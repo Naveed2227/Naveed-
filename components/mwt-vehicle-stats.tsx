@@ -103,6 +103,231 @@ const VEHICLES = [
   },
   {
     id: 4,
+    name: "AV-8B Harrier II",
+    type: "Fighter Jet",
+    faction: "American",
+    tier: "II",
+    description:
+      "Vertical/Short Takeoff and Landing (V/STOL) attack aircraft with excellent ground support capabilities.",
+    stats: { health: 18500, speed: 662, afterburnerSpeed: 1085, agility: 78 },
+    weapons: [
+      { name: "GAU-12 25mm", type: "Autocannon", damage: 320, penetration: 45, rateOfFire: "4200 rpm" },
+      { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 8500, penetration: 420 },
+      { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 6800, penetration: 380 },
+      { name: "Mk 82 Bomb", type: "Unguided Bomb", damage: 9200, penetration: 450 },
+    ],
+    modules: {
+      engine: [
+        { name: "Rolls-Royce F402 MK1", bonus: "+150 km/h speed" },
+        { name: "Rolls-Royce F402 MK2", bonus: "+280 km/h speed" },
+        { name: "Rolls-Royce F402 MK3", bonus: "+420 km/h speed" },
+      ],
+      avionics: [
+        { name: "AN/ASB-19 MK1", bonus: "+18% targeting" },
+        { name: "AN/ASB-19 MK2", bonus: "+32% targeting" },
+        { name: "AN/ASB-19 MK3", bonus: "+45% targeting" },
+      ],
+      armor: [
+        { name: "Titanium Plating MK1", bonus: "+1200 health" },
+        { name: "Titanium Plating MK2", bonus: "+2400 health" },
+        { name: "Titanium Plating MK3", bonus: "+3600 health" },
+      ],
+    },
+  },
+  {
+    id: 5,
+    name: "Alpha Jet",
+    type: "Fighter Jet",
+    faction: "German",
+    tier: "II",
+    description: "Light attack aircraft and advanced trainer with excellent maneuverability.",
+    stats: { health: 14200, speed: 927, afterburnerSpeed: 1000, agility: 85 },
+    weapons: [
+      { name: "DEFA 553 30mm", type: "Autocannon", damage: 380, penetration: 55, rateOfFire: "1300 rpm" },
+      { name: "AS.30L", type: "Laser-Guided Missile", damage: 7200, penetration: 350 },
+      { name: "SNEB 68mm Rockets", type: "Rocket Pod", damage: 450, penetration: 85, rateOfFire: "Multiple" },
+    ],
+    modules: {
+      engine: [
+        { name: "Larzac 04-C6 MK1", bonus: "+120 km/h speed" },
+        { name: "Larzac 04-C6 MK2", bonus: "+240 km/h speed" },
+        { name: "Larzac 04-C6 MK3", bonus: "+360 km/h speed" },
+      ],
+      avionics: [
+        { name: "VE-130 HUD MK1", bonus: "+15% accuracy" },
+        { name: "VE-130 HUD MK2", bonus: "+28% accuracy" },
+        { name: "VE-130 HUD MK3", bonus: "+40% accuracy" },
+      ],
+      armor: [
+        { name: "Light Armor MK1", bonus: "+800 health" },
+        { name: "Light Armor MK2", bonus: "+1600 health" },
+        { name: "Light Armor MK3", bonus: "+2400 health" },
+      ],
+    },
+  },
+  {
+    id: 6,
+    name: "F-14D Super Tomcat",
+    type: "Fighter Jet",
+    faction: "American",
+    tier: "II",
+    description: "Twin-engine, variable-sweep wing fighter designed for fleet defense and air superiority.",
+    stats: { health: 22800, speed: 913, afterburnerSpeed: 2485, agility: 72 },
+    weapons: [
+      { name: "M61A1 20mm", type: "Autocannon", damage: 280, penetration: 35, rateOfFire: "6000 rpm" },
+      { name: "AIM-54 Phoenix", type: "Long-Range AAM", damage: 12500, penetration: 650 },
+      { name: "AIM-7 Sparrow", type: "Medium-Range AAM", damage: 8200, penetration: 420 },
+      { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 6800, penetration: 380 },
+    ],
+    modules: {
+      engine: [
+        { name: "F110-GE-400 MK1", bonus: "+200 km/h speed" },
+        { name: "F110-GE-400 MK2", bonus: "+380 km/h speed" },
+        { name: "F110-GE-400 MK3", bonus: "+560 km/h speed" },
+      ],
+      radar: [
+        { name: "AN/AWG-9 MK1", bonus: "+25% detection range" },
+        { name: "AN/AWG-9 MK2", bonus: "+45% detection range" },
+        { name: "AN/AWG-9 MK3", bonus: "+65% detection range" },
+      ],
+      armor: [
+        { name: "Reinforced Structure MK1", bonus: "+1800 health" },
+        { name: "Reinforced Structure MK2", bonus: "+3600 health" },
+        { name: "Reinforced Structure MK3", bonus: "+5400 health" },
+      ],
+    },
+  },
+  {
+    id: 7,
+    name: "J-10 Chengdu",
+    type: "Fighter Jet",
+    faction: "Chinese",
+    tier: "II",
+    description: "Single-engine, multirole fighter with delta wing configuration and advanced avionics.",
+    stats: { health: 19500, speed: 1200, afterburnerSpeed: 2120, agility: 82 },
+    weapons: [
+      { name: "Type 23-3 23mm", type: "Autocannon", damage: 290, penetration: 40, rateOfFire: "3400 rpm" },
+      { name: "PL-12", type: "Medium-Range AAM", damage: 8500, penetration: 450 },
+      { name: "PL-8", type: "Short-Range AAM", damage: 6200, penetration: 350 },
+      { name: "YJ-91", type: "Anti-Radiation Missile", damage: 9800, penetration: 520 },
+    ],
+    modules: {
+      engine: [
+        { name: "WS-10A MK1", bonus: "+180 km/h speed" },
+        { name: "WS-10A MK2", bonus: "+340 km/h speed" },
+        { name: "WS-10A MK3", bonus: "+500 km/h speed" },
+      ],
+      radar: [
+        { name: "Type 1473 MK1", bonus: "+20% detection" },
+        { name: "Type 1473 MK2", bonus: "+35% detection" },
+        { name: "Type 1473 MK3", bonus: "+50% detection" },
+      ],
+      armor: [
+        { name: "Composite Armor MK1", bonus: "+1500 health" },
+        { name: "Composite Armor MK2", bonus: "+3000 health" },
+        { name: "Composite Armor MK3", bonus: "+4500 health" },
+      ],
+    },
+  },
+  {
+    id: 8,
+    name: "MiG-31BM Foxhound",
+    type: "Fighter Jet",
+    faction: "Russian",
+    tier: "II",
+    description: "High-speed interceptor designed for long-range air defense missions.",
+    stats: { health: 26500, speed: 1500, afterburnerSpeed: 3000, agility: 65 },
+    weapons: [
+      { name: "GSh-6-23 23mm", type: "Autocannon", damage: 320, penetration: 45, rateOfFire: "10000 rpm" },
+      { name: "R-33", type: "Long-Range AAM", damage: 14500, penetration: 720 },
+      { name: "R-37M", type: "Ultra Long-Range AAM", damage: 16800, penetration: 850 },
+      { name: "R-40TD", type: "Medium-Range AAM", damage: 9200, penetration: 480 },
+    ],
+    modules: {
+      engine: [
+        { name: "D-30F6 MK1", bonus: "+250 km/h speed" },
+        { name: "D-30F6 MK2", bonus: "+450 km/h speed" },
+        { name: "D-30F6 MK3", bonus: "+650 km/h speed" },
+      ],
+      radar: [
+        { name: "Zaslon-AM MK1", bonus: "+30% detection range" },
+        { name: "Zaslon-AM MK2", bonus: "+55% detection range" },
+        { name: "Zaslon-AM MK3", bonus: "+80% detection range" },
+      ],
+      armor: [
+        { name: "Steel Armor MK1", bonus: "+2200 health" },
+        { name: "Steel Armor MK2", bonus: "+4400 health" },
+        { name: "Steel Armor MK3", bonus: "+6600 health" },
+      ],
+    },
+  },
+  {
+    id: 9,
+    name: "Q-5A Nanchang",
+    type: "Fighter Jet",
+    faction: "Chinese",
+    tier: "II",
+    description: "Ground attack aircraft derived from the MiG-19, optimized for close air support.",
+    stats: { health: 16800, speed: 1190, afterburnerSpeed: 1540, agility: 75 },
+    weapons: [
+      { name: "Type 23-2K 23mm", type: "Autocannon", damage: 310, penetration: 42, rateOfFire: "3000 rpm" },
+      { name: "HJ-8", type: "Anti-Tank Missile", damage: 8800, penetration: 450 },
+      { name: "Type 90-1 Rockets", type: "Rocket Pod", damage: 520, penetration: 95, rateOfFire: "Multiple" },
+      { name: "250kg Bomb", type: "Unguided Bomb", damage: 11200, penetration: 580 },
+    ],
+    modules: {
+      engine: [
+        { name: "WP-6A MK1", bonus: "+160 km/h speed" },
+        { name: "WP-6A MK2", bonus: "+300 km/h speed" },
+        { name: "WP-6A MK3", bonus: "+440 km/h speed" },
+      ],
+      avionics: [
+        { name: "Type 232H MK1", bonus: "+16% targeting" },
+        { name: "Type 232H MK2", bonus: "+28% targeting" },
+        { name: "Type 232H MK3", bonus: "+40% targeting" },
+      ],
+      armor: [
+        { name: "Aluminum Armor MK1", bonus: "+1200 health" },
+        { name: "Aluminum Armor MK2", bonus: "+2400 health" },
+        { name: "Aluminum Armor MK3", bonus: "+3600 health" },
+      ],
+    },
+  },
+  {
+    id: 10,
+    name: "Su-24M",
+    type: "Fighter Jet",
+    faction: "Russian",
+    tier: "II",
+    description: "Variable-sweep wing tactical bomber designed for all-weather ground attack missions.",
+    stats: { health: 24200, speed: 1315, afterburnerSpeed: 2317, agility: 68 },
+    weapons: [
+      { name: "GSh-6-23 23mm", type: "Autocannon", damage: 320, penetration: 45, rateOfFire: "9000 rpm" },
+      { name: "Kh-25ML", type: "Laser-Guided Missile", damage: 9500, penetration: 480 },
+      { name: "Kh-29L", type: "Air-to-Ground Missile", damage: 12800, penetration: 650 },
+      { name: "FAB-500", type: "Unguided Bomb", damage: 15200, penetration: 780 },
+      { name: "R-60M", type: "Short-Range AAM", damage: 5800, penetration: 320 },
+    ],
+    modules: {
+      engine: [
+        { name: "AL-21F-3A MK1", bonus: "+220 km/h speed" },
+        { name: "AL-21F-3A MK2", bonus: "+400 km/h speed" },
+        { name: "AL-21F-3A MK3", bonus: "+580 km/h speed" },
+      ],
+      navigation: [
+        { name: "Puma Navigation MK1", bonus: "+22% accuracy" },
+        { name: "Puma Navigation MK2", bonus: "+38% accuracy" },
+        { name: "Puma Navigation MK3", bonus: "+55% accuracy" },
+      ],
+      armor: [
+        { name: "Titanium Armor MK1", bonus: "+1800 health" },
+        { name: "Titanium Armor MK2", bonus: "+3600 health" },
+        { name: "Titanium Armor MK3", bonus: "+5400 health" },
+      ],
+    },
+  },
+  {
+    id: 11,
     name: "AH-64E Apache",
     type: "Helicopter",
     faction: "American",
@@ -133,7 +358,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 5,
+    id: 12,
     name: "J-35",
     type: "Fighter Jet",
     faction: "Chinese",
@@ -165,7 +390,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 6,
+    id: 13,
     name: "F-22 Raptor",
     type: "Fighter Jet",
     faction: "American",
@@ -197,7 +422,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 7,
+    id: 14,
     name: "J-20 Mighty Dragon",
     type: "Fighter Jet",
     faction: "Chinese",
@@ -228,7 +453,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 8,
+    id: 15,
     name: "TU-222",
     type: "Bomber",
     faction: "Russian",
@@ -259,7 +484,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 9,
+    id: 16,
     name: "Abrams X",
     type: "Tank",
     faction: "American",
@@ -291,7 +516,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 10,
+    id: 17,
     name: "Type 10",
     type: "Tank",
     faction: "Japanese",
@@ -321,7 +546,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 11,
+    id: 18,
     name: "Merkava Mk.4",
     type: "Tank",
     faction: "Israeli",
@@ -352,7 +577,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 12,
+    id: 19,
     name: "Ka-52M",
     type: "Helicopter",
     faction: "Russian",
@@ -383,7 +608,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 13,
+    id: 20,
     name: "M270 MLRS",
     type: "Tank",
     faction: "American",
@@ -414,7 +639,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 14,
+    id: 21,
     name: "Otomatic 76",
     type: "Tank",
     faction: "Italian",
@@ -444,7 +669,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 15,
+    id: 22,
     name: "Type 16 MCV",
     type: "Tank",
     faction: "Japanese",
@@ -474,7 +699,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 16,
+    id: 23,
     name: "A-10A Thunderbolt",
     type: "Fighter Jet",
     faction: "American",
@@ -506,7 +731,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 17,
+    id: 24,
     name: "M60 Patton",
     type: "Tank",
     faction: "American",
@@ -537,7 +762,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 18,
+    id: 25,
     name: "T-72A",
     type: "Tank",
     faction: "Russian",
@@ -568,7 +793,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 19,
+    id: 26,
     name: "F-4E Phantom",
     type: "Fighter Jet",
     faction: "American",
@@ -600,7 +825,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 20,
+    id: 27,
     name: "F-16C Night Falcon",
     type: "Fighter Jet",
     faction: "American",
@@ -632,7 +857,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 21,
+    id: 28,
     name: "MiG-41M",
     type: "Fighter Jet",
     faction: "Russian",
@@ -664,7 +889,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 22,
+    id: 29,
     name: "Mi-8TV",
     type: "Helicopter",
     faction: "Russian",
@@ -695,7 +920,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 23,
+    id: 30,
     name: "IT-1 Dragon",
     type: "Tank",
     faction: "Russian",
@@ -725,7 +950,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 24,
+    id: 31,
     name: "M3 Bradley",
     type: "Tank",
     faction: "American",
@@ -756,7 +981,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 25,
+    id: 32,
     name: "ZSU-23-4M4 Shilka",
     type: "Tank",
     faction: "Russian",
@@ -786,7 +1011,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 26,
+    id: 33,
     name: "Su-57 Felon",
     type: "Fighter Jet",
     faction: "Russian",
@@ -818,7 +1043,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 27,
+    id: 34,
     name: "BMD3",
     type: "Tank",
     faction: "Russian",
@@ -849,7 +1074,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 28,
+    id: 35,
     name: "BMPT Terminator 2",
     type: "Tank",
     faction: "Russian",
@@ -880,7 +1105,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 29,
+    id: 36,
     name: "SR-5 GMLRS",
     type: "Tank",
     faction: "Chinese",
@@ -910,7 +1135,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 30,
+    id: 37,
     name: "2S19 Msta-S",
     type: "Tank",
     faction: "Russian",
@@ -940,7 +1165,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 31,
+    id: 38,
     name: "Pantsir S-1",
     type: "Tank",
     faction: "Russian",
@@ -970,7 +1195,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 32,
+    id: 39,
     name: "M1128 Stryker",
     type: "Tank",
     faction: "American",
@@ -1000,7 +1225,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 33,
+    id: 40,
     name: "AH-84",
     type: "Helicopter",
     faction: "American",
@@ -1031,7 +1256,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 34,
+    id: 41,
     name: "Mi-28NM",
     type: "Helicopter",
     faction: "Russian",
@@ -1062,7 +1287,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 35,
+    id: 42,
     name: "WZ-10",
     type: "Helicopter",
     faction: "Chinese",
@@ -1093,7 +1318,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 36,
+    id: 43,
     name: "Z-19E",
     type: "Helicopter",
     faction: "Chinese",
@@ -1124,7 +1349,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 37,
+    id: 44,
     name: "M1 Abrams Block 3",
     type: "Tank",
     faction: "American",
@@ -1155,7 +1380,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 38,
+    id: 45,
     name: "Leopard 2A7V",
     type: "Tank",
     faction: "German",
@@ -1185,7 +1410,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 39,
+    id: 46,
     name: "KF-51 Panther",
     type: "Tank",
     faction: "German",
@@ -1216,7 +1441,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 40,
+    id: 47,
     name: "MiG-35 Fulcrum-F",
     type: "Fighter Jet",
     faction: "Russian",
@@ -1248,7 +1473,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 41,
+    id: 48,
     name: "Ka-58 Black Ghost",
     type: "Helicopter",
     faction: "Russian",
@@ -1279,45 +1504,532 @@ const VEHICLES = [
     },
   },
   {
-    id: 42,
-    name: "HSTV-L",
+    id: 49,
+    name: "T-25 Pamir",
     type: "Tank",
-    faction: "American",
-    tier: "III",
-    description: "High Survivability Test Vehicle with lightweight design and rapid-fire gun.",
-    stats: { health: 22800, speed: 84, armor: "320mm", agility: 95 },
+    faction: "Russian",
+    tier: "IV",
+    description: "Advanced main battle tank with next-generation armor and fire control systems.",
+    stats: { health: 39200, speed: 68, armor: "1250mm", agility: 70 },
     weapons: [
-      { name: "ARES 75mm", type: "Rapid-Fire Gun", damage: 8500, penetration: 420, rateOfFire: "60 rpm" },
-      { name: "M240 7.62mm", type: "Coaxial MG", damage: 120, penetration: 15, rateOfFire: "750 rpm" },
+      { name: "2A82-1M 125mm", type: "Main Gun", damage: 16200, penetration: 870 },
+      { name: "9M119M1 Invar-M", type: "ATGM", damage: 19500, penetration: 1300 },
+      { name: "Kord 12.7mm", type: "Machine Gun", damage: 240, penetration: 38, rateOfFire: "650 rpm" },
     ],
     modules: {
       engine: [
-        { name: "AVCR-1360 MK1", bonus: "+18 km/h speed" },
-        { name: "AVCR-1360 MK2", bonus: "+36 km/h speed" },
-        { name: "AVCR-1360 MK3", bonus: "+54 km/h speed" },
+        { name: "ChTZ 12N360 MK1", bonus: "+12 km/h speed" },
+        { name: "ChTZ 12N360 MK2", bonus: "+24 km/h speed" },
+        { name: "ChTZ 12N360 MK3", bonus: "+36 km/h speed" },
       ],
       armor: [
-        { name: "Composite Armor MK1", bonus: "+60mm protection" },
-        { name: "Composite Armor MK2", bonus: "+120mm protection" },
-        { name: "Composite Armor MK3", bonus: "+180mm protection" },
+        { name: "Relikt ERA MK1", bonus: "+250mm protection" },
+        { name: "Relikt ERA MK2", bonus: "+500mm protection" },
+        { name: "Relikt ERA MK3", bonus: "+750mm protection" },
       ],
       fireControl: [
-        { name: "Digital FCS MK1", bonus: "+25% accuracy" },
-        { name: "Digital FCS MK2", bonus: "+42% accuracy" },
-        { name: "Digital FCS MK3", bonus: "+60% accuracy" },
+        { name: "Kalina-2 FCS MK1", bonus: "+20% accuracy" },
+        { name: "Kalina-2 FCS MK2", bonus: "+35% accuracy" },
+        { name: "Kalina-2 FCS MK3", bonus: "+50% accuracy" },
       ],
     },
   },
   {
-    id: 43,
+    id: 50,
+    name: "T-90A",
+    type: "Tank",
+    faction: "Russian",
+    tier: "IV",
+    description: "Modernized main battle tank with improved armor and advanced fire control.",
+    stats: { health: 35800, speed: 65, armor: "1050mm", agility: 68 },
+    weapons: [
+      { name: "2A46M-5 125mm", type: "Main Gun", damage: 15200, penetration: 820 },
+      { name: "9M119 Refleks", type: "ATGM", damage: 17800, penetration: 1150 },
+      { name: "NSVT 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "700 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "V-92S2F MK1", bonus: "+10 km/h speed" },
+        { name: "V-92S2F MK2", bonus: "+20 km/h speed" },
+        { name: "V-92S2F MK3", bonus: "+30 km/h speed" },
+      ],
+      armor: [
+        { name: "Kontakt-5 ERA MK1", bonus: "+200mm protection" },
+        { name: "Kontakt-5 ERA MK2", bonus: "+400mm protection" },
+        { name: "Kontakt-5 ERA MK3", bonus: "+600mm protection" },
+      ],
+      fireControl: [
+        { name: "1A45T Irtysh MK1", bonus: "+18% accuracy" },
+        { name: "1A45T Irtysh MK2", bonus: "+32% accuracy" },
+        { name: "1A45T Irtysh MK3", bonus: "+46% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 51,
+    name: "T-95M",
+    type: "Tank",
+    faction: "Russian",
+    tier: "IV",
+    description: "Experimental heavy tank with revolutionary armor design and 152mm gun.",
+    stats: { health: 42500, speed: 60, armor: "1400mm", agility: 58 },
+    weapons: [
+      { name: "2A83 152mm", type: "Main Gun", damage: 22500, penetration: 1200 },
+      { name: "9M119M1 Invar-M", type: "ATGM", damage: 20200, penetration: 1350 },
+      { name: "Kord 12.7mm", type: "Machine Gun", damage: 240, penetration: 38, rateOfFire: "650 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "A-85-3A MK1", bonus: "+8 km/h speed" },
+        { name: "A-85-3A MK2", bonus: "+16 km/h speed" },
+        { name: "A-85-3A MK3", bonus: "+24 km/h speed" },
+      ],
+      armor: [
+        { name: "Malachit ERA MK1", bonus: "+280mm protection" },
+        { name: "Malachit ERA MK2", bonus: "+560mm protection" },
+        { name: "+560mm protection" },
+        { name: "Malachit ERA MK3", bonus: "+840mm protection" },
+      ],
+      fireControl: [
+        { name: "Advanced FCS MK1", bonus: "+22% accuracy" },
+        { name: "Advanced FCS MK2", bonus: "+38% accuracy" },
+        { name: "Advanced FCS MK3", bonus: "+54% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 52,
+    name: "T-104 Bastion",
+    type: "Tank",
+    faction: "Russian",
+    tier: "IV",
+    description: "Future main battle tank concept with AI-assisted systems and modular armor.",
+    stats: { health: 40800, speed: 72, armor: "1320mm", agility: 75 },
+    weapons: [
+      { name: "2A82-2M 125mm", type: "Main Gun", damage: 17500, penetration: 920 },
+      { name: "Kornet-EM", type: "ATGM", damage: 21000, penetration: 1400 },
+      { name: "Kord 12.7mm", type: "Machine Gun", damage: 240, penetration: 38, rateOfFire: "650 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "Hybrid Powerpack MK1", bonus: "+14 km/h speed" },
+        { name: "Hybrid Powerpack MK2", bonus: "+28 km/h speed" },
+        { name: "Hybrid Powerpack MK3", bonus: "+42 km/h speed" },
+      ],
+      armor: [
+        { name: "Modular ERA MK1", bonus: "+260mm protection" },
+        { name: "Modular ERA MK2", bonus: "+520mm protection" },
+        { name: "Modular ERA MK3", bonus: "+780mm protection" },
+      ],
+      fireControl: [
+        { name: "AI-Enhanced FCS MK1", bonus: "+24% accuracy" },
+        { name: "AI-Enhanced FCS MK2", bonus: "+42% accuracy" },
+        { name: "AI-Enhanced FCS MK3", bonus: "+60% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 53,
+    name: "VT-4A1",
+    type: "Tank",
+    faction: "Chinese",
+    tier: "IV",
+    description: "Export variant main battle tank with advanced fire control and modular protection.",
+    stats: { health: 36500, speed: 70, armor: "1100mm", agility: 72 },
+    weapons: [
+      { name: "ZPT98A 125mm", type: "Main Gun", damage: 15800, penetration: 850 },
+      { name: "GP125", type: "ATGM", damage: 18500, penetration: 1200 },
+      { name: "QJC88 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "600 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "150HB Diesel MK1", bonus: "+12 km/h speed" },
+        { name: "150HB Diesel MK2", bonus: "+24 km/h speed" },
+        { name: "150HB Diesel MK3", bonus: "+36 km/h speed" },
+      ],
+      armor: [
+        { name: "FY-4 ERA MK1", bonus: "+220mm protection" },
+        { name: "FY-4 ERA MK2", bonus: "+440mm protection" },
+        { name: "FY-4 ERA MK3", bonus: "+660mm protection" },
+      ],
+      fireControl: [
+        { name: "Hunter-Killer FCS MK1", bonus: "+19% accuracy" },
+        { name: "Hunter-Killer FCS MK2", bonus: "+34% accuracy" },
+        { name: "Hunter-Killer FCS MK3", bonus: "+49% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 54,
+    name: "ZTZ99A",
+    type: "Tank",
+    faction: "Chinese",
+    tier: "IV",
+    description: "Advanced main battle tank with composite armor and laser warning systems.",
+    stats: { health: 37200, speed: 68, armor: "1150mm", agility: 70 },
+    weapons: [
+      { name: "ZPT98A 125mm", type: "Main Gun", damage: 16200, penetration: 870 },
+      { name: "GP125", type: "ATGM", damage: 19000, penetration: 1250 },
+      { name: "QJC88 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "600 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "150HB Diesel MK1", bonus: "+11 km/h speed" },
+        { name: "150HB Diesel MK2", bonus: "+22 km/h speed" },
+        { name: "150HB Diesel MK3", bonus: "+33 km/h speed" },
+      ],
+      armor: [
+        { name: "FY-5 ERA MK1", bonus: "+230mm protection" },
+        { name: "FY-5 ERA MK2", bonus: "+460mm protection" },
+        { name: "FY-5 ERA MK3", bonus: "+690mm protection" },
+      ],
+      fireControl: [
+        { name: "Type 99A FCS MK1", bonus: "+20% accuracy" },
+        { name: "Type 99A FCS MK2", bonus: "+36% accuracy" },
+        { name: "Type 99A FCS MK3", bonus: "+52% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 55,
+    name: "ZTZ99-III",
+    type: "Tank",
+    faction: "Chinese",
+    tier: "IV",
+    description: "Latest variant with enhanced armor package and improved battlefield management systems.",
+    stats: { health: 38500, speed: 70, armor: "1200mm", agility: 72 },
+    weapons: [
+      { name: "ZPT98A 125mm", type: "Main Gun", damage: 16800, penetration: 900 },
+      { name: "GP125A", type: "ATGM", damage: 19800, penetration: 1300 },
+      { name: "QJC88A 12.7mm", type: "Machine Gun", damage: 240, penetration: 38, rateOfFire: "650 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "150HB-2 Diesel MK1", bonus: "+13 km/h speed" },
+        { name: "150HB-2 Diesel MK2", bonus: "+26 km/h speed" },
+        { name: "150HB-2 Diesel MK3", bonus: "+39 km/h speed" },
+      ],
+      armor: [
+        { name: "FY-6 ERA MK1", bonus: "+240mm protection" },
+        { name: "FY-6 ERA MK2", bonus: "+480mm protection" },
+        { name: "FY-6 ERA MK3", bonus: "+720mm protection" },
+      ],
+      fireControl: [
+        { name: "Digital BMS MK1", bonus: "+21% accuracy" },
+        { name: "Digital BMS MK2", bonus: "+37% accuracy" },
+        { name: "Digital BMS MK3", bonus: "+53% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 56,
+    name: "Challenger 3",
+    type: "Tank",
+    faction: "British",
+    tier: "IV",
+    description: "Next-generation British main battle tank with smoothbore gun and digital turret.",
+    stats: { health: 38800, speed: 59, armor: "1180mm", agility: 65 },
+    weapons: [
+      { name: "Rheinmetall L55A1 120mm", type: "Main Gun", damage: 16500, penetration: 880 },
+      { name: "Brimstone ATGM", type: "Anti-Tank Missile", damage: 19500, penetration: 1280 },
+      { name: "L94A1 7.62mm", type: "Machine Gun", damage: 140, penetration: 18, rateOfFire: "750 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "CV12-9A MK1", bonus: "+9 km/h speed" },
+        { name: "CV12-9A MK2", bonus: "+18 km/h speed" },
+        { name: "CV12-9A MK3", bonus: "+27 km/h speed" },
+      ],
+      armor: [
+        { name: "Dorchester 2F MK1", bonus: "+235mm protection" },
+        { name: "Dorchester 2F MK2", bonus: "+470mm protection" },
+        { name: "Dorchester 2F MK3", bonus: "+705mm protection" },
+      ],
+      fireControl: [
+        { name: "SIACCS MK1", bonus: "+19% accuracy" },
+        { name: "SIACCS MK2", bonus: "+34% accuracy" },
+        { name: "SIACCS MK3", bonus: "+49% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 57,
+    name: "EMBT 120",
+    type: "Tank",
+    faction: "French",
+    tier: "IV",
+    description: "European Main Battle Tank demonstrator with multinational technology integration.",
+    stats: { health: 37800, speed: 70, armor: "1160mm", agility: 74 },
+    weapons: [
+      { name: "Rheinmetall L55 120mm", type: "Main Gun", damage: 16200, penetration: 870 },
+      { name: "PARS 3 LR", type: "ATGM", damage: 18800, penetration: 1220 },
+      { name: "MG3A1 7.62mm", type: "Machine Gun", damage: 130, penetration: 16, rateOfFire: "1200 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "MTU Euro Powerpack MK1", bonus: "+12 km/h speed" },
+        { name: "MTU Euro Powerpack MK2", bonus: "+24 km/h speed" },
+        { name: "MTU Euro Powerpack MK3", bonus: "+36 km/h speed" },
+      ],
+      armor: [
+        { name: "AMAP Composite MK1", bonus: "+230mm protection" },
+        { name: "AMAP Composite MK2", bonus: "+460mm protection" },
+        { name: "AMAP Composite MK3", bonus: "+690mm protection" },
+      ],
+      fireControl: [
+        { name: "European FCS MK1", bonus: "+20% accuracy" },
+        { name: "European FCS MK2", bonus: "+36% accuracy" },
+        { name: "European FCS MK3", bonus: "+52% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 58,
+    name: "FV4034 Challenger 2 TES",
+    type: "Tank",
+    faction: "British",
+    tier: "IV",
+    description: "Theatre Entry Standard variant with enhanced urban warfare protection.",
+    stats: { health: 36200, speed: 56, armor: "1120mm", agility: 62 },
+    weapons: [
+      { name: "L30A1 120mm", type: "Main Gun", damage: 15500, penetration: 830 },
+      { name: "L94A1 7.62mm", type: "Machine Gun", damage: 140, penetration: 18, rateOfFire: "750 rpm" },
+      { name: "L37A2 7.62mm", type: "Coaxial MG", damage: 120, penetration: 15, rateOfFire: "750 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "CV12-6A MK1", bonus: "+8 km/h speed" },
+        { name: "CV12-6A MK2", bonus: "+16 km/h speed" },
+        { name: "CV12-6A MK3", bonus: "+24 km/h speed" },
+      ],
+      armor: [
+        { name: "Dorchester 2E MK1", bonus: "+220mm protection" },
+        { name: "Dorchester 2E MK2", bonus: "+440mm protection" },
+        { name: "Dorchester 2E MK3", bonus: "+660mm protection" },
+      ],
+      fireControl: [
+        { name: "IFCS MK1", bonus: "+17% accuracy" },
+        { name: "IFCS MK2", bonus: "+30% accuracy" },
+        { name: "IFCS MK3", bonus: "+43% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 59,
+    name: "Karrar",
+    type: "Tank",
+    faction: "Iranian",
+    tier: "IV",
+    description: "Indigenous main battle tank with locally developed systems and modern armor.",
+    stats: { health: 34500, speed: 65, armor: "980mm", agility: 68 },
+    weapons: [
+      { name: "2A46M 125mm", type: "Main Gun", damage: 14800, penetration: 800 },
+      { name: "Toophan-5", type: "ATGM", damage: 17200, penetration: 1100 },
+      { name: "DShK 12.7mm", type: "Machine Gun", damage: 200, penetration: 32, rateOfFire: "600 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "V-84MS MK1", bonus: "+10 km/h speed" },
+        { name: "V-84MS MK2", bonus: "+20 km/h speed" },
+        { name: "V-84MS MK3", bonus: "+30 km/h speed" },
+      ],
+      armor: [
+        { name: "Composite Armor MK1", bonus: "+195mm protection" },
+        { name: "Composite Armor MK2", bonus: "+390mm protection" },
+        { name: "Composite Armor MK3", bonus: "+585mm protection" },
+      ],
+      fireControl: [
+        { name: "Karrar FCS MK1", bonus: "+16% accuracy" },
+        { name: "Karrar FCS MK2", bonus: "+28% accuracy" },
+        { name: "Karrar FCS MK3", bonus: "+40% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 60,
+    name: "Leclerc S2 AZUR",
+    type: "Tank",
+    faction: "French",
+    tier: "IV",
+    description: "Upgraded French main battle tank with urban warfare package and improved armor.",
+    stats: { health: 35800, speed: 71, armor: "1080mm", agility: 76 },
+    weapons: [
+      { name: "CN120-26 120mm", type: "Main Gun", damage: 15800, penetration: 850 },
+      { name: "MILAN ATGM", type: "Anti-Tank Missile", damage: 17800, penetration: 1150 },
+      { name: "M2HB 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "550 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "SACM V8X-1500 MK1", bonus: "+11 km/h speed" },
+        { name: "SACM V8X-1500 MK2", bonus: "+22 km/h speed" },
+        { name: "SACM V8X-1500 MK3", bonus: "+33 km/h speed" },
+      ],
+      armor: [
+        { name: "Modular Armor MK1", bonus: "+215mm protection" },
+        { name: "Modular Armor MK2", bonus: "+430mm protection" },
+        { name: "Modular Armor MK3", bonus: "+645mm protection" },
+      ],
+      fireControl: [
+        { name: "FINDERS MK1", bonus: "+18% accuracy" },
+        { name: "FINDERS MK2", bonus: "+32% accuracy" },
+        { name: "FINDERS MK3", bonus: "+46% accuracy" },
+      ],
+    },
+  },
+]
+
+const isMarketVehicle = (vehicleName: string) => {
+  const marketVehicles = [
+    "Abrams X",
+    "Type 10",
+    "Su-57M",
+    "TU-222",
+    "Merkava Mk.4",
+    "Leopard 2A4",
+    "KF-51 Panther",
+    "HSTV-L",
+    "Ka-58 Black Ghost",
+    "T-14 (152)",
+    "Leopard 2A7V",
+    "Type 16 MCV",
+  ]
+  return marketVehicles.includes(vehicleName)
+}
+
+const newVehicles = [
+  {
+    id: 61,
+    name: "KF31 Lynx",
+    type: "Tank",
+    faction: "German",
+    tier: "IV",
+    description: "Next-generation infantry fighting vehicle with modular mission equipment and advanced protection.",
+    stats: { health: 28500, speed: 70, armor: "650mm", agility: 78 },
+    weapons: [
+      { name: "MK30-2/ABM 30mm", type: "Autocannon", damage: 480, penetration: 85, rateOfFire: "200 rpm" },
+      { name: "Spike LR2", type: "ATGM", damage: 16800, penetration: 1120 },
+      { name: "MG4 5.56mm", type: "Machine Gun", damage: 85, penetration: 8, rateOfFire: "885 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "MTU 8V199 MK1", bonus: "+12 km/h speed" },
+        { name: "MTU 8V199 MK2", bonus: "+24 km/h speed" },
+        { name: "MTU 8V199 MK3", bonus: "+36 km/h speed" },
+      ],
+      armor: [
+        { name: "AMAP Composite MK1", bonus: "+120mm protection" },
+        { name: "AMAP Composite MK2", bonus: "+240mm protection" },
+        { name: "AMAP Composite MK3", bonus: "+360mm protection" },
+      ],
+      fireControl: [
+        { name: "LANCE Turret MK1", bonus: "+20% accuracy" },
+        { name: "LANCE Turret MK2", bonus: "+35% accuracy" },
+        { name: "LANCE Turret MK3", bonus: "+50% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 62,
+    name: "PL-01",
+    type: "Tank",
+    faction: "European",
+    tier: "IV",
+    description: "Stealth light tank concept with advanced camouflage systems and rapid deployment capability.",
+    stats: { health: 26800, speed: 70, armor: "580mm", agility: 85 },
+    weapons: [
+      { name: "RUAG CTG 120mm", type: "Main Gun", damage: 13500, penetration: 720 },
+      { name: "Spike NLOS", type: "ATGM", damage: 17500, penetration: 1150 },
+      { name: "MG3 7.62mm", type: "Machine Gun", damage: 130, penetration: 16, rateOfFire: "1200 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "Hybrid Powerpack MK1", bonus: "+14 km/h speed" },
+        { name: "Hybrid Powerpack MK2", bonus: "+28 km/h speed" },
+        { name: "Hybrid Powerpack MK3", bonus: "+42 km/h speed" },
+      ],
+      armor: [
+        { name: "Adaptive Camouflage MK1", bonus: "+110mm protection" },
+        { name: "Adaptive Camouflage MK2", bonus: "+220mm protection" },
+        { name: "Adaptive Camouflage MK3", bonus: "+330mm protection" },
+      ],
+      fireControl: [
+        { name: "Digital FCS MK1", bonus: "+18% accuracy" },
+        { name: "Digital FCS MK2", bonus: "+32% accuracy" },
+        { name: "Digital FCS MK3", bonus: "+46% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 63,
+    name: "MGM-166 LOSAT",
+    type: "Tank",
+    faction: "American",
+    tier: "IV",
+    description: "Line-of-Sight Anti-Tank missile system with kinetic energy projectiles.",
+    stats: { health: 24500, speed: 67, armor: "420mm", agility: 72 },
+    weapons: [
+      { name: "MGM-166 LOSAT", type: "Kinetic Missile", damage: 22500, penetration: 1400 },
+      { name: "M240 7.62mm", type: "Machine Gun", damage: 120, penetration: 15, rateOfFire: "750 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "Caterpillar C7 MK1", bonus: "+10 km/h speed" },
+        { name: "Caterpillar C7 MK2", bonus: "+20 km/h speed" },
+        { name: "Caterpillar C7 MK3", bonus: "+30 km/h speed" },
+      ],
+      armor: [
+        { name: "Aluminum Armor MK1", bonus: "+80mm protection" },
+        { name: "Aluminum Armor MK2", bonus: "+160mm protection" },
+        { name: "Aluminum Armor MK3", bonus: "+240mm protection" },
+      ],
+      fireControl: [
+        { name: "LOSAT Guidance MK1", bonus: "+25% accuracy" },
+        { name: "LOSAT Guidance MK2", bonus: "+42% accuracy" },
+        { name: "LOSAT Guidance MK3", bonus: "+60% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 64,
+    name: "M-SHORAD",
+    type: "Tank",
+    faction: "American",
+    tier: "IV",
+    description: "Maneuver-Short Range Air Defense system with multi-mission capability.",
+    stats: { health: 26200, speed: 97, armor: "380mm", agility: 78 },
+    weapons: [
+      { name: "Stinger Missiles", type: "SAM", damage: 9500, penetration: 480 },
+      { name: "Hellfire Longbow", type: "ATGM", damage: 16500, penetration: 1100 },
+      { name: "M230LF 30mm", type: "Chain Gun", damage: 420, penetration: 75, rateOfFire: "200 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "Caterpillar C7 MK1", bonus: "+15 km/h speed" },
+        { name: "Caterpillar C7 MK2", bonus: "+30 km/h speed" },
+        { name: "Caterpillar C7 MK3", bonus: "+45 km/h speed" },
+      ],
+      armor: [
+        { name: "Ceramic Armor MK1", bonus: "+70mm protection" },
+        { name: "Ceramic Armor MK2", bonus: "+140mm protection" },
+        { name: "Ceramic Armor MK3", bonus: "+210mm protection" },
+      ],
+      fireControl: [
+        { name: "Sentinel Radar MK1", bonus: "+22% accuracy" },
+        { name: "Sentinel Radar MK2", bonus: "+38% accuracy" },
+        { name: "Sentinel Radar MK3", bonus: "+54% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 65,
     name: "TOS-1A",
     type: "Tank",
     faction: "Russian",
     tier: "IV",
-    description: "Heavy flamethrower system designed for bunker-busting and area denial.",
-    stats: { health: 35800, speed: 60, armor: "780mm", agility: 48 },
+    description: "Heavy flamethrower system designed for bunker destruction,Aromourd Vehicles and area denial.",
+    stats: { health: 35800, speed: 60, armor: "750mm", agility: 55 },
     weapons: [
-      { name: "220mm Thermobaric Rockets", type: "Rocket System", damage: 32000, penetration: 1100 },
+      { name: "220mm Thermobaric Rockets", type: "Heavy Rocket", damage: 32000, penetration: 1200 },
       { name: "PKT 7.62mm", type: "Machine Gun", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
     ],
     modules: {
@@ -1327,89 +2039,57 @@ const VEHICLES = [
         { name: "V-84MS MK3", bonus: "+24 km/h speed" },
       ],
       armor: [
-        { name: "T-72 Chassis Armor MK1", bonus: "+140mm protection" },
-        { name: "T-72 Chassis Armor MK2", bonus: "+280mm protection" },
-        { name: "T-72 Chassis Armor MK3", bonus: "+420mm protection" },
+        { name: "Steel Armor MK1", bonus: "+140mm protection" },
+        { name: "Steel Armor MK2", bonus: "+280mm protection" },
+        { name: "Steel Armor MK3", bonus: "+420mm protection" },
       ],
       fireControl: [
-        { name: "Rocket Guidance MK1", bonus: "+15% accuracy" },
-        { name: "Rocket Guidance MK2", bonus: "+28% accuracy" },
-        { name: "Rocket Guidance MK3", bonus: "+40% accuracy" },
+        { name: "Fire Control MK1", bonus: "+15% accuracy" },
+        { name: "Fire Control MK2", bonus: "+28% accuracy" },
+        { name: "Fire Control MK3", bonus: "+40% accuracy" },
       ],
     },
   },
   {
-    id: 44,
-    name: "T-20 Monolit",
+    id: 66,
+    name: "PLZ-05",
     type: "Tank",
-    faction: "Russian",
+    faction: "Chinese",
     tier: "IV",
-    description: "Advanced tank destroyer with stealth capabilities and powerful anti-tank systems.",
-    stats: { health: 29500, speed: 75, armor: "680mm", agility: 78 },
+    description: "Self-propelled howitzer with automated loading and digital fire control.",
+    stats: { health: 32500, speed: 60, armor: "480mm", agility: 58 },
     weapons: [
-      { name: "2A75 125mm", type: "Anti-Tank Gun", damage: 16800, penetration: 920 },
-      { name: "9M133 Kornet", type: "ATGM", damage: 19500, penetration: 1300 },
-      { name: "NSVT 12.7mm", type: "Machine Gun", damage: 200, penetration: 32, rateOfFire: "700 rpm" },
+      { name: "PLZ05 155mm", type: "Howitzer", damage: 26500, penetration: 900 },
+      { name: "QJC88 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "600 rpm" },
     ],
     modules: {
       engine: [
-        { name: "Diesel Engine MK1", bonus: "+12 km/h speed" },
-        { name: "Diesel Engine MK2", bonus: "+24 km/h speed" },
-        { name: "Diesel Engine MK3", bonus: "+36 km/h speed" },
+        { name: "Diesel Engine MK1", bonus: "+9 km/h speed" },
+        { name: "Diesel Engine MK2", bonus: "+18 km/h speed" },
+        { name: "Diesel Engine MK3", bonus: "+27 km/h speed" },
       ],
       armor: [
-        { name: "Stealth Armor MK1", bonus: "+120mm protection" },
-        { name: "Stealth Armor MK2", bonus: "+240mm protection" },
-        { name: "Stealth Armor MK3", bonus: "+360mm protection" },
+        { name: "Steel Armor MK1", bonus: "+90mm protection" },
+        { name: "Steel Armor MK2", bonus: "+180mm protection" },
+        { name: "Steel Armor MK3", bonus: "+270mm protection" },
       ],
       fireControl: [
-        { name: "Advanced FCS MK1", bonus: "+20% accuracy" },
-        { name: "Advanced FCS MK2", bonus: "+35% accuracy" },
-        { name: "Advanced FCS MK3", bonus: "+50% accuracy" },
+        { name: "Digital FCS MK1", bonus: "+20% accuracy" },
+        { name: "Digital FCS MK2", bonus: "+35% accuracy" },
+        { name: "Digital FCS MK3", bonus: "+50% accuracy" },
       ],
     },
   },
   {
-    id: 45,
-    name: "T-14 (152)",
+    id: 67,
+    name: "M109A6 Paladin",
     type: "Tank",
-    faction: "Russian",
+    faction: "American",
     tier: "IV",
-    description: "Armata variant with massive 152mm gun for maximum firepower.",
-    stats: { health: 40200, speed: 68, armor: "1250mm", agility: 62 },
+    description: "Self-propelled howitzer with automated fire control and shoot-and-scoot capability.",
+    stats: { health: 30800, speed: 56, armor: "450mm", agility: 52 },
     weapons: [
-      { name: "2A83 152mm", type: "Main Gun", damage: 22500, penetration: 1200 },
-      { name: "Kornet ATGM", type: "Anti-Tank Missile", damage: 20800, penetration: 1350 },
-      { name: "12.7mm Kord", type: "Machine Gun", damage: 180, penetration: 25, rateOfFire: "700 rpm" },
-    ],
-    modules: {
-      engine: [
-        { name: "ChTZ 12N360 MK1", bonus: "+10 km/h speed" },
-        { name: "ChTZ 12N360 MK2", bonus: "+20 km/h speed" },
-        { name: "ChTZ 12N360 MK3", bonus: "+30 km/h speed" },
-      ],
-      armor: [
-        { name: "Malachit ERA MK1", bonus: "+250mm protection" },
-        { name: "Malachit ERA MK2", bonus: "+500mm protection" },
-        { name: "Malachit ERA MK3", bonus: "+750mm protection" },
-      ],
-      fireControl: [
-        { name: "Kalina FCS MK1", bonus: "+18% accuracy" },
-        { name: "Kalina FCS MK2", bonus: "+32% accuracy" },
-        { name: "Kalina FCS MK3", bonus: "+46% accuracy" },
-      ],
-    },
-  },
-  {
-    id: 46,
-    name: "M110A2",
-    type: "Tank",
-    faction: "Japanese",
-    tier: "III",
-    description: "Self-propelled howitzer with long-range artillery capability and proven reliability.",
-    stats: { health: 26800, speed: 56, armor: "380mm", agility: 45 },
-    weapons: [
-      { name: "M201A1 203mm", type: "Howitzer", damage: 26500, penetration: 880 },
+      { name: "M284 155mm", type: "Howitzer", damage: 25500, penetration: 850 },
       { name: "M2HB 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "550 rpm" },
     ],
     modules: {
@@ -1419,29 +2099,151 @@ const VEHICLES = [
         { name: "Detroit Diesel 8V71T MK3", bonus: "+24 km/h speed" },
       ],
       armor: [
-        { name: "Steel Armor MK1", bonus: "+70mm protection" },
-        { name: "Steel Armor MK2", bonus: "+140mm protection" },
-        { name: "Steel Armor MK3", bonus: "+210mm protection" },
+        { name: "Aluminum Armor MK1", bonus: "+85mm protection" },
+        { name: "Aluminum Armor MK2", bonus: "+170mm protection" },
+        { name: "Aluminum Armor MK3", bonus: "+255mm protection" },
       ],
       fireControl: [
-        { name: "Artillery Computer MK1", bonus: "+18% accuracy" },
-        { name: "Artillery Computer MK2", bonus: "+32% accuracy" },
-        { name: "Artillery Computer MK3", bonus: "+46% accuracy" },
+        { name: "AFATDS MK1", bonus: "+18% accuracy" },
+        { name: "AFATDS MK2", bonus: "+32% accuracy" },
+        { name: "AFATDS MK3", bonus: "+46% accuracy" },
       ],
     },
   },
   {
-    id: 47,
+    id: 68,
+    name: "FK 2000",
+    type: "Tank",
+    faction: "Chinese",
+    tier: "IV",
+    description: "Self-propelled artillery system with rapid deployment and high mobility.",
+    stats: { health: 28200, speed: 70, armor: "420mm", agility: 65 },
+    weapons: [
+      { name: "L52 155mm", type: "Howitzer", damage: 24000, penetration: 800 },
+      { name: "MG3 7.62mm", type: "Machine Gun", damage: 130, penetration: 16, rateOfFire: "1200 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "MTU 8V183 MK1", bonus: "+10 km/h speed" },
+        { name: "MTU 8V183 MK2", bonus: "+20 km/h speed" },
+        { name: "MTU 8V183 MK3", bonus: "+30 km/h speed" },
+      ],
+      armor: [
+        { name: "Steel Armor MK1", bonus: "+80mm protection" },
+        { name: "Steel Armor MK2", bonus: "+160mm protection" },
+        { name: "Steel Armor MK3", bonus: "+240mm protection" },
+      ],
+      fireControl: [
+        { name: "Artillery FCS MK1", bonus: "+16% accuracy" },
+        { name: "Artillery FCS MK2", bonus: "+28% accuracy" },
+        { name: "Artillery FCS MK3", bonus: "+40% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 69,
+    name: "BM-57-2 Kochevnik",
+    type: "Tank",
+    faction: "Russian",
+    tier: "IV",
+    description: "Tank destroyer with advanced anti-tank guided missiles and stealth features.",
+    stats: { health: 29500, speed: 65, armor: "580mm", agility: 75 },
+    weapons: [
+      { name: "9M133 Kornet", type: "ATGM", damage: 19500, penetration: 1300 },
+      { name: "2A42 30mm", type: "Autocannon", damage: 420, penetration: 75, rateOfFire: "550 rpm" },
+      { name: "PKT 7.62mm", type: "Machine Gun", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "UTD-29 MK1", bonus: "+10 km/h speed" },
+        { name: "UTD-29 MK2", bonus: "+20 km/h speed" },
+        { name: "UTD-29 MK3", bonus: "+30 km/h speed" },
+      ],
+      armor: [
+        { name: "Composite Armor MK1", bonus: "+110mm protection" },
+        { name: "Composite Armor MK2", bonus: "+220mm protection" },
+        { name: "Composite Armor MK3", bonus: "+330mm protection" },
+      ],
+      fireControl: [
+        { name: "Missile Guidance MK1", bonus: "+20% accuracy" },
+        { name: "Missile Guidance MK2", bonus: "+35% accuracy" },
+        { name: "Missile Guidance MK3", bonus: "+50% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 70,
+    name: "Object 640",
+    type: "Tank",
+    faction: "Russian",
+    tier: "IV",
+    description: "Experimental main battle tank with revolutionary design and advanced systems.",
+    stats: { health: 41500, speed: 70, armor: "1350mm", agility: 72 },
+    weapons: [
+      { name: "2A83 152mm", type: "Main Gun", damage: 21500, penetration: 1150 },
+      { name: "9M119M1 Invar-M", type: "ATGM", damage: 20500, penetration: 1380 },
+      { name: "Kord 12.7mm", type: "Machine Gun", damage: 240, penetration: 38, rateOfFire: "650 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "A-85-3A MK1", bonus: "+12 km/h speed" },
+        { name: "A-85-3A MK2", bonus: "+24 km/h speed" },
+        { name: "A-85-3A MK3", bonus: "+36 km/h speed" },
+      ],
+      armor: [
+        { name: "Experimental ERA MK1", bonus: "+270mm protection" },
+        { name: "Experimental ERA MK2", bonus: "+540mm protection" },
+        { name: "Experimental ERA MK3", bonus: "+810mm protection" },
+      ],
+      fireControl: [
+        { name: "Advanced AI FCS MK1", bonus: "+24% accuracy" },
+        { name: "Advanced AI FCS MK2", bonus: "+42% accuracy" },
+        { name: "Advanced AI FCS MK3", bonus: "+60% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 71,
+    name: "HSTV-L",
+    type: "Tank",
+    faction: "American",
+    tier: "III",
+    description: "High Survivability Test Vehicle - Light with advanced armor and rapid-fire gun.",
+    stats: { health: 22500, speed: 70, armor: "520mm", agility: 88 },
+    weapons: [
+      { name: "ARES 75mm", type: "Rapid-Fire Gun", damage: 3200, penetration: 180, rateOfFire: "60 rpm" },
+      { name: "M240 7.62mm", type: "Machine Gun", damage: 120, penetration: 15, rateOfFire: "750 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "AVCR-1360 MK1", bonus: "+12 km/h speed" },
+        { name: "AVCR-1360 MK2", bonus: "+24 km/h speed" },
+        { name: "AVCR-1360 MK3", bonus: "+36 km/h speed" },
+      ],
+      armor: [
+        { name: "Composite Armor MK1", bonus: "+100mm protection" },
+        { name: "Composite Armor MK2", bonus: "+200mm protection" },
+        { name: "Composite Armor MK3", bonus: "+300mm protection" },
+      ],
+      fireControl: [
+        { name: "Digital FCS MK1", bonus: "+20% accuracy" },
+        { name: "Digital FCS MK2", bonus: "+35% accuracy" },
+        { name: "Digital FCS MK3", bonus: "+50% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 72,
     name: "ZBL-08",
     type: "Tank",
     faction: "Chinese",
     tier: "III",
-    description: "Wheeled infantry fighting vehicle with amphibious capability and modern systems.",
-    stats: { health: 21500, speed: 100, armor: "420mm", agility: 85 },
+    description: "Wheeled infantry fighting vehicle with amphibious capability and modular design.",
+    stats: { health: 24800, speed: 100, armor: "480mm", agility: 82 },
     weapons: [
-      { name: "ZPT-99 30mm", type: "Autocannon", damage: 420, penetration: 75, rateOfFire: "330 rpm" },
-      { name: "HJ-73C ATGM", type: "Anti-Tank Missile", damage: 14200, penetration: 750 },
-      { name: "QJT-88 5.8mm", type: "Coaxial MG", damage: 85, penetration: 8, rateOfFire: "650 rpm" },
+      { name: "ZPT99 30mm", type: "Autocannon", damage: 380, penetration: 68, rateOfFire: "330 rpm" },
+      { name: "HJ-73D", type: "ATGM", damage: 14200, penetration: 750 },
+      { name: "QJT 5.8mm", type: "Machine Gun", damage: 75, penetration: 6, rateOfFire: "650 rpm" },
     ],
     modules: {
       engine: [
@@ -1450,48 +2252,93 @@ const VEHICLES = [
         { name: "Deutz BF6M1015C MK3", bonus: "+45 km/h speed" },
       ],
       armor: [
-        { name: "Composite Armor MK1", bonus: "+80mm protection" },
-        { name: "Composite Armor MK2", bonus: "+160mm protection" },
-        { name: "Composite Armor MK3", bonus: "+240mm protection" },
+        { name: "Steel Armor MK1", bonus: "+90mm protection" },
+        { name: "Steel Armor MK2", bonus: "+180mm protection" },
+        { name: "Steel Armor MK3", bonus: "+270mm protection" },
       ],
       fireControl: [
-        { name: "Digital FCS MK1", bonus: "+16% accuracy" },
-        { name: "Digital FCS MK2", bonus: "+28% accuracy" },
-        { name: "Digital FCS MK3", bonus: "+40% accuracy" },
-      ],
-    },
-  },
-  {
-    id: 48,
-    name: "ADATS",
-    type: "Tank",
-    faction: "American",
-    tier: "IV",
-    description: "Air Defense Anti-Tank System with dual-purpose missile capability.",
-    stats: { health: 24800, speed: 67, armor: "350mm", agility: 72 },
-    weapons: [
-      { name: "MIM-146 ADATS", type: "SAM/ATGM", damage: 15500, penetration: 900 },
-      { name: "M240 7.62mm", type: "Machine Gun", damage: 120, penetration: 15, rateOfFire: "750 rpm" },
-    ],
-    modules: {
-      engine: [
-        { name: "Detroit Diesel 8V92TA MK1", bonus: "+10 km/h speed" },
-        { name: "Detroit Diesel 8V92TA MK2", bonus: "+20 km/h speed" },
-        { name: "Detroit Diesel 8V92TA MK3", bonus: "+30 km/h speed" },
-      ],
-      armor: [
-        { name: "Aluminum Armor MK1", bonus: "+65mm protection" },
-        { name: "Aluminum Armor MK2", bonus: "+130mm protection" },
-        { name: "Aluminum Armor MK3", bonus: "+195mm protection" },
-      ],
-      fireControl: [
-        { name: "Dual-Mode Radar MK1", bonus: "+25% accuracy" },
-        { name: "Dual-Mode Radar MK2", bonus: "+42% accuracy" },
-        { name: "Dual-Mode Radar MK3", bonus: "+60% accuracy" },
+        { name: "Integrated FCS MK1", bonus: "+16% accuracy" },
+        { name: "Integrated FCS MK2", bonus: "+28% accuracy" },
+        { name: "Integrated FCS MK3", bonus: "+40% accuracy" },
       ],
     },
   },
 ]
+
+VEHICLES.push(...newVehicles)
+
+const getAircraftRole = (vehicle: any) => {
+  if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber") return null
+
+  // Specific aircraft role assignments
+  if (vehicle.name.includes("J-10")) return "multi-role"
+  if (vehicle.name.includes("J-35")) return "stealth"
+  if (vehicle.name.includes("MiG-41M")) return "interceptor"
+  if (vehicle.name.includes("F-16C Night Falcon")) return "multi-role"
+  if (vehicle.name.includes("Tu-222")) return "bomber"
+
+  const weapons = vehicle.weapons || []
+  const hasStealthWeapons = weapons.some(
+    (w: any) =>
+      w.name.includes("Kinzhal") ||
+      w.name.includes("GROM") ||
+      vehicle.name.includes("F-22") ||
+      vehicle.name.includes("Su-57") ||
+      vehicle.name.includes("J-20") ||
+      vehicle.name.includes("F-35") ||
+      vehicle.name.includes("YF-23") ||
+      vehicle.name.includes("Su-75"),
+  )
+
+  const hasGroundAttackWeapons = weapons.some(
+    (w: any) =>
+      w.type.includes("Ground") ||
+      w.type.includes("Bomb") ||
+      w.name.includes("Maverick") ||
+      w.name.includes("Hellfire") ||
+      vehicle.name.includes("A-10") ||
+      vehicle.name.includes("Su-25") ||
+      vehicle.name.includes("AV-8B") ||
+      vehicle.name.includes("Su-39"),
+  )
+
+  const hasInterceptorCharacteristics = weapons.some(
+    (w: any) =>
+      w.type.includes("AAM") ||
+      w.name.includes("Phoenix") ||
+      vehicle.name.includes("MiG-31") ||
+      vehicle.name.includes("F-14") ||
+      vehicle.name.includes("MiG-41"),
+  )
+
+  const hasMultiRoleWeapons = weapons.some(
+    (w: any) => w.type.includes("Air-to-Ground") && weapons.some((w2: any) => w2.type.includes("AAM")),
+  )
+
+  if (hasStealthWeapons) return "stealth"
+  if (hasGroundAttackWeapons && !hasInterceptorCharacteristics) return "ground-attack"
+  if (hasInterceptorCharacteristics && !hasGroundAttackWeapons) return "interceptor"
+  if (hasMultiRoleWeapons || (hasGroundAttackWeapons && hasInterceptorCharacteristics)) return "multi-role"
+
+  return "multi-role" // Default for jets
+}
+
+const getRoleIcon = (role: string | null) => {
+  switch (role) {
+    case "stealth":
+      return "/stealth-icon.png"
+    case "multi-role":
+      return "/multi-role-icon.png"
+    case "ground-attack":
+      return "/ground-attack-icon.png"
+    case "interceptor":
+      return "/interceptor-icon.png"
+    case "bomber":
+      return "/bomber-icon.png"
+    default:
+      return null
+  }
+}
 
 const getFlagImage = (faction: string): string => {
   const flags: { [key: string]: string } = {
@@ -1499,7 +2346,7 @@ const getFlagImage = (faction: string): string => {
     American: "/usa-flag.png",
     Chinese: "/china-flag.png",
     German: "/germany-flag.jpeg",
-    British: "/uk-flag.png",
+    British: "/british-flag.png",
     European: "/eu-flag.png",
     Japanese: "/japan-flag.webp",
     Turkish: "/turkey-flag.png",
@@ -1507,6 +2354,7 @@ const getFlagImage = (faction: string): string => {
     Israeli: "/israel-flag.webp",
     French: "/france-flag.webp",
     Italian: "/italy-flag.png",
+    Iranian: "/iran-flag.png",
     "South Korean": "/flags/kr.png",
     Ukrainian: "/ukraine-flag.png",
     Swedish: "/sweden-flag.png",
@@ -1514,47 +2362,22 @@ const getFlagImage = (faction: string): string => {
   return flags[faction] || "/default-flag.png"
 }
 
-const generateComparisonAnalysis = (vehicle1: any, vehicle2: any): string => {
-  const healthWinner = vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name
-  const speedWinner = vehicle1.stats.speed > vehicle2.stats.speed ? vehicle1.name : vehicle2.name
-  const agilityWinner = vehicle1.stats.agility > vehicle2.stats.agility ? vehicle1.name : vehicle2.name
-
-  let analysis = `🤖 AI TACTICAL ANALYSIS\n\n`
-
-  // Performance comparison
-  analysis += `PERFORMANCE OVERVIEW:\n`
-  analysis += `• Survivability: ${healthWinner} dominates with ${healthWinner === vehicle1.name ? vehicle1.stats.health.toLocaleString() : vehicle2.stats.health.toLocaleString()} HP\n`
-  analysis += `• Mobility: ${speedWinner} leads with ${speedWinner === vehicle1.name ? vehicle1.stats.speed : vehicle2.stats.speed} km/h\n`
-  analysis += `• Maneuverability: ${agilityWinner} excels with ${agilityWinner === vehicle1.name ? vehicle1.stats.agility : vehicle2.stats.agility} agility\n\n`
-
-  // Tactical analysis
-  analysis += `TACTICAL ASSESSMENT:\n`
-  if (vehicle1.type === vehicle2.type) {
-    analysis += `Both are ${vehicle1.type}s, making this a direct role comparison. `
-  } else {
-    analysis += `Cross-role comparison: ${vehicle1.type} vs ${vehicle2.type}. `
-  }
-
-  // Tier analysis
-  if (vehicle1.tier === vehicle2.tier) {
-    analysis += `Same tier (${vehicle1.tier}) vehicles with balanced matchup potential.\n`
-  } else {
-    const higherTier = vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name
-    analysis += `${higherTier} has tier advantage, expect superior technology and capabilities.\n`
-  }
-
-  // Weapon analysis
-  analysis += `\nWEAPON SYSTEMS:\n`
-  analysis += `• ${vehicle1.name}: ${vehicle1.weapons.length} weapon systems\n`
-  analysis += `• ${vehicle2.name}: ${vehicle2.weapons.length} weapon systems\n`
-
-  // Faction analysis
-  if (vehicle1.faction !== vehicle2.faction) {
-    analysis += `\nFACTION DOCTRINE:\n`
-    analysis += `${vehicle1.faction} vs ${vehicle2.faction} represents different military philosophies and engineering approaches.`
-  }
-
-  return analysis
+const isMarketVehicleCheck = (vehicleName: string) => {
+  const marketVehicles = [
+    "Abrams X",
+    "Type 10",
+    "Su-57M",
+    "TU-222",
+    "Merkava Mk.4",
+    "Leopard 2A4",
+    "KF-51 Panther",
+    "HSTV-L",
+    "Ka-58 Black Ghost",
+    "T-14 (152)",
+    "Leopard 2A7V",
+    "Type 16 MCV",
+  ]
+  return marketVehicles.includes(vehicleName)
 }
 
 const MwtVehicleStats = () => {
@@ -1581,70 +2404,6 @@ const MwtVehicleStats = () => {
   const tiers = [...new Set(VEHICLES.map((v) => v.tier))].sort()
   const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
 
-  const isMarketVehicle = (vehicleName: string) => {
-    const marketVehicles = [
-      "Abrams X",
-      "Type 10",
-      "Su-57M",
-      "TU-222",
-      "Merkava Mk.4",
-      "Leopard 2A4",
-      "KF-51 Panther",
-      "HSTV-L",
-      "Ka-58 Black Ghost",
-      "T-14 (152)",
-    ]
-    return marketVehicles.includes(vehicleName)
-  }
-
-  const getTierColor = (tier: string) => {
-    switch (tier) {
-      case "II":
-        return "border-l-green-500"
-      case "III":
-        return "border-l-blue-700"
-      case "IV":
-        return "border-l-purple-500"
-      default:
-        return "border-l-gray-500"
-    }
-  }
-
-  const getVehicleDetailedInfo = (vehicle: any) => {
-    const weaponsList = vehicle.weapons
-      .map((weapon: any) => `${weapon.name}: ${weapon.damage} DMG, ${weapon.penetration} PEN`)
-      .join("\n")
-
-    const modulesList = Object.entries(vehicle.modules || {})
-      .map(
-        ([category, modules]: [string, any]) =>
-          `${category}: ${Array.isArray(modules) ? modules.map((m: any) => m.name).join(", ") : "N/A"}`,
-      )
-      .join("\n")
-
-    return `🎯 ${vehicle.name} - ${vehicle.type}
-  
-📊 SPECIFICATIONS:
-• Faction: ${vehicle.faction}
-• Tier: ${vehicle.tier}
-• Health: ${vehicle.stats.health.toLocaleString()} HP
-• Speed: ${vehicle.stats.speed} km/h
-${vehicle.stats.afterburnerSpeed ? `• Afterburner: ${vehicle.stats.afterburnerSpeed} km/h` : ""}
-${vehicle.stats.armor ? `• Armor: ${vehicle.stats.armor}` : ""}
-• Agility: ${vehicle.stats.agility}
-
-🎮 IN-GAME INFO:
-${vehicle.description}
-
-⚔️ WEAPONS:
-${weaponsList}
-
-🔧 UPGRADE MODULES:
-${modulesList}
-
-${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : "🆓 Standard Vehicle"}`
-  }
-
   const filteredVehicles = VEHICLES.filter((vehicle) => {
     const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesType = !typeFilter || vehicle.type === typeFilter
@@ -1665,10 +2424,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     }
   }
 
-  const toggleExpand = (id: string) => {
-    setExpandedVehicle(expandedVehicle === id ? "" : id)
-  }
-
   const handleChatSubmit = () => {
     if (!chatInput.trim()) return
 
@@ -1676,296 +2431,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     setChatMessages((prev) => [...prev, userMessage])
     setIsLoading(true)
 
-    const getVehicleInfo = (query: string) => {
-      const lowerQuery = query.toLowerCase().trim()
-
-      // Enhanced vehicle search with better matching
-      const searchVehicle = (name: string) => {
-        const cleanName = name.toLowerCase().replace(/[-\s]/g, "")
-        return VEHICLES.find(
-          (v) =>
-            v.name.toLowerCase().includes(name.toLowerCase()) ||
-            v.name.toLowerCase().replace(/[-\s]/g, "").includes(cleanName) ||
-            cleanName.includes(v.name.toLowerCase().replace(/[-\s]/g, "")),
-        )
-      }
-
-      // Advanced data analysis functions
-      const analyzeVehicles = {
-        fastestTank: () => {
-          const tanks = VEHICLES.filter((v) => v.type === "Tank")
-          return tanks.reduce((prev, current) =>
-            (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
-          )
-        },
-        strongestTank: () => {
-          const tanks = VEHICLES.filter((v) => v.type === "Tank")
-          return tanks.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
-        },
-        fastestJet: () => {
-          const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
-          return jets.reduce((prev, current) => {
-            const prevSpeed = prev.stats.afterburnerSpeed || prev.stats.speed || prev.stats.cruiseSpeed || 0
-            const currentSpeed = current.stats.afterburnerSpeed || current.stats.speed || current.stats.cruiseSpeed || 0
-            return prevSpeed > currentSpeed ? prev : current
-          })
-        },
-        strongestJet: () => {
-          const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
-          return jets.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
-        },
-        fastestHelicopter: () => {
-          const helicopters = VEHICLES.filter((v) => v.type === "Helicopter")
-          return helicopters.reduce((prev, current) =>
-            (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
-          )
-        },
-        strongestHelicopter: () => {
-          const helicopters = VEHICLES.filter((v) => v.type === "Helicopter")
-          return helicopters.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
-        },
-        mostArmoredVehicle: () => {
-          return VEHICLES.filter((v) => v.stats.armor).reduce((prev, current) =>
-            (prev.stats.armor || 0) > (current.stats.armor || 0) ? prev : current,
-          )
-        },
-        mostAgileVehicle: () => {
-          return VEHICLES.filter((v) => v.stats.agility).reduce((prev, current) =>
-            (prev.stats.agility || 0) > (current.stats.agility || 0) ? prev : current,
-          )
-        },
-        bestByNation: (nation: string) => {
-          const nationVehicles = VEHICLES.filter((v) => v.faction.toLowerCase().includes(nation.toLowerCase()))
-          return nationVehicles.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
-        },
-      }
-
-      // Enhanced response formatting
-      const formatVehicleDetails = (vehicle: any, context = "") => {
-        let response = `🎯 ${vehicle.name} (${vehicle.faction} ${vehicle.type})\n\n`
-
-        if (context) response += `${context}\n\n`
-
-        response += `📊 COMBAT SPECIFICATIONS:\n`
-        response += `• Health: ${vehicle.stats.health.toLocaleString()} HP\n`
-
-        if (vehicle.stats.speed) response += `• Speed: ${vehicle.stats.speed} km/h\n`
-        if (vehicle.stats.cruiseSpeed) response += `• Cruise Speed: ${vehicle.stats.cruiseSpeed} km/h\n`
-        if (vehicle.stats.afterburnerSpeed) response += `• Afterburner Speed: ${vehicle.stats.afterburnerSpeed} km/h\n`
-        if (vehicle.stats.armor) response += `• Armor: ${vehicle.stats.armor}\n`
-        if (vehicle.stats.agility) response += `• Agility: ${vehicle.stats.agility}\n`
-
-        response += `• Combat Tier: ${vehicle.tier}\n`
-        response += `• Nation: ${vehicle.faction}\n\n`
-
-        response += `📝 TACTICAL ANALYSIS:\n${vehicle.description}\n\n`
-
-        response += `⚔️ WEAPON SYSTEMS (${vehicle.weapons.length} total):\n`
-        response += vehicle.weapons
-          .map(
-            (w) =>
-              `• ${w.name}: ${w.damage} DMG, ${w.penetration} PEN${w.rateOfFire ? `, ${w.rateOfFire} RPM` : ""}${w.lockTime ? `, ${w.lockTime}s lock` : ""}`,
-          )
-          .join("\n")
-
-        return response
-      }
-
-      // Advanced query processing with ChatGPT-like intelligence
-
-      // Fastest vehicle queries
-      if (lowerQuery.includes("fastest tank") || lowerQuery.includes("quickest tank")) {
-        const fastest = analyzeVehicles.fastestTank()
-        return formatVehicleDetails(
-          fastest,
-          `🏃‍♂️ FASTEST TANK ANALYSIS:\nAfter analyzing all ${VEHICLES.filter((v) => v.type === "Tank").length} tanks in the database, the ${fastest.name} emerges as the speed champion with ${fastest.stats.speed} km/h maximum velocity.`,
-        )
-      }
-
-      if (
-        lowerQuery.includes("fastest jet") ||
-        lowerQuery.includes("quickest jet") ||
-        lowerQuery.includes("fastest fighter")
-      ) {
-        const fastest = analyzeVehicles.fastestJet()
-        const maxSpeed = fastest.stats.afterburnerSpeed || fastest.stats.speed || fastest.stats.cruiseSpeed
-        return formatVehicleDetails(
-          fastest,
-          `✈️ FASTEST FIGHTER JET ANALYSIS:\nAnalyzing ${VEHICLES.filter((v) => v.type === "Fighter Jet").length} fighter aircraft, the ${fastest.name} dominates with ${maxSpeed} km/h maximum speed capability.`,
-        )
-      }
-
-      if (lowerQuery.includes("fastest helicopter") || lowerQuery.includes("quickest helicopter")) {
-        const fastest = analyzeVehicles.fastestHelicopter()
-        return formatVehicleDetails(
-          fastest,
-          `🚁 FASTEST HELICOPTER ANALYSIS:\nAmong ${VEHICLES.filter((v) => v.type === "Helicopter").length} rotorcraft, the ${fastest.name} achieves the highest speed of ${fastest.stats.speed} km/h.`,
-        )
-      }
-
-      // Strongest/toughest vehicle queries
-      if (
-        lowerQuery.includes("strongest tank") ||
-        lowerQuery.includes("toughest tank") ||
-        lowerQuery.includes("most durable tank")
-      ) {
-        const strongest = analyzeVehicles.strongestTank()
-        return formatVehicleDetails(
-          strongest,
-          `🛡️ STRONGEST TANK ANALYSIS:\nAfter evaluating durability across all armored vehicles, the ${strongest.name} stands as the ultimate survivor with ${strongest.stats.health.toLocaleString()} HP.`,
-        )
-      }
-
-      if (
-        lowerQuery.includes("strongest jet") ||
-        lowerQuery.includes("toughest jet") ||
-        lowerQuery.includes("most durable jet")
-      ) {
-        const strongest = analyzeVehicles.strongestJet()
-        return formatVehicleDetails(
-          strongest,
-          `🛡️ STRONGEST FIGHTER JET ANALYSIS:\nEvaluating combat survivability, the ${strongest.name} leads with ${strongest.stats.health.toLocaleString()} HP structural integrity.`,
-        )
-      }
-
-      if (lowerQuery.includes("strongest helicopter") || lowerQuery.includes("toughest helicopter")) {
-        const strongest = analyzeVehicles.strongestHelicopter()
-        return formatVehicleDetails(
-          strongest,
-          `🛡️ STRONGEST HELICOPTER ANALYSIS:\nFor rotorcraft durability, the ${strongest.name} excels with ${strongest.stats.health.toLocaleString()} HP.`,
-        )
-      }
-
-      // Most armored/agile queries
-      if (lowerQuery.includes("most armored") || lowerQuery.includes("best armor")) {
-        const mostArmored = analyzeVehicles.mostArmoredVehicle()
-        return formatVehicleDetails(
-          mostArmored,
-          `🛡️ MOST ARMORED VEHICLE:\nMaximum protection analysis reveals the ${mostArmored.name} with ${mostArmored.stats.armor} armor rating.`,
-        )
-      }
-
-      if (lowerQuery.includes("most agile") || lowerQuery.includes("best agility")) {
-        const mostAgile = analyzeVehicles.mostAgileVehicle()
-        return formatVehicleDetails(
-          mostAgile,
-          `🎯 MOST AGILE VEHICLE:\nManeuverability champion is the ${mostAgile.name} with ${mostAgile.stats.agility} agility rating.`,
-        )
-      }
-
-      // Nation-specific best queries with intelligence
-      if (lowerQuery.includes("best russian") || lowerQuery.includes("strongest russian")) {
-        const best = analyzeVehicles.bestByNation("russian")
-        return formatVehicleDetails(
-          best,
-          `🇷🇺 BEST RUSSIAN VEHICLE:\nRussian military engineering peaks with this exceptional combat platform.`,
-        )
-      }
-
-      if (
-        lowerQuery.includes("best american") ||
-        lowerQuery.includes("best usa") ||
-        lowerQuery.includes("strongest american")
-      ) {
-        const best = analyzeVehicles.bestByNation("american")
-        return formatVehicleDetails(
-          best,
-          `🇺🇸 BEST AMERICAN VEHICLE:\nAmerican technological superiority demonstrated through this advanced system.`,
-        )
-      }
-
-      if (
-        lowerQuery.includes("best chinese") ||
-        lowerQuery.includes("best china") ||
-        lowerQuery.includes("strongest chinese")
-      ) {
-        const best = analyzeVehicles.bestByNation("chinese")
-        return formatVehicleDetails(
-          best,
-          `🇨🇳 BEST CHINESE VEHICLE:\nChinese military innovation showcased in this cutting-edge platform.`,
-        )
-      }
-
-      if (lowerQuery.includes("best german") || lowerQuery.includes("strongest german")) {
-        const best = analyzeVehicles.bestByNation("german")
-        return formatVehicleDetails(best, `🇩🇪 BEST GERMAN VEHICLE:\nGerman precision engineering at its finest.`)
-      }
-
-      // Vehicle comparison logic with enhanced analysis
-      if (lowerQuery.includes(" vs ") || lowerQuery.includes(" versus ")) {
-        const parts = lowerQuery.split(/ vs | versus /)
-        if (parts.length === 2) {
-          const vehicle1 = searchVehicle(parts[0].trim())
-          const vehicle2 = searchVehicle(parts[1].trim())
-
-          if (vehicle1 && vehicle2) {
-            const formatComparisonStats = (vehicle: any) => {
-              let stats = `• Health: ${vehicle.stats.health.toLocaleString()} HP\n`
-              if (vehicle.stats.speed) stats += `• Speed: ${vehicle.stats.speed} km/h\n`
-              if (vehicle.stats.cruiseSpeed) stats += `• Cruise Speed: ${vehicle.stats.cruiseSpeed} km/h\n`
-              if (vehicle.stats.afterburnerSpeed)
-                stats += `• Afterburner Speed: ${vehicle.stats.afterburnerSpeed} km/h\n`
-              if (vehicle.stats.armor) stats += `• Armor: ${vehicle.stats.armor}\n`
-              if (vehicle.stats.agility) stats += `• Agility: ${vehicle.stats.agility}\n`
-              stats += `• Tier: ${vehicle.tier}\n`
-              stats += `• Primary Weapons: ${vehicle.weapons
-                .slice(0, 3)
-                .map((w) => w.name)
-                .join(", ")}`
-              return stats
-            }
-
-            const getMaxSpeed = (vehicle: any) =>
-              vehicle.stats.afterburnerSpeed || vehicle.stats.speed || vehicle.stats.cruiseSpeed || 0
-
-            return (
-              `⚔️ TACTICAL COMBAT ANALYSIS: ${vehicle1.name} vs ${vehicle2.name}\n\n` +
-              `🔵 ${vehicle1.name} (${vehicle1.faction} ${vehicle1.type}):\n${formatComparisonStats(vehicle1)}\n\n` +
-              `🔴 ${vehicle2.name} (${vehicle2.faction} ${vehicle2.type}):\n${formatComparisonStats(vehicle2)}\n\n` +
-              `🏆 COMBAT SUPERIORITY ANALYSIS:\n` +
-              `• Survivability: ${vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name} (${Math.max(vehicle1.stats.health, vehicle2.stats.health).toLocaleString()} HP advantage)\n` +
-              `• Speed: ${getMaxSpeed(vehicle1) > getMaxSpeed(vehicle2) ? vehicle1.name : vehicle2.name} (${Math.max(getMaxSpeed(vehicle1), getMaxSpeed(vehicle2))} km/h max)\n` +
-              `• Firepower: ${vehicle1.weapons.length > vehicle2.weapons.length ? vehicle1.name : vehicle2.name} (${Math.max(vehicle1.weapons.length, vehicle2.weapons.length)} weapon systems)\n` +
-              `• Tier Advantage: ${vehicle1.tier === vehicle2.tier ? "Equal tier" : vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name}\n\n` +
-              `🎯 TACTICAL RECOMMENDATION: ${vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name + " for survivability" : vehicle2.name + " for survivability"}`
-            )
-          }
-        }
-      }
-
-      // Individual vehicle search with enhanced details
-      const foundVehicle = searchVehicle(lowerQuery)
-      if (foundVehicle) {
-        return formatVehicleDetails(foundVehicle)
-      }
-
-      // Tier and nation listings with intelligence
-      if (lowerQuery.includes("tier ii") || lowerQuery.includes("tier 2")) {
-        const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier II")
-        return `🎖️ TIER II COMBAT VEHICLES (${tierVehicles.length} platforms):\n\nThese intermediate-tier vehicles offer balanced performance for developing commanders:\n\n${tierVehicles.map((v) => `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP`).join("\n")}`
-      }
-
-      if (lowerQuery.includes("tier iii") || lowerQuery.includes("tier 3")) {
-        const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier III")
-        return `🎖️ TIER III COMBAT VEHICLES (${tierVehicles.length} platforms):\n\nAdvanced military hardware for experienced operators:\n\n${tierVehicles.map((v) => `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP`).join("\n")}`
-      }
-
-      if (lowerQuery.includes("tier iv") || lowerQuery.includes("tier 4")) {
-        const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier IV")
-        return `🎖️ TIER IV COMBAT VEHICLES (${tierVehicles.length} platforms):\n\nCutting-edge military technology for elite commanders:\n\n${tierVehicles.map((v) => `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP`).join("\n")}`
-      }
-
-      // Enhanced help and default responses
-      if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
-        return `🤖 MWT TACTICAL AI ASSISTANT\n\nI'm an advanced military vehicle analysis system. I can provide:\n\n🔍 VEHICLE ANALYSIS:\n• "Su-57M" - Complete specifications\n• "T-14 vs Abrams X" - Tactical comparisons\n\n🏆 PERFORMANCE QUERIES:\n• "Fastest tank" - Speed analysis\n• "Strongest jet" - Durability rankings\n• "Most armored vehicle" - Protection analysis\n\n🌍 NATION ANALYSIS:\n• "Best Russian vehicle" - National superiority\n• "American vehicles" - Fleet listings\n\n📊 DATA INSIGHTS:\n• "Tier IV vehicles" - Tier breakdowns\n• "Market vehicles" - Premium platforms\n\nWhat tactical intelligence do you need?`
-      }
-
-      // Default intelligent response
-      return `🤖 MWT TACTICAL AI - Advanced Military Analysis System\n\nI didn't recognize that specific query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n💡 TRY ASKING:\n• "What's the fastest tank?" - Performance analysis\n• "Su-57M vs F-22" - Combat comparisons\n• "Best Chinese vehicle" - National rankings\n• "Tier IV vehicles" - Category listings\n\nI'm designed to think analytically about military vehicle performance, tactics, and specifications. What would you like to analyze?`
-    }
-
     setTimeout(() => {
-      const response = getVehicleInfo(chatInput)
+      const response = "AI response would go here"
       const botMessage = { role: "assistant", content: response }
       setChatMessages((prev) => [...prev, botMessage])
       setIsLoading(false)
@@ -1975,7 +2442,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-40 shadow-sm">
+      <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 shadow-sm">
         <div className="max-w-7xl mx-auto p-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
@@ -2041,69 +2508,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       </header>
 
       <main className="max-w-7xl mx-auto p-6">
-        {compare.length === 2 && (
-          <div className="mb-8 bg-slate-900/40 rounded-xl p-6 border border-slate-800">
-            <h2 className="text-2xl font-bold text-cyan-400 mb-4">Vehicle Comparison</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {compare.map((id) => {
-                const vehicle = VEHICLES.find((v) => v.id.toString() === id)
-                if (!vehicle) return null
-                return (
-                  <div key={id} className="bg-slate-800/50 rounded-lg p-4">
-                    <h3 className="text-xl font-semibold text-cyan-300 mb-2">{vehicle.name}</h3>
-                    <p className="text-slate-400 text-sm mb-3">{vehicle.description}</p>
-                    <div className="grid grid-cols-2 gap-3 text-sm">
-                      <div>
-                        <span className="text-slate-400">Health:</span>
-                        <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.health.toLocaleString()}</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-400">Speed:</span>
-                        <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.speed} km/h</span>
-                      </div>
-                      {vehicle.stats.armor && (
-                        <div>
-                          <span className="text-slate-400">Armor:</span>
-                          <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.armor}</span>
-                        </div>
-                      )}
-                      <div>
-                        <span className="text-slate-400">Agility:</span>
-                        <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.agility}</span>
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-
-            {(() => {
-              const vehicle1 = VEHICLES.find((v) => v.id.toString() === compare[0])
-              const vehicle2 = VEHICLES.find((v) => v.id.toString() === compare[1])
-              if (vehicle1 && vehicle2) {
-                return (
-                  <div className="mt-6 bg-slate-800/30 rounded-lg p-4 border border-cyan-500/20">
-                    <h3 className="text-lg font-semibold text-cyan-400 mb-3 flex items-center gap-2">
-                      🤖 AI Tactical Analysis
-                    </h3>
-                    <div className="text-slate-300 text-sm whitespace-pre-line leading-relaxed">
-                      {generateComparisonAnalysis(vehicle1, vehicle2)}
-                    </div>
-                  </div>
-                )
-              }
-              return null
-            })()}
-
-            <button
-              onClick={() => setCompare([])}
-              className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
-            >
-              Clear Comparison
-            </button>
-          </div>
-        )}
-
         <div className="mb-6 flex items-center justify-between">
           <p className="text-slate-400">
             Showing {indexOfFirstVehicle + 1}-{Math.min(indexOfLastVehicle, filteredVehicles.length)} of{" "}
@@ -2119,21 +2523,43 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               animate={{ opacity: 1, y: 0 }}
               className="relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 hover:border-cyan-600/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10"
             >
-              {/* Tier indicator bookmark */}
-              <div
-                className={`absolute top-0 left-0 border-b-transparent w-1.5 h-1.5 border-l-[30px] border-r-0 border-b-[30px] ${getTierColor(vehicle.tier)}`}
-                title={`Tier ${vehicle.tier}`}
-              />
-
-              {/* Market vehicle indicator */}
-              {isMarketVehicle(vehicle.name) && (
+              <div className="absolute top-0 left-0 w-0 h-0 z-10">
                 <div
-                  className="absolute top-0 left-3 w-0 h-0 border-b-transparent border-l-yellow-500 z-10 px-0 border-l-[20px] border-b-[20px] mx-[-12px]"
-                  title="Market Vehicle"
+                  className={`w-0 h-0 border-r-[40px] border-t-[40px] border-r-transparent ${
+                    vehicle.tier === "II"
+                      ? "border-t-green-500"
+                      : vehicle.tier === "III"
+                        ? "border-t-blue-700"
+                        : vehicle.tier === "IV"
+                          ? "border-t-purple-500"
+                          : "border-t-gray-500"
+                  }`}
                 />
+              </div>
+
+              {isMarketVehicleCheck(vehicle.name) && (
+                <div className="absolute top-0 left-0 w-0 h-0 z-10">
+                  <div className="h-0 border-l-yellow-500 border-b-transparent ml-0 w-0 border-l-[25px] border-b-[25px]" />
+                </div>
               )}
 
-              <div className="flex items-center gap-3 mb-2 px-0">
+              {(vehicle.type === "Fighter Jet" || vehicle.type === "Bomber") && (
+                <div className="absolute top-4 right-4">
+                  {(() => {
+                    const role = getAircraftRole(vehicle)
+                    const iconPath = getRoleIcon(role)
+                    return iconPath ? (
+                      <img
+                        src={iconPath || "/placeholder.svg"}
+                        alt={`${role} aircraft`}
+                        className="w-6 h-6 opacity-80"
+                      />
+                    ) : null
+                  })()}
+                </div>
+              )}
+
+              <div className="flex items-center gap-3 mb-2">
                 <img
                   src={getFlagImage(vehicle.faction) || "/placeholder.svg"}
                   alt={`${vehicle.faction} flag`}
@@ -2150,42 +2576,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <div className="text-xs text-slate-400 mb-1">Health</div>
                   <div className="text-lg font-bold text-cyan-300">{vehicle.stats.health.toLocaleString()}</div>
                 </div>
-
-                {vehicle.type === "Fighter Jet" || vehicle.type === "Bomber" ? (
-                  <>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <div className="text-xs text-slate-400 mb-1">Cruise Speed</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.speed} km/h</div>
-                    </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <div className="text-xs text-slate-400 mb-1">Afterburner Speed</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.afterburnerSpeed} km/h</div>
-                    </div>
-                  </>
-                ) : vehicle.type === "Helicopter" ? (
-                  <>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <div className="text-xs text-slate-400 mb-1">Speed</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.speed} km/h</div>
-                    </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <div className="text-xs text-slate-400 mb-1">Max Speed</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.maxSpeed} km/h</div>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <div className="text-xs text-slate-400 mb-1">Speed</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.speed} km/h</div>
-                    </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <div className="text-xs text-slate-400 mb-1">Armor</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.armor}</div>
-                    </div>
-                  </>
-                )}
-
+                <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className="text-xs text-slate-400 mb-1">Speed</div>
+                  <div className="text-lg font-bold text-cyan-300">{vehicle.stats.speed} km/h</div>
+                </div>
+                <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className="text-xs text-slate-400 mb-1">Armor</div>
+                  <div className="text-lg font-bold text-cyan-300">{vehicle.stats.armor}</div>
+                </div>
                 <div className="bg-slate-800/50 rounded-lg p-3">
                   <div className="text-xs text-slate-400 mb-1">Agility</div>
                   <div className="text-lg font-bold text-cyan-300">{vehicle.stats.agility}</div>
@@ -2196,7 +2594,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <button
                   onClick={() => toggleCompare(vehicle.id.toString())}
                   disabled={compare.length >= 2 && !compare.includes(vehicle.id.toString())}
-                  className={`flex-1 text-sm rounded transition-colors tabular-nums px-5 py-4 font-bold ${
+                  className={`flex-1 text-sm rounded transition-colors px-5 py-4 font-bold ${
                     compare.includes(vehicle.id.toString())
                       ? "bg-cyan-600 text-white"
                       : compare.length >= 2
@@ -2224,58 +2622,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <Bot className="group-hover:text-cyan-300 text-sky-300 w-[30px] h-[30px]" />
                 </button>
               </div>
-
-              {expandedVehicle === vehicle.id.toString() && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mt-4 pt-4 border-t border-slate-700"
-                >
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-sm font-semibold text-cyan-300 mb-2">Weapons</h4>
-                      <div className="space-y-2">
-                        {vehicle.weapons.map((weapon: any, idx: number) => (
-                          <div key={idx} className="bg-slate-800/30 rounded p-2">
-                            <div className="flex justify-between items-start">
-                              <div>
-                                <div className="font-medium text-cyan-200">{weapon.name}</div>
-                                <div className="text-xs text-slate-400">{weapon.type}</div>
-                              </div>
-                              <div className="text-right text-xs">
-                                <div className="text-cyan-300 font-bold">DMG: {weapon.damage}</div>
-                                <div className="text-cyan-300 font-bold">PEN: {weapon.penetration}</div>
-                                {weapon.rateOfFire && <div className="text-slate-400">{weapon.rateOfFire}</div>}
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-sm font-semibold text-cyan-300 mb-2">Upgrade Modules</h4>
-                      <div className="space-y-3">
-                        {Object.entries(vehicle.modules || {}).map(([category, modules]: [string, any]) => (
-                          <div key={category}>
-                            <div className="text-xs font-medium text-slate-300 mb-1 capitalize">{category}</div>
-                            <div className="space-y-1">
-                              {Array.isArray(modules) &&
-                                modules.map((module: any, idx: number) => (
-                                  <div key={idx} className="bg-slate-800/20 rounded px-2 py-1 text-xs">
-                                    <div className="font-medium text-cyan-200">{module.name}</div>
-                                    <div className="text-slate-400">{module.bonus}</div>
-                                  </div>
-                                ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
             </motion.div>
           ))}
         </div>
@@ -2298,244 +2644,88 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             )}
           </div>
         </div>
+      </main>
 
-        {/* Chat Interface */}
-        {chatOpen && (
-          <div className="fixed bottom-4 right-4 w-96 h-96 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50">
-            <div className="flex items-center justify-between p-4 border-b border-slate-700">
-              <h3 className="font-semibold text-cyan-300">Vehicle Database Chat</h3>
-              <button onClick={() => setChatOpen(false)} className="text-slate-400 hover:text-white">
-                <X className="w-5 h-5" />
+      {/* Chat Toggle Button */}
+      <button
+        onClick={() => setChatOpen(!chatOpen)}
+        className="fixed bottom-6 right-6 bg-cyan-600 hover:bg-cyan-700 text-white p-4 rounded-full shadow-lg transition-colors z-50"
+      >
+        <BotMessageSquareIcon className="w-6 h-6" />
+      </button>
+
+      {/* Chat Interface */}
+      {chatOpen && (
+        <div className="fixed bottom-24 right-6 w-96 h-96 bg-slate-900 border border-slate-700 rounded-lg shadow-xl z-50">
+          <div className="flex items-center justify-between p-4 border-b border-slate-700">
+            <h3 className="font-semibold text-cyan-400">MWT AI Assistant</h3>
+            <button onClick={() => setChatOpen(false)} className="text-slate-400 hover:text-white">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="flex-1 p-4 overflow-y-auto h-64">
+            {chatMessages.map((message, index) => (
+              <div key={index} className={`mb-4 ${message.role === "user" ? "text-right" : "text-left"}`}>
+                <div
+                  className={`inline-block p-3 rounded-lg max-w-xs ${
+                    message.role === "user" ? "bg-cyan-600 text-white" : "bg-slate-800 text-slate-300"
+                  }`}
+                >
+                  {message.content}
+                </div>
+              </div>
+            ))}
+            {isLoading && (
+              <div className="text-left mb-4">
+                <div className="inline-block p-3 rounded-lg bg-slate-800 text-slate-300">Thinking...</div>
+              </div>
+            )}
+          </div>
+
+          <div className="p-4 border-t border-slate-700">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyPress={(e) => e.key === "Enter" && handleChatSubmit()}
+                placeholder="Ask about vehicles..."
+                className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+              />
+              <button
+                onClick={handleChatSubmit}
+                className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors"
+              >
+                <Send className="w-4 h-4" />
               </button>
             </div>
+          </div>
+        </div>
+      )}
 
-            <div className="h-64 overflow-y-auto p-4 space-y-3">
-              {chatMessages.map((msg, index) => (
-                <div key={index} className={`${msg.role === "user" ? "text-right" : "text-left"}`}>
-                  <div className="text-xs text-slate-400 mb-1">{msg.role === "user" ? "You:" : "Database:"}</div>
-                  <div
-                    className={`inline-block p-2 rounded-lg text-sm ${
-                      msg.role === "user" ? "bg-cyan-600 text-white" : "bg-slate-800 text-slate-200"
-                    }`}
-                  >
-                    {msg.content}
-                  </div>
-                </div>
-              ))}
-              {isLoading && <div className="text-center text-slate-400">Thinking...</div>}
-            </div>
-
-            <div className="p-4 border-t border-slate-700">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  onKeyPress={(e) => e.key === "Enter" && handleChatSubmit()}
-                  placeholder="Ask about vehicles..."
-                  className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded text-sm focus:ring-2 focus:ring-cyan-500"
-                />
-                <button
-                  onClick={handleChatSubmit}
-                  className="px-3 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded transition-colors"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
-              </div>
+      {/* Footer */}
+      <footer className="bg-slate-900/80 backdrop-blur-sm border-t border-slate-700 mt-12">
+        <div className="max-w-7xl mx-auto p-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-slate-400 text-sm">© 2024 MWT Assistant. All rights reserved.</div>
+            <div className="flex gap-6">
+              <button
+                onClick={() => setShowAbout(true)}
+                className="text-slate-400 hover:text-cyan-400 text-sm transition-colors"
+              >
+                About
+              </button>
+              <button
+                onClick={() => setShowCredits(true)}
+                className="text-slate-400 hover:text-cyan-400 text-sm transition-colors"
+              >
+                Credits
+              </button>
             </div>
           </div>
-        )}
-
-        {/* Floating Chat Button */}
-        {!chatOpen && (
-          <button
-            onClick={() => setChatOpen(true)}
-            className="fixed bottom-6 right-6 p-4 bg-cyan-600 hover:bg-cyan-700 text-white rounded-full shadow-lg transition-colors z-40 px-10"
-          >
-            <BotMessageSquareIcon className="w-[35px] h-[50px] px-0 mx-1.5" /> Ask Ai
-          </button>
-        )}
-
-        <footer className="mt-16 pt-8 border-t border-slate-800">
-          <div className="text-center space-x-8">
-            <button
-              onClick={() => setShowAbout(true)}
-              className="text-cyan-400 hover:text-cyan-300 underline font-medium"
-            >
-              About
-            </button>
-            <button
-              onClick={() => setShowCredits(true)}
-              className="text-cyan-400 hover:text-cyan-300 underline font-medium"
-            >
-              Credits
-            </button>
-          </div>
-        </footer>
-
-        {showAbout && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-slate-800 p-6 rounded-lg max-w-md px-6 h-full py-60 mx-0.5 my-0 w-[400px]">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold text-cyan-400">About</h3>
-                <button onClick={() => setShowAbout(false)} className="text-slate-400 hover:text-white">
-                  ✕
-                </button>
-              </div>
-              <p className="text-slate-300">This MWT Vehicle Statistics website was developed by Naveed2227 :)</p>
-              <p className="text-slate-400 text-sm mt-4">
-                A comprehensive database of military vehicles from MWT Tank Battles featuring detailed specifications,
-                weapons, and upgrade modules.
-              </p>
-            </div>
-          </div>
-        )}
-
-        {showCredits && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-slate-900 p-6 rounded-lg max-w-4xl mx-4 max-h-[80vh] overflow-y-auto h-full px-6 w-full">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-bold text-cyan-400">Credits</h3>
-                <button onClick={() => setShowCredits(false)} className="text-slate-400 hover:text-white">
-                  ✕
-                </button>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div>
-                  <h4 className="text-white font-semibold">Naveed2227</h4>
-                  <p className="text-slate-400 text-sm">Developer and creator</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Hoffman Derpin</h4>
-                  <p className="text-slate-400 text-sm">Supporter</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Spector404</h4>
-                  <p className="text-slate-400 text-sm">Supporter,Writer</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Unnamed</h4>
-                  <p className="text-slate-400 text-sm">Suggester</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Hollyninja456</h4>
-                  <p className="text-slate-400 text-sm">Writer, Supporter</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Flarakrad</h4>
-                  <p className="text-slate-400 text-sm">Contributer</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Yeti</h4>
-                  <p className="text-slate-400 text-sm">Yeti</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Yx190</h4>
-                  <p className="text-slate-400 text-sm">Supporter</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">QWE</h4>
-                  <p className="text-slate-400 text-sm">Server Moderator, Supporter, Coordinator</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">OberstLeutnantFerid</h4>
-                  <p className="text-slate-400 text-sm">Militarist Officer</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Top Gun</h4>
-                  <p className="text-slate-400 text-sm">Server Moderator, supporter, Coordinator</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">White Windu</h4>
-                  <p className="text-slate-400 text-sm">Adviser, Coordination Manager</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Shiroko_Chan</h4>
-                  <p className="text-slate-400 text-sm">Server Moderator, Supporter, Iwak</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Eidolon X</h4>
-                  <p className="text-slate-400 text-sm">Adviser, Lurks</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Nesli27</h4>
-                  <p className="text-slate-400 text-sm">Supporter</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Vehicle Info Modal */}
-        {vehicleInfoOpen && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-slate-900 rounded-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
-              <div className="flex items-center justify-between p-6 border-b border-slate-700">
-                <h3 className="text-xl font-bold text-cyan-300">AI Vehicle Analysis</h3>
-                <button onClick={() => setVehicleInfoOpen(null)} className="text-slate-400 hover:text-white">
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-              <div className="p-6">
-                <pre className="whitespace-pre-wrap text-sm text-slate-200 leading-relaxed">
-                  {(() => {
-                    const vehicle = VEHICLES.find((v) => v.id.toString() === vehicleInfoOpen)
-                    return vehicle ? getVehicleDetailedInfo(vehicle) : "Vehicle not found"
-                  })()}
-                </pre>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {weaponsModalOpenId && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-slate-900 rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto border border-slate-700">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold text-white">
-                  {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.name} - Weapons
-                </h3>
-                <button
-                  onClick={() => setWeaponsModalOpenId(null)}
-                  className="text-slate-400 hover:text-white text-2xl"
-                >
-                  ×
-                </button>
-              </div>
-
-              <div className="space-y-4">
-                {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon, index) => (
-                  <div key={index} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
-                    <h4 className="text-lg font-semibold text-cyan-300 mb-2">{weapon.name}</h4>
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <span className="text-slate-400">Damage: </span>
-                        <span className="text-cyan-300 font-bold text-lg">{weapon.damage}</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-400">Penetration: </span>
-                        <span className="text-cyan-300 font-bold text-lg">{weapon.penetration}</span>
-                      </div>
-                      {weapon.rateOfFire && (
-                        <div>
-                          <span className="text-slate-400">Rate of Fire: </span>
-                          <span className="text-cyan-300">{weapon.rateOfFire}</span>
-                        </div>
-                      )}
-                      {weapon.lockTime && (
-                        <div>
-                          <span className="text-slate-400">Lock Time: </span>
-                          <span className="text-cyan-300">{weapon.lockTime}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-      </main>
+        </div>
+      </footer>
     </div>
   )
 }
