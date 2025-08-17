@@ -2085,7 +2085,7 @@ const VEHICLES = [
       { "name": "FCS MK3", "bonus": "+60% targeting accuracy" }
     ]
   }
-}
+},
 {
   "id": 66,
   "name": "TOS-1A",
@@ -2131,7 +2131,7 @@ const VEHICLES = [
       { "name": "TOS Targeting System MK3", "bonus": "+60% accuracy" }
     ]
   }
-}
+},
 
 {
   "id": 67,
@@ -2223,7 +2223,7 @@ const VEHICLES = [
       { "name": "FCS Artillery MK3", "bonus": "+60% targeting accuracy" }
     ]
   }
-}
+},
 
 {
   "id": 69,
@@ -2281,7 +2281,7 @@ const VEHICLES = [
       { "name": "Radar FCS MK3", "bonus": "+60% targeting accuracy" }
     ]
   }
-}
+},
 
 {
   "id": 70,
