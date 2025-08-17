@@ -2781,7 +2781,7 @@ const VEHICLES = [
       { name: "Sh-121 Radar MK2", bonus: "+45% detection" }
     ]
   }
-}
+},
 {
   id: 86,
   name: "Z-9G Harbin",
