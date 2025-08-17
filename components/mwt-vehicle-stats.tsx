@@ -2767,7 +2767,7 @@ const getAircraftRole = (vehicle: any) => {
   if (vehicle.name.includes("J-35")) return "stealth"
   if (vehicle.name.includes("MiG-41M")) return "interceptor"
   if (vehicle.name.includes("F-16C Night Falcon")) return "multi-role"
-  if (vehicle.name.includes("Tu-222")) return "bomber"
+  if (vehicle.name.includes("TU-222")) return "bomber"
 
   const weapons = vehicle.weapons || []
   const hasStealthWeapons = weapons.some(
