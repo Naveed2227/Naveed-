@@ -43,7 +43,7 @@ const VEHICLES = [
   {
     id: 2,
     name: "T-14 Armata",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "Russian",
     tier: "IV",
     description: "Next-generation main battle tank with unmanned turret and advanced armor systems.",
@@ -74,7 +74,7 @@ const VEHICLES = [
   {
     id: 3,
     name: "Leopard 2A4",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "German",
     tier: "III",
     description: "Proven main battle tank with excellent firepower and mobility balance.",
@@ -486,7 +486,7 @@ const VEHICLES = [
   {
     id: 16,
     name: "Abrams X",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "American",
     tier: "IV",
     description: "Next-generation prototype tank with unmanned turret and advanced systems.",
@@ -518,7 +518,7 @@ const VEHICLES = [
   {
     id: 17,
     name: "Type 10",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "Japanese",
     tier: "IV",
     description: "Modern main battle tank optimized for Japanese terrain with advanced fire control.",
@@ -548,7 +548,7 @@ const VEHICLES = [
   {
     id: 18,
     name: "Merkava Mk.4",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "Israeli",
     tier: "IV",
     description: "Heavily armored main battle tank with unique rear-engine design and crew survivability focus.",
@@ -610,7 +610,7 @@ const VEHICLES = [
   {
     id: 20,
     name: "M270 MLRS",
-    type: "Tank",
+    type: "MLRS",
     faction: "American",
     tier: "IV",
     description: "Multiple Launch Rocket System capable of delivering devastating area bombardment.",
@@ -641,7 +641,7 @@ const VEHICLES = [
   {
     id: 21,
     name: "Otomatic 76",
-    type: "Tank",
+    type: "Anti-Air",
     faction: "Italian",
     tier: "III",
     description: "Self-propelled anti-aircraft gun with rapid-fire 76mm cannon.",
@@ -671,7 +671,7 @@ const VEHICLES = [
   {
     id: 22,
     name: "Type 16 MCV",
-    type: "Tank",
+    type: "Tank Destroyer",
     faction: "Japanese",
     tier: "IV",
     description: "Mobile Combat Vehicle with excellent mobility and firepower for rapid deployment.",
@@ -733,11 +733,11 @@ const VEHICLES = [
   {
     id: 24,
     name: "M60 Patton",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "American",
     tier: "II",
     description: "Cold War era main battle tank with proven reliability and combat effectiveness.",
-    stats: { health: 28500, speed: 48, armor: "650mm", agility: 58 },
+    stats: { health: 32000, speed: 50, armor: "650mm", agility: 36 },
     weapons: [
       { name: "M68 105mm L52", type: "Main Gun", damage: 11800, penetration: 620 },
       { name: "M85 12.7mm", type: "Machine Gun", damage: 180, penetration: 28, rateOfFire: "450 rpm" },
@@ -764,7 +764,7 @@ const VEHICLES = [
   {
     id: 25,
     name: "T-72A",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "Russian",
     tier: "III",
     description: "Widely exported main battle tank with robust design and effective firepower.",
@@ -922,13 +922,13 @@ const VEHICLES = [
   {
     id: 30,
     name: "IT-1 Dragon",
-    type: "Tank",
+    type: "Missile Carrier",
     faction: "Russian",
     tier: "II",
     description: "Experimental missile tank destroyer with unique guided missile system.",
     stats: { health: 22800, speed: 50, armor: "520mm", agility: 55 },
     weapons: [
-      { name: "3M7 Drakon ATGM", type: "Anti-Tank Missile", damage: 15200, penetration: 800 },
+      { name: "3M7 Drakon ATGM", type: "Anti-Tank Missile", damage: 15200, penetration: 500 },
       { name: "PKT 7.62mm", type: "Machine Gun", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
     ],
     modules: {
@@ -952,11 +952,11 @@ const VEHICLES = [
   {
     id: 31,
     name: "M3 Bradley",
-    type: "Tank",
+    type: "Multirole-IFV",
     faction: "American",
     tier: "II",
     description: "Infantry fighting vehicle with TOW missile system and troop transport capability.",
-    stats: { health: 19500, speed: 66, armor: "380mm", agility: 78 },
+    stats: { health: 25000, speed: 62, armor: "380mm", agility: 35 },
     weapons: [
       { name: "TOW-2 ATGM", type: "Anti-Tank Missile", damage: 14800, penetration: 780 },
       { name: "M242 25mm", type: "Autocannon", damage: 320, penetration: 58, rateOfFire: "200 rpm" },
@@ -983,11 +983,11 @@ const VEHICLES = [
   {
     id: 32,
     name: "ZSU-23-4M4 Shilka",
-    type: "Tank",
+    type: "Anti-Air",
     faction: "Russian",
     tier: "II",
     description: "Self-propelled anti-aircraft gun with quad 23mm cannons and radar guidance.",
-    stats: { health: 18200, speed: 44, armor: "280mm", agility: 68 },
+    stats: { health: 21000, speed: 68, armor: "280mm", agility: 32 },
     weapons: [
       { name: "AZP-23 23mm Quad", type: "Anti-Aircraft Gun", damage: 1800, penetration: 95, rateOfFire: "3400 rpm" },
       { name: "9M311 Sosna", type: "SAM", damage: 7500, penetration: 380 },
@@ -1045,7 +1045,7 @@ const VEHICLES = [
   {
     id: 34,
     name: "BMD3",
-    type: "Tank",
+    type: "Light Tank",
     faction: "Russian",
     tier: "III",
     description: "Light infantry fighting vehicle with amphibious capability and rapid deployment design.",
@@ -1076,7 +1076,7 @@ const VEHICLES = [
   {
     id: 35,
     name: "BMPT Terminator 2",
-    type: "Tank",
+    type: "Tank Destroyer",
     faction: "Russian",
     tier: "IV",
     description: "Tank support fighting vehicle designed for urban combat and infantry support.",
@@ -1107,7 +1107,7 @@ const VEHICLES = [
   {
     id: 36,
     name: "SR-5 GMLRS",
-    type: "Tank",
+    type: "MLRS",
     faction: "Chinese",
     tier: "IV",
     description: "Guided multiple launch rocket system with precision strike capability.",
@@ -1137,7 +1137,7 @@ const VEHICLES = [
   {
     id: 37,
     name: "2S19 Msta-S",
-    type: "Tank",
+    type: "SPA",
     faction: "Russian",
     tier: "IV",
     description: "Self-propelled howitzer with long-range precision artillery capability.",
@@ -1167,7 +1167,7 @@ const VEHICLES = [
   {
     id: 38,
     name: "Pantsir S-1",
-    type: "Tank",
+    type: "Anti-Air",
     faction: "Russian",
     tier: "IV",
     description: "Combined gun-missile air defense system with advanced radar capabilities.",
@@ -1197,7 +1197,7 @@ const VEHICLES = [
   {
     id: 39,
     name: "M1128 Stryker",
-    type: "Tank",
+    type: "Tank Destroyer",
     faction: "American",
     tier: "IV",
     description: "Mobile gun system with rapid deployment capability and stealth features.",
@@ -1351,7 +1351,7 @@ const VEHICLES = [
   {
     id: 44,
     name: "M1 Abrams Block 3",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "American",
     tier: "IV",
     description: "An Experimental prototype tank intended as a successor to the Abrams MBT family",
@@ -1382,7 +1382,7 @@ const VEHICLES = [
   {
     id: 45,
     name: "Leopard 2A7V",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "German",
     tier: "IV",
     description: "Most advanced Leopard variant with urban warfare modifications and enhanced protection.",
@@ -1412,7 +1412,7 @@ const VEHICLES = [
   {
     id: 46,
     name: "KF-51 Panther",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "German",
     tier: "IV",
     description: "Next-generation main battle tank with 130mm gun and advanced digital systems.",
@@ -1506,7 +1506,7 @@ const VEHICLES = [
   {
     id: 49,
     name: "T-25 Pamir",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "Russian",
     tier: "IV",
     description: "Advanced main battle tank with next-generation armor and fire control systems.",
@@ -1537,7 +1537,7 @@ const VEHICLES = [
   {
     id: 50,
     name: "T-90A",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "Russian",
     tier: "IV",
     description: "Modernized main battle tank with improved armor and advanced fire control.",
@@ -1568,7 +1568,7 @@ const VEHICLES = [
   {
     id: 51,
     name: "T-95M",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "Russian",
     tier: "IV",
     description: "Experimental heavy tank with revolutionary armor design and 152mm gun.",
@@ -1600,10 +1600,10 @@ const VEHICLES = [
   {
     id: 52,
     name: "T-104 Bastion",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "Russian",
     tier: "IV",
-    description: "Future main battle tank concept with AI-assisted systems and modular armor.",
+    description: "A Russian heavy main battle tank, featuring strong armor, AI-assisted and protection systems.",
     stats: { health: 40800, speed: 72, armor: "1320mm", agility: 75 },
     weapons: [
       { name: "2A82-2M 125mm", type: "Main Gun", damage: 17500, penetration: 920 },
@@ -1631,7 +1631,7 @@ const VEHICLES = [
   {
     id: 53,
     name: "VT-4A1",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "Chinese",
     tier: "IV",
     description: "Export variant main battle tank with advanced fire control and modular protection.",
@@ -1662,7 +1662,7 @@ const VEHICLES = [
   {
     id: 54,
     name: "ZTZ99A",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "Chinese",
     tier: "IV",
     description: "Advanced main battle tank with composite armor and laser warning systems.",
@@ -1693,7 +1693,7 @@ const VEHICLES = [
   {
     id: 55,
     name: "ZTZ99-III",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "Chinese",
     tier: "IV",
     description: "Latest variant with enhanced armor package and improved battlefield management systems.",
@@ -1724,7 +1724,7 @@ const VEHICLES = [
   {
     id: 56,
     name: "Challenger 3",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "British",
     tier: "IV",
     description: "Next-generation British main battle tank with smoothbore gun and digital turret.",
@@ -1755,10 +1755,10 @@ const VEHICLES = [
   {
     id: 57,
     name: "EMBT 120",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "French",
     tier: "IV",
-    description: "European Main Battle Tank demonstrator with multinational technology integration.",
+    description: "A hybrid European main battle tank, combining Leopard 2 chassis with Leclerc turret.",
     stats: { health: 37800, speed: 70, armor: "1160mm", agility: 74 },
     weapons: [
       { name: "Rheinmetall L55 120mm", type: "Main Gun", damage: 16200, penetration: 870 },
@@ -1786,10 +1786,10 @@ const VEHICLES = [
   {
     id: 58,
     name: "FV4034 Challenger 2 TES",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "British",
     tier: "IV",
-    description: "Theatre Entry Standard variant with enhanced urban warfare protection.",
+    description: "A heavily upgraded British main battle tank with advanced armor for urban warfare.",
     stats: { health: 36200, speed: 56, armor: "1120mm", agility: 62 },
     weapons: [
       { name: "L30A1 120mm", type: "Main Gun", damage: 15500, penetration: 830 },
@@ -1817,10 +1817,10 @@ const VEHICLES = [
   {
     id: 59,
     name: "Karrar",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "Iranian",
     tier: "IV",
-    description: "Indigenous main battle tank with locally developed systems and modern armor.",
+    description: "An Iranian main battle tank, featuring upgraded armor, firepower, and technology from T-72 design.",
     stats: { health: 34500, speed: 65, armor: "980mm", agility: 68 },
     weapons: [
       { name: "2A46M 125mm", type: "Main Gun", damage: 14800, penetration: 800 },
@@ -1848,7 +1848,7 @@ const VEHICLES = [
   {
     id: 60,
     name: "Leclerc S2 AZUR",
-    type: "Tank",
+    type: "Main Battle Tank",
     faction: "French",
     tier: "IV",
     description: "Upgraded French main battle tank with urban warfare package and improved armor.",
@@ -1876,6 +1876,473 @@ const VEHICLES = [
       ],
     },
   },
+  {
+    "id": 61,
+    "name": "T-20 Monolit",
+    "type": "Tank Destroyer",
+    "faction": "Russian",
+    "tier": "IV",
+    "description": "Advanced Russian main battle tank equipped with a 2A42 autocannon, Kornet ATGMs, and a 30mm AGS-30 grenade launcher. Known for its formidable firepower and versatility on the battlefield.",
+    "stats": {
+      "health": 37100,
+      "speed": 70,
+      "reverseSpeed": 25,
+      "turretRotationSpeed": 49.8,
+      "hullRotationSpeed": 40,
+      "armor": 400,
+      "agility": 45
+    },
+    "weapons": [
+      { "name": "2A42", "type": "Autocannon", "damage": 380, "penetration": 65, "rateOfFire": "1800 rpm", "reload": 6, "ammo": 600, "ammoInMagazine": 150, "range": 1666, "elevationAngle": "-10/30 degrees" },
+      { "name": "9K135 Kornet", "type": "Laser-Guided ATGM", "damage": 9800, "penetration": 1200, "reload": 8, "ammo": 8, "ammoInMagazine": 1, "rateOfFire": "1 round/s", "range": 1566, "lockOnTime": "0 s" },
+      { "name": "AGS-30", "type": "30mm Grenade Launcher", "damage": 380, "penetration": 65, "reload": 5, "ammo": 29, "ammoInMagazine": 1, "rateOfFire": "1.7 rounds/s", "range": 666 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "V-92S2F", "bonus": "+200 km/h speed" },
+        { "name": "V-92S2F-M", "bonus": "+400 km/h speed" },
+        { "name": "V-92S2F-2", "bonus": "+600 km/h speed" }
+      ],
+      "armor": [
+        { "name": "Composite Armor MK1", "bonus": "+15% armor" },
+        { "name": "Composite Armor MK2", "bonus": "+25% armor" },
+        { "name": "Composite Armor MK3", "bonus": "+35% armor" }
+      ],
+      "electronics": [
+        { "name": "T-05 Radar MK1", "bonus": "+20% detection" },
+        { "name": "T-05 Radar MK2", "bonus": "+35% detection" },
+        { "name": "T-05 Radar MK3", "bonus": "+50% detection" }
+      ]
+    }
+  },
+  {
+    "id": 62,
+    "name": "KF31 Lynx",
+    "type": "Multirole-IFV",
+    "faction": "German",
+    "tier": "IV",
+    "description": "A versatile German infantry fighting vehicle equipped with a 30mm autocannon and Spike LR2 missiles, adaptable for various combat roles.",
+    "stats": {
+      "health": 22000,
+      "speed": 80,
+      "reverseSpeed": 30,
+      "turretRotationSpeed": 50,
+      "hullRotationSpeed": 45,
+      "armor": 300,
+      "agility": 70
+    },
+    "weapons": [
+      { "name": "30mm LANCE Autocannon", "type": "Autocannon", "damage": 500, "penetration": 100, "rateOfFire": "600 rpm", "reload": 4, "ammo": 500, "ammoInMagazine": 100, "range": 2000, "elevationAngle": "-10/60 degrees" },
+      { "name": "Spike LR2", "type": "Anti-Tank Guided Missile", "damage": 9800, "penetration": 750, "reload": 12, "ammo": 4, "ammoInMagazine": 1, "rateOfFire": "1 round/s", "range": 4000, "lockOnTime": "3 s" }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "MTU MB 883 Ka-501", "bonus": "+200 km/h speed" },
+        { "name": "MTU MB 883 Ka-502", "bonus": "+400 km/h speed" },
+        { "name": "MTU MB 883 Ka-503", "bonus": "+600 km/h speed" }
+      ],
+      "armor": [
+        { "name": "Composite Armor MK1", "bonus": "+15% armor" },
+        { "name": "Composite Armor MK2", "bonus": "+25% armor" },
+        { "name": "Composite Armor MK3", "bonus": "+35% armor" }
+      ],
+      "electronics": [
+        { "name": "FCS MK1", "bonus": "+20% targeting accuracy" },
+        { "name": "FCS MK2", "bonus": "+35% targeting accuracy" },
+        { "name": "FCS MK3", "bonus": "+50% targeting accuracy" }
+      ]
+    }
+  },
+  {
+    "id": 63,
+    "name": "M10 Booker",
+    "type": "Light Tank",
+    "faction": "American",
+    "tier": "IV",
+    "description": "A mobile assault gun designed to neutralize fortified positions and light armor, featuring a 105mm M35 gun.",
+    "stats": {
+      "health": 28000,
+      "speed": 60,
+      "reverseSpeed": 20,
+      "turretRotationSpeed": 30,
+      "hullRotationSpeed": 35,
+      "armor": 350,
+      "agility": 45
+    },
+    "weapons": [
+      { "name": "105mm M35 Gun", "type": "Main Gun", "damage": 12000, "penetration": 800, "reload": 10, "ammo": 40, "ammoInMagazine": 5, "rateOfFire": "1 round/s", "range": 3000, "elevationAngle": "-5/15 degrees" },
+      { "name": "M240C 7.62mm", "type": "Coaxial MG", "damage": 200, "penetration": 50, "rateOfFire": "900 rpm", "reload": 2, "ammo": 1000, "ammoInMagazine": 200, "range": 800 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Honeywell AGT1500", "bonus": "+150 km/h speed" },
+        { "name": "Honeywell AGT1500-X", "bonus": "+300 km/h speed" },
+        { "name": "Honeywell AGT1500-Y", "bonus": "+450 km/h speed" }
+      ],
+      "armor": [
+        { "name": "Chobham Armor MK1", "bonus": "+20% armor" },
+        { "name": "Chobham Armor MK2", "bonus": "+40% armor" },
+        { "name": "Chobham Armor MK3", "bonus": "+60% armor" }
+      ],
+      "electronics": [
+        { "name": "TIS MK1", "bonus": "+15% detection range" },
+        { "name": "TIS MK2", "bonus": "+30% detection range" },
+        { "name": "TIS MK3", "bonus": "+45% detection range" }
+      ]
+    }
+  },
+  {
+    "id": 64,
+    "name": "PL-01",
+    "type": "Light Tank",
+    "faction": "Polish",
+    "tier": "IV",
+    "description": "A concept stealth tank featuring a 120mm cannon and advanced camouflage systems.",
+    "stats": {
+      "health": 25000,
+      "speed": 70,
+      "reverseSpeed": 25,
+      "turretRotationSpeed": 40,
+      "hullRotationSpeed": 30,
+      "armor": 320,
+      "agility": 55
+    },
+    "weapons": [
+      { "name": "120mm Cannon", "type": "Main Gun", "damage": 10000, "penetration": 900, "reload": 12, "ammo": 30, "ammoInMagazine": 5, "rateOfFire": "1 round/s", "range": 3500, "elevationAngle": "-5/15 degrees" },
+      { "name": "7.62mm Coaxial MG", "type": "Coaxial MG", "damage": 150, "penetration": 40, "rateOfFire": "1000 rpm", "reload": 1, "ammo": 500, "ammoInMagazine": 100, "range": 800 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "MTU MB 838 CaM-500", "bonus": "+200 km/h speed" },
+        { "name": "MTU MB 838 CaM-600", "bonus": "+400 km/h speed" },
+        { "name": "MTU MB 838 CaM-700", "bonus": "+600 km/h speed" }
+      ],
+      "armor": [
+        { "name": "Composite Armor MK1", "bonus": "+15% armor" },
+        { "name": "Composite Armor MK2", "bonus": "+30% armor" },
+        { "name": "Composite Armor MK3", "bonus": "+45% armor" }
+      ],
+      "electronics": [
+        { "name": "Advanced FCS MK1", "bonus": "+20% targeting accuracy" },
+        { "name": "Advanced FCS MK2", "bonus": "+40% targeting accuracy" },
+        { "name": "Advanced FCS MK3", "bonus": "+60% targeting accuracy" }
+      ]
+    }
+  }
+ {
+  "id": 65,
+  "name": "M-SHORAD",
+  "type": "Anti-Air",
+  "faction": "American",
+  "tier": "IV",
+  "description": "Mobile short-range air defense system equipped with autocannons, Stinger missiles, and radar-guided targeting.",
+  "stats": {
+    "health": 24000,
+    "speed": 70,
+    "reverseSpeed": 25,
+    "turretRotationSpeed": 55,
+    "hullRotationSpeed": 50,
+    "armor": 250,
+    "agility": 65
+  },
+  "weapons": [
+    {
+      "name": "M3P 30mm Autocannon",
+      "type": "Autocannon",
+      "damage": 300,
+      "penetration": 80,
+      "rateOfFire": "850 rpm",
+      "ammo": 500,
+      "ammoInMagazine": 100,
+      "range": 1500
+    },
+    {
+      "name": "FIM-92 Stinger",
+      "type": "Surface-to-Air Missile",
+      "damage": 9000,
+      "penetration": 1000,
+      "reload": 10,
+      "ammo": 4,
+      "ammoInMagazine": 1,
+      "range": 3000,
+      "lockOnTime": "2 s"
+    }
+  ],
+  "modules": {
+    "engine": [
+      { "name": "Cummins 6VTA-903", "bonus": "+200 km/h speed" },
+      { "name": "Cummins 6VTA-904", "bonus": "+400 km/h speed" },
+      { "name": "Cummins 6VTA-905", "bonus": "+600 km/h speed" }
+    ],
+    "armor": [
+      { "name": "Composite Armor MK1", "bonus": "+15% armor" },
+      { "name": "Composite Armor MK2", "bonus": "+30% armor" },
+      { "name": "Composite Armor MK3", "bonus": "+45% armor" }
+    ],
+    "electronics": [
+      { "name": "FCS MK1", "bonus": "+20% targeting accuracy" },
+      { "name": "FCS MK2", "bonus": "+40% targeting accuracy" },
+      { "name": "FCS MK3", "bonus": "+60% targeting accuracy" }
+    ]
+  }
+}
+{
+  "id": 66,
+  "name": "TOS-1A",
+  "type": "MLRS",
+  "faction": "Russian",
+  "tier": "IV",
+  "description": "Heavy flamethrower rocket launcher mounted on a tank chassis, designed for area suppression and destruction of entrenched enemies.",
+  "stats": {
+    "health": 38000,
+    "speed": 60,
+    "reverseSpeed": 25,
+    "turretRotationSpeed": 20,
+    "hullRotationSpeed": 30,
+    "armor": 400,
+    "agility": 35
+  },
+  "weapons": [
+    {
+      "name": "Thermobaric Rockets",
+      "type": "Rocket Launcher",
+      "damage": 12000,
+      "penetration": 200,
+      "reload": 20,
+      "ammo": 24,
+      "ammoInMagazine": 12,
+      "range": 3500
+    }
+  ],
+  "modules": {
+    "engine": [
+      { "name": "V-84A Diesel", "bonus": "+150 km/h speed" },
+      { "name": "V-84A-X", "bonus": "+300 km/h speed" },
+      { "name": "V-84A-Y", "bonus": "+450 km/h speed" }
+    ],
+    "armor": [
+      { "name": "Heavy Armor MK1", "bonus": "+20% armor" },
+      { "name": "Heavy Armor MK2", "bonus": "+40% armor" },
+      { "name": "Heavy Armor MK3", "bonus": "+60% armor" }
+    ],
+    "electronics": [
+      { "name": "TOS Targeting System MK1", "bonus": "+20% accuracy" },
+      { "name": "TOS Targeting System MK2", "bonus": "+40% accuracy" },
+      { "name": "TOS Targeting System MK3", "bonus": "+60% accuracy" }
+    ]
+  }
+}
+
+{
+  "id": 67,
+  "name": "PLZ-05",
+  "type": "SPA",
+  "faction": "Chinese",
+  "tier": "IV",
+  "description": "Modern 155mm self-propelled howitzer designed for long-range artillery support and rapid deployment.",
+  "stats": {
+    "health": 32000,
+    "speed": 65,
+    "reverseSpeed": 25,
+    "turretRotationSpeed": 25,
+    "hullRotationSpeed": 30,
+    "armor": 350,
+    "agility": 40
+  },
+  "weapons": [
+    {
+      "name": "155mm Howitzer",
+      "type": "Artillery",
+      "damage": 14000,
+      "penetration": 100,
+      "reload": 20,
+      "ammo": 40,
+      "ammoInMagazine": 5,
+      "range": 4000
+    }
+  ],
+  "modules": {
+    "engine": [
+      { "name": "Deutz Diesel BF6M1015", "bonus": "+200 km/h speed" },
+      { "name": "Deutz Diesel BF6M1015-X", "bonus": "+400 km/h speed" },
+      { "name": "Deutz Diesel BF6M1015-Y", "bonus": "+600 km/h speed" }
+    ],
+    "armor": [
+      { "name": "Medium Armor MK1", "bonus": "+15% armor" },
+      { "name": "Medium Armor MK2", "bonus": "+30% armor" },
+      { "name": "Medium Armor MK3", "bonus": "+45% armor" }
+    ],
+    "electronics": [
+      { "name": "FCS Artillery MK1", "bonus": "+20% targeting accuracy" },
+      { "name": "FCS Artillery MK2", "bonus": "+40% targeting accuracy" },
+      { "name": "FCS Artillery MK3", "bonus": "+60% targeting accuracy" }
+    ]
+  }
+}{
+  "id": 68,
+  "name": "M109A6 Paladin",
+  "type": "SPA",
+  "faction": "American",
+  "tier": "IV",
+  "description": "Modernized 155mm self-propelled artillery system providing rapid, accurate fire support for ground forces.",
+  "stats": {
+    "health": 34000,
+    "speed": 60,
+    "reverseSpeed": 25,
+    "turretRotationSpeed": 25,
+    "hullRotationSpeed": 30,
+    "armor": 350,
+    "agility": 38
+  },
+  "weapons": [
+    {
+      "name": "155mm Howitzer",
+      "type": "Artillery",
+      "damage": 13500,
+      "penetration": 100,
+      "reload": 18,
+      "ammo": 40,
+      "ammoInMagazine": 5,
+      "range": 4000
+    }
+  ],
+  "modules": {
+    "engine": [
+      { "name": "Detroit Diesel 8V71T", "bonus": "+150 km/h speed" },
+      { "name": "Detroit Diesel 8V71T-X", "bonus": "+300 km/h speed" },
+      { "name": "Detroit Diesel 8V71T-Y", "bonus": "+450 km/h speed" }
+    ],
+    "armor": [
+      { "name": "Medium Armor MK1", "bonus": "+15% armor" },
+      { "name": "Medium Armor MK2", "bonus": "+30% armor" },
+      { "name": "Medium Armor MK3", "bonus": "+45% armor" }
+    ],
+    "electronics": [
+      { "name": "FCS Artillery MK1", "bonus": "+20% targeting accuracy" },
+      { "name": "FCS Artillery MK2", "bonus": "+40% targeting accuracy" },
+      { "name": "FCS Artillery MK3", "bonus": "+60% targeting accuracy" }
+    ]
+  }
+}
+
+{
+  "id": 69,
+  "name": "FK 2000",
+  "type": "Anti-Air",
+  "faction": "Chinese",
+  "tier": "IV",
+  "description": "Modern Chinese mobile anti-aircraft system with radar-guided missiles and rapid-fire autocannons for air defense.",
+  "stats": {
+    "health": 28000,
+    "speed": 70,
+    "reverseSpeed": 25,
+    "turretRotationSpeed": 60,
+    "hullRotationSpeed": 50,
+    "armor": 300,
+    "agility": 60
+  },
+  "weapons": [
+    {
+      "name": "Type 98 35mm Autocannon",
+      "type": "Autocannon",
+      "damage": 350,
+      "penetration": 70,
+      "rateOfFire": "1000 rpm",
+      "ammo": 500,
+      "ammoInMagazine": 100,
+      "range": 2000
+    },
+    {
+      "name": "PL-9 Missile",
+      "type": "Surface-to-Air Missile",
+      "damage": 9000,
+      "penetration": 1000,
+      "reload": 8,
+      "ammo": 8,
+      "ammoInMagazine": 2,
+      "range": 4000,
+      "lockOnTime": "2 s"
+    }
+  ],
+  "modules": {
+    "engine": [
+      { "name": "Diesel 6V150", "bonus": "+200 km/h speed" },
+      { "name": "Diesel 6V150-X", "bonus": "+400 km/h speed" },
+      { "name": "Diesel 6V150-Y", "bonus": "+600 km/h speed" }
+    ],
+    "armor": [
+      { "name": "Composite Armor MK1", "bonus": "+15% armor" },
+      { "name": "Composite Armor MK2", "bonus": "+30% armor" },
+      { "name": "Composite Armor MK3", "bonus": "+45% armor" }
+    ],
+    "electronics": [
+      { "name": "Radar FCS MK1", "bonus": "+20% targeting accuracy" },
+      { "name": "Radar FCS MK2", "bonus": "+40% targeting accuracy" },
+      { "name": "Radar FCS MK3", "bonus": "+60% targeting accuracy" }
+    ]
+  }
+}
+
+{
+  "id": 70,
+  "name": "BM-57-2 Kochevnik",
+  "type": "Tank Destroyer",
+  "faction": "Russian",
+  "tier": "IV",
+  "description": "A modern Russian heavy tank armed with a 125mm smoothbore cannon and multiple defensive systems, built for frontline dominance.",
+  "stats": {
+    "health": 42000,
+    "speed": 65,
+    "reverseSpeed": 25,
+    "turretRotationSpeed": 45,
+    "hullRotationSpeed": 40,
+    "armor": 500,
+    "agility": 50
+  },
+  "weapons": [
+    {
+      "name": "125mm 2A82 Cannon",
+      "type": "Main Gun",
+      "damage": 14000,
+      "penetration": 1000,
+      "reload": 12,
+      "ammo": 40,
+      "ammoInMagazine": 5,
+      "rateOfFire": "1 round/s",
+      "range": 3500,
+      "elevationAngle": "-5/15 degrees"
+    },
+    {
+      "name": "PKT 7.62mm Coaxial MG",
+      "type": "Coaxial MG",
+      "damage": 200,
+      "penetration": 50,
+      "rateOfFire": "900 rpm",
+      "ammo": 1000,
+      "ammoInMagazine": 200,
+      "range": 800
+    }
+  ],
+  "modules": {
+    "engine": [
+      { "name": "V-92S2F Diesel", "bonus": "+200 km/h speed" },
+      { "name": "V-92S2F-X Diesel", "bonus": "+400 km/h speed" },
+      { "name": "V-92S2F-Y Diesel", "bonus": "+600 km/h speed" }
+    ],
+    "armor": [
+      { "name": "Reactive Armor MK1", "bonus": "+20% armor" },
+      { "name": "Reactive Armor MK2", "bonus": "+40% armor" },
+      { "name": "Reactive Armor MK3", "bonus": "+60% armor" }
+    ],
+    "electronics": [
+      { "name": "Advanced FCS MK1", "bonus": "+20% targeting accuracy" },
+      { "name": "Advanced FCS MK2", "bonus": "+40% targeting accuracy" },
+      { "name": "Advanced FCS MK3", "bonus": "+60% targeting accuracy" }
+    ]
+  }
+}
+
+
 ]
 
 const getAircraftRole = (vehicle: any) => {
@@ -1977,7 +2444,7 @@ const generateComparisonAnalysis = (vehicle1: any, vehicle2: any): string => {
   const speedWinner = vehicle1.stats.speed > vehicle2.stats.speed ? vehicle1.name : vehicle2.name
   const agilityWinner = vehicle1.stats.agility > vehicle2.stats.agility ? vehicle1.name : vehicle2.name
 
-  let analysis = `🤖 AI TACTICAL ANALYSIS\n\n`
+  let analysis = `🤖 AI TACTICAL ANALYSIS SYSTEM(AITAS)\n\n`
 
   // Performance comparison
   analysis += `PERFORMANCE OVERVIEW:\n`
@@ -2586,7 +3053,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 return (
                   <div className="mt-6 bg-slate-800/30 rounded-lg p-4 border border-cyan-500/20">
                     <h3 className="text-lg font-semibold text-cyan-400 mb-3 flex items-center gap-2">
-                      🤖 AI Tactical Analysis
+                      🤖 AI Tactical Analysis System (AITAS)
                     </h3>
                     <div className="text-slate-300 text-sm whitespace-pre-line leading-relaxed">
                       {generateComparisonAnalysis(vehicle1, vehicle2)}
@@ -2978,7 +3445,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div>
                   <h4 className="text-white font-semibold">Naveed2227</h4>
-                  <p className="text-slate-400 text-sm">Developer and creator</p>
+                  <p className="text-slate-400 text-sm">Lead developer and creator</p>
                 </div>
                 <div>
                   <h4 className="text-white font-semibold">Hoffman Derpin</h4>
@@ -3034,6 +3501,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
                 <div>
                   <h4 className="text-white font-semibold">Nesli27</h4>
+                  <p className="text-slate-400 text-sm">Supporter</p>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold"> 枕頭 </h4>
                   <p className="text-slate-400 text-sm">Supporter</p>
                 </div>
               </div>
