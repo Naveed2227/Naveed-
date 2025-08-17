@@ -2947,6 +2947,7 @@ const MwtVehicleStats = () => {
       "T-14 (152)",
       "Leopard 2A7V",
       "Type 16 MCV",
+      "YF-23"
     ]
     return marketVehicles.includes(vehicleName)
   }
