@@ -2028,8 +2028,8 @@ const VEHICLES = [
         { "name": "Advanced FCS MK3", "bonus": "+60% targeting accuracy" }
       ]
     }
-  }
- {
+  },
+  {
   "id": 65,
   "name": "M-SHORAD",
   "type": "Anti-Air",
