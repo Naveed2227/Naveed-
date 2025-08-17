@@ -2341,6 +2341,418 @@ const VEHICLES = [
       { "name": "Advanced FCS MK3", "bonus": "+60% targeting accuracy" }
     ]
   }
+},
+{
+  id: 71,
+  name: "F/A-18F Super Hornet",
+  type: "Fighter Jet",
+  faction: "American",
+  tier: "III",
+  description: "Twin-engine carrier-based multirole fighter with excellent versatility for both air-to-air and air-to-ground combat.",
+  stats: { health: 19800, speed: 770, afterburnerSpeed: 1985, agility: 46 },
+  weapons: [
+    { name: "M61A2 Vulcan 20mm", type: "Autocannon", damage: 320, penetration: 50, rateOfFire: "6000 rpm" },
+    { name: "AIM-9X Sidewinder", type: "Short-Range AAM", damage: 7600, penetration: 380 },
+    { name: "AIM-120D AMRAAM", type: "Long-Range AAM", damage: 9100, penetration: 460 },
+    { name: "AGM-84 Harpoon", type: "Anti-Ship Missile", damage: 12500, penetration: 600 },
+    { name: "GBU-31 JDAM", type: "Guided Bomb", damage: 13200, penetration: 650 }
+  ],
+  modules: {
+    engine: [
+      { name: "F414-GE-400 MK1", bonus: "+150 km/h speed" },
+      { name: "F414-GE-400 MK2", bonus: "+300 km/h speed" },
+      { name: "F414-GE-400 MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "APG-79 AESA Radar MK1", bonus: "+20% detection" },
+      { name: "APG-79 AESA Radar MK2", bonus: "+35% detection" },
+      { name: "APG-79 AESA Radar MK3", bonus: "+50% detection" }
+    ],
+    survivability: [
+      { name: "ALE-55 Towed Decoy MK1", bonus: "+15% evasion" },
+      { name: "ALE-55 Towed Decoy MK2", bonus: "+30% evasion" },
+      { name: "ALE-55 Towed Decoy MK3", bonus: "+45% evasion" }
+    ],
+  },
+},
+{
+  id: 72,
+  name: "J-16",
+  type: "Fighter Jet",
+  faction: "Chinese",
+  tier: "III",
+  description: "Chinese twin-seat multirole fighter derived from Su-30, capable of carrying heavy weapons payload.",
+  stats: { health: 21000, speed: 780, afterburnerSpeed: 2050, agility: 48 },
+  weapons: [
+    { name: "PL-10", type: "Short-Range AAM", damage: 7800, penetration: 380 },
+    { name: "PL-15", type: "Long-Range AAM", damage: 9800, penetration: 470 },
+    { name: "KD-88", type: "Air-to-Surface Missile", damage: 12200, penetration: 580 },
+    { name: "LS-6 Glide Bomb", type: "Guided Bomb", damage: 11800, penetration: 500 },
+    { name: "30mm Cannon", type: "Autocannon", damage: 350, penetration: 60, rateOfFire: "1500 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "WS-10A MK1", bonus: "+150 km/h speed" },
+      { name: "WS-10A MK2", bonus: "+300 km/h speed" },
+      { name: "WS-10A MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "KLJ-7A Radar MK1", bonus: "+20% detection" },
+      { name: "KLJ-7A Radar MK2", bonus: "+35% detection" },
+      { name: "KLJ-7A Radar MK3", bonus: "+50% detection" }
+    ],
+    survivability: [
+      { name: "ECM Suite MK1", bonus: "+15% evasion" },
+      { name: "ECM Suite MK2", bonus: "+30% evasion" },
+      { name: "ECM Suite MK3", bonus: "+45% evasion" }
+    ],
+  },
+},
+{
+  id: 73,
+  name: "Su-37 Terminator",
+  type: "Fighter Jet",
+  faction: "Russian",
+  tier: "III",
+  description: "Experimental Russian fighter with thrust-vectoring for extreme maneuverability.",
+  stats: { health: 20500, speed: 765, afterburnerSpeed: 2020, agility: 82 },
+  weapons: [
+    { name: "R-73", type: "Short-Range AAM", damage: 7200, penetration: 360 },
+    { name: "R-77", type: "Medium-Range AAM", damage: 8700, penetration: 420 },
+    { name: "Kh-29T", type: "Air-to-Ground Missile", damage: 11600, penetration: 540 },
+    { name: "KAB-500Kr", type: "Guided Bomb", damage: 12000, penetration: 580 },
+    { name: "30mm GSh-301", type: "Autocannon", damage: 380, penetration: 65, rateOfFire: "1500 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "AL-37FU MK1", bonus: "+150 km/h speed" },
+      { name: "AL-37FU MK2", bonus: "+300 km/h speed" },
+      { name: "AL-37FU MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "N011M Radar MK1", bonus: "+20% detection" },
+      { name: "N011M Radar MK2", bonus: "+35% detection" },
+      { name: "N011M Radar MK3", bonus: "+50% detection" }
+    ],
+    agility: [
+      { name: "Thrust Vectoring MK1", bonus: "+10% agility" },
+      { name: "Thrust Vectoring MK2", bonus: "+20% agility" },
+      { name: "Thrust Vectoring MK3", bonus: "+30% agility" }
+    ],
+  },
+},
+{
+  id: 74,
+  name: "Su-25UB",
+  type: "Fighter Jet",
+  faction: "Russian",
+  tier: "III",
+  description: "Twin-seat variant of the Su-25, specialized for ground attack with heavy armor.",
+  stats: { health: 24500, speed: 720, afterburnerSpeed: 1680, agility: 28 },
+  weapons: [
+    { name: "30mm GSh-30-2 Cannon", type: "Autocannon", damage: 400, penetration: 70, rateOfFire: "3000 rpm" },
+    { name: "Kh-25ML", type: "Air-to-Ground Missile", damage: 9500, penetration: 480 },
+    { name: "S-25 Rocket", type: "Rocket Pod", damage: 8800, penetration: 440 },
+    { name: "FAB-500", type: "Unguided Bomb", damage: 10000, penetration: 500 }
+  ],
+  modules: {
+    armor: [
+      { name: "Cockpit Armor MK1", bonus: "+10% survivability" },
+      { name: "Cockpit Armor MK2", bonus: "+20% survivability" },
+      { name: "Cockpit Armor MK3", bonus: "+30% survivability" }
+    ],
+    engine: [
+      { name: "R-195 Engine MK1", bonus: "+100 km/h speed" },
+      { name: "R-195 Engine MK2", bonus: "+200 km/h speed" },
+      { name: "R-195 Engine MK3", bonus: "+300 km/h speed" }
+    ],
+  },
+},
+{
+  id: 75,
+  name: "Su-39",
+  type: "Fighter Jet",
+  faction: "Russian",
+  tier: "III",
+  description: "Upgraded variant of Su-25 with improved avionics and guided weapons.",
+  stats: { health: 25200, speed: 730, afterburnerSpeed: 1700, agility: 30 },
+  weapons: [
+    { name: "30mm GSh-30-2 Cannon", type: "Autocannon", damage: 420, penetration: 70, rateOfFire: "3000 rpm" },
+    { name: "Kh-29T", type: "Air-to-Ground Missile", damage: 11600, penetration: 540 },
+    { name: "Kh-31P", type: "Anti-Radiation Missile", damage: 12100, penetration: 600 },
+    { name: "FAB-500", type: "Unguided Bomb", damage: 10000, penetration: 500 }
+  ],
+  modules: {
+    engine: [
+      { name: "R-195M MK1", bonus: "+100 km/h speed" },
+      { name: "R-195M MK2", bonus: "+200 km/h speed" },
+      { name: "R-195M MK3", bonus: "+300 km/h speed" }
+    ],
+    avionics: [
+      { name: "Targeting Pod MK1", bonus: "+20% accuracy" },
+      { name: "Targeting Pod MK2", bonus: "+35% accuracy" },
+      { name: "Targeting Pod MK3", bonus: "+50% accuracy" }
+    ],
+  },
+},
+{
+  id: 76,
+  name: "J-15",
+  type: "Fighter Jet",
+  faction: "Chinese",
+  tier: "III",
+  description: "Chinese carrier-based fighter based on Su-33 design, versatile in both air and ground roles.",
+  stats: { health: 20100, speed: 765, afterburnerSpeed: 2000, agility: 45 },
+  weapons: [
+    { name: "PL-8", type: "Short-Range AAM", damage: 7300, penetration: 370 },
+    { name: "PL-12", type: "Medium-Range AAM", damage: 8900, penetration: 440 },
+    { name: "YJ-83K", type: "Anti-Ship Missile", damage: 12000, penetration: 580 },
+    { name: "LS-6 Glide Bomb", type: "Guided Bomb", damage: 11500, penetration: 520 }
+  ],
+  modules: {
+    engine: [
+      { name: "WS-10H MK1", bonus: "+150 km/h speed" },
+      { name: "WS-10H MK2", bonus: "+300 km/h speed" },
+      { name: "WS-10H MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "Type 1475 Radar MK1", bonus: "+20% detection" },
+      { name: "Type 1475 Radar MK2", bonus: "+35% detection" },
+      { name: "Type 1475 Radar MK3", bonus: "+50% detection" }
+    ],
+  },
+},
+{
+  id: 77,
+  name: "MiG-35",
+  type: "Fighter Jet",
+  faction: "Russian",
+  tier: "III",
+  description: "Advanced MiG fighter with modern avionics, thrust-vectoring, and strong multirole performance.",
+  stats: { health: 20200, speed: 775, afterburnerSpeed: 2060, agility: 52 },
+  weapons: [
+    { name: "R-73", type: "Short-Range AAM", damage: 7200, penetration: 360 },
+    { name: "R-77-1", type: "Medium-Range AAM", damage: 9100, penetration: 450 },
+    { name: "Kh-31A", type: "Anti-Ship Missile", damage: 11800, penetration: 560 },
+    { name: "Kh-29T", type: "Air-to-Ground Missile", damage: 11600, penetration: 540 },
+    { name: "30mm GSh-30-1", type: "Autocannon", damage: 380, penetration: 65, rateOfFire: "1500 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "RD-33MK MK1", bonus: "+150 km/h speed" },
+      { name: "RD-33MK MK2", bonus: "+300 km/h speed" },
+      { name: "RD-33MK MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "Zhuk-AE Radar MK1", bonus: "+20% detection" },
+      { name: "Zhuk-AE Radar MK2", bonus: "+35% detection" },
+      { name: "Zhuk-AE Radar MK3", bonus: "+50% detection" }
+    ],
+    agility: [
+      { name: "Thrust Vectoring MK1", bonus: "+10% agility" },
+      { name: "Thrust Vectoring MK2", bonus: "+20% agility" },
+      { name: "Thrust Vectoring MK3", bonus: "+30% agility" }
+    ],
+  },
+},
+{
+  id: 78,
+  name: "J-10B",
+  type: "Fighter Jet",
+  faction: "Chinese",
+  tier: "III",
+  description: "Modernized version of the J-10 with updated avionics and thrust-vectoring engine.",
+  stats: { health: 18500, speed: 765, afterburnerSpeed: 1960, agility: 56 },
+  weapons: [
+    { name: "PL-10", type: "Short-Range AAM", damage: 7800, penetration: 380 },
+    { name: "PL-12", type: "Medium-Range AAM", damage: 8900, penetration: 440 },
+    { name: "LS-6", type: "Glide Bomb", damage: 11500, penetration: 520 },
+    { name: "23mm Cannon", type: "Autocannon", damage: 300, penetration: 45, rateOfFire: "1500 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "AL-31FN MK1", bonus: "+150 km/h speed" },
+      { name: "AL-31FN MK2", bonus: "+300 km/h speed" },
+      { name: "AL-31FN MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "KLJ-7A MK1", bonus: "+20% detection" },
+      { name: "KLJ-7A MK2", bonus: "+35% detection" },
+      { name: "KLJ-7A MK3", bonus: "+50% detection" }
+    ],
+  },
+},
+{
+  id: 79,
+  name: "F-15EX Eagle II",
+  type: "Fighter Jet",
+  faction: "American",
+  tier: "III",
+  description: "Latest advanced variant of the F-15 with modern avionics and expanded weapons payload.",
+  stats: { health: 23000, speed: 800, afterburnerSpeed: 2100, agility: 58 },
+  weapons: [
+    { name: "AIM-9X Sidewinder", type: "Short-Range AAM", damage: 7600, penetration: 380 },
+    { name: "AIM-120D AMRAAM", type: "Long-Range AAM", damage: 9100, penetration: 460 },
+    { name: "AGM-158 JASSM", type: "Cruise Missile", damage: 14500, penetration: 700 },
+    { name: "GBU-31 JDAM", type: "Guided Bomb", damage: 13200, penetration: 650 },
+    { name: "M61A1 Vulcan 20mm", type: "Autocannon", damage: 320, penetration: 50, rateOfFire: "6000 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "F110-GE-132 MK1", bonus: "+150 km/h speed" },
+      { name: "F110-GE-132 MK2", bonus: "+300 km/h speed" },
+      { name: "F110-GE-132 MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "APG-82 AESA Radar MK1", bonus: "+20% detection" },
+      { name: "APG-82 AESA Radar MK2", bonus: "+35% detection" },
+      { name: "APG-82 AESA Radar MK3", bonus: "+50% detection" }
+    ],
+  },
+},
+{
+  id: 80,
+  name: "Mitsubishi F-2B",
+  type: "Fighter Jet",
+  faction: "Japanese",
+  tier: "III",
+  description: "Multirole fighter developed from the F-16, optimized for anti-ship and air-to-air roles.",
+  stats: { health: 19200, speed: 750, afterburnerSpeed: 1900, agility: 80 },
+  weapons: [
+    { name: "AAM-4B", type: "Medium-Range AAM", damage: 8500, penetration: 460 },
+    { name: "ASM-2", type: "Anti-Ship Missile", damage: 14000, penetration: 720 },
+    { name: "Mk82 Bomb", type: "Unguided Bomb", damage: 5000, penetration: 250 },
+    { name: "20mm JM61A1 Vulcan", type: "Autocannon", damage: 320, penetration: 60, rateOfFire: "6000 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "IHI XF5-1 MK1", bonus: "+200 km/h speed" },
+      { name: "IHI XF5-1 MK2", bonus: "+400 km/h speed" }
+    ],
+    avionics: [
+      { name: "J/APG-2 Radar MK1", bonus: "+20% detection" },
+      { name: "J/APG-2 Radar MK2", bonus: "+40% detection" }
+    ],
+    stealth: [
+      { name: "RAM Coating MK1", bonus: "+15% stealth" }
+    ]
+  }
+},
+{
+  id: 81,
+  name: "YF-23",
+  type: "Fighter Jet",
+  faction: "American",
+  tier: "IV",
+  description: "Experimental stealth fighter designed for air superiority, rival to the F-22.",
+  stats: { health: 23800, speed: 770, afterburnerSpeed: 2200, agility: 84 },
+  weapons: [
+    { name: "AIM-120D AMRAAM", type: "Medium-Range AAM", damage: 9000, penetration: 480 },
+    { name: "AIM-9X Sidewinder", type: "Short-Range AAM", damage: 6200, penetration: 330 },
+    { name: "GBU-32 JDAM", type: "Guided Bomb", damage: 12800, penetration: 620 },
+    { name: "M61A2 Vulcan 20mm", type: "Autocannon", damage: 300, penetration: 55, rateOfFire: "6000 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "YF119 MK1", bonus: "+200 km/h speed" },
+      { name: "YF120 MK2", bonus: "+450 km/h speed" }
+    ],
+    stealth: [
+      { name: "Advanced RAM MK1", bonus: "+25% stealth" },
+      { name: "Advanced RAM MK2", bonus: "+40% stealth" }
+    ],
+    avionics: [
+      { name: "AN/APG-77 Radar MK1", bonus: "+30% detection" },
+      { name: "AN/APG-77 Radar MK2", bonus: "+50% detection" }
+    ]
+  }
+},
+{
+  id: 82,
+  name: "F-35B Lightning II",
+  type: "Fighter Jet",
+  faction: "American",
+  tier: "IV",
+  description: "Fifth-generation stealth multirole fighter with STOVL capability.",
+  stats: { health: 23000, speed: 740, afterburnerSpeed: 2000, agility: 82 },
+  weapons: [
+    { name: "AIM-120C AMRAAM", type: "Medium-Range AAM", damage: 8700, penetration: 470 },
+    { name: "AIM-9X Sidewinder", type: "Short-Range AAM", damage: 6200, penetration: 330 },
+    { name: "GBU-31 JDAM", type: "Guided Bomb", damage: 14500, penetration: 720 },
+    { name: "GAU-22/A 25mm", type: "Autocannon", damage: 360, penetration: 70, rateOfFire: "3300 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "Pratt & Whitney F135 MK1", bonus: "+200 km/h speed" },
+      { name: "Pratt & Whitney F135 MK2", bonus: "+400 km/h speed" }
+    ],
+    stealth: [
+      { name: "RAM Coating MK1", bonus: "+20% stealth" },
+      { name: "RAM Coating MK2", bonus: "+35% stealth" }
+    ],
+    avionics: [
+      { name: "AN/APG-81 Radar MK1", bonus: "+25% detection" },
+      { name: "AN/APG-81 Radar MK2", bonus: "+45% detection" }
+    ]
+  }
+},
+{
+  id: 83,
+  name: "J-50",
+  type: "Fighter Jet",
+  faction: "Chinese",
+  tier: "IV",
+  description: "Advanced stealth air superiority fighter concept with heavy armament.",
+  stats: { health: 24000, speed: 760, afterburnerSpeed: 2150, agility: 83 },
+  weapons: [
+    { name: "PL-15", type: "Long-Range AAM", damage: 9500, penetration: 500 },
+    { name: "PL-10", type: "Short-Range AAM", damage: 6400, penetration: 340 },
+    { name: "LS-6 Guided Bomb", type: "Guided Bomb", damage: 13000, penetration: 680 },
+    { name: "23mm Cannon", type: "Autocannon", damage: 340, penetration: 65, rateOfFire: "1800 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "WS-19 MK1", bonus: "+200 km/h speed" },
+      { name: "WS-19 MK2", bonus: "+400 km/h speed" }
+    ],
+    stealth: [
+      { name: "RAM Coating MK1", bonus: "+20% stealth" },
+      { name: "RAM Coating MK2", bonus: "+40% stealth" }
+    ],
+    avionics: [
+      { name: "AESAN Radar MK1", bonus: "+25% detection" },
+      { name: "AESAN Radar MK2", bonus: "+45% detection" }
+    ]
+  }
+},
+{
+  id: 84,
+  name: "Su-75 Checkmate",
+  type: "Fighter Jet",
+  faction: "Russian",
+  tier: "IV",
+  description: "Light stealth fighter designed for export and versatile combat missions.",
+  stats: { health: 22000, speed: 755, afterburnerSpeed: 2100, agility: 85 },
+  weapons: [
+    { name: "R-77M", type: "Medium-Range AAM", damage: 8800, penetration: 470 },
+    { name: "R-74M2", type: "Short-Range AAM", damage: 6300, penetration: 340 },
+    { name: "KAB-500S", type: "Guided Bomb", damage: 12500, penetration: 640 },
+    { name: "30mm Cannon GSh-301", type: "Autocannon", damage: 380, penetration: 65, rateOfFire: "1500 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "Izdeliye 30 MK1", bonus: "+200 km/h speed" },
+      { name: "Izdeliye 30 MK2", bonus: "+400 km/h speed" }
+    ],
+    stealth: [
+      { name: "RAM Coating MK1", bonus: "+20% stealth" },
+      { name: "RAM Coating MK2", bonus: "+35% stealth" }
+    ],
+    avionics: [
+      { name: "Sh-121 Radar MK1", bonus: "+25% detection" },
+      { name: "Sh-121 Radar MK2", bonus: "+45% detection" }
+    ]
+  }
 }
 
 
@@ -2351,6 +2763,7 @@ const getAircraftRole = (vehicle: any) => {
 
   // Specific aircraft role assignments
   if (vehicle.name.includes("J-10")) return "multi-role"
+  if (vehicle.name.includes("J-50")) return "stealth"
   if (vehicle.name.includes("J-35")) return "stealth"
   if (vehicle.name.includes("MiG-41M")) return "interceptor"
   if (vehicle.name.includes("F-16C Night Falcon")) return "multi-role"
