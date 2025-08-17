@@ -2904,7 +2904,7 @@ const VEHICLES = [
 {
   id: 90,
   name: "Super Lynx Mk88A",
-  type: "NHelicopter",
+  type: "Helicopter",
   faction: "British",
   tier: "III",
   description: "British naval helicopter adapted for anti-ship and light attack roles (small weapon capacity in MWT).",
@@ -3674,7 +3674,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               vehicle.stats.afterburnerSpeed || vehicle.stats.speed || vehicle.stats.cruiseSpeed || 0
 
             return (
-              `⚔️ TACTICAL COMBAT ANALYSIS: ${vehicle1.name} vs ${vehicle2.name}\n\n` +
+              `⚔️ AI TACTICAL ANALYSIS SYSTEM (AITAS): ${vehicle1.name} vs ${vehicle2.name}\n\n` +
               `🔵 ${vehicle1.name} (${vehicle1.faction} ${vehicle1.type}):\n${formatComparisonStats(vehicle1)}\n\n` +
               `🔴 ${vehicle2.name} (${vehicle2.faction} ${vehicle2.type}):\n${formatComparisonStats(vehicle2)}\n\n` +
               `🏆 COMBAT SUPERIORITY ANALYSIS:\n` +
@@ -3712,11 +3712,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
       // Enhanced help and default responses
       if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
-        return `🤖 MWT TACTICAL AI ASSISTANT\n\nI'm an advanced military vehicle analysis system. I can provide:\n\n🔍 VEHICLE ANALYSIS:\n• "Su-57M" - Complete specifications\n• "T-14 vs Abrams X" - Tactical comparisons\n\n🏆 PERFORMANCE QUERIES:\n• "Fastest tank" - Speed analysis\n• "Strongest jet" - Durability rankings\n• "Most armored vehicle" - Protection analysis\n\n🌍 NATION ANALYSIS:\n• "Best Russian vehicle" - National superiority\n• "American vehicles" - Fleet listings\n\n📊 DATA INSIGHTS:\n• "Tier IV vehicles" - Tier breakdowns\n• "Market vehicles" - Premium platforms\n\nWhat tactical intelligence do you need?`
+        return `🤖 MWT AI TACTICAL ANALYSIS SYSTEM (AITAS)\n\nI'm an advanced military vehicle analysis system. I can provide:\n\n🔍 VEHICLE ANALYSIS:\n• "Su-57M" - Complete specifications\n• "T-14 vs Abrams X" - Tactical comparisons\n\n🏆 PERFORMANCE QUERIES:\n• "Fastest tank" - Speed analysis\n• "Strongest jet" - Durability rankings\n• "Most armored vehicle" - Protection analysis\n\n🌍 NATION ANALYSIS:\n• "Best Russian vehicle" - National superiority\n• "American vehicles" - Fleet listings\n\n📊 DATA INSIGHTS:\n• "Tier IV vehicles" - Tier breakdowns\n• "Market vehicles" - Premium platforms\n\nWhat tactical intelligence do you need?`
       }
 
       // Default intelligent response
-      return `🤖 MWT TACTICAL AI - Advanced Military Analysis System\n\nI didn't recognize that specific query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n💡 TRY ASKING:\n• "What's the fastest tank?" - Performance analysis\n• "Su-57M vs F-22" - Combat comparisons\n• "Best Chinese vehicle" - National rankings\n• "Tier IV vehicles" - Category listings\n\nI'm designed to think analytically about military vehicle performance, tactics, and specifications. What would you like to analyze?`
+      return `🤖 MWT AI TACTICAL ANALYSIS SYSTEM (AITAS) - Advanced Military Analysis System\n\nI didn't recognize that specific query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n💡 TRY ASKING:\n• "What's the fastest tank?" - Performance analysis\n• "Su-57M vs F-22" - Combat comparisons\n• "Best Chinese vehicle" - National rankings\n• "Tier IV vehicles" - Category listings\n\nI'm designed to think analytically about military vehicle performance, tactics, and specifications. What would you like to analyze?`
     }
 
     setTimeout(() => {
@@ -4360,7 +4360,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
             <div className="bg-slate-900 rounded-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
               <div className="flex items-center justify-between p-6 border-b border-slate-700">
-                <h3 className="text-xl font-bold text-cyan-300">AI Vehicle Analysis</h3>
+                <h3 className="text-xl font-bold text-cyan-300">AI Vehicle Analysis Syetem (AIVAS)  </h3>
                 <button onClick={() => setVehicleInfoOpen(null)} className="text-slate-400 hover:text-white">
                   <X className="w-6 h-6" />
                 </button>
