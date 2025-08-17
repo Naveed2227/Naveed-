@@ -698,38 +698,34 @@ const VEHICLES = [
       ],
     },
   },
-  {
-    id: 23,
-    name: "A-10A Thunderbolt",
-    type: "Fighter Jet",
-    faction: "American",
-    tier: "III",
-    description: "Close air support aircraft designed around the GAU-8 Avenger cannon.",
-    stats: { health: 28500, speed: 560, afterburnerSpeed: 706, agility: 55 },
-    weapons: [
-      { name: "GAU-8/A Avenger", type: "Autocannon", damage: 850, penetration: 120, rateOfFire: "3900 rpm" },
-      { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 14500, penetration: 750 },
-      { name: "Hydra 70 Rockets", type: "Rocket Pod", damage: 6800, penetration: 320 },
-      { name: "GBU-12 Paveway", type: "Guided Bomb", damage: 18200, penetration: 900 },
+    {
+  id: 23,
+  name: "T-14 Armata (152)",
+  type: "Main Battle Tank",
+  faction: "Russian",
+  tier: "IV",
+  description: "Next-generation Russian MBT prototype equipped with a powerful 152mm smoothbore gun and advanced armor.",
+  stats: { health: 42000, speed: 85, armor: "1000mm", agility: 40 },
+  weapons: [
+    { name: "2A83 152mm Smoothbore Gun", type: "Cannon", damage: 17000, penetration: 1100, rateOfFire: "6 rpm" },
+    { name: "Kord 12.7mm MG", type: "Machine Gun", damage: 180, penetration: 25, rateOfFire: "750 rpm" },
+    { name: "PKTM 7.62mm MG", type: "Coaxial MG", damage: 120, penetration: 15, rateOfFire: "800 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "A-85-3A MK1", bonus: "+5 km/h speed" },
+      { name: "A-85-3A MK2", bonus: "+10 km/h speed" }
     ],
-    modules: {
-      engine: [
-        { name: "TF34-GE-100 MK1", bonus: "+40 km/h speed" },
-        { name: "TF34-GE-100 MK2", bonus: "+80 km/h speed" },
-        { name: "TF34-GE-100 MK3", bonus: "+120 km/h speed" },
-      ],
-      stealth: [
-        { name: "IR Suppression MK1", bonus: "+5% stealth" },
-        { name: "IR Suppression MK2", bonus: "+10% stealth" },
-        { name: "IR Suppression MK3", bonus: "+15% stealth" },
-      ],
-      avionics: [
-        { name: "Targeting Pod MK1", bonus: "+20% accuracy" },
-        { name: "Targeting Pod MK2", bonus: "+35% accuracy" },
-        { name: "Targeting Pod MK3", bonus: "+50% accuracy" },
-      ],
-    },
+    armor: [
+      { name: "Malachit ERA MK1", bonus: "+15% protection" },
+      { name: "Malachit ERA MK2", bonus: "+30% protection" }
+    ],
+    electronics: [
+      { name: "Afganit APS MK1", bonus: "+20% defense vs missiles" },
+      { name: "Afganit APS MK2", bonus: "+40% defense vs missiles" }
+    ]
   },
+ },
   {
     id: 24,
     name: "M60 Patton",
@@ -2639,7 +2635,39 @@ const VEHICLES = [
   }
 },
 {
-  id: 81,
+    id: 81,
+    name: "A-10A Thunderbolt",
+    type: "Fighter Jet",
+    faction: "American",
+    tier: "III",
+    description: "Close air support aircraft designed around the GAU-8 Avenger cannon.",
+    stats: { health: 28500, speed: 560, afterburnerSpeed: 706, agility: 55 },
+    weapons: [
+      { name: "GAU-8/A Avenger", type: "Autocannon", damage: 850, penetration: 120, rateOfFire: "3900 rpm" },
+      { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 14500, penetration: 750 },
+      { name: "Hydra 70 Rockets", type: "Rocket Pod", damage: 6800, penetration: 320 },
+      { name: "GBU-12 Paveway", type: "Guided Bomb", damage: 18200, penetration: 900 },
+    ],
+    modules: {
+      engine: [
+        { name: "TF34-GE-100 MK1", bonus: "+40 km/h speed" },
+        { name: "TF34-GE-100 MK2", bonus: "+80 km/h speed" },
+        { name: "TF34-GE-100 MK3", bonus: "+120 km/h speed" },
+      ],
+      stealth: [
+        { name: "IR Suppression MK1", bonus: "+5% stealth" },
+        { name: "IR Suppression MK2", bonus: "+10% stealth" },
+        { name: "IR Suppression MK3", bonus: "+15% stealth" },
+      ],
+      avionics: [
+        { name: "Targeting Pod MK1", bonus: "+20% accuracy" },
+        { name: "Targeting Pod MK2", bonus: "+35% accuracy" },
+        { name: "Targeting Pod MK3", bonus: "+50% accuracy" },
+      ],
+    },
+  },
+{
+  id: 82,
   name: "YF-23",
   type: "Fighter Jet",
   faction: "American",
@@ -2668,7 +2696,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 82,
+  id: 83,
   name: "F-35B Lightning II",
   type: "Fighter Jet",
   faction: "American",
@@ -2697,7 +2725,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 83,
+  id: 84,
   name: "J-50",
   type: "Fighter Jet",
   faction: "Chinese",
@@ -2726,7 +2754,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 84,
+  id: 85,
   name: "Su-75 Checkmate",
   type: "Fighter Jet",
   faction: "Russian",
@@ -2940,7 +2968,6 @@ const MwtVehicleStats = () => {
       "Su-57M",
       "TU-222",
       "Merkava Mk.4",
-      "Leopard 2A4",
       "KF-51 Panther",
       "HSTV-L",
       "Ka-58 Black Ghost",
@@ -3756,9 +3783,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         {!chatOpen && (
           <button
             onClick={() => setChatOpen(true)}
-            className="fixed bottom-6 right-6 p-4 bg-cyan-600 hover:bg-cyan-700 text-white rounded-full shadow-lg transition-colors z-40 px-4 my-0 mx-0 py-2"
+            className="fixed bottom-6 right-6 p-4 bg-cyan-600 hover:bg-cyan-700 text-white rounded-full shadow-lg transition-colors z-40 px-4 my-0 mx-0 py-2 pb-[-2px] pb-[-7px] pb-[-5px] pt-[-5px] pt-0 pr-2.5 pl-2.5 pb-1.5"
           >
-            <BotMessageSquareIcon className="w-[35px] h-[50px] px-0 mx-1.5" /> Ask Ai
+            <BotMessageSquareIcon className="px-0 mx-1.5 h-11 w-10" /> Ask Ai
           </button>
         )}
 
@@ -3807,10 +3834,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <div className="mt-6 pt-4 border-t border-slate-600">
                     <h3 className="text-xl font-semibold text-cyan-400 mb-3">Updates</h3>
                     <div className="space-y-3">
+                     <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version Beta 1.3 </span>
+                          <span className="text-sm text-slate-400">Latest</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Added 34 new Vehicles including YF-23, T20 monolit and Su-37 Terminator</li>
+                          <li>• New Tank Role drop doen box</li>
+                          <li>• Tu-222 now has the Bomber Icon </li>
+                        </ul>
+                      </div>
                       <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-cyan-300">Version Beta 1.2 </span>
-                          <span className="text-sm text-slate-400">Latest</span>
+                          <span className="text-sm text-slate-400">Previous</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
                           <li>• Added 7 new aircraft including AV-8B Harrier II and F-14D Super Tomcat</li>
@@ -3821,7 +3859,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-cyan-300">Version Beta 1.1 </span>
-                          <span className="text-sm text-slate-400">Previous</span>
+                          <span className="text-sm text-slate-400">Old</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
                           <li>• Added country flag indicators for all vehicles</li>
@@ -3864,7 +3902,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
                 <div>
                   <h4 className="text-white font-semibold">Hoffman Derpin</h4>
-                  <p className="text-slate-400 text-sm">Supporter</p>
+                  <p className="text-slate-400 text-sm">Supporter,Writer</p>
                 </div>
                 <div>
                   <h4 className="text-white font-semibold">Spector404</h4>
