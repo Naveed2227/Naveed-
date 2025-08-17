@@ -333,7 +333,7 @@ const VEHICLES = [
     faction: "American",
     tier: "III",
     description: "Advanced attack helicopter with multi-role capabilities and proven combat record.",
-    stats: { health: 22000, speed: 293, maxSpeed: 365, agility: 75 },
+    stats: { health: 20500, speed: 293, verticalSpeed: 17, agility: 78 },
     weapons: [
       { name: "AGM-114 Hellfire", type: "Anti-Tank Missile", damage: 16500, penetration: 1100 },
       { name: "Hydra 70 Rockets", type: "Rocket Pod", damage: 8200, penetration: 380 },
@@ -583,7 +583,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "IV",
     description: "Advanced reconnaissance and attack helicopter with coaxial rotor design.",
-    stats: { health: 26000, speed: 300, maxSpeed: 350, agility: 80 },
+    stats: { health: 21000, speed: 310, verticalSpeed: 16, agility: 80 },
     weapons: [
       { name: "Vikhr ATGM", type: "Anti-Tank Missile", damage: 16800, penetration: 1120 },
       { name: "S-8 Rockets", type: "Rocket Pod", damage: 7800, penetration: 350 },
@@ -891,7 +891,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "II",
     description: "Versatile transport helicopter with light attack capabilities and proven reliability.",
-    stats: { health: 16500, speed: 250, maxSpeed: 280, agility: 65 },
+    stats: { health: 25000, speed: 260, verticalSpeed: 12, agility: 55 },
     weapons: [
       { name: "S-8 Rockets", type: "Rocket Pod", damage: 5800, penetration: 280 },
       { name: "PKT 7.62mm", type: "Machine Gun", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
@@ -1227,7 +1227,7 @@ const VEHICLES = [
     faction: "American",
     tier: "IV",
     description: "Next-generation attack helicopter with stealth features and advanced weapons.",
-    stats: { health: 18000, speed: 320, maxSpeed: 380, agility: 85 },
+    stats: { health: 21500, speed: 325, verticalSpeed: 20, agility: 82 },
     weapons: [
       { name: "AGM-179 JAGM", type: "Multi-Purpose Missile", damage: 17500, penetration: 1180 },
       { name: "Hydra 70 Rockets", type: "Rocket Pod", damage: 8500, penetration: 390 },
@@ -1258,7 +1258,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "IV",
     description: "Night hunter attack helicopter with all-weather combat capability.",
-    stats: { health: 28000, speed: 300, maxSpeed: 324, agility: 78 },
+    stats: { health: 22000, speed: 295, verticalSpeed: 15, agility: 75 },
     weapons: [
       { name: "9M120 Ataka-V", type: "ATGM", damage: 17800, penetration: 1200 },
       { name: "S-13 Rockets", type: "Rocket Pod", damage: 9200, penetration: 420 },
@@ -1289,7 +1289,7 @@ const VEHICLES = [
     faction: "Chinese",
     tier: "IV",
     description: "Dedicated attack helicopter with tandem-seat configuration and advanced sensors.",
-    stats: { health: 20000, speed: 290, maxSpeed: 316, agility: 80 },
+    stats: { health: 19000, speed: 270, verticalSpeed: 14, agility: 72 },
     weapons: [
       { name: "HJ-10", type: "ATGM", damage: 16500, penetration: 1100 },
       { name: "TY-90 AAM", type: "Air-to-Air Missile", damage: 8800, penetration: 440 },
@@ -1320,7 +1320,7 @@ const VEHICLES = [
     faction: "Chinese",
     tier: "IV",
     description: "Light attack and reconnaissance helicopter with stealth characteristics.",
-    stats: { health: 19000, speed: 280, maxSpeed: 305, agility: 88 },
+    stats: { health: 16000, speed: 280, verticalSpeed: 15, agility: 85 },
     weapons: [
       { name: "HJ-10", type: "ATGM", damage: 15800, penetration: 1050 },
       { name: "TY-90 AAM", type: "Air-to-Air Missile", damage: 8500, penetration: 420 },
@@ -1475,7 +1475,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "IV",
     description: "Stealth attack helicopter with advanced composite materials and reduced signature.",
-    stats: { health: 24500, speed: 310, maxSpeed: 360, agility: 92 },
+    stats: { health: 20000, speed: 320, verticalSpeed: 19, agility: 88 },
     weapons: [
       { name: "9M120 Ataka-V", type: "ATGM", damage: 18200, penetration: 1220 },
       { name: "S-25 Rockets", type: "Heavy Rocket Pod", damage: 12500, penetration: 580 },
@@ -2779,6 +2779,392 @@ const VEHICLES = [
     avionics: [
       { name: "Sh-121 Radar MK1", bonus: "+25% detection" },
       { name: "Sh-121 Radar MK2", bonus: "+45% detection" }
+    ]
+  }
+}
+{
+  id: 86,
+  name: "Z-9G Harbin",
+  type: "Helicopter",
+  faction: "Chinese",
+  tier: "II",
+  description: "Multi-role Chinese helicopter equipped with light rockets, cannons, and ATGMs in MWT.",
+  stats: { health: 17200, speed: 270, verticalSpeed: 55, agility: 60 },
+  weapons: [
+    { name: "TY-90", type: "Air-to-Air Missile", damage: 1800, penetration: 90 },
+    { name: "QJK-88", type: "ATGM", damage: 2400, penetration: 160 },
+    { name: "Type 57-1 Rocket Pod", type: "Rocket Pod", damage: 750, penetration: 50 },
+    { name: "23mm Gun Pod", type: "Autocannon", damage: 140, penetration: 20 }
+  ],
+  modules: {
+    engine: [
+      { name: "WZ-8 Engine MK1", bonus: "+15 km/h speed" },
+      { name: "WZ-8 Engine MK2", bonus: "+30 km/h speed" }
+    ],
+    avionics: [
+      { name: "Targeting Pod MK1", bonus: "+15% lock speed" },
+      { name: "Targeting Pod MK2", bonus: "+30% lock speed" }
+    ],
+    defense: [
+      { name: "ECM Suite MK1", bonus: "+12% evasion" },
+      { name: "ECM Suite MK2", bonus: "+25% evasion" }
+    ]
+  }
+},
+{
+  id: 87,
+  name: "AH-64E Apache Guardian",
+  type: "Helicopter",
+  faction: "American",
+  tier: "III",
+  description: "Advanced multi-role gunship with heavy ATGMs, Hydra rockets, and 30mm cannon in MWT.",
+  stats: { health: 22300, speed: 290, verticalSpeed: 65, agility: 65 },
+  weapons: [
+    { name: "AGM-114 Hellfire", type: "ATGM", damage: 3200, penetration: 200 },
+    { name: "Hydra-70 Rocket Pods", type: "Rocket Pod", damage: 850, penetration: 50 },
+    { name: "AIM-92 Stinger", type: "AAM", damage: 1800, penetration: 90 },
+    { name: "M230 30mm Chain Gun", type: "Autocannon", damage: 180, penetration: 25 }
+  ],
+  modules: {
+    engine: [
+      { name: "T700-GE-701D MK1", bonus: "+10% speed" },
+      { name: "T700-GE-701D MK2", bonus: "+20% speed" }
+    ],
+    avionics: [
+      { name: "Targeting & Sensor Suite MK1", bonus: "+20% detection" },
+      { name: "Targeting & Sensor Suite MK2", bonus: "+40% detection" }
+    ],
+    defense: [
+      { name: "Chaff/Flare MK1", bonus: "+20% countermeasures" },
+      { name: "Chaff/Flare MK2", bonus: "+35% countermeasures" }
+    ]
+  }
+},
+{
+  id: 88,
+  name: "MH-6 Little Bird",
+  type: "Helicopter",
+  faction: "American",
+  tier: "II",
+  description: "Ultra-light scout/assault helicopter used for special operations; light armament but excellent maneuverability.",
+  stats: { health: 6100, speed: 280, verticalSpeed: 45, agility: 75 },
+  weapons: [
+    { name: "M134 Minigun", type: "Autocannon", damage: 120, penetration: 15, rateOfFire: "variable" },
+    { name: "LAU-61 / Hydra-70 Rocket Pod", type: "Rocket Pod", damage: 800, penetration: 50 },
+    { name: "7.62mm Door Gun", type: "Machine Gun", damage: 45, penetration: 10 }
+  ],
+  modules: {
+    engine: [
+      { name: "Turboshaft Upgrade MK1", bonus: "+10% speed" },
+      { name: "Turboshaft Upgrade MK2", bonus: "+20% speed" }
+    ],
+    avionics: [
+      { name: "Light Recon Suite MK1", bonus: "+15% detection" },
+      { name: "Light Recon Suite MK2", bonus: "+30% detection" }
+    ],
+    defense: [
+      { name: "Light Flares MK1", bonus: "+10% countermeasures" },
+      { name: "Light Flares MK2", bonus: "+20% countermeasures" }
+    ]
+  }
+},
+{
+  id: 89,
+  name: "Z-11WB Changhe",
+  type: "Helicopter",
+  faction: "Chinese",
+  tier: "II",
+  description: "Light Chinese helicopter (Changhe Z-11WB) with multiple light ATGM/rocket options.",
+  stats: { health: 7200, speed: 270, verticalSpeed: 50, agility: 70 },
+  weapons: [
+    { name: "AKD-9", type: "ATGM", damage: 2200, penetration: 150 },
+    { name: "AKD-10", type: "ATGM", damage: 2800, penetration: 180 },
+    { name: "TY-90", type: "Air-to-Air Missile", damage: 1800, penetration: 90 },
+    { name: "HJ-8E", type: "ATGM", damage: 2500, penetration: 170 },
+    { name: "Type 57-1", type: "Rocket Pod", damage: 750, penetration: 50 },
+    { name: "Type 90", type: "Rocket Pod", damage: 800, penetration: 55 },
+    { name: "TL-6", type: "Light Anti-Ship Missile", damage: 3200, penetration: 200 },
+    { name: "FS-70", type: "Rocket Pod", damage: 780, penetration: 50 }
+  ],
+  modules: {
+    engine: [
+      { name: "WZ-8 Engine MK1", bonus: "+15 km/h speed" },
+      { name: "WZ-8 Engine MK2", bonus: "+30 km/h speed" }
+    ],
+    avionics: [
+      { name: "Targeting Pod MK1", bonus: "+15% lock speed" },
+      { name: "Targeting Pod MK2", bonus: "+30% lock speed" }
+    ],
+    defense: [
+      { name: "ECM Suite MK1", bonus: "+12% evasion" },
+      { name: "ECM Suite MK2", bonus: "+25% evasion" }
+    ]
+  }
+},
+{
+  id: 90,
+  name: "Super Lynx Mk88A",
+  type: "NHelicopter",
+  faction: "British",
+  tier: "III",
+  description: "British naval helicopter adapted for anti-ship and light attack roles (small weapon capacity in MWT).",
+  stats: { health: 10200, speed: 290, verticalSpeed: 55, agility: 68 },
+  weapons: [
+    { name: "Sea Skua", type: "Anti-Ship Missile", damage: 4200, penetration: 250 },
+    { name: "20mm Cannon", type: "Autocannon", damage: 150, penetration: 20, rateOfFire: "variable" }
+  ],
+  modules: {
+    engine: [
+      { name: "Turbine Upgrade MK1", bonus: "+10% speed" },
+      { name: "Turbine Upgrade MK2", bonus: "+20% speed" }
+    ],
+    avionics: [
+      { name: "Naval Radar MK1", bonus: "+20% detection" },
+      { name: "Naval Radar MK2", bonus: "+40% detection" }
+    ],
+    defense: [
+      { name: "Chaff/Flare MK1", bonus: "+15% countermeasures" }
+    ]
+  }
+},
+{
+  id: 91,
+  name: "Z-9WA Harbin",
+  type: "Helicopter",
+  faction: "Chinese",
+  tier: "III",
+  description: "Heavily armed Z-9 variant with multi-mount capability (x4 mounts for some missiles in MWT).",
+  stats: { health: 19580, speed: 285, verticalSpeed: 60, agility: 60 },
+  weapons: [
+    { name: "Type 57-1", type: "Rocket Pod", damage: 800, penetration: 50 },
+    { name: "TY-90", type: "Air-to-Air Missile", damage: 1800, penetration: 90 },
+    { name: "QJK99", type: "ATGM", damage: 2500, penetration: 170 },
+    { name: "AKD-9 (x4 mount option)", type: "ATGM", damage: 2200, penetration: 150 },
+    { name: "HJ-8E (x4 mount option)", type: "ATGM", damage: 2500, penetration: 170 },
+    { name: "AKD-10 (x4 mount option)", type: "ATGM", damage: 2800, penetration: 180 },
+    { name: "FS-70", type: "Rocket Pod", damage: 780, penetration: 50 },
+    { name: "Type 90", type: "Rocket Pod", damage: 800, penetration: 55 }
+  ],
+  modules: {
+    engine: [
+      { name: "WZ-8A MK1", bonus: "+10 km/h speed" },
+      { name: "WZ-8A MK2", bonus: "+20 km/h speed" }
+    ],
+    armor: [
+      { name: "Light Armor MK1", bonus: "+10% survivability" },
+      { name: "Light Armor MK2", bonus: "+20% survivability" }
+    ],
+    avionics: [
+      { name: "Heavy Targeting Pod MK1", bonus: "+20% lock speed" },
+      { name: "Heavy Targeting Pod MK2", bonus: "+35% lock speed" }
+    ]
+  }
+},
+{
+  id: 92,
+  name: "Z-20 Harbin",
+  type: "Helicopter",
+  faction: "Chinese",
+  tier: "III",
+  description: "Modern multi-role Chinese helicopter with stub wings; carries Chinese ATGMs and rockets in MWT.",
+  stats: { health: 18400, speed: 280, verticalSpeed: 60, agility: 55 },
+  weapons: [
+    { name: "AKD-9", type: "ATGM", damage: 2200, penetration: 150 },
+    { name: "AKD-10", type: "ATGM", damage: 2800, penetration: 180 },
+    { name: "HJ-10 / HJ-series", type: "ATGM", damage: 2500, penetration: 170 },
+    { name: "23mm Cannon Pod", type: "Autocannon", damage: 150, penetration: 20 },
+    { name: "Rocket Pods (Type series)", type: "Rocket Pod", damage: 800, penetration: 50 }
+  ],
+  modules: {
+    engine: [
+      { name: "WZ-10 Derived Engine MK1", bonus: "+10% speed" },
+      { name: "WZ-10 Derived Engine MK2", bonus: "+20% speed" }
+    ],
+    avionics: [
+      { name: "Z-20 Sensor Suite MK1", bonus: "+20% detection" },
+      { name: "Z-20 Sensor Suite MK2", bonus: "+40% detection" }
+    ],
+    defense: [
+      { name: "Countermeasure Suite MK1", bonus: "+20% missile defense" }
+    ]
+  }
+},
+{
+  id: 93,
+  name: "MH-60L DAP",
+  type: "Helicopter",
+  faction: "American",
+  tier: "III",
+  description: "Armed MH-60 variant (DAP) with a flexible loadout for rockets, ATGMs and air-to-air missiles.",
+  stats: { health: 19200, speed: 285, verticalSpeed: 62, agility: 58 },
+  weapons: [
+    { name: "LAU-61", type: "Rocket Pod", damage: 800, penetration: 50 },
+    { name: "AGR-20 BLR", type: "Rocket Pod", damage: 850, penetration: 55 },
+    { name: "AGM-114 Hellfire", type: "ATGM", damage: 3200, penetration: 200 },
+    { name: "AGM-179 JAGM", type: "ATGM", damage: 3500, penetration: 220 },
+    { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 1800, penetration: 90 },
+    { name: "AIM-92 (Stinger)", type: "AAM", damage: 1800, penetration: 90 },
+    { name: "ADS Starstreak", type: "AAM", damage: 1900, penetration: 100 },
+    { name: "M230 30mm", type: "Autocannon", damage: 180, penetration: 25 }
+  ],
+  modules: {
+    engine: [
+      { name: "T700 Series Upgrade MK1", bonus: "+10% speed" },
+      { name: "T700 Series Upgrade MK2", bonus: "+20% speed" }
+    ],
+    avionics: [
+      { name: "APG-Style Radar MK1", bonus: "+18% detection" },
+      { name: "Targeting Pod MK1", bonus: "+20% accuracy" }
+    ],
+    defense: [
+      { name: "Flares/Chaff MK1", bonus: "+20% countermeasures" }
+    ]
+  }
+},
+{
+  id: 94,
+  name: "Mi-35P Hind-F",
+  type: "Helicopter",
+  faction: "Russian",
+  tier: "III",
+  description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
+  stats: { health: 26400, speed: 290, verticalSpeed: 60, agility: 60 },
+  weapons: [
+    { name: "9K121 Vikhr / 9K121 Vikhr-1", type: "ATGM", damage: 3200, penetration: 200 },
+    { name: "Ataka (where available)", type: "ATGM", damage: 3000, penetration: 180 },
+    { name: "Igla-V", type: "AAM (MANPADS)", damage: 1800, penetration: 90 },
+    { name: "S-8 / S-13 Rockets", type: "Rocket Pod", damage: 850, penetration: 55 },
+    { name: "23mm / 30mm Gun Pod", type: "Autocannon", damage: 180, penetration: 25 }
+  ],
+  modules: {
+    engine: [
+      { name: "VK-2500 Upgrade MK1", bonus: "+10% speed" },
+      { name: "VK-2500 Upgrade MK2", bonus: "+20% speed" }
+    ],
+    avionics: [
+      { name: "Hind Targeting Suite MK1", bonus: "+20% lock speed" },
+      { name: "Hind Targeting Suite MK2", bonus: "+35% lock speed" }
+    ],
+    defense: [
+      { name: "Vitebsk ECM MK1", bonus: "+20% missile defense" }
+    ]
+  }
+},
+{
+  id: 95,
+  name: "AH-1Z Viper",
+  type: "Helicopter",
+  faction: "American",
+  tier: "III",
+  description: "Upgraded Cobra with improved sensors, weapons flexibility and survivability.",
+  stats: { health: 21120, speed: 287, verticalSpeed: 65, agility: 60 },
+  weapons: [
+    { name: "AGM-114 Hellfire", type: "ATGM", damage: 3200, penetration: 200 },
+    { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 2800, penetration: 180 },
+    { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 1800, penetration: 90 },
+    { name: "AIM-92 (Stinger)", type: "AAM", damage: 1800, penetration: 90 },
+    { name: "LAU-61 (Hydra-70 Pods)", type: "Rocket Pod", damage: 850, penetration: 55 },
+    { name: "M197 20mm (or turret gun)", type: "Autocannon", damage: 150, penetration: 20 }
+  ],
+  modules: {
+    engine: [
+      { name: "T700-GE-401D MK1", bonus: "+5% speed" },
+      { name: "T700-GE-401D MK2", bonus: "+10% speed" }
+    ],
+    avionics: [
+      { name: "TSS Targeting Sight MK1", bonus: "+20% targeting accuracy" },
+      { name: "TSS Targeting Sight MK2", bonus: "+35% targeting accuracy" }
+    ],
+    defense: [
+      { name: "Chaff/Flare MK1", bonus: "+20% countermeasures" },
+      { name: "Chaff/Flare MK2", bonus: "+35% countermeasures" }
+    ]
+  }
+},
+{
+  id: 96,
+  name: "Ka-50 Black Shark",
+  type: "Helicopter",
+  faction: "Russian",
+  tier: "III",
+  description: "Single-seat heavy attack helicopter with heavy ATGMs and cannon armament in MWT.",
+  stats: { health: 22000, speed: 295, verticalSpeed: 62, agility: 62 },
+  weapons: [
+    { name: "Ataka / Ataka-V ATGM", type: "ATGM", damage: 3000, penetration: 180 },
+    { name: "9M120 / Vikhr ATGM", type: "ATGM", damage: 3200, penetration: 200 },
+    { name: "30mm 2A42 Gun", type: "Autocannon", damage: 180, penetration: 25 },
+    { name: "S-8 Rocket Pod", type: "Rocket Pod", damage: 800, penetration: 50 },
+    { name: "S-13 Rocket Pod", type: "Rocket Pod", damage: 850, penetration: 55 }
+  ],
+  modules: {
+    engine: [
+      { name: "TV3-117VM Upgrade MK1", bonus: "+10% speed" },
+      { name: "TV3-117VM Upgrade MK2", bonus: "+20% speed" }
+    ],
+    avionics: [
+      { name: "Ka-50 Advanced Sensor Suite MK1", bonus: "+20% detection" },
+      { name: "Ka-50 Advanced Sensor Suite MK2", bonus: "+40% detection" }
+    ],
+    defense: [
+      { name: "Vitebsk ECM MK1", bonus: "+15% countermeasure efficiency" }
+    ]
+  }
+},
+{
+  id: 97,
+  name: "Tiger HAD",
+  type: "Helicopter",
+  faction: "French",
+  tier: "III",
+  description: "French multi-role attack helicopter with rockets, HOT-3/Spike ATGMs, and 30mm cannon in MWT.",
+  stats: { health: 21000, speed: 285, verticalSpeed: 60, agility: 58 },
+  weapons: [
+    { name: "HOT-3 ATGM", type: "ATGM", damage: 3000, penetration: 180 },
+    { name: "Spike ER ATGM", type: "ATGM", damage: 3500, penetration: 220 },
+    { name: "Rocket Pods (Hydra-70 variants)", type: "Rocket Pod", damage: 850, penetration: 55 },
+    { name: "30mm GIAT Cannon", type: "Autocannon", damage: 180, penetration: 25 }
+  ],
+  modules: {
+    engine: [
+      { name: "MTR390-2C MK1", bonus: "+10% speed" },
+      { name: "MTR390-2C MK2", bonus: "+20% speed" }
+    ],
+    avionics: [
+      { name: "Tiger Sensor Suite MK1", bonus: "+20% detection" },
+      { name: "Tiger Sensor Suite MK2", bonus: "+35% detection" }
+    ],
+    defense: [
+      { name: "Chaff/Flare MK1", bonus: "+20% countermeasures" },
+      { name: "Chaff/Flare MK2", bonus: "+35% countermeasures" }
+    ]
+  }
+},
+{
+  id: 98,
+  name: "EC665 Tiger UHT",
+  type: "Helicopter",
+  faction: "French",
+  tier: "III",
+  description: "French Tiger gunship optimized for air-to-ground combat with heavy missile load in MWT.",
+  stats: { health: 21500, speed: 287, verticalSpeed: 61, agility: 60 },
+  weapons: [
+    { name: "HOT-3 ATGM", type: "ATGM", damage: 3000, penetration: 180 },
+    { name: "Spike ER ATGM", type: "ATGM", damage: 3500, penetration: 220 },
+    { name: "Rocket Pods (Hydra-70)", type: "Rocket Pod", damage: 850, penetration: 55 },
+    { name: "30mm GIAT Cannon", type: "Autocannon", damage: 180, penetration: 25 }
+  ],
+  modules: {
+    engine: [
+      { name: "MTR390-2C MK1", bonus: "+10% speed" },
+      { name: "MTR390-2C MK2", bonus: "+20% speed" }
+    ],
+    avionics: [
+      { name: "Tiger Targeting Suite MK1", bonus: "+20% detection" },
+      { name: "Tiger Targeting Suite MK2", bonus: "+35% detection" }
+    ],
+    defense: [
+      { name: "Chaff/Flare MK1", bonus: "+20% countermeasures" },
+      { name: "Chaff/Flare MK2", bonus: "+35% countermeasures" }
     ]
   }
 }
