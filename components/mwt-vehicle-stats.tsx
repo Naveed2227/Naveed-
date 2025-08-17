@@ -2178,7 +2178,8 @@ const VEHICLES = [
       { "name": "FCS Artillery MK3", "bonus": "+60% targeting accuracy" }
     ]
   }
-}{
+},
+{
   "id": 68,
   "name": "M109A6 Paladin",
   "type": "SPA",
