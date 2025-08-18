@@ -3174,7 +3174,7 @@ const VEHICLES = [
 ]
 
 const getAircraftRole = (vehicle: any) => {
-  if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== " Helicopter") return null
+  if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== " helicopter") return null
 
   // Specific aircraft role assignments
   if (vehicle.name.includes("J-10")) return "multi-role"
@@ -3244,7 +3244,7 @@ const getAircraftRole = (vehicle: any) => {
 const getRoleIcon = (role: string | null) => {
   switch (role) {
     case "stealth":
-      return "/stealth-icon.png"
+      return "/Helicopter-icon.png"
     case "multi-role":
       return "/multi-role-icon.png"
     case "ground-attack":
@@ -3253,7 +3253,7 @@ const getRoleIcon = (role: string | null) => {
       return "/interceptor-icon.png"
     case "bomber":
       return "/bomber-icon.png"
-    case "Helicopter":
+    case "helicopter":
       return "/Helicopter-Icon.png"
     default:
       return null
@@ -3263,22 +3263,6 @@ const getRoleIcon = (role: string | null) => {
 
 
 
-const getHelicopterRole = (vehicle: any) => {
-if (vehicle.type !== " Helicopter") return null
-
-if (vehicle.name.includes("Ka-52M")) return "helicopter"
-
-     const weapons = vehicle.weapons || []
-     const hasHelicopterCharacteristics = weapons.some(
-     (w: any) =>
-      w.name.includes("Hellfire") ||
-      vehicle.name.includes("Ka-52M") ||
-      vehicle.name.includes("AH-64E Apache"),
-)
-
-if (hasHelicopterCharacteristics) return "helicopter"
-
-}
 
 
 
@@ -3309,6 +3293,38 @@ const getFlagImage = (faction: string): string => {
   }
   return flags[faction] || "/default-flag.png"
 }
+
+
+
+
+
+
+
+
+
+
+<div className="absolute top-4 right-4 px-0 py-0 pl-0 pb-2.5 pt-0 border-t-0 mx-[-14px] my-[-3px]">
+                  {(() => {
+                    const role = getAircraftRole(vehicle)
+                    const iconPath = getRoleIcon(role)
+                    return iconPath ? (
+                      <img
+                        src={iconPath || "/placeholder.svg"}
+                        alt={`${role} aircraft`}
+                        className="w-6 h-6 opacity-80"
+                      />
+                    ) : null
+                  })()}
+                </div>
+
+
+
+
+
+
+
+
+
 
 const generateComparisonAnalysis = (vehicle1: any, vehicle2: any): string => {
   const healthWinner = vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name
