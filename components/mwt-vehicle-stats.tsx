@@ -3168,6 +3168,7 @@ const VEHICLES = [
       { name: "Chaff/Flare MK2", bonus: "+35% countermeasures" }
    ]
   }
+  }
 ];
 
 export default vehicles;
