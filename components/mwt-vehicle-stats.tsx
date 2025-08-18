@@ -3458,7 +3458,7 @@ ${weaponsList}
 🔧 UPGRADE MODULES:
 ${modulesList}
 
-${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only in Gatchs and Events" : "🆓 Standard Vehicle"}`
+${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : "🆓 Standard Vehicle"}`
   }
 
   const filteredVehicles = VEHICLES.filter((vehicle) => {
