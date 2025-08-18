@@ -12,6 +12,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "IV",
     description: "Advanced fifth-generation stealth fighter with supercruise capability and advanced avionics.",
+    image: "/images/su57m.png",
     stats: { health: 24500, speed: 762, afterburnerSpeed: 2100, agility: 85 },
     weapons: [
       { name: "Kh-38MLE", type: "Air-to-Ground Missile", damage: 9800, penetration: 380 },
@@ -3263,6 +3264,7 @@ const getFlagImage = (faction: string): string => {
     "South Korean": "/flags/kr.png",
     Ukrainian: "/ukraine-flag.png",
     Swedish: "/sweden-flag.png",
+  
   }
   return flags[faction] || "/default-flag.png"
 }
