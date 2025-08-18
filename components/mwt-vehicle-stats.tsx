@@ -3183,7 +3183,7 @@ const getAircraftRole = (vehicle: any) => {
   if (vehicle.name.includes("MiG-41M")) return "interceptor"
   if (vehicle.name.includes("F-16C Night Falcon")) return "multi-role"
   if (vehicle.name.includes("TU-222")) return "bomber"
-  if (vehicle.name.includes("Ka-52M")) return "Helicopter"
+  if (vehicle.name.includes("Ka-52M")) return "helicopter"
 
   const weapons = vehicle.weapons || []
   const hasStealthWeapons = weapons.some(
@@ -3221,6 +3221,7 @@ const getAircraftRole = (vehicle: any) => {
 
   const hasHelicopterCharacteristics = weapons.some(
      (w: any) =>
+      w.name.includes("Hellfire") ||
       vehicle.name.includes("Ka-52M") ||
       vehicle.name.includes("AH-64E Apache"),
   )
@@ -3237,6 +3238,8 @@ const getAircraftRole = (vehicle: any) => {
 
   return "multi-role" // Default for jets
 }
+
+
 
 const getRoleIcon = (role: string | null) => {
   switch (role) {
@@ -3256,6 +3259,39 @@ const getRoleIcon = (role: string | null) => {
       return null
   }
 }
+
+
+
+
+const getHelicopterRole = (vehicle: any) => {
+if (vehicle.type !== " Helicopter") return null
+
+if (vehicle.name.includes("Ka-52M")) return "helicopter"
+
+     const weapons = vehicle.weapons || []
+     const hasHelicopterCharacteristics = weapons.some(
+     (w: any) =>
+      w.name.includes("Hellfire") ||
+      vehicle.name.includes("Ka-52M") ||
+      vehicle.name.includes("AH-64E Apache"),
+)
+
+if (hasHelicopterCharacteristics) return "helicopter"
+
+}
+
+const getRoleIcon = (role: string | null) => {
+  switch (role) {
+    case "helicopter":
+      return "/Helicopter-Icon.png"
+    default:
+      return null
+  }
+}
+
+
+
+
 
 const getFlagImage = (faction: string): string => {
   const flags: { [key: string]: string } = {
