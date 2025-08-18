@@ -3166,9 +3166,454 @@ const VEHICLES = [
     defense: [
       { name: "Chaff/Flare MK1", bonus: "+20% countermeasures" },
       { name: "Chaff/Flare MK2", bonus: "+35% countermeasures" }
-    ]
+   ]
   }
-}
+},
+{
+    id: 99,
+    name: "M1A1 Abrams",
+    type: "Main Battle Tank",
+    faction: "American",
+    tier: "III",
+    description: "M1A1 with M256 120mm smoothbore.",
+    stats: { health: 49920, speed: 85.6, armor: null, agility: null },
+    weapons: [
+      { name: "M256 120mm - APFSDS (M1 family Mk variants e.g. APFSDS/M322/M338)", type: "APFSDS", damage: null, penetration: null, reload: 5, note: "M1 family main rounds (Mk dependent)." },
+      { name: "M256 120mm - HEAT (Mk variants)", type: "HEAT", damage: null, penetration: null, reload: 5, note: "Alternative HEAT rounds." },
+      { name: "M256 120mm - HE/HEI", type: "HE/HEI", damage: null, penetration: null, reload: 5, note: "High-explosive/incendiary for soft targets." },
+      { name: "M2 Browning .50 cal (API/AP/HEI belts)", type: "Machine Gun", damage: null, penetration: null, rateOfFire: "900–1050 rpm", note: "Roof/AA secondary belts." },
+      { name: "M240 / 7.62mm belts (AP / HEI variants)", type: "Machine Gun", damage: null, penetration: null, rateOfFire: null, note: "Coax / commander belts." }
+    ],
+    modules: {
+      engine: [
+        { name: "AGT1500 MK1", bonus: "+8 km/h speed" },
+        { name: "AGT1500 MK2", bonus: "+16 km/h speed" },
+        { name: "AGT1500 MK3", bonus: "+24 km/h speed" }
+      ],
+      armor: [
+        { name: "Chobham Composite MK1", bonus: "+120mm effective armor" },
+        { name: "Chobham Composite MK2", bonus: "+240mm effective armor" },
+        { name: "Chobham Composite MK3", bonus: "+360mm effective armor" }
+      ],
+      fireControl: [
+        { name: "CITV FCS MK1", bonus: "+10% accuracy" },
+        { name: "CITV FCS MK2", bonus: "+18% accuracy" },
+        { name: "CITV FCS MK3", bonus: "+26% accuracy" }
+      ]
+     }
+  },
+
+  {
+    id: 100,
+    name: "MBT-70",
+    type: "Main Battle Tank",
+    faction: "American",
+    tier: "III",
+    description: "MBT-70 with XM150 152mm gun/launcher (shells + MGM-51 Shillelagh missile capability).",
+    stats: { health: null, speed: null, armor: null, agility: null },
+    weapons: [
+      { name: "XM150 152mm - APFSDS (152mm APFSDS variants)", type: "APFSDS", damage: null, penetration: null, reload: null, note: "152mm APFSDS rounds used by XM150 family." },
+      { name: "XM150 152mm - HE / HEAT (152mm HE/HEAT shells)", type: "HE/HEAT", damage: null, penetration: null, reload: null, note: "Conventional 152mm shells." },
+      { name: "XM150 152mm - MGM-51 'Shillelagh' / 152mm guided missile", type: "ATGM", damage: null, penetration: null, reload: null, note: "Guided missile/launcher option (Shillelagh-family in lore/MWT listings)." },
+      { name: "Coax / secondary MG belts (various)", type: "Machine Gun", damage: null, penetration: null, rateOfFire: null }
+    ],
+    modules: {
+      engine: [
+        { name: "Prototype Turbine MK1", bonus: "+6 km/h speed" },
+        { name: "Prototype Turbine MK2", bonus: "+12 km/h speed" },
+        { name: "Prototype Turbine MK3", bonus: "+18 km/h speed" }
+      ],
+      armor: [
+        { name: "Reactive Composite MK1", bonus: "+100mm effective armor" },
+        { name: "Reactive Composite MK2", bonus: "+200mm effective armor" },
+        { name: "Reactive Composite MK3", bonus: "+300mm effective armor" }
+      ],
+      fireControl: [
+        { name: "XM Sight Suite MK1", bonus: "+8% accuracy" },
+        { name: "XM Sight Suite MK2", bonus: "+16% accuracy" },
+        { name: "XM Sight Suite MK3", bonus: "+24% accuracy" }
+      ]
+    },
+  
+  },
+
+  {
+    id: 101,
+    name: "M1 Abrams Block III",
+    type: "Main Battle Tank",
+    faction: "American",
+    tier: "III",
+    description: "Block III concept — advanced M1-family 120mm gun and higher-tier ammo tree.",
+    stats: { health: null, speed: null, armor: null, agility: null },
+    weapons: [
+      { name: "120mm APFSDS (Block III / M1 family Mk1/Mk2/Mk3 variants)", type: "APFSDS", damage: null, penetration: null, reload: null },
+      { name: "120mm HEAT (Block III variants)", type: "HEAT", damage: null, penetration: null, reload: null },
+      { name: "120mm HE/HEI (specialist rounds)", type: "HE/HEI", damage: null, penetration: null, reload: null },
+      { name: "M2 Browning .50 cal and 7.62mm belts", type: "Machine Gun", damage: null, penetration: null, rateOfFire: null }
+    ],
+    modules: {
+      engine: [
+        { name: "AGT1500 Block III MK1", bonus: "+9 km/h speed" },
+        { name: "AGT1500 Block III MK2", bonus: "+18 km/h speed" },
+        { name: "AGT1500 Block III MK3", bonus: "+27 km/h speed" }
+      ],
+      armor: [
+        { name: "Advanced Chobham MK1", bonus: "+140mm effective armor" },
+        { name: "Advanced Chobham MK2", bonus: "+280mm effective armor" },
+        { name: "Advanced Chobham MK3", bonus: "+420mm effective armor" }
+      ],
+      fireControl: [
+        { name: "Block III FCS MK1", bonus: "+12% accuracy" },
+        { name: "Block III FCS MK2", bonus: "+22% accuracy" },
+        { name: "Block III FCS MK3", bonus: "+32% accuracy" }
+      ]
+    },
+    
+  },
+
+  {
+    id: 102,
+    name: "PT-91 Twardy",
+    type: "Main Battle Tank",
+    faction: "Polish",
+    tier: "III",
+    description: "Polish PT-91 with 125mm gun/autoloader and cannon-launched ATGM options.",
+    stats: { health: null, speed: 60, armor: null, agility: null },
+    weapons: [
+      { name: "125mm - 3BM-series APFSDS (3BM22 / 3BM32 equivalents)", type: "APFSDS", damage: null, penetration: null, reload: null },
+      { name: "125mm - HEAT-FS (3BK variants)", type: "HEAT-FS", damage: null, penetration: null, reload: null },
+      { name: "125mm - HE / HE-FRAG (3OF series)", type: "HE", damage: null, penetration: null, reload: null },
+      { name: "125mm - Cannon-launched ATGM (9M119 / Refleks-style)", type: "ATGM", damage: null, penetration: null, reload: null },
+      { name: "7.62mm PKT / 12.7mm NSVT belts", type: "Machine Gun", damage: null, penetration: null, rateOfFire: null }
+    ],
+    modules: {
+      engine: [
+        { name: "Praga/Silnik MK1", bonus: "+6 km/h speed" },
+        { name: "Praga/Silnik MK2", bonus: "+12 km/h speed" },
+        { name: "Praga/Silnik MK3", bonus: "+18 km/h speed" }
+      ],
+      armor: [
+        { name: "Composite Add-on MK1", bonus: "+110mm effective armor" },
+        { name: "Composite Add-on MK2", bonus: "+220mm effective armor" },
+        { name: "Composite Add-on MK3", bonus: "+330mm effective armor" }
+      ],
+      fireControl: [
+        { name: "Polish FCS MK1", bonus: "+9% accuracy" },
+        { name: "Polish FCS MK2", bonus: "+17% accuracy" },
+        { name: "Polish FCS MK3", bonus: "+25% accuracy" }
+      ]
+    },
+    
+  },
+
+  {
+    id: 103,
+    name: "T-64BV",
+    type: "Main Battle Tank",
+    faction: "Russian",
+    tier: "III",
+    description: "T-64BV with 125mm 2A46-series gun — full in-game shell list included.",
+    stats: { health: null, speed: null, armor: null, agility: null },
+    weapons: [
+      { name: "3BM22 APFSDS", type: "APFSDS", damage: null, penetration: null, reload: null },
+      { name: "3BM32 APFSDS (DU/high-pen variant)", type: "APFSDS", damage: null, penetration: null, reload: null },
+      { name: "3BK18M HEAT-FS", type: "HEAT-FS", damage: null, penetration: null, reload: null },
+      { name: "9M112/9M119 cannon-launched ATGM", type: "ATGM", damage: null, penetration: null, reload: null },
+      { name: "3OF26 HE", type: "HE", damage: null, penetration: null, reload: null }
+    ],
+    modules: {
+      engine: [
+        { name: "V-12 Diesel MK1", bonus: "+5 km/h speed" },
+        { name: "V-12 Diesel MK2", bonus: "+10 km/h speed" },
+        { name: "V-12 Diesel MK3", bonus: "+15 km/h speed" }
+      ],
+      armor: [
+        { name: "ERA Blocks MK1", bonus: "+100mm effective armor (front)" },
+        { name: "ERA Blocks MK2", bonus: "+200mm effective armor (front)" },
+        { name: "ERA Blocks MK3", bonus: "+300mm effective armor (front)" }
+      ],
+      fireControl: [
+        { name: "Soviet FCS MK1", bonus: "+7% accuracy" },
+        { name: "Soviet FCS MK2", bonus: "+14% accuracy" },
+        { name: "Soviet FCS MK3", bonus: "+21% accuracy" }
+      ]
+    },
+    
+  },
+
+  {
+    id: 104,
+    name: "Type 90",
+    type: "Main Battle Tank",
+    faction: "Japanese",
+    tier: "III",
+    description: "Type 90 with 120mm JSW-120/L44 smoothbore; typical 120mm MWT ammo tree.",
+    stats: { health: null, speed: null, armor: null, agility: null },
+    weapons: [
+      { name: "120mm APFSDS (Type 90 / multiple Mk variants)", type: "APFSDS", damage: null, penetration: null, reload: null },
+      { name: "120mm HEAT (Type 90 variants)", type: "HEAT", damage: null, penetration: null, reload: null },
+      { name: "120mm HE/HEI", type: "HE/HEI", damage: null, penetration: null, reload: null },
+      { name: "Type 74 / M2HB secondary MG belts", type: "Machine Gun", damage: null, penetration: null, rateOfFire: null }
+    ],
+    modules: {
+      engine: [
+        { name: "Isuzu Diesel MK1", bonus: "+7 km/h speed" },
+        { name: "Isuzu Diesel MK2", bonus: "+14 km/h speed" },
+        { name: "Isuzu Diesel MK3", bonus: "+21 km/h speed" }
+      ],
+      armor: [
+        { name: "Japanese Composite MK1", bonus: "+120mm effective armor" },
+        { name: "Japanese Composite MK2", bonus: "+240mm effective armor" },
+        { name: "Japanese Composite MK3", bonus: "+360mm effective armor" }
+      ],
+      fireControl: [
+        { name: "Type-90 FCS MK1", bonus: "+10% accuracy" },
+        { name: "Type-90 FCS MK2", bonus: "+18% accuracy" },
+        { name: "Type-90 FCS MK3", bonus: "+26% accuracy" }
+      ]
+    },
+    
+  },
+
+  {
+    id: 105,
+    name: "ZTZ85-II",
+    type: "Main Battle Tank",
+    faction: "Chinese",
+    tier: "III",
+    description: "ZTZ85-II with 125mm ZPT-98 smoothbore — Chinese 125mm ammo set.",
+    stats: { health: null, speed: null, armor: null, agility: null },
+    weapons: [
+      { name: "125mm PLA APFSDS (Type/DTC variants)", type: "APFSDS", damage: null, penetration: null, reload: null },
+      { name: "125mm PLA HEAT (DTP / Chinese HEAT variants)", type: "HEAT", damage: null, penetration: null, reload: null },
+      { name: "125mm PLA HE (DTB/HE-FRAG)", type: "HE", damage: null, penetration: null, reload: null },
+      { name: "125mm cannon-launched ATGM (where applicable)", type: "ATGM", damage: null, penetration: null, reload: null },
+      { name: "Coax / AA MG belts (12.7 / 7.62)", type: "Machine Gun", damage: null, penetration: null, rateOfFire: null }
+    ],
+    modules: {
+      engine: [
+        { name: "12150L Diesel MK1", bonus: "+7 km/h speed" },
+        { name: "12150L Diesel MK2", bonus: "+14 km/h speed" },
+        { name: "12150L Diesel MK3", bonus: "+21 km/h speed" }
+      ],
+      armor: [
+        { name: "PLA Reactive MK1", bonus: "+110mm effective armor" },
+        { name: "PLA Reactive MK2", bonus: "+220mm effective armor" },
+        { name: "PLA Reactive MK3", bonus: "+330mm effective armor" }
+      ],
+      fireControl: [
+        { name: "Chinese FCS MK1", bonus: "+9% accuracy" },
+        { name: "Chinese FCS MK2", bonus: "+17% accuracy" },
+        { name: "Chinese FCS MK3", bonus: "+25% accuracy" }
+      ]
+    },
+    
+  },
+
+  {
+    id: 106,
+    name: "ZTZ96",
+    type: "Main Battle Tank",
+    faction: "Chinese",
+    tier: "III",
+    description: "ZTZ96 with Chinese 125mm L/— smoothbore; standard Chinese ammo tree (APFSDS / HEAT / HE / ATGM).",
+    stats: { health: null, speed: null, armor: null, agility: null },
+    weapons: [
+      { name: "125mm Type 88C / DTC10-125 APFSDS", type: "APFSDS", damage: null, penetration: null, reload: null },
+      { name: "125mm DTP-125 HEAT-FS", type: "HEAT-FS", damage: null, penetration: null, reload: null },
+      { name: "125mm DTB-125 HE", type: "HE", damage: null, penetration: null, reload: null },
+      { name: "125mm cannon-launched ATGM (where available)", type: "ATGM", damage: null, penetration: null, reload: null }
+    ],
+    modules: {
+      engine: [
+        { name: "Type 150 Diesel MK1", bonus: "+7 km/h speed" },
+        { name: "Type 150 Diesel MK2", bonus: "+14 km/h speed" },
+        { name: "Type 150 Diesel MK3", bonus: "+21 km/h speed" }
+      ],
+      armor: [
+        { name: "DTC Composite MK1", bonus: "+115mm effective armor" },
+        { name: "DTC Composite MK2", bonus: "+230mm effective armor" },
+        { name: "DTC Composite MK3", bonus: "+345mm effective armor" }
+      ],
+      fireControl: [
+        { name: "PLA Ballistic Comp MK1", bonus: "+8% accuracy" },
+        { name: "PLA Ballistic Comp MK2", bonus: "+16% accuracy" },
+        { name: "PLA Ballistic Comp MK3", bonus: "+24% accuracy" }
+      ]
+    },
+    
+  },
+
+  {
+    id: 107,
+    name: "ZTZ-96A (P)",
+    type: "Main Battle Tank",
+    faction: "Chinese",
+    tier: "III",
+    description: "Export/modernized ZTZ-96A (P) — 125mm export ammo names / higher-tier APFSDS variants.",
+    stats: { health: null, speed: null, armor: null, agility: null },
+    weapons: [
+      { name: "125mm Type 1985-I APFSDS (export APFSDS)", type: "APFSDS", damage: null, penetration: null, reload: null },
+      { name: "125mm DTC10-125 APFSDS (higher-pen)", type: "APFSDS", damage: null, penetration: null, reload: null },
+      { name: "125mm DTP-125 HEAT-FS", type: "HEAT-FS", damage: null, penetration: null, reload: null },
+      { name: "125mm DTB-125 HE", type: "HE", damage: null, penetration: null, reload: null }
+    ],
+    modules: {
+      engine: [
+        { name: "Export Diesel MK1", bonus: "+6 km/h speed" },
+        { name: "Export Diesel MK2", bonus: "+12 km/h speed" },
+        { name: "Export Diesel MK3", bonus: "+18 km/h speed" }
+      ],
+      armor: [
+        { name: "Export Composite MK1", bonus: "+110mm effective armor" },
+        { name: "Export Composite MK2", bonus: "+220mm effective armor" },
+        { name: "Export Composite MK3", bonus: "+330mm effective armor" }
+      ],
+      fireControl: [
+        { name: "Export FCS MK1", bonus: "+8% accuracy" },
+        { name: "Export FCS MK2", bonus: "+16% accuracy" },
+        { name: "Export FCS MK3", bonus: "+24% accuracy" }
+      ]
+    },
+    
+  },
+
+  {
+    id: 108,
+    name: "PLZ-07B",
+    type: "SPA",
+    faction: "Chinese",
+    tier: "III",
+    description: "PLZ-07B — 122mm SPH family (HE, RAP, base-bleed, guided shells in-game).",
+    stats: { health: null, speed: null, armor: null, agility: null },
+    weapons: [
+      { name: "122mm HE standard artillery shells", type: "HE", damage: null, penetration: null, reload: null },
+      { name: "122mm Rocket-Assisted Projectile (RAP) / Base-bleed (BB)", type: "RAP/BB", damage: null, penetration: null, reload: null },
+      { name: "122mm Guided Artillery shell (if equipped)", type: "Guided Shell", damage: null, penetration: null, reload: null },
+      { name: "Type 54 12.7mm MG belts", type: "Machine Gun", damage: null, penetration: null, rateOfFire: null }
+    ],
+    modules: {
+      engine: [
+        { name: "122mm SPH Diesel MK1", bonus: "+5 km/h speed" },
+        { name: "122mm SPH Diesel MK2", bonus: "+10 km/h speed" },
+        { name: "122mm SPH Diesel MK3", bonus: "+15 km/h speed" }
+      ],
+      armor: [
+        { name: "Light Armored Plate MK1", bonus: "+60mm effective armor" },
+        { name: "Light Armored Plate MK2", bonus: "+120mm effective armor" },
+        { name: "Light Armored Plate MK3", bonus: "+180mm effective armor" }
+      ],
+      fireControl: [
+        { name: "Artillery FCS MK1", bonus: "+10% indirect accuracy" },
+        { name: "Artillery FCS MK2", bonus: "+20% indirect accuracy" },
+        { name: "Artillery FCS MK3", bonus: "+30% indirect accuracy" }
+      ]
+    },
+    
+  },
+
+  {
+    id: 109,
+    name: "M110A2",
+    type: "SPA",
+    faction: "American",
+    tier: "III",
+    description: "M110A2 — 203mm heavy SPH; large-calibre HE, RAP, specialized and guided variants.",
+    stats: { health: null, speed: null, armor: null, agility: null },
+    weapons: [
+      { name: "203mm HE (large-calibre artillery)", type: "HE", damage: null, penetration: null, reload: null },
+      { name: "203mm Rocket-Assisted / Specialized rounds", type: "RAP/Guided", damage: null, penetration: null, reload: null },
+      { name: "203mm Smoke / Illumination rounds", type: "Utility", damage: null, penetration: null, reload: null }
+    ],
+    modules: {
+      engine: [
+        { name: "Heavy Diesel MK1", bonus: "+4 km/h speed" },
+        { name: "Heavy Diesel MK2", bonus: "+8 km/h speed" },
+        { name: "Heavy Diesel MK3", bonus: "+12 km/h speed" }
+      ],
+      armor: [
+        { name: "SPH Reinforcement MK1", bonus: "+80mm effective protection" },
+        { name: "SPH Reinforcement MK2", bonus: "+160mm effective protection" },
+        { name: "SPH Reinforcement MK3", bonus: "+240mm effective protection" }
+      ],
+      fireControl: [
+        { name: "203mm Ballistic Comp MK1", bonus: "+8% accuracy" },
+        { name: "203mm Ballistic Comp MK2", bonus: "+16% accuracy" },
+        { name: "203mm Ballistic Comp MK3", bonus: "+24% accuracy" }
+      ]
+    },
+    
+  },
+
+  {
+    id: 110,
+    name: "2S31 Vena",
+    type: "SPA",
+    faction: "Russian",
+    tier: "III",
+    description: "2S31 Vena — 120mm mortar/SPH hybrid. HE, guided mortar rounds, smoke, illumination in-game.",
+    stats: { health: null, speed: null, armor: null, agility: null },
+    weapons: [
+      { name: "120mm HE Mortar rounds", type: "HE", damage: null, penetration: null, reload: null },
+      { name: "120mm Guided Mortar rounds (if available in-game)", type: "Guided Shell", damage: null, penetration: null, reload: null },
+      { name: "120mm Smoke / Illumination rounds", type: "Utility", damage: null, penetration: null, reload: null }
+    ],
+    modules: {
+      engine: [
+        { name: "120mm Mortar Diesel MK1", bonus: "+6 km/h speed" },
+        { name: "120mm Mortar Diesel MK2", bonus: "+12 km/h speed" },
+        { name: "120mm Mortar Diesel MK3", bonus: "+18 km/h speed" }
+      ],
+      armor: [
+        { name: "Mortar Shield MK1", bonus: "+70mm effective armor" },
+        { name: "Mortar Shield MK2", bonus: "+140mm effective armor" },
+        { name: "Mortar Shield MK3", bonus: "+210mm effective armor" }
+      ],
+      fireControl: [
+        { name: "Mortar FCS MK1", bonus: "+12% indirect accuracy" },
+        { name: "Mortar FCS MK2", bonus: "+22% indirect accuracy" },
+        { name: "Mortar FCS MK3", bonus: "+32% indirect accuracy" }
+      ]
+    },
+    
+  },
+
+  {
+    id: 111,
+    name: "XM2001 Crusader",
+    type: "SPA",
+    faction: "American",
+    tier: "III",
+    description: "XM2001 Crusader — 155mm XM297E2 cannon; standard HE, guided and precision rounds in-game.",
+    stats: { health: null, speed: null, armor: null, agility: null },
+    weapons: [
+      { name: "155mm HE standard shells", type: "HE", damage: null, penetration: null, reload: null },
+      { name: "155mm M267A2 HEAT / advanced artillery (if present in-game)", type: "HEAT", damage: null, penetration: null, reload: null },
+      { name: "155mm M982 'Excalibur' / guided precision rounds", type: "Guided Shell", damage: null, penetration: null, reload: null },
+      { name: "155mm Smoke & Illumination rounds", type: "Utility", damage: null, penetration: null, reload: null }
+    ],
+    modules: {
+      engine: [
+        { name: "XM Powerplant MK1", bonus: "+5 km/h speed" },
+        { name: "XM Powerplant MK2", bonus: "+10 km/h speed" },
+        { name: "XM Powerplant MK3", bonus: "+15 km/h speed" }
+      ],
+      armor: [
+        { name: "Crusader Light Armor MK1", bonus: "+90mm effective protection" },
+        { name: "Crusader Light Armor MK2", bonus: "+180mm effective protection" },
+        { name: "Crusader Light Armor MK3", bonus: "+270mm effective protection" }
+      ],
+      fireControl: [
+        { name: "XM Artillery FCS MK1", bonus: "+12% precision" },
+        { name: "XM Artillery FCS MK2", bonus: "+22% precision" },
+        { name: "XM Artillery FCS MK3", bonus: "+32% precision" }
+      ]
+    },
+    
+  }
+];
+
+export default vehicles;
 
 
 ]
