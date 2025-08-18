@@ -3174,7 +3174,7 @@ const VEHICLES = [
 ]
 
 const getAircraftRole = (vehicle: any) => {
-  if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber") return null
+  if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== " Helicopter") return null
 
   // Specific aircraft role assignments
   if (vehicle.name.includes("J-10")) return "multi-role"
@@ -3219,6 +3219,12 @@ const getAircraftRole = (vehicle: any) => {
       vehicle.name.includes("MiG-41"),
   )
 
+  const hasHelicopterCharacteristics = weapons.some(
+     (w: any) =>
+      vehicle.name.includes("Ka-52M") ||
+      vehicle.name.includes("AH-64E Apache"),
+  )
+
   const hasMultiRoleWeapons = weapons.some(
     (w: any) => w.type.includes("Air-to-Ground") && weapons.some((w2: any) => w2.type.includes("AAM")),
   )
@@ -3227,6 +3233,7 @@ const getAircraftRole = (vehicle: any) => {
   if (hasGroundAttackWeapons && !hasInterceptorCharacteristics) return "ground-attack"
   if (hasInterceptorCharacteristics && !hasGroundAttackWeapons) return "interceptor"
   if (hasMultiRoleWeapons || (hasGroundAttackWeapons && hasInterceptorCharacteristics)) return "multi-role"
+  if (hasHelicopterCharacteristics) return "helicopter"
 
   return "multi-role" // Default for jets
 }
@@ -3243,7 +3250,7 @@ const getRoleIcon = (role: string | null) => {
       return "/interceptor-icon.png"
     case "bomber":
       return "/bomber-icon.png"
-    case "helicopter":
+    case "Helicopter":
       return "/Helicopter-Icon.png"
     default:
       return null
@@ -3742,9 +3749,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                MWT Assistant (Demo)
+                {"MWT Assistant (Unofficial)\n(Demo)"}
               </h1>
-              <p className="text-slate-400 mt-1">Modern Warfare Tanks Assistant</p>
+              <p className="text-slate-400 mt-1">    MWT Assistant</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="pb-6">
@@ -3977,7 +3984,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <div className="text-lg font-bold text-cyan-300">{vehicle.stats.health.toLocaleString()}</div>
                 </div>
 
-                {vehicle.type === "Fighter Jet" || vehicle.type === "Bomber" ? (
+                {vehicle.type === "Fighter Jet" || vehicle.type === "Bomber" || vehicle.type === "Helicopter"? (
                   <>
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Cruise Speed</div>
@@ -4221,7 +4228,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     analysis, and advanced filtering capabilities.
                   </p>
                   <p className="text-sm text-slate-400">
-                    Created by Naveed2227 • Version 1.0 • Built with React and TypeScript
+                    Created by Naveed2227 • Version 1.0 • Built with CSS and TypeScript
                   </p>
 
                   <div className="mt-6 pt-4 border-t border-slate-600">
