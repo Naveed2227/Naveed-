@@ -3261,10 +3261,10 @@ const getFlagImage = (faction: string): string => {
     Israeli: "/israel-flag.webp",
     French: "/france-flag.webp",
     Italian: "/italy-flag.png",
-    "South Korean": "/flags/kr.png",
     Ukrainian: "/ukraine-flag.png",
     Swedish: "/sweden-flag.png",
     Iranian: "/Iranian-flag.png",
+    Polish: "/Poland-flag.webp",
   
   
   }
