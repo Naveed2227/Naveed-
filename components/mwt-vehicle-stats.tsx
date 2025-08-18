@@ -3183,6 +3183,7 @@ const getAircraftRole = (vehicle: any) => {
   if (vehicle.name.includes("MiG-41M")) return "interceptor"
   if (vehicle.name.includes("F-16C Night Falcon")) return "multi-role"
   if (vehicle.name.includes("TU-222")) return "bomber"
+  if (vehicle.name.includes("Ka-52M")) return "Helicopter"
 
   const weapons = vehicle.weapons || []
   const hasStealthWeapons = weapons.some(
@@ -3242,6 +3243,8 @@ const getRoleIcon = (role: string | null) => {
       return "/interceptor-icon.png"
     case "bomber":
       return "/bomber-icon.png"
+    case "helicopter":
+      return "/Helicopter-Icon.png"
     default:
       return null
   }
@@ -3940,7 +3943,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
               )}
 
-              {(vehicle.type === "Fighter Jet" || vehicle.type === "Bomber") && (
+              {(vehicle.type === "Fighter Jet" || vehicle.type === "Bomber" || vehicle.type === "Helicopter") && (
                 <div className="absolute top-4 right-4 px-0 py-0 pl-0 pb-2.5 pt-0 border-t-0 mx-[-14px] my-[-3px]">
                   {(() => {
                     const role = getAircraftRole(vehicle)
