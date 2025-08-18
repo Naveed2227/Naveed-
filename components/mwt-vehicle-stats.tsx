@@ -3166,13 +3166,12 @@ const VEHICLES = [
     defense: [
       { name: "Chaff/Flare MK1", bonus: "+20% countermeasures" },
       { name: "Chaff/Flare MK2", bonus: "+35% countermeasures" }
-   ]
+    ]
   }
-  }
-];
+}
 
-export default vehicles;
 
+]
 
 const getAircraftRole = (vehicle: any) => {
   if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== " Helicopter") return null
@@ -3459,7 +3458,7 @@ ${weaponsList}
 🔧 UPGRADE MODULES:
 ${modulesList}
 
-${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : "🆓 Standard Vehicle"}`
+${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : ${isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only in Gatchs and Events" : "🆓 Standard Vehicle"}`
   }
 
   const filteredVehicles = VEHICLES.filter((vehicle) => {
