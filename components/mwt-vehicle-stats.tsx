@@ -3612,7 +3612,6 @@ const VEHICLES = [
   }
 ];
 
-export default vehicles;
 
 
 const getAircraftRole = (vehicle: any) => {
@@ -4940,7 +4939,4 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     </div>
   )
 }
-
-export default function MwtVehicleStats() {
-  // component code
-}
+export default MwtVehicleStats;
