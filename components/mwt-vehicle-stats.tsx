@@ -3379,6 +3379,18 @@ const MwtVehicleStats = () => {
     return marketVehicles.includes(vehicleName)
   }
 
+
+
+  const isExclusiveVehicle = (vehicleName: string) => {
+    const ExclusiveVehicles = [
+      "Su-24M",
+
+]
+    return ExclusiveVehicles.includes(vehicleName)
+  }
+
+
+
   const getVehicleDetailedInfo = (vehicle: any) => {
     const weaponsList = vehicle.weapons
       .map((weapon: any) => `${weapon.name}: ${weapon.damage} DMG, ${weapon.penetration} PEN`)
@@ -3949,6 +3961,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <div className="h-0 border-b-transparent border-l-yellow-500 ml-0 w-[0-] w-[aut-] w-[auto-] w-[auto-10] w-[auto-10px] w-[au-10px] w-[-10px] border-l-[30px] border-r-0 border-b-[30px]" />
                 </div>
               )}
+
+              {isxclusiveVehicle(vehicle.name) && (
+                <div className="absolute top-0 left-0 w-0 h-0 z-10">
+                  <div className="h-0 border-b-transparent border-l-Red-500 ml-0 w-[0-] w-[aut-] w-[auto-] w-[auto-10] w-[auto-10px] w-[au-10px] w-[-10px] border-l-[30px] border-r-0 border-b-[30px]" />
+                </div>
+              )}
+
+
+
 
               {(vehicle.type === "Fighter Jet" || vehicle.type === "Bomber" || vehicle.type === "Helicopter") && (
                 <div className="absolute top-4 right-4 px-0 py-0 pl-0 pb-2.5 pt-0 border-t-0 mx-[-14px] my-[-3px]">
