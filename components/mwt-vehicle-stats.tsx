@@ -3937,7 +3937,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               )}
 
               {(vehicle.type === "Fighter Jet" || vehicle.type === "Bomber") && (
-                <div className="absolute top-4 right-4 mx-[-5px] px-0 py-0 pl-0 pb-2.5 pt-0 border-t-0">
+                <div className="absolute top-4 right-4 px-0 py-0 pl-0 pb-2.5 pt-0 border-t-0 mx-[-14px] my-[-3px]">
                   {(() => {
                     const role = getAircraftRole(vehicle)
                     const iconPath = getRoleIcon(role)
