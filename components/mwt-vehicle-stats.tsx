@@ -3280,14 +3280,7 @@ if (hasHelicopterCharacteristics) return "helicopter"
 
 }
 
-const getRoleIcon = (role: string | null) => {
-  switch (role) {
-    case "helicopter":
-      return "/Helicopter-Icon.png"
-    default:
-      return null
-  }
-}
+
 
 
 
