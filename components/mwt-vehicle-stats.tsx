@@ -3374,6 +3374,10 @@ const MwtVehicleStats = () => {
       "T-14 (152)",
       "Leopard 2A7V",
       "Type 16 MCV",
+      "M-SHORAD",
+      "EMBT 120",
+      "KF31 Lynx",
+      "VT-4A1",
       "YF-23"
     ]
     return marketVehicles.includes(vehicleName)
@@ -3382,11 +3386,42 @@ const MwtVehicleStats = () => {
 
 
   const isExclusiveVehicle = (vehicleName: string) => {
-    const ExclusiveVehicles = [
-      "Su-24M",
+    const exclusiveVehicles = [
+"Leopard 2A4",
+"Alpha Jet",
+"Su-24M",
+"M270 MLRS",
+"Otomatic 76",
+"F-16C Night Falcon",
+"MiG-41M",
+"IT-1 Dragon",
+"SR-5 GMLRS",
+"T-25 Pamir",
+"T-104 Bastion",
+"Challenger 3",
+"FV4034 Challenger 2 TES",
+"Karrar",
+"Leclerc S2 AZUR",
+"T-20 Monolit",
+"M10 Booker",
+"PL-01",
+"TOS-1A",
+"BMD3",
+"ZTZ96",
+"M109A6 Paladin",
+"FK 2000",
+"BM-57-2 Kochevnik",
+"Su-39",
+"J-10B",
+"Mitsubishi F-2B",
+"J-50",
+"Z-11WB Changhe",
+"Tiger HAD",
+"EC665 Tiger UHT"
+        
 
 ]
-    return ExclusiveVehicles.includes(vehicleName)
+    return exclusiveVehicles.includes(vehicleName)
   }
 
 
@@ -3962,9 +3997,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
               )}
 
-              {isxclusiveVehicle(vehicle.name) && (
+              {isExclusiveVehicle(vehicle.name) && (
                 <div className="absolute top-0 left-0 w-0 h-0 z-10">
-                  <div className="h-0 border-b-transparent border-l-Red-500 ml-0 w-[0-] w-[aut-] w-[auto-] w-[auto-10] w-[auto-10px] w-[au-10px] w-[-10px] border-l-[30px] border-r-0 border-b-[30px]" />
+                  <div className="h-0 border-b-transparent border-l-red-500 ml-0 w-[0-] w-[aut-] w-[auto-] w-[auto-10] w-[auto-10px] w-[au-10px] w-[-10px] border-r-0 text-transparent border-l-[25px] border-b-[25px]" />
                 </div>
               )}
 
