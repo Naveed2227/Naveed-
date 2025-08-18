@@ -3233,7 +3233,7 @@ const VEHICLES = [
         { name: "XM Sight Suite MK2", bonus: "+16% accuracy" },
         { name: "XM Sight Suite MK3", bonus: "+24% accuracy" }
       ]
-    },
+    }
   
   },
 
@@ -3267,7 +3267,7 @@ const VEHICLES = [
         { name: "Block III FCS MK2", bonus: "+22% accuracy" },
         { name: "Block III FCS MK3", bonus: "+32% accuracy" }
       ]
-    },
+    }
     
   },
 
@@ -3302,7 +3302,7 @@ const VEHICLES = [
         { name: "Polish FCS MK2", bonus: "+17% accuracy" },
         { name: "Polish FCS MK3", bonus: "+25% accuracy" }
       ]
-    },
+  }
     
   },
 
@@ -3337,7 +3337,7 @@ const VEHICLES = [
         { name: "Soviet FCS MK2", bonus: "+14% accuracy" },
         { name: "Soviet FCS MK3", bonus: "+21% accuracy" }
       ]
-    },
+    }
     
   },
 
@@ -3371,8 +3371,7 @@ const VEHICLES = [
         { name: "Type-90 FCS MK2", bonus: "+18% accuracy" },
         { name: "Type-90 FCS MK3", bonus: "+26% accuracy" }
       ]
-    },
-    
+    }
   },
 
   {
@@ -4942,4 +4941,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   )
 }
 
-export default MwtVehicleStats
+export default function MwtVehicleStats() {
+  // component code
+}
