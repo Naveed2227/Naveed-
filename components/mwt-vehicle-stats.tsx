@@ -3616,8 +3616,6 @@ const VEHICLES = [
 export default vehicles;
 
 
-]
-
 const getAircraftRole = (vehicle: any) => {
   if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== " Helicopter") return null
 
