@@ -5041,19 +5041,40 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="space-y-3">
                      <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version Beta 1.3 </span>
+                          <span className="font-medium text-cyan-300">Version Beta 1.5    (19/8/2025)</span>
                           <span className="text-sm text-slate-400">Latest</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
-                          <li>• Added 34 new Vehicles including YF-23, T20 monolit and Su-37 Terminator</li>
-                          <li>• New Tank Role drop doen box</li>
-                          <li>• Tu-222 now has the Bomber Icon </li>
+                          <li>• Added 26 new Vehicles including LAV-600, ZTZ-96(P) and PT-91 Twardy</li>
+                          <li>• Majour Bugs fixed</li>
                         </ul>
                       </div>
                       <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version Beta 1.2 </span>
+                          <span className="font-medium text-cyan-300">Version Beta 1.4    (18/8/2025)</span>
                           <span className="text-sm text-slate-400">Previous</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Added 20 new Vehicles including Mi-35, Ka-58 Black Ghost and SB1</li>
+                          <li>• New Vehicle Red Tag for Exclusive vehicles (Gatcha)</li>
+                          <li>• Minor bugs fixed</li>
+                        </ul>
+                      </div>
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version Beta 1.3    (17/8/2025)</span>
+                          <span className="text-sm text-slate-400">Old</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Added 34 new Vehicles including YF-23, T20 monolit and Su-37 Terminator</li>
+                          <li>• New Tank Role drop doen box</li>
+                          <li>• Tu-222 now has the Bomber Icon</li>
+                        </ul>
+                      </div>
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version Beta 1.2    (16/8/2025)</span>
+                          <span className="text-sm text-slate-400">Old</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
                           <li>• Added 7 new aircraft including AV-8B Harrier II and F-14D Super Tomcat</li>
@@ -5063,7 +5084,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
                       <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version Beta 1.1 </span>
+                          <span className="font-medium text-cyan-300">Version Beta 1.1    (16/8/2025)</span>
                           <span className="text-sm text-slate-400">Old</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
@@ -5074,7 +5095,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
                       <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version Beta 1.0 </span>
+                          <span className="font-medium text-cyan-300">Version Beta 1.0    (16/8/2025)</span>
                           <span className="text-sm text-slate-400">Initial</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
