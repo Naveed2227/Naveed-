@@ -2609,6 +2609,47 @@ const VEHICLES = [
 },
 {
   id: 80,
+  name: "Su-35S",
+  type: "Fighter Jet",
+  faction: "Russian",
+  tier: "III",
+  description: "Highly maneuverable 4++ generation multirole fighter with thrust vectoring engines and powerful radar.",
+  image: "/images/su35s.png",
+  stats: { health: 23300, speed: 870, afterburnerSpeed: 2200, agility: 67 },
+  weapons: [
+    { name: "R-73", type: "Short-Range AAM", damage: 4900, penetration: 60, reload: 15 },
+    { name: "R-27", type: "Medium-Range AAM", damage: 8100, penetration: 65, reload: 20},
+    { name: "R-77", type: "Medium-Range AAM", damage: 8100, penetration: 55, reload: 20 },
+    { name: "Kh-31", type: "Air-to-Surface Missile", damage: 8100, penetration: 230, reload: 20 },
+    { name: "Kh-38M", type: "Air-to-Ground Missile", damage: 17300, penetration: 310, reload: 40 },
+    { name: "KAB-500L", type: "Guided Bomb (Laser)", damage: 17300, penetration: 320, reload: 40 },
+    { name: "KAB-500Kr", type: "Guided Bomb (TV)", damage: 17800, penetration: 210, reload: 40 },
+    { name: "FAB-500", type: "Unguided Bomb", damage: 16000, penetration: 210, reload: 35 },
+    { name: "B-8M1", type: "Rocket Pod (S-8)", damage: 5100, penetration: 420, reload: 20, rateOfFire: "80 rockets" },
+    { name: "B-13L", type: "Rocket Pod (S-13)", damage: 9200, penetration: 250, reload: 40, rateOfFire: "20 rockets" },
+    { name: "GSh-30-1 30mm", type: "Autocannon", damage: 400, penetration: 70, rateOfFire: "1500 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "Saturn AL-41F1S MK1", bonus: "+250 km/h speed" },
+      { name: "Saturn AL-41F1S MK2", bonus: "+500 km/h speed" },
+      { name: "Saturn AL-41F1S MK3", bonus: "+750 km/h speed" }
+    ],
+    stealth: [
+      { name: "RAM Coating MK1", bonus: "+10% stealth" },
+      { name: "RAM Coating MK2", bonus: "+20% stealth" },
+      { name: "RAM Coating MK3", bonus: "+30% stealth" }
+    ],
+    avionics: [
+      { name: "Irbis-E Radar MK1", bonus: "+20% detection" },
+      { name: "Irbis-E Radar MK2", bonus: "+35% detection" },
+      { name: "Irbis-E Radar MK3", bonus: "+50% detection" }
+    ]
+  }
+},
+
+{
+  id: 81,
   name: "Mitsubishi F-2B",
   type: "Fighter Jet",
   faction: "Japanese",
@@ -2636,7 +2677,7 @@ const VEHICLES = [
   }
 },
 {
-    id: 81,
+    id: 82,
     name: "A-10A Thunderbolt",
     type: "Fighter Jet",
     faction: "American",
@@ -2668,7 +2709,7 @@ const VEHICLES = [
     },
   },
 {
-  id: 82,
+  id: 83,
   name: "YF-23",
   type: "Fighter Jet",
   faction: "American",
@@ -2697,7 +2738,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 83,
+  id: 84,
   name: "F-35B Lightning II",
   type: "Fighter Jet",
   faction: "American",
@@ -2726,7 +2767,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 84,
+  id: 85,
   name: "J-50",
   type: "Fighter Jet",
   faction: "Chinese",
@@ -2755,7 +2796,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 85,
+  id: 86,
   name: "Su-75 Checkmate",
   type: "Fighter Jet",
   faction: "Russian",
@@ -2784,7 +2825,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 86,
+  id: 87,
   name: "Z-9G Harbin",
   type: "Helicopter",
   faction: "Chinese",
@@ -2813,7 +2854,7 @@ const VEHICLES = [
   }
 },
 {
-    id: 87,
+    id: 88,
     name: "OH-1 Ninja",
     type: "Helicopter",
     faction: "Japanese",
@@ -2842,7 +2883,7 @@ const VEHICLES = [
   },
 
 {
-  id: 88,
+  id: 89,
   name: "MH-6 Little Bird",
   type: "Helicopter",
   faction: "American",
@@ -2870,7 +2911,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 89,
+  id: 90,
   name: "Z-11WB Changhe",
   type: "Helicopter",
   faction: "Chinese",
@@ -2903,7 +2944,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 90,
+  id: 91,
   name: "Super Lynx Mk88A",
   type: "Helicopter",
   faction: "British",
@@ -2929,7 +2970,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 91,
+  id: 92,
   name: "Z-9WA Harbin",
   type: "Helicopter",
   faction: "Chinese",
@@ -2962,7 +3003,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 92,
+  id: 93,
   name: "Z-20 Harbin",
   type: "Helicopter",
   faction: "Chinese",
@@ -2991,7 +3032,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 93,
+  id: 94,
   name: "MH-60L DAP",
   type: "Helicopter",
   faction: "American",
@@ -3023,7 +3064,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 94,
+  id: 95,
   name: "Mi-35P Hind-F",
   type: "Helicopter",
   faction: "Russian",
@@ -3052,7 +3093,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 95,
+  id: 96,
   name: "AH-1Z Viper",
   type: "Helicopter",
   faction: "American",
@@ -3083,7 +3124,7 @@ const VEHICLES = [
   }
 },
   {
-    id: 96,
+    id: 97,
     name: "SB-1",
     type: "Helicopter",
     faction: "American",
@@ -3112,7 +3153,7 @@ const VEHICLES = [
     }
   },
 {
-  id: 97,
+  id: 98,
   name: "Ka-50 Black Shark",
   type: "Helicopter",
   faction: "Russian",
@@ -3141,7 +3182,7 @@ const VEHICLES = [
   }
  },
   {
-    "id": 98,
+    "id": 99,
     "name": "M1A1 Abrams",
     "type": "Main Battle Tank",
     "faction": "American",
@@ -3174,7 +3215,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 99,
+    "id": 100,
     "name": "MBT-70",
     "type": "Main Battle Tank",
     "faction": "American",
@@ -3206,7 +3247,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 100,
+    "id": 101,
     "name": "M1 Abrams Block III",
     "type": "Main Battle Tank",
     "faction": "American",
@@ -3238,7 +3279,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 101,
+    "id": 102,
     "name": "PT-91 Twardy",
     "type": "Main Battle Tank",
     "faction": "Polish",
@@ -3270,7 +3311,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 102,
+    "id": 103,
     "name": "T-64BV",
     "type": "Main Battle Tank",
     "faction": "Russian",
@@ -3303,7 +3344,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 103,
+    "id": 104,
     "name": "Type 90",
     "type": "Main Battle Tank",
     "faction": "Japanese",
@@ -3334,7 +3375,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 104,
+    "id": 105,
     "name": "ZTZ85-II",
     "type": "Main Battle Tank",
     "faction": "Chinese",
@@ -3365,7 +3406,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 105,
+    "id": 106,
     "name": "ZTZ96",
     "type": "Main Battle Tank",
     "faction": "Chinese",
@@ -3396,7 +3437,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 106,
+    "id": 107,
     "name": "ZTZ-96A (P)",
     "type": "Main Battle Tank",
     "faction": "Chinese",
@@ -3427,7 +3468,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 107,
+    "id": 108,
     "name": "PLZ-07B",
     "type": "SPA",
     "faction": "Chinese",
@@ -3457,9 +3498,9 @@ const VEHICLES = [
     }
   },
   {
-    "id": 108,
+    "id": 109,
     "name": "M110A2",
-    "type": "SPS",
+    "type": "SPA",
     "faction": "American",
     "tier": "III",
     "description": "American 203mm self-propelled artillery for heavy bombardment.",
@@ -3487,7 +3528,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 109,
+    "id": 110,
     "name": "2S31 Vena",
     "type": "SPA",
     "faction": "Russian",
@@ -3517,7 +3558,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 110,
+    "id": 111,
     "name": "XM2001 Crusader",
     "type": "SPA",
     "faction": "American",
@@ -3547,7 +3588,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 111,
+    "id": 112,
     "name": "Gepard 1A2",
     "type": "Anti-Air",
     "faction": "German",
@@ -3574,7 +3615,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 112,
+    "id": 113,
     "name": "K-31 Cheonma",
     "type": "Anti-Air",
     "faction": "SouthKorean",
@@ -3601,7 +3642,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 113,
+    "id": 114,
     "name": "PGZ-09",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3628,7 +3669,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 114,
+    "id": 115,
     "name": "2S6M1 Tunguska-M1",
     "type": "Anti-Air",
     "faction": "Russian",
@@ -3656,7 +3697,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 115,
+    "id": 116,
     "name": "Type 625E SHORAD",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3684,7 +3725,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 116,
+    "id": 117,
     "name": "XM975",
     "type": "Anti-Air",
     "faction": "American",
@@ -3712,7 +3753,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 117,
+    "id": 118,
     "name": "AFT-10",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3740,7 +3781,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 118,
+    "id": 119,
     "name": "M113 Hellfire",
     "type": "Missile Carrier",
     "faction": "American",
@@ -3766,7 +3807,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 119,
+    "id": 120,
     "name": "9A52-2 Smerch",
     "type": "MLRS",
     "faction": "Russian",
@@ -3793,7 +3834,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 120,
+    "id": 121,
     "name": "Type 89 MLRS",
     "type": "MLRS",
     "faction": "Japanese",
@@ -3820,7 +3861,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 121,
+    "id": 122,
     "name": "AFT-09",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3848,7 +3889,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 122,
+    "id": 123,
     "name": "LAV-600",
     "type": "Tank Destroyer",
     "faction": "American",
@@ -3875,7 +3916,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 123,
+    "id": 124,
     "name": "WMA301",
     "type": "MLRS",
     "faction": "Chinese",
@@ -4885,6 +4926,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               <div className="text-right text-xs">
                                 <div className="text-cyan-300 font-bold">DMG: {weapon.damage}</div>
                                 <div className="text-cyan-300 font-bold">PEN: {weapon.penetration}</div>
+                                <div className="text-cyan-300 font-bold">REL: {weapon.reload}</div>
                                 {weapon.rateOfFire && <div className="text-slate-400">{weapon.rateOfFire}</div>}
                               </div>
                             </div>
@@ -5245,6 +5287,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       <div>
                         <span className="text-slate-400">Penetration: </span>
                         <span className="text-cyan-300 font-bold text-lg">{weapon.penetration}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400">Reload: </span>
+                        <span className="text-cyan-300 font-bold text-lg">{weapon.reload}</span>
                       </div>
                       {weapon.rateOfFire && (
                         <div>
