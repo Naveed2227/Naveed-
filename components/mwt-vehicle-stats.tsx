@@ -3577,7 +3577,7 @@ const VEHICLES = [
     "id": 112,
     "name": "K-31 Cheonma",
     "type": "Anti-Air",
-    "faction": "South Korean",
+    "faction": "SouthKorean",
     "tier": "III",
     "description": "Korean SPAAG with 30mm cannons and short-range SAM missiles.",
     "stats": { "health": 22000, "speed": 70, "armor": 30, "agility": 42 },
@@ -4008,6 +4008,7 @@ const getFlagImage = (faction: string): string => {
     Swedish: "/sweden-flag.png",
     Iranian: "/Iranian-flag.png",
     Polish: "/Poland-flag.webp",
+    SouthKorean: "/SouthKorea-flag.jpg",
   
   
   }
@@ -5017,7 +5018,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             <div className="bg-slate-800 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
               <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-2xl font-bold text-cyan-400">About MWT Assistant</h2>
+                  <h2 className="text-2xl font-bold text-cyan-400">About MWT Assistant (Unofficial) </h2>
                   <button onClick={() => setShowAbout(false)} className="text-slate-400 hover:text-white">
                     <X className="w-6 h-6" />
                   </button>
