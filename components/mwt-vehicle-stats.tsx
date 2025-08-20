@@ -1568,17 +1568,17 @@ const VEHICLES = [
   },
   {
     id: 47,
-    name: "MiG-35 Fulcrum-F",
-    type: "Fighter Jet",
-    faction: "Russian",
-    tier: "III",
-    description: "Advanced multi-role fighter with AESA radar and enhanced maneuverability.",
+    name: "Altay",
+    type: "Main Battle Tank",
+    faction: "Turkish",
+    tier: "IV",
+    description: "Turkey’s modern main battle tank, emphasizing firepower, protection, mobility, and advanced technology.",
     stats: { health: 19500, speed: 1400, afterburnerSpeed: 2100, agility: 95 },
     weapons: [
-      { name: "R-77-1", type: "Medium-Range AAM", damage: 8800, penetration: 440 },
-      { name: "R-73", type: "Short-Range AAM", damage: 7200, penetration: 380 },
-      { name: "Kh-38MLE", type: "Air-to-Ground Missile", damage: 12500, penetration: 650 },
-      { name: "GSh-30-1 30mm", type: "Autocannon", damage: 380, penetration: 65, rateOfFire: "1800 rpm" },
+      { name: "DM63A1 APFSDS", type: "Main Gun", damage: 18500, penetration: 950 },
+      { name: "DM11 HEI", type: "Main Gun", damage: 19200, penetration: 1250 },
+      { name: "DM12A2 HEATFS", type: "Main Gun", damage: 19200, penetration: 1250 },
+      { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 1250 },
     ],
     modules: {
       engine: [
@@ -4199,10 +4199,18 @@ const getAircraftRole = (vehicle: any) => {
   if (vehicle.name.includes("J-10")) return "multi-role"
   if (vehicle.name.includes("J-50")) return "stealth"
   if (vehicle.name.includes("J-35")) return "stealth"
-  if (vehicle.name.includes("MiG-41M")) return "interceptor"
+  if (vehicle.name.includes("MiG-41M")) return "stealth"
   if (vehicle.name.includes("F-16C Night Falcon")) return "multi-role"
   if (vehicle.name.includes("TU-222")) return "bomber"
-  if (vehicle.name.includes("Ka-52M")) return "Helicopter"
+  if (vehicle.name.includes("AH-64E Apache")) return "helicopter"
+  if (vehicle.name.includes("AH-64E Apache")) return "interceptor"
+  if (vehicle.name.includes("MiG-35")) return "interceptor"
+  if (vehicle.name.includes("MiG-31BM Foxhound")) return "interceptor"
+  if (vehicle.name.includes("J-16")) return "multi-role"
+  if (vehicle.name.includes("A-10A Thunderbolt")) return "ground-attack"
+  if (vehicle.name.includes("J-15")) return "multi-role"
+  if (vehicle.name.includes("F/A-18F Super Hornet")) return "multi-role"
+  if (vehicle.name.includes("Su-37 Terminator")) return "multi-role"
 
   const weapons = vehicle.weapons || []
   const hasStealthWeapons = weapons.some(
@@ -4214,6 +4222,7 @@ const getAircraftRole = (vehicle: any) => {
       vehicle.name.includes("J-20") ||
       vehicle.name.includes("F-35") ||
       vehicle.name.includes("YF-23") ||
+      vehicle.name.includes("MiG-41M") ||
       vehicle.name.includes("Su-75"),
   )
 
@@ -4225,6 +4234,7 @@ const getAircraftRole = (vehicle: any) => {
       w.name.includes("Hellfire") ||
       vehicle.name.includes("A-10") ||
       vehicle.name.includes("Su-25") ||
+      vehicle.name.includes("MiG-41M") ||
       vehicle.name.includes("AV-8B") ||
       vehicle.name.includes("Su-39"),
   )
@@ -4269,7 +4279,7 @@ const getRoleIcon = (role: string | null) => {
       return "/interceptor-icon.png"
     case "bomber":
       return "/bomber-icon.png"
-    case "Helicopter":
+    case "helicopter":
       return "/Helicopter-Icon.png"
     default:
       return null
@@ -4593,13 +4603,13 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           return jets.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
         },
         fastestHelicopter: () => {
-          const helicopters = VEHICLES.filter((v) => v.type === "Helicopter")
+          const helicopters = VEHICLES.filter((v) => v.type === "helicopter")
           return helicopters.reduce((prev, current) =>
             (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
           )
         },
         strongestHelicopter: () => {
-          const helicopters = VEHICLES.filter((v) => v.type === "Helicopter")
+          const helicopters = VEHICLES.filter((v) => v.type === "helicopter")
           return helicopters.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
         },
         mostArmoredVehicle: () => {
@@ -5360,8 +5370,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     analysis, and advanced filtering capabilities.
                   </p>
                   <p className="text-sm text-slate-400">
-                    Created by Naveed2227 • Version 1.0 • Built with CSS and TypeScript
+                    Created by Naveed2227 • Version 1.0 • Built with CSS and TypeScript..........................
+                    
+                    Contact:...............................................................................................................................
+                    Email: naveed.miandad.007@gmail.com ..........................................................................
+                    Discord: naveed27...............................................................................................................
+                    Inst: @naveed_2227.............................................................................................................
                   </p>
+                  
 
                   <div className="mt-6 pt-4 border-t border-slate-600">
                     <h3 className="text-xl font-semibold text-cyan-400 mb-3">Updates</h3>
