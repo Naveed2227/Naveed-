@@ -1573,12 +1573,12 @@ const VEHICLES = [
     faction: "Turkish",
     tier: "IV",
     description: "Turkey’s modern main battle tank, emphasizing firepower, protection, mobility, and advanced technology.",
-    stats: { health: 19500, speed: 1400,armor: "1200mm", agility: 95 },
+    stats: { health: 38200, speed: 65,armor: "1200mm", agility: 70 },
     weapons: [
-      { name: "DM63A1 APFSDS", type: "Main Gun", damage: 18500, penetration: 950 },
-      { name: "DM11 HEI", type: "Main Gun", damage: 19200, penetration: 1250 },
-      { name: "DM12A2 HEATFS", type: "Main Gun", damage: 19200, penetration: 1250 },
-      { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 1250 },
+      { name: "DM63A1 APFSDS", type: "Main Gun", damage: 18500, penetration: 950, reload: 5.2 },
+      { name: "DM11 HEI", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 },
+      { name: "DM12A2 HEATFS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 },
+      { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 },
     ],
     modules: {
       engine: [
@@ -4320,7 +4320,7 @@ const getFlagImage = (faction: string): string => {
     British: "/british-flag.png",
     European: "/eu-flag.png",
     Japanese: "/japan-flag.webp",
-    Turkish: "/turkey-flag.png",
+    Turkish: "/Turkey.webp",
     Canadian: "/canada-flag.png",
     Israeli: "/israel-flag.webp",
     French: "/france-flag.webp",
@@ -5047,7 +5047,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               key={vehicle.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 hover:border-cyan-600/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10"
+              className="relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 hover:border-blue-600/100 transition-all duration-300 hover:shadow-lg hover:shadow-red-600/99"
             >
               <div className="absolute top-0 left-0 w-0 h-0 z-10">
                 <div
