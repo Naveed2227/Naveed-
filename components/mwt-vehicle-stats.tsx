@@ -15,12 +15,16 @@ const VEHICLES = [
     image: "/images/su57m.png",
     stats: { health: 24500, speed: 762, afterburnerSpeed: 2100, agility: 85 },
     weapons: [
-      { name: "Kh-38MLE", type: "Air-to-Ground Missile", damage: 9800, penetration: 380, reload: 38 },
-      { name: "Kh-47M2 Kinzhal", type: "Hypersonic Missile", damage: 18500, penetration: 1200 },
-      { name: "KAB-250", type: "Guided Bomb", damage: 12500, penetration: 600 },
-   
-      { name: "RVV-SD", type: "Medium-Range AAM", damage: 8200, penetration: 450 },
-      { name: "9A1-4071K 30mm", type: "Autocannon", damage: 380, penetration: 65, rateOfFire: "1800 rpm" },
+      { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
+      { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
+      { "name": "KAB500KR", "type": "Guided Bomb", "damage": 17800, "penetration": 320, "reload": 40 },
+      { "name": "Kh-47M2 Kinzhal", "type": "Ballistic Missile", "damage": 35000, "penetration": 1200, "reload": 60 },
+      { "name": "RVV-MD", "type": "Medium-Range AAM", "damage": 4800, "penetration": 65, "reload": 15 },
+      { "name": "Kh-38MLE", "type": "Air-to-Ground Missile", "damage": 17800, "penetration": 400, "reload": 40 },
+      { "name": "RVV-SD", "type": "Medium-Range AAM", "damage": 6500, "penetration": 65, "reload": 20 },
+      { "name": "Kh-23M", "type": "Air-to-Ground Missile", "damage": 12900, "penetration": 800, "reload": 38 },
+      { "name": "Kh-69", "type": "Air-to-Ground Missile", "damage": 18400, "penetration": 230, "reload": 40 }
+
     ],
     modules: {
       engine: [
@@ -111,10 +115,13 @@ const VEHICLES = [
       "Vertical/Short Takeoff and Landing (V/STOL) attack aircraft with excellent ground support capabilities.",
     stats: { health: 18500, speed: 662, afterburnerSpeed: 1085, agility: 78 },
     weapons: [
-      { name: "GAU-12 25mm", type: "Autocannon", damage: 320, penetration: 45, rateOfFire: "4200 rpm" },
-      { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 8500, penetration: 420 },
-      { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 6800, penetration: 380 },
-      { name: "Mk 82 Bomb", type: "Unguided Bomb", damage: 9200, penetration: 450 },
+      { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "LAU-10 x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
+    { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-132", type: "Short-Range AAM", damage: 5200, penetration: 65, reload: 15 },
+    { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 }
+
     ],
     modules: {
       engine: [
@@ -143,9 +150,14 @@ const VEHICLES = [
     description: "Light attack aircraft and advanced trainer with excellent maneuverability.",
     stats: { health: 14200, speed: 927, afterburnerSpeed: 1000, agility: 85 },
     weapons: [
-      { name: "DEFA 553 30mm", type: "Autocannon", damage: 380, penetration: 55, rateOfFire: "1300 rpm" },
-      { name: "AS.30L", type: "Laser-Guided Missile", damage: 7200, penetration: 350 },
-      { name: "SNEB 68mm Rockets", type: "Rocket Pod", damage: 450, penetration: 85, rateOfFire: "Multiple" },
+      { name: "SUU-20", type: "Bomb Cluster", damage: 14300, penetration: 120, reload: 40 },
+    { name: "LAU-51", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "LAU-51 x2", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
+    { name: "AIM-132", type: "Short-Range AAM", damage: 5200, penetration: 65, reload: 15 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 }
+
     ],
     modules: {
       engine: [
@@ -174,10 +186,13 @@ const VEHICLES = [
     description: "Twin-engine, variable-sweep wing fighter designed for fleet defense and air superiority.",
     stats: { health: 22800, speed: 913, afterburnerSpeed: 2485, agility: 72 },
     weapons: [
-      { name: "M61A1 20mm", type: "Autocannon", damage: 280, penetration: 35, rateOfFire: "6000 rpm" },
-      { name: "AIM-54 Phoenix", type: "Long-Range AAM", damage: 12500, penetration: 650 },
-      { name: "AIM-7 Sparrow", type: "Medium-Range AAM", damage: 8200, penetration: 420 },
-      { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 6800, penetration: 380 },
+       { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
+    { name: "GBU-31", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
+    { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+    { name: "AIM-54", type: "Long-Range AAM", damage: 8600, penetration: 100, reload: 30 }
+
     ],
     modules: {
       engine: [
@@ -206,10 +221,15 @@ const VEHICLES = [
     description: "Single-engine, multirole fighter with delta wing configuration and advanced avionics.",
     stats: { health: 19500, speed: 1200, afterburnerSpeed: 2120, agility: 82 },
     weapons: [
-      { name: "Type 23-3 23mm", type: "Autocannon", damage: 290, penetration: 40, rateOfFire: "3400 rpm" },
-      { name: "PL-12", type: "Medium-Range AAM", damage: 8500, penetration: 450 },
-      { name: "PL-8", type: "Short-Range AAM", damage: 6200, penetration: 350 },
-      { name: "YJ-91", type: "Anti-Radiation Missile", damage: 9800, penetration: 520 },
+     { name: "Type 2(100)", type: "Bomb", damage: 14000, penetration: 110, reload: 30 },
+    { name: "Type 90", type: "Short-Range AAM", damage: 6400, penetration: 320, reload: 40 },
+    { name: "TL-20", type: "Guided Bomb", damage: 16120, penetration: 143, reload: 25 },
+    { name: "Type 3", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
+    { name: "LT-2", type: "Air-to-Surface Missile", damage: 16200, penetration: 250, reload: 38 },
+    { name: "PL-2", type: "Short-Range AAM", damage: 5800, penetration: 40, reload: 15 },
+    { name: "PL-5", type: "Short-Range AAM", damage: 7100, penetration: 40, reload: 15 },
+    { name: "PL-7", type: "Short-Range AAM", damage: 6500, penetration: 50, reload: 20 }
+
     ],
     modules: {
       engine: [
@@ -238,10 +258,15 @@ const VEHICLES = [
     description: "High-speed interceptor designed for long-range air defense missions.",
     stats: { health: 26500, speed: 1500, afterburnerSpeed: 3000, agility: 65 },
     weapons: [
-      { name: "GSh-6-23 23mm", type: "Autocannon", damage: 320, penetration: 45, rateOfFire: "10000 rpm" },
-      { name: "R-33", type: "Long-Range AAM", damage: 14500, penetration: 720 },
-      { name: "R-37M", type: "Ultra Long-Range AAM", damage: 16800, penetration: 850 },
-      { name: "R-40TD", type: "Medium-Range AAM", damage: 9200, penetration: 480 },
+      { name: "KAB-250", type: "Guided Bomb", damage: 14900, penetration: 130, reload: 25 },
+    { name: "FAB-500", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
+    { name: "KAB-500L", type: "Guided Bomb", damage: 17300, penetration: 310, reload: 40 },
+    { name: "R-73", type: "Short-Range AAM", damage: 4800, penetration: 56, reload: 15 },
+    { name: "Kh-38ME", type: "Air-to-Surface Missile", damage: 17300, penetration: 230, reload: 40 },
+    { name: "R-40TD", type: "Long-Range AAM", damage: 7800, penetration: 70, reload: 30 },
+    { name: "Kh-59M", type: "Air-to-Surface Missile", damage: 18400, penetration: 280, reload: 50 },
+    { name: "R-37", type: "Long-Range AAM", damage: 8400, penetration: 80, reload: 30 }
+
     ],
     modules: {
       engine: [
@@ -270,10 +295,15 @@ const VEHICLES = [
     description: "Ground attack aircraft derived from the MiG-19, optimized for close air support.",
     stats: { health: 16800, speed: 1190, afterburnerSpeed: 1540, agility: 75 },
     weapons: [
-      { name: "Type 23-2K 23mm", type: "Autocannon", damage: 310, penetration: 42, rateOfFire: "3000 rpm" },
-      { name: "HJ-8", type: "Anti-Tank Missile", damage: 8800, penetration: 450 },
-      { name: "Type 90-1 Rockets", type: "Rocket Pod", damage: 520, penetration: 95, rateOfFire: "Multiple" },
-      { name: "250kg Bomb", type: "Unguided Bomb", damage: 11200, penetration: 580 },
+     { name: "Type 2(100)", type: "Bomb", damage: 14000, penetration: 110, reload: 30 },
+    { name: "Type 90", type: "Short-Range AAM", damage: 6400, penetration: 320, reload: 40 },
+    { name: "Type 1", type: "Bomb", damage: 15100, penetration: 120, reload: 32 },
+    { name: "Type 3", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
+    { name: "Type 130", type: "Air-to-Surface Missile", damage: 6900, penetration: 450, reload: 40 },
+    { name: "PL-2", type: "Short-Range AAM", damage: 5800, penetration: 40, reload: 15 },
+    { name: "PL-5", type: "Short-Range AAM", damage: 7100, penetration: 40, reload: 15 },
+    { name: "PL-7", type: "Short-Range AAM", damage: 6500, penetration: 50, reload: 20 }
+
     ],
     modules: {
       engine: [
@@ -302,11 +332,16 @@ const VEHICLES = [
     description: "Variable-sweep wing tactical bomber designed for all-weather ground attack missions.",
     stats: { health: 24200, speed: 1315, afterburnerSpeed: 2317, agility: 68 },
     weapons: [
-      { name: "GSh-6-23 23mm", type: "Autocannon", damage: 320, penetration: 45, rateOfFire: "9000 rpm" },
-      { name: "Kh-25ML", type: "Laser-Guided Missile", damage: 9500, penetration: 480 },
-      { name: "Kh-29L", type: "Air-to-Ground Missile", damage: 12800, penetration: 650 },
-      { name: "FAB-500", type: "Unguided Bomb", damage: 15200, penetration: 780 },
-      { name: "R-60M", type: "Short-Range AAM", damage: 5800, penetration: 320 },
+      { name: "B8M1", type: "Rocket Pod", damage: 5100, penetration: 420, reload: 20 },
+    { name: "FAB-250", type: "Bomb", damage: 15100, penetration: 130, reload: 30 },
+    { name: "B-13L", type: "Rocket Pod", damage: 9200, penetration: 160, reload: 40 },
+    { name: "KAB-500L", type: "Guided Bomb", damage: 17300, penetration: 310, reload: 40 },
+    { name: "R-60", type: "Short-Range AAM", damage: 4600, penetration: 36, reload: 10 },
+    { name: "Kh-23M", type: "Air-to-Surface Missile", damage: 12900, penetration: 800, reload: 38 },
+    { name: "Kh-25MLE", type: "Air-to-Surface Missile", damage: 16000, penetration: 160, reload: 35 },
+    { name: "Kh-38ME", type: "Air-to-Surface Missile", damage: 17300, penetration: 230, reload: 40 },
+    { name: "Kh-59M", type: "Air-to-Surface Missile", damage: 18400, penetration: 280, reload: 50 }
+
     ],
     modules: {
       engine: [
@@ -366,10 +401,16 @@ const VEHICLES = [
     description: "Fifth-generation stealth fighter with advanced sensor fusion and networking capabilities.",
     stats: { health: 22600, speed: 762, afterburnerSpeed: 2199, agility: 82 },
     weapons: [
-      { name: "PL-15", type: "Long-Range AAM", damage: 9500, penetration: 480 },
-      { name: "PL-10", type: "Short-Range AAM", damage: 7800, penetration: 420 },
-      { name: "YJ-91", type: "Anti-Radiation Missile", damage: 12500, penetration: 650 },
-      { name: "Type 23-III 23mm", type: "Autocannon", damage: 350, penetration: 60, rateOfFire: "1800 rpm" },
+      { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
+      { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
+      { "name": "TL-20", "type": "Guided Bomb", "damage": 16120, "penetration": 143, "reload": 25 },
+      { "name": "YJ-1000", "type": "Anti-Ship Missile", "damage": 21600, "penetration": 500, "reload": 40 },
+      { "name": "PL-10", "type": "Short-Range AAM", "damage": 7400, "penetration": 60, "reload": 20 },
+      { "name": "AR-1", "type": "Anti-Radiation Missile", "damage": 7400, "penetration": 1000, "reload": 16 },
+      { "name": "PL-15", "type": "BVR AAM", "damage": 7800, "penetration": 70, "reload": 30 },
+      { "name": "CM-102A", "type": "Air-to-Ground Missile", "damage": 14600, "penetration": 110, "reload": 40 },
+      { "name": "AKF-98A", "type": "Air-to-Ground Missile", "damage": 20500, "penetration": 410, "reload": 40 }
+
     ],
     modules: {
       engine: [
@@ -398,10 +439,15 @@ const VEHICLES = [
     description: "Air superiority fighter with unmatched stealth and supercruise capabilities.",
     stats: { health: 25100, speed: 770, afterburnerSpeed: 2170, agility: 88 },
     weapons: [
-      { name: "AIM-120D AMRAAM", type: "Medium-Range AAM", damage: 9200, penetration: 460 },
-      { name: "AIM-9X Sidewinder", type: "Short-Range AAM", damage: 7500, penetration: 400 },
-      { name: "GBU-39 SDB", type: "Guided Bomb", damage: 11800, penetration: 580 },
-      { name: "M61A2 20mm", type: "Autocannon", damage: 320, penetration: 55, rateOfFire: "6000 rpm" },
+     { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
+      { "name": "GBU-39", "type": "Guided Bomb", "damage": 14700, "penetration": 120, "reload": 28 },
+      { "name": "GBU-31", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
+      { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
+      { "name": "AGM-65", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
+      { "name": "AIM-132", "type": "Short-Range AAM", "damage": 5200, "penetration": 65, "reload": 15 },
+      { "name": "AGM-84H/K", "type": "Anti-Ship Missile", "damage": 18900, "penetration": 310, "reload": 35 },
+      { "name": "AIM-120", "type": "BVR AAM", "damage": 11300, "penetration": 60, "reload": 20 }
+
     ],
     modules: {
       engine: [
@@ -430,9 +476,15 @@ const VEHICLES = [
     description: "Long-range stealth fighter designed for air superiority and strike missions.",
     stats: { health: 21200, speed: 694, afterburnerSpeed: 1803, agility: 78 },
     weapons: [
-      { name: "PL-15", type: "Long-Range AAM", damage: 9500, penetration: 480 },
-      { name: "PL-10", type: "Short-Range AAM", damage: 7800, penetration: 420 },
-      { name: "YJ-12", type: "Anti-Ship Missile", damage: 15200, penetration: 780 },
+      { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
+      { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
+      { "name": "TL-20", "type": "Guided Bomb", "damage": 16120, "penetration": 143, "reload": 25 },
+      { "name": "CM-506KG", "type": "Air-to-Ground Missile", "damage": 13000, "penetration": 90, "reload": 25 },
+      { "name": "PL-10", "type": "Short-Range AAM", "damage": 7400, "penetration": 60, "reload": 20 },
+      { "name": "AR-1", "type": "Anti-Radiation Missile", "damage": 7400, "penetration": 1000, "reload": 16 },
+      { "name": "PL-15", "type": "BVR AAM", "damage": 7800, "penetration": 70, "reload": 30 },
+      { "name": "AKF-98A", "type": "Air-to-Ground Missile", "damage": 20500, "penetration": 410, "reload": 40 }
+
     ],
     modules: {
       engine: [
@@ -855,10 +907,12 @@ const VEHICLES = [
     description: "Legendary multi-role fighter with proven combat record and versatile weapon systems.",
     stats: { health: 19800, speed: 1472, afterburnerSpeed: 2370, agility: 68 },
     weapons: [
-      { name: "AIM-7 Sparrow", type: "Medium-Range AAM", damage: 7200, penetration: 380 },
-      { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 6500, penetration: 340 },
-      { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 12800, penetration: 680 },
-      { name: "M61A1 20mm", type: "Autocannon", damage: 280, penetration: 48, rateOfFire: "6000 rpm" },
+      { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "LAU-10 x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+    { name: "AGM-12B", type: "Air-to-Surface Missile", damage: 11500, penetration: 600, reload: 41 }
+
     ],
     modules: {
       engine: [
@@ -887,10 +941,16 @@ const VEHICLES = [
     description: "Multi-role fighter with advanced night vision and precision strike capabilities.",
     stats: { health: 18500, speed: 1320, afterburnerSpeed: 2124, agility: 92 },
     weapons: [
-      { name: "AIM-120 AMRAAM", type: "Medium-Range AAM", damage: 8500, penetration: 420 },
-      { name: "AIM-9X Sidewinder", type: "Short-Range AAM", damage: 7200, penetration: 380 },
-      { name: "AGM-88 HARM", type: "Anti-Radiation Missile", damage: 11500, penetration: 580 },
-      { name: "M61A1 20mm", type: "Autocannon", damage: 280, penetration: 48, rateOfFire: "6000 rpm" },
+       { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
+    { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "GBU-39", type: "Guided Bomb", damage: 14700, penetration: 120, reload: 28 },
+    { name: "GBU-31", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
+    { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
+    { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 },
+    { name: "AGM-84H/K", type: "Anti-Ship Missile", damage: 18900, penetration: 310, reload: 35 }
+
     ],
     modules: {
       engine: [
@@ -919,10 +979,16 @@ const VEHICLES = [
     description: "Next-generation interceptor with hypersonic capabilities and advanced radar systems.",
     stats: { health: 23800, speed: 1800, afterburnerSpeed: 4320, agility: 75 },
     weapons: [
-      { name: "R-37M", type: "Long-Range AAM", damage: 11500, penetration: 520 },
-      { name: "R-77M", type: "Medium-Range AAM", damage: 9200, penetration: 460 },
-      { name: "Kh-47M2 Kinzhal", type: "Hypersonic Missile", damage: 22000, penetration: 1400 },
-      { name: "GSh-6-30 30mm", type: "Autocannon", damage: 420, penetration: 75, rateOfFire: "6000 rpm" },
+      { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
+      { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
+      { "name": "C-13DF", "type": "Autocannon", "damage": 9200, "penetration": 160, "reload": 30 },
+      { "name": "KAB-500L", "type": "Guided Bomb", "damage": 17300, "penetration": 310, "reload": 40 },
+      { "name": "Kh-MD-E", "type": "Air-to-Ground Missile", "damage": 12400, "penetration": 250, "reload": 20 },
+      { "name": "R-93M", "type": "Short-Range AAM", "damage": 5000, "penetration": 65, "reload": 15 },
+      { "name": "9K38", "type": "Surface-to-Air Missile", "damage": 4100, "penetration": 30, "reload": 15 },
+      { "name": "RVV-SD", "type": "Medium-Range AAM", "damage": 6500, "penetration": 65, "reload": 20 },
+      { "name": "Kh-23M", "type": "Air-to-Ground Missile", "damage": 12900, "penetration": 800, "reload": 38 }
+
     ],
     modules: {
       engine: [
@@ -1073,10 +1139,16 @@ const VEHICLES = [
     description: "Fifth-generation stealth fighter with advanced maneuverability and sensor fusion.",
     stats: { health: 23200, speed: 1100, afterburnerSpeed: 2100, agility: 90 },
     weapons: [
-      { name: "R-74M2", type: "Short-Range AAM", damage: 7800, penetration: 410 },
-      { name: "R-77-1", type: "Medium-Range AAM", damage: 8900, penetration: 450 },
-      { name: "R-77M", type: "Long-Range AAM", damage: 9500, penetration: 480 },
-      { name: "GSh-30-1 30mm", type: "Autocannon", damage: 380, penetration: 65, rateOfFire: "1800 rpm" },
+     { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
+      { "name": "FAB-250-M62", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
+      { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
+      { "name": "KAB500KR", "type": "Guided Bomb", "damage": 17800, "penetration": 320, "reload": 40 },
+      { "name": "Kh-MD-E", "type": "Air-to-Ground Missile", "damage": 12400, "penetration": 250, "reload": 20 },
+      { "name": "RVV-MD", "type": "Medium-Range AAM", "damage": 4800, "penetration": 65, "reload": 15 },
+      { "name": "Kh-38MLE", "type": "Air-to-Ground Missile", "damage": 17800, "penetration": 400, "reload": 40 },
+      { "name": "R-77", "type": "Medium-Range AAM", "damage": 8100, "penetration": 55, "reload": 20 },
+      { "name": "Kh-23M", "type": "Air-to-Ground Missile", "damage": 12900, "penetration": 800, "reload": 38 }
+
     ],
     modules: {
       engine: [
@@ -2405,11 +2477,11 @@ const VEHICLES = [
   description: "Twin-engine carrier-based multirole fighter with excellent versatility for both air-to-air and air-to-ground combat.",
   stats: { health: 19800, speed: 770, afterburnerSpeed: 1985, agility: 46 },
   weapons: [
-    { name: "M61A2 Vulcan 20mm", type: "Autocannon", damage: 320, penetration: 50, rateOfFire: "6000 rpm" },
-    { name: "AIM-9X Sidewinder", type: "Short-Range AAM", damage: 7600, penetration: 380 },
-    { name: "AIM-120D AMRAAM", type: "Long-Range AAM", damage: 9100, penetration: 460 },
-    { name: "AGM-84 Harpoon", type: "Anti-Ship Missile", damage: 12500, penetration: 600 },
-    { name: "GBU-31 JDAM", type: "Guided Bomb", damage: 13200, penetration: 650 }
+    { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
+      { "name": "GBU-12", "type": "Guided Bomb", "damage": 18590, "penetration": 120, "reload": 30 },
+      { "name": "AGM-65", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
+      { "name": "AIM-132", "type": "Short-Range Air-to-Air Missile", "damage": 5200, "penetration": 65, "reload": 15 },
+      { "name": "AIM-120", "type": "Beyond Visual Range Air-to-Air Missile", "damage": 11300, "penetration": 60, "reload": 20 }
   ],
   modules: {
     engine: [
@@ -2438,11 +2510,13 @@ const VEHICLES = [
   description: "Chinese twin-seat multirole fighter derived from Su-30, capable of carrying heavy weapons payload.",
   stats: { health: 21000, speed: 780, afterburnerSpeed: 2050, agility: 48 },
   weapons: [
-    { name: "PL-10", type: "Short-Range AAM", damage: 7800, penetration: 380 },
-    { name: "PL-15", type: "Long-Range AAM", damage: 9800, penetration: 470 },
-    { name: "KD-88", type: "Air-to-Surface Missile", damage: 12200, penetration: 580 },
-    { name: "LS-6 Glide Bomb", type: "Guided Bomb", damage: 11800, penetration: 500 },
-    { name: "30mm Cannon", type: "Autocannon", damage: 350, penetration: 60, rateOfFire: "1500 rpm" }
+    { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
+      { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
+      { "name": "KD-88", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
+      { "name": "PL-10", "type": "Short-Range Air-to-Air Missile", "damage": 7400, "penetration": 60, "reload": 20 },
+      { "name": "PL-15", "type": "Beyond Visual Range Air-to-Air Missile", "damage": 7800, "penetration": 70, "reload": 30 },
+      { "name": "AKF-98A", "type": "Air-to-Ground Missile", "damage": 20500, "penetration": 410, "reload": 40 }
+
   ],
   modules: {
     engine: [
@@ -2471,11 +2545,15 @@ const VEHICLES = [
   description: "Experimental Russian fighter with thrust-vectoring for extreme maneuverability.",
   stats: { health: 20500, speed: 765, afterburnerSpeed: 2020, agility: 82 },
   weapons: [
-    { name: "R-73", type: "Short-Range AAM", damage: 7200, penetration: 360 },
-    { name: "R-77", type: "Medium-Range AAM", damage: 8700, penetration: 420 },
-    { name: "Kh-29T", type: "Air-to-Ground Missile", damage: 11600, penetration: 540 },
-    { name: "KAB-500Kr", type: "Guided Bomb", damage: 12000, penetration: 580 },
-    { name: "30mm GSh-301", type: "Autocannon", damage: 380, penetration: 65, rateOfFire: "1500 rpm" }
+    { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
+      { "name": "FAB-250", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
+      { "name": "Kh-MD-E", "type": "Air-to-Ground Missile", "damage": 12400, "penetration": 250, "reload": 20 },
+      { "name": "R-73", "type": "Short-Range Air-to-Air Missile", "damage": 4800, "penetration": 56, "reload": 15 },
+      { "name": "Kh-38ME", "type": "Air-to-Ground Missile", "damage": 17300, "penetration": 230, "reload": 40 },
+      { "name": "R-27", "type": "Medium-Range Air-to-Air Missile", "damage": 8100, "penetration": 80, "reload": 20 },
+      { "name": "Kh-59M", "type": "Air-to-Ground Missile", "damage": 18400, "penetration": 280, "reload": 50 },
+      { "name": "Kh-31", "type": "Air-to-Ground Missile", "damage": 14900, "penetration": 130, "reload": 46 }
+
   ],
   modules: {
     engine: [
@@ -2504,10 +2582,17 @@ const VEHICLES = [
   description: "Twin-seat variant of the Su-25, specialized for ground attack with heavy armor.",
   stats: { health: 24500, speed: 720, afterburnerSpeed: 1680, agility: 28 },
   weapons: [
-    { name: "30mm GSh-30-2 Cannon", type: "Autocannon", damage: 400, penetration: 70, rateOfFire: "3000 rpm" },
-    { name: "Kh-25ML", type: "Air-to-Ground Missile", damage: 9500, penetration: 480 },
-    { name: "S-25 Rocket", type: "Rocket Pod", damage: 8800, penetration: 440 },
-    { name: "FAB-500", type: "Unguided Bomb", damage: 10000, penetration: 500 }
+    { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
+      { "name": "FAB-250", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
+      { "name": "SPPU-22-1", "type": "Autocannon", "damage": 400, "penetration": 71, "reload": 25 },
+      { "name": "B-13L", "type": "Autocannon", "damage": 9200, "penetration": 160, "reload": 40 },
+      { "name": "KAB500KR", "type": "Guided Bomb", "damage": 17800, "penetration": 320, "reload": 40 },
+      { "name": "R-60", "type": "Short-Range Air-to-Air Missile", "damage": 4600, "penetration": 36, "reload": 10 },
+      { "name": "R-73", "type": "Short-Range Air-to-Air Missile", "damage": 4800, "penetration": 56, "reload": 15 },
+      { "name": "Kh-25MLE", "type": "Air-to-Ground Missile", "damage": 16000, "penetration": 160, "reload": 35 },
+      { "name": "9K121 Vikhr", "type": "Anti-Tank Guided Missile", "damage": 7800, "penetration": 1000, "reload": 30 },
+      { "name": "Kh-29T", "type": "Air-to-Ground Missile", "damage": 17800, "penetration": 280, "reload": 38 }
+
   ],
   modules: {
     armor: [
@@ -2531,10 +2616,16 @@ const VEHICLES = [
   description: "Upgraded variant of Su-25 with improved avionics and guided weapons.",
   stats: { health: 25200, speed: 730, afterburnerSpeed: 1700, agility: 30 },
   weapons: [
-    { name: "30mm GSh-30-2 Cannon", type: "Autocannon", damage: 420, penetration: 70, rateOfFire: "3000 rpm" },
-    { name: "Kh-29T", type: "Air-to-Ground Missile", damage: 11600, penetration: 540 },
-    { name: "Kh-31P", type: "Anti-Radiation Missile", damage: 12100, penetration: 600 },
-    { name: "FAB-500", type: "Unguided Bomb", damage: 10000, penetration: 500 }
+    { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
+      { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
+      { "name": "S-24", "type": "Unguided Rocket", "damage": 14600, "penetration": 180, "reload": 15 },
+      { "name": "B-13L", "type": "Autocannon", "damage": 9200, "penetration": 160, "reload": 40 },
+      { "name": "KAB-500L", "type": "Guided Bomb", "damage": 17300, "penetration": 310, "reload": 40 },
+      { "name": "R-73", "type": "Short-Range Air-to-Air Missile", "damage": 4800, "penetration": 56, "reload": 15 },
+      { "name": "RVV-MD", "type": "Medium-Range Air-to-Air Missile", "damage": 4800, "penetration": 65, "reload": 15 },
+      { "name": "R-27", "type": "Medium-Range Air-to-Air Missile", "damage": 8100, "penetration": 80, "reload": 20 },
+      { "name": "Kh-25MLE", "type": "Air-to-Ground Missile", "damage": 16000, "penetration": 160, "reload": 35 },
+      { "name": "Kh-38ME", "type": "Air-to-Ground Missile", "damage": 17300, "penetration": 230, "reload": 40 }
   ],
   modules: {
     engine: [
@@ -2558,10 +2649,16 @@ const VEHICLES = [
   description: "Chinese carrier-based fighter based on Su-33 design, versatile in both air and ground roles.",
   stats: { health: 20100, speed: 765, afterburnerSpeed: 2000, agility: 45 },
   weapons: [
-    { name: "PL-8", type: "Short-Range AAM", damage: 7300, penetration: 370 },
-    { name: "PL-12", type: "Medium-Range AAM", damage: 8900, penetration: 440 },
-    { name: "YJ-83K", type: "Anti-Ship Missile", damage: 12000, penetration: 580 },
-    { name: "LS-6 Glide Bomb", type: "Guided Bomb", damage: 11500, penetration: 520 }
+    { "name": "Type 1", "type": "Guided Bomb", "damage": 15100, "penetration": 120, "reload": 32 },
+      { "name": "Type 90 x2", "type": "Air-to-Ground Missile", "damage": 6400, "penetration": 320, "reload": 40 },
+      { "name": "Type 3", "type": "Guided Bomb", "damage": 16000, "penetration": 210, "reload": 35 },
+      { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
+      { "name": "KD-88", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
+      { "name": "PL-7", "type": "Short-Range Air-to-Air Missile", "damage": 6500, "penetration": 50, "reload": 20 },
+      { "name": "PL-10", "type": "Short-Range Air-to-Air Missile", "damage": 7400, "penetration": 60, "reload": 20 },
+      { "name": "PL-12", "type": "Medium-Range Air-to-Air Missile", "damage": 7600, "penetration": 56, "reload": 30 },
+      { "name": "PL-15", "type": "Beyond Visual Range Air-to-Air Missile", "damage": 7800, "penetration": 70, "reload": 30 }
+
   ],
   modules: {
     engine: [
@@ -2585,11 +2682,15 @@ const VEHICLES = [
   description: "Advanced MiG fighter with modern avionics, thrust-vectoring, and strong multirole performance.",
   stats: { health: 20200, speed: 775, afterburnerSpeed: 2060, agility: 52 },
   weapons: [
-    { name: "R-73", type: "Short-Range AAM", damage: 7200, penetration: 360 },
-    { name: "R-77-1", type: "Medium-Range AAM", damage: 9100, penetration: 450 },
-    { name: "Kh-31A", type: "Anti-Ship Missile", damage: 11800, penetration: 560 },
-    { name: "Kh-29T", type: "Air-to-Ground Missile", damage: 11600, penetration: 540 },
-    { name: "30mm GSh-30-1", type: "Autocannon", damage: 380, penetration: 65, rateOfFire: "1500 rpm" }
+    { name: "KAB-250", type: "Guided Bomb", damage: 14900, penetration: 130, reload: 25 },
+    { name: "FAB-500", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
+    { name: "KAB-500L", type: "Guided Bomb", damage: 17300, penetration: 310, reload: 40 },
+    { name: "R-73", type: "Short-Range AAM", damage: 4800, penetration: 56, reload: 15 },
+    { name: "Kh-38ME", type: "Air-to-Surface Missile", damage: 17300, penetration: 230, reload: 40 },
+    { name: "R-40TD", type: "Long-Range AAM", damage: 7800, penetration: 70, reload: 30 },
+    { name: "Kh-59M", type: "Air-to-Surface Missile", damage: 18400, penetration: 280, reload: 50 },
+    { name: "R-37", type: "Long-Range AAM", damage: 8400, penetration: 80, reload: 30 }
+
   ],
   modules: {
     engine: [
@@ -2645,11 +2746,14 @@ const VEHICLES = [
   description: "Latest advanced variant of the F-15 with modern avionics and expanded weapons payload.",
   stats: { health: 23000, speed: 800, afterburnerSpeed: 2100, agility: 58 },
   weapons: [
-    { name: "AIM-9X Sidewinder", type: "Short-Range AAM", damage: 7600, penetration: 380 },
-    { name: "AIM-120D AMRAAM", type: "Long-Range AAM", damage: 9100, penetration: 460 },
-    { name: "AGM-158 JASSM", type: "Cruise Missile", damage: 14500, penetration: 700 },
-    { name: "GBU-31 JDAM", type: "Guided Bomb", damage: 13200, penetration: 650 },
-    { name: "M61A1 Vulcan 20mm", type: "Autocannon", damage: 320, penetration: 50, rateOfFire: "6000 rpm" }
+    { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
+    { name: "GBU-31", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
+    { name: "GBU-32", type: "Guided Bomb", damage: 15700, penetration: 200, reload: 35 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+    { name: "AGM-84H/K", type: "Anti-Ship Missile", damage: 18900, penetration: 310, reload: 35 },
+    { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 }
+
   ],
   modules: {
     engine: [
@@ -2714,10 +2818,17 @@ const VEHICLES = [
   description: "Multirole fighter developed from the F-16, optimized for anti-ship and air-to-air roles.",
   stats: { health: 19200, speed: 750, afterburnerSpeed: 1900, agility: 80 },
   weapons: [
-    { name: "AAM-4B", type: "Medium-Range AAM", damage: 8500, penetration: 460 },
-    { name: "ASM-2", type: "Anti-Ship Missile", damage: 14000, penetration: 720 },
-    { name: "Mk82 Bomb", type: "Unguided Bomb", damage: 5000, penetration: 250 },
-    { name: "20mm JM61A1 Vulcan", type: "Autocannon", damage: 320, penetration: 60, rateOfFire: "6000 rpm" }
+    { "name": "GCS-1", "type": "Autocannon", "damage": 14300, "penetration": 120, "reload": 25 },
+      { "name": "JLAU-3/A", "type": "Rocket Pod", "damage": 5200, "penetration": 128, "reload": 20 },
+      { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
+      { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
+      { "name": "GBU-31", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
+      { "name": "AAM-3", "type": "Short-Range AAM", "damage": 5900, "penetration": 45, "reload": 15 },
+      { "name": "AAM-5", "type": "Short-Range AAM", "damage": 6100, "penetration": 60, "reload": 20 },
+      { "name": "AAM-4", "type": "BVR AAM", "damage": 7500, "penetration": 75, "reload": 30 },
+      { "name": "AAM-6", "type": "BVR AAM", "damage": 8100, "penetration": 85, "reload": 35 },
+      { "name": "ASM-3", "type": "Anti-Ship Missile", "damage": 19400, "penetration": 240, "reload": 38 }
+
   ],
   modules: {
     engine: [
@@ -2742,10 +2853,16 @@ const VEHICLES = [
     description: "Close air support aircraft designed around the GAU-8 Avenger cannon.",
     stats: { health: 28500, speed: 560, afterburnerSpeed: 706, agility: 55 },
     weapons: [
-      { name: "GAU-8/A Avenger", type: "Autocannon", damage: 850, penetration: 120, rateOfFire: "3900 rpm" },
-      { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 14500, penetration: 750 },
-      { name: "Hydra 70 Rockets", type: "Rocket Pod", damage: 6800, penetration: 320 },
-      { name: "GBU-12 Paveway", type: "Guided Bomb", damage: 18200, penetration: 900 },
+     { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "MK-84", type: "General-Purpose Bomb", damage: 19400, penetration: 360, reload: 40 },
+    { name: "LAU-10 x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
+    { name: "GBU-32", type: "Guided Bomb", damage: 15700, penetration: 200, reload: 35 },
+    { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-132", type: "Short-Range AAM", damage: 5200, penetration: 65, reload: 15 },
+    { name: "AGM-12B", type: "Air-to-Surface Missile", damage: 11500, penetration: 600, reload: 41 },
+    { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 }
+
     ],
     modules: {
       engine: [
@@ -2774,10 +2891,14 @@ const VEHICLES = [
   description: "Experimental stealth fighter designed for air superiority, rival to the F-22.",
   stats: { health: 23800, speed: 770, afterburnerSpeed: 2200, agility: 84 },
   weapons: [
-    { name: "AIM-120D AMRAAM", type: "Medium-Range AAM", damage: 9000, penetration: 480 },
-    { name: "AIM-9X Sidewinder", type: "Short-Range AAM", damage: 6200, penetration: 330 },
-    { name: "GBU-32 JDAM", type: "Guided Bomb", damage: 12800, penetration: 620 },
-    { name: "M61A2 Vulcan 20mm", type: "Autocannon", damage: 300, penetration: 55, rateOfFire: "6000 rpm" }
+    { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
+      { "name": "GBU-39", "type": "Guided Bomb", "damage": 14700, "penetration": 120, "reload": 28 },
+      { "name": "GBU-31", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
+      { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
+      { "name": "AGM-65", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
+      { "name": "AIM-132", "type": "Short-Range AAM", "damage": 5200, "penetration": 65, "reload": 15 },
+      { "name": "AIM-120", "type": "BVR AAM", "damage": 11300, "penetration": 60, "reload": 20 }
+
   ],
   modules: {
     engine: [
@@ -2803,10 +2924,14 @@ const VEHICLES = [
   description: "Fifth-generation stealth multirole fighter with STOVL capability.",
   stats: { health: 23000, speed: 740, afterburnerSpeed: 2000, agility: 82 },
   weapons: [
-    { name: "AIM-120C AMRAAM", type: "Medium-Range AAM", damage: 8700, penetration: 470 },
-    { name: "AIM-9X Sidewinder", type: "Short-Range AAM", damage: 6200, penetration: 330 },
-    { name: "GBU-31 JDAM", type: "Guided Bomb", damage: 14500, penetration: 720 },
-    { name: "GAU-22/A 25mm", type: "Autocannon", damage: 360, penetration: 70, rateOfFire: "3300 rpm" }
+     { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
+      { "name": "GBU-31", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
+      { "name": "AGM-169", "type": "Air-to-Ground Missile", "damage": 9800, "penetration": 1200, "reload": 30 },
+      { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
+      { "name": "AGM-65", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
+      { "name": "Storm Shadow", "type": "Cruise Missile", "damage": 20000, "penetration": 370, "reload": 40 },
+      { "name": "AIM-120", "type": "BVR AAM", "damage": 11300, "penetration": 60, "reload": 20 }
+
   ],
   modules: {
     engine: [
@@ -2918,10 +3043,16 @@ const VEHICLES = [
   description: "Light stealth fighter designed for export and versatile combat missions.",
   stats: { health: 22000, speed: 755, afterburnerSpeed: 2100, agility: 85 },
   weapons: [
-    { name: "KAB-250", damage: 14900, penetration: 130, reload: 25 },
-    { name: "R-74M2", type: "Short-Range AAM", damage: 6300, penetration: 340 },
-    { name: "KAB-500S", type: "Guided Bomb", damage: 12500, penetration: 640 },
-    { name: "30mm Cannon GSh-301", type: "Autocannon", damage: 380, penetration: 65, rateOfFire: "1500 rpm" }
+    
+    { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
+      { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
+      { "name": "UPK-23-250", "type": "Autocannon", "damage": 400, "penetration": 71, "reload": 25 },
+      { "name": "KAB500KR", "type": "Guided Bomb", "damage": 17800, "penetration": 320, "reload": 40 },
+      { "name": "Kh-MD-E", "type": "Air-to-Ground Missile", "damage": 12400, "penetration": 250, "reload": 20 },
+      { "name": "RVV-MD", "type": "Medium-Range AAM", "damage": 4800, "penetration": 65, "reload": 15 },
+      { "name": "RVV-SD", "type": "Medium-Range AAM", "damage": 6500, "penetration": 65, "reload": 20 },
+      { "name": "Kh-23M", "type": "Air-to-Ground Missile", "damage": 12900, "penetration": 800, "reload": 38 }
+
   ],
   modules: {
     engine: [
@@ -4358,7 +4489,8 @@ const MwtVehicleStats = () => {
 
   const getVehicleDetailedInfo = (vehicle: any) => {
     const weaponsList = vehicle.weapons
-      .map((weapon: any) => `${weapon.name}: ${weapon.damage} DMG, ${weapon.penetration} PEN, ${weapon.reload}`REL)
+      .map((weapon: any) => weapon.name + ": " + weapon.damage + " DMG, " + weapon.penetration + " PEN, " + weapon.reload + " REL")
+
       .join("\n")
 
     const modulesList = Object.entries(vehicle.modules || {})
