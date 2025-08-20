@@ -1573,7 +1573,7 @@ const VEHICLES = [
     faction: "Turkish",
     tier: "IV",
     description: "Turkey’s modern main battle tank, emphasizing firepower, protection, mobility, and advanced technology.",
-    stats: { health: 19500, speed: 1400, afterburnerSpeed: 2100, agility: 95 },
+    stats: { health: 19500, speed: 1400,armor: "1200mm", agility: 95 },
     weapons: [
       { name: "DM63A1 APFSDS", type: "Main Gun", damage: 18500, penetration: 950 },
       { name: "DM11 HEI", type: "Main Gun", damage: 19200, penetration: 1250 },
