@@ -5047,7 +5047,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               key={vehicle.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 transition-all duration-300
+              className={`group relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 transition-all duration-300
     ${
       vehicle.tier === "II"
         ? "hover:border-green-500 hover:shadow-[0_0_12px_1px_rgba(34,197,94,0.6)]"
@@ -5058,20 +5058,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         : ""
     }`}
 >
-  {/* Top-only glow for Exclusive / Market */}
+  {/* Full border glow for Exclusive / Market (softer) */}
   {(isExclusiveVehicle(vehicle.name) || isMarketVehicle(vehicle.name)) && (
     <div
-      className={`absolute top-0 left-0 w-full h-1.5 rounded-t-xl pointer-events-none
+      className={`absolute top-0 left-0 w-full h-full rounded-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300
         ${
           isExclusiveVehicle(vehicle.name)
-            ? "bg-red-500/20 shadow-[0_0_4px_1px_rgba(239,68,68,0.2)]"
-            : "bg-yellow-400/20 shadow-[0_0_4px_1px_rgba(234,179,8,0.2)]"
+            ? "border-4 border-red-500/30 shadow-[0_0_12px_3px_rgba(239,68,68,0.25)]"
+            : "border-4 border-yellow-400/30 shadow-[0_0_12px_3px_rgba(234,179,8,0.25)]"
         }`}
     />
   )}
 
+
               
-            >
+            
             
               <div className="absolute top-0 left-0 w-0 h-0 z-10">
 
