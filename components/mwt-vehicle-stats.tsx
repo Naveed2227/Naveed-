@@ -4867,7 +4867,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         <div className="max-w-7xl mx-auto p-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
                 {"MWT Assistant (Unofficial)\n(Demo)"}
               </h1>
               <p className="text-slate-400 mt-1">    MWT Assistant</p>
@@ -4876,7 +4876,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               <div className="pb-6">
                 <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-400 w-4 h-4" />
                     <input
                       type="text"
                       placeholder="Search vehicles..."
@@ -5047,9 +5047,35 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               key={vehicle.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 hover:border-blue-600/100 transition-all duration-300 hover:shadow-lg hover:shadow-red-600/99"
+              className={`relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 transition-all duration-300
+    ${
+      vehicle.tier === "II"
+        ? "hover:border-green-500 hover:shadow-[0_0_12px_1px_rgba(34,197,94,0.6)]"
+        : vehicle.tier === "III"
+        ? "hover:border-blue-500 hover:shadow-[0_0_12px_1px_rgba(29,78,216,0.6)]"
+        : vehicle.tier === "IV"
+        ? "hover:border-purple-500 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
+        : ""
+    }`}
+>
+  {/* Top-only glow for Exclusive / Market */}
+  {(isExclusiveVehicle(vehicle.name) || isMarketVehicle(vehicle.name)) && (
+    <div
+      className={`absolute top-0 left-0 w-full h-2 rounded-t-xl pointer-events-none
+        ${
+          isExclusiveVehicle(vehicle.name)
+            ? "bg-red-500/30 shadow-[0_0_6px_2px_rgba(239,68,68,0.3)]"
+            : "bg-yellow-400/30 shadow-[0_0_6px_2px_rgba(234,179,8,0.3)]"
+        }`}
+    />
+  )}
+
+  {/* ...rest of your card content */}
+              
             >
+            
               <div className="absolute top-0 left-0 w-0 h-0 z-10">
+
                 <div
                   className={`w-0 h-0 border-r-[40px] border-t-[40px] border-r-transparent text-fuchsia-800 ${
                     vehicle.tier === "II"
