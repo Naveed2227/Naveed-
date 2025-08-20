@@ -15,11 +15,10 @@ const VEHICLES = [
     image: "/images/su57m.png",
     stats: { health: 24500, speed: 762, afterburnerSpeed: 2100, agility: 85 },
     weapons: [
-      { name: "Kh-38MLE", type: "Air-to-Ground Missile", damage: 9800, penetration: 380 },
+      { name: "Kh-38MLE", type: "Air-to-Ground Missile", damage: 9800, penetration: 380, reload: 38 },
       { name: "Kh-47M2 Kinzhal", type: "Hypersonic Missile", damage: 18500, penetration: 1200 },
       { name: "KAB-250", type: "Guided Bomb", damage: 12500, penetration: 600 },
-      { name: "GROM-E1", type: "Glide Bomb", damage: 14200, penetration: 750 },
-      { name: "Kh-69", type: "Cruise Missile", damage: 11800, penetration: 520 },
+   
       { name: "RVV-SD", type: "Medium-Range AAM", damage: 8200, penetration: 450 },
       { name: "9A1-4071K 30mm", type: "Autocannon", damage: 380, penetration: 65, rateOfFire: "1800 rpm" },
     ],
@@ -462,9 +461,67 @@ const VEHICLES = [
     description: "Next-generation supersonic strategic bomber with hypersonic missile capability.",
     stats: { health: 15500, speed: 186, afterburnerSpeed: 209, agility: 50 },
     weapons: [
-      { name: "Kh-47M2 Kinzhal", type: "Hypersonic Missile", damage: 25000, penetration: 1500 },
-      { name: "P-800 Onix", type: "Cruise Missile", damage: 18500, penetration: 950 },
-      { name: "Kh-38MKE", type: "Air-to-Ground Missile", damage: 12800, penetration: 680 },
+      {
+        "name": "KAB-250",
+        "damage": 14900,
+        "penetration": 130,
+        "reload": 25
+      },
+      {
+        "name": "FAB-250-M62",
+        "damage": 15100,
+        "penetration": 130,
+        "reload": 30
+      },
+      {
+        "name": "GROM-E1",
+        "damage": 16200,
+        "penetration": 170,
+        "reload": 36
+      },
+      {
+        "name": "KAB500KR",
+        "damage": 17800,
+        "penetration": 320,
+        "reload": 40
+      },
+      {
+        "name": "Kh-MD-E",
+        "damage": 12400,
+        "penetration": 250,
+        "reload": 20
+      },
+      {
+        "name": "R-93M",
+        "damage": 5000,
+        "penetration": 65,
+        "reload": 15
+      },
+      {
+        "name": "Kh-25MLE",
+        "damage": 16000,
+        "penetration": 160,
+        "reload": 35
+      },
+      {
+        "name": "R-37",
+        "damage": 8400,
+        "penetration": 80,
+        "reload": 30
+      },
+      {
+        "name": "Kh-38ME",
+        "damage": 17300,
+        "penetration": 230,
+        "reload": 40
+      },
+      {
+        "name": "Kh-69",
+        "damage": 18400,
+        "penetration": 230,
+        "reload": 40
+      }
+
     ],
     modules: {
       engine: [
@@ -2775,10 +2832,67 @@ const VEHICLES = [
   description: "Advanced stealth air superiority fighter concept with heavy armament.",
   stats: { health: 24000, speed: 760, afterburnerSpeed: 2150, agility: 83 },
   weapons: [
-    { name: "PL-15", type: "Long-Range AAM", damage: 9500, penetration: 500 },
-    { name: "PL-10", type: "Short-Range AAM", damage: 6400, penetration: 340 },
-    { name: "LS-6 Guided Bomb", type: "Guided Bomb", damage: 13000, penetration: 680 },
-    { name: "23mm Cannon", type: "Autocannon", damage: 340, penetration: 65, rateOfFire: "1800 rpm" }
+    {
+        "name": "FT-3",
+        "damage": 15800,
+        "penetration": 210,
+        "reload": 34
+      },
+      {
+        "name": "LS-6/250",
+        "damage": 17300,
+        "penetration": 300,
+        "reload": 40
+      },
+      {
+        "name": "TL-20",
+        "damage": 16120,
+        "penetration": 143,
+        "reload": 25
+      },
+      {
+        "name": "Type 3",
+        "damage": 16000,
+        "penetration": 210,
+        "reload": 35
+      },
+      {
+        "name": "YJ-1000",
+        "damage": 21600,
+        "penetration": 500,
+        "reload": 40
+      },
+      {
+        "name": "PL-10",
+        "damage": 7400,
+        "penetration": 60,
+        "reload": 20
+      },
+      {
+        "name": "PL-12",
+        "damage": 7600,
+        "penetration": 56,
+        "reload": 30
+      },
+      {
+        "name": "PL-15",
+        "damage": 7800,
+        "penetration": 70,
+        "reload": 30
+      },
+      {
+        "name": "CM-102A",
+        "damage": 14600,
+        "penetration": 110,
+        "reload": 40
+      },
+      {
+        "name": "AKF-98A",
+        "damage": 20500,
+        "penetration": 410,
+        "reload": 40
+      }
+
   ],
   modules: {
     engine: [
@@ -2804,7 +2918,7 @@ const VEHICLES = [
   description: "Light stealth fighter designed for export and versatile combat missions.",
   stats: { health: 22000, speed: 755, afterburnerSpeed: 2100, agility: 85 },
   weapons: [
-    { name: "R-77M", type: "Medium-Range AAM", damage: 8800, penetration: 470 },
+    { name: "KAB-250", damage: 14900, penetration: 130, reload: 25 },
     { name: "R-74M2", type: "Short-Range AAM", damage: 6300, penetration: 340 },
     { name: "KAB-500S", type: "Guided Bomb", damage: 12500, penetration: 640 },
     { name: "30mm Cannon GSh-301", type: "Autocannon", damage: 380, penetration: 65, rateOfFire: "1500 rpm" }
@@ -3921,7 +4035,7 @@ const VEHICLES = [
     "type": "MLRS",
     "faction": "Chinese",
     "tier": "III",
-    "description": "Chinese wheeled MLRS with 300mm rockets for long-range bombardment.",
+    "description": "Chinese third-generation wheeled multiple rocket launcher system with long-range precision firepower.",
     "stats": { "health": 28000, "speed": 65, "armor": 25, "agility": 25 },
     "weapons": [
       { "name": "300mm Rocket - HE", "type": "Rocket", "damage": 2000, "penetration": 50, "reload": 15 },
@@ -4031,6 +4145,31 @@ const getRoleIcon = (role: string | null) => {
   }
 }
 
+
+const getTRoleIcon = (role: string | null) => {
+  switch (role) {
+    case "MBT":
+      return "/MBT.png"
+    case "Light Tank":
+      return "/LightTank.png"
+    case "Tank Destroyer":
+      return "/TankDestroyer.png"
+    case "MLRS":
+      return "/MLRS.png"
+    case "Missile Carrier":
+      return "/MissileCarrier.png"
+    case "SPA":
+      return "/SPA.png"
+    case "AA":
+      return "/AA.png"
+    default:
+      return null
+  }
+}
+
+
+
+
 const getFlagImage = (faction: string): string => {
   const flags: { [key: string]: string } = {
     Russian: "/russia-flag.png",
@@ -4106,7 +4245,7 @@ const getTierColor = (tier: string) => {
     case "III":
       return "bg-blue-700"
     case "IV":
-      return "bg-purple-500"
+      return "bg-purple-100"
     default:
       return "bg-gray-500"
   }
@@ -4219,7 +4358,7 @@ const MwtVehicleStats = () => {
 
   const getVehicleDetailedInfo = (vehicle: any) => {
     const weaponsList = vehicle.weapons
-      .map((weapon: any) => `${weapon.name}: ${weapon.damage} DMG, ${weapon.penetration} PEN`)
+      .map((weapon: any) => `${weapon.name}: ${weapon.damage} DMG, ${weapon.penetration} PEN, ${weapon.reload}`REL)
       .join("\n")
 
     const modulesList = Object.entries(vehicle.modules || {})
@@ -4770,7 +4909,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             >
               <div className="absolute top-0 left-0 w-0 h-0 z-10">
                 <div
-                  className={`w-0 h-0 border-r-[40px] border-t-[40px] border-r-transparent ${
+                  className={`w-0 h-0 border-r-[40px] border-t-[40px] border-r-transparent text-fuchsia-800 ${
                     vehicle.tier === "II"
                       ? "border-t-green-500"
                       : vehicle.tier === "III"
@@ -4790,9 +4929,18 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
               {isExclusiveVehicle(vehicle.name) && (
                 <div className="absolute top-0 left-0 w-0 h-0 z-10">
-                  <div className="h-0 border-b-transparent border-l-red-500 ml-0 w-[0-] w-[aut-] w-[auto-] w-[auto-10] w-[auto-10px] w-[au-10px] w-[-10px] border-r-0 text-transparent border-l-[25px] border-b-[25px]" />
+                  <div className="h-0 border-b-transparent border-l-red-500 ml-0 w-[0-] w-[aut-] w-[auto-] w-[auto-10] w-[auto-10px] w-[au-10px] w-[-10px] border-r-0 border-b-[20px] border-l-[20px] text-rose-500 opacity-100" />
                 </div>
               )}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4822,6 +4970,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <h3 className="text-xl font-bold text-white">{vehicle.name}</h3>
                 <span className="text-sm text-slate-400 font-semibold">({vehicle.faction})</span>
               </div>
+
+
+
+
 
               <p className="text-slate-300 text-sm mb-4 leading-relaxed">{vehicle.description}</p>
 
@@ -4970,7 +5122,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   key={number}
                   onClick={() => setCurrentPage(number)}
                   className={`px-3 py-2 rounded transition-colors ${
-                    currentPage === number ? "bg-cyan-600 text-white" : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                    currentPage === number ? "bg-cyan-700 text-white" : "bg-slate-700 text-slate-300 hover:bg-slate-600"
                   }`}
                 >
                   {number}
@@ -5067,7 +5219,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
                 <div className="space-y-4 text-slate-300">
                   <p>
-                    MWT Assistant is a comprehensive database and analysis tool for Modern Warfare Tanks (MWT) vehicles.
+                    MWT Assistant is a comprehensive database and analysis tool for MWT vehicles.
                     This application provides detailed specifications, tactical analysis, and comparison tools for
                     military vehicles.
                   </p>
@@ -5195,7 +5347,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
                 <div>
                   <h4 className="text-white font-semibold">Yx190</h4>
-                  <p className="text-slate-400 text-sm">Supporter</p>
+                  <p className="text-slate-400 text-sm">Supporter, Writer</p>
                 </div>
                 <div>
                   <h4 className="text-white font-semibold">QWE</h4>
