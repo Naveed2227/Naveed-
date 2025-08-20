@@ -5058,19 +5058,18 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         : ""
     }`}
 >
-  {/* Top-only glow for Exclusive / Market */}
+  {/* Top-only glow for Exclusive / Market, only on hover */}
   {(isExclusiveVehicle(vehicle.name) || isMarketVehicle(vehicle.name)) && (
     <div
-      className={`absolute top-0 left-0 w-full h-2 rounded-t-xl pointer-events-none
+      className={`absolute top-0 left-0 w-full h-1.5 rounded-t-xl pointer-events-none opacity-0 hover:opacity-100 transition-opacity duration-300
         ${
           isExclusiveVehicle(vehicle.name)
-            ? "bg-red-500/30 shadow-[0_0_6px_2px_rgba(239,68,68,0.3)]"
-            : "bg-yellow-400/30 shadow-[0_0_6px_2px_rgba(234,179,8,0.3)]"
+            ? "hover:bg-red-500/20 hover:shadow-[0_0_4px_1px_rgba(239,68,68,0.2)]"
+            : "hover:bg-yellow-400/20 hover:shadow-[0_0_4px_1px_rgba(234,179,8,0.2)]"
         }`}
     />
   )}
 
-  {/* ...rest of your card content */}
               
             >
             
