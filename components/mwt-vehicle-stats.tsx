@@ -3428,7 +3428,7 @@ const VEHICLES = [
  },
   {
     "id": 99,
-    "name": "M1A1 Abrams",
+    "name": "M1 Abrams",
     "type": "Main Battle Tank",
     "faction": "American",
     "tier": "III",
@@ -5396,14 +5396,20 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     analysis, and advanced filtering capabilities.
                   </p>
                   <p className="text-sm text-slate-400">
-                    Created by Naveed2227 • Version 1.0 • Built with CSS and TypeScript..........................
-                    
-                    Contact:...............................................................................................................................
-                    Email: naveed.miandad.007@gmail.com ..........................................................................
-                    Discord: naveed27...............................................................................................................
-                    Inst: @naveed_2227.............................................................................................................
+                    Created by Naveed2227 • Version 1.0 • Built with CSS and TypeScript
                   </p>
-                  
+                   <p className="text-sm text-slate-400"> 
+                    Contact:
+                  </p>
+                  <p className="text-sm text-slate-400"> 
+                    Email: naveed.miandad.007@gmail.com
+                  </p>
+                  <p className="text-sm text-slate-400"> 
+                    Discord: naveed27
+                  </p>
+                  <p className="text-sm text-slate-400"> 
+                    Inst: @naveed_2227
+                  </p>
 
                   <div className="mt-6 pt-4 border-t border-slate-600">
                     <h3 className="text-xl font-semibold text-cyan-400 mb-3">Updates</h3>
