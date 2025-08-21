@@ -1551,7 +1551,7 @@ const VEHICLES = [
   },
   {
     id: 45,
-    name: "Leopard 2A7V",
+    name: "Leopard 2A7+",
     type: "Main Battle Tank",
     faction: "German",
     tier: "IV",
