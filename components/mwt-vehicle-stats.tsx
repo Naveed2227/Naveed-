@@ -1527,9 +1527,10 @@ const VEHICLES = [
     description: "An Experimental prototype tank intended as a successor to the Abrams MBT family",
     stats: { health: 37500, speed: 67, armor: "1150mm", agility: 66 },
     weapons: [
-      { name: "M256A1 120mm", type: "Main Gun", damage: 15500, penetration: 830 },
-      { name: "M830A1 HEAT", type: "HEAT Round", damage: 17200, penetration: 1050 },
-      { name: "M2HB 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "550 rpm" },
+      { "name": "120mm XM360 - APFSDS", "type": "APFSDS", "damage": 700, "penetration": 850, "reload": 7 },
+      { "name": "120mm XM360 - HEAT", "type": "HEAT", "damage": 750, "penetration": 450, "reload": 7 },
+      { "name": "120mm XM360 - HE/HEI", "type": "HE/HEI", "damage": 900, "penetration": 50, "reload": 7 },
+      { "name": "M240 / 7.62mm", "type": "Machine Gun", "damage": 45, "penetration": 20, "reload": 0 }
     ],
     modules: {
       engine: [
@@ -3256,6 +3257,7 @@ const VEHICLES = [
   type: "Helicopter",
   faction: "British",
   tier: "III",
+   image: "Super-Lynx-Mk88A.jpg",
   description: "British naval helicopter adapted for anti-ship and light attack roles (small weapon capacity in MWT).",
   stats: { health: 10200, speed: 290, verticalSpeed: 55, agility: 68 },
   weapons: [
@@ -3282,6 +3284,7 @@ const VEHICLES = [
   type: "Helicopter",
   faction: "Chinese",
   tier: "III",
+   image: "Z-9WA-Harbin.jpg",
   description: "Heavily armed Z-9 variant with multi-mount capability (x4 mounts for some missiles in MWT).",
   stats: { health: 19580, speed: 285, verticalSpeed: 60, agility: 60 },
   weapons: [
@@ -3315,6 +3318,7 @@ const VEHICLES = [
   type: "Helicopter",
   faction: "Chinese",
   tier: "III",
+   image: "Z-20-Harbin.jpg",
   description: "Modern multi-role Chinese helicopter with stub wings; carries Chinese ATGMs and rockets in MWT.",
   stats: { health: 18400, speed: 280, verticalSpeed: 60, agility: 55 },
   weapons: [
@@ -3344,6 +3348,7 @@ const VEHICLES = [
   type: "Helicopter",
   faction: "American",
   tier: "III",
+  image: "MH-60L-DAP.jpg",
   description: "Armed MH-60 variant (DAP) with a flexible loadout for rockets, ATGMs and air-to-air missiles.",
   stats: { health: 19200, speed: 285, verticalSpeed: 62, agility: 58 },
   weapons: [
@@ -3376,6 +3381,7 @@ const VEHICLES = [
   type: "Helicopter",
   faction: "Russian",
   tier: "III",
+  image: "Mi-35P-Hind-F.jpg",
   description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
   stats: { health: 26400, speed: 290, verticalSpeed: 60, agility: 60 },
   weapons: [
@@ -3405,6 +3411,7 @@ const VEHICLES = [
   type: "Helicopter",
   faction: "American",
   tier: "III",
+  image: "AH-1Z-Viper.jpg",
   description: "Upgraded Cobra with improved sensors, weapons flexibility and survivability.",
   stats: { health: 21120, speed: 287, verticalSpeed: 65, agility: 60 },
   weapons: [
@@ -3436,6 +3443,7 @@ const VEHICLES = [
     type: "Helicopter",
     faction: "American",
     tier: "IV",
+    image: "SB-1.jpg",
     description: "High-speed American compound helicopter with heavy firepower including Storm Shadow missiles in MWT.",
     stats: { health: 24000, speed: 350, verticalSpeed: 70, agility: 72 },
     weapons: [
@@ -3465,6 +3473,7 @@ const VEHICLES = [
   type: "Helicopter",
   faction: "Russian",
   tier: "III",
+  image: "Ka-50-Black-Shark.jpg",
   description: "Single-seat heavy attack helicopter with heavy ATGMs and cannon armament in MWT.",
   stats: { health: 22000, speed: 295, verticalSpeed: 62, agility: 62 },
   weapons: [
@@ -3494,6 +3503,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "American",
     "tier": "III",
+    image: "M1-Abrams.jpg",
     "description": "M1A1 with M256 120mm smoothbore.",
     "stats": { "health": 49920, "speed": 85.6, "armor": 900, "agility": 40 },
     "weapons": [
@@ -3527,6 +3537,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "American",
     "tier": "III",
+    image: "MBT-70.jpg",
     "description": "Experimental joint American-German tank with 152mm gun/missile launcher.",
     "stats": { "health": 45000, "speed": 90, "armor": 800, "agility": 35 },
     "weapons": [
@@ -3552,38 +3563,7 @@ const VEHICLES = [
         { "name": "Advanced FCS MK3", "bonus": "+26% accuracy" }
       ]
     }
-  },
-  {
-    "id": 101,
-    "name": "M1 Abrams Block III",
-    "type": "Main Battle Tank",
-    "faction": "American",
-    "tier": "III",
-    "description": "Prototype variant with unmanned turret and advanced armor.",
-    "stats": { "health": 50000, "speed": 86, "armor": 950, "agility": 40 },
-    "weapons": [
-      { "name": "120mm XM360 - APFSDS", "type": "APFSDS", "damage": 700, "penetration": 850, "reload": 7 },
-      { "name": "120mm XM360 - HEAT", "type": "HEAT", "damage": 750, "penetration": 450, "reload": 7 },
-      { "name": "120mm XM360 - HE/HEI", "type": "HE/HEI", "damage": 900, "penetration": 50, "reload": 7 },
-      { "name": "M240 / 7.62mm", "type": "Machine Gun", "damage": 45, "penetration": 20, "reload": 0 }
-    ],
-    "modules": {
-      "engine": [
-        { "name": "AGT1500 MK1", "bonus": "+10% speed" },
-        { "name": "AGT1500 MK2", "bonus": "+20% speed" },
-        { "name": "AGT1500 MK3", "bonus": "+30% speed" }
-      ],
-      "armor": [
-        { "name": "Composite MK1", "bonus": "+120mm armor" },
-        { "name": "Composite MK2", "bonus": "+240mm armor" },
-        { "name": "Composite MK3", "bonus": "+360mm armor" }
-      ],
-      "fireControl": [
-        { "name": "Advanced FCS MK1", "bonus": "+10% accuracy" },
-        { "name": "Advanced FCS MK2", "bonus": "+18% accuracy" },
-        { "name": "Advanced FCS MK3", "bonus": "+26% accuracy" }
-      ]
-    }
+
   },
   {
     "id": 102,
@@ -3591,6 +3571,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Polish",
     "tier": "III",
+    image: "PT-91-Twardy.jpg",
     "description": "Polish upgrade of the Soviet T-72M1 with improved armor and fire control.",
     "stats": { "health": 48000, "speed": 80, "armor": 820, "agility": 38 },
     "weapons": [
@@ -3623,6 +3604,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Russian",
     "tier": "III",
+    image: "T-64BV.jpg",
     "description": "Soviet main battle tank with composite armor and 125mm smoothbore gun.",
     "stats": { "health": 46000, "speed": 75, "armor": 800, "agility": 35 },
     "weapons": [
@@ -3656,6 +3638,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Japanese",
     "tier": "III",
+    image: "Type-90.jpg",
     "description": "Japanese main battle tank with advanced armor and 120mm smoothbore gun.",
     "stats": { "health": 48000, "speed": 70, "armor": 720, "agility": 32 },
     "weapons": [
@@ -3687,6 +3670,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Chinese",
     "tier": "III",
+    image: "ZTZ85-II.jpg",
     "description": "Chinese upgrade of Type 85 tank with improved armor and firepower.",
     "stats": { "health": 46000, "speed": 60, "armor": 700, "agility": 30 },
     "weapons": [
@@ -3718,6 +3702,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Chinese",
     "tier": "III",
+    image: "ZTZ96.jpg",
     "description": "Modern Chinese MBT with 125mm smoothbore and composite armor.",
     "stats": { "health": 47000, "speed": 65, "armor": 750, "agility": 31 },
     "weapons": [
@@ -3749,6 +3734,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Chinese",
     "tier": "III",
+    image: "ZTZ-96A-(P).jpg",
     "description": "Improved export variant of ZTZ96 with enhanced protection and gun systems.",
     "stats": { "health": 48000, "speed": 65, "armor": 770, "agility": 32 },
     "weapons": [
@@ -3780,6 +3766,7 @@ const VEHICLES = [
     "type": "SPA",
     "faction": "Chinese",
     "tier": "III",
+    image: "PLZ-07B.jpg",
     "description": "Chinese 155mm self-propelled howitzer with high mobility and firepower.",
     "stats": { "health": 22000, "speed": 55, "armor": 200, "agility": 25 },
     "weapons": [
@@ -3810,6 +3797,7 @@ const VEHICLES = [
     "type": "SPA",
     "faction": "American",
     "tier": "III",
+    image: "M110A2.jpg",
     "description": "American 203mm self-propelled artillery for heavy bombardment.",
     "stats": { "health": 28000, "speed": 50, "armor": 150, "agility": 22 },
     "weapons": [
@@ -3840,6 +3828,7 @@ const VEHICLES = [
     "type": "SPA",
     "faction": "Russian",
     "tier": "III",
+    image: "2S31-Vena.jpg",
     "description": "Russian 120mm mortar howitzer on tracked chassis.",
     "stats": { "health": 24000, "speed": 60, "armor": 180, "agility": 26 },
     "weapons": [
@@ -3870,6 +3859,7 @@ const VEHICLES = [
     "type": "SPA",
     "faction": "American",
     "tier": "III",
+    image: "XM2001-Crusader.jpg",
     "description": "Experimental 155mm self-propelled howitzer with automatic loading.",
     "stats": { "health": 25000, "speed": 60, "armor": 200, "agility": 25 },
     "weapons": [
@@ -3900,6 +3890,7 @@ const VEHICLES = [
     "type": "Anti-Air",
     "faction": "German",
     "tier": "III",
+    image: "Gepard-1A2.jpg",
     "description": "German SPAAG with twin 35mm Oerlikon cannons and radar-guided fire control.",
     "stats": { "health": 24000, "speed": 65, "armor": 35, "agility": 45 },
     "weapons": [
@@ -3927,6 +3918,7 @@ const VEHICLES = [
     "type": "Anti-Air",
     "faction": "SouthKorean",
     "tier": "III",
+    image: "K-31-Cheonma.jpg",
     "description": "Korean SPAAG with 30mm cannons and short-range SAM missiles.",
     "stats": { "health": 22000, "speed": 70, "armor": 30, "agility": 42 },
     "weapons": [
@@ -3954,6 +3946,7 @@ const VEHICLES = [
     "type": "Anti-Air",
     "faction": "Chinese",
     "tier": "III",
+    image: "PGZ-09.jpg",
     "description": "Chinese SPAAG with twin 35mm cannons and short-range missiles.",
     "stats": { "health": 23000, "speed": 60, "armor": 30, "agility": 40 },
     "weapons": [
@@ -3981,6 +3974,7 @@ const VEHICLES = [
     "type": "Anti-Air",
     "faction": "Russian",
     "tier": "III",
+    image: "S6M1-Tunguska-M1.jpg",
     "description": "Russian SPAAG with twin 30mm cannons and 9M311 SAM missiles.",
     "stats": { "health": 25000, "speed": 65, "armor": 35, "agility": 45 },
     "weapons": [
@@ -4009,6 +4003,7 @@ const VEHICLES = [
     "type": "Anti-Air",
     "faction": "Chinese",
     "tier": "III",
+    image: "Type-625E-SHORAD.jpg",
     "description": "Chinese short-range air defense vehicle with 25mm cannons and SAM missiles.",
     "stats": { "health": 20000, "speed": 60, "armor": 25, "agility": 40 },
     "weapons": [
@@ -4037,6 +4032,7 @@ const VEHICLES = [
     "type": "Anti-Air",
     "faction": "American",
     "tier": "III",
+    image: "XM975.jpg",
     "description": "US SPAAG with 20mm Vulcan cannon and Stinger SAM missiles.",
     "stats": { "health": 21000, "speed": 65, "armor": 30, "agility": 42 },
     "weapons": [
@@ -4065,6 +4061,7 @@ const VEHICLES = [
     "type": "Anti-Air",
     "faction": "Chinese",
     "tier": "III",
+    image: "AFT-10.jpg",
     "description": "Chinese SPAAG equipped with 30mm autocannons and HJ-10 anti-air missiles.",
     "stats": { "health": 22000, "speed": 60, "armor": 30, "agility": 41 },
     "weapons": [
@@ -4093,6 +4090,7 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "American",
     "tier": "III",
+    image: "M113-Hellfire.jpg",
     "description": "M113 variant carrying AGM-114 Hellfire missiles for ground and air targets.",
     "stats": { "health": 18000, "speed": 65, "armor": 25, "agility": 40 },
     "weapons": [
@@ -4119,6 +4117,7 @@ const VEHICLES = [
     "type": "MLRS",
     "faction": "Russian",
     "tier": "III",
+    image: "9A52-2-Smerch.jpg",
     "description": "Heavy Russian MLRS with 300mm rockets for long-range bombardment.",
     "stats": { "health": 30000, "speed": 55, "armor": 25, "agility": 20 },
     "weapons": [
@@ -4144,8 +4143,9 @@ const VEHICLES = [
     "id": 121,
     "name": "Type 89 MLRS",
     "type": "MLRS",
-    "faction": "Japanese",
+    "faction": "Chinese",
     "tier": "III",
+    image: "Type-89-MLRS.jpg",
     "description": "Japanese 300mm MLRS for long-range artillery strikes.",
     "stats": { "health": 28000, "speed": 55, "armor": 25, "agility": 20 },
     "weapons": [
@@ -4173,6 +4173,7 @@ const VEHICLES = [
     "type": "Anti-Air",
     "faction": "Chinese",
     "tier": "III",
+    image: "AFT-09.jpg",
     "description": "Chinese SPAAG equipped with 30mm autocannons and short-range missiles.",
     "stats": { "health": 22000, "speed": 60, "armor": 30, "agility": 40 },
     "weapons": [
@@ -4201,6 +4202,7 @@ const VEHICLES = [
     "type": "Tank Destroyer",
     "faction": "American",
     "tier": "III",
+    image: "LAV-600.jpg",
     "description": "Armored wheeled vehicle equipped with short-range missiles and machine guns.",
     "stats": { "health": 18000, "speed": 80, "armor": 20, "agility": 45 },
     "weapons": [
@@ -4228,6 +4230,7 @@ const VEHICLES = [
     "type": "MLRS",
     "faction": "Chinese",
     "tier": "III",
+    image: "WMA30.jpg",
     "description": "Chinese third-generation wheeled multiple rocket launcher system with long-range precision firepower.",
     "stats": { "health": 28000, "speed": 65, "armor": 25, "agility": 25 },
     "weapons": [
