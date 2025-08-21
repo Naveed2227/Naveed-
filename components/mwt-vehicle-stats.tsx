@@ -1972,7 +1972,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "British",
     tier: "IV",
-    image: "FV4034-Challenge-2-TES.jpg",
+    image: "FV4034-Challenger-2-TES.jpg",
     description: "A heavily upgraded British main battle tank with advanced armor for urban warfare.",
     stats: { health: 36200, speed: 56, armor: "1120mm", agility: 62 },
     weapons: [
@@ -2787,34 +2787,7 @@ const VEHICLES = [
     ],
   },
 },
-{
-  id: 78,
-  name: "J-10B",
-  type: "Fighter Jet",
-  faction: "Chinese",
-  tier: "III",
-  image: "J-10B.jpg",
-  description: "Modernized version of the J-10 with updated avionics and thrust-vectoring engine.",
-  stats: { health: 18500, speed: 765, afterburnerSpeed: 1960, agility: 56 },
-  weapons: [
-    { name: "PL-10", type: "Short-Range AAM", damage: 7800, penetration: 380 },
-    { name: "PL-12", type: "Medium-Range AAM", damage: 8900, penetration: 440 },
-    { name: "LS-6", type: "Glide Bomb", damage: 11500, penetration: 520 },
-    { name: "23mm Cannon", type: "Autocannon", damage: 300, penetration: 45, rateOfFire: "1500 rpm" }
-  ],
-  modules: {
-    engine: [
-      { name: "AL-31FN MK1", bonus: "+150 km/h speed" },
-      { name: "AL-31FN MK2", bonus: "+300 km/h speed" },
-      { name: "AL-31FN MK3", bonus: "+450 km/h speed" }
-    ],
-    avionics: [
-      { name: "KLJ-7A MK1", bonus: "+20% detection" },
-      { name: "KLJ-7A MK2", bonus: "+35% detection" },
-      { name: "KLJ-7A MK3", bonus: "+50% detection" }
-    ],
-  },
-},
+
 {
   id: 79,
   name: "F-15EX Eagle II",
