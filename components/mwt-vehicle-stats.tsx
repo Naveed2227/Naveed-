@@ -261,6 +261,7 @@ const VEHICLES = [
     type: "Fighter Jet",
     faction: "Russian",
     tier: "II",
+    image: "MiG-31BM-Foxhound.jpg",
     description: "High-speed interceptor designed for long-range air defense missions.",
     stats: { health: 26500, speed: 1500, afterburnerSpeed: 3000, agility: 65 },
     weapons: [
@@ -298,6 +299,7 @@ const VEHICLES = [
     type: "Fighter Jet",
     faction: "Chinese",
     tier: "II",
+    image: "Q-5A-Nanchang.jpg",
     description: "Ground attack aircraft derived from the MiG-19, optimized for close air support.",
     stats: { health: 16800, speed: 1190, afterburnerSpeed: 1540, agility: 75 },
     weapons: [
@@ -374,6 +376,7 @@ const VEHICLES = [
     type: "Helicopter",
     faction: "American",
     tier: "III",
+    image: "AH-64E-Apache.jpg",
     description: "Advanced attack helicopter with multi-role capabilities and proven combat record.",
     stats: { health: 20500, speed: 293, verticalSpeed: 17, agility: 78 },
     weapons: [
@@ -405,6 +408,7 @@ const VEHICLES = [
     type: "Fighter Jet",
     faction: "Chinese",
     tier: "IV",
+    image: "J-35.jpg",
     description: "Fifth-generation stealth fighter with advanced sensor fusion and networking capabilities.",
     stats: { health: 22600, speed: 762, afterburnerSpeed: 2199, agility: 82 },
     weapons: [
@@ -443,6 +447,7 @@ const VEHICLES = [
     type: "Fighter Jet",
     faction: "American",
     tier: "IV",
+    image: "F-22-Raptor.jpg",
     description: "Air superiority fighter with unmatched stealth and supercruise capabilities.",
     stats: { health: 25100, speed: 770, afterburnerSpeed: 2170, agility: 88 },
     weapons: [
@@ -480,6 +485,7 @@ const VEHICLES = [
     type: "Fighter Jet",
     faction: "Chinese",
     tier: "IV",
+    image: "J-20-Mighty-Dragon.jpg",
     description: "Long-range stealth fighter designed for air superiority and strike missions.",
     image: "J-20-Mighty-Dragon.jpg",
     stats: { health: 21200, speed: 694, afterburnerSpeed: 1803, agility: 78 },
@@ -518,6 +524,7 @@ const VEHICLES = [
     type: "Bomber",
     faction: "Russian",
     tier: "IV",
+    image: "TU-222.jpg",
     description: "Next-generation supersonic strategic bomber with hypersonic missile capability.",
     stats: { health: 15500, speed: 186, afterburnerSpeed: 209, agility: 50 },
     weapons: [
@@ -607,6 +614,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "American",
     tier: "IV",
+    image: "Abrams-X.jpg",
     description: "Next-generation prototype tank with unmanned turret and advanced systems.",
     stats: { health: 36800, speed: 72, armor: "1100mm", agility: 68 },
     weapons: [
@@ -639,6 +647,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "Japanese",
     tier: "IV",
+    image: "Type-10.jpg",
     description: "Modern main battle tank optimized for Japanese terrain with advanced fire control.",
     stats: { health: 31200, speed: 70, armor: "950mm", agility: 75 },
     weapons: [
@@ -669,6 +678,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "Israeli",
     tier: "IV",
+    image: "Merkava-Mk.4.jpg",
     description: "Heavily armored main battle tank with unique rear-engine design and crew survivability focus.",
     stats: { health: 35600, speed: 64, armor: "1050mm", agility: 62 },
     weapons: [
@@ -700,6 +710,7 @@ const VEHICLES = [
     type: "Helicopter",
     faction: "Russian",
     tier: "IV",
+    image: "Ka-52M.jpg",
     description: "Advanced reconnaissance and attack helicopter with coaxial rotor design.",
     stats: { health: 21000, speed: 310, verticalSpeed: 16, agility: 80 },
     weapons: [
@@ -731,6 +742,7 @@ const VEHICLES = [
     type: "MLRS",
     faction: "American",
     tier: "IV",
+    image: "M270-MLRS.jpg",
     description: "Multiple Launch Rocket System capable of delivering devastating area bombardment.",
     stats: { health: 28500, speed: 64, armor: "450mm", agility: 45 },
     weapons: [
@@ -762,6 +774,7 @@ const VEHICLES = [
     type: "Anti-Air",
     faction: "Italian",
     tier: "III",
+    image: "Otomatic-76.jpg",
     description: "Self-propelled anti-aircraft gun with rapid-fire 76mm cannon.",
     stats: { health: 24800, speed: 65, armor: "380mm", agility: 72 },
     weapons: [
@@ -792,6 +805,7 @@ const VEHICLES = [
     type: "Tank Destroyer",
     faction: "Japanese",
     tier: "IV",
+    image: "Type-16-MCV.jpg",
     description: "Mobile Combat Vehicle with excellent mobility and firepower for rapid deployment.",
     stats: { health: 26400, speed: 100, armor: "420mm", agility: 85 },
     weapons: [
@@ -822,6 +836,7 @@ const VEHICLES = [
   type: "Main Battle Tank",
   faction: "Russian",
   tier: "IV",
+  image: "T-14-Armata-(152).jpg",
   description: "Next-generation Russian MBT prototype equipped with a powerful 152mm smoothbore gun and advanced armor.",
   stats: { health: 42000, speed: 85, armor: "1000mm", agility: 40 },
   weapons: [
@@ -850,6 +865,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "American",
     tier: "II",
+    image: "M60-Patton.jpg",
     description: "Cold War era main battle tank with proven reliability and combat effectiveness.",
     stats: { health: 32000, speed: 50, armor: "650mm", agility: 36 },
     weapons: [
@@ -1255,6 +1271,7 @@ const VEHICLES = [
     type: "MLRS",
     faction: "Chinese",
     tier: "IV",
+    image: "SR-5-GMLRS.jpg",
     description: "Guided multiple launch rocket system with precision strike capability.",
     stats: { health: 29900, speed: 85, armor: "380mm", agility: 58 },
     weapons: [
@@ -1285,6 +1302,7 @@ const VEHICLES = [
     type: "SPA",
     faction: "Russian",
     tier: "IV",
+    image: "2S19-Msta-S.jpg",
     description: "Self-propelled howitzer with long-range precision artillery capability.",
     stats: { health: 34300, speed: 60, armor: "450mm", agility: 52 },
     weapons: [
@@ -1315,6 +1333,7 @@ const VEHICLES = [
     type: "Anti-Air",
     faction: "Russian",
     tier: "IV",
+    image: "Pantsir-S-1.jpg",
     description: "Combined gun-missile air defense system with advanced radar capabilities.",
     stats: { health: 32500, speed: 70, armor: "420mm", agility: 75 },
     weapons: [
@@ -1345,6 +1364,7 @@ const VEHICLES = [
     type: "Tank Destroyer",
     faction: "American",
     tier: "IV",
+    image: "M1128-Stryker.jpg",
     description: "Mobile gun system with rapid deployment capability and stealth features.",
     stats: { health: 28800, speed: 97, armor: "380mm", agility: 88 },
     weapons: [
@@ -1375,6 +1395,7 @@ const VEHICLES = [
     type: "Helicopter",
     faction: "American",
     tier: "IV",
+    image: "AH-84.jpg",
     description: "Next-generation attack helicopter with stealth features and advanced weapons.",
     stats: { health: 21500, speed: 325, verticalSpeed: 20, agility: 82 },
     weapons: [
@@ -1406,6 +1427,7 @@ const VEHICLES = [
     type: "Helicopter",
     faction: "Russian",
     tier: "IV",
+    image: "Mi-28NM.jpg",
     description: "Night hunter attack helicopter with all-weather combat capability.",
     stats: { health: 22000, speed: 295, verticalSpeed: 15, agility: 75 },
     weapons: [
@@ -1437,6 +1459,7 @@ const VEHICLES = [
     type: "Helicopter",
     faction: "Chinese",
     tier: "IV",
+    image: "WZ-10.jpg",
     description: "Dedicated attack helicopter with tandem-seat configuration and advanced sensors.",
     stats: { health: 19000, speed: 270, verticalSpeed: 14, agility: 72 },
     weapons: [
@@ -1468,6 +1491,7 @@ const VEHICLES = [
     type: "Helicopter",
     faction: "Chinese",
     tier: "IV",
+    image: "Z-19E.jpg",
     description: "Light attack and reconnaissance helicopter with stealth characteristics.",
     stats: { health: 16000, speed: 280, verticalSpeed: 15, agility: 85 },
     weapons: [
@@ -1499,6 +1523,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "American",
     tier: "IV",
+    image: "M1-Abrams-Block-3.jpg",
     description: "An Experimental prototype tank intended as a successor to the Abrams MBT family",
     stats: { health: 37500, speed: 67, armor: "1150mm", agility: 66 },
     weapons: [
@@ -1530,6 +1555,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "German",
     tier: "IV",
+    image: "Leopard-2A7V.jpg",
     description: "Most advanced Leopard variant with urban warfare modifications and enhanced protection.",
     stats: { health: 36200, speed: 68, armor: "1080mm", agility: 70 },
     weapons: [
@@ -1560,6 +1586,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "German",
     tier: "IV",
+    image: "KF-51-Panther.jpg",
     description: "Next-generation main battle tank with 130mm gun and advanced digital systems.",
     stats: { health: 38200, speed: 70, armor: "1200mm", agility: 72 },
     weapons: [
@@ -1591,6 +1618,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "Turkish",
     tier: "IV",
+    image: "Altay.jpg",
     description: "Turkey’s modern main battle tank, emphasizing firepower, protection, mobility, and advanced technology.",
     stats: { health: 38200, speed: 65,armor: "1200mm", agility: 70 },
     weapons: [
@@ -1623,6 +1651,7 @@ const VEHICLES = [
     type: "Helicopter",
     faction: "Russian",
     tier: "IV",
+    image: "Ka-58-Black-Ghost.jpg",
     description: "Stealth attack helicopter with advanced composite materials and reduced signature.",
     stats: { health: 20000, speed: 320, verticalSpeed: 19, agility: 88 },
     weapons: [
@@ -1654,6 +1683,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "Russian",
     tier: "IV",
+    image: "T-25-Pamir.jpg",
     description: "Advanced main battle tank with next-generation armor and fire control systems.",
     stats: { health: 39200, speed: 68, armor: "1250mm", agility: 70 },
     weapons: [
@@ -1685,6 +1715,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "Russian",
     tier: "IV",
+    image: "T-90A.jpg",
     description: "Modernized main battle tank with improved armor and advanced fire control.",
     stats: { health: 35800, speed: 65, armor: "1050mm", agility: 68 },
     weapons: [
@@ -1716,6 +1747,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "Russian",
     tier: "IV",
+    image: "T-95M.jpg",
     description: "Experimental heavy tank with revolutionary armor design and 152mm gun.",
     stats: { health: 42500, speed: 60, armor: "1400mm", agility: 58 },
     weapons: [
@@ -1748,6 +1780,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "Russian",
     tier: "IV",
+    image: "T-104-Bastion.jpg",
     description: "A Russian heavy main battle tank, featuring strong armor, AI-assisted and protection systems.",
     stats: { health: 40800, speed: 72, armor: "1320mm", agility: 75 },
     weapons: [
@@ -1779,6 +1812,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "Chinese",
     tier: "IV",
+    image: "VT-4A1.jpg",
     description: "Export variant main battle tank with advanced fire control and modular protection.",
     stats: { health: 36500, speed: 70, armor: "1100mm", agility: 72 },
     weapons: [
@@ -1810,6 +1844,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "Chinese",
     tier: "IV",
+    image: "ZTZ99A.jpg",
     description: "Advanced main battle tank with composite armor and laser warning systems.",
     stats: { health: 37200, speed: 68, armor: "1150mm", agility: 70 },
     weapons: [
@@ -1841,6 +1876,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "Chinese",
     tier: "IV",
+    image: "ZTZ99-III.jpg",
     description: "Latest variant with enhanced armor package and improved battlefield management systems.",
     stats: { health: 38500, speed: 70, armor: "1200mm", agility: 72 },
     weapons: [
@@ -1872,6 +1908,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "British",
     tier: "IV",
+    image: "Challenger-3.jpg",
     description: "Next-generation British main battle tank with smoothbore gun and digital turret.",
     stats: { health: 38800, speed: 59, armor: "1180mm", agility: 65 },
     weapons: [
@@ -1903,6 +1940,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "French",
     tier: "IV",
+    image: "EMBT-120.jpg",
     description: "A hybrid European main battle tank, combining Leopard 2 chassis with Leclerc turret.",
     stats: { health: 37800, speed: 70, armor: "1160mm", agility: 74 },
     weapons: [
@@ -1934,6 +1972,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "British",
     tier: "IV",
+    image: "FV4034-Challenge-2-TES.jpg",
     description: "A heavily upgraded British main battle tank with advanced armor for urban warfare.",
     stats: { health: 36200, speed: 56, armor: "1120mm", agility: 62 },
     weapons: [
@@ -1965,6 +2004,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "Iranian",
     tier: "IV",
+    image: "Karrar.jpg",
     description: "An Iranian main battle tank, featuring upgraded armor, firepower, and technology from T-72 design.",
     stats: { health: 34500, speed: 65, armor: "980mm", agility: 68 },
     weapons: [
@@ -1996,6 +2036,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "French",
     tier: "IV",
+    image: "Leclerc-S2-AZUR.jpg",
     description: "Upgraded French main battle tank with urban warfare package and improved armor.",
     stats: { health: 35800, speed: 71, armor: "1080mm", agility: 76 },
     weapons: [
@@ -2027,6 +2068,7 @@ const VEHICLES = [
     "type": "Tank Destroyer",
     "faction": "Russian",
     "tier": "IV",
+    image: "T-20-Monolit.jpg",
     "description": "Advanced Russian main battle tank equipped with a 2A42 autocannon, Kornet ATGMs, and a 30mm AGS-30 grenade launcher. Known for its formidable firepower and versatility on the battlefield.",
     "stats": {
       "health": 37100,
@@ -2066,6 +2108,7 @@ const VEHICLES = [
     "type": "Multirole-IFV",
     "faction": "German",
     "tier": "IV",
+    image: "KF31-Lynx.jpg",
     "description": "A versatile German infantry fighting vehicle equipped with a 30mm autocannon and Spike LR2 missiles, adaptable for various combat roles.",
     "stats": {
       "health": 22000,
@@ -2104,6 +2147,7 @@ const VEHICLES = [
     "type": "Light Tank",
     "faction": "American",
     "tier": "IV",
+    image: "M10-Booker.jpg",
     "description": "A mobile assault gun designed to neutralize fortified positions and light armor, featuring a 105mm M35 gun.",
     "stats": {
       "health": 28000,
@@ -2142,6 +2186,7 @@ const VEHICLES = [
     "type": "Light Tank",
     "faction": "Polish",
     "tier": "IV",
+    image: "PL-01.jpg",
     "description": "A concept stealth tank featuring a 120mm cannon and advanced camouflage systems.",
     "stats": {
       "health": 25000,
@@ -2180,6 +2225,7 @@ const VEHICLES = [
   "type": "Anti-Air",
   "faction": "American",
   "tier": "IV",
+  image: "M-SHORAD.jpg",
   "description": "Mobile short-range air defense system equipped with autocannons, Stinger missiles, and radar-guided targeting.",
   "stats": {
     "health": 24000,
@@ -2237,6 +2283,7 @@ const VEHICLES = [
   "type": "MLRS",
   "faction": "Russian",
   "tier": "IV",
+  image: "TOS-1A.jpg",
   "description": "Heavy flamethrower rocket launcher mounted on a tank chassis, designed for area suppression and destruction of entrenched enemies.",
   "stats": {
     "health": 38000,
@@ -2284,6 +2331,7 @@ const VEHICLES = [
   "type": "SPA",
   "faction": "Chinese",
   "tier": "IV",
+  image: "PLZ-05.jpg",
   "description": "Modern 155mm self-propelled howitzer designed for long-range artillery support and rapid deployment.",
   "stats": {
     "health": 32000,
@@ -2330,6 +2378,7 @@ const VEHICLES = [
   "type": "SPA",
   "faction": "American",
   "tier": "IV",
+  image: "M109A6-Paladin.jpg",
   "description": "Modernized 155mm self-propelled artillery system providing rapid, accurate fire support for ground forces.",
   "stats": {
     "health": 34000,
@@ -2377,6 +2426,7 @@ const VEHICLES = [
   "type": "Anti-Air",
   "faction": "Chinese",
   "tier": "IV",
+  image: "FK-2000.jpg",
   "description": "Modern Chinese mobile anti-aircraft system with radar-guided missiles and rapid-fire autocannons for air defense.",
   "stats": {
     "health": 28000,
@@ -2435,6 +2485,7 @@ const VEHICLES = [
   "type": "Tank Destroyer",
   "faction": "Russian",
   "tier": "IV",
+  image: "BM-57-2-Kochevnik.jpg",
   "description": "A modern Russian heavy tank armed with a 125mm smoothbore cannon and multiple defensive systems, built for frontline dominance.",
   "stats": {
     "health": 42000,
@@ -2493,6 +2544,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "American",
   tier: "III",
+  image: "FA-18F-Super-Hornet.jpg",
   description: "Twin-engine carrier-based multirole fighter with excellent versatility for both air-to-air and air-to-ground combat.",
   stats: { health: 19800, speed: 770, afterburnerSpeed: 1985, agility: 46 },
   weapons: [
@@ -2526,6 +2578,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Chinese",
   tier: "III",
+  image: "J-16.jpg",
   description: "Chinese twin-seat multirole fighter derived from Su-30, capable of carrying heavy weapons payload.",
   stats: { health: 21000, speed: 780, afterburnerSpeed: 2050, agility: 48 },
   weapons: [
@@ -2561,6 +2614,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Russian",
   tier: "III",
+  image: "Su-37-Terminator.jpg",
   description: "Experimental Russian fighter with thrust-vectoring for extreme maneuverability.",
   stats: { health: 20500, speed: 765, afterburnerSpeed: 2020, agility: 82 },
   weapons: [
@@ -2598,6 +2652,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Russian",
   tier: "III",
+  image: "Su-25UB.jpg",
   description: "Twin-seat variant of the Su-25, specialized for ground attack with heavy armor.",
   stats: { health: 24500, speed: 720, afterburnerSpeed: 1680, agility: 28 },
   weapons: [
@@ -2632,6 +2687,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Russian",
   tier: "III",
+  image: "Su-39.jpg",
   description: "Upgraded variant of Su-25 with improved avionics and guided weapons.",
   stats: { health: 25200, speed: 730, afterburnerSpeed: 1700, agility: 30 },
   weapons: [
@@ -2665,6 +2721,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Chinese",
   tier: "III",
+  image: "J-15.jpg",
   description: "Chinese carrier-based fighter based on Su-33 design, versatile in both air and ground roles.",
   stats: { health: 20100, speed: 765, afterburnerSpeed: 2000, agility: 45 },
   weapons: [
@@ -2698,6 +2755,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Russian",
   tier: "III",
+  image: "MiG-35.jpg",
   description: "Advanced MiG fighter with modern avionics, thrust-vectoring, and strong multirole performance.",
   stats: { health: 20200, speed: 775, afterburnerSpeed: 2060, agility: 52 },
   weapons: [
@@ -2735,6 +2793,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Chinese",
   tier: "III",
+  image: "J-10B.jpg",
   description: "Modernized version of the J-10 with updated avionics and thrust-vectoring engine.",
   stats: { health: 18500, speed: 765, afterburnerSpeed: 1960, agility: 56 },
   weapons: [
@@ -2762,6 +2821,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "American",
   tier: "III",
+  image: "F-15EX-Eagle-II.jpg",
   description: "Latest advanced variant of the F-15 with modern avionics and expanded weapons payload.",
   stats: { health: 23000, speed: 800, afterburnerSpeed: 2100, agility: 58 },
   weapons: [
@@ -2793,8 +2853,8 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Russian",
   tier: "III",
+  image: "Su-35S.jpg",
   description: "Highly maneuverable 4++ generation multirole fighter with thrust vectoring engines and powerful radar.",
-  image: "/images/su35s.png",
   stats: { health: 23300, speed: 870, afterburnerSpeed: 2200, agility: 67 },
   weapons: [
     { name: "R-73", type: "Short-Range AAM", damage: 4900, penetration: 60, reload: 15 },
@@ -2834,6 +2894,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Japanese",
   tier: "III",
+  image: "Mitsubishi-F-2B.jpg",
   description: "Multirole fighter developed from the F-16, optimized for anti-ship and air-to-air roles.",
   stats: { health: 19200, speed: 750, afterburnerSpeed: 1900, agility: 80 },
   weapons: [
@@ -2869,6 +2930,7 @@ const VEHICLES = [
     type: "Fighter Jet",
     faction: "American",
     tier: "III",
+    image: "A-10A-Thunderbolt.jpg",
     description: "Close air support aircraft designed around the GAU-8 Avenger cannon.",
     stats: { health: 28500, speed: 560, afterburnerSpeed: 706, agility: 55 },
     weapons: [
@@ -2907,6 +2969,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "American",
   tier: "IV",
+  image: "YF-23.jpg",
   description: "Experimental stealth fighter designed for air superiority, rival to the F-22.",
   stats: { health: 23800, speed: 770, afterburnerSpeed: 2200, agility: 84 },
   weapons: [
@@ -2940,6 +3003,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "American",
   tier: "IV",
+  image: "F-35B-Lightning-II.jpg",
   description: "Fifth-generation stealth multirole fighter with STOVL capability.",
   stats: { health: 23000, speed: 740, afterburnerSpeed: 2000, agility: 82 },
   weapons: [
@@ -2973,6 +3037,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Chinese",
   tier: "IV",
+  image: "J-50.jpg",
   description: "Advanced stealth air superiority fighter concept with heavy armament.",
   stats: { health: 24000, speed: 760, afterburnerSpeed: 2150, agility: 83 },
   weapons: [
@@ -3059,6 +3124,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Russian",
   tier: "IV",
+  image: "Su-75-Checkmate.jpg",
   description: "Light stealth fighter designed for export and versatile combat missions.",
   stats: { health: 22000, speed: 755, afterburnerSpeed: 2100, agility: 85 },
   weapons: [
@@ -3094,6 +3160,7 @@ const VEHICLES = [
   type: "Helicopter",
   faction: "Chinese",
   tier: "II",
+  image: "Z-9G-Harbin.jpg",
   description: "Multi-role Chinese helicopter equipped with light rockets, cannons, and ATGMs in MWT.",
   stats: { health: 17200, speed: 270, verticalSpeed: 55, agility: 60 },
   weapons: [
@@ -3123,6 +3190,7 @@ const VEHICLES = [
     type: "Helicopter",
     faction: "Japanese",
     tier: "III",
+    image: "OH-1-Ninja.jpg",
     description: "Agile Japanese attack/recon helicopter—fast and nimble with light AAMs in MWT.",
     stats: { health: 18000, speed: 320, verticalSpeed: 75, agility: 80 },
     weapons: [
@@ -3152,6 +3220,7 @@ const VEHICLES = [
   type: "Helicopter",
   faction: "American",
   tier: "II",
+  image: "MH-6-Little-Bird.jpg",
   description: "Ultra-light scout/assault helicopter used for special operations; light armament but excellent maneuverability.",
   stats: { health: 6100, speed: 280, verticalSpeed: 45, agility: 75 },
   weapons: [
@@ -3180,6 +3249,7 @@ const VEHICLES = [
   type: "Helicopter",
   faction: "Chinese",
   tier: "II",
+  image: "Z-11WB-Changhe.jpg",
   description: "Light Chinese helicopter (Changhe Z-11WB) with multiple light ATGM/rocket options.",
   stats: { health: 7200, speed: 270, verticalSpeed: 50, agility: 70 },
   weapons: [
