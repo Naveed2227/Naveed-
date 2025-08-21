@@ -2578,7 +2578,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Chinese",
   tier: "III",
-  image: "J-16.jpg",
+  image: "J16.jpg",
   description: "Chinese twin-seat multirole fighter derived from Su-30, capable of carrying heavy weapons payload.",
   stats: { health: 21000, speed: 780, afterburnerSpeed: 2050, agility: 48 },
   weapons: [
@@ -5603,7 +5603,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
                 <div>
                   <h4 className="text-white font-semibold">QWE</h4>
-                  <p className="text-slate-400 text-sm">Server Moderator, Supporter, Coordinator</p>
+                  <p className="text-slate-400 text-sm">Server Moderator, Supporter, Coordinator, Images Contributer</p>
                 </div>
                 <div>
                   <h4 className="text-white font-semibold">OberstLeutnantFerid</h4>
