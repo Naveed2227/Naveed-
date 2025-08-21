@@ -12,7 +12,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "IV",
     description: "Advanced fifth-generation stealth fighter with supercruise capability and advanced avionics.",
-    image: "/images/su57m.png",
+    image: "Su-57M.jpg",
     stats: { health: 24500, speed: 762, afterburnerSpeed: 2100, agility: 85 },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
@@ -5139,9 +5139,19 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <span className="text-sm text-slate-400 font-semibold">({vehicle.faction})</span>
               </div>
 
-
-
-
+              {/* Vehicle Image Display */}
+              {vehicle.image && (
+                <div className="mb-4">
+                  <img
+                    src={vehicle.image}
+                    alt={`${vehicle.name} vehicle`}
+                    className="w-full h-48 object-cover rounded-lg border border-slate-700 shadow-lg"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                </div>
+              )}
 
               <p className="text-slate-300 text-sm mb-4 leading-relaxed">{vehicle.description}</p>
 
