@@ -51,6 +51,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "IV",
     description: "Next-generation main battle tank with unmanned turret and advanced armor systems.",
+    image: "T-14-Armata.jpg",
     stats: { health: 38900, speed: 70, armor: "1200mm", agility: 65 },
     weapons: [
       { name: "2A82-1M 125mm", type: "Main Gun", damage: 15800, penetration: 850 },
@@ -82,6 +83,7 @@ const VEHICLES = [
     faction: "German",
     tier: "III",
     description: "Proven main battle tank with excellent firepower and mobility balance.",
+    image: "Leopard-2A4.jpg",
     stats: { health: 32500, speed: 68, armor: "800mm", agility: 70 },
     weapons: [
       { name: "Rheinmetall L44 120mm", type: "Main Gun", damage: 14200, penetration: 780 },
@@ -113,6 +115,7 @@ const VEHICLES = [
     tier: "II",
     description:
       "Vertical/Short Takeoff and Landing (V/STOL) attack aircraft with excellent ground support capabilities.",
+    image: "AV-8B-Harrier-II.jpg",
     stats: { health: 18500, speed: 662, afterburnerSpeed: 1085, agility: 78 },
     weapons: [
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
@@ -148,6 +151,7 @@ const VEHICLES = [
     faction: "German",
     tier: "II",
     description: "Light attack aircraft and advanced trainer with excellent maneuverability.",
+    image: "Alpha-Jet.jpg",
     stats: { health: 14200, speed: 927, afterburnerSpeed: 1000, agility: 85 },
     weapons: [
       { name: "SUU-20", type: "Bomb Cluster", damage: 14300, penetration: 120, reload: 40 },
@@ -184,6 +188,7 @@ const VEHICLES = [
     faction: "American",
     tier: "II",
     description: "Twin-engine, variable-sweep wing fighter designed for fleet defense and air superiority.",
+    image: "F-14D-Super-Tomcat.jpg",
     stats: { health: 22800, speed: 913, afterburnerSpeed: 2485, agility: 72 },
     weapons: [
        { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
@@ -219,6 +224,7 @@ const VEHICLES = [
     faction: "Chinese",
     tier: "II",
     description: "Single-engine, multirole fighter with delta wing configuration and advanced avionics.",
+    image: "J-10-Chengdu.jpg",
     stats: { health: 19500, speed: 1200, afterburnerSpeed: 2120, agility: 82 },
     weapons: [
      { name: "Type 2(100)", type: "Bomb", damage: 14000, penetration: 110, reload: 30 },
@@ -330,6 +336,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "II",
     description: "Variable-sweep wing tactical bomber designed for all-weather ground attack missions.",
+    image: "Su-24M.jpg",
     stats: { health: 24200, speed: 1315, afterburnerSpeed: 2317, agility: 68 },
     weapons: [
       { name: "B8M1", type: "Rocket Pod", damage: 5100, penetration: 420, reload: 20 },
@@ -474,6 +481,7 @@ const VEHICLES = [
     faction: "Chinese",
     tier: "IV",
     description: "Long-range stealth fighter designed for air superiority and strike missions.",
+    image: "J-20-Mighty-Dragon.jpg",
     stats: { health: 21200, speed: 694, afterburnerSpeed: 1803, agility: 78 },
     weapons: [
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
@@ -874,6 +882,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "III",
     description: "Widely exported main battle tank with robust design and effective firepower.",
+    image: "T-72A.jpg",
     stats: { health: 32800, speed: 60, armor: "750mm", agility: 62 },
     weapons: [
       { name: "2A46 125mm", type: "Main Gun", damage: 13500, penetration: 720 },
@@ -905,6 +914,7 @@ const VEHICLES = [
     faction: "American",
     tier: "II",
     description: "Legendary multi-role fighter with proven combat record and versatile weapon systems.",
+    image: "F-4E-Phantom.jpg",
     stats: { health: 19800, speed: 1472, afterburnerSpeed: 2370, agility: 68 },
     weapons: [
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
@@ -939,6 +949,7 @@ const VEHICLES = [
     faction: "American",
     tier: "III",
     description: "Multi-role fighter with advanced night vision and precision strike capabilities.",
+    image: "F-16C-Night-Falcon.jpg",
     stats: { health: 18500, speed: 1320, afterburnerSpeed: 2124, agility: 92 },
     weapons: [
        { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
@@ -977,6 +988,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "IV",
     description: "Next-generation interceptor with hypersonic capabilities and advanced radar systems.",
+    image: "MiG-41M.jpg",
     stats: { health: 23800, speed: 1800, afterburnerSpeed: 4320, agility: 75 },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
@@ -1015,6 +1027,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "II",
     description: "Versatile transport helicopter with light attack capabilities and proven reliability.",
+    image: "Mi-8TV.jpg",
     stats: { health: 25000, speed: 260, verticalSpeed: 12, agility: 55 },
     weapons: [
       { name: "S-8 Rockets", type: "Rocket Pod", damage: 5800, penetration: 280 },
@@ -1046,6 +1059,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "II",
     description: "Experimental missile tank destroyer with unique guided missile system.",
+    image: "IT-1-Dragon.jpg",
     stats: { health: 22800, speed: 50, armor: "520mm", agility: 55 },
     weapons: [
       { name: "3M7 Drakon ATGM", type: "Anti-Tank Missile", damage: 15200, penetration: 500 },
@@ -1076,6 +1090,7 @@ const VEHICLES = [
     faction: "American",
     tier: "II",
     description: "Infantry fighting vehicle with TOW missile system and troop transport capability.",
+    image: "M3-Bradley.jpg",
     stats: { health: 25000, speed: 62, armor: "380mm", agility: 35 },
     weapons: [
       { name: "TOW-2 ATGM", type: "Anti-Tank Missile", damage: 14800, penetration: 780 },
@@ -1107,6 +1122,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "II",
     description: "Self-propelled anti-aircraft gun with quad 23mm cannons and radar guidance.",
+    image: "ZSU-23-4M4-Shilka.jpg",
     stats: { health: 21000, speed: 68, armor: "280mm", agility: 32 },
     weapons: [
       { name: "AZP-23 23mm Quad", type: "Anti-Aircraft Gun", damage: 1800, penetration: 95, rateOfFire: "3400 rpm" },
@@ -1137,6 +1153,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "IV",
     description: "Fifth-generation stealth fighter with advanced maneuverability and sensor fusion.",
+    image: "Su-57-Felon.jpg",
     stats: { health: 23200, speed: 1100, afterburnerSpeed: 2100, agility: 90 },
     weapons: [
      { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
@@ -1175,6 +1192,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "III",
     description: "Light infantry fighting vehicle with amphibious capability and rapid deployment design.",
+    image: "BMD3.jpg",
     stats: { health: 24000, speed: 70, armor: "420mm", agility: 82 },
     weapons: [
       { name: "2A42 30mm", type: "Autocannon", damage: 420, penetration: 75, rateOfFire: "550 rpm" },
@@ -1206,6 +1224,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "IV",
     description: "Tank support fighting vehicle designed for urban combat and infantry support.",
+    image: "BMPT-Terminator-2.jpg",
     stats: { health: 36400, speed: 60, armor: "850mm", agility: 68 },
     weapons: [
       { name: "2A42 30mm Twin", type: "Autocannon", damage: 520, penetration: 85, rateOfFire: "550 rpm" },
