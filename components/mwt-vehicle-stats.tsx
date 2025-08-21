@@ -158,6 +158,7 @@ const VEHICLES = [
     { name: "LAU-51", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
     { name: "LAU-51 x2", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
     { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
+    { name: "AIM-9", type: "Air-to-Air", damage: 5700, penetration: 45, reload: 15 },
     { name: "AIM-132", type: "Short-Range AAM", damage: 5200, penetration: 65, reload: 15 },
     { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
     { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 }
@@ -2965,6 +2966,7 @@ const VEHICLES = [
       { "name": "GBU-39", "type": "Guided Bomb", "damage": 14700, "penetration": 120, "reload": 28 },
       { "name": "GBU-31", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
       { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
+      { name: "AIM-9", type: "Air-to-Air", damage: 5700, penetration: 45, reload: 15 },
       { "name": "AGM-65", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
       { "name": "AIM-132", "type": "Short-Range AAM", "damage": 5200, "penetration": 65, "reload": 15 },
       { "name": "AIM-120", "type": "BVR AAM", "damage": 11300, "penetration": 60, "reload": 20 }
