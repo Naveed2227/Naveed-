@@ -3974,7 +3974,7 @@ const VEHICLES = [
     "type": "Anti-Air",
     "faction": "Russian",
     "tier": "III",
-    image: "S6M1-Tunguska-M1.jpg",
+    image: "2S6M1-Tunguska-M1.jpg",
     "description": "Russian SPAAG with twin 30mm cannons and 9M311 SAM missiles.",
     "stats": { "health": 25000, "speed": 65, "armor": 35, "agility": 45 },
     "weapons": [
@@ -4230,7 +4230,7 @@ const VEHICLES = [
     "type": "MLRS",
     "faction": "Chinese",
     "tier": "III",
-    image: "WMA30.jpg",
+    image: "WMA301.jpg",
     "description": "Chinese third-generation wheeled multiple rocket launcher system with long-range precision firepower.",
     "stats": { "health": 28000, "speed": 65, "armor": 25, "agility": 25 },
     "weapons": [
