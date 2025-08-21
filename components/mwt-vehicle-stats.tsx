@@ -196,6 +196,7 @@ const VEHICLES = [
     { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
     { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
     { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+    { name: "AIM-9", type: "Air-to-Air", damage: 5700, penetration: 45, reload: 15 },
     { name: "AIM-54", type: "Long-Range AAM", damage: 8600, penetration: 100, reload: 30 }
 
     ],
@@ -382,6 +383,7 @@ const VEHICLES = [
     weapons: [
       { name: "AGM-114 Hellfire", type: "Anti-Tank Missile", damage: 16500, penetration: 1100 },
       { name: "Hydra 70 Rockets", type: "Rocket Pod", damage: 8200, penetration: 380 },
+      { name: "AIM-9", type: "Air-to-Air", damage: 5700, penetration: 45, reload: 15 },
       { name: "M230 30mm Chain Gun", type: "Autocannon", damage: 420, penetration: 75, rateOfFire: "625 rpm" },
     ],
     modules: {
@@ -456,6 +458,7 @@ const VEHICLES = [
       { "name": "GBU-31", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
       { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
       { "name": "AGM-65", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
+      { name: "AIM-9", type: "Air-to-Air", damage: 5700, penetration: 45, reload: 15 },
       { "name": "AIM-132", "type": "Short-Range AAM", "damage": 5200, "penetration": 65, "reload": 15 },
       { "name": "AGM-84H/K", "type": "Anti-Ship Missile", "damage": 18900, "penetration": 310, "reload": 35 },
       { "name": "AIM-120", "type": "BVR AAM", "damage": 11300, "penetration": 60, "reload": 20 }
@@ -933,10 +936,14 @@ const VEHICLES = [
     image: "F-4E-Phantom.jpg",
     stats: { health: 19800, speed: 1472, afterburnerSpeed: 2370, agility: 68 },
     weapons: [
-      { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
     { name: "LAU-10 x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
     { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "MK-82", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
+    { name: "MK-82 x3", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
+    { name: "MK-83 x3", type: "Guided Bomb", damage: 15700, penetration: 120, reload: 35 },
     { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+    { name: "AIM-9", type: "Air-to-Air", damage: 5700, penetration: 45, reload: 15 },
     { name: "AGM-12B", type: "Air-to-Surface Missile", damage: 11500, penetration: 600, reload: 41 }
 
     ],
@@ -973,6 +980,7 @@ const VEHICLES = [
     { name: "GBU-39", type: "Guided Bomb", damage: 14700, penetration: 120, reload: 28 },
     { name: "GBU-31", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
     { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
+    { name: "AIM-9", type: "Air-to-Air", damage: 5700, penetration: 45, reload: 15 },
     { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
     { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
     { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 },
@@ -2551,8 +2559,11 @@ const VEHICLES = [
   weapons: [
     { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
       { "name": "GBU-12", "type": "Guided Bomb", "damage": 18590, "penetration": 120, "reload": 30 },
+      { name: "MK-81", type: "Guided Bomb", damage: 13000, penetration: 90, reload: 20 },
+      { name: "MK-82", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
       { "name": "AGM-65", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
       { "name": "AIM-132", "type": "Short-Range Air-to-Air Missile", "damage": 5200, "penetration": 65, "reload": 15 },
+      { name: "AIM-9", type: "Air-to-Air", damage: 5700, penetration: 45, reload: 15 },
       { "name": "AIM-120", "type": "Beyond Visual Range Air-to-Air Missile", "damage": 11300, "penetration": 60, "reload": 20 }
   ],
   modules: {
@@ -2802,9 +2813,12 @@ const VEHICLES = [
     { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
     { name: "GBU-31", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
     { name: "GBU-32", type: "Guided Bomb", damage: 15700, penetration: 200, reload: 35 },
+    { name: "GBU-53 Storm breaker", type: "Guided Bomb", damage: 15700, penetration: 90, reload: 22 },
+    { name: "MK-84", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
+    { name: "AGM-84H/K", type: "Anti-Ship Missile", damage: 18900, penetration: 310, reload: 35 },
     { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
     { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
-    { name: "AGM-84H/K", type: "Anti-Ship Missile", damage: 18900, penetration: 310, reload: 35 },
+    { name: "AIM-9", type: "Air-to-Air", damage: 5700, penetration: 45, reload: 15 },
     { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 }
 
   ],
@@ -3795,7 +3809,7 @@ const VEHICLES = [
     "id": 109,
     "name": "M110A2",
     "type": "SPA",
-    "faction": "American",
+    "faction": "Japanese",
     "tier": "III",
     image: "M110A2.jpg",
     "description": "American 203mm self-propelled artillery for heavy bombardment.",
