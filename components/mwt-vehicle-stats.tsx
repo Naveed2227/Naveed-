@@ -4251,7 +4251,7 @@ const VEHICLES = [
         { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
       ]
     }
-  }
+  },
 {
     "id": 152,
     "name": "M41 Walker Bulldog",
