@@ -5295,7 +5295,7 @@ const VEHICLES = [
     "faction": "American",
     "tier": 1,
     "description": "M113A1 FMS AIFV is a Tier 1 Unknown of American.",
-    "image": "M113A1 FMS AIFV.jpg",
+    "image": "M113A1-FMS-AIFV.jpg",
     "stats": {
       "health": 0,
       "speed": 0,
