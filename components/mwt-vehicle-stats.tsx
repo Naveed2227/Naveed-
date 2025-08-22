@@ -1,5 +1,6 @@
 "use client"
 
+
 import { motion } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot } from "lucide-react"
 import { useState } from "react"
@@ -4935,7 +4936,7 @@ const VEHICLES = [
       "agility": 35
     },
     "weapons": [
-      BP-350B APBC, BP-350M HE, BP-354P HVAP, BK-354M HEAT
+
       {
     "name": "BP-350B APHE",
     "type": "Main Gun",
@@ -5690,7 +5691,7 @@ const VEHICLES = [
       "agility": 37
     },
     "weapons": [
-      M792 HEI, PGU-32/U SAPHEI, M791 APDS, M919 APFSDS
+     
       {
     "name": "M792 HEI(FMS)",
     "type": "Main Gun",
@@ -5917,7 +5918,7 @@ const VEHICLES = [
       "agility": 41
     },
     "weapons": [
-      M344 HEAT, PFF HE, M344A1 HEAT, 106 3A HEAT
+     
      {
     "name": "BP-350B APHE",
     "type": "Main Gun",
@@ -5991,7 +5992,7 @@ const VEHICLES = [
       "agility": 38
     },
     "weapons": [
-      M81A1 API, Mk2 HEI, Mk3 HEI
+     
       {
     "name": "M81A1 API",
     "type": "Main Gun",
@@ -6992,14 +6993,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className={`group relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 transition-all duration-300 ${
-      vehicle.tier === "II"
-        ? "hover:border-green-500 hover:shadow-[0_0_12px_1px_rgba(34,197,94,0.6)]"
+      vehicle.tier === "I"
+        ? "hover:border-slate-500 hover:shadow-[0_0_12px_1px_rgba(34,197,94,0.6)]"
+        : vehicle.tier === "II"
+        ? "hover:border-green-500 hover:shadow-[0_0_12px_1px_rgba(29,78,216,0.6)]"
         : vehicle.tier === "III"
-        ? "hover:border-blue-500 hover:shadow-[0_0_12px_1px_rgba(29,78,216,0.6)]"
+        ? "hover:border-blue-500 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
         : vehicle.tier === "IV"
         ? "hover:border-purple-500 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
-        : vehicle.tier === "I"
-        ? "hover:border-white-300 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
         : ""
     }`}
 >
