@@ -4252,7 +4252,7 @@ const VEHICLES = [
         { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
       ]
     }
-  }
+  },
   
 {
     "id": 152,
