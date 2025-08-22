@@ -6899,6 +6899,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <span className="text-slate-400">Armor:</span>
                           <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.armor}</span>
                         </div>
+                        <div>
+                          <span className="text-slate-400">Armor:</span>
+                          <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.armor}</span>
+                        </div>
                       )}
                       <div>
                         <span className="text-slate-400">Agility:</span>
