@@ -4259,7 +4259,7 @@ const VEHICLES = [
     "faction": "American",
     "tier": 1,
     "description": "M41 Walker Bulldog is a Tier 1 Unknown of American.",
-    "image": "M41 WalkerBulldog.jpg",
+    "image": "M41 Walker Bulldog.jpg",
     "stats": {
       "health": 27000,
       "speed": 67,
