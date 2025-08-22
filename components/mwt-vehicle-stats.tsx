@@ -4252,7 +4252,1784 @@ const VEHICLES = [
       ]
     }
   }
-
+{
+    "id": 152,
+    "name": "M41 Walker Bulldog",
+    "type": "Main Battle Tank",
+    "faction": "American",
+    "tier": 1,
+    "description": "M41 Walker Bulldog is a Tier 1 Unknown of American.",
+    "image": "M41 Walker Bulldog.jpg",
+    "stats": {
+      "health": 27000,
+      "speed": 67,
+      "reverseSpeed": 27,
+      "agility": 38
+    },
+    "weapons": [
+      {
+        "name": "M339 APBC",
+        "type": "Main Gun",
+        "damage": 7560,
+        "penetration": 173,
+        "reload": 0
+      },
+      {
+        "name": "M352 HE",
+        "type": "Main Gun",
+        "damage": 5600,
+        "penetration": 78,
+        "reload": 0
+      },
+      {
+        "name": "M319 APCR",
+        "type": "Main Gun",
+        "damage": 5880,
+        "penetration": 200,
+        "reload": 0
+      },
+      {
+        "name": "M331A2 APDS",
+        "type": "Main Gun",
+        "damage": 10800,
+        "penetration": 296,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 153,
+    "name": "T-55A",
+    "type": "Main Battle Tank",
+    "faction": "Russian",
+    "tier": 1,
+    "description": "T-55A is a Tier 1 Unknown of Russian.",
+    "image": "T-55A.jpg",
+    "stats": {
+      "health": 29000,
+      "speed": 55,
+      "reverseSpeed": 12,
+      "agility": 35
+    },
+    "weapons": [
+      {
+        "name": "BR-412 APHE",
+        "type": "Main Gun",
+        "damage": 6300,
+        "penetration": 236,
+        "reload": 0
+      },
+      {
+        "name": "OF-412 HE",
+        "type": "Main Gun",
+        "damage": 9450,
+        "penetration": 103,
+        "reload": 0
+      },
+      {
+        "name": "3BK17M HEAT",
+        "type": "Main Gun",
+        "damage": 8670,
+        "penetration": 390,
+        "reload": 0
+      },
+      {
+        "name": "3BM8 APFSDS",
+        "type": "Main Gun",
+        "damage": 7700,
+        "penetration": 332,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 154,
+    "name": "T-55AMD-1",
+    "type": "Main Battle Tank",
+    "faction": "Russian",
+    "tier": 1,
+    "description": "T-55AMD-1 is a Tier 1 Unknown of Russian.",
+    "image": "T-55AMD-1.jpg",
+    "stats": {
+      "health": 0,
+      "speed": 0,
+      "reverseSpeed": 0,
+      "agility": 0
+    },
+    "weapons": [
+      {
+        "name": "Unknown",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 155,
+    "name": "Type 61",
+    "type": "Main Battle Tank",
+    "faction": "Japanese",
+    "tier": 1,
+    "description": "Type 61 is a Tier 1 Unknown of Japan.",
+    "image": "Type 61.jpg",
+    "stats": {
+      "health": 0,
+      "speed": 0,
+      "reverseSpeed": 0,
+      "agility": 0
+    },
+    "weapons": [
+      {
+        "name": "Unknown",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 156,
+    "name": "WZ-120C",
+    "type": "Main Battle Tank",
+    "faction": "Chinese",
+    "tier": 1,
+    "description": "WZ-120C is a Tier 1 Unknown of Chinese.",
+    "image": "WZ-120C.jpg",
+    "stats": {
+      "health": 28500,
+      "speed": 48,
+      "reverseSpeed": 11,
+      "agility": 33
+    },
+    "weapons": [
+      {
+        "name": "DTP1A HEAT",
+        "type": "Main Gun",
+        "damage": 9280,
+        "penetration": 800,
+        "reload": 0
+      },
+      {
+        "name": "Type-83 HE",
+        "type": "Main Gun",
+        "damage": 8100,
+        "penetration": 107,
+        "reload": 0
+      },
+      {
+        "name": "APFSDS",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "HEAT",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 157,
+    "name": "WZ-120",
+    "type": "Main Battle Tank",
+    "faction": "Chinese",
+    "tier": 1,
+    "description": "WZ-120 is a Tier 1 Unknown of Chinese.",
+    "image": "WZ-120.jpg",
+    "stats": {
+      "health": 28000,
+      "speed": 48,
+      "reverseSpeed": 11,
+      "agility": 28
+    },
+    "weapons": [
+      {
+        "name": "BR-412 APHE",
+        "type": "Main Gun",
+        "damage": 6300,
+        "penetration": 236,
+        "reload": 0
+      },
+      {
+        "name": "OF-412 HE",
+        "type": "Main Gun",
+        "damage": 9450,
+        "penetration": 103,
+        "reload": 0
+      },
+      {
+        "name": "Type-59 APFSDS",
+        "type": "Main Gun",
+        "damage": 7700,
+        "penetration": 325,
+        "reload": 0
+      },
+      {
+        "name": "Type-73 HEAT",
+        "type": "Main Gun",
+        "damage": 8050,
+        "penetration": 380,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 158,
+    "name": "WZ-121",
+    "type": "Main Battle Tank",
+    "faction": "Chinese",
+    "tier": 1,
+    "description": "WZ-121 is a Tier 1 Unknown of Chinese.",
+    "image": "WZ-121.jpg",
+    "stats": {
+      "health": 30000,
+      "speed": 51,
+      "reverseSpeed": 12,
+      "agility": 35
+    },
+    "weapons": [
+      {
+        "name": "3BM1 APFSDS",
+        "type": "Main Gun",
+        "damage": 7920,
+        "penetration": 185,
+        "reload": 0
+      },
+      {
+        "name": "3OF15 HE",
+        "type": "Main Gun",
+        "damage": 9720,
+        "penetration": 93,
+        "reload": 0
+      },
+      {
+        "name": "3BK3 HEAT",
+        "type": "Main Gun",
+        "damage": 8280,
+        "penetration": 420,
+        "reload": 0
+      },
+      {
+        "name": "3BM24 APFSDS",
+        "type": "Main Gun",
+        "damage": 7920,
+        "penetration": 360,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 159,
+    "name": "T54E1",
+    "type": "Main Battle Tank",
+    "faction": "American",
+    "tier": 1,
+    "description": "T54E1 is a Tier 1 Unknown of American.",
+    "image": "T54E1.jpg",
+    "stats": {
+      "health": 29000,
+      "speed": 46,
+      "reverseSpeed": 18,
+      "agility": 29
+    },
+    "weapons": [
+      {
+        "name": "T18E1 APBC",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "T297 HESH",
+        "type": "Main Gun",
+        "damage": 8150,
+        "penetration": 117,
+        "reload": 0
+      },
+      {
+        "name": "T279 APFSDS",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "T298E1 HEAT",
+        "type": "Main Gun",
+        "damage": 9780,
+        "penetration": 380,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 160,
+    "name": "BMP-1",
+    "type": "Missile Carrier",
+    "faction": "Russian",
+    "tier": 1,
+    "description": "BMP-1 is a Tier 1 Unknown of Russian.",
+    "image": "BMP-1.jpg",
+    "stats": {
+      "health": 19000,
+      "speed": 69,
+      "reverseSpeed": 17,
+      "agility": 35
+    },
+    "weapons": [
+      {
+        "name": "3UBR6 APBC",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "3OF8 HEI",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "3UBR8 APDS",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "M929 APFSDS",
+        "type": "Main Gun",
+        "damage": 550,
+        "penetration": 189,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 161,
+    "name": "BRM-1K",
+    "type": "Missile Carrier",
+    "faction": "Russian",
+    "tier": 1,
+    "description": "BRM-1K is a Tier 1 Unknown of Russian.",
+    "image": "BRM-1K.jpg",
+    "stats": {
+      "health": 0,
+      "speed": 0,
+      "reverseSpeed": 0,
+      "agility": 0
+    },
+    "weapons": [
+      {
+        "name": "Unknown",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 162,
+    "name": "BTR-60PB",
+    "type": "Missile Carrier",
+    "faction": "Russian",
+    "tier": 1,
+    "description": "BTR-60PB is a Tier 1 Unknown of Russian.",
+    "image": "BTR-60PB.jpg",
+    "stats": {
+      "health": 0,
+      "speed": 0,
+      "reverseSpeed": 0,
+      "agility": 0
+    },
+    "weapons": [
+      {
+        "name": "Unknown",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 163,
+    "name": "BTR-80",
+    "type": "Missile Carrier",
+    "faction": "Russian",
+    "tier": 1,
+    "description": "BTR-80 is a Tier 1 Unknown of Russian.",
+    "image": "BTR-80.jpg",
+    "stats": {
+      "health": 19000,
+      "speed": 87,
+      "reverseSpeed": 18,
+      "agility": 35
+    },
+    "weapons": [
+      {
+        "name": "PG-9 HEAT",
+        "type": "Main Gun",
+        "damage": 6325,
+        "penetration": 300,
+        "reload": 0
+      },
+      {
+        "name": "OG-9 HE",
+        "type": "Main Gun",
+        "damage": 7425,
+        "penetration": 66,
+        "reload": 0
+      },
+      {
+        "name": "9M14 Malyutka",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 164,
+    "name": "BTR-80A",
+    "type": "Missile Carrier",
+    "faction": "Russian",
+    "tier": 1,
+    "description": "BTR-80A is a Tier 1 Unknown of Russian.",
+    "image": "BTR-80A.jpg",
+    "stats": {
+      "health": 19500,
+      "speed": 87,
+      "reverseSpeed": 18,
+      "agility": 35
+    },
+    "weapons": [
+      {
+        "name": "PG-9 HEAT",
+        "type": "Main Gun",
+        "damage": 6325,
+        "penetration": 300,
+        "reload": 0
+      },
+      {
+        "name": "OG-9 HE",
+        "type": "Main Gun",
+        "damage": 7425,
+        "penetration": 66,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 165,
+    "name": "LAV-25",
+    "type": "Missile Carrier",
+    "faction": "American",
+    "tier": 1,
+    "description": "LAV-25 is a Tier 1 Unknown of American.",
+    "image": "LAV-25.jpg",
+    "stats": {
+      "health": 18500,
+      "speed": 96,
+      "reverseSpeed": 27,
+      "agility": 35
+    },
+    "weapons": [
+      {
+        "name": "M601 API",
+        "type": "Main Gun",
+        "damage": 340,
+        "penetration": 95,
+        "reload": 0
+      },
+      {
+        "name": "M599 HEI",
+        "type": "Main Gun",
+        "damage": 410,
+        "penetration": 40,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 166,
+    "name": "LAV-150",
+    "type": "Missile Carrier",
+    "faction": "American",
+    "tier": 1,
+    "description": "LAV-150 is a Tier 1 Unknown of American.",
+    "image": "LAV-150.jpg",
+    "stats": {
+      "health": 18000,
+      "speed": 98,
+      "reverseSpeed": 30,
+      "agility": 35
+    },
+    "weapons": [
+      {
+        "name": "PGU-32/U SAPHEI",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "M792 HEI",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "M719 APDS",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "M919 APFSDS",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 167,
+    "name": "M113A1 FMS AIFV",
+    "type": "Missile Carrier",
+    "faction": "American",
+    "tier": 1,
+    "description": "M113A1 FMS AIFV is a Tier 1 Unknown of American.",
+    "image": "M113A1 FMS AIFV.jpg",
+    "stats": {
+      "health": 0,
+      "speed": 0,
+      "reverseSpeed": 0,
+      "agility": 0
+    },
+    "weapons": [
+      {
+        "name": "Unknown",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 168,
+    "name": "PT-76B",
+    "type": "Light Tank",
+    "faction": "Russian",
+    "tier": 1,
+    "description": "PT-76B is a Tier 1 Unknown of Russian.",
+    "image": "PT-76B.jpg",
+    "stats": {
+      "health": 22500,
+      "speed": 60,
+      "reverseSpeed": 18,
+      "agility": 25
+    },
+    "weapons": [
+      {
+        "name": "BR-281 AP",
+        "type": "Main Gun",
+        "damage": 1040,
+        "penetration": 147,
+        "reload": 0
+      },
+      {
+        "name": "OR-281 HEI",
+        "type": "Main Gun",
+        "damage": 1570,
+        "penetration": 83,
+        "reload": 0
+      },
+      {
+        "name": "BR-281U APHE",
+        "type": "Main Gun",
+        "damage": 1080,
+        "penetration": 156,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 169,
+    "name": "WZ-211",
+    "type": "Main Battle Tank",
+    "faction": "Chinese",
+    "tier": 1,
+    "description": "WZ-211 is a Tier 1 Unknown of Chinese.",
+    "image": "WZ-211.jpg",
+    "stats": {
+      "health": 24000,
+      "speed": 65,
+      "reverseSpeed": 18,
+      "agility": 30
+    },
+    "weapons": [
+      {
+        "name": "BR-365A APHE",
+        "type": "Main Gun",
+        "damage": 5850,
+        "penetration": 139,
+        "reload": 0
+      },
+      {
+        "name": "BR-367P HE",
+        "type": "Main Gun",
+        "damage": 8775,
+        "penetration": 85,
+        "reload": 0
+      },
+      {
+        "name": "O-365K APFSDS ",
+        "type": "Main Gun",
+        "damage": 7150,
+        "penetration": 255,
+        "reload": 0
+      },
+      {
+        "name": "Type-1956 HEAT",
+        "type": "Main Gun",
+        "damage": 7475,
+        "penetration": 370,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 170,
+    "name": "WZ-501A",
+    "type": "Missile Carrier",
+    "faction": "Chinese",
+    "tier": 1,
+    "description": "WZ-501A is a Tier 1 Unknown of Chinese.",
+    "image": "WZ-501A.jpg",
+    "stats": {
+      "health": 19500,
+      "speed": 70,
+      "reverseSpeed": 20,
+      "agility": 35
+    },
+    "weapons": [
+      {
+        "name": "Type-85 HEAT",
+        "type": "Main Gun",
+        "damage": 5980,
+        "penetration": 320,
+        "reload": 0
+      },
+      {
+        "name": "Type-85 HE",
+        "type": "Main Gun",
+        "damage": 7020,
+        "penetration": 66,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 171,
+    "name": "WZ-501",
+    "type": "Missile Carrier",
+    "faction": "Chinese",
+    "tier": 1,
+    "description": "WZ-501 is a Tier 1 Unknown of Chinese.",
+    "image": "WZ-501.jpg",
+    "stats": {
+      "health": 22000,
+      "speed": 70,
+      "reverseSpeed": 20,
+      "agility": 35
+    },
+    "weapons": [
+      {
+        "name": "Type-87 SAPHEI",
+        "type": "Main Gun",
+        "damage": 432,
+        "penetration": 105,
+        "reload": 0
+      },
+      {
+        "name": "HE",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "APDS",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "APFSDS",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 172,
+    "name": "XM-800T",
+    "type": "Missile Carrier",
+    "faction": "American",
+    "tier": 1,
+    "description": "XM-800T is a Tier 1 Unknown of American.",
+    "image": "XM-800T.jpg",
+    "stats": {
+      "health": 0,
+      "speed": 0,
+      "reverseSpeed": 0,
+      "agility": 0
+    },
+    "weapons": [
+      {
+        "name": "Unknown",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 173,
+    "name": "CM25",
+    "type": "Missile Carrier",
+    "faction": "Chinese",
+    "tier": 1,
+    "description": "CM25 is a Tier 1 Unknown of Chinese.",
+    "image": "CM25.jpg",
+    "stats": {
+      "health": 19000,
+      "speed": 65,
+      "reverseSpeed": 23,
+      "agility": 30
+    },
+    "weapons": [
+      {
+        "name": "BGM-71A",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "BGM-71H",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "BGM-71C",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      },
+      {
+        "name": "BGM-71E",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 174,
+    "name": "SU-152 Taran",
+    "type": "Tank Destroyer",
+    "faction": "Russian",
+    "tier": 1,
+    "description": "SU-152 Taran is a Tier 1 Unknown of Russian.",
+    "image": "SU-152 Taran.jpg",
+    "stats": {
+      "health": 24000,
+      "speed": 64,
+      "reverseSpeed": 24,
+      "agility": 32
+    },
+    "weapons": [
+      {
+        "name": "B-32 API",
+        "type": "Main Gun",
+        "damage": 300,
+        "penetration": 90,
+        "reload": 0
+      },
+      {
+        "name": "BZT-44 API",
+        "type": "Main Gun",
+        "damage": 330,
+        "penetration": 90,
+        "reload": 0
+      },
+      {
+        "name": "BS-41 API",
+        "type": "Main Gun",
+        "damage": 310,
+        "penetration": 112,
+        "reload": 0
+      },
+      {
+        "name": "BST",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 175,
+    "name": "T114 (BAT)",
+    "type": "Tank Destroyer",
+    "faction": "American",
+    "tier": 1,
+    "description": "T114 (BAT) is a Tier 1 Unknown of American.",
+    "image": "T114 (BAT).jpg",
+    "stats": {
+      "health": 0,
+      "speed": 0,
+      "reverseSpeed": 0,
+      "agility": 0
+    },
+    "weapons": [
+      {
+        "name": "Unknown",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 176,
+    "name": "M42A1",
+    "type": "Anti-Air",
+    "faction": "American",
+    "tier": 1,
+    "description": "M42A1 is a Tier 1 Unknown of American.",
+    "image": "M42A1.jpg",
+    "stats": {
+      "health": 0,
+      "speed": 0,
+      "reverseSpeed": 0,
+      "agility": 0
+    },
+    "weapons": [
+      {
+        "name": "Unknown",
+        "type": "Unknown",
+        "damage": 0,
+        "penetration": 0,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 177,
+    "name": "ZSU-57-2",
+    "type": "Anti-Air",
+    "faction": "Russian",
+    "tier": 1,
+    "description": "ZSU-57-2 is a Tier 1 Unknown of Russian.",
+    "image": "ZSU-57-2.jpg",
+    "stats": {
+      "health": 19500,
+      "speed": 47,
+      "reverseSpeed": 12,
+      "agility": 36
+    },
+    "weapons": [
+      {
+        "name": "BR-540 APHE",
+        "type": "Main Gun",
+        "damage": 9900,
+        "penetration": 243,
+        "reload": 0
+      },
+      {
+        "name": "OF-540 HE",
+        "type": "Main Gun",
+        "damage": 14850,
+        "penetration": 139,
+        "reload": 0
+      },
+      {
+        "name": "M69 APFSDS ",
+        "type": "Main Gun",
+        "damage": 11100,
+        "penetration": 400,
+        "reload": 0
+      },
+      {
+        "name": "BP-540 HEAT",
+        "type": "Main Gun",
+        "damage": 12650,
+        "penetration": 480,
+        "reload": 0
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  }
 ];
 
 const getAircraftRole = (vehicle: any) => {
@@ -5127,14 +6904,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               key={vehicle.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`group relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 transition-all duration-300
-    ${
+              className={`group relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 transition-all duration-300 ${
       vehicle.tier === "II"
         ? "hover:border-green-500 hover:shadow-[0_0_12px_1px_rgba(34,197,94,0.6)]"
         : vehicle.tier === "III"
         ? "hover:border-blue-500 hover:shadow-[0_0_12px_1px_rgba(29,78,216,0.6)]"
         : vehicle.tier === "IV"
         ? "hover:border-purple-500 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
+        : vehicle.tier === "I"
+        ? "hover:border-white-300 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
         : ""
     }`}
 >
