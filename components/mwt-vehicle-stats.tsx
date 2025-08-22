@@ -4253,6 +4253,7 @@ const VEHICLES = [
       ]
     }
   }
+  
 {
     "id": 152,
     "name": "M41 Walker Bulldog",
@@ -6119,6 +6120,7 @@ const VEHICLES = [
     }
   }
 ];
+
 
 const getAircraftRole = (vehicle: any) => {
   if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== "Helicopter") return null
