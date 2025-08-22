@@ -4259,7 +4259,7 @@ const VEHICLES = [
     "faction": "American",
     "tier": 1,
     "description": "M41 Walker Bulldog is a Tier 1 Unknown of American.",
-    "image": "M41 Walker Bulldog.jpg",
+    "image": "M41Bulldog.jpg",
     "stats": {
       "health": 27000,
       "speed": 67,
@@ -4415,19 +4415,38 @@ const VEHICLES = [
     "description": "T-55AMD-1 is a Tier 1 Unknown of Russian.",
     "image": "T-55AMD-1.jpg",
     "stats": {
-      "health": 0,
-      "speed": 0,
-      "reverseSpeed": 0,
-      "agility": 0
+      "health": 29000,
+      "speed": 55,
+      "reverseSpeed": 12,
+      "agility": 35
     },
     "weapons": [
       {
-        "name": "Unknown",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
+        "name": "BR-412 APHE",
+        "type": "Main Gun",
+        "damage": 6300,
+        "penetration": 236,
         "reload": 0
-      }
+      },
+      {
+        "name": "OF-412 HE",
+        "type": "Main Gun",
+        "damage": 9450,
+        "penetration": 103,
+        "reload": 0
+      },
+      {
+    "name": "3BK17M HEAT",
+    "type": "Main Gun",
+    "damage": 8670,
+    "penetration": 390
+  },
+      {
+    "name": "3BM24 APFSDS",
+    "type": "Main Gun",
+    "damage": 7920,
+    "penetration": 360
+  }
     ],
     "modules": {
       "engine": [
@@ -4464,12 +4483,12 @@ const VEHICLES = [
   },
   {
     "id": 155,
-    "name": "Type 61",
+    "name": "Type-61",
     "type": "Main Battle Tank",
     "faction": "Japanese",
     "tier": 1,
     "description": "Type 61 is a Tier 1 Unknown of Japan.",
-    "image": "Type 61.jpg",
+    "image": "Type61.jpg",
     "stats": {
       "health": 0,
       "speed": 0,
@@ -4477,13 +4496,32 @@ const VEHICLES = [
       "agility": 0
     },
     "weapons": [
+
+     
       {
-        "name": "Unknown",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      }
+    "name": "M82 APBC",
+    "type": "Main Gun",
+    "damage": 7480,
+    "penetration": 185
+  },
+   {
+    "name": "M71 HE",
+    "type": "Main Gun",
+    "damage": 9900,
+    "penetration": 90
+  },
+  {
+    "name": "M318A1 APBC",
+    "type": "Main Gun",
+    "damage": 8780,
+    "penetration": 194
+  },
+  {
+    "name": "M431 HEAT",
+    "type": "Main Gun",
+    "damage": 8460,
+    "penetration": 320
+  }
     ],
     "modules": {
       "engine": [
@@ -4545,20 +4583,6 @@ const VEHICLES = [
         "type": "Main Gun",
         "damage": 8100,
         "penetration": 107,
-        "reload": 0
-      },
-      {
-        "name": "APFSDS",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      },
-      {
-        "name": "HEAT",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
         "reload": 0
       }
     ],
@@ -4767,31 +4791,28 @@ const VEHICLES = [
       {
         "name": "T18E1 APBC",
         "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
+        "damage": 9100,
+        "penetration": 420,
         "reload": 0
       },
       {
-        "name": "T297 HESH",
-        "type": "Main Gun",
-        "damage": 8150,
-        "penetration": 117,
-        "reload": 0
-      },
+    "name": "T297 HESH",
+    "type": "Main Gun",
+    "damage": 8150,
+    "penetration": 117
+  },
       {
-        "name": "T279 APFSDS",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      },
+    "name": "T297 APFSDS",
+    "type": "Main Gun",
+    "damage": 10200,
+    "penetration": 429
+  },
       {
-        "name": "T298E1 HEAT",
-        "type": "Main Gun",
-        "damage": 9780,
-        "penetration": 380,
-        "reload": 0
-      }
+    "name": "T298E1 HEAT",
+    "type": "Main Gun",
+    "damage": 9780,
+    "penetration": 380
+  }
     ],
     "modules": {
       "engine": [
@@ -4842,33 +4863,29 @@ const VEHICLES = [
     },
     "weapons": [
       {
-        "name": "3UBR6 APBC",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      },
+    "name": "3UBR APBC",
+    "type": "Main Gun",
+    "damage": 540,
+    "penetration": 112
+  },
       {
-        "name": "3OF8 HEI",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      },
+    "name": "30F8 HEI",
+    "type": "Main Gun",
+    "damage": 675,
+    "penetration": 50
+  },
       {
-        "name": "3UBR8 APDS",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      },
+    "name": "3UBRB APDS",
+    "type": "Main Gun",
+    "damage": 525,
+    "penetration": 163
+  },
       {
-        "name": "M929 APFSDS",
-        "type": "Main Gun",
-        "damage": 550,
-        "penetration": 189,
-        "reload": 0
-      }
+    "name": "M929 APFSDS",
+    "type": "Main Gun",
+    "damage": 550,
+    "penetration": 189
+  }
     ],
     "modules": {
       "engine": [
@@ -4912,19 +4929,37 @@ const VEHICLES = [
     "description": "BRM-1K is a Tier 1 Unknown of Russian.",
     "image": "BRM-1K.jpg",
     "stats": {
-      "health": 0,
-      "speed": 0,
-      "reverseSpeed": 0,
-      "agility": 0
+      "health": 20000,
+      "speed": 68,
+      "reverseSpeed": 18,
+      "agility": 35
     },
     "weapons": [
+      BP-350B APBC, BP-350M HE, BP-354P HVAP, BK-354M HEAT
       {
-        "name": "Unknown",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      }
+    "name": "BP-350B APHE",
+    "type": "Main Gun",
+    "damage": 6264,
+    "penetration": 122
+  },
+  {
+    "name": "BP-350M HE",
+    "type": "Main Gun",
+    "damage": 7830,
+    "penetration": 76
+  },
+  {
+    "name": "BP-350M HE",
+    "type": "Main Gun",
+    "damage": 7830,
+    "penetration": 76
+  },
+   {
+    "name": "BK-354M HEAT",
+    "type": "Main Gun",
+    "damage": 6670,
+    "penetration": 320
+  }
     ],
     "modules": {
       "engine": [
@@ -5047,9 +5082,9 @@ const VEHICLES = [
       {
         "name": "9M14 Malyutka",
         "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
+        "damage": 8200,
+        "penetration": 400,
+        "reload": 4
       }
     ],
     "modules": {
@@ -5227,33 +5262,29 @@ const VEHICLES = [
     },
     "weapons": [
       {
-        "name": "PGU-32/U SAPHEI",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      },
+    "name": "PGU-32/U SAPHEI(LAV)",
+    "type": "Main Gun",
+    "damage": 405,
+    "penetration": 115
+  },
       {
-        "name": "M792 HEI",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      },
+    "name": "M791 APDS(LAV)",
+    "type": "Main Gun",
+    "damage": 473,
+    "penetration": 111
+  },
       {
         "name": "M719 APDS",
         "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
+        "damage": 450,
+        "penetration": 120
       },
       {
-        "name": "M919 APFSDS",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      }
+    "name": "M919 APFSDS(LAV)",
+    "type": "Main Gun",
+    "damage": 495,
+    "penetration": 140
+  },
     ],
     "modules": {
       "engine": [
@@ -5297,19 +5328,36 @@ const VEHICLES = [
     "description": "M113A1 FMS AIFV is a Tier 1 Unknown of American.",
     "image": "M113A1-FMS-AIFV.jpg",
     "stats": {
-      "health": 0,
-      "speed": 0,
-      "reverseSpeed": 0,
-      "agility": 0
+      "health": 21500,
+      "speed": 65,
+      "reverseSpeed": 23,
+      "agility": 38
     },
     "weapons": [
       {
-        "name": "Unknown",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      }
+    "name": "20×128 APCR",
+    "type": "Main Gun",
+    "damage": 380,
+    "penetration": 135
+  },
+  {
+    "name": "20×128 API",
+    "type": "Main Gun",
+    "damage": 380,
+    "penetration": 105
+  },
+  {
+    "name": "20×128 API ",
+    "type": "Main Gun",
+    "damage": 380,
+    "penetration": 95
+  },
+  {
+    "name": "20×128 HEI",
+    "type": "Main Gun",
+    "damage": 513,
+    "penetration": 40
+  }
     ],
     "modules": {
       "engine": [
@@ -5570,33 +5618,29 @@ const VEHICLES = [
     },
     "weapons": [
       {
-        "name": "Type-87 SAPHEI",
-        "type": "Main Gun",
-        "damage": 432,
-        "penetration": 105,
-        "reload": 0
-      },
-      {
-        "name": "HE",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      },
-      {
-        "name": "APDS",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      },
-      {
-        "name": "APFSDS",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      }
+    "name": "Type-87 APDS",
+    "type": "Main Gun",
+    "damage": 504,
+    "penetration": 111
+  },
+  {
+    "name": "Type-87 APFSDS",
+    "type": "Main Gun",
+    "damage": 528,
+    "penetration": 150
+  },
+  {
+    "name": "Type-87 HEI",
+    "type": "Main Gun",
+    "damage": 648,
+    "penetration": 45
+  },
+  {
+    "name": "Type-87 SAPHEI",
+    "type": "Main Gun",
+    "damage": 432,
+    "penetration": 105
+  }
     ],
     "modules": {
       "engine": [
@@ -5640,19 +5684,37 @@ const VEHICLES = [
     "description": "XM-800T is a Tier 1 Unknown of American.",
     "image": "XM-800T.jpg",
     "stats": {
-      "health": 0,
-      "speed": 0,
-      "reverseSpeed": 0,
-      "agility": 0
+      "health": 21000,
+      "speed": 96,
+      "reverseSpeed": 43,
+      "agility": 37
     },
     "weapons": [
+      M792 HEI, PGU-32/U SAPHEI, M791 APDS, M919 APFSDS
       {
-        "name": "Unknown",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      }
+    "name": "M792 HEI(FMS)",
+    "type": "Main Gun",
+    "damage": 608,
+    "penetration": 48
+  },
+  {
+    "name": "PGU-32/U SAPHEI(FMS)",
+    "type": "Main Gun",
+    "damage": 432,
+    "penetration": 15
+  },
+  {
+    "name": "M7911 APDS(FMS)",
+    "type": "Main Gun",
+    "damage": 473,
+    "penetration": 111
+  },
+  {
+    "name": "M919 APFSDS(FMS)",
+    "type": "Main Gun",
+    "damage": 495,
+    "penetration": 140
+  }
     ],
     "modules": {
       "engine": [
@@ -5705,30 +5767,30 @@ const VEHICLES = [
       {
         "name": "BGM-71A",
         "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
+        "damage": 10450,
+        "penetration": 430,
+        "reload": 6
       },
       {
         "name": "BGM-71H",
         "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
+        "damage": 9900,
+        "penetration": 120,
+        "reload": 6
       },
       {
         "name": "BGM-71C",
         "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
+        "damage": 12100,
+        "penetration": 630,
+        "reload": 6
       },
       {
         "name": "BGM-71E",
         "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
+        "damage": 10120,
+        "penetration": 900,
+        "reload": 6
       }
     ],
     "modules": {
@@ -5771,7 +5833,7 @@ const VEHICLES = [
     "faction": "Russian",
     "tier": 1,
     "description": "SU-152 Taran is a Tier 1 Unknown of Russian.",
-    "image": "SU-152 Taran.jpg",
+    "image": "SU-152.jpg",
     "stats": {
       "health": 24000,
       "speed": 64,
@@ -5800,13 +5862,12 @@ const VEHICLES = [
         "penetration": 112,
         "reload": 0
       },
-      {
-        "name": "BST",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      }
+     {
+    "name": "BST API",
+    "type": "Main Gun",
+    "damage": 350,
+    "penetration": 112
+  },
     ],
     "modules": {
       "engine": [
@@ -5848,21 +5909,39 @@ const VEHICLES = [
     "faction": "American",
     "tier": 1,
     "description": "T114 (BAT) is a Tier 1 Unknown of American.",
-    "image": "T114 (BAT).jpg",
+    "image": "T114.jpg",
     "stats": {
-      "health": 0,
-      "speed": 0,
-      "reverseSpeed": 0,
-      "agility": 0
+      "health": 18000,
+      "speed": 59,
+      "reverseSpeed": 19,
+      "agility": 41
     },
     "weapons": [
-      {
-        "name": "Unknown",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      }
+      M344 HEAT, PFF HE, M344A1 HEAT, 106 3A HEAT
+     {
+    "name": "BP-350B APHE",
+    "type": "Main Gun",
+    "damage": 6264,
+    "penetration": 122
+  },
+  {
+    "name": "PFF HE",
+    "type": "Main Gun",
+    "damage": 10400,
+    "penetration": 106
+  },
+  {
+    "name": "M344A1 HEAT",
+    "type": "Main Gun",
+    "damage": 10800,
+    "penetration": 433
+  },
+  {
+    "name": "106 3A HEAT",
+    "type": "Main Gun",
+    "damage": 10000,
+    "penetration": 700
+  }
     ],
     "modules": {
       "engine": [
@@ -5906,19 +5985,31 @@ const VEHICLES = [
     "description": "M42A1 is a Tier 1 Unknown of American.",
     "image": "M42A1.jpg",
     "stats": {
-      "health": 0,
-      "speed": 0,
-      "reverseSpeed": 0,
-      "agility": 0
+      "health": 19000,
+      "speed": 73,
+      "reverseSpeed": 29,
+      "agility": 38
     },
     "weapons": [
+      M81A1 API, Mk2 HEI, Mk3 HEI
       {
-        "name": "Unknown",
-        "type": "Unknown",
-        "damage": 0,
-        "penetration": 0,
-        "reload": 0
-      }
+    "name": "M81A1 API",
+    "type": "Main Gun",
+    "damage": 1080,
+    "penetration": 135
+  },
+  {
+    "name": "Mk2 HEI",
+    "type": "Main Gun",
+    "damage": 1400,
+    "penetration": 56
+  },
+  {
+    "name": "Mk3 HEI",
+    "type": "Main Gun",
+    "damage": 1200,
+    "penetration": 76
+  }
     ],
     "modules": {
       "engine": [
@@ -5972,29 +6063,25 @@ const VEHICLES = [
         "name": "BR-540 APHE",
         "type": "Main Gun",
         "damage": 9900,
-        "penetration": 243,
-        "reload": 0
+        "penetration": 243
       },
       {
         "name": "OF-540 HE",
         "type": "Main Gun",
         "damage": 14850,
-        "penetration": 139,
-        "reload": 0
+        "penetration": 139
       },
       {
         "name": "M69 APFSDS ",
         "type": "Main Gun",
         "damage": 11100,
-        "penetration": 400,
-        "reload": 0
+        "penetration": 400
       },
       {
         "name": "BP-540 HEAT",
         "type": "Main Gun",
         "damage": 12650,
-        "penetration": 480,
-        "reload": 0
+        "penetration": 480
       }
     ],
     "modules": {
