@@ -1,7 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useState } from "react"
 
 const VEHICLES = [
@@ -6195,6 +6195,76 @@ const VEHICLES = [
   }
 ];
 
+// Battle Pass Data
+const BATTLE_PASS_MONTHS = [
+  {
+    id: 1,
+    month: "January 2024",
+    title: "Arctic Storm",
+    description: "Frozen battlefields and winter warfare dominate this month's operations. Elite units deploy advanced cold-weather equipment.",
+    image: "arctic-storm-event.jpg",
+    vehicles: [
+      VEHICLES.find(v => v.name === "T-14 Armata"),
+      VEHICLES.find(v => v.name === "Leopard 2A7+")
+    ].filter(Boolean)
+  },
+  {
+    id: 2,
+    month: "February 2024",
+    title: "Desert Thunder",
+    description: "High-intensity desert combat with advanced air support and armored divisions clashing in sandy terrain.",
+    image: "desert-thunder-event.jpg",
+    vehicles: [
+      VEHICLES.find(v => v.name === "F-22 Raptor"),
+      VEHICLES.find(v => v.name === "Abrams X")
+    ].filter(Boolean)
+  },
+  {
+    id: 3,
+    month: "March 2024",
+    title: "Urban Siege",
+    description: "Close-quarters urban warfare featuring specialized equipment for city combat and building clearing operations.",
+    image: "urban-siege-event.jpg",
+    vehicles: [
+      VEHICLES.find(v => v.name === "BMPT Terminator 2"),
+      VEHICLES.find(v => v.name === "M1128 Stryker")
+    ].filter(Boolean)
+  },
+  {
+    id: 4,
+    month: "April 2024",
+    title: "Naval Strike",
+    description: "Amphibious operations and carrier-based missions with advanced naval aviation and marine assault units.",
+    image: "naval-strike-event.jpg",
+    vehicles: [
+      VEHICLES.find(v => v.name === "F/A-18F Super Hornet"),
+      VEHICLES.find(v => v.name === "Type 16 MCV")
+    ].filter(Boolean)
+  },
+  {
+    id: 5,
+    month: "May 2024",
+    title: "Stealth Operations",
+    description: "Covert missions featuring next-generation stealth technology and advanced reconnaissance platforms.",
+    image: "stealth-ops-event.jpg",
+    vehicles: [
+      VEHICLES.find(v => v.name === "Su-57M"),
+      VEHICLES.find(v => v.name === "Ka-58 Black Ghost")
+    ].filter(Boolean)
+  },
+  {
+    id: 6,
+    month: "June 2024",
+    title: "Air Supremacy",
+    description: "Aerial dominance campaigns with cutting-edge fighter jets and advanced air-to-air combat systems.",
+    image: "air-supremacy-event.jpg",
+    vehicles: [
+      VEHICLES.find(v => v.name === "J-20 Mighty Dragon"),
+      VEHICLES.find(v => v.name === "MiG-41M")
+    ].filter(Boolean)
+  }
+];
+
 const getAircraftRole = (vehicle: any) => {
   if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== "Helicopter") return null
 
@@ -6431,6 +6501,11 @@ const MwtVehicleStats = () => {
   const [showCredits, setShowCredits] = useState(false)
 
   const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
+  
+  // Sidebar state
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [activeTab, setActiveTab] = useState("battlepass")
+  const [expandedMonth, setExpandedMonth] = useState<number | null>(null)
 
   const types = [...new Set(VEHICLES.map((v) => v.type))]
   const tiers = [...new Set(VEHICLES.map((v) => v.tier))].sort()
@@ -6892,14 +6967,151 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      {/* Sidebar Toggle Button */}
+      <button
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        className="fixed top-4 left-4 z-50 p-3 hover:bg-slate-700 rounded-lg border border-slate-600 transition-all duration-200 backdrop-blur-sm w-0.5 my-20 mx-[-22px] bg-blue-900 h-[150px]"
+      >
+        <CalendarSearchIcon className="w-5 h-5 text-cyan-400 mx-[-8px]" />
+      </button>
+
+      {/* Sidebar */}
+      <AnimatePresence>
+        {sidebarOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSidebarOpen(false)}
+              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            />
+            
+            {/* Sidebar Content */}
+            <motion.div
+              initial={{ x: -320 }}
+              animate={{ x: 0 }}
+              exit={{ x: -320 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed left-0 top-0 h-full bg-slate-800 border-r border-slate-700 z-50 overflow-y-auto w-96"
+            >
+              {/* Sidebar Header */}
+              <div className="p-4 flex items-center justify-between bg-blue-900">
+                <div className="flex items-center space-x-2">
+                  
+                  <span className="text-white font-medium">MWT Assistant </span>
+                </div>
+                <button
+                  onClick={() => setSidebarOpen(false)}
+                  className="text-white hover:text-gray-200 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Battle Pass Tab - Always Active */}
+              <div className="py-4">
+                <div className="w-full flex items-center px-4 py-3 bg-red-600 text-white border-r-2 border-red-400">
+                  <Trophy className="w-4 h-4 mr-3" />
+                  <span>MWT Battle Pass</span>
+                  <span className="ml-auto text-xs bg-red-700 px-2 py-1 rounded">6</span>
+                </div>
+              </div>
+
+              {/* Battle Pass Content - Always Visible */}
+              <div className="px-4 pb-4">
+                  <div className="border-t border-slate-700 pt-4">
+                    <h4 className="text-white font-medium mb-3 px-2">2025</h4>
+                    
+                    {BATTLE_PASS_MONTHS.map((month) => (
+                      <div key={month.id} className="mb-2">
+                        {/* Month Header */}
+                        <button
+                          onClick={() => setExpandedMonth(expandedMonth === month.id ? null : month.id)}
+                          className="w-full flex items-center justify-between px-2 py-2 text-left text-gray-300 hover:bg-slate-700 hover:text-white transition-colors rounded"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <Calendar className="w-4 h-4" />
+                            <span className="text-sm">{month.title}</span>
+                          </div>
+                          {expandedMonth === month.id ? (
+                            <ChevronDown className="w-4 h-4" />
+                          ) : (
+                            <ChevronRight className="w-4 h-4" />
+                          )}
+                        </button>
+
+                        {/* Expanded Content */}
+                        <AnimatePresence>
+                          {expandedMonth === month.id && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="ml-6 mt-2 space-y-2">
+                                <p className="text-xs text-gray-400 mb-3">{month.description}</p>
+                                
+                                {month.vehicles.map((vehicle) => (
+                                  <div key={vehicle.id} className="bg-slate-700/50 rounded-lg p-3 hover:bg-slate-700 transition-colors border border-slate-600">
+                                    <div className="flex items-center space-x-3">
+                                      <div className="w-12 h-12 bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0">
+                                        <img 
+                                          src={`/vehicles/${vehicle.image}`} 
+                                          alt={vehicle.name}
+                                          className="w-full h-full object-cover"
+                                          onError={(e) => {
+                                            e.currentTarget.style.display = 'none';
+                                            e.currentTarget.nextElementSibling.style.display = 'flex';
+                                          }}
+                                        />
+                                        <div className="w-full h-full bg-gradient-to-br from-slate-600 to-slate-700 flex items-center justify-center" style={{display: 'none'}}>
+                                          <span className="text-xs font-bold text-cyan-400">
+                                            {vehicle.name.substring(0, 2)}
+                                          </span>
+                                        </div>
+                                      </div>
+                                      <div className="flex-1 min-w-0">
+                                        <div className="text-sm font-medium text-white truncate">{vehicle.name}</div>
+                                        <div className="text-xs text-gray-400">{vehicle.type} • {vehicle.faction}</div>
+                                        <div className="flex items-center space-x-3 mt-1">
+                                          <div className="flex items-center space-x-1">
+                                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                            <span className="text-xs text-gray-500">HP: {vehicle.stats.health.toLocaleString()}</span>
+                                          </div>
+                                          <div className="flex items-center space-x-1">
+                                            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                            <span className="text-xs text-gray-500">Speed: {vehicle.stats.speed}</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 shadow-sm">
         <div className="max-w-7xl mx-auto p-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent mx-1.5">
                 {"MWT Assistant (Unofficial)\n(Demo)"}
               </h1>
-              <p className="text-slate-400 mt-1">    MWT Assistant</p>
+              <p className="text-slate-400 mt-1 ml-2.5">    MWT Assistant</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="pb-6">
@@ -6957,7 +7169,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto p-6">
+      <main className="max-w-7xl p-6 mx-2">
         {compare.length === 2 && (
           <div className="mb-8 bg-slate-900/40 rounded-xl p-6 border border-slate-800">
             <h2 className="text-2xl font-bold text-cyan-400 mb-4">Vehicle Comparison</h2>
@@ -7064,7 +7276,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         )}
 
         <div className="mb-6 flex items-center justify-between">
-          <p className="text-slate-400">
+          <p className="text-slate-400 mx-1.5">
             Showing {indexOfFirstVehicle + 1}-{Math.min(indexOfLastVehicle, filteredVehicles.length)} of{" "}
             {filteredVehicles.length} vehicles
           </p>
@@ -7715,115 +7927,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   )
 }
 
-import { useState } from "react";
-import tanksData from "../data/tanks.json"; // your existing tank stats
 
-export default function Sidebar() {
-  const [open, setOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("");
-  const [activeMonth, setActiveMonth] = useState(null);
-
-  const battlePasses = [
-    {
-      month: "August 2025",
-      image: "/battlepasses/aug2025.jpg",
-      description: "Special summer event with exclusive rewards.",
-      vehicles: ["M41 Walker Bulldog", "T-55A"],
-    },
-    {
-      month: "July 2025",
-      image: "/battlepasses/july2025.jpg",
-      description: "Armored Thunder season with premium tank skins.",
-      vehicles: ["Leopard 1", "Type 74"],
-    },
-  ];
-
-  const getVehicleData = (name) =>
-    tanksData.find((tank) => tank.name === name);
-
-  return (
-    <div className="flex">
-      {/* Toggle button */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="p-2 m-2 bg-gray-800 text-white rounded-lg"
-      >
-        ☰
-      </button>
-
-      {/* Sidebar */}
-      <div
-        className={`fixed top-0 left-0 h-full bg-gray-900 text-white w-64 transform ${
-          open ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out`}
-      >
-        <h2 className="text-xl font-bold p-4">Menu</h2>
-        <ul>
-          <li
-            className="p-4 hover:bg-gray-700 cursor-pointer"
-            onClick={() => setActiveTab("battlepass")}
-          >
-            Battle Pass
-          </li>
-        </ul>
-      </div>
-
-      {/* Main Content */}
-      <div className="ml-4 p-4 w-full">
-        {activeTab === "battlepass" && (
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Battle Pass</h2>
-            <div className="grid gap-4">
-              {battlePasses.map((bp, i) => (
-                <div
-                  key={i}
-                  className="bg-gray-100 rounded-xl p-4 shadow-lg cursor-pointer"
-                  onClick={() =>
-                    setActiveMonth(activeMonth === bp.month ? null : bp.month)
-                  }
-                >
-                  <div className="flex gap-4">
-                    <img
-                      src={bp.image}
-                      alt={bp.month}
-                      className="w-32 h-32 object-cover rounded-lg"
-                    />
-                    <div>
-                      <h3 className="text-xl font-semibold">{bp.month}</h3>
-                      <p className="text-gray-700">{bp.description}</p>
-                    </div>
-                  </div>
-
-                  {/* Vehicles Section */}
-                  {activeMonth === bp.month && (
-                    <div className="mt-4 grid grid-cols-2 gap-4">
-                      {bp.vehicles.map((name) => {
-                        const tank = getVehicleData(name);
-                        return tank ? (
-                          <div
-                            key={name}
-                            className="bg-gray-200 rounded-lg p-2 flex flex-col items-center"
-                          >
-                            <img
-                              src={tank.image}
-                              alt={tank.name}
-                              className="w-24 h-24 object-cover rounded-md"
-                            />
-                            <h4 className="mt-2 font-semibold">{tank.name}</h4>
-                            <p className="text-sm text-gray-600">{tank.type}</p>
-                          </div>
-                        ) : null;
-                      })}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
 
 export default MwtVehicleStats;
