@@ -2970,7 +2970,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 111,
+    "id": 413,
     "name": "XM2001 Crusader",
     "type": "SPA",
     "faction": "American",
@@ -3001,7 +3001,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 412,
+    "id": 414,
     "name": "Gepard 1A2",
     "type": "Anti-Air",
     "faction": "German",
@@ -3030,7 +3030,7 @@ const VEHICLES = [
   },
    
   {
-    id: 413,
+    id: 415,
     name: "Otomatic 76",
     type: "Anti-Air",
     faction: "Italian",
@@ -3061,7 +3061,7 @@ const VEHICLES = [
     },
   },
   {
-    "id": 414,
+    "id": 416,
     "name": "K-31 Cheonma",
     "type": "Anti-Air",
     "faction": "SouthKorean",
@@ -3089,7 +3089,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 415,
+    "id": 417,
     "name": "PGZ-09",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3117,7 +3117,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 416,
+    "id": 418,
     "name": "2S6M1 Tunguska-M1",
     "type": "Anti-Air",
     "faction": "Russian",
@@ -3146,7 +3146,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 417,
+    "id": 419,
     "name": "Type 625E SHORAD",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3175,7 +3175,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 418,
+    "id": 420,
     "name": "XM975",
     "type": "Anti-Air",
     "faction": "American",
@@ -3204,7 +3204,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 419,
+    "id": 421,
     "name": "AFT-10",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3233,7 +3233,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 420,
+    "id": 422,
     "name": "M113 Hellfire",
     "type": "Missile Carrier",
     "faction": "American",
@@ -3260,7 +3260,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 421,
+    "id": 423,
     "name": "9A52-2 Smerch",
     "type": "MLRS",
     "faction": "Russian",
@@ -3288,7 +3288,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 422,
+    "id": 424,
     "name": "Type 89 MLRS",
     "type": "MLRS",
     "faction": "Chinese",
@@ -3316,7 +3316,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 423,
+    "id": 425,
     "name": "AFT-09",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3345,7 +3345,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 424,
+    "id": 426,
     "name": "LAV-600",
     "type": "Tank Destroyer",
     "faction": "American",
@@ -3373,14 +3373,14 @@ const VEHICLES = [
     }
   },
   {
-    "id": 425,
+    "id": 427,
     "name": "Rookiat MTTD",
     "type": "Light Tank",
     "faction": "British",
     "tier": "III",
-    image: "Rookiat MTTD.jpg",
+    image: "Rookiat-MTTD.jpg",
     "description": "The Rooikat MTTD is a fast, wheeled tank destroyer with strong firepower.",
-    "stats": { "health": 26100, "speed": 105, "armor": 40, "agility": 35 },
+    "stats": { "health": 26100, "speed": 105, "armor": 40, "agility": 50 },
     "weapons": [
       { "name": "DM23 APFSDS", "type": "Cannon", "damage": 8400, "penetration": 337, "reload": 5.8 },
       { "name": "DM512 HESH", "type": "Cannon", "damage": 9600, "penetration": 127, "reload": 5.8 }
@@ -3403,7 +3403,37 @@ const VEHICLES = [
     }
   },
   {
-    "id": 426,
+    "id": 428,
+    "name": "VBCI-2",
+    "type": "Light Tank",
+    "faction": "French",
+    "tier": "III",
+    image: "VBCI-2.jpg",
+    "description": "A French 8×8 infantry fighting vehicle, upgraded from the VBCI with better armor and mobility",
+    "stats": { "health": 27500, "speed": 120, "armor": 40, "agility": 52 },
+    "weapons": [
+      { "name": "MK246 API", "type": "Cannon", "damage": 1000, "penetration": 117, "reload": 10},
+      { "name": "MK266 HEI", "type": "Cannon", "damage": 520, "penetration": 55, "reload": 10 }
+      { "name": "MK258 APFSDS", "type": "Cannon", "damage": 1100, "penetration": 165, "reload": 10 }
+      { "name": "MBDA-MMP", "type": "Missile", "damage": 12540, "penetration": 1000, "reload": 10 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
+  },
+  {
+    "id": 429,
     "name": "WMA301",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -3431,7 +3461,7 @@ const VEHICLES = [
     }
   },
    {
-    id: 427,
+    id: 430,
     name: "BMD3",
     type: "Light Tank",
     faction: "Russian",
@@ -6426,7 +6456,9 @@ const MwtVehicleStats = () => {
       "YF-23",
       "Gepard 1A2",
       "Type 625E SHORAD",
-      "SB-1"
+      "SB-1",
+      "T-14 Armata (152)",
+      "Leopard 2A7+"
     ]
     return marketVehicles.includes(vehicleName)
   }
@@ -6477,7 +6509,14 @@ const MwtVehicleStats = () => {
 "AFT-10",
 "Type 89 MLRS",
 "AFT-09",
-"WMA301"
+"WMA301",
+"Type 61",
+"VBCI-2",
+"Rookiat MTTD",
+"M1 Abrams Block 3",
+"J-15",
+"Su-35S",
+"OH-1 Ninja"
 
         
 
