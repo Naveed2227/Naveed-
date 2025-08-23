@@ -7114,7 +7114,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               animate={{ x: 0 }}
               exit={{ x: -400 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed left-0 top-0 h-full bg-gradient-to-b from-slate-800 to-slate-900 border-r border-purple-500/30 z-50 overflow-y-auto w-[450px] shadow-2xl"
+              className="fixed left-0 top-0 h-full bg-gradient-to-b from-slate-800 to-slate-900 border-r border-purple-500/30 z-50 overflow-y-auto shadow-2xl w-[400px]"
             >
               {/* Header */}
               <div className="p-6 bg-gradient-to-r from-lime-400 to-blue-600 border-b border-purple-400/30">
@@ -7136,8 +7136,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               </div>
 
               {/* Battle Pass List */}
-              <div className="p-6 space-y-4">
-                <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+              <div className="p-6 space-y-4 w-auto mx-[-22px]">
+                <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2 ml-1.5">
                   <Calendar className="w-5 h-5 text-lime-300" />
                   Battle Passes
                 </h3>
@@ -7147,7 +7147,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     {/* Battle Pass Header */}
                     <button
                       onClick={() => setSelectedBattlePass(selectedBattlePass === battlePass.id ? null : battlePass.id)}
-                      className="w-full p-4 text-left hover:bg-slate-700/30 transition-colors"
+                      className="p-4 text-left hover:bg-slate-700/30 transition-colors w-56"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
@@ -7174,7 +7174,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className="text-white text-xs px-2 py-1 rounded-full font-medium bg-blue-600">
+                          <span className="text-white text-xs px-2 py-1 rounded-full font-medium bg-blue-600 w-[62px]">
                              Vehicles
                           </span>
                           {selectedBattlePass === battlePass.id ? (
