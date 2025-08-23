@@ -7715,6 +7715,115 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   )
 }
 
+import { useState } from "react";
+import tanksData from "../data/tanks.json"; // your existing tank stats
 
+export default function Sidebar() {
+  const [open, setOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("");
+  const [activeMonth, setActiveMonth] = useState(null);
+
+  const battlePasses = [
+    {
+      month: "August 2025",
+      image: "/battlepasses/aug2025.jpg",
+      description: "Special summer event with exclusive rewards.",
+      vehicles: ["M41 Walker Bulldog", "T-55A"],
+    },
+    {
+      month: "July 2025",
+      image: "/battlepasses/july2025.jpg",
+      description: "Armored Thunder season with premium tank skins.",
+      vehicles: ["Leopard 1", "Type 74"],
+    },
+  ];
+
+  const getVehicleData = (name) =>
+    tanksData.find((tank) => tank.name === name);
+
+  return (
+    <div className="flex">
+      {/* Toggle button */}
+      <button
+        onClick={() => setOpen(!open)}
+        className="p-2 m-2 bg-gray-800 text-white rounded-lg"
+      >
+        ☰
+      </button>
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full bg-gray-900 text-white w-64 transform ${
+          open ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out`}
+      >
+        <h2 className="text-xl font-bold p-4">Menu</h2>
+        <ul>
+          <li
+            className="p-4 hover:bg-gray-700 cursor-pointer"
+            onClick={() => setActiveTab("battlepass")}
+          >
+            Battle Pass
+          </li>
+        </ul>
+      </div>
+
+      {/* Main Content */}
+      <div className="ml-4 p-4 w-full">
+        {activeTab === "battlepass" && (
+          <div>
+            <h2 className="text-2xl font-bold mb-4">Battle Pass</h2>
+            <div className="grid gap-4">
+              {battlePasses.map((bp, i) => (
+                <div
+                  key={i}
+                  className="bg-gray-100 rounded-xl p-4 shadow-lg cursor-pointer"
+                  onClick={() =>
+                    setActiveMonth(activeMonth === bp.month ? null : bp.month)
+                  }
+                >
+                  <div className="flex gap-4">
+                    <img
+                      src={bp.image}
+                      alt={bp.month}
+                      className="w-32 h-32 object-cover rounded-lg"
+                    />
+                    <div>
+                      <h3 className="text-xl font-semibold">{bp.month}</h3>
+                      <p className="text-gray-700">{bp.description}</p>
+                    </div>
+                  </div>
+
+                  {/* Vehicles Section */}
+                  {activeMonth === bp.month && (
+                    <div className="mt-4 grid grid-cols-2 gap-4">
+                      {bp.vehicles.map((name) => {
+                        const tank = getVehicleData(name);
+                        return tank ? (
+                          <div
+                            key={name}
+                            className="bg-gray-200 rounded-lg p-2 flex flex-col items-center"
+                          >
+                            <img
+                              src={tank.image}
+                              alt={tank.name}
+                              className="w-24 h-24 object-cover rounded-md"
+                            />
+                            <h4 className="mt-2 font-semibold">{tank.name}</h4>
+                            <p className="text-sm text-gray-600">{tank.type}</p>
+                          </div>
+                        ) : null;
+                      })}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default MwtVehicleStats;
