@@ -7139,7 +7139,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               <div className="p-6 space-y-4">
                 <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-purple-400" />
-                  2024 Battle Passes
+                  Battle Passes
                 </h3>
                 
                 {BATTLE_PASSES.map((battlePass) => (
@@ -7151,7 +7151,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center border border-purple-400/30 overflow-hidden">
+                          <div className="h-16 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center border border-purple-400/30 overflow-hidden w-32">
                             <img 
                               src={battlePass.image} 
                               alt={battlePass.name}
@@ -7168,14 +7168,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             </div>
                           </div>
                           <div className="flex-1">
-                            <h4 className="text-lg font-bold text-white">{battlePass.name}</h4>
+                            <h4 className="text-lg font-bold text-white w-36">{battlePass.name}</h4>
                             <p className="text-purple-300 text-sm font-medium">{battlePass.month}</p>
-                            <p className="text-slate-400 text-xs mt-1">{battlePass.description}</p>
+                            
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
                           <span className="bg-purple-600 text-white text-xs px-2 py-1 rounded-full font-medium">
-                            {battlePass.vehicles.length} Vehicles
+                             Vehicles
                           </span>
                           {selectedBattlePass === battlePass.id ? (
                             <ChevronDown className="w-5 h-5 text-purple-400" />
