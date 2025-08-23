@@ -7624,6 +7624,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <h4 className="text-white font-semibold">VIPER2729</h4>
                   <p className="text-slate-400 text-sm">Supporter</p>
                 </div>
+                <div>
+                  <h4 className="text-white font-semibold">THE DAWN</h4>
+                  <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold">白叔</h4>
+                  <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
+                </div>
               </div>
             </div>
           </div>
