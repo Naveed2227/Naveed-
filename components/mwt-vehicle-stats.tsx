@@ -7,10 +7,82 @@ import { useState } from "react"
 // Battle Pass Data Structure
 const BATTLE_PASSES = [
   {
-    id: 1,
-    month: "January 2024",
+    id: 9,
+    month: "August 2025",
     name: "Winter Storm",
-    image: "winter-storm.jpg", // Upload your custom image to the same directory
+    image: "2025-Aug.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
+      free: ["Bonus XP", "Credits", "Decals"]
+    }
+  },
+  {
+    id: 8,
+    month: "July 2025",
+    name: "Winter Storm",
+    image: "2025-July.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
+      free: ["Bonus XP", "Credits", "Decals"]
+    }
+  },
+  {
+    id: 7,
+    month: "June 2025",
+    name: "Winter Storm",
+    image: "2025-Jun.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
+      free: ["Bonus XP", "Credits", "Decals"]
+    }
+  },
+  {
+    id: 6,
+    month: "May 2025",
+    name: "Winter Storm",
+    image: "2025-May.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
+      free: ["Bonus XP", "Credits", "Decals"]
+    }
+  },
+  {
+    id: 5,
+    month: "April 2025",
+    name: "Winter Storm",
+    image: "2025-Apr.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
+      free: ["Bonus XP", "Credits", "Decals"]
+    }
+  },
+  {
+    id: 4,
+    month: "March 2025",
+    name: "Winter Storm",
+    image: "2025-March.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
+      free: ["Bonus XP", "Credits", "Decals"]
+    }
+  },
+  {
+    id: 3,
+    month: "February 2025",
+    name: "Winter Storm",
+    image: "2025-Feb.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
     vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
     rewards: {
@@ -20,76 +92,29 @@ const BATTLE_PASSES = [
   },
   {
     id: 2,
-    month: "February 2024",
-    name: "Desert Thunder",
-    image: "desert-thunder.jpg", // Upload your custom image to the same directory
-    description: "Command the desert with advanced armored divisions",
-    vehicles: [103, 106, 301, 303, 501],
+    month: "January 2025",
+    name: "Winter Storm",
+    image: "2025-Jan.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["M1 Abrams Block 3", "Altay", "F-16C Night Falcon"],
-      free: ["Camouflage", "Credits", "Repair Kits"]
+      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
+      free: ["Bonus XP", "Credits", "Decals"]
     }
   },
   {
-    id: 3,
-    month: "March 2024",
-    name: "Sky Dominance",
-    image: "sky-dominance.jpg", // Upload your custom image to the same directory
-    description: "Rule the skies with next-generation air superiority fighters",
-    vehicles: [4, 5, 7, 203, 206],
-    rewards: {
-      premium: ["TU-222", "J-35", "Ka-58 Black Ghost"],
-      free: ["Pilot Gear", "Credits", "Ammunition"]
-    }
-  },
-  {
-    id: 4,
-    month: "April 2024",
-    name: "Naval Strike",
-    image: "naval-strike.jpg", // Upload your custom image to the same directory
-    description: "Amphibious assault and naval warfare specialists",
-    vehicles: [9, 11, 600, 702, 800],
-    rewards: {
-      premium: ["F-35B Lightning II", "Su-75 Checkmate", "AV-8B Harrier II"],
-      free: ["Naval Insignia", "Credits", "Fuel"]
-    }
-  },
-  {
-    id: 5,
-    month: "May 2024",
-    name: "Armored Spearhead",
-    image: "armored-spearhead.jpg", // Upload your custom image to the same directory
-    description: "Heavy armor breakthrough operations",
-    vehicles: [109, 114, 118, 121, 124],
-    rewards: {
-      premium: ["T-95M", "BMPT Terminator 2", "ZTZ99-III"],
-      free: ["Tank Crew Gear", "Credits", "Armor Plates"]
-    }
-  },
-  {
-    id: 6,
-    month: "June 2024",
-    name: "Electronic Warfare",
-    image: "electronic-warfare.jpg", // Upload your custom image to the same directory
-    description: "Advanced electronic warfare and stealth operations",
-    vehicles: [127, 129, 132, 135, 415],
-    rewards: {
-      premium: ["T-20 Monolit", "M10 Booker", "TOS-1A"],
-      free: ["Electronic Equipment", "Credits", "Countermeasures"]
-    }
-  },
-  {
-    id: 7,
+    id: 1,
     month: "December 2024",
-    name: "Season Two",
-    image: "season-two.jpg", // Your December Battle Pass image
-    description: "Epic battles across land, sea, and air in the ultimate warfare season",
-    vehicles: [1, 4, 100, 103, 200, 203], // Premium vehicles for Season Two
+    name: "Winter Storm",
+    image: "2024-Dec.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["Su-57M", "TU-222", "T-14 Armata", "M1 Abrams Block 3"],
-      free: ["Season Emblems", "Credits", "Premium Time"]
+      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
+      free: ["Bonus XP", "Credits", "Decals"]
     }
   }
+
 ];
 
 const VEHICLES = [
