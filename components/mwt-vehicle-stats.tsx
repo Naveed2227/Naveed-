@@ -10,7 +10,7 @@ const BATTLE_PASSES = [
     id: 1,
     month: "January 2024",
     name: "Winter Storm",
-    image: "/battle-pass-january.jpg",
+    image: "winter-storm.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
     vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
     rewards: {
@@ -22,7 +22,7 @@ const BATTLE_PASSES = [
     id: 2,
     month: "February 2024",
     name: "Desert Thunder",
-    image: "/battle-pass-february.jpg",
+    image: "desert-thunder.jpg", // Upload your custom image to the same directory
     description: "Command the desert with advanced armored divisions",
     vehicles: [103, 106, 301, 303, 501],
     rewards: {
@@ -34,7 +34,7 @@ const BATTLE_PASSES = [
     id: 3,
     month: "March 2024",
     name: "Sky Dominance",
-    image: "/battle-pass-march.jpg",
+    image: "sky-dominance.jpg", // Upload your custom image to the same directory
     description: "Rule the skies with next-generation air superiority fighters",
     vehicles: [4, 5, 7, 203, 206],
     rewards: {
@@ -46,7 +46,7 @@ const BATTLE_PASSES = [
     id: 4,
     month: "April 2024",
     name: "Naval Strike",
-    image: "/battle-pass-april.jpg",
+    image: "naval-strike.jpg", // Upload your custom image to the same directory
     description: "Amphibious assault and naval warfare specialists",
     vehicles: [9, 11, 600, 702, 800],
     rewards: {
@@ -58,7 +58,7 @@ const BATTLE_PASSES = [
     id: 5,
     month: "May 2024",
     name: "Armored Spearhead",
-    image: "/battle-pass-may.jpg",
+    image: "armored-spearhead.jpg", // Upload your custom image to the same directory
     description: "Heavy armor breakthrough operations",
     vehicles: [109, 114, 118, 121, 124],
     rewards: {
@@ -70,12 +70,24 @@ const BATTLE_PASSES = [
     id: 6,
     month: "June 2024",
     name: "Electronic Warfare",
-    image: "/battle-pass-june.jpg",
+    image: "electronic-warfare.jpg", // Upload your custom image to the same directory
     description: "Advanced electronic warfare and stealth operations",
     vehicles: [127, 129, 132, 135, 415],
     rewards: {
       premium: ["T-20 Monolit", "M10 Booker", "TOS-1A"],
       free: ["Electronic Equipment", "Credits", "Countermeasures"]
+    }
+  },
+  {
+    id: 7,
+    month: "December 2024",
+    name: "Season Two",
+    image: "season-two.jpg", // Your December Battle Pass image
+    description: "Epic battles across land, sea, and air in the ultimate warfare season",
+    vehicles: [1, 4, 100, 103, 200, 203], // Premium vehicles for Season Two
+    rewards: {
+      premium: ["Su-57M", "TU-222", "T-14 Armata", "M1 Abrams Block 3"],
+      free: ["Season Emblems", "Credits", "Premium Time"]
     }
   }
 ];
@@ -7050,10 +7062,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Battle Pass Tab - Rotated 90° */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
-        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-r border-transparent w-[26px]"
+        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-r border-purple-400"
         style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
       >
-        <div className="text-white font-bold text-lg tracking-wider bg-blue-900 py-[-] py-[-1px] py-[-1px] mx-0 w-[26px] px-0 h-40">
+        <div className="px-3 py-6 text-white font-bold text-lg tracking-wider">
           BATTLE PASS
         </div>
       </button>
@@ -7080,7 +7092,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               className="fixed left-0 top-0 h-full bg-gradient-to-b from-slate-800 to-slate-900 border-r border-purple-500/30 z-50 overflow-y-auto w-[450px] shadow-2xl"
             >
               {/* Header */}
-              <div className="p-6 bg-gradient-to-r from-purple-600 to-blue-600 border-b border-purple-400/30 bg-slate-700 text-slate-400">
+              <div className="p-6 bg-gradient-to-r from-purple-600 to-blue-600 border-b border-purple-400/30">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <Trophy className="w-8 h-8 text-yellow-400" />
@@ -7114,14 +7126,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center border border-purple-400/30">
+                          <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center border border-purple-400/30 overflow-hidden">
                             <img 
                               src={battlePass.image} 
                               alt={battlePass.name}
-                              className="w-full h-full object-cover rounded-lg"
+                              className="w-full h-full object-cover rounded-lg transition-opacity duration-200"
                               onError={(e) => {
-                                e.currentTarget.style.display = 'none';
-                                e.currentTarget.nextElementSibling.style.display = 'flex';
+                                const target = e.currentTarget as HTMLImageElement;
+                                target.style.display = 'none';
+                                const fallback = target.nextElementSibling as HTMLElement;
+                                if (fallback) fallback.style.display = 'flex';
                               }}
                             />
                             <div className="w-full h-full bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center rounded-lg" style={{display: 'none'}}>
@@ -7166,9 +7180,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 return (
                                   <div key={vehicle.id} className="bg-slate-700/30 rounded-lg p-3 border border-slate-600/50 hover:border-purple-500/30 transition-all duration-200">
                                     <div className="flex items-center space-x-3">
-                                      <div className="w-14 h-14 bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0">
+                                      <div className="w-12 h-12 bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0">
                                         <img 
-                                          src={`/vehicles/${vehicle.image}`} 
+                                          src={`${vehicle.image}`} 
                                           alt={vehicle.name}
                                           className="w-full h-full object-cover"
                                           onError={(e) => {
@@ -7184,17 +7198,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                       </div>
                                       <div className="flex-1 min-w-0">
                                         <div className="text-sm font-semibold text-white truncate">{vehicle.name}</div>
-                                        <div className="text-xs text-slate-400 mb-1">{vehicle.type} • {vehicle.faction}</div>
-                                        <div className="flex items-center space-x-4">
-                                          <div className="flex items-center space-x-1">
-                                            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                                            <span className="text-xs text-slate-300">HP: {vehicle.stats.health?.toLocaleString() || 'N/A'}</span>
-                                          </div>
-                                          <div className="flex items-center space-x-1">
-                                            <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                                            <span className="text-xs text-slate-300">Speed: {vehicle.stats.speed || vehicle.stats.cruiseSpeed || 'N/A'}</span>
-                                          </div>
-                                        </div>
+                                        <div className="text-xs text-slate-400">{vehicle.type} • {vehicle.faction}</div>
                                       </div>
                                       <div className="text-right">
                                         <div className={`text-xs px-2 py-1 rounded-full font-medium ${
