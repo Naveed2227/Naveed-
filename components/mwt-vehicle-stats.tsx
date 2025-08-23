@@ -7162,7 +7162,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               {(vehicle.type === "Main Battle Tank" || vehicle.type === "Light Tank" || vehicle.type === "Tank Destroyer" || 
                 vehicle.type === "MLRS" || vehicle.type === "Missile Carrier" || vehicle.type === "SPA" || 
                 vehicle.type === "Anti-Air") && (
-                <div className="absolute top-4 right-4 px-0 py-0 pl-0 pb-2.5 pt-0 border-t-0 mx-[-14px] my-[-3px]">
+                <div className="absolute top-4 right-4 px-0 py-0 pl-0 pb-2.5 pt-0 border-t-0 my-[-3px] mx-[-4px]">
                   {(() => {
                     const tankType = vehicle.type === "Main Battle Tank" ? "MBT" : 
                                    vehicle.type === "Anti-Air" ? "AA" : vehicle.type
