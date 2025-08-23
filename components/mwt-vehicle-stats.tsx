@@ -1423,7 +1423,7 @@ const VEHICLES = [
   {
     "id": 128,
     "name": "KF31 Lynx",
-    "type": "Multirole-IFV",
+    "type": "Light Tank",
     "faction": "German",
     "tier": "IV",
     image: "KF31-Lynx.jpg",
@@ -3374,6 +3374,36 @@ const VEHICLES = [
   },
   {
     "id": 425,
+    "name": "Rookiat MTTD",
+    "type": "Light Tank",
+    "faction": "British",
+    "tier": "III",
+    image: "Rookiat MTTD.jpg",
+    "description": "The Rooikat MTTD is a fast, wheeled tank destroyer with strong firepower.",
+    "stats": { "health": 26100, "speed": 105, "armor": 40, "agility": 35 },
+    "weapons": [
+      { "name": "DM23 APFSDS", "type": "Cannon", "damage": 8400, "penetration": 337, "reload": 5.8 },
+      { "name": "DM512 HESH", "type": "Cannon", "damage": 9600, "penetration": 127, "reload": 5.8 }
+      { "name": "DM12 HEAT", "type": "Cannon", "damage": 9200, "penetration": 400, "reload": 5.8 }
+      { "name": "DM33 APFSDS", "type": "Cannon", "damage": 8800, "penetration": 508, "reload": 5.8 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
+  },
+  {
+    "id": 426,
     "name": "WMA301",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -3401,7 +3431,7 @@ const VEHICLES = [
     }
   },
    {
-    id: 426,
+    id: 427,
     name: "BMD3",
     type: "Light Tank",
     faction: "Russian",
