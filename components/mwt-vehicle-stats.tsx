@@ -3413,8 +3413,8 @@ const VEHICLES = [
     "stats": { "health": 27500, "speed": 120, "armor": 40, "agility": 52 },
     "weapons": [
       { "name": "MK246 API", "type": "Cannon", "damage": 1000, "penetration": 117, "reload": 10},
-      { "name": "MK266 HEI", "type": "Cannon", "damage": 520, "penetration": 55, "reload": 10 }
-      { "name": "MK258 APFSDS", "type": "Cannon", "damage": 1100, "penetration": 165, "reload": 10 }
+      { "name": "MK266 HEI", "type": "Cannon", "damage": 520, "penetration": 55, "reload": 10 },
+      { "name": "MK258 APFSDS", "type": "Cannon", "damage": 1100, "penetration": 165, "reload": 10 },
       { "name": "MBDA-MMP", "type": "Missile", "damage": 12540, "penetration": 1000, "reload": 10 }
     ],
     "modules": {
