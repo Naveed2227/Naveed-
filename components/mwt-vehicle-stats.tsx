@@ -7065,7 +7065,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-r border-purple-400 mr-0 ml-[-30px]"
         style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
       >
-        <div className="px-3 py-6 text-white font-bold text-lg tracking-wider my-0 mx-1.5 ml-1.5 mr-[-23px]">
+        <div className="px-3 py-6 text-white font-bold text-lg tracking-wider my-0 mx-1.5 ml-1.5 mr-[-23px] opacity-100 shadow-none">
           BATTLE PASS
         </div>
       </button>
