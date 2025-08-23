@@ -4334,7 +4334,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "American",
     "tier": 1,
-    "description": "M41 Walker Bulldog is a Tier 1 Unknown of American.",
+    "description": "American light tank, fast and agile, armed with 76mm gun, ideal for scouting missions.",
     "image": "M41Bulldog.jpg",
     "stats": {
       "health": 27000,
@@ -4411,7 +4411,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Russian",
     "tier": 1,
-    "description": "T-55A is a Tier 1 Unknown of Russian.",
+    "description": "Soviet medium tank, balanced armor and firepower, armed with 100mm gun, versatile on battlefield.",
     "image": "T-55A.jpg",
     "stats": {
       "health": 29000,
@@ -4488,7 +4488,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Russian",
     "tier": 1,
-    "description": "T-55AMD-1 is a Tier 1 Unknown of Russian.",
+    "description": "Soviet tank destroyer, lightly armored, equipped with 100mm gun, excels at ambushes and long-range engagements.",
     "image": "T-55AMD-1.jpg",
     "stats": {
       "health": 29000,
@@ -4563,7 +4563,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Japanese",
     "tier": 1,
-    "description": "Type 61 is a Tier 1 Unknown of Japan.",
+    "description": "Japanese medium tank, agile and lightly armored, armed with 90mm gun, effective in flanking maneuvers.",
     "image": "Type61.jpg",
     "stats": {
       "health": 0,
@@ -4638,7 +4638,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Chinese",
     "tier": 1,
-    "description": "WZ-120C is a Tier 1 Unknown of Chinese.",
+    "description": "Chinese medium tank, well-armored and mobile, equipped with 105mm gun, versatile in frontline combat.",
     "image": "WZ-120C.jpg",
     "stats": {
       "health": 28500,
@@ -4701,7 +4701,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Chinese",
     "tier": 1,
-    "description": "WZ-120 is a Tier 1 Unknown of Chinese.",
+    "description": "Chinese medium tank, balanced armor and speed, armed with 105mm gun, effective in versatile combat roles.",
     "image": "WZ-120.jpg",
     "stats": {
       "health": 28000,
@@ -4778,7 +4778,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Chinese",
     "tier": 1,
-    "description": "WZ-121 is a Tier 1 Unknown of Chinese.",
+    "description": "Chinese light tank, fast and maneuverable, armed with 76mm gun, ideal for scouting and flanking.",
     "image": "WZ-121.jpg",
     "stats": {
       "health": 30000,
@@ -4855,7 +4855,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "American",
     "tier": 1,
-    "description": "T54E1 is a Tier 1 Unknown of American.",
+    "description": "American medium tank, heavily armed with 105mm gun, balanced armor, versatile in frontline and support roles.",
     "image": "T54E1.jpg",
     "stats": {
       "health": 29000,
@@ -4929,7 +4929,7 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "Russian",
     "tier": 1,
-    "description": "BMP-1 is a Tier 1 Unknown of Russian.",
+    "description": "Soviet light armored vehicle, highly mobile, armed with 73mm gun and ATGM, excels in reconnaissance.",
     "image": "BMP-1.jpg",
     "stats": {
       "health": 19000,
@@ -5002,7 +5002,7 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "Russian",
     "tier": 1,
-    "description": "BRM-1K is a Tier 1 Unknown of Russian.",
+    "description": "Soviet reconnaissance vehicle, lightly armored, fast, equipped with 73mm gun and sensors for scouting missions.",
     "image": "BRM-1K.jpg",
     "stats": {
       "health": 20000,
@@ -5076,13 +5076,13 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "Russian",
     "tier": 1,
-    "description": "BTR-60PB is a Tier 1 Unknown of Russian.",
+    "description": "Soviet armored personnel carrier, lightly armored, fast, armed with 14.5mm machine gun for infantry support.",
     "image": "BTR-60PB.jpg",
     "stats": {
-      "health": 0,
-      "speed": 0,
-      "reverseSpeed": 0,
-      "agility": 0
+      "health": 18500,
+      "speed": 70,
+      "reverseSpeed": 22,
+      "agility": 45
     },
     "weapons": [
       {
@@ -5132,7 +5132,7 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "Russian",
     "tier": 1,
-    "description": "BTR-80 is a Tier 1 Unknown of Russian.",
+    "description": "Soviet wheeled armored personnel carrier, fast and mobile, armed with 14.5mm machine gun, supports infantry effectively.",
     "image": "BTR-80.jpg",
     "stats": {
       "health": 19000,
@@ -5202,7 +5202,7 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "Russian",
     "tier": 1,
-    "description": "BTR-80A is a Tier 1 Unknown of Russian.",
+    "description": "Soviet wheeled armored personnel carrier, upgraded with 30mm autocannon, fast and versatile for frontline support.",
     "image": "BTR-80A.jpg",
     "stats": {
       "health": 19500,
@@ -5265,7 +5265,7 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "American",
     "tier": 1,
-    "description": "LAV-25 is a Tier 1 Unknown of American.",
+    "description": "American light armored vehicle, highly mobile, armed with 25mm autocannon, ideal for reconnaissance and rapid assaults.",
     "image": "LAV-25.jpg",
     "stats": {
       "health": 18500,
@@ -5328,7 +5328,7 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "American",
     "tier": 1,
-    "description": "LAV-150 is a Tier 1 Unknown of American.",
+    "description": "American wheeled armored vehicle, fast and lightly armored, equipped with 90mm gun for versatile combat roles.",
     "image": "LAV-150.jpg",
     "stats": {
       "health": 18000,
@@ -5401,7 +5401,7 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "American",
     "tier": 1,
-    "description": "M113A1 FMS AIFV is a Tier 1 Unknown of American.",
+    "description": "American armored infantry fighting vehicle, lightly armored, armed with 12.7mm machine gun, transports troops and supports frontline combat.",
     "image": "M113A1-FMS-AIFV.jpg",
     "stats": {
       "health": 21500,
@@ -5474,7 +5474,7 @@ const VEHICLES = [
     "type": "Light Tank",
     "faction": "Russian",
     "tier": 1,
-    "description": "PT-76B is a Tier 1 Unknown of Russian.",
+    "description": "Soviet light amphibious tank, fast and mobile, armed with 76mm gun, excels in reconnaissance and river crossings.",
     "image": "PT-76B.jpg",
     "stats": {
       "health": 22500,
@@ -5544,7 +5544,7 @@ const VEHICLES = [
     "type": "Main Battle Tank",
     "faction": "Chinese",
     "tier": 1,
-    "description": "WZ-211 is a Tier 1 Unknown of Chinese.",
+    "description": "Chinese light tank, fast and maneuverable, armed with 76mm gun, suitable for scouting and hit-and-run tactics.",
     "image": "WZ-211.jpg",
     "stats": {
       "health": 24000,
@@ -5621,7 +5621,7 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "Chinese",
     "tier": 1,
-    "description": "WZ-501A is a Tier 1 Unknown of Chinese.",
+    "description": "Chinese light armored vehicle, fast and agile, equipped with 73mm gun, ideal for reconnaissance and support.",
     "image": "WZ-501A.jpg",
     "stats": {
       "health": 19500,
@@ -5684,7 +5684,7 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "Chinese",
     "tier": 1,
-    "description": "WZ-501 is a Tier 1 Unknown of Chinese.",
+    "description": "Chinese light armored vehicle, highly mobile, armed with 73mm gun, effective for scouting and support roles.",
     "image": "WZ-501.jpg",
     "stats": {
       "health": 22000,
@@ -5757,7 +5757,7 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "American",
     "tier": 1,
-    "description": "XM-800T is a Tier 1 Unknown of American.",
+    "description": "American light tank, fast and agile, armed with 76mm gun, excels at reconnaissance and flanking maneuvers.",
     "image": "XM-800T.jpg",
     "stats": {
       "health": 21000,
@@ -5831,7 +5831,7 @@ const VEHICLES = [
     "type": "Missile Carrier",
     "faction": "Chinese",
     "tier": 1,
-    "description": "CM25 is a Tier 1 Unknown of Chinese.",
+    "description": "French light armored vehicle, fast and mobile, armed with 90mm gun, effective for reconnaissance and hit-and-run attacks.",
     "image": "CM25.jpg",
     "stats": {
       "health": 19000,
@@ -5908,7 +5908,7 @@ const VEHICLES = [
     "type": "Tank Destroyer",
     "faction": "Russian",
     "tier": 1,
-    "description": "SU-152 Taran is a Tier 1 Unknown of Russian.",
+    "description": "Soviet tank destroyer, heavily armed with 152mm gun, excels in ambushes and destroying heavily armored targets.",
     "image": "SU-152.jpg",
     "stats": {
       "health": 24000,
@@ -5984,7 +5984,7 @@ const VEHICLES = [
     "type": "Tank Destroyer",
     "faction": "American",
     "tier": 1,
-    "description": "T114 (BAT) is a Tier 1 Unknown of American.",
+    "description": "American tank destroyer, heavily armored, armed with 90mm gun, designed for long-range engagements and frontline support.",
     "image": "T114.jpg",
     "stats": {
       "health": 18000,
@@ -6058,7 +6058,7 @@ const VEHICLES = [
     "type": "Anti-Air",
     "faction": "American",
     "tier": 1,
-    "description": "M42A1 is a Tier 1 Unknown of American.",
+    "description": "American self-propelled anti-aircraft vehicle, lightly armored, armed with twin 40mm autocannons for air defense support.",
     "image": "M42A1.jpg",
     "stats": {
       "health": 19000,
@@ -6126,7 +6126,7 @@ const VEHICLES = [
     "type": "Anti-Air",
     "faction": "Russian",
     "tier": 1,
-    "description": "ZSU-57-2 is a Tier 1 Unknown of Russian.",
+    "description": "Soviet self-propelled anti-aircraft vehicle, lightly armored, armed with twin 57mm autocannons, effective against low-flying aircraft.",
     "image": "ZSU-57-2.jpg",
     "stats": {
       "health": 19500,
