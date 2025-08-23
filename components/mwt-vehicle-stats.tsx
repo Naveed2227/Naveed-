@@ -12,10 +12,10 @@ const BATTLE_PASSES = [
     name: "Sentinels union",
     image: "2025-Aug.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    vehicles: [128, 123], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
-      free: ["Bonus XP", "Credits", "Decals"]
+      premium: ["EMBT 120"],
+      free: ["KF-31"]
     }
   },
   {
@@ -24,10 +24,10 @@ const BATTLE_PASSES = [
     name: "Steal Eagle",
     image: "2025-Jul.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    vehicles: [111], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
-      free: ["Bonus XP", "Credits", "Decals"]
+      premium: ["Obj 640"],
+      free: ["Type 16 MCV"]
     }
   },
   {
@@ -36,10 +36,10 @@ const BATTLE_PASSES = [
     name: "Royal dragon",
     image: "2025-Jun.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    vehicles: [414, 8], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
-      free: ["Bonus XP", "Credits", "Decals"]
+      premium: ["YF-23"],
+      free: ["Gepard 1A2"]
     }
   },
   {
@@ -48,46 +48,46 @@ const BATTLE_PASSES = [
     name: "Golden Sky",
     image: "2025-May.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    vehicles: [131, 113], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
-      free: ["Bonus XP", "Credits", "Decals"]
+      premium: ["Merkava MK.4"],
+      free: ["M-SHORAD"]
     }
   },
   {
     id: 5,
     month: "April 2025",
-    name: "Golden Sky",
+    name: "Crosswind",
     image: "2025-Apr.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    vehicles: [419, 1], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
-      free: ["Bonus XP", "Credits", "Decals"]
+      premium: ["Su-57M"],
+      free: ["Type 625E"]
     }
   },
   {
     id: 4,
     month: "March 2025",
-    name: "Crosswind",
+    name: "Living steel",
     image: "2025-Mar.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    vehicles: [104, 101], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
-      free: ["Bonus XP", "Credits", "Decals"]
+      premium: ["Abram X"],
+      free: ["Leopard 2A7+"]
     }
   },
   {
     id: 3,
     month: "February 2025",
-    name: "Living steel",
+    name: "Operation G.H.O.S.T",
     image: "2025-Feb.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    vehicles: [204], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
-      free: ["Bonus XP", "Credits", "Decals"]
+      premium: ["KA-58"],
+      free: ["HSTVL"]
     }
   },
   {
@@ -96,22 +96,22 @@ const BATTLE_PASSES = [
     name: "Zero hour",
     image: "2025-Jan.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    vehicles: [102, 4], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
-      free: ["Bonus XP", "Credits", "Decals"]
+      premium: ["TU-222"],
+      free: ["Type-90"]
     }
   },
   {
     id: 1,
     month: "December 2024",
-    name: "Frozen Frontlines",
+    name: "Season Two",
     image: "2024-Dec.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    vehicles: [119, 105], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
-      free: ["Bonus XP", "Credits", "Decals"]
+      premium: ["kF-51"],
+      free: ["VT-4A1"]
     }
   }
 
@@ -7117,7 +7117,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               className="fixed left-0 top-0 h-full bg-gradient-to-b from-slate-800 to-slate-900 border-r border-purple-500/30 z-50 overflow-y-auto w-[450px] shadow-2xl"
             >
               {/* Header */}
-              <div className="p-6 bg-gradient-to-r from-blue-500 to-blue-700 border-b border-purple-400/30">
+              <div className="p-6 bg-gradient-to-r from-lime-400 to-blue-600 border-b border-purple-400/30">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <Trophy className="w-8 h-8 text-yellow-400" />
@@ -7138,7 +7138,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               {/* Battle Pass List */}
               <div className="p-6 space-y-4">
                 <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                  <Calendar className="w-5 h-5 text-purple-400" />
+                  <Calendar className="w-5 h-5 text-lime-300" />
                   Battle Passes
                 </h3>
                 
@@ -7205,7 +7205,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 return (
                                   <div key={vehicle.id} className="bg-slate-700/30 rounded-lg p-3 border border-slate-600/50 hover:border-purple-500/30 transition-all duration-200">
                                     <div className="flex items-center space-x-3">
-                                      <div className="w-12 h-12 bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0">
+                                      <div className="bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0 h-20 w-36">
                                         <img 
                                           src={`${vehicle.image}`} 
                                           alt={vehicle.name}
@@ -7225,8 +7225,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                         <div className="text-sm font-semibold text-white truncate">{vehicle.name}</div>
                                         <div className="text-xs text-slate-400">{vehicle.type} • {vehicle.faction}</div>
                                       </div>
-                                      <div className="text-right">
-                                        <div className={`text-xs px-2 py-1 rounded-full font-medium ${
+                                      <div className="text-right text-white bg-transparent">
+                                        <div className={`text-xs px-2 py-1 rounded-full font-medium bg-lime-400 ${
                                           vehicle.tier === 'IV' ? 'bg-purple-600 text-white' :
                                           vehicle.tier === 'III' ? 'bg-blue-600 text-white' :
                                           vehicle.tier === 'II' ? 'bg-green-600 text-white' :
