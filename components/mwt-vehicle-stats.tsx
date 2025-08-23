@@ -7136,7 +7136,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               </div>
 
               {/* Battle Pass List */}
-              <div className="p-6 space-y-4 w-auto mx-[-22px]">
+              <div className="p-6 space-y-4 mx-[-22px] w-[410px]">
                 <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2 ml-1.5">
                   <Calendar className="w-5 h-5 text-lime-300" />
                   Battle Passes
@@ -7151,7 +7151,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="h-16 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center border border-purple-400/30 overflow-hidden w-32">
+                          <div className="h-16 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center border border-purple-400/30 overflow-hidden w-32 mr-1.5">
                             <img 
                               src={battlePass.image} 
                               alt={battlePass.name}
