@@ -84,7 +84,7 @@ const BATTLE_PASSES = [
     name: "Operation G.H.O.S.T",
     image: "2025-Feb.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [204], // Vehicle IDs from VEHICLES array
+    vehicles: [203], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["KA-58"],
       free: ["HSTVL"]
