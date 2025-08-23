@@ -7226,7 +7226,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                         <div className="text-xs text-slate-400">{vehicle.type} • {vehicle.faction}</div>
                                       </div>
                                       <div className="text-right text-white bg-transparent">
-                                        <div className={`text-xs px-2 py-1 rounded-full font-medium bg-lime-400 ${
+                                        <div className={`text-xs px-2 py-1 rounded-full font-medium bg-blue-700 ${
                                           vehicle.tier === 'IV' ? 'bg-purple-600 text-white' :
                                           vehicle.tier === 'III' ? 'bg-blue-600 text-white' :
                                           vehicle.tier === 'II' ? 'bg-green-600 text-white' :
