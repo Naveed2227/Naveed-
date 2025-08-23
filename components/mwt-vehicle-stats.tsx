@@ -4,6 +4,82 @@ import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useState } from "react"
 
+// Battle Pass Data Structure
+const BATTLE_PASSES = [
+  {
+    id: 1,
+    month: "January 2024",
+    name: "Winter Storm",
+    image: "/battle-pass-january.jpg",
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["Su-57M", "F-22 Raptor", "T-14 Armata"],
+      free: ["Bonus XP", "Credits", "Decals"]
+    }
+  },
+  {
+    id: 2,
+    month: "February 2024",
+    name: "Desert Thunder",
+    image: "/battle-pass-february.jpg",
+    description: "Command the desert with advanced armored divisions",
+    vehicles: [103, 106, 301, 303, 501],
+    rewards: {
+      premium: ["M1 Abrams Block 3", "Altay", "F-16C Night Falcon"],
+      free: ["Camouflage", "Credits", "Repair Kits"]
+    }
+  },
+  {
+    id: 3,
+    month: "March 2024",
+    name: "Sky Dominance",
+    image: "/battle-pass-march.jpg",
+    description: "Rule the skies with next-generation air superiority fighters",
+    vehicles: [4, 5, 7, 203, 206],
+    rewards: {
+      premium: ["TU-222", "J-35", "Ka-58 Black Ghost"],
+      free: ["Pilot Gear", "Credits", "Ammunition"]
+    }
+  },
+  {
+    id: 4,
+    month: "April 2024",
+    name: "Naval Strike",
+    image: "/battle-pass-april.jpg",
+    description: "Amphibious assault and naval warfare specialists",
+    vehicles: [9, 11, 600, 702, 800],
+    rewards: {
+      premium: ["F-35B Lightning II", "Su-75 Checkmate", "AV-8B Harrier II"],
+      free: ["Naval Insignia", "Credits", "Fuel"]
+    }
+  },
+  {
+    id: 5,
+    month: "May 2024",
+    name: "Armored Spearhead",
+    image: "/battle-pass-may.jpg",
+    description: "Heavy armor breakthrough operations",
+    vehicles: [109, 114, 118, 121, 124],
+    rewards: {
+      premium: ["T-95M", "BMPT Terminator 2", "ZTZ99-III"],
+      free: ["Tank Crew Gear", "Credits", "Armor Plates"]
+    }
+  },
+  {
+    id: 6,
+    month: "June 2024",
+    name: "Electronic Warfare",
+    image: "/battle-pass-june.jpg",
+    description: "Advanced electronic warfare and stealth operations",
+    vehicles: [127, 129, 132, 135, 415],
+    rewards: {
+      premium: ["T-20 Monolit", "M10 Booker", "TOS-1A"],
+      free: ["Electronic Equipment", "Credits", "Countermeasures"]
+    }
+  }
+];
+
 const VEHICLES = [
   {
     id: 1,
@@ -6506,6 +6582,10 @@ const MwtVehicleStats = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [activeTab, setActiveTab] = useState("battlepass")
   const [expandedMonth, setExpandedMonth] = useState<number | null>(null)
+  
+  // Battle Pass state
+  const [battlePassOpen, setBattlePassOpen] = useState(false)
+  const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
 
   const types = [...new Set(VEHICLES.map((v) => v.type))]
   const tiers = [...new Set(VEHICLES.map((v) => v.tier))].sort()
@@ -6967,98 +7047,126 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      {/* Sidebar Toggle Button */}
+      {/* Battle Pass Tab - Rotated 90° */}
       <button
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="fixed top-4 left-4 z-50 p-3 hover:bg-slate-700 rounded-lg border border-slate-600 transition-all duration-200 backdrop-blur-sm w-0.5 my-20 mx-[-22px] bg-blue-900 h-[150px]"
+        onClick={() => setBattlePassOpen(!battlePassOpen)}
+        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-r border-transparent w-[26px]"
+        style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
       >
-        <CalendarSearchIcon className="w-5 h-5 text-cyan-400 mx-[-8px]" />
+        <div className="text-white font-bold text-lg tracking-wider bg-blue-900 py-[-] py-[-1px] py-[-1px] mx-0 w-[26px] px-0 h-40">
+          BATTLE PASS
+        </div>
       </button>
 
-      {/* Sidebar */}
+      {/* Battle Pass Panel */}
       <AnimatePresence>
-        {sidebarOpen && (
+        {battlePassOpen && (
           <>
             {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setSidebarOpen(false)}
-              className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              onClick={() => setBattlePassOpen(false)}
+              className="fixed inset-0 bg-black/50 z-40"
             />
             
-            {/* Sidebar Content */}
+            {/* Battle Pass Content */}
             <motion.div
-              initial={{ x: -320 }}
+              initial={{ x: -400 }}
               animate={{ x: 0 }}
-              exit={{ x: -320 }}
+              exit={{ x: -400 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed left-0 top-0 h-full bg-slate-800 border-r border-slate-700 z-50 overflow-y-auto w-96"
+              className="fixed left-0 top-0 h-full bg-gradient-to-b from-slate-800 to-slate-900 border-r border-purple-500/30 z-50 overflow-y-auto w-[450px] shadow-2xl"
             >
-              {/* Sidebar Header */}
-              <div className="p-4 flex items-center justify-between bg-blue-900">
-                <div className="flex items-center space-x-2">
-                  
-                  <span className="text-white font-medium">MWT Assistant </span>
-                </div>
-                <button
-                  onClick={() => setSidebarOpen(false)}
-                  className="text-white hover:text-gray-200 transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Battle Pass Tab - Always Active */}
-              <div className="py-4">
-                <div className="w-full flex items-center px-4 py-3 bg-red-600 text-white border-r-2 border-red-400">
-                  <Trophy className="w-4 h-4 mr-3" />
-                  <span>MWT Battle Pass</span>
-                  <span className="ml-auto text-xs bg-red-700 px-2 py-1 rounded">6</span>
+              {/* Header */}
+              <div className="p-6 bg-gradient-to-r from-purple-600 to-blue-600 border-b border-purple-400/30">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <Trophy className="w-8 h-8 text-yellow-400" />
+                    <div>
+                      <h2 className="text-2xl font-bold text-white">Battle Pass</h2>
+                      <p className="text-purple-200 text-sm">Monthly Vehicle Collections</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setBattlePassOpen(false)}
+                    className="text-white hover:text-purple-200 transition-colors p-2 hover:bg-white/10 rounded-lg"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
                 </div>
               </div>
 
-              {/* Battle Pass Content - Always Visible */}
-              <div className="px-4 pb-4">
-                  <div className="border-t border-slate-700 pt-4">
-                    <h4 className="text-white font-medium mb-3 px-2">2025</h4>
-                    
-                    {BATTLE_PASS_MONTHS.map((month) => (
-                      <div key={month.id} className="mb-2">
-                        {/* Month Header */}
-                        <button
-                          onClick={() => setExpandedMonth(expandedMonth === month.id ? null : month.id)}
-                          className="w-full flex items-center justify-between px-2 py-2 text-left text-gray-300 hover:bg-slate-700 hover:text-white transition-colors rounded"
-                        >
-                          <div className="flex items-center space-x-2">
-                            <Calendar className="w-4 h-4" />
-                            <span className="text-sm">{month.title}</span>
+              {/* Battle Pass List */}
+              <div className="p-6 space-y-4">
+                <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                  <Calendar className="w-5 h-5 text-purple-400" />
+                  2024 Battle Passes
+                </h3>
+                
+                {BATTLE_PASSES.map((battlePass) => (
+                  <div key={battlePass.id} className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden hover:border-purple-500/50 transition-all duration-300">
+                    {/* Battle Pass Header */}
+                    <button
+                      onClick={() => setSelectedBattlePass(selectedBattlePass === battlePass.id ? null : battlePass.id)}
+                      className="w-full p-4 text-left hover:bg-slate-700/30 transition-colors"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center border border-purple-400/30">
+                            <img 
+                              src={battlePass.image} 
+                              alt={battlePass.name}
+                              className="w-full h-full object-cover rounded-lg"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                                e.currentTarget.nextElementSibling.style.display = 'flex';
+                              }}
+                            />
+                            <div className="w-full h-full bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center rounded-lg" style={{display: 'none'}}>
+                              <Trophy className="w-8 h-8 text-yellow-400" />
+                            </div>
                           </div>
-                          {expandedMonth === month.id ? (
-                            <ChevronDown className="w-4 h-4" />
+                          <div className="flex-1">
+                            <h4 className="text-lg font-bold text-white">{battlePass.name}</h4>
+                            <p className="text-purple-300 text-sm font-medium">{battlePass.month}</p>
+                            <p className="text-slate-400 text-xs mt-1">{battlePass.description}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span className="bg-purple-600 text-white text-xs px-2 py-1 rounded-full font-medium">
+                            {battlePass.vehicles.length} Vehicles
+                          </span>
+                          {selectedBattlePass === battlePass.id ? (
+                            <ChevronDown className="w-5 h-5 text-purple-400" />
                           ) : (
-                            <ChevronRight className="w-4 h-4" />
+                            <ChevronRight className="w-5 h-5 text-slate-400" />
                           )}
-                        </button>
+                        </div>
+                      </div>
+                    </button>
 
-                        {/* Expanded Content */}
-                        <AnimatePresence>
-                          {expandedMonth === month.id && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.2 }}
-                              className="overflow-hidden"
-                            >
-                              <div className="ml-6 mt-2 space-y-2">
-                                <p className="text-xs text-gray-400 mb-3">{month.description}</p>
-                                
-                                {month.vehicles.map((vehicle) => (
-                                  <div key={vehicle.id} className="bg-slate-700/50 rounded-lg p-3 hover:bg-slate-700 transition-colors border border-slate-600">
+                    {/* Expanded Vehicle List */}
+                    <AnimatePresence>
+                      {selectedBattlePass === battlePass.id && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-4 pb-4 border-t border-slate-700/50">
+                            <div className="mt-4 space-y-3">
+                              <h5 className="text-sm font-semibold text-purple-300 mb-3">Featured Vehicles:</h5>
+                              {battlePass.vehicles.map((vehicleId) => {
+                                const vehicle = VEHICLES.find(v => v.id === vehicleId);
+                                if (!vehicle) return null;
+                                return (
+                                  <div key={vehicle.id} className="bg-slate-700/30 rounded-lg p-3 border border-slate-600/50 hover:border-purple-500/30 transition-all duration-200">
                                     <div className="flex items-center space-x-3">
-                                      <div className="w-12 h-12 bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0">
+                                      <div className="w-14 h-14 bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0">
                                         <img 
                                           src={`/vehicles/${vehicle.image}`} 
                                           alt={vehicle.name}
@@ -7075,30 +7183,61 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                         </div>
                                       </div>
                                       <div className="flex-1 min-w-0">
-                                        <div className="text-sm font-medium text-white truncate">{vehicle.name}</div>
-                                        <div className="text-xs text-gray-400">{vehicle.type} • {vehicle.faction}</div>
-                                        <div className="flex items-center space-x-3 mt-1">
+                                        <div className="text-sm font-semibold text-white truncate">{vehicle.name}</div>
+                                        <div className="text-xs text-slate-400 mb-1">{vehicle.type} • {vehicle.faction}</div>
+                                        <div className="flex items-center space-x-4">
                                           <div className="flex items-center space-x-1">
-                                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                                            <span className="text-xs text-gray-500">HP: {vehicle.stats.health.toLocaleString()}</span>
+                                            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                                            <span className="text-xs text-slate-300">HP: {vehicle.stats.health?.toLocaleString() || 'N/A'}</span>
                                           </div>
                                           <div className="flex items-center space-x-1">
-                                            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                                            <span className="text-xs text-gray-500">Speed: {vehicle.stats.speed}</span>
+                                            <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                                            <span className="text-xs text-slate-300">Speed: {vehicle.stats.speed || vehicle.stats.cruiseSpeed || 'N/A'}</span>
                                           </div>
+                                        </div>
+                                      </div>
+                                      <div className="text-right">
+                                        <div className={`text-xs px-2 py-1 rounded-full font-medium ${
+                                          vehicle.tier === 'IV' ? 'bg-purple-600 text-white' :
+                                          vehicle.tier === 'III' ? 'bg-blue-600 text-white' :
+                                          vehicle.tier === 'II' ? 'bg-green-600 text-white' :
+                                          'bg-gray-600 text-white'
+                                        }`}>
+                                          Tier {vehicle.tier}
                                         </div>
                                       </div>
                                     </div>
                                   </div>
+                                );
+                              })}
+                            </div>
+                            
+                            {/* Rewards Section */}
+                            <div className="mt-4 pt-4 border-t border-slate-700/50">
+                              <h5 className="text-sm font-semibold text-yellow-400 mb-2">Premium Rewards:</h5>
+                              <div className="flex flex-wrap gap-2 mb-3">
+                                {battlePass.rewards.premium.map((reward, index) => (
+                                  <span key={index} className="bg-yellow-600/20 text-yellow-300 text-xs px-2 py-1 rounded border border-yellow-600/30">
+                                    {reward}
+                                  </span>
                                 ))}
                               </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    ))}
+                              <h5 className="text-sm font-semibold text-slate-300 mb-2">Free Rewards:</h5>
+                              <div className="flex flex-wrap gap-2">
+                                {battlePass.rewards.free.map((reward, index) => (
+                                  <span key={index} className="bg-slate-600/30 text-slate-300 text-xs px-2 py-1 rounded border border-slate-600">
+                                    {reward}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                </div>
+                ))}
+              </div>
             </motion.div>
           </>
         )}
