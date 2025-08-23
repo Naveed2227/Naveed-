@@ -22,7 +22,7 @@ const BATTLE_PASSES = [
     id: 8,
     month: "July 2025",
     name: "Winter Storm",
-    image: "2025-July.jpg", // Upload your custom image to the same directory
+    image: "2025-Jul.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
     vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
     rewards: {
@@ -70,7 +70,7 @@ const BATTLE_PASSES = [
     id: 4,
     month: "March 2025",
     name: "Winter Storm",
-    image: "2025-March.jpg", // Upload your custom image to the same directory
+    image: "2025-Mar.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
     vehicles: [1, 2, 3, 100, 200], // Vehicle IDs from VEHICLES array
     rewards: {
