@@ -3381,7 +3381,7 @@ const VEHICLES = [
     image: "Rookiat-MTTD.jpg",
     "description": "The Rooikat MTTD is a fast, wheeled tank destroyer with strong firepower.",
     "stats": { "health": 26100, "speed": 105, "armor": 40, "agility": 50 },
-    "weapons": "weapons": [
+    "weapons": [
   { "name": "DM23 APFSDS", "type": "Cannon", "damage": 8400, "penetration": 337, "reload": 5.8 },
   { "name": "DM512 HESH", "type": "Cannon", "damage": 9600, "penetration": 127, "reload": 5.8 },
   { "name": "DM12 HEAT", "type": "Cannon", "damage": 9200, "penetration": 400, "reload": 5.8 },
