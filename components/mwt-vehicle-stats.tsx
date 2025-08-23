@@ -7714,4 +7714,354 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     </div>
   )
 }
+const MwtVehicleStats = () => {
+  const [selectedVehicle, setSelectedVehicle] = useState(null)
+  const [searchTerm, setSearchTerm] = useState("")
+  const [selectedFaction, setSelectedFaction] = useState("All")
+  const [selectedType, setSelectedType] = useState("All")
+  const [selectedTier, setSelectedTier] = useState("All")
+  const [showChat, setShowChat] = useState(false)
+  const [chatMessages, setChatMessages] = useState([])
+  const [inputMessage, setInputMessage] = useState("")
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const factions = ["All", ...new Set(VEHICLES.map(v => v.faction))]
+  const types = ["All", ...new Set(VEHICLES.map(v => v.type))]
+  const tiers = ["All", ...new Set(VEHICLES.map(v => v.tier))]
+
+  const filteredVehicles = VEHICLES.filter(vehicle => {
+    const matchesSearch = vehicle.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         vehicle.description.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesFaction = selectedFaction === "All" || vehicle.faction === selectedFaction
+    const matchesType = selectedType === "All" || vehicle.type === selectedType
+    const matchesTier = selectedTier === "All" || vehicle.tier === selectedTier
+    
+    return matchesSearch && matchesFaction && matchesType && matchesTier
+  })
+
+  const handleSendMessage = () => {
+    if (inputMessage.trim()) {
+      setChatMessages([...chatMessages, { type: 'user', content: inputMessage }])
+      // Simulate AI response
+      setTimeout(() => {
+        setChatMessages(prev => [...prev, { 
+          type: 'ai', 
+          content: `I can help you with information about ${inputMessage}. What specific details would you like to know?` 
+        }])
+      }, 1000)
+      setInputMessage("")
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      {/* Header */}
+      <header className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center">
+                <span className="text-xl font-bold">MWT</span>
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                  Modern Warfare Tactics
+                </h1>
+                <p className="text-slate-400 text-sm">Vehicle Statistics Database</p>
+              </div>
+            </div>
+            
+            <button
+              onClick={() => setShowChat(!showChat)}
+              className="flex items-center space-x-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 px-4 py-2 rounded-lg transition-all duration-200"
+            >
+              <BotMessageSquareIcon className="w-5 h-5" />
+              <span>AI Assistant</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Chat Interface */}
+      {showChat && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed top-20 right-4 w-96 h-96 bg-slate-800/95 backdrop-blur-sm border border-slate-700 rounded-lg shadow-2xl z-50"
+        >
+          <div className="flex items-center justify-between p-4 border-b border-slate-700">
+            <div className="flex items-center space-x-2">
+              <Bot className="w-5 h-5 text-cyan-400" />
+              <span className="font-semibold">MWT Assistant</span>
+            </div>
+            <button
+              onClick={() => setShowChat(false)}
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          
+          <div className="flex-1 p-4 h-64 overflow-y-auto">
+            {chatMessages.length === 0 ? (
+              <div className="text-slate-400 text-center">
+                <Bot className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                <p>Ask me anything about vehicles!</p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {chatMessages.map((msg, idx) => (
+                  <div key={idx} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-xs p-3 rounded-lg ${
+                      msg.type === 'user' 
+                        ? 'bg-cyan-600 text-white' 
+                        : 'bg-slate-700 text-slate-200'
+                    }`}>
+                      {msg.content}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          
+          <div className="p-4 border-t border-slate-700">
+            <div className="flex space-x-2">
+              <input
+                type="text"
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                placeholder="Ask about vehicles..."
+                className="flex-1 bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-cyan-500"
+              />
+              <button
+                onClick={handleSendMessage}
+                className="bg-cyan-600 hover:bg-cyan-500 p-2 rounded-lg transition-colors"
+              >
+                <Send className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      <main className="container mx-auto px-4 py-8">
+        {/* Search and Filters */}
+        <div className="mb-8 space-y-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
+            <input
+              type="text"
+              placeholder="Search vehicles..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full bg-slate-800/50 border border-slate-700 rounded-lg pl-10 pr-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors"
+            />
+          </div>
+          
+          <div className="flex flex-wrap gap-4">
+            <select
+              value={selectedFaction}
+              onChange={(e) => setSelectedFaction(e.target.value)}
+              className="bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500"
+            >
+              {factions.map(faction => (
+                <option key={faction} value={faction}>{faction}</option>
+              ))}
+            </select>
+            
+            <select
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value)}
+              className="bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500"
+            >
+              {types.map(type => (
+                <option key={type} value={type}>{type}</option>
+              ))}
+            </select>
+            
+            <select
+              value={selectedTier}
+              onChange={(e) => setSelectedTier(e.target.value)}
+              className="bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 focus:outline-none focus:border-cyan-500"
+            >
+              {tiers.map(tier => (
+                <option key={tier} value={tier}>Tier {tier}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Vehicle Grid */}
+        {!selectedVehicle && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredVehicles.map(vehicle => (
+              <motion.div
+                key={vehicle.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.02 }}
+                onClick={() => setSelectedVehicle(vehicle)}
+                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg p-6 cursor-pointer hover:border-cyan-500 transition-all duration-200"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-cyan-400">{vehicle.name}</h3>
+                    <p className="text-slate-400 text-sm">{vehicle.type}</p>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xs text-slate-500">Tier {vehicle.tier}</div>
+                    <div className="text-xs text-slate-400">{vehicle.faction}</div>
+                  </div>
+                </div>
+                
+                <p className="text-slate-300 text-sm mb-4 line-clamp-3">{vehicle.description}</p>
+                
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">Health:</span>
+                    <span className="text-green-400">{vehicle.stats.health?.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">Speed:</span>
+                    <span className="text-blue-400">{vehicle.stats.speed} km/h</span>
+                  </div>
+                  {vehicle.stats.armor && (
+                    <div className="flex justify-between">
+                      <span className="text-slate-400">Armor:</span>
+                      <span className="text-yellow-400">{vehicle.stats.armor}</span>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+
+        {/* Vehicle Details */}
+        {selectedVehicle && (
+          <div className="max-w-6xl mx-auto">
+            <button
+              onClick={() => setSelectedVehicle(null)}
+              className="mb-6 flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 transition-colors"
+            >
+              <span>← Back to vehicles</span>
+            </button>
+            
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Basic Info */}
+                <div>
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      <h1 className="text-3xl font-bold text-cyan-400 mb-2">{selectedVehicle.name}</h1>
+                      <div className="flex items-center space-x-4 text-slate-400">
+                        <span>{selectedVehicle.type}</span>
+                        <span>•</span>
+                        <span>{selectedVehicle.faction}</span>
+                        <span>•</span>
+                        <span>Tier {selectedVehicle.tier}</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <p className="text-slate-300 mb-6">{selectedVehicle.description}</p>
+                  
+                  {/* Stats */}
+                  <div className="bg-slate-900/50 rounded-lg p-6 mb-6">
+                    <h3 className="text-xl font-bold text-cyan-400 mb-4">Statistics</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      {Object.entries(selectedVehicle.stats).map(([key, value]) => (
+                        <div key={key} className="flex justify-between">
+                          <span className="text-slate-400 capitalize">{key.replace(/([A-Z])/g, ' $1')}:</span>
+                          <span className="text-white font-semibold">
+                            {typeof value === 'number' ? value.toLocaleString() : value}
+                            {key === 'speed' && ' km/h'}
+                            {key === 'afterburnerSpeed' && ' km/h'}
+                            {key === 'verticalSpeed' && ' m/s'}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Modules */}
+                <div>
+                  <div className="bg-slate-900/50 rounded-lg p-6">
+                    <h3 className="text-xl font-bold text-cyan-400 mb-4">Upgrade Modules</h3>
+                    <div className="space-y-4">
+                      {Object.entries(selectedVehicle.modules).map(([moduleType, modules]) => (
+                        <div key={moduleType}>
+                          <h4 className="text-lg font-semibold text-slate-200 capitalize mb-2">{moduleType}</h4>
+                          <div className="space-y-2">
+                            {modules.map((module, idx) => (
+                              <div key={idx} className="bg-slate-800/50 rounded p-3 border border-slate-700">
+                                <div className="flex justify-between items-center">
+                                  <span className="text-slate-300">{module.name}</span>
+                                  <span className="text-green-400 text-sm">{module.bonus}</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Weapons */}
+              <div className="mt-8">
+                <h3 className="text-xl font-bold text-cyan-400 mb-4">Weapons & Armament</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {selectedVehicle.weapons.map((weapon, idx) => (
+                    <div key={idx} className="bg-slate-900/50 rounded-lg p-4 border border-slate-700">
+                      <h4 className="text-lg font-semibold text-slate-200 mb-2">{weapon.name}</h4>
+                      <p className="text-slate-400 text-sm mb-3">{weapon.type}</p>
+                      <div className="space-y-1 text-sm">
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Damage:</span>
+                          <span className="text-red-400">{weapon.damage?.toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400">Penetration:</span>
+                          <span className="text-orange-400">{weapon.penetration}mm</span>
+                        </div>
+                        {weapon.reload && (
+                          <div className="flex justify-between">
+                            <span className="text-slate-400">Reload:</span>
+                            <span className="text-blue-400">{weapon.reload}s</span>
+                          </div>
+                        )}
+                        {weapon.rateOfFire && (
+                          <div className="flex justify-between">
+                            <span className="text-slate-400">Rate of Fire:</span>
+                            <span className="text-cyan-300">{weapon.rateOfFire}</span>
+                          </div>
+                        )}
+                        {weapon.lockTime && (
+                          <div className="flex justify-between">
+                            <span className="text-slate-400">Lock Time:</span>
+                            <span className="text-cyan-300">{weapon.lockTime}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
+    </div>
+  )
+}
+
+
+
+
+
 export default MwtVehicleStats;
