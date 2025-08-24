@@ -100,7 +100,7 @@ const BATTLE_PASSES = [
     vehicles: [102, 4], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["TU-222"],
-      free: ["Type-90"]
+      free: ["Type-10"]
     }
   },
   {
