@@ -1,8 +1,9 @@
 "use client"
 
+import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
-import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 // Battle Pass Data Structure
 const BATTLE_PASSES = [
@@ -6657,6 +6658,7 @@ const getTierColor = (tier: string) => {
 }
 
 const MwtVehicleStats = () => {
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState("")
   const [typeFilter, setTypeFilter] = useState("")
   const [tierFilter, setTierFilter] = useState("")
@@ -7264,13 +7266,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 const vehicle = VEHICLES.find(v => v.id === vehicleId);
                                 if (!vehicle) return null;
                                 return (
-                                  <div key={vehicle.id} className="bg-slate-700/30 rounded-lg p-3 border border-slate-600/50 hover:border-purple-500/30 transition-all duration-200">
+                                  <div 
+                                    key={vehicle.id} 
+                                    className="bg-slate-700/30 rounded-lg p-3 border border-slate-600/50 hover:border-purple-500/50 hover:bg-slate-700/50 transition-all duration-200 cursor-pointer group"
+                                    onClick={() => {
+                                      setSearchQuery(vehicle.name);
+                                      setBattlePassOpen(false);
+                                      setExpandedVehicle(vehicle.id.toString());
+                                    }}
+                                  >
                                     <div className="flex items-center space-x-3">
-                                      <div className="bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0 h-20 w-36">
+                                      <div className="bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0 h-20 w-36 group-hover:border-purple-400/50 transition-colors">
                                         <img 
                                           src={`${vehicle.image}`} 
                                           alt={vehicle.name}
-                                          className="w-full h-full object-cover"
+                                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                                           onError={(e) => {
                                             e.currentTarget.style.display = 'none';
                                             e.currentTarget.nextElementSibling.style.display = 'flex';
@@ -7283,8 +7293,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                         </div>
                                       </div>
                                       <div className="flex-1 min-w-0">
-                                        <div className="text-sm font-semibold text-white truncate">{vehicle.name}</div>
-                                        <div className="text-xs text-slate-400">{vehicle.type} • {vehicle.faction}</div>
+                                        <div className="text-sm font-semibold text-white truncate group-hover:text-purple-300 transition-colors">{vehicle.name}</div>
+                                        <div className="text-xs text-slate-400 group-hover:text-slate-300 transition-colors">{vehicle.type} • {vehicle.faction}</div>
                                       </div>
                                       <div className="text-right text-white bg-transparent">
                                         <div className={`text-xs px-2 py-1 rounded-full font-medium bg-blue-700 ${
@@ -7292,7 +7302,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                           vehicle.tier === 'III' ? 'bg-blue-600 text-white' :
                                           vehicle.tier === 'II' ? 'bg-green-600 text-white' :
                                           'bg-gray-600 text-white'
-                                        }`}>
+                                        } group-hover:shadow-lg transition-shadow`}>
                                           Tier {vehicle.tier}
                                         </div>
                                       </div>
