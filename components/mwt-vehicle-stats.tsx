@@ -7150,10 +7150,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Battle Pass Tab - Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
-        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-r border-purple-400 mr-0 ml-[-30px] md:ml-[-30px] sm:ml-[-25px]"
+        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-r border-purple-400"
         style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
       >
-        <div className="px-2 py-4 md:px-3 md:py-6 text-white font-bold text-sm md:text-lg tracking-wider my-0 mx-1 md:mx-1.5 ml-1 md:ml-1.5 mr-[-18px] md:mr-[-23px] opacity-100 shadow-none">
+        <div className="px-2 py-3 sm:px-3 sm:py-6 text-white font-bold text-xs sm:text-sm md:text-lg tracking-wider mr-0 mt-0 ml-[-20px]">
           <span className="hidden sm:inline">BATTLE PASS</span>
           <span className="sm:hidden">BP</span>
         </div>
