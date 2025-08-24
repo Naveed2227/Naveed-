@@ -12,7 +12,7 @@ const BATTLE_PASSES = [
     name: "Sentinels union",
     image: "2025-Aug.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [128, 123], // Vehicle IDs from VEHICLES array
+    vehicles: [129, 123], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["EMBT 120"],
       free: ["KF-31"]
@@ -24,7 +24,7 @@ const BATTLE_PASSES = [
     name: "Steal Eagle",
     image: "2025-Jul.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [111], // Vehicle IDs from VEHICLES array
+    vehicles: [111, 127], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["Obj 640"],
       free: ["Type 16 MCV"]
@@ -48,7 +48,7 @@ const BATTLE_PASSES = [
     name: "Golden Sky",
     image: "2025-May.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [131, 113], // Vehicle IDs from VEHICLES array
+    vehicles: [132, 113], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["Merkava MK.4"],
       free: ["M-SHORAD"]
@@ -1494,7 +1494,40 @@ const VEHICLES = [
     },
   },
   {
-    "id": 127,
+    id: 127,
+    name: "Object 640",
+    type: "Main Battle Tank",
+    faction: "Russian",
+    tier: "IV",
+    image: "Object-640.jpg",
+    description: "The Object 640 “Black Eagle” is a Russian prototype main battle tank with modular armor.",
+    stats: { health: 48000, speed: 73, armor: "1200mm", agility: 40.6 },
+    weapons: [
+      { name: "ZBK18M HEAT", type: "Main Gun", damage: 12390, penetration: 550 },
+      { name: "ZOF25 HEI", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "ZBM42 APFSDS", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "9M119 HEAT", type: "Main Gun", damage: 10160, penetration: 750 },
+    ],
+    modules: {
+      engine: [
+        { name: "SACM V8X-1500 MK1", bonus: "+11 km/h speed" },
+        { name: "SACM V8X-1500 MK2", bonus: "+22 km/h speed" },
+        { name: "SACM V8X-1500 MK3", bonus: "+33 km/h speed" },
+      ],
+      armor: [
+        { name: "Modular Armor MK1", bonus: "+215mm protection" },
+        { name: "Modular Armor MK2", bonus: "+430mm protection" },
+        { name: "Modular Armor MK3", bonus: "+645mm protection" },
+      ],
+      fireControl: [
+        { name: "FINDERS MK1", bonus: "+18% accuracy" },
+        { name: "FINDERS MK2", bonus: "+32% accuracy" },
+        { name: "FINDERS MK3", bonus: "+46% accuracy" },
+      ],
+    },
+  },
+  {
+    "id": 128,
     "name": "T-20 Monolit",
     "type": "Tank Destroyer",
     "faction": "Russian",
@@ -1534,7 +1567,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 128,
+    "id": 129,
     "name": "KF31 Lynx",
     "type": "Light Tank",
     "faction": "German",
@@ -1573,7 +1606,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 129,
+    "id": 130,
     "name": "M10 Booker",
     "type": "Light Tank",
     "faction": "American",
@@ -1612,7 +1645,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 130,
+    "id": 131,
     "name": "PL-01",
     "type": "Light Tank",
     "faction": "Polish",
@@ -1651,7 +1684,7 @@ const VEHICLES = [
     }
   },
   {
-  "id": 131,
+  "id": 132,
   "name": "M-SHORAD",
   "type": "Anti-Air",
   "faction": "American",
@@ -1709,7 +1742,7 @@ const VEHICLES = [
   }
 },
 {
-  "id": 132,
+  "id": 133,
   "name": "TOS-1A",
   "type": "MLRS",
   "faction": "Russian",
@@ -1756,7 +1789,7 @@ const VEHICLES = [
   }
 },
 {
-    id: 133,
+    id: 134,
     name: "M270 MLRS",
     type: "MLRS",
     faction: "American",
@@ -1788,7 +1821,7 @@ const VEHICLES = [
     },
   },
 {
-  "id": 134,
+  "id": 135,
   "name": "PLZ-05",
   "type": "SPA",
   "faction": "Chinese",
@@ -1835,7 +1868,7 @@ const VEHICLES = [
   }
 },
 {
-  "id": 135,
+  "id": 136,
   "name": "M109A6 Paladin",
   "type": "SPA",
   "faction": "American",
@@ -1883,7 +1916,7 @@ const VEHICLES = [
 },
 
 {
-  "id": 136,
+  "id": 137,
   "name": "FK 2000",
   "type": "Anti-Air",
   "faction": "Chinese",
@@ -1942,7 +1975,7 @@ const VEHICLES = [
 },
 
 {
-  "id": 137,
+  "id": 138,
   "name": "BM-57-2 Kochevnik",
   "type": "Tank Destroyer",
   "faction": "Russian",
@@ -3517,6 +3550,36 @@ const VEHICLES = [
   },
   {
     "id": 428,
+    "name": "Rookiat MTTD",
+    "type": "Light Tank",
+    "faction": "British",
+    "tier": "III",
+    image: "Rookiat-MTTD.jpg",
+    "description": "The Rooikat MTTD is a fast, wheeled tank destroyer with strong firepower.",
+    "stats": { "health": 26100, "speed": 105, "armor": 40, "agility": 50 },
+    "weapons": [
+  { "name": "DM23 APFSDS", "type": "Cannon", "damage": 8400, "penetration": 337, "reload": 5.8 },
+  { "name": "DM512 HESH", "type": "Cannon", "damage": 9600, "penetration": 127, "reload": 5.8 },
+  { "name": "DM12 HEAT", "type": "Cannon", "damage": 9200, "penetration": 400, "reload": 5.8 },
+  { "name": "DM33 APFSDS", "type": "Cannon", "damage": 8800, "penetration": 508, "reload": 5.8 }
+],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
+  },
+  {
+    "id": 429,
     "name": "VBCI-2",
     "type": "Light Tank",
     "faction": "French",
@@ -3546,7 +3609,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 429,
+    "id": 430,
     "name": "WMA301",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -3574,7 +3637,7 @@ const VEHICLES = [
     }
   },
    {
-    id: 430,
+    id: 431,
     name: "BMD3",
     type: "Light Tank",
     faction: "Russian",
