@@ -7721,21 +7721,103 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
 
         {/* Pagination */}
-        <div className="mt-8 flex justify-center">
-          <div className="flex gap-2">
-            {Array.from({ length: Math.ceil(filteredVehicles.length / vehiclesPerPage) }, (_, i) => i + 1).map(
-              (number) => (
-                <button
-                  key={number}
-                  onClick={() => setCurrentPage(number)}
-                  className={`px-3 py-2 rounded transition-colors ${
-                    currentPage === number ? "bg-cyan-700 text-white" : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                  }`}
-                >
-                  {number}
-                </button>
-              ),
-            )}
+        <div className="flex justify-center flex-row mx-4 mt-2.5 leading-9">
+          <div className="flex gap-1 items-center">
+            {/* Previous Button */}
+            <button
+              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1}
+              className={`px-2 py-1 text-sm rounded transition-colors ${
+                currentPage === 1 
+                  ? "bg-slate-800 text-slate-500 cursor-not-allowed" 
+                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+              }`}
+            >
+              &lt;
+            </button>
+
+            {/* Compact Page Numbers - Hidden on Mobile */}
+            <div className="hidden md:flex gap-1 items-center">
+              {(() => {
+                const totalPages = Math.ceil(filteredVehicles.length / vehiclesPerPage);
+                const current = currentPage;
+                const pages = [];
+
+                if (totalPages <= 7) {
+                  // Show all pages if 7 or fewer
+                  for (let i = 1; i <= totalPages; i++) {
+                    pages.push(i);
+                  }
+                } else {
+                  // Always show first page
+                  pages.push(1);
+                  
+                  if (current <= 4) {
+                    // Near beginning: 1 2 3 4 5 ... last
+                    for (let i = 2; i <= 5; i++) {
+                      pages.push(i);
+                    }
+                    pages.push('...');
+                    pages.push(totalPages);
+                  } else if (current >= totalPages - 3) {
+                    // Near end: 1 ... (last-4) (last-3) (last-2) (last-1) last
+                    pages.push('...');
+                    for (let i = totalPages - 4; i <= totalPages; i++) {
+                      pages.push(i);
+                    }
+                  } else {
+                    // Middle: 1 ... (current-1) current (current+1) ... last
+                    pages.push('...');
+                    for (let i = current - 1; i <= current + 1; i++) {
+                      pages.push(i);
+                    }
+                    pages.push('...');
+                    pages.push(totalPages);
+                  }
+                }
+
+                return pages.map((page, index) => {
+                  if (page === '...') {
+                    return (
+                      <span key={`ellipsis-${index}`} className="px-2 py-1 text-slate-400 text-sm">
+                        ...
+                      </span>
+                    );
+                  }
+                  return (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`px-2 py-1 text-sm rounded transition-colors mr-0.5 ${
+                        currentPage === page 
+                          ? "bg-cyan-700 text-white" 
+                          : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  );
+                });
+              })()}
+            </div>
+
+            {/* Current Page Indicator - Visible on Mobile */}
+            <div className="md:hidden px-2 py-1 bg-slate-800 text-slate-300 rounded text-sm">
+              {currentPage} / {Math.ceil(filteredVehicles.length / vehiclesPerPage)}
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={() => setCurrentPage(Math.min(Math.ceil(filteredVehicles.length / vehiclesPerPage), currentPage + 1))}
+              disabled={currentPage === Math.ceil(filteredVehicles.length / vehiclesPerPage)}
+              className={`px-2 py-1 text-sm rounded transition-colors ${
+                currentPage === Math.ceil(filteredVehicles.length / vehiclesPerPage)
+                  ? "bg-slate-800 text-slate-500 cursor-not-allowed" 
+                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+              }`}
+            >
+              &gt;
+            </button>
           </div>
         </div>
 
