@@ -7150,12 +7150,23 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Battle Pass Tab - Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
-        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-r border-purple-400"
-        style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-r border-purple-400 min-h-[120px] sm:min-h-[140px] min-w-[44px] sm:min-w-[48px] flex items-center justify-center"
       >
-        <div className="px-2 py-3 sm:px-3 sm:py-6 text-white font-bold text-xs sm:text-sm md:text-lg tracking-wider mr-0 mt-0 ml-[-20px]">
-          <span className="hidden sm:inline">BATTLE PASS</span>
-          <span className="sm:hidden">BP</span>
+        {/* Mobile: Horizontal layout with icon + text */}
+        <div className="sm:hidden flex flex-col items-center justify-center px-3 py-4 text-white font-bold text-xs tracking-wide">
+          <svg className="w-5 h-5 mb-1" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+            <path d="M12 17L13.09 23.26L22 24L13.09 24.74L12 31L10.91 24.74L2 24L10.91 23.26L12 17Z" opacity="0.6"/>
+          </svg>
+          <span className="text-center leading-tight">BATTLE<br/>PASS</span>
+        </div>
+        
+        {/* Desktop: Vertical rotated text */}
+        <div 
+          className="hidden sm:flex px-3 py-6 text-white font-bold text-sm md:text-lg tracking-wider items-center justify-center mr-0 ml-[-15px]"
+          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+        >
+          BATTLE PASS
         </div>
       </button>
 
