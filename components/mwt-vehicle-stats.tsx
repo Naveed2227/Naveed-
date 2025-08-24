@@ -641,7 +641,7 @@ const VEHICLES = [
     tier: "IV",
     description: "Next-generation main battle tank with unmanned turret and advanced armor systems.",
     image: "T-14-Armata.jpg",
-    stats: { health: 38900, speed: 70, reverseSpeed: 70, maneuverability: 34, armor: "1200mm", agility: 65 },
+    stats: { health: 38900, speed: 70, reverseSpeed: 70, armor: "1200mm", agility: 34 },
     weapons: [
       { name: "2A82-1M 125mm", type: "Main Gun", damage: 15800, penetration: 850 },
       { name: "Invar ATGM", type: "Anti-Tank Missile", damage: 18500, penetration: 1200 },
@@ -674,7 +674,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Abrams-X.jpg",
     description: "Next-generation prototype tank with unmanned turret and advanced systems.",
-    stats: { health: 40300, speed: 75, reverseSpeed: 45, maneuverability: 35, armor: "1100mm", agility: 68 },
+    stats: { health: 40300, speed: 75, reverseSpeed: 45, armor: "1100mm", agility: 35 },
     weapons: [
       { name: "XM360 120mm", type: "Main Gun", damage: 15200, penetration: 820 },
       { name: "Switchblade Drone", type: "Loitering Munition", damage: 8500, penetration: 450 },
@@ -707,7 +707,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Type-10.jpg",
     description: "Modern main battle tank optimized for Japanese terrain with advanced fire control.",
-    stats: { health: 38000, speed: 71, reverseSpeed: 71, maneuverability: 40, armor: "950mm", agility: 75 },
+    stats: { health: 38000, speed: 71, reverseSpeed: 71, armor: "950mm", agility: 40 },
     weapons: [
       { name: "JSW 120mm L44", type: "Main Gun", damage: 13800, penetration: 750 },
       { name: "Type 74 7.62mm", type: "Machine Gun", damage: 110, penetration: 12, rateOfFire: "850 rpm" },
@@ -738,7 +738,7 @@ const VEHICLES = [
     tier: "IV",
     image: "M1-Abrams-Block-3.jpg",
     description: "An Experimental prototype tank intended as a successor to the Abrams MBT family",
-    stats: { health: 39600, speed: 80, reverseSpeed: 50, maneuverability: 40, armor: "1150mm", agility: 66 },
+    stats: { health: 39600, speed: 80, reverseSpeed: 50, maneuverability: 40, armor: "1150mm", agility: 40 },
     weapons: [
       { "name": "120mm XM360 - APFSDS", "type": "APFSDS", "damage": 700, "penetration": 850, "reload": 7 },
       { "name": "120mm XM360 - HEAT", "type": "HEAT", "damage": 750, "penetration": 450, "reload": 7 },
@@ -802,7 +802,7 @@ const VEHICLES = [
     tier: "IV",
     image: "KF-51-Panther.jpg",
     description: "Next-generation main battle tank with 130mm gun and advanced digital systems.",
-    stats: { health: 38200, speed: 70, armor: "1200mm", agility: 72 },
+    stats: { health: 38500, speed: 65, armor: "1200mm", agility: 38 },
     weapons: [
       { name: "Future Gun System 130mm", type: "Main Gun", damage: 18500, penetration: 950 },
       { name: "Spike LR2", type: "ATGM", damage: 19200, penetration: 1250 },
@@ -868,7 +868,7 @@ const VEHICLES = [
     tier: "IV",
     image: "T-25-Pamir.jpg",
     description: "Advanced main battle tank with next-generation armor and fire control systems.",
-    stats: { health: 39200, speed: 68, armor: "1250mm", agility: 70 },
+    stats: { health: 40000, speed: 65, armor: "1250mm", agility: 30 },
     weapons: [
       { name: "2A82-1M 125mm", type: "Main Gun", damage: 16200, penetration: 870 },
       { name: "9M119M1 Invar-M", type: "ATGM", damage: 19500, penetration: 1300 },
@@ -900,7 +900,7 @@ const VEHICLES = [
     tier: "IV",
     image: "T-90A.jpg",
     description: "Modernized main battle tank with improved armor and advanced fire control.",
-    stats: { health: 39400, speed: 65, reverseSpeed: 30, maneuverability: 44, armor: "1050mm", agility: 68 },
+    stats: { health: 39400, speed: 65, reverseSpeed: 30, maneuverability: 44, armor: "1050mm", agility: 44 },
     weapons: [
       { name: "2A46M-5 125mm", type: "Main Gun", damage: 15200, penetration: 820 },
       { name: "9M119 Refleks", type: "ATGM", damage: 17800, penetration: 1150 },
@@ -932,7 +932,7 @@ const VEHICLES = [
     tier: "IV",
     image: "T-95M.jpg",
     description: "Experimental heavy tank with revolutionary armor design and 152mm gun.",
-    stats: { health: 42500, speed: 60, armor: "1400mm", agility: 58 },
+    stats: { health: 38100, speed: 75, armor: "1400mm", agility: 30 },
     weapons: [
       { name: "2A83 152mm", type: "Main Gun", damage: 22500, penetration: 1200 },
       { name: "9M119M1 Invar-M", type: "ATGM", damage: 20200, penetration: 1350 },
@@ -965,7 +965,7 @@ const VEHICLES = [
     tier: "IV",
     image: "T-104-Bastion.jpg",
     description: "A Russian heavy main battle tank, featuring strong armor, AI-assisted and protection systems.",
-    stats: { health: 40800, speed: 72, armor: "1320mm", agility: 75 },
+    stats: { health: 42200, speed: 60, armor: "1320mm", agility: 45 },
     weapons: [
       { name: "2A82-2M 125mm", type: "Main Gun", damage: 17500, penetration: 920 },
       { name: "Kornet-EM", type: "ATGM", damage: 21000, penetration: 1400 },
@@ -997,7 +997,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Type-16-MCV.jpg",
     description: "Mobile Combat Vehicle with excellent mobility and firepower for rapid deployment.",
-    stats: { health: 26400, speed: 100, armor: "420mm", agility: 85 },
+    stats: { health: 33000, speed: 100, armor: "420mm", agility: 42 },
     weapons: [
       { name: "JSW 105mm L52", type: "Main Gun", damage: 12500, penetration: 680 },
       { name: "Type 74 7.62mm", type: "Machine Gun", damage: 110, penetration: 12, rateOfFire: "850 rpm" },
@@ -1028,7 +1028,7 @@ const VEHICLES = [
   tier: "IV",
   image: "T-14-Armata-(152).jpg",
   description: "Next-generation Russian MBT prototype equipped with a powerful 152mm smoothbore gun and advanced armor.",
-  stats: { health: 42000, speed: 85, armor: "1000mm", agility: 40 },
+  stats: { health: 39700, speed: 73, armor: "1000mm", agility: 34 },
   weapons: [
     { name: "2A83 152mm Smoothbore Gun", type: "Cannon", damage: 17000, penetration: 1100, rateOfFire: "6 rpm" },
     { name: "Kord 12.7mm MG", type: "Machine Gun", damage: 180, penetration: 25, rateOfFire: "750 rpm" },
@@ -1057,7 +1057,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Merkava-Mk.4.jpg",
     description: "Heavily armored main battle tank with unique rear-engine design and crew survivability focus.",
-    stats: { health: 35600, speed: 64, armor: "1050mm", agility: 62 },
+    stats: { health: 42500, speed: 64, armor: "1050mm", agility: 38 },
     weapons: [
       { name: "IMI 120mm", type: "Main Gun", damage: 14800, penetration: 800 },
       { name: "Spike NLOS", type: "Anti-Tank Missile", damage: 17200, penetration: 1150 },
@@ -1089,7 +1089,7 @@ const VEHICLES = [
     tier: "IV",
     description: "Tank support fighting vehicle designed for urban combat and infantry support.",
     image: "BMPT-Terminator-2.jpg",
-    stats: { health: 36400, speed: 60, armor: "850mm", agility: 68 },
+    stats: { health: 36400, speed: 60, armor: "850mm", agility: 38 },
     weapons: [
       { name: "2A42 30mm Twin", type: "Autocannon", damage: 520, penetration: 85, rateOfFire: "550 rpm" },
       { name: "9M120 Ataka", type: "ATGM", damage: 17200, penetration: 1150 },
@@ -1121,7 +1121,7 @@ const VEHICLES = [
     tier: "IV",
     image: "SR-5-GMLRS.jpg",
     description: "Guided multiple launch rocket system with precision strike capability.",
-    stats: { health: 29900, speed: 85, armor: "380mm", agility: 58 },
+    stats: { health: 29900, speed: 85, armor: "380mm", agility: 18 },
     weapons: [
       { name: "SR-5 Guided Rocket", type: "Guided Rocket", damage: 20500, penetration: 750 },
       { name: "QJC88 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "600 rpm" },
@@ -1152,7 +1152,7 @@ const VEHICLES = [
     tier: "IV",
     image: "2S19-Msta-S.jpg",
     description: "Self-propelled howitzer with long-range precision artillery capability.",
-    stats: { health: 34300, speed: 60, armor: "450mm", agility: 52 },
+    stats: { health: 34300, speed: 60, armor: "450mm", agility: 32 },
     weapons: [
       { name: "2A64 152mm", type: "Howitzer", damage: 28500, penetration: 950 },
       { name: "NSVT 12.7mm", type: "Machine Gun", damage: 200, penetration: 32, rateOfFire: "700 rpm" },
@@ -1183,7 +1183,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Pantsir-S-1.jpg",
     description: "Combined gun-missile air defense system with advanced radar capabilities.",
-    stats: { health: 32500, speed: 70, armor: "420mm", agility: 75 },
+    stats: { health: 32500, speed: 70, armor: "420mm", agility: 35 },
     weapons: [
       { name: "2A38M 30mm Twin", type: "Anti-Aircraft Gun", damage: 2200, penetration: 120, rateOfFire: "2500 rpm" },
       { name: "57E6 SAM", type: "Surface-to-Air Missile", damage: 12500, penetration: 650 },
@@ -1214,7 +1214,7 @@ const VEHICLES = [
     tier: "IV",
     image: "M1128-Stryker.jpg",
     description: "Mobile gun system with rapid deployment capability and stealth features.",
-    stats: { health: 28800, speed: 97, armor: "380mm", agility: 88 },
+    stats: { health: 28800, speed: 97, armor: "380mm", agility: 40.1 },
     weapons: [
       { name: "M68A1E4 105mm", type: "Main Gun", damage: 12800, penetration: 680 },
       { name: "M240 7.62mm", type: "Coaxial MG", damage: 120, penetration: 15, rateOfFire: "750 rpm" },
@@ -1246,7 +1246,7 @@ const VEHICLES = [
     tier: "IV",
     image: "VT-4A1.jpg",
     description: "Export variant main battle tank with advanced fire control and modular protection.",
-    stats: { health: 36500, speed: 70, armor: "1100mm", agility: 72 },
+    stats: { health: 39100, speed: 71, armor: "1100mm", agility: 37 },
     weapons: [
       { name: "ZPT98A 125mm", type: "Main Gun", damage: 15800, penetration: 850 },
       { name: "GP125", type: "ATGM", damage: 18500, penetration: 1200 },
@@ -1278,7 +1278,7 @@ const VEHICLES = [
     tier: "IV",
     image: "ZTZ99A.jpg",
     description: "Advanced main battle tank with composite armor and laser warning systems.",
-    stats: { health: 37200, speed: 68, armor: "1150mm", agility: 70 },
+    stats: { health: 37500, speed: 76, armor: "1150mm", agility: 40 },
     weapons: [
       { name: "ZPT98A 125mm", type: "Main Gun", damage: 16200, penetration: 870 },
       { name: "GP125", type: "ATGM", damage: 19000, penetration: 1250 },
@@ -1310,7 +1310,7 @@ const VEHICLES = [
     tier: "IV",
     image: "ZTZ99-III.jpg",
     description: "Latest variant with enhanced armor package and improved battlefield management systems.",
-    stats: { health: 38500, speed: 70, armor: "1200mm", agility: 72 },
+    stats: { health: 38300, speed: 70, armor: "1200mm", agility: 32 },
     weapons: [
       { name: "ZPT98A 125mm", type: "Main Gun", damage: 16800, penetration: 900 },
       { name: "GP125A", type: "ATGM", damage: 19800, penetration: 1300 },
@@ -1342,7 +1342,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Challenger-3.jpg",
     description: "Next-generation British main battle tank with smoothbore gun and digital turret.",
-    stats: { health: 38800, speed: 59, armor: "1180mm", agility: 65 },
+    stats: { health: 43000, speed: 70, armor: "1180mm", agility: 32 },
     weapons: [
       { name: "Rheinmetall L55A1 120mm", type: "Main Gun", damage: 16500, penetration: 880 },
       { name: "Brimstone ATGM", type: "Anti-Tank Missile", damage: 19500, penetration: 1280 },
@@ -1374,7 +1374,7 @@ const VEHICLES = [
     tier: "IV",
     image: "EMBT-120.jpg",
     description: "A hybrid European main battle tank, combining Leopard 2 chassis with Leclerc turret.",
-    stats: { health: 37800, speed: 70, armor: "1160mm", agility: 74 },
+    stats: { health: 41900, speed: 75, armor: "1160mm", agility: 38 },
     weapons: [
       { name: "Rheinmetall L55 120mm", type: "Main Gun", damage: 16200, penetration: 870 },
       { name: "PARS 3 LR", type: "ATGM", damage: 18800, penetration: 1220 },
@@ -1406,7 +1406,7 @@ const VEHICLES = [
     tier: "IV",
     image: "FV4034-Challenger-2-TES.jpg",
     description: "A heavily upgraded British main battle tank with advanced armor for urban warfare.",
-    stats: { health: 36200, speed: 56, armor: "1120mm", agility: 62 },
+    stats: { health: 42700, speed: 56, armor: "1120mm", agility: 30 },
     weapons: [
       { name: "L30A1 120mm", type: "Main Gun", damage: 15500, penetration: 830 },
       { name: "L94A1 7.62mm", type: "Machine Gun", damage: 140, penetration: 18, rateOfFire: "750 rpm" },
@@ -1438,7 +1438,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Karrar.jpg",
     description: "An Iranian main battle tank, featuring upgraded armor, firepower, and technology from T-72 design.",
-    stats: { health: 34500, speed: 65, armor: "980mm", agility: 68 },
+    stats: { health: 39800, speed: 70, armor: "980mm", agility: 35 },
     weapons: [
       { name: "2A46M 125mm", type: "Main Gun", damage: 14800, penetration: 800 },
       { name: "Toophan-5", type: "ATGM", damage: 17200, penetration: 1100 },
@@ -1470,7 +1470,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Leclerc-S2-AZUR.jpg",
     description: "Upgraded French main battle tank with urban warfare package and improved armor.",
-    stats: { health: 35800, speed: 71, armor: "1080mm", agility: 76 },
+    stats: { health: 42400, speed: 80, armor: "1080mm", agility: 38 },
     weapons: [
       { name: "CN120-26 120mm", type: "Main Gun", damage: 15800, penetration: 850 },
       { name: "MILAN ATGM", type: "Anti-Tank Missile", damage: 17800, penetration: 1150 },
@@ -1502,7 +1502,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Object-640.jpg",
     description: "The Object 640 “Black Eagle” is a Russian prototype main battle tank with modular armor.",
-    stats: { health: 48000, speed: 73, armor: "1200mm", agility: 40.6 },
+    stats: { health: 42400, speed: 80, armor: "1200mm", agility: 38 },
     weapons: [
       { name: "ZBK18M HEAT", type: "Main Gun", damage: 12390, penetration: 550 },
       { name: "ZOF25 HEI", type: "Main Gun", damage: 5000, penetration: 92 },
@@ -1536,13 +1536,13 @@ const VEHICLES = [
     image: "T-20-Monolit.jpg",
     "description": "Advanced Russian main battle tank equipped with a 2A42 autocannon, Kornet ATGMs, and a 30mm AGS-30 grenade launcher. Known for its formidable firepower and versatility on the battlefield.",
     "stats": {
-      "health": 37100,
+      "health": 39400,
       "speed": 70,
-      "reverseSpeed": 25,
+      "reverseSpeed": 50,
       "turretRotationSpeed": 49.8,
       "hullRotationSpeed": 40,
       "armor": 400,
-      "agility": 45
+      "agility": 40
     },
     "weapons": [
       { "name": "2A42", "type": "Autocannon", "damage": 380, "penetration": 65, "rateOfFire": "1800 rpm", "reload": 6, "ammo": 600, "ammoInMagazine": 150, "range": 1666, "elevationAngle": "-10/30 degrees" },
@@ -1576,13 +1576,13 @@ const VEHICLES = [
     image: "KF31-Lynx.jpg",
     "description": "A versatile German infantry fighting vehicle equipped with a 30mm autocannon and Spike LR2 missiles, adaptable for various combat roles.",
     "stats": {
-      "health": 22000,
+      "health": 38600,
       "speed": 80,
       "reverseSpeed": 30,
       "turretRotationSpeed": 50,
       "hullRotationSpeed": 45,
       "armor": 300,
-      "agility": 70
+      "agility": 40
     },
     "weapons": [
       { "name": "30mm LANCE Autocannon", "type": "Autocannon", "damage": 500, "penetration": 100, "rateOfFire": "600 rpm", "reload": 4, "ammo": 500, "ammoInMagazine": 100, "range": 2000, "elevationAngle": "-10/60 degrees" },
@@ -1615,13 +1615,13 @@ const VEHICLES = [
     image: "M10-Booker.jpg",
     "description": "A mobile assault gun designed to neutralize fortified positions and light armor, featuring a 105mm M35 gun.",
     "stats": {
-      "health": 28000,
-      "speed": 60,
-      "reverseSpeed": 20,
+      "health": 39300,
+      "speed": 72,
+      "reverseSpeed": 30,
       "turretRotationSpeed": 30,
       "hullRotationSpeed": 35,
       "armor": 350,
-      "agility": 45
+      "agility": 30
     },
     "weapons": [
       { "name": "105mm M35 Gun", "type": "Main Gun", "damage": 12000, "penetration": 800, "reload": 10, "ammo": 40, "ammoInMagazine": 5, "rateOfFire": "1 round/s", "range": 3000, "elevationAngle": "-5/15 degrees" },
@@ -1654,13 +1654,13 @@ const VEHICLES = [
     image: "PL-01.jpg",
     "description": "A concept stealth tank featuring a 120mm cannon and advanced camouflage systems.",
     "stats": {
-      "health": 25000,
-      "speed": 70,
-      "reverseSpeed": 25,
+      "health": 36100,
+      "speed": 85,
+      "reverseSpeed": 45,
       "turretRotationSpeed": 40,
       "hullRotationSpeed": 30,
       "armor": 320,
-      "agility": 55
+      "agility": 36
     },
     "weapons": [
       { "name": "120mm Cannon", "type": "Main Gun", "damage": 10000, "penetration": 900, "reload": 12, "ammo": 30, "ammoInMagazine": 5, "rateOfFire": "1 round/s", "range": 3500, "elevationAngle": "-5/15 degrees" },
@@ -1693,13 +1693,13 @@ const VEHICLES = [
   image: "M-SHORAD.jpg",
   "description": "Mobile short-range air defense system equipped with autocannons, Stinger missiles, and radar-guided targeting.",
   "stats": {
-    "health": 24000,
-    "speed": 70,
-    "reverseSpeed": 25,
+    "health": 27900,
+    "speed": 97,
+    "reverseSpeed": 30,
     "turretRotationSpeed": 55,
     "hullRotationSpeed": 50,
     "armor": 250,
-    "agility": 65
+    "agility": 55
   },
   "weapons": [
     {
@@ -1751,13 +1751,13 @@ const VEHICLES = [
   image: "TOS-1A.jpg",
   "description": "Heavy flamethrower rocket launcher mounted on a tank chassis, designed for area suppression and destruction of entrenched enemies.",
   "stats": {
-    "health": 38000,
+    "health": 37100,
     "speed": 60,
     "reverseSpeed": 25,
     "turretRotationSpeed": 20,
     "hullRotationSpeed": 30,
     "armor": 400,
-    "agility": 35
+    "agility": 44
   },
   "weapons": [
     {
@@ -1797,7 +1797,7 @@ const VEHICLES = [
     tier: "IV",
     image: "M270-MLRS.jpg",
     description: "Multiple Launch Rocket System capable of delivering devastating area bombardment.",
-    stats: { health: 28500, speed: 64, armor: "450mm", agility: 45 },
+    stats: { health: 31400, speed: 72, armor: "450mm", agility: 26 },
     weapons: [
       { name: "M31 GMLRS", type: "Guided Rocket", damage: 22000, penetration: 800 },
       { name: "ATACMS", type: "Tactical Missile", damage: 35000, penetration: 1200 },
@@ -1830,13 +1830,13 @@ const VEHICLES = [
   image: "PLZ-05.jpg",
   "description": "Modern 155mm self-propelled howitzer designed for long-range artillery support and rapid deployment.",
   "stats": {
-    "health": 32000,
-    "speed": 65,
-    "reverseSpeed": 25,
+    "health": 31200,
+    "speed": 56,
+    "reverseSpeed": 16,
     "turretRotationSpeed": 25,
     "hullRotationSpeed": 30,
     "armor": 350,
-    "agility": 40
+    "agility": 30
   },
   "weapons": [
     {
@@ -1877,13 +1877,13 @@ const VEHICLES = [
   image: "M109A6-Paladin.jpg",
   "description": "Modernized 155mm self-propelled artillery system providing rapid, accurate fire support for ground forces.",
   "stats": {
-    "health": 34000,
-    "speed": 60,
-    "reverseSpeed": 25,
+    "health": 31100,
+    "speed": 64,
+    "reverseSpeed": 26,
     "turretRotationSpeed": 25,
     "hullRotationSpeed": 30,
     "armor": 350,
-    "agility": 38
+    "agility": 28
   },
   "weapons": [
     {
@@ -1925,13 +1925,13 @@ const VEHICLES = [
   image: "FK-2000.jpg",
   "description": "Modern Chinese mobile anti-aircraft system with radar-guided missiles and rapid-fire autocannons for air defense.",
   "stats": {
-    "health": 28000,
-    "speed": 70,
-    "reverseSpeed": 25,
+    "health": 35000,
+    "speed": 60,
+    "reverseSpeed": 60,
     "turretRotationSpeed": 60,
     "hullRotationSpeed": 50,
     "armor": 300,
-    "agility": 60
+    "agility": 75
   },
   "weapons": [
     {
@@ -1984,13 +1984,13 @@ const VEHICLES = [
   image: "BM-57-2-Kochevnik.jpg",
   "description": "A modern Russian heavy tank armed with a 125mm smoothbore cannon and multiple defensive systems, built for frontline dominance.",
   "stats": {
-    "health": 42000,
-    "speed": 65,
-    "reverseSpeed": 25,
+    "health": 36200,
+    "speed": 75,
+    "reverseSpeed": 28,
     "turretRotationSpeed": 45,
     "hullRotationSpeed": 40,
     "armor": 500,
-    "agility": 50
+    "agility": 40
   },
   "weapons": [
     {
