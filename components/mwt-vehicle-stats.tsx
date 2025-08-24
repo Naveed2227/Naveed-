@@ -633,7 +633,7 @@ const VEHICLES = [
     ]
   }
 },
-  {
+{
     id: 100,
     name: "T-14 Armata",
     type: "Main Battle Tank",
@@ -641,7 +641,7 @@ const VEHICLES = [
     tier: "IV",
     description: "Next-generation main battle tank with unmanned turret and advanced armor systems.",
     image: "T-14-Armata.jpg",
-    stats: { health: 38900, speed: 70, armor: "1200mm", agility: 65 },
+    stats: { health: 38900, speed: 70, reverseSpeed: 70, maneuverability: 34, armor: "1200mm", agility: 65 },
     weapons: [
       { name: "2A82-1M 125mm", type: "Main Gun", damage: 15800, penetration: 850 },
       { name: "Invar ATGM", type: "Anti-Tank Missile", damage: 18500, penetration: 1200 },
@@ -674,7 +674,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Abrams-X.jpg",
     description: "Next-generation prototype tank with unmanned turret and advanced systems.",
-    stats: { health: 36800, speed: 72, armor: "1100mm", agility: 68 },
+    stats: { health: 40300, speed: 75, reverseSpeed: 45, maneuverability: 35, armor: "1100mm", agility: 68 },
     weapons: [
       { name: "XM360 120mm", type: "Main Gun", damage: 15200, penetration: 820 },
       { name: "Switchblade Drone", type: "Loitering Munition", damage: 8500, penetration: 450 },
@@ -707,7 +707,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Type-10.jpg",
     description: "Modern main battle tank optimized for Japanese terrain with advanced fire control.",
-    stats: { health: 31200, speed: 70, armor: "950mm", agility: 75 },
+    stats: { health: 38000, speed: 71, reverseSpeed: 71, maneuverability: 40, armor: "950mm", agility: 75 },
     weapons: [
       { name: "JSW 120mm L44", type: "Main Gun", damage: 13800, penetration: 750 },
       { name: "Type 74 7.62mm", type: "Machine Gun", damage: 110, penetration: 12, rateOfFire: "850 rpm" },
@@ -738,7 +738,7 @@ const VEHICLES = [
     tier: "IV",
     image: "M1-Abrams-Block-3.jpg",
     description: "An Experimental prototype tank intended as a successor to the Abrams MBT family",
-    stats: { health: 37500, speed: 67, armor: "1150mm", agility: 66 },
+    stats: { health: 39600, speed: 80, reverseSpeed: 50, maneuverability: 40, armor: "1150mm", agility: 66 },
     weapons: [
       { "name": "120mm XM360 - APFSDS", "type": "APFSDS", "damage": 700, "penetration": 850, "reload": 7 },
       { "name": "120mm XM360 - HEAT", "type": "HEAT", "damage": 750, "penetration": 450, "reload": 7 },
@@ -900,7 +900,7 @@ const VEHICLES = [
     tier: "IV",
     image: "T-90A.jpg",
     description: "Modernized main battle tank with improved armor and advanced fire control.",
-    stats: { health: 35800, speed: 65, armor: "1050mm", agility: 68 },
+    stats: { health: 39400, speed: 65, reverseSpeed: 30, maneuverability: 44, armor: "1050mm", agility: 68 },
     weapons: [
       { name: "2A46M-5 125mm", type: "Main Gun", damage: 15200, penetration: 820 },
       { name: "9M119 Refleks", type: "ATGM", damage: 17800, penetration: 1150 },
@@ -3666,7 +3666,6 @@ const VEHICLES = [
         { name: "BPK-3-42 MK3", bonus: "+38% accuracy" },
       ],
     },
-  },
   {
   id: 500,
   name: "Mi-35P Hind-F",
