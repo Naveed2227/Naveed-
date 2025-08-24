@@ -7147,14 +7147,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      {/* Battle Pass Tab - Rotated 90° */}
+      {/* Battle Pass Tab - Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
-        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-r border-purple-400 mr-0 ml-[-30px]"
+        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-r border-purple-400 mr-0 ml-[-30px] md:ml-[-30px] sm:ml-[-25px]"
         style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
       >
-        <div className="px-3 py-6 text-white font-bold text-lg tracking-wider my-0 mx-1.5 ml-1.5 mr-[-23px] opacity-100 shadow-none">
-          BATTLE PASS
+        <div className="px-2 py-4 md:px-3 md:py-6 text-white font-bold text-sm md:text-lg tracking-wider my-0 mx-1 md:mx-1.5 ml-1 md:ml-1.5 mr-[-18px] md:mr-[-23px] opacity-100 shadow-none">
+          <span className="hidden sm:inline">BATTLE PASS</span>
+          <span className="sm:hidden">BP</span>
         </div>
       </button>
 
@@ -7177,7 +7178,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               animate={{ x: 0 }}
               exit={{ x: -400 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed left-0 top-0 h-full bg-gradient-to-b from-slate-800 to-slate-900 border-r border-purple-500/30 z-50 overflow-y-auto shadow-2xl w-[400px]"
+              className="fixed left-0 top-0 h-full bg-gradient-to-b from-slate-800 to-slate-900 border-r border-purple-500/30 z-50 overflow-y-auto shadow-2xl w-full sm:w-[400px] max-w-[400px]"
             >
               {/* Header */}
               <div className="p-6 bg-gradient-to-r from-lime-400 to-blue-600 border-b border-purple-400/30">
@@ -7344,31 +7345,43 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       </AnimatePresence>
 
       <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 shadow-sm">
-        <div className="max-w-7xl mx-auto p-6">
+        <div className="max-w-7xl mx-auto p-4 sm:p-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent mx-1.5">
-                {"MWT Assistant (Unofficial)\n(Demo)"}
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent mx-1.5">
+                <span className="hidden sm:inline">{"MWT Assistant (Unofficial)\n(Demo)"}</span>
+                <span className="sm:hidden">MWT Assistant</span>
               </h1>
-              <p className="text-slate-400 mt-1 ml-2.5">    MWT Assistant</p>
+              <p className="text-slate-400 mt-1 ml-2.5 text-sm hidden sm:block">    MWT Assistant</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="pb-6">
-                <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-                  <div className="relative">
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+                  <div className="relative w-full sm:w-auto">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-400 w-4 h-4" />
                     <input
                       type="text"
                       placeholder="Search vehicles..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 pr-4 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                      className="w-full sm:w-64 pl-10 pr-12 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                     />
+                    {searchQuery && (
+                      <button
+                        onClick={() => {
+                          setSearchQuery("");
+                          setExpandedVehicle("");
+                        }}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white rounded-sm w-5 h-5 flex items-center justify-center text-xs font-bold transition-colors"
+                      >
+                        ×
+                      </button>
+                    )}
                   </div>
                   <select
                     value={typeFilter}
                     onChange={(e) => setTypeFilter(e.target.value)}
-                    className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
+                    className="w-full sm:w-auto px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
                   >
                     <option value="">All Types</option>
                     {types.map((type) => (
@@ -7380,7 +7393,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <select
                     value={tierFilter}
                     onChange={(e) => setTierFilter(e.target.value)}
-                    className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
+                    className="w-full sm:w-auto px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
                   >
                     <option value="">All Tiers</option>
                     {tiers.map((tier) => (
@@ -7392,7 +7405,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <select
                     value={countryFilter}
                     onChange={(e) => setCountryFilter(e.target.value)}
-                    className="px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
+                    className="w-full sm:w-auto px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
                   >
                     <option value="">All Countries</option>
                     {countries.map((country) => (
@@ -7408,11 +7421,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
       </header>
 
-      <main className="max-w-7xl p-6 mx-2">
+      <main className="max-w-7xl p-4 sm:p-6 mx-auto px-4 sm:px-6">
         {compare.length === 2 && (
           <div className="mb-8 bg-slate-900/40 rounded-xl p-6 border border-slate-800">
             <h2 className="text-2xl font-bold text-cyan-400 mb-4">Vehicle Comparison</h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {compare.map((id) => {
                 const vehicle = VEHICLES.find((v) => v.id.toString() === id)
                 if (!vehicle) return null
@@ -7420,7 +7433,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <div key={id} className="bg-slate-800/50 rounded-lg p-4">
                     <h3 className="text-xl font-semibold text-cyan-300 mb-2">{vehicle.name}</h3>
                     <p className="text-slate-400 text-sm mb-3">{vehicle.description}</p>
-                    <div className="grid grid-cols-2 gap-3 text-sm">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                       <div>
                         <span className="text-slate-400">Health:</span>
                         <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.health.toLocaleString()}</span>
@@ -7521,7 +7534,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {paginatedVehicles.map((vehicle) => (
             <motion.div
               key={vehicle.id}
@@ -7655,7 +7668,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
               <p className="text-slate-300 text-sm mb-4 leading-relaxed">{vehicle.description}</p>
 
-              <div className="grid grid-cols-2 gap-3 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
                 <div className="bg-slate-800/50 rounded-lg p-3">
                   <div className="text-xs text-slate-400 mb-1">Health</div>
                   <div className="text-lg font-bold text-cyan-300">{vehicle.stats.health.toLocaleString()}</div>
@@ -7792,13 +7805,13 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
 
         {/* Pagination */}
-        <div className="flex justify-center flex-row mx-4 mt-2.5 leading-9">
-          <div className="flex gap-1 items-center">
+        <div className="flex justify-center flex-row mx-2 sm:mx-4 mt-2.5 leading-9">
+          <div className="flex gap-1 items-center flex-wrap justify-center">
             {/* Previous Button */}
             <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
-              className={`px-2 py-1 text-sm rounded transition-colors ${
+              className={`px-3 py-2 text-sm rounded transition-colors ${
                 currentPage === 1 
                   ? "bg-slate-800 text-slate-500 cursor-not-allowed" 
                   : "bg-slate-700 text-slate-300 hover:bg-slate-600"
@@ -7859,7 +7872,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`px-2 py-1 text-sm rounded transition-colors mr-0.5 ${
+                      className={`px-3 py-2 text-sm rounded transition-colors mr-0.5 ${
                         currentPage === page 
                           ? "bg-cyan-700 text-white" 
                           : "bg-slate-700 text-slate-300 hover:bg-slate-600"
@@ -7873,7 +7886,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             </div>
 
             {/* Current Page Indicator - Visible on Mobile */}
-            <div className="md:hidden px-2 py-1 bg-slate-800 text-slate-300 rounded text-sm">
+            <div className="md:hidden px-3 py-2 bg-slate-800 text-slate-300 rounded text-sm mx-2">
               {currentPage} / {Math.ceil(filteredVehicles.length / vehiclesPerPage)}
             </div>
 
@@ -7881,7 +7894,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             <button
               onClick={() => setCurrentPage(Math.min(Math.ceil(filteredVehicles.length / vehiclesPerPage), currentPage + 1))}
               disabled={currentPage === Math.ceil(filteredVehicles.length / vehiclesPerPage)}
-              className={`px-2 py-1 text-sm rounded transition-colors ${
+              className={`px-3 py-2 text-sm rounded transition-colors ${
                 currentPage === Math.ceil(filteredVehicles.length / vehiclesPerPage)
                   ? "bg-slate-800 text-slate-500 cursor-not-allowed" 
                   : "bg-slate-700 text-slate-300 hover:bg-slate-600"
@@ -7894,7 +7907,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
         {/* Chat Interface */}
         {chatOpen && (
-          <div className="fixed bottom-4 right-4 h-96 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 w-[344px]">
+          <div className="fixed bottom-4 right-4 h-96 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 w-[344px] sm:w-[400px] max-w-[90vw]">
             <div className="flex items-center justify-between p-4 border-b border-slate-700">
               <h3 className="font-semibold text-cyan-300">Vehicle Database Chat</h3>
               <button onClick={() => setChatOpen(false)} className="text-slate-400 hover:text-white">
@@ -7902,7 +7915,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               </button>
             </div>
 
-            <div className="h-64 overflow-y-auto p-4 space-y-3 px-1.5 w-[340px] mx-0">
+            <div className="h-64 overflow-y-auto p-4 space-y-3">
               {chatMessages.map((msg, index) => (
                 <div key={index} className={`${msg.role === "user" ? "text-right" : "text-left"}`}>
                   <div className="text-xs text-slate-400 mb-1">{msg.role === "user" ? "You:" : "Database:"}</div>
@@ -7943,14 +7956,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         {!chatOpen && (
           <button
             onClick={() => setChatOpen(true)}
-            className="fixed bottom-6 right-6 p-4 bg-cyan-600 hover:bg-cyan-700 text-white rounded-full shadow-lg transition-colors z-40 px-4 my-0 mx-0 py-2 pb-[-2px] pb-[-7px] pb-[-5px] pt-[-5px] pt-0 pr-2.5 pl-2.5 pb-1.5"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 p-3 sm:p-4 bg-cyan-600 hover:bg-cyan-700 text-white rounded-full shadow-lg transition-colors z-40"
           >
-            <BotMessageSquareIcon className="px-0 mx-1.5 h-11 w-10" /> Ask Ai
+            <BotMessageSquareIcon className="h-6 w-6 sm:h-8 sm:w-8" />
+            <span className="hidden sm:inline ml-2">Ask AI</span>
           </button>
         )}
 
-        <footer className="mt-16 pt-8 border-t border-slate-800">
-          <div className="text-center space-x-8">
+        <footer className="mt-8 sm:mt-16 pt-6 sm:pt-8 border-t border-slate-800">
+          <div className="text-center space-x-4 sm:space-x-8 px-4">
             <button
               onClick={() => setShowAbout(true)}
               className="text-cyan-400 hover:text-cyan-300 underline font-medium"
@@ -8088,7 +8102,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   ✕
                 </button>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 <div>
                   <h4 className="text-white font-semibold">Naveed2227</h4>
                   <p className="text-slate-400 text-sm">Lead developer and creator</p>
@@ -8211,7 +8225,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon, index) => (
                   <div key={index} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
                     <h4 className="text-lg font-semibold text-cyan-300 mb-2">{weapon.name}</h4>
-                    <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                       <div>
                         <span className="text-slate-400">Damage: </span>
                         <span className="text-cyan-300 font-bold text-lg">{weapon.damage}</span>
