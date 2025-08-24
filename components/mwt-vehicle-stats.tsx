@@ -5,6 +5,37 @@ import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useRouter } from "next/navigation"
 
+// Roman numeral conversion utility
+const toRomanNumeral = (num: number | string): string => {
+  let numValue = typeof num === 'string' ? parseInt(num) : num;
+  const romanNumerals = [
+    { value: 10, numeral: 'X' },
+    { value: 9, numeral: 'IX' },
+    { value: 5, numeral: 'V' },
+    { value: 4, numeral: 'IV' },
+    { value: 1, numeral: 'I' }
+  ];
+  
+  let result = '';
+  for (const { value, numeral } of romanNumerals) {
+    while (numValue >= value) {
+      result += numeral;
+      numValue -= value;
+    }
+  }
+  return result || 'I';
+};
+
+// Convert tier to Roman numeral if it's not already
+const formatTier = (tier: string | number): string => {
+  // If already Roman numeral, return as is
+  if (typeof tier === 'string' && /^[IVX]+$/.test(tier)) {
+    return tier;
+  }
+  // Otherwise convert to Roman numeral
+  return toRomanNumeral(tier);
+};
+
 // Battle Pass Data Structure
 const BATTLE_PASSES = [
   {
@@ -2705,7 +2736,7 @@ const VEHICLES = [
     tier: "III",
     description: "Proven main battle tank with excellent firepower and mobility balance.",
     image: "Leopard-2A4.jpg",
-    stats: { health: 32500, speed: 68, armor: "800mm", agility: 70 },
+    stats: { health: 39200, speed: 72, armor: "800mm", agility: 32 },
     weapons: [
       { name: "Rheinmetall L44 120mm", type: "Main Gun", damage: 14200, penetration: 780 },
       { name: "MG3 7.62mm", type: "Machine Gun", damage: 120, penetration: 15, rateOfFire: "1200 rpm" },
@@ -2736,7 +2767,7 @@ const VEHICLES = [
     tier: "III",
     description: "Widely exported main battle tank with robust design and effective firepower.",
     image: "T-72A.jpg",
-    stats: { health: 32800, speed: 60, armor: "750mm", agility: 62 },
+    stats: { health: 37500, speed: 60, armor: "750mm", agility: 44 },
     weapons: [
       { name: "2A46 125mm", type: "Main Gun", damage: 13500, penetration: 720 },
       { name: "9M119 Refleks", type: "ATGM", damage: 16800, penetration: 1050 },
@@ -2768,7 +2799,7 @@ const VEHICLES = [
     "tier": "III",
     image: "M1-Abrams.jpg",
     "description": "M1A1 with M256 120mm smoothbore.",
-    "stats": { "health": 49920, "speed": 85.6, "armor": 900, "agility": 40 },
+    "stats": { "health": 38400, "speed": 69, "armor": "900mm", "agility": 36 },
     "weapons": [
       { "name": "M256 120mm - APFSDS (M1 family Mk variants e.g. APFSDS/M322/M338)", "type": "APFSDS", "damage": 480, "penetration": 700, "reload": 5, "note": "M1 family main rounds." },
       { "name": "M256 120mm - HEAT (Mk variants)", "type": "HEAT", "damage": 600, "penetration": 400, "reload": 5, "note": "Anti-tank high-explosive." },
@@ -2802,7 +2833,7 @@ const VEHICLES = [
     "tier": "III",
     image: "MBT-70.jpg",
     "description": "Experimental joint American-German tank with 152mm gun/missile launcher.",
-    "stats": { "health": 45000, "speed": 90, "armor": 800, "agility": 35 },
+    "stats": { "health": 37200, "speed": 65, "armor": "800mm", "agility": 30 },
     "weapons": [
       { "name": "152mm Gun/Missile - APFSDS", "type": "APFSDS", "damage": 600, "penetration": 800, "reload": 8 },
       { "name": "152mm Gun/Missile - HEAT", "type": "HEAT", "damage": 650, "penetration": 500, "reload": 8 },
@@ -2836,7 +2867,7 @@ const VEHICLES = [
     "tier": "III",
     image: "PT-91-Twardy.jpg",
     "description": "Polish upgrade of the Soviet T-72M1 with improved armor and fire control.",
-    "stats": { "health": 48000, "speed": 80, "armor": 820, "agility": 38 },
+    "stats": { "health": 38200, "speed": 60, "armor": "820mm", "agility": 40 },
     "weapons": [
       { "name": "125mm 2A46M - APFSDS", "type": "APFSDS", "damage": 680, "penetration": 750, "reload": 6 },
       { "name": "125mm 2A46M - HEAT", "type": "HEAT", "damage": 720, "penetration": 400, "reload": 6 },
@@ -2869,7 +2900,7 @@ const VEHICLES = [
     "tier": "III",
     image: "T-64BV.jpg",
     "description": "Soviet main battle tank with composite armor and 125mm smoothbore gun.",
-    "stats": { "health": 46000, "speed": 75, "armor": 800, "agility": 35 },
+    "stats": { "health": 36700, "speed": 55, "armor": "800mm", "agility": 45 },
     "weapons": [
       { "name": "125mm 2A46M-1 - APFSDS", "type": "APFSDS", "damage": 660, "penetration": 740, "reload": 6 },
       { "name": "125mm 2A46M-1 - HEAT", "type": "HEAT", "damage": 700, "penetration": 400, "reload": 6 },
@@ -2903,7 +2934,7 @@ const VEHICLES = [
     "tier": "III",
     image: "Type-90.jpg",
     "description": "Japanese main battle tank with advanced armor and 120mm smoothbore gun.",
-    "stats": { "health": 48000, "speed": 70, "armor": 720, "agility": 32 },
+    "stats": { "health": 37000, "speed": 55, "armor": "720mm", "agility": 40 },
     "weapons": [
       { "name": "120mm L44 - APFSDS", "type": "APFSDS", "damage": 680, "penetration": 750, "reload": 6 },
       { "name": "120mm L44 - HEAT", "type": "HEAT", "damage": 700, "penetration": 320, "reload": 6 },
@@ -2935,7 +2966,7 @@ const VEHICLES = [
     "tier": "III",
     image: "ZTZ85-II.jpg",
     "description": "Chinese upgrade of Type 85 tank with improved armor and firepower.",
-    "stats": { "health": 46000, "speed": 60, "armor": 700, "agility": 30 },
+    "stats": { "health": 35200, "speed": 57, "armor": "700mm", "agility": 38 },
     "weapons": [
       { "name": "105mm rifled gun - APFSDS", "type": "APFSDS", "damage": 620, "penetration": 700, "reload": 6 },
       { "name": "105mm rifled gun - HEAT", "type": "HEAT", "damage": 650, "penetration": 320, "reload": 6 },
@@ -2967,7 +2998,7 @@ const VEHICLES = [
     "tier": "III",
     image: "ZTZ96.jpg",
     "description": "Modern Chinese MBT with 125mm smoothbore and composite armor.",
-    "stats": { "health": 47000, "speed": 65, "armor": 750, "agility": 31 },
+    "stats": { "health": 36500, "speed": 24, "armor": "750mm", "agility": 34 },
     "weapons": [
       { "name": "125mm smoothbore - APFSDS", "type": "APFSDS", "damage": 700, "penetration": 800, "reload": 6 },
       { "name": "125mm smoothbore - HEAT", "type": "HEAT", "damage": 750, "penetration": 350, "reload": 6 },
@@ -2999,7 +3030,7 @@ const VEHICLES = [
     "tier": "III",
     image: "ZTZ-96A-(P).jpg",
     "description": "Improved export variant of ZTZ96 with enhanced protection and gun systems.",
-    "stats": { "health": 48000, "speed": 65, "armor": 770, "agility": 32 },
+    "stats": { "health": 36900, "speed": 24, "armor": "770mm", "agility": 34 },
     "weapons": [
       { "name": "125mm smoothbore - APFSDS", "type": "APFSDS", "damage": 720, "penetration": 820, "reload": 6 },
       { "name": "125mm smoothbore - HEAT", "type": "HEAT", "damage": 750, "penetration": 360, "reload": 6 },
@@ -3031,7 +3062,7 @@ const VEHICLES = [
     "tier": "III",
     image: "PLZ-07B.jpg",
     "description": "Chinese 155mm self-propelled howitzer with high mobility and firepower.",
-    "stats": { "health": 22000, "speed": 55, "armor": 200, "agility": 25 },
+    "stats": { "health": 26000, "speed": 59, "armor": "200mm", "agility": 35 },
     "weapons": [
       { "name": "155mm Howitzer - HE", "type": "HE", "damage": 1000, "penetration": 50, "reload": 8 },
       { "name": "155mm Howitzer - AP", "type": "AP", "damage": 1200, "penetration": 100, "reload": 8 }
@@ -3062,7 +3093,7 @@ const VEHICLES = [
     "tier": "III",
     image: "M110A2.jpg",
     "description": "American 203mm self-propelled artillery for heavy bombardment.",
-    "stats": { "health": 28000, "speed": 50, "armor": 150, "agility": 22 },
+    "stats": { "health": 27800, "speed": 63, "armor": "150mm", "agility": 36 },
     "weapons": [
       { "name": "203mm Howitzer - HE", "type": "HE", "damage": 1500, "penetration": 70, "reload": 10 },
       { "name": "203mm Howitzer - AP", "type": "AP", "damage": 1800, "penetration": 120, "reload": 10 }
@@ -3093,7 +3124,7 @@ const VEHICLES = [
     "tier": "III",
     image: "2S31-Vena.jpg",
     "description": "Russian 120mm mortar howitzer on tracked chassis.",
-    "stats": { "health": 24000, "speed": 60, "armor": 180, "agility": 26 },
+    "stats": { "health": 23500, "speed": 79, "armor": "180mm", "agility": 42 },
     "weapons": [
       { "name": "120mm Mortar - HE", "type": "HE", "damage": 900, "penetration": 40, "reload": 6 },
       { "name": "120mm Mortar - Smoke", "type": "Smoke", "damage": 0, "penetration": 0, "reload": 6 }
@@ -3124,7 +3155,7 @@ const VEHICLES = [
     "tier": "III",
     image: "XM2001-Crusader.jpg",
     "description": "Experimental 155mm self-propelled howitzer with automatic loading.",
-    "stats": { "health": 25000, "speed": 60, "armor": 200, "agility": 25 },
+    "stats": { "health": 34800, "speed": 67, "armor": "200mm", "agility": 38 },
     "weapons": [
       { "name": "155mm Howitzer - HE", "type": "HE", "damage": 1200, "penetration": 50, "reload": 5 },
       { "name": "155mm Howitzer - AP", "type": "AP", "damage": 1400, "penetration": 100, "reload": 5 }
@@ -3155,7 +3186,7 @@ const VEHICLES = [
     "tier": "III",
     image: "Gepard-1A2.jpg",
     "description": "German SPAAG with twin 35mm Oerlikon cannons and radar-guided fire control.",
-    "stats": { "health": 24000, "speed": 65, "armor": 35, "agility": 45 },
+    "stats": { "health": 28900, "speed": 65, "armor": "35mm", "agility": 30 },
     "weapons": [
       { "name": "35mm Oerlikon KDA - APDS", "type": "APDS", "damage": 250, "penetration": 100, "reload": 0.1 },
       { "name": "35mm Oerlikon KDA - HEI", "type": "HEI", "damage": 320, "penetration": 50, "reload": 0.1 }
@@ -3184,7 +3215,7 @@ const VEHICLES = [
     tier: "III",
     image: "Otomatic-76.jpg",
     description: "Self-propelled anti-aircraft gun with rapid-fire 76mm cannon.",
-    stats: { health: 24800, speed: 65, armor: "380mm", agility: 72 },
+    stats: { health: 33700, speed: 62, armor: "380mm", agility: 36 },
     weapons: [
       { name: "OTO 76mm L62", type: "Anti-Aircraft Gun", damage: 2800, penetration: 180, rateOfFire: "120 rpm" },
       { name: "Aspide SAM", type: "Surface-to-Air Missile", damage: 8500, penetration: 420 },
@@ -3215,7 +3246,7 @@ const VEHICLES = [
     "tier": "III",
     image: "K-31-Cheonma.jpg",
     "description": "Korean SPAAG with 30mm cannons and short-range SAM missiles.",
-    "stats": { "health": 22000, "speed": 70, "armor": 30, "agility": 42 },
+    "stats": { "health": 23100, "speed": 60, "armor": "30mm", "agility": 35 },
     "weapons": [
       { "name": "30mm Cannon - APDS", "type": "APDS", "damage": 200, "penetration": 80, "reload": 0.1 },
       { "name": "Cheonma SAM Missile", "type": "SAM", "damage": 1200, "penetration": 250, "reload": 5 }
@@ -3243,7 +3274,7 @@ const VEHICLES = [
     "tier": "III",
     image: "PGZ-09.jpg",
     "description": "Chinese SPAAG with twin 35mm cannons and short-range missiles.",
-    "stats": { "health": 23000, "speed": 60, "armor": 30, "agility": 40 },
+    "stats": { "health": 25500, "speed": 60, "armor": "30mm", "agility": 30 },
     "weapons": [
       { "name": "35mm Cannon - APDS", "type": "APDS", "damage": 250, "penetration": 100, "reload": 0.1 },
       { "name": "PG-99 SAM Missile", "type": "SAM", "damage": 1000, "penetration": 220, "reload": 5 }
@@ -3271,7 +3302,7 @@ const VEHICLES = [
     "tier": "III",
     image: "2S6M1-Tunguska-M1.jpg",
     "description": "Russian SPAAG with twin 30mm cannons and 9M311 SAM missiles.",
-    "stats": { "health": 25000, "speed": 65, "armor": 35, "agility": 45 },
+    "stats": { "health": 25000, "speed": 65, "armor": 35, "agility": 35 },
     "weapons": [
       { "name": "30mm 2A38M - APDS", "type": "APDS", "damage": 220, "penetration": 90, "reload": 0.1 },
       { "name": "30mm 2A38M - HEI", "type": "HEI", "damage": 300, "penetration": 50, "reload": 0.1 },
@@ -3300,7 +3331,7 @@ const VEHICLES = [
     "tier": "III",
     image: "Type-625E-SHORAD.jpg",
     "description": "Chinese short-range air defense vehicle with 25mm cannons and SAM missiles.",
-    "stats": { "health": 20000, "speed": 60, "armor": 25, "agility": 40 },
+    "stats": { "health": 22000, "speed": 100, "armor": "25mm", "agility": 60 },
     "weapons": [
       { "name": "25mm autocannon - APDS", "type": "APDS", "damage": 180, "penetration": 80, "reload": 0.1 },
       { "name": "25mm autocannon - HEI", "type": "HEI", "damage": 250, "penetration": 40, "reload": 0.1 },
@@ -3329,7 +3360,7 @@ const VEHICLES = [
     "tier": "III",
     image: "XM975.jpg",
     "description": "US SPAAG with 20mm Vulcan cannon and Stinger SAM missiles.",
-    "stats": { "health": 21000, "speed": 65, "armor": 30, "agility": 42 },
+    "stats": { "health": 23500, "speed": 57, "armor": "30mm", "agility": 30 },
     "weapons": [
       { "name": "20mm M61 Vulcan - APDS", "type": "APDS", "damage": 150, "penetration": 60, "reload": 0.05 },
       { "name": "20mm M61 Vulcan - HEI", "type": "HEI", "damage": 220, "penetration": 35, "reload": 0.05 },
@@ -3358,7 +3389,7 @@ const VEHICLES = [
     "tier": "III",
     image: "AFT-10.jpg",
     "description": "Chinese SPAAG equipped with 30mm autocannons and HJ-10 anti-air missiles.",
-    "stats": { "health": 22000, "speed": 60, "armor": 30, "agility": 41 },
+    "stats": { "health": 26000, "speed": 70, "armor": "30mm", "agility": 40 },
     "weapons": [
       { "name": "30mm autocannon - APDS", "type": "APDS", "damage": 210, "penetration": 85, "reload": 0.1 },
       { "name": "30mm autocannon - HEI", "type": "HEI", "damage": 280, "penetration": 45, "reload": 0.1 },
@@ -3387,7 +3418,7 @@ const VEHICLES = [
     "tier": "III",
     image: "M113-Hellfire.jpg",
     "description": "M113 variant carrying AGM-114 Hellfire missiles for ground and air targets.",
-    "stats": { "health": 18000, "speed": 65, "armor": 25, "agility": 40 },
+    "stats": { "health": 24500, "speed": 62, "armor": "25mm", "agility": 35 },
     "weapons": [
       { "name": "AGM-114 Hellfire", "type": "ATGM", "damage": 1800, "penetration": 400, "reload": 5 }
     ],
@@ -3414,7 +3445,7 @@ const VEHICLES = [
     "tier": "III",
     image: "9A52-2-Smerch.jpg",
     "description": "Heavy Russian MLRS with 300mm rockets for long-range bombardment.",
-    "stats": { "health": 30000, "speed": 55, "armor": 25, "agility": 20 },
+    "stats": { "health": 26000, "speed": 60, "armor": "25mm", "agility": 23 },
     "weapons": [
       { "name": "300mm Rocket - HE", "type": "Rocket", "damage": 2000, "penetration": 50, "reload": 15 },
       { "name": "300mm Rocket - Cluster", "type": "Rocket", "damage": 1800, "penetration": 30, "reload": 15 }
@@ -3442,7 +3473,7 @@ const VEHICLES = [
     "tier": "III",
     image: "Type-89-MLRS.jpg",
     "description": "Japanese 300mm MLRS for long-range artillery strikes.",
-    "stats": { "health": 28000, "speed": 55, "armor": 25, "agility": 20 },
+    "stats": { "health": 24500, "speed": 55, "armor": "25mm", "agility": 36 },
     "weapons": [
       { "name": "300mm Rocket - HE", "type": "Rocket", "damage": 1900, "penetration": 50, "reload": 14 },
       { "name": "300mm Rocket - Cluster", "type": "Rocket", "damage": 1700, "penetration": 30, "reload": 14 }
@@ -3470,7 +3501,7 @@ const VEHICLES = [
     "tier": "III",
     image: "AFT-09.jpg",
     "description": "Chinese SPAAG equipped with 30mm autocannons and short-range missiles.",
-    "stats": { "health": 22000, "speed": 60, "armor": 30, "agility": 40 },
+    "stats": { "health": 23000, "speed": 96, "armor": "30mm", "agility": 40 },
     "weapons": [
       { "name": "30mm autocannon - APDS", "type": "APDS", "damage": 210, "penetration": 85, "reload": 0.1 },
       { "name": "30mm autocannon - HEI", "type": "HEI", "damage": 280, "penetration": 45, "reload": 0.1 },
@@ -3499,7 +3530,7 @@ const VEHICLES = [
     "tier": "III",
     image: "LAV-600.jpg",
     "description": "Armored wheeled vehicle equipped with short-range missiles and machine guns.",
-    "stats": { "health": 18000, "speed": 80, "armor": 20, "agility": 45 },
+    "stats": { "health": 24000, "speed": 95, "armor": "20mm", "agility": 27 },
     "weapons": [
       { "name": "Short-range SAM Missile", "type": "SAM", "damage": 900, "penetration": 200, "reload": 4 },
       { "name": "7.62mm Machine Gun", "type": "MG", "damage": 50, "penetration": 20, "reload": 0 }
@@ -3527,7 +3558,7 @@ const VEHICLES = [
     "tier": "III",
     image: "HSTV-L.jpg",
     "description": "A lightweight prototype tank, emphasizing mobility, advanced optics, and rapid firepower.",
-    "stats": { "health": 26350, "speed": 84, "armor": 47, "agility": 39 },
+    "stats": { "health": 26000, "speed": 84, "armor": "47mm", "agility": 40 },
     "weapons": [
   { "name": "XM885AP APFSDS", "type": "Cannon", "damage": 6160, "penetration": 370, "reload": 2 },
   { "name": "XM855HE HE", "type": "Cannon", "damage": 7560, "penetration": 68, "reload": 2 }
@@ -3555,7 +3586,7 @@ const VEHICLES = [
     "tier": "III",
     image: "Rookiat-MTTD.jpg",
     "description": "The Rooikat MTTD is a fast, wheeled tank destroyer with strong firepower.",
-    "stats": { "health": 26100, "speed": 105, "armor": 40, "agility": 50 },
+    "stats": { "health": 27200, "speed": 120, "armor": "40mm", "agility": 28 },
     "weapons": [
   { "name": "DM23 APFSDS", "type": "Cannon", "damage": 8400, "penetration": 337, "reload": 5.8 },
   { "name": "DM512 HESH", "type": "Cannon", "damage": 9600, "penetration": 127, "reload": 5.8 },
@@ -3585,7 +3616,7 @@ const VEHICLES = [
     "tier": "III",
     image: "VBCI-2.jpg",
     "description": "A French 8×8 infantry fighting vehicle, upgraded from the VBCI with better armor and mobility",
-    "stats": { "health": 27500, "speed": 120, "armor": 40, "agility": 52 },
+    "stats": { "health": 26900, "speed": 111, "armor": "40mm", "agility": 64 },
     "weapons": [
       { "name": "MK246 API", "type": "Cannon", "damage": 1000, "penetration": 117, "reload": 10},
       { "name": "MK266 HEI", "type": "Cannon", "damage": 520, "penetration": 55, "reload": 10 },
@@ -3615,7 +3646,7 @@ const VEHICLES = [
     "tier": "III",
     image: "WMA301.jpg",
     "description": "A Chinese modern wheeled armored vehicle with strong firepower, protection, and mobility..",
-    "stats": { "health": 28000, "speed": 65, "armor": 25, "agility": 25 },
+    "stats": { "health": 28200, "speed": 85, "armor": "25mm", "agility": 35 },
     "weapons": [
       { "name": "300mm Rocket - HE", "type": "Rocket", "damage": 2000, "penetration": 50, "reload": 15 },
       { "name": "300mm Rocket - Cluster", "type": "Rocket", "damage": 1800, "penetration": 30, "reload": 15 }
@@ -3643,7 +3674,7 @@ const VEHICLES = [
     tier: "III",
     description: "Light infantry fighting vehicle with amphibious capability and rapid deployment design.",
     image: "BMD3.jpg",
-    stats: { health: 24000, speed: 70, armor: "420mm", agility: 82 },
+    stats: { health: 24000, speed: 70, armor: "420mm", agility: 40 },
     weapons: [
       { name: "2A42 30mm", type: "Autocannon", damage: 420, penetration: 75, rateOfFire: "550 rpm" },
       { name: "9M113 Konkurs", type: "ATGM", damage: 14500, penetration: 750 },
@@ -6687,7 +6718,7 @@ const MwtVehicleStats = () => {
   const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
 
   const types = [...new Set(VEHICLES.map((v) => v.type))]
-  const tiers = [...new Set(VEHICLES.map((v) => v.tier))].sort()
+  const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
   const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
 
   const isMarketVehicle = (vehicleName: string) => {
@@ -6712,7 +6743,8 @@ const MwtVehicleStats = () => {
       "Type 625E SHORAD",
       "SB-1",
       "T-14 Armata (152)",
-      "Leopard 2A7+"
+      "Leopard 2A7+",
+      "Object 640"
     ]
     return marketVehicles.includes(vehicleName)
   }
@@ -6770,7 +6802,11 @@ const MwtVehicleStats = () => {
 "M1 Abrams Block 3",
 "J-15",
 "Su-35S",
-"OH-1 Ninja"
+"OH-1 Ninja",
+"PGZ-09",
+"Type-61",
+"T54E1",
+"BTR-60PB"
 
         
 
@@ -6797,7 +6833,7 @@ const MwtVehicleStats = () => {
   
 📊 SPECIFICATIONS:
 • Faction: ${vehicle.faction}
-• Tier: ${vehicle.tier}
+• Tier: ${formatTier(vehicle.tier)}
 • Health: ${vehicle.stats.health.toLocaleString()} HP
 • Speed: ${vehicle.stats.speed} km/h
 ${vehicle.stats.afterburnerSpeed ? `• Afterburner: ${vehicle.stats.afterburnerSpeed} km/h` : ""}
@@ -6819,7 +6855,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   const filteredVehicles = VEHICLES.filter((vehicle) => {
     const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesType = !typeFilter || vehicle.type === typeFilter
-    const matchesTier = !tierFilter || vehicle.tier === tierFilter
+    const matchesTier = !tierFilter || formatTier(vehicle.tier) === tierFilter
     const matchesCountry = !countryFilter || vehicle.faction === countryFilter
     return matchesSearch && matchesType && matchesTier && matchesCountry
   })
@@ -6926,7 +6962,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         if (vehicle.stats.armor) response += `• Armor: ${vehicle.stats.armor}\n`
         if (vehicle.stats.agility) response += `• Agility: ${vehicle.stats.agility}\n`
 
-        response += `• Combat Tier: ${vehicle.tier}\n`
+        response += `• Combat Tier: ${formatTier(vehicle.tier)}\n`
         response += `• Nation: ${vehicle.faction}\n\n`
 
         response += `📝 TACTICAL ANALYSIS:\n${vehicle.description}\n\n`
@@ -7078,7 +7114,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 stats += `• Afterburner Speed: ${vehicle.stats.afterburnerSpeed} km/h\n`
               if (vehicle.stats.armor) stats += `• Armor: ${vehicle.stats.armor}\n`
               if (vehicle.stats.agility) stats += `• Agility: ${vehicle.stats.agility}\n`
-              stats += `• Tier: ${vehicle.tier}\n`
+              stats += `• Tier: ${formatTier(vehicle.tier)}\n`
               stats += `• Primary Weapons: ${vehicle.weapons
                 .slice(0, 3)
                 .map((w) => w.name)
@@ -7309,12 +7345,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                       </div>
                                       <div className="text-right text-white bg-transparent">
                                         <div className={`text-xs px-2 py-1 rounded-full font-medium bg-blue-700 ${
-                                          vehicle.tier === 'IV' ? 'bg-purple-600 text-white' :
-                                          vehicle.tier === 'III' ? 'bg-blue-600 text-white' :
-                                          vehicle.tier === 'II' ? 'bg-green-600 text-white' :
+                                          formatTier(vehicle.tier) === 'IV' ? 'bg-purple-600 text-white' :
+                                          formatTier(vehicle.tier) === 'III' ? 'bg-blue-600 text-white' :
+                                          formatTier(vehicle.tier) === 'II' ? 'bg-green-600 text-white' :
                                           'bg-gray-600 text-white'
                                         } group-hover:shadow-lg transition-shadow`}>
-                                          Tier {vehicle.tier}
+                                          Tier {formatTier(vehicle.tier)}
                                         </div>
                                       </div>
                                     </div>
@@ -7382,7 +7418,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           setSearchQuery("");
                           setExpandedVehicle("");
                         }}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white rounded-sm w-5 h-5 flex items-center justify-center text-xs font-bold transition-colors"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white rounded-sm flex items-center justify-center text-xs font-bold transition-colors w-8 h-8"
                       >
                         ×
                       </button>
@@ -7551,13 +7587,13 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className={`group relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 transition-all duration-300 ${
-      vehicle.tier === "II"
+      formatTier(vehicle.tier) === "II"
         ? "hover:border-green-500 hover:shadow-[0_0_12px_1px_rgba(34,197,94,0.6)]"
-        : vehicle.tier === "III"
+        : formatTier(vehicle.tier) === "III"
         ? "hover:border-blue-500 hover:shadow-[0_0_12px_1px_rgba(29,78,216,0.6)]"
-        : vehicle.tier === "IV"
+        : formatTier(vehicle.tier) === "IV"
         ? "hover:border-purple-500 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
-        : vehicle.tier === "I"
+        : formatTier(vehicle.tier) === "I"
         ? "hover:border-white-300 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
         : ""
     }`}
@@ -7582,11 +7618,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
                 <div
                   className={`w-0 h-0 border-r-[40px] border-t-[40px] border-r-transparent text-fuchsia-800 ${
-                    vehicle.tier === "II"
+                    formatTier(vehicle.tier) === "II"
                       ? "border-t-green-500"
-                      : vehicle.tier === "III"
+                      : formatTier(vehicle.tier) === "III"
                         ? "border-t-blue-700"
-                        : vehicle.tier === "IV"
+                        : formatTier(vehicle.tier) === "IV"
                           ? "border-t-purple-500"
                           : "border-t-gray-500"
                   }`}
