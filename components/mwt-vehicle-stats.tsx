@@ -3696,6 +3696,7 @@ const VEHICLES = [
         { name: "BPK-3-42 MK2", bonus: "+26% accuracy" },
         { name: "BPK-3-42 MK3", bonus: "+38% accuracy" },
       ],
+      }
     },
   {
   id: 500,
