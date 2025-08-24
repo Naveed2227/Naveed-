@@ -84,10 +84,10 @@ const BATTLE_PASSES = [
     name: "Operation G.H.O.S.T",
     image: "2025-Feb.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: [203], // Vehicle IDs from VEHICLES array
+    vehicles: [427, 203], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["KA-58"],
-      free: ["HSTVL"]
+      free: ["HSTV-L"]
     }
   },
   {
@@ -3520,18 +3520,16 @@ const VEHICLES = [
   },
   {
     "id": 427,
-    "name": "Rookiat MTTD",
+    "name": "HSTV-L",
     "type": "Light Tank",
-    "faction": "British",
+    "faction": "American",
     "tier": "III",
-    image: "Rookiat-MTTD.jpg",
-    "description": "The Rooikat MTTD is a fast, wheeled tank destroyer with strong firepower.",
-    "stats": { "health": 26100, "speed": 105, "armor": 40, "agility": 50 },
+    image: "HSTV-L.jpg",
+    "description": "A lightweight prototype tank, emphasizing mobility, advanced optics, and rapid firepower.",
+    "stats": { "health": 26350, "speed": 84, "armor": 47, "agility": 39 },
     "weapons": [
-  { "name": "DM23 APFSDS", "type": "Cannon", "damage": 8400, "penetration": 337, "reload": 5.8 },
-  { "name": "DM512 HESH", "type": "Cannon", "damage": 9600, "penetration": 127, "reload": 5.8 },
-  { "name": "DM12 HEAT", "type": "Cannon", "damage": 9200, "penetration": 400, "reload": 5.8 },
-  { "name": "DM33 APFSDS", "type": "Cannon", "damage": 8800, "penetration": 508, "reload": 5.8 }
+  { "name": "XM885AP APFSDS", "type": "Cannon", "damage": 6160, "penetration": 370, "reload": 2 },
+  { "name": "XM855HE HE", "type": "Cannon", "damage": 7560, "penetration": 68, "reload": 2 }
 ],
     "modules": {
       "engine": [
