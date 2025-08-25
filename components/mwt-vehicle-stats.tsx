@@ -7199,7 +7199,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         
         {/* Desktop: Vertical rotated text */}
         <div 
-          className="hidden sm:flex px-3 py-6 text-white font-bold text-sm md:text-lg tracking-wider items-center justify-center mr-0 ml-[-15px]"
+          className="hidden sm:flex px-3 py-6 text-white font-bold text-sm md:text-lg tracking-wider items-center justify-center ml-[-15px] mr-[-12px]"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
         >
           BATTLE PASS
