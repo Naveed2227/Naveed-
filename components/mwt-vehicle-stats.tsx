@@ -2739,10 +2739,8 @@ const VEHICLES = [
     stats: { health: 39200, speed: 72, armor: "800mm", agility: 32 },
     weapons: [
       { name: "DM12", type: "Main Gun", damage: 10760, penetration: 400 },
-
-{ name: "DM13", type: "Main Gun", damage: 9800, penetration: 393 },
-
-{ name: "DM23", type: "Main Gun", damage: 38911, penetration: 337 }
+      { name: "DM13", type: "Main Gun", damage: 9800, penetration: 393 },
+      { name: "DM23", type: "Main Gun", damage: 38911, penetration: 337 }
 
     ],
     modules: {
@@ -2840,7 +2838,9 @@ const VEHICLES = [
     "description": "Experimental joint American-German tank with 152mm gun/missile launcher.",
     "stats": { "health": 37200, "speed": 65, "armor": "800mm", "agility": 30 },
     "weapons": [
-      
+      { name: "XM578E1", type: "Main Gun", damage: 10400, penetration: 285 },
+      { name: "M657A2", type: "Main Gun", damage: 13500, penetration: 138 }
+
     ],
     "modules": {
       "engine": [
@@ -2938,7 +2938,9 @@ const VEHICLES = [
     "description": "Japanese main battle tank with advanced armor and 120mm smoothbore gun.",
     "stats": { "health": 37000, "speed": 55, "armor": "720mm", "agility": 40 },
     "weapons": [
-      
+      { name: "JM33", type: "Main Gun", damage: 9900, penetration: 481 },
+      { name: "JM12A1", type: "Main Gun", damage: 10400, penetration: 480 },
+      { name: "Type 10", type: "Main Gun", damage: 10900, penetration: 615 }
     ],
     "modules": {
       "engine": [
@@ -3195,7 +3197,10 @@ const VEHICLES = [
     "description": "German SPAAG with twin 35mm Oerlikon cannons and radar-guided fire control.",
     "stats": { "health": 28900, "speed": 65, "armor": "35mm", "agility": 30 },
     "weapons": [
-      
+       { name: "25 x 228 API", type: "Main Gun", damage: 580, penetration: 75 },
+       { name: "25 x 228 HEI", type: "Main Gun", damage: 300, penetration: 59 },
+       { name: "35 x 228 APDS", type: "Main Gun", damage: 610, penetration: 127 },
+       { name: "Fliegerfaust 2 Stinger", type: "Missile", damage: 4210, penetration: 60, reload: 12 }
     ],
     "modules": {
       "engine": [
@@ -3223,8 +3228,9 @@ const VEHICLES = [
     description: "Self-propelled anti-aircraft gun with rapid-fire 76mm cannon.",
     stats: { health: 33700, speed: 62, armor: "380mm", agility: 36 },
     weapons: [
-      { name: "OTO 76mm L62", type: "Anti-Aircraft Gun", damage: 2800, penetration: 180, rateOfFire: "120 rpm" },
-      { name: "Aspide SAM", type: "Surface-to-Air Missile", damage: 8500, penetration: 420 }
+      { name: "76-62 APFSDS", type: "Main Gun", damage: 2340, penetration: 310 },
+      { name: "76-62 HE MOM", type: "Main Gun", damage: 1079.230769, penetration: 80 },
+      { name: "76-62 SAPOM", type: "Main Gun", damage: 1860, penetration: 160 }
     ],
     modules: {
       engine: [
@@ -3620,6 +3626,37 @@ const VEHICLES = [
   },
   {
     "id": 429,
+    "name": "ZBL-08",
+    "type": "Light Tank",
+    "faction": "Chinese",
+    "tier": "III",
+    image: "ZBL-08.jpg",
+    "description": "Wheeled armored personnel carrier with good mobility, moderate armor, versatile weapon options.",
+    "stats": { "health": 26900, "speed": 111, "armor": "40mm", "agility": 64 },
+    "weapons": [
+      { name: "ZUBR6 APBC", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "Z0F8", type: "Main Gun", damage: 675, penetration: 50 },
+      { name: "ZUBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "M929", type: "Main Gun", damage: 680, penetration: 189 }
+
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
+  },
+  {
+    "id": 430,
     "name": "VBCI-2",
     "type": "Light Tank",
     "faction": "French",
@@ -3649,7 +3686,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 430,
+    "id": 431,
     "name": "WMA301",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -3679,7 +3716,7 @@ const VEHICLES = [
     }
   },
    {
-    id: 431,
+    id: 432,
     name: "BMD3",
     type: "Light Tank",
     faction: "Russian",
@@ -3690,7 +3727,8 @@ const VEHICLES = [
     weapons: [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
-      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 }
+      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
+      { name: "M929", type: "Main Gun", damage: 680, penetration: 189 }
     ],
     modules: {
       engine: [
@@ -3710,6 +3748,38 @@ const VEHICLES = [
       ],
       }
     },
+    {
+    "id": 433,
+    "name": "M3A3 Bradley",
+    "type": "Light Tank",
+    "faction": "American",
+    "tier": "III",
+    image: "M3A3 Bradley.jpg",
+    "description": "Fast, armored infantry vehicle with strong firepower and decent survivability.",
+    "stats": { "health": 26000, "speed": 84, "armor": "47mm", "agility": 40 },
+    "weapons": [
+     { name: "PGU-32U/T", type: "Main Gun", damage: 405, penetration: 115 },
+     { name: "M791", type: "Main Gun", damage: 473, penetration: 111 },
+     { name: "M792", type: "Main Gun", damage: 608, penetration: 48 },
+     { name: "M919", type: "Main Gun", damage: 495, penetration: 140 }
+
+
+],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
+  },
   {
   id: 500,
   name: "Mi-35P Hind-F",
