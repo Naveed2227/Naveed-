@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -2738,8 +2738,12 @@ const VEHICLES = [
     image: "Leopard-2A4.jpg",
     stats: { health: 39200, speed: 72, armor: "800mm", agility: 32 },
     weapons: [
-      { name: "Rheinmetall L44 120mm", type: "Main Gun", damage: 14200, penetration: 780 },
-      { name: "MG3 7.62mm", type: "Machine Gun", damage: 120, penetration: 15, rateOfFire: "1200 rpm" },
+      { name: "DM12", type: "Main Gun", damage: 10760, penetration: 400 },
+
+{ name: "DM13", type: "Main Gun", damage: 9800, penetration: 393 },
+
+{ name: "DM23", type: "Main Gun", damage: 38911, penetration: 337 }
+
     ],
     modules: {
       engine: [
@@ -2769,9 +2773,11 @@ const VEHICLES = [
     image: "T-72A.jpg",
     stats: { health: 37500, speed: 60, armor: "750mm", agility: 44 },
     weapons: [
-      { name: "2A46 125mm", type: "Main Gun", damage: 13500, penetration: 720 },
-      { name: "9M119 Refleks", type: "ATGM", damage: 16800, penetration: 1050 },
-      { name: "NSVT 12.7mm", type: "Machine Gun", damage: 200, penetration: 32, rateOfFire: "700 rpm" },
+      { name: "3BM22", type: "Main Gun", damage: 11100, penetration: 425 },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "9M119", type: "Main Gun", damage: 10160, penetration: 750 },
+      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "3BK12M", type: "Main Gun", damage: 12140, penetration: 440 }
     ],
     modules: {
       engine: [
@@ -2801,11 +2807,10 @@ const VEHICLES = [
     "description": "M1A1 with M256 120mm smoothbore.",
     "stats": { "health": 38400, "speed": 69, "armor": "900mm", "agility": 36 },
     "weapons": [
-      { "name": "M256 120mm - APFSDS (M1 family Mk variants e.g. APFSDS/M322/M338)", "type": "APFSDS", "damage": 480, "penetration": 700, "reload": 5, "note": "M1 family main rounds." },
-      { "name": "M256 120mm - HEAT (Mk variants)", "type": "HEAT", "damage": 600, "penetration": 400, "reload": 5, "note": "Anti-tank high-explosive." },
-      { "name": "M256 120mm - HE/HEI", "type": "HE/HEI", "damage": 800, "penetration": 50, "reload": 5, "note": "High-explosive/incendiary for soft targets." },
-      { "name": "M2 Browning .50 cal", "type": "Machine Gun", "damage": 50, "penetration": 25, "reload": 0, "note": "Roof/AA secondary belts." },
-      { "name": "M240 / 7.62mm", "type": "Machine Gun", "damage": 45, "penetration": 20, "reload": 0, "note": "Coax / commander belts." }
+      { name: "M829", type: "Main Gun", damage: 9020, penetration: 490 },
+      { name: "M830", type: "Main Gun", damage: 10930, penetration: 800 },
+      { name: "AMP", type: "Main Gun", damage: 11070, penetration: 200 },
+      { name: "M829A1", type: "Main Gun", damage: 9520, penetration: 630 }
     ],
     "modules": {
       "engine": [
@@ -2835,10 +2840,7 @@ const VEHICLES = [
     "description": "Experimental joint American-German tank with 152mm gun/missile launcher.",
     "stats": { "health": 37200, "speed": 65, "armor": "800mm", "agility": 30 },
     "weapons": [
-      { "name": "152mm Gun/Missile - APFSDS", "type": "APFSDS", "damage": 600, "penetration": 800, "reload": 8 },
-      { "name": "152mm Gun/Missile - HEAT", "type": "HEAT", "damage": 650, "penetration": 500, "reload": 8 },
-      { "name": "152mm Gun/Missile - HE", "type": "HE", "damage": 1000, "penetration": 50, "reload": 8 },
-      { "name": "Coaxial MG 7.62mm", "type": "Machine Gun", "damage": 50, "penetration": 20, "reload": 0 }
+      
     ],
     "modules": {
       "engine": [
@@ -2869,10 +2871,11 @@ const VEHICLES = [
     "description": "Polish upgrade of the Soviet T-72M1 with improved armor and fire control.",
     "stats": { "health": 38200, "speed": 60, "armor": "820mm", "agility": 40 },
     "weapons": [
-      { "name": "125mm 2A46M - APFSDS", "type": "APFSDS", "damage": 680, "penetration": 750, "reload": 6 },
-      { "name": "125mm 2A46M - HEAT", "type": "HEAT", "damage": 720, "penetration": 400, "reload": 6 },
-      { "name": "125mm 2A46M - HE", "type": "HE", "damage": 900, "penetration": 50, "reload": 6 },
-      { "name": "PKT - 7.62mm", "type": "Machine Gun", "damage": 45, "penetration": 20, "reload": 0 }
+      { name: "3BM22", type: "Main Gun", damage: 11100, penetration: 425 },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "9M119", type: "Main Gun", damage: 10160, penetration: 750 },
+      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "3BK12M", type: "Main Gun", damage: 12140, penetration: 440 }
     ],
     "modules": {
       "engine": [
@@ -2902,11 +2905,10 @@ const VEHICLES = [
     "description": "Soviet main battle tank with composite armor and 125mm smoothbore gun.",
     "stats": { "health": 36700, "speed": 55, "armor": "800mm", "agility": 45 },
     "weapons": [
-      { "name": "125mm 2A46M-1 - APFSDS", "type": "APFSDS", "damage": 660, "penetration": 740, "reload": 6 },
-      { "name": "125mm 2A46M-1 - HEAT", "type": "HEAT", "damage": 700, "penetration": 400, "reload": 6 },
-      { "name": "125mm 2A46M-1 - HE", "type": "HE", "damage": 880, "penetration": 50, "reload": 6 },
-      { "name": "PKT - 7.62mm", "type": "Machine Gun", "damage": 45, "penetration": 20, "reload": 0 },
-      { "name": "NSVT - 12.7mm", "type": "Heavy Machine Gun", "damage": 100, "penetration": 40, "reload": 0 }
+      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "9M112", type: "Main Gun", damage: 10070, penetration: 700 },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 }
     ],
     "modules": {
       "engine": [
@@ -2936,9 +2938,7 @@ const VEHICLES = [
     "description": "Japanese main battle tank with advanced armor and 120mm smoothbore gun.",
     "stats": { "health": 37000, "speed": 55, "armor": "720mm", "agility": 40 },
     "weapons": [
-      { "name": "120mm L44 - APFSDS", "type": "APFSDS", "damage": 680, "penetration": 750, "reload": 6 },
-      { "name": "120mm L44 - HEAT", "type": "HEAT", "damage": 700, "penetration": 320, "reload": 6 },
-      { "name": "12.7mm M2 HB", "type": "Machine Gun", "damage": 50, "penetration": 25, "reload": 0 }
+      
     ],
     "modules": {
       "engine": [
@@ -2968,9 +2968,10 @@ const VEHICLES = [
     "description": "Chinese upgrade of Type 85 tank with improved armor and firepower.",
     "stats": { "health": 35200, "speed": 57, "armor": "700mm", "agility": 38 },
     "weapons": [
-      { "name": "105mm rifled gun - APFSDS", "type": "APFSDS", "damage": 620, "penetration": 700, "reload": 6 },
-      { "name": "105mm rifled gun - HEAT", "type": "HEAT", "damage": 650, "penetration": 320, "reload": 6 },
-      { "name": "Type 85 coaxial MG - 7.62mm", "type": "Machine Gun", "damage": 50, "penetration": 20, "reload": 0 }
+      { name: "125-I", type: "Main Gun", damage: 9020, penetration: 465 },
+      { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
+      { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
+      { name: "DTC10-125", type: "Main Gun", damage: 8800, penetration: 680 }
     ],
     "modules": {
       "engine": [
@@ -3000,9 +3001,10 @@ const VEHICLES = [
     "description": "Modern Chinese MBT with 125mm smoothbore and composite armor.",
     "stats": { "health": 36500, "speed": 24, "armor": "750mm", "agility": 34 },
     "weapons": [
-      { "name": "125mm smoothbore - APFSDS", "type": "APFSDS", "damage": 700, "penetration": 800, "reload": 6 },
-      { "name": "125mm smoothbore - HEAT", "type": "HEAT", "damage": 750, "penetration": 350, "reload": 6 },
-      { "name": "ZPT-99 coax MG - 7.62mm", "type": "Machine Gun", "damage": 55, "penetration": 25, "reload": 0 }
+      { name: "125-I", type: "Main Gun", damage: 9020, penetration: 465 },
+      { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
+      { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
+      { name: "DTC10-125", type: "Main Gun", damage: 8800, penetration: 680 }
     ],
     "modules": {
       "engine": [
@@ -3032,9 +3034,10 @@ const VEHICLES = [
     "description": "Improved export variant of ZTZ96 with enhanced protection and gun systems.",
     "stats": { "health": 36900, "speed": 24, "armor": "770mm", "agility": 34 },
     "weapons": [
-      { "name": "125mm smoothbore - APFSDS", "type": "APFSDS", "damage": 720, "penetration": 820, "reload": 6 },
-      { "name": "125mm smoothbore - HEAT", "type": "HEAT", "damage": 750, "penetration": 360, "reload": 6 },
-      { "name": "ZPT-99 coax MG - 7.62mm", "type": "Machine Gun", "damage": 55, "penetration": 25, "reload": 0 }
+      { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
+      { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
+      { name: "Type1985 I", type: "Main Gun", damage: 10220, penetration: 466 },
+      { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
     ],
     "modules": {
       "engine": [
@@ -3064,8 +3067,10 @@ const VEHICLES = [
     "description": "Chinese 155mm self-propelled howitzer with high mobility and firepower.",
     "stats": { "health": 26000, "speed": 59, "armor": "200mm", "agility": 35 },
     "weapons": [
-      { "name": "155mm Howitzer - HE", "type": "HE", "damage": 1000, "penetration": 50, "reload": 8 },
-      { "name": "155mm Howitzer - AP", "type": "AP", "damage": 1200, "penetration": 100, "reload": 8 }
+      { name: "GP120A", type: "Main Gun", damage: 8100, penetration: 240 },
+      { name: "GP120B", type: "Main Gun", damage: 7400, penetration: 480 },
+      { name: "3OF56", type: "Main Gun", damage: 12200, penetration: 120 },
+      { name: "ZBP1", type: "Main Gun", damage: 10450, penetration: 400 }
     ],
     "modules": {
       "engine": [
@@ -3095,8 +3100,9 @@ const VEHICLES = [
     "description": "American 203mm self-propelled artillery for heavy bombardment.",
     "stats": { "health": 27800, "speed": 63, "armor": "150mm", "agility": 36 },
     "weapons": [
-      { "name": "203mm Howitzer - HE", "type": "HE", "damage": 1500, "penetration": 70, "reload": 10 },
-      { "name": "203mm Howitzer - AP", "type": "AP", "damage": 1800, "penetration": 120, "reload": 10 }
+      { name: "M106", type: "Main Gun", damage: 10600, penetration: 152 },
+      { name: "M650", type: "Main Gun", damage: 11700, penetration: 185 },
+      { name: "M404", type: "Main Gun", damage: 9500, penetration: 120 }
     ],
     "modules": {
       "engine": [
@@ -3126,8 +3132,10 @@ const VEHICLES = [
     "description": "Russian 120mm mortar howitzer on tracked chassis.",
     "stats": { "health": 23500, "speed": 79, "armor": "180mm", "agility": 42 },
     "weapons": [
-      { "name": "120mm Mortar - HE", "type": "HE", "damage": 900, "penetration": 40, "reload": 6 },
-      { "name": "120mm Mortar - Smoke", "type": "Smoke", "damage": 0, "penetration": 0, "reload": 6 }
+      { name: "ZVOF110", type: "Main Gun", damage: 11500, penetration: 120 },
+      { name: "KM-8 Gran", type: "Main Gun", damage: 7000, penetration: 180 },
+      { name: "3BO34", type: "Main Gun", damage: 9800, penetration: 240 },
+      { name: "Kitolov 2M", type: "Main Gun", damage: 5100, penetration: 280 }
     ],
     "modules": {
       "engine": [
@@ -3157,8 +3165,7 @@ const VEHICLES = [
     "description": "Experimental 155mm self-propelled howitzer with automatic loading.",
     "stats": { "health": 34800, "speed": 67, "armor": "200mm", "agility": 38 },
     "weapons": [
-      { "name": "155mm Howitzer - HE", "type": "HE", "damage": 1200, "penetration": 50, "reload": 5 },
-      { "name": "155mm Howitzer - AP", "type": "AP", "damage": 1400, "penetration": 100, "reload": 5 }
+      { name: "M982", type: "Main Gun", damage: 6600, penetration: 280 },
     ],
     "modules": {
       "engine": [
@@ -3188,8 +3195,7 @@ const VEHICLES = [
     "description": "German SPAAG with twin 35mm Oerlikon cannons and radar-guided fire control.",
     "stats": { "health": 28900, "speed": 65, "armor": "35mm", "agility": 30 },
     "weapons": [
-      { "name": "35mm Oerlikon KDA - APDS", "type": "APDS", "damage": 250, "penetration": 100, "reload": 0.1 },
-      { "name": "35mm Oerlikon KDA - HEI", "type": "HEI", "damage": 320, "penetration": 50, "reload": 0.1 }
+      
     ],
     "modules": {
       "engine": [
@@ -3276,8 +3282,10 @@ const VEHICLES = [
     "description": "Chinese SPAAG with twin 35mm cannons and short-range missiles.",
     "stats": { "health": 25500, "speed": 60, "armor": "30mm", "agility": 30 },
     "weapons": [
-      { "name": "35mm Cannon - APDS", "type": "APDS", "damage": 250, "penetration": 100, "reload": 0.1 },
-      { "name": "PG-99 SAM Missile", "type": "SAM", "damage": 1000, "penetration": 220, "reload": 5 }
+      { name: "DKG01A", type: "Main Gun", damage: 270, penetration: 59 },
+      { name: "DKP01A", type: "Main Gun", damage: 500, penetration: 75 },
+      { name: "DM23", type: "Main Gun", damage: 530, penetration: 127 },
+      { name: "PMD062", type: "Main Gun", damage: 290, penetration: 59 },
     ],
     "modules": {
       "engine": [
@@ -3304,9 +3312,9 @@ const VEHICLES = [
     "description": "Russian SPAAG with twin 30mm cannons and 9M311 SAM missiles.",
     "stats": { "health": 25000, "speed": 65, "armor": 35, "agility": 35 },
     "weapons": [
-      { "name": "30mm 2A38M - APDS", "type": "APDS", "damage": 220, "penetration": 90, "reload": 0.1 },
-      { "name": "30mm 2A38M - HEI", "type": "HEI", "damage": 300, "penetration": 50, "reload": 0.1 },
-      { "name": "9M311 SAM Missile", "type": "SAM", "damage": 1200, "penetration": 250, "reload": 4 }
+      { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
+      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 }
     ],
     "modules": {
       "engine": [
@@ -3333,9 +3341,8 @@ const VEHICLES = [
     "description": "Chinese short-range air defense vehicle with 25mm cannons and SAM missiles.",
     "stats": { "health": 22000, "speed": 100, "armor": "25mm", "agility": 60 },
     "weapons": [
-      { "name": "25mm autocannon - APDS", "type": "APDS", "damage": 180, "penetration": 80, "reload": 0.1 },
-      { "name": "25mm autocannon - HEI", "type": "HEI", "damage": 250, "penetration": 40, "reload": 0.1 },
-      { "name": "TY-90 SAM Missile", "type": "SAM", "damage": 900, "penetration": 200, "reload": 5 }
+      { name: "30*160 APFSDS", type: "Main Gun", damage: 0, penetration: 128 },
+      { name: "30*160 HEI", type: "Main Gun", damage: 351, penetration: 60 },
     ],
     "modules": {
       "engine": [
@@ -3532,8 +3539,10 @@ const VEHICLES = [
     "description": "Armored wheeled vehicle equipped with short-range missiles and machine guns.",
     "stats": { "health": 24000, "speed": 95, "armor": "20mm", "agility": 27 },
     "weapons": [
-      { "name": "Short-range SAM Missile", "type": "SAM", "damage": 900, "penetration": 200, "reload": 4 },
-      { "name": "7.62mm Machine Gun", "type": "MG", "damage": 50, "penetration": 20, "reload": 0 }
+      { name: "M392", type: "Main Gun", damage: 8295, penetration: 350 },
+      { name: "M393", type: "Main Gun", damage: 11800, penetration: 127 },
+      { name: "M456", type: "Main Gun", damage: 9800, penetration: 400 },
+      { name: "M833", type: "Main Gun", damage: 9900, penetration: 472 }
     ],
     "modules": {
       "engine": [
@@ -3560,8 +3569,8 @@ const VEHICLES = [
     "description": "A lightweight prototype tank, emphasizing mobility, advanced optics, and rapid firepower.",
     "stats": { "health": 26000, "speed": 84, "armor": "47mm", "agility": 40 },
     "weapons": [
-  { "name": "XM885AP APFSDS", "type": "Cannon", "damage": 6160, "penetration": 370, "reload": 2 },
-  { "name": "XM855HE HE", "type": "Cannon", "damage": 7560, "penetration": 68, "reload": 2 }
+     { name: "XM855HE", type: "Main Gun", damage: 7560, penetration: 68 }.
+     { name: "XM885AP", type: "Main Gun", damage: 6160, penetration: 370 },
 ],
     "modules": {
       "engine": [
@@ -3588,10 +3597,11 @@ const VEHICLES = [
     "description": "The Rooikat MTTD is a fast, wheeled tank destroyer with strong firepower.",
     "stats": { "health": 27200, "speed": 120, "armor": "40mm", "agility": 28 },
     "weapons": [
-  { "name": "DM23 APFSDS", "type": "Cannon", "damage": 8400, "penetration": 337, "reload": 5.8 },
-  { "name": "DM512 HESH", "type": "Cannon", "damage": 9600, "penetration": 127, "reload": 5.8 },
-  { "name": "DM12 HEAT", "type": "Cannon", "damage": 9200, "penetration": 400, "reload": 5.8 },
-  { "name": "DM33 APFSDS", "type": "Cannon", "damage": 8800, "penetration": 508, "reload": 5.8 }
+    { name: "DM23", type: "Main Gun", damage: 8911, penetration: 337 },
+    { name: "DM33", type: "Main Gun", damage: 10060, penetration: 508 },
+    { name: "DM12", type: "Main Gun", damage: 10760, penetration: 400 },
+    { name: "DM512", type: "Main Gun", damage: 10210, penetration: 127 }
+
 ],
     "modules": {
       "engine": [
@@ -3648,8 +3658,10 @@ const VEHICLES = [
     "description": "A Chinese modern wheeled armored vehicle with strong firepower, protection, and mobility..",
     "stats": { "health": 28200, "speed": 85, "armor": "25mm", "agility": 35 },
     "weapons": [
-      { "name": "300mm Rocket - HE", "type": "Rocket", "damage": 2000, "penetration": 50, "reload": 15 },
-      { "name": "300mm Rocket - Cluster", "type": "Rocket", "damage": 1800, "penetration": 30, "reload": 15 }
+      { name: "Type 83 APFSDS", type: "Main Gun", damage: 10340, penetration: 425 },
+      { name: "Type 83 HEAT", type: "Main Gun", damage: 9900, penetration: 400 },
+      { name: "Type 83 HESH", type: "Main Gun", damage: 9410, penetration: 127 },
+      { name: "GP 105", type: "Main Gun", damage: 9180, penetration: 750 }
     ],
     "modules": {
       "engine": [
@@ -3676,9 +3688,9 @@ const VEHICLES = [
     image: "BMD3.jpg",
     stats: { health: 24000, speed: 70, armor: "420mm", agility: 40 },
     weapons: [
-      { name: "2A42 30mm", type: "Autocannon", damage: 420, penetration: 75, rateOfFire: "550 rpm" },
-      { name: "9M113 Konkurs", type: "ATGM", damage: 14500, penetration: 750 },
-      { name: "PKT 7.62mm", type: "Coaxial MG", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
+      { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 }
     ],
     modules: {
       engine: [
@@ -6708,6 +6720,24 @@ const MwtVehicleStats = () => {
   const [showCredits, setShowCredits] = useState(false)
 
   const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
+  const weaponsModalRef = useRef<HTMLDivElement>(null)
+  
+  // Click outside handler for weapons modal
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (weaponsModalRef.current && !weaponsModalRef.current.contains(event.target as Node)) {
+        setWeaponsModalOpenId(null)
+      }
+    }
+
+    if (weaponsModalOpenId) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [weaponsModalOpenId])
   
   // Sidebar state
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -7780,7 +7810,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
               <div className="flex justify-between items-center">
                 <button
-                  onClick={() => setWeaponsModalOpenId(vehicle.id.toString())}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setWeaponsModalOpenId(vehicle.id.toString())
+                  }}
                   className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-semibold rounded transition-colors"
                 >
                   Weapons
@@ -8255,7 +8288,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
         {weaponsModalOpenId && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-slate-900 rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto border border-slate-700">
+            <div ref={weaponsModalRef} className="bg-slate-900 rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto border border-slate-700">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-white">
                   {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.name} - Weapons
