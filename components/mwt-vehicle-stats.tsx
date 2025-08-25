@@ -3986,7 +3986,7 @@ const VEHICLES = [
     tier: "II",
     description:
       "Vertical/Short Takeoff and Landing (V/STOL) attack aircraft with excellent ground support capabilities.",
-    image: "AV-8B-Harrier-II.jpg",
+    image: "AV-8B-Harrier.jpg",
     stats: { health: 18500, speed: 662, afterburnerSpeed: 1085, agility: 78 },
     weapons: [
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
@@ -6610,7 +6610,7 @@ const getTRoleIcon = (role: string | null) => {
 const getFlagImage = (faction: string): string => {
   const flags: { [key: string]: string } = {
     Russian: "/russia-flag.png",
-    American: "/usa-flag.png",
+    American: "/America.png",
     Chinese: "/china-flag.png",
     German: "/germany-flag.jpeg",
     British: "/british-flag.png",
