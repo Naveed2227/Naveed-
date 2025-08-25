@@ -441,7 +441,7 @@ const VEHICLES = [
     faction: "Russian",
     tier: "IV",
     description: "Fifth-generation stealth fighter with advanced maneuverability and sensor fusion.",
-    image: "Su-57-Felon.jpg",
+    image: "SU-57-Felon.jpg",
     stats: { health: 23200, speed: 1100, afterburnerSpeed: 2100, agility: 90 },
     weapons: [
      { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
