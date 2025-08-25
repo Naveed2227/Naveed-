@@ -674,9 +674,10 @@ const VEHICLES = [
     image: "T-14-Armata.jpg",
     stats: { health: 38900, speed: 70, reverseSpeed: 70, armor: "1200mm", agility: 34 },
     weapons: [
-      { name: "2A82-1M 125mm", type: "Main Gun", damage: 15800, penetration: 850 },
-      { name: "Invar ATGM", type: "Anti-Tank Missile", damage: 18500, penetration: 1200 },
-      { name: "12.7mm Kord", type: "Machine Gun", damage: 180, penetration: 25, rateOfFire: "700 rpm" },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 },
+      { name: "3BK21", type: "Main Gun", damage: 10250, penetration: 800 }
+
     ],
     modules: {
       engine: [
@@ -707,10 +708,10 @@ const VEHICLES = [
     description: "Next-generation prototype tank with unmanned turret and advanced systems.",
     stats: { health: 40300, speed: 75, reverseSpeed: 45, armor: "1100mm", agility: 35 },
     weapons: [
-      { name: "XM360 120mm", type: "Main Gun", damage: 15200, penetration: 820 },
-      { name: "Switchblade Drone", type: "Loitering Munition", damage: 8500, penetration: 450 },
-      { name: "XM914 30mm", type: "Autocannon", damage: 480, penetration: 85, rateOfFire: "200 rpm" },
-      { name: "Trophy APS", type: "Active Protection", damage: 0, penetration: 0 },
+      { name: "M829A3", type: "Main Gun", damage: 10450, penetration: 670 },
+      { name: "MRM-KE", type: "Main Gun", damage: 9150, penetration: 980 },
+      { name: "MRM-CE", type: "Main Gun", damage: 10000, penetration: 850 },
+      { name: "M830", type: "Main Gun", damage: 10930, penetration: 800 }
     ],
     modules: {
       engine: [
@@ -740,8 +741,9 @@ const VEHICLES = [
     description: "Modern main battle tank optimized for Japanese terrain with advanced fire control.",
     stats: { health: 38000, speed: 71, reverseSpeed: 71, armor: "950mm", agility: 40 },
     weapons: [
-      { name: "JSW 120mm L44", type: "Main Gun", damage: 13800, penetration: 750 },
-      { name: "Type 74 7.62mm", type: "Machine Gun", damage: 110, penetration: 12, rateOfFire: "850 rpm" },
+      { name: "JM33", type: "Main Gun", damage: 9900, penetration: 481 },
+      { name: "JM12A1", type: "Main Gun", damage: 10400, penetration: 480 },
+      { name: "Type 10", type: "Main Gun", damage: 10900, penetration: 615 }
     ],
     modules: {
       engine: [
@@ -771,10 +773,10 @@ const VEHICLES = [
     description: "An Experimental prototype tank intended as a successor to the Abrams MBT family",
     stats: { health: 39600, speed: 80, reverseSpeed: 50, maneuverability: 40, armor: "1150mm", agility: 40 },
     weapons: [
-      { "name": "120mm XM360 - APFSDS", "type": "APFSDS", "damage": 700, "penetration": 850, "reload": 7 },
-      { "name": "120mm XM360 - HEAT", "type": "HEAT", "damage": 750, "penetration": 450, "reload": 7 },
-      { "name": "120mm XM360 - HE/HEI", "type": "HE/HEI", "damage": 900, "penetration": 50, "reload": 7 },
-      { "name": "M240 / 7.62mm", "type": "Machine Gun", "damage": 45, "penetration": 20, "reload": 0 }
+      { name: "M830A1", type: "Main Gun", damage: 12100, penetration: 850 },
+      { name: "M829A3", type: "Main Gun", damage: 10450, penetration: 670 },
+      { name: "MRM-CE", type: "Main Gun", damage: 10000, penetration: 850 },
+      { name: "MRM-KE", type: "Main Gun", damage: 9150, penetration: 980 }
     ],
     modules: {
       engine: [
@@ -804,8 +806,9 @@ const VEHICLES = [
     description: "Most advanced Leopard variant with urban warfare modifications and enhanced protection.",
     stats: { health: 36200, speed: 68, armor: "1080mm", agility: 70 },
     weapons: [
-      { name: "Rheinmetall L55 120mm", type: "Main Gun", damage: 15200, penetration: 810 },
-      { name: "MG3A1 7.62mm", type: "Machine Gun", damage: 130, penetration: 16, rateOfFire: "1200 rpm" },
+      { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
+      { name: "DM33", type: "Main Gun", damage: 10620, penetration: 496 },
+      { name: "DM-73-1", type: "Main Gun", damage: 12100, penetration: 980 },
     ],
     modules: {
       engine: [
@@ -835,9 +838,10 @@ const VEHICLES = [
     description: "Next-generation main battle tank with 130mm gun and advanced digital systems.",
     stats: { health: 38500, speed: 65, armor: "1200mm", agility: 38 },
     weapons: [
-      { name: "Future Gun System 130mm", type: "Main Gun", damage: 18500, penetration: 950 },
-      { name: "Spike LR2", type: "ATGM", damage: 19200, penetration: 1250 },
-      { name: "MG4 5.56mm", type: "Machine Gun", damage: 85, penetration: 8, rateOfFire: "885 rpm" },
+      { name: "DM-11-1", type: "Main Gun", damage: 14850, penetration: 135 },
+      { name: "DM-12-1", type: "Main Gun", damage: 12650, penetration: 800 },
+      { name: "DM-33-1", type: "Main Gun", damage: 11500, penetration: 596 },
+      { name: "DM-73-1", type: "Main Gun", damage: 12100, penetration: 980 }
     ],
     modules: {
       engine: [
@@ -868,7 +872,7 @@ const VEHICLES = [
     stats: { health: 38200, speed: 65,armor: "1200mm", agility: 70 },
     weapons: [
       { name: "DM63A1 APFSDS", type: "Main Gun", damage: 18500, penetration: 950, reload: 5.2 },
-      { name: "DM11 HEI", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 },
+      { name: "DM11", type: "Main Gun", damage: 4900, penetration: 87 },
       { name: "DM12A2 HEATFS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 },
       { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 },
     ],
@@ -901,9 +905,11 @@ const VEHICLES = [
     description: "Advanced main battle tank with next-generation armor and fire control systems.",
     stats: { health: 40000, speed: 65, armor: "1250mm", agility: 30 },
     weapons: [
-      { name: "2A82-1M 125mm", type: "Main Gun", damage: 16200, penetration: 870 },
-      { name: "9M119M1 Invar-M", type: "ATGM", damage: 19500, penetration: 1300 },
-      { name: "Kord 12.7mm", type: "Machine Gun", damage: 240, penetration: 38, rateOfFire: "650 rpm" },
+      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 },
+      { name: "3BK21", type: "Main Gun", damage: 10250, penetration: 800 }
+
     ],
     modules: {
       engine: [
@@ -933,9 +939,10 @@ const VEHICLES = [
     description: "Modernized main battle tank with improved armor and advanced fire control.",
     stats: { health: 39400, speed: 65, reverseSpeed: 30, maneuverability: 44, armor: "1050mm", agility: 44 },
     weapons: [
-      { name: "2A46M-5 125mm", type: "Main Gun", damage: 15200, penetration: 820 },
-      { name: "9M119 Refleks", type: "ATGM", damage: 17800, penetration: 1150 },
-      { name: "NSVT 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "700 rpm" },
+      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "9M112", type: "Main Gun", damage: 10070, penetration: 700 },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 }
     ],
     modules: {
       engine: [
@@ -965,9 +972,8 @@ const VEHICLES = [
     description: "Experimental heavy tank with revolutionary armor design and 152mm gun.",
     stats: { health: 38100, speed: 75, armor: "1400mm", agility: 30 },
     weapons: [
-      { name: "2A83 152mm", type: "Main Gun", damage: 22500, penetration: 1200 },
-      { name: "9M119M1 Invar-M", type: "ATGM", damage: 20200, penetration: 1350 },
-      { name: "Kord 12.7mm", type: "Machine Gun", damage: 240, penetration: 38, rateOfFire: "650 rpm" },
+      { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 1000 },
+      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1200 }
     ],
     modules: {
       engine: [
@@ -998,9 +1004,10 @@ const VEHICLES = [
     description: "A Russian heavy main battle tank, featuring strong armor, AI-assisted and protection systems.",
     stats: { health: 42200, speed: 60, armor: "1320mm", agility: 45 },
     weapons: [
-      { name: "2A82-2M 125mm", type: "Main Gun", damage: 17500, penetration: 920 },
-      { name: "Kornet-EM", type: "ATGM", damage: 21000, penetration: 1400 },
-      { name: "Kord 12.7mm", type: "Machine Gun", damage: 240, penetration: 38, rateOfFire: "650 rpm" },
+      { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 1000 },
+      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1200 },
+      { name: "GRIFFEL 3", type: "Main Gun", damage: 16100, penetration: 900 },
+      { name: "30F38", type: "Main Gun", damage: 10600, penetration: 480 }
     ],
     modules: {
       engine: [
@@ -1030,8 +1037,10 @@ const VEHICLES = [
     description: "Mobile Combat Vehicle with excellent mobility and firepower for rapid deployment.",
     stats: { health: 33000, speed: 100, armor: "420mm", agility: 42 },
     weapons: [
-      { name: "JSW 105mm L52", type: "Main Gun", damage: 12500, penetration: 680 },
-      { name: "Type 74 7.62mm", type: "Machine Gun", damage: 110, penetration: 12, rateOfFire: "850 rpm" },
+      { name: "M735", type: "Main Gun", damage: 9940, penetration: 318 },
+      { name: "Type 75", type: "Main Gun", damage: 10460, penetration: 127 },
+      { name: "Type 91", type: "Main Gun", damage: 11070, penetration: 425 },
+      { name: "Type 93(B)", type: "Main Gun", damage: 10380, penetration: 550 }
     ],
     modules: {
       engine: [
@@ -1061,9 +1070,10 @@ const VEHICLES = [
   description: "Next-generation Russian MBT prototype equipped with a powerful 152mm smoothbore gun and advanced armor.",
   stats: { health: 39700, speed: 73, armor: "1000mm", agility: 34 },
   weapons: [
-    { name: "2A83 152mm Smoothbore Gun", type: "Cannon", damage: 17000, penetration: 1100, rateOfFire: "6 rpm" },
-    { name: "Kord 12.7mm MG", type: "Machine Gun", damage: 180, penetration: 25, rateOfFire: "750 rpm" },
-    { name: "PKTM 7.62mm MG", type: "Coaxial MG", damage: 120, penetration: 15, rateOfFire: "800 rpm" }
+      { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 1000 },
+      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1200 },
+      { name: "GRIFFEL 3", type: "Main Gun", damage: 16100, penetration: 900 },
+      { name: "30F38", type: "Main Gun", damage: 10600, penetration: 480 }
   ],
   modules: {
     engine: [
@@ -1122,9 +1132,10 @@ const VEHICLES = [
     image: "BMPT-Terminator-2.jpg",
     stats: { health: 36400, speed: 60, armor: "850mm", agility: 38 },
     weapons: [
-      { name: "2A42 30mm Twin", type: "Autocannon", damage: 520, penetration: 85, rateOfFire: "550 rpm" },
-      { name: "9M120 Ataka", type: "ATGM", damage: 17200, penetration: 1150 },
-      { name: "PKT 7.62mm", type: "Coaxial MG", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
+      { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
+
     ],
     modules: {
       engine: [
@@ -1185,8 +1196,10 @@ const VEHICLES = [
     description: "Self-propelled howitzer with long-range precision artillery capability.",
     stats: { health: 34300, speed: 60, armor: "450mm", agility: 32 },
     weapons: [
-      { name: "2A64 152mm", type: "Howitzer", damage: 28500, penetration: 950 },
-      { name: "NSVT 12.7mm", type: "Machine Gun", damage: 200, penetration: 32, rateOfFire: "700 rpm" },
+      { name: "30F25", type: "Main Gun", damage: 15000, penetration: 160 },
+      { name: "30F45", type: "Main Gun", damage: 16200, penetration: 180 },
+      { name: "Z023", type: "Main Gun", damage: 13800, penetration: 400 },
+      { name: "30F39", type: "Main Gun", damage: 8800, penetration: 480 }
     ],
     modules: {
       engine: [
@@ -1216,8 +1229,9 @@ const VEHICLES = [
     description: "Combined gun-missile air defense system with advanced radar capabilities.",
     stats: { health: 32500, speed: 70, armor: "420mm", agility: 35 },
     weapons: [
-      { name: "2A38M 30mm Twin", type: "Anti-Aircraft Gun", damage: 2200, penetration: 120, rateOfFire: "2500 rpm" },
-      { name: "57E6 SAM", type: "Surface-to-Air Missile", damage: 12500, penetration: 650 },
+      { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 }
     ],
     modules: {
       engine: [
@@ -1247,8 +1261,10 @@ const VEHICLES = [
     description: "Mobile gun system with rapid deployment capability and stealth features.",
     stats: { health: 28800, speed: 97, armor: "380mm", agility: 40.1 },
     weapons: [
-      { name: "M68A1E4 105mm", type: "Main Gun", damage: 12800, penetration: 680 },
-      { name: "M240 7.62mm", type: "Coaxial MG", damage: 120, penetration: 15, rateOfFire: "750 rpm" },
+      { name: "M392A2", type: "Main Gun", damage: 8510, penetration: 372 },
+      { name: "M393A2", type: "Main Gun", damage: 10090, penetration: 127 },
+      { name: "M456A2", type: "Main Gun", damage: 9320, penetration: 400 },
+      { name: "M900", type: "Main Gun", damage: 8910, penetration: 522 }
     ],
     modules: {
       engine: [
@@ -1279,9 +1295,10 @@ const VEHICLES = [
     description: "Export variant main battle tank with advanced fire control and modular protection.",
     stats: { health: 39100, speed: 71, armor: "1100mm", agility: 37 },
     weapons: [
-      { name: "ZPT98A 125mm", type: "Main Gun", damage: 15800, penetration: 850 },
-      { name: "GP125", type: "ATGM", damage: 18500, penetration: 1200 },
-      { name: "QJC88 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "600 rpm" },
+      { name: "BTJ1", type: "Main Gun", damage: 10200, penetration: 1000 },
+      { name: "BTA4", type: "Main Gun", damage: 9350, penetration: 700 },
+      { name: "BTE2", type: "Main Gun", damage: 11475, penetration: 123 },
+      { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
     ],
     modules: {
       engine: [
@@ -1311,9 +1328,10 @@ const VEHICLES = [
     description: "Advanced main battle tank with composite armor and laser warning systems.",
     stats: { health: 37500, speed: 76, armor: "1150mm", agility: 40 },
     weapons: [
-      { name: "ZPT98A 125mm", type: "Main Gun", damage: 16200, penetration: 870 },
-      { name: "GP125", type: "ATGM", damage: 19000, penetration: 1250 },
-      { name: "QJC88 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "600 rpm" },
+      { name: "DTB-125", type: "Main Gun", damage: 4300, penetration: 160 },
+      { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
+      { name: "DTC10-125", type: "Main Gun", damage: 8800, penetration: 680 },
+      { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
     ],
     modules: {
       engine: [
@@ -1343,9 +1361,10 @@ const VEHICLES = [
     description: "Latest variant with enhanced armor package and improved battlefield management systems.",
     stats: { health: 38300, speed: 70, armor: "1200mm", agility: 32 },
     weapons: [
-      { name: "ZPT98A 125mm", type: "Main Gun", damage: 16800, penetration: 900 },
-      { name: "GP125A", type: "ATGM", damage: 19800, penetration: 1300 },
-      { name: "QJC88A 12.7mm", type: "Machine Gun", damage: 240, penetration: 38, rateOfFire: "650 rpm" },
+      { name: "BTJ1", type: "Main Gun", damage: 10200, penetration: 1000 },
+      { name: "BTA4", type: "Main Gun", damage: 9350, penetration: 700 },
+      { name: "BTE2", type: "Main Gun", damage: 11475, penetration: 123 },
+      { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
     ],
     modules: {
       engine: [
@@ -1375,9 +1394,9 @@ const VEHICLES = [
     description: "Next-generation British main battle tank with smoothbore gun and digital turret.",
     stats: { health: 43000, speed: 70, armor: "1180mm", agility: 32 },
     weapons: [
-      { name: "Rheinmetall L55A1 120mm", type: "Main Gun", damage: 16500, penetration: 880 },
-      { name: "Brimstone ATGM", type: "Anti-Tank Missile", damage: 19500, penetration: 1280 },
-      { name: "L94A1 7.62mm", type: "Machine Gun", damage: 140, penetration: 18, rateOfFire: "750 rpm" },
+      { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
+      { name: "DM23", type: "Main Gun", damage: 8911, penetration: 337 },
+      { name: "DM33", type: "Main Gun", damage: 10620, penetration: 496 }
     ],
     modules: {
       engine: [
@@ -1407,9 +1426,10 @@ const VEHICLES = [
     description: "A hybrid European main battle tank, combining Leopard 2 chassis with Leclerc turret.",
     stats: { health: 41900, speed: 75, armor: "1160mm", agility: 38 },
     weapons: [
-      { name: "Rheinmetall L55 120mm", type: "Main Gun", damage: 16200, penetration: 870 },
-      { name: "PARS 3 LR", type: "ATGM", damage: 18800, penetration: 1220 },
-      { name: "MG3A1 7.62mm", type: "Machine Gun", damage: 130, penetration: 16, rateOfFire: "1200 rpm" },
+      { name: "OCC120G1", type: "Main Gun", damage: 11840, penetration: 480 },
+      { name: "OE120F1", type: "Main Gun", damage: 4800, penetration: 85 },
+      { name: "OFL120F1", type: "Main Gun", damage: 11040, penetration: 575 },
+      { name: "SHARD120", type: "Main Gun", damage: 11300, penetration: 575 }
     ],
     modules: {
       engine: [
@@ -1439,9 +1459,9 @@ const VEHICLES = [
     description: "A heavily upgraded British main battle tank with advanced armor for urban warfare.",
     stats: { health: 42700, speed: 56, armor: "1120mm", agility: 30 },
     weapons: [
-      { name: "L30A1 120mm", type: "Main Gun", damage: 15500, penetration: 830 },
-      { name: "L94A1 7.62mm", type: "Machine Gun", damage: 140, penetration: 18, rateOfFire: "750 rpm" },
-      { name: "L37A2 7.62mm", type: "Coaxial MG", damage: 120, penetration: 15, rateOfFire: "750 rpm" },
+      { name: "L26", type: "Main Gun", damage: 11000, penetration: 500 },
+      { name: "L27A1", type: "Main Gun", damage: 11600, penetration: 610 },
+      { name: "L31A7", type: "Main Gun", damage: 13800, penetration: 160 }
     ],
     modules: {
       engine: [
@@ -1471,9 +1491,10 @@ const VEHICLES = [
     description: "An Iranian main battle tank, featuring upgraded armor, firepower, and technology from T-72 design.",
     stats: { health: 39800, speed: 70, armor: "980mm", agility: 35 },
     weapons: [
-      { name: "2A46M 125mm", type: "Main Gun", damage: 14800, penetration: 800 },
-      { name: "Toophan-5", type: "ATGM", damage: 17200, penetration: 1100 },
-      { name: "DShK 12.7mm", type: "Machine Gun", damage: 200, penetration: 32, rateOfFire: "600 rpm" },
+      { name: "3BK29", type: "Main Gun", damage: 12630, penetration: 660 },
+      { name: "3OF19", type: "Main Gun", damage: 5000, penetration: 82 },
+      { name: "3BM29", type: "Main Gun", damage: 11150, penetration: 450 },
+      { name: "Tondar", type: "Main Gun", damage: 10160, penetration: 750 }
     ],
     modules: {
       engine: [
@@ -1503,9 +1524,10 @@ const VEHICLES = [
     description: "Upgraded French main battle tank with urban warfare package and improved armor.",
     stats: { health: 42400, speed: 80, armor: "1080mm", agility: 38 },
     weapons: [
-      { name: "CN120-26 120mm", type: "Main Gun", damage: 15800, penetration: 850 },
-      { name: "MILAN ATGM", type: "Anti-Tank Missile", damage: 17800, penetration: 1150 },
-      { name: "M2HB 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "550 rpm" },
+      { name: "OCC120G1", type: "Main Gun", damage: 11840, penetration: 480 },
+      { name: "OE120F1", type: "Main Gun", damage: 4800, penetration: 85 },
+      { name: "OFL120F1", type: "Main Gun", damage: 11040, penetration: 575 },
+      { name: "OR-281", type: "Main Gun", damage: 2106, penetration: 83 }
     ],
     modules: {
       engine: [
@@ -1535,10 +1557,11 @@ const VEHICLES = [
     description: "The Object 640 “Black Eagle” is a Russian prototype main battle tank with modular armor.",
     stats: { health: 42400, speed: 80, armor: "1200mm", agility: 38 },
     weapons: [
-      { name: "ZBK18M HEAT", type: "Main Gun", damage: 12390, penetration: 550 },
-      { name: "ZOF25 HEI", type: "Main Gun", damage: 5000, penetration: 92 },
-      { name: "ZBM42 APFSDS", type: "Main Gun", damage: 11700, penetration: 720 },
-      { name: "9M119 HEAT", type: "Main Gun", damage: 10160, penetration: 750 },
+      { name: "3BM22", type: "Main Gun", damage: 11100, penetration: 425 },
+      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "3BK12M", type: "Main Gun", damage: 12140, penetration: 440 },
+      { name: "3OF39", type: "Main Gun", damage: 11040, penetration: 480 },
+      { name: "9M119", type: "Main Gun", damage: 10160, penetration: 750 }
     ],
     modules: {
       engine: [
@@ -1576,9 +1599,9 @@ const VEHICLES = [
       "agility": 40
     },
     "weapons": [
-      { "name": "2A42", "type": "Autocannon", "damage": 380, "penetration": 65, "rateOfFire": "1800 rpm", "reload": 6, "ammo": 600, "ammoInMagazine": 150, "range": 1666, "elevationAngle": "-10/30 degrees" },
-      { "name": "9K135 Kornet", "type": "Laser-Guided ATGM", "damage": 9800, "penetration": 1200, "reload": 8, "ammo": 8, "ammoInMagazine": 1, "rateOfFire": "1 round/s", "range": 1566, "lockOnTime": "0 s" },
-      { "name": "AGS-30", "type": "30mm Grenade Launcher", "damage": 380, "penetration": 65, "reload": 5, "ammo": 29, "ammoInMagazine": 1, "rateOfFire": "1.7 rounds/s", "range": 666 }
+      { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 }
     ],
     "modules": {
       "engine": [
@@ -1616,8 +1639,8 @@ const VEHICLES = [
       "agility": 40
     },
     "weapons": [
-      { "name": "30mm LANCE Autocannon", "type": "Autocannon", "damage": 500, "penetration": 100, "rateOfFire": "600 rpm", "reload": 4, "ammo": 500, "ammoInMagazine": 100, "range": 2000, "elevationAngle": "-10/60 degrees" },
-      { "name": "Spike LR2", "type": "Anti-Tank Guided Missile", "damage": 9800, "penetration": 750, "reload": 12, "ammo": 4, "ammoInMagazine": 1, "rateOfFire": "1 round/s", "range": 4000, "lockOnTime": "3 s" }
+      { name: "PMC287", type: "Main Gun", damage: 970, penetration: 195 },
+      { name: "PMC308", type: "Main Gun", damage: 300, penetration: 55 }
     ],
     "modules": {
       "engine": [
@@ -1655,8 +1678,10 @@ const VEHICLES = [
       "agility": 30
     },
     "weapons": [
-      { "name": "105mm M35 Gun", "type": "Main Gun", "damage": 12000, "penetration": 800, "reload": 10, "ammo": 40, "ammoInMagazine": 5, "rateOfFire": "1 round/s", "range": 3000, "elevationAngle": "-5/15 degrees" },
-      { "name": "M240C 7.62mm", "type": "Coaxial MG", "damage": 200, "penetration": 50, "rateOfFire": "900 rpm", "reload": 2, "ammo": 1000, "ammoInMagazine": 200, "range": 800 }
+      { name: "M392A2", type: "Main Gun", damage: 8510, penetration: 372 },
+      { name: "M393A2", type: "Main Gun", damage: 10090, penetration: 127 },
+      { name: "M456A2", type: "Main Gun", damage: 9320, penetration: 400 },
+      { name: "M900", type: "Main Gun", damage: 8910, penetration: 522 }
     ],
     "modules": {
       "engine": [
@@ -1694,8 +1719,10 @@ const VEHICLES = [
       "agility": 36
     },
     "weapons": [
-      { "name": "120mm Cannon", "type": "Main Gun", "damage": 10000, "penetration": 900, "reload": 12, "ammo": 30, "ammoInMagazine": 5, "rateOfFire": "1 round/s", "range": 3500, "elevationAngle": "-5/15 degrees" },
-      { "name": "7.62mm Coaxial MG", "type": "Coaxial MG", "damage": 150, "penetration": 40, "rateOfFire": "1000 rpm", "reload": 1, "ammo": 500, "ammoInMagazine": 100, "range": 800 }
+      { name: "M829A3", type: "Main Gun", damage: 10450, penetration: 670 },
+      { name: "M830", type: "Main Gun", damage: 10930, penetration: 800 },
+      { name: "MRM-CE", type: "Main Gun", damage: 10000, penetration: 850 },
+      { name: "MRM-KE", type: "Main Gun", damage: 9150, penetration: 980 }
     ],
     "modules": {
       "engine": [
@@ -2024,28 +2051,10 @@ const VEHICLES = [
     "agility": 40
   },
   "weapons": [
-    {
-      "name": "125mm 2A82 Cannon",
-      "type": "Main Gun",
-      "damage": 14000,
-      "penetration": 1000,
-      "reload": 12,
-      "ammo": 40,
-      "ammoInMagazine": 5,
-      "rateOfFire": "1 round/s",
-      "range": 3500,
-      "elevationAngle": "-5/15 degrees"
-    },
-    {
-      "name": "PKT 7.62mm Coaxial MG",
-      "type": "Coaxial MG",
-      "damage": 200,
-      "penetration": 50,
-      "rateOfFire": "900 rpm",
-      "ammo": 1000,
-      "ammoInMagazine": 200,
-      "range": 800
-    }
+    { name: "BR-281SP", type: "Main Gun", damage: 1560, penetration: 147 },
+    { name: "BR-281U", type: "Main Gun", damage: 1404, penetration: 156 },
+    { name: "OR-281", type: "Main Gun", damage: 2106, penetration: 83 }
+
   ],
   "modules": {
     "engine": [
