@@ -1066,7 +1066,7 @@ const VEHICLES = [
   type: "Main Battle Tank",
   faction: "Russian",
   tier: "IV",
-  image: "T-14-Armata-(152).jpg",
+  image: "T-14-(152).jpg",
   description: "Next-generation Russian MBT prototype equipped with a powerful 152mm smoothbore gun and advanced armor.",
   stats: { health: 39700, speed: 73, armor: "1000mm", agility: 34 },
   weapons: [
