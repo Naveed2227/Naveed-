@@ -3165,7 +3165,7 @@ const VEHICLES = [
     "description": "Experimental 155mm self-propelled howitzer with automatic loading.",
     "stats": { "health": 34800, "speed": 67, "armor": "200mm", "agility": 38 },
     "weapons": [
-      { name: "M982", type: "Main Gun", damage: 6600, penetration: 280 },
+      { name: "M982", type: "Main Gun", damage: 6600, penetration: 280 }
     ],
     "modules": {
       "engine": [
@@ -3224,7 +3224,7 @@ const VEHICLES = [
     stats: { health: 33700, speed: 62, armor: "380mm", agility: 36 },
     weapons: [
       { name: "OTO 76mm L62", type: "Anti-Aircraft Gun", damage: 2800, penetration: 180, rateOfFire: "120 rpm" },
-      { name: "Aspide SAM", type: "Surface-to-Air Missile", damage: 8500, penetration: 420 },
+      { name: "Aspide SAM", type: "Surface-to-Air Missile", damage: 8500, penetration: 420 }
     ],
     modules: {
       engine: [
@@ -3285,7 +3285,7 @@ const VEHICLES = [
       { name: "DKG01A", type: "Main Gun", damage: 270, penetration: 59 },
       { name: "DKP01A", type: "Main Gun", damage: 500, penetration: 75 },
       { name: "DM23", type: "Main Gun", damage: 530, penetration: 127 },
-      { name: "PMD062", type: "Main Gun", damage: 290, penetration: 59 },
+      { name: "PMD062", type: "Main Gun", damage: 290, penetration: 59 }
     ],
     "modules": {
       "engine": [
@@ -3342,7 +3342,7 @@ const VEHICLES = [
     "stats": { "health": 22000, "speed": 100, "armor": "25mm", "agility": 60 },
     "weapons": [
       { name: "30*160 APFSDS", type: "Main Gun", damage: 0, penetration: 128 },
-      { name: "30*160 HEI", type: "Main Gun", damage: 351, penetration: 60 },
+      { name: "30*160 HEI", type: "Main Gun", damage: 351, penetration: 60 }
     ],
     "modules": {
       "engine": [
@@ -3569,8 +3569,8 @@ const VEHICLES = [
     "description": "A lightweight prototype tank, emphasizing mobility, advanced optics, and rapid firepower.",
     "stats": { "health": 26000, "speed": 84, "armor": "47mm", "agility": 40 },
     "weapons": [
-     { name: "XM855HE", type: "Main Gun", damage: 7560, penetration: 68 }.
-     { name: "XM885AP", type: "Main Gun", damage: 6160, penetration: 370 },
+     { name: "XM855HE", type: "Main Gun", damage: 7560, penetration: 68 },
+     { name: "XM885AP", type: "Main Gun", damage: 6160, penetration: 370 }
 ],
     "modules": {
       "engine": [
