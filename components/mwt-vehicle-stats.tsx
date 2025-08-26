@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Zap, Shield, Target, Star } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 // Roman numeral conversion utility
@@ -34,6 +34,207 @@ const formatTier = (tier: string | number): string => {
   }
   // Otherwise convert to Roman numeral
   return toRomanNumeral(tier);
+};
+
+// Fuzzy search utility
+const fuzzySearch = (query: string, text: string): number => {
+  const queryLower = query.toLowerCase();
+  const textLower = text.toLowerCase();
+  
+  // Exact match gets highest score
+  if (textLower === queryLower) return 100;
+  if (textLower.includes(queryLower)) return 80;
+  
+  // Calculate fuzzy match score
+  let score = 0;
+  let queryIndex = 0;
+  
+  for (let i = 0; i < textLower.length && queryIndex < queryLower.length; i++) {
+    if (textLower[i] === queryLower[queryIndex]) {
+      score += 1;
+      queryIndex++;
+    }
+  }
+  
+  return queryIndex === queryLower.length ? (score / queryLower.length) * 60 : 0;
+};
+
+// Enhanced vehicle search with fuzzy matching
+const searchVehicles = (query: string, vehicles: any[]): any[] => {
+  if (!query.trim()) return vehicles;
+  
+  const results = vehicles.map(vehicle => {
+    const nameScore = fuzzySearch(query, vehicle.name);
+    const typeScore = fuzzySearch(query, vehicle.type) * 0.7;
+    const factionScore = fuzzySearch(query, vehicle.faction) * 0.6;
+    const tierScore = fuzzySearch(query, vehicle.tier) * 0.5;
+    
+    const totalScore = Math.max(nameScore, typeScore, factionScore, tierScore);
+    
+    return { ...vehicle, searchScore: totalScore };
+  })
+  .filter(vehicle => vehicle.searchScore > 20)
+  .sort((a, b) => b.searchScore - a.searchScore);
+  
+  return results;
+};
+
+// Calculate vehicle performance score
+const calculatePerformanceScore = (vehicle: any): number => {
+  const stats = vehicle.stats;
+  let score = 0;
+  
+  // Normalize stats based on vehicle type
+  if (vehicle.type.includes('Tank') || vehicle.type.includes('MBT')) {
+    score = (stats.health * 0.3) + (stats.armor * 0.4) + (stats.firepower * 0.3);
+  } else if (vehicle.type.includes('Fighter') || vehicle.type.includes('Jet')) {
+    score = (stats.speed * 0.4) + (stats.agility * 0.3) + (stats.health * 0.3);
+  } else {
+    // General scoring
+    const statValues = Object.values(stats).filter(val => typeof val === 'number');
+    score = statValues.reduce((sum: number, val: any) => sum + val, 0) / statValues.length;
+  }
+  
+  return Math.round(score);
+};
+
+// Get best vehicles by nation
+const getBestVehiclesByNation = (vehicles: any[]): { [key: string]: any } => {
+  const nationGroups = vehicles.reduce((acc, vehicle) => {
+    if (!acc[vehicle.faction]) acc[vehicle.faction] = [];
+    acc[vehicle.faction].push({ ...vehicle, performanceScore: calculatePerformanceScore(vehicle) });
+    return acc;
+  }, {});
+  
+  const bestByNation: { [key: string]: any } = {};
+  Object.keys(nationGroups).forEach(nation => {
+    bestByNation[nation] = nationGroups[nation]
+      .sort((a: any, b: any) => b.performanceScore - a.performanceScore)[0];
+  });
+  
+  return bestByNation;
+};
+
+// Get best vehicles by role/type
+const getBestVehiclesByRole = (vehicles: any[]): { [key: string]: any } => {
+  const roleGroups = vehicles.reduce((acc, vehicle) => {
+    if (!acc[vehicle.type]) acc[vehicle.type] = [];
+    acc[vehicle.type].push({ ...vehicle, performanceScore: calculatePerformanceScore(vehicle) });
+    return acc;
+  }, {});
+  
+  const bestByRole: { [key: string]: any } = {};
+  Object.keys(roleGroups).forEach(role => {
+    bestByRole[role] = roleGroups[role]
+      .sort((a: any, b: any) => b.performanceScore - a.performanceScore)[0];
+  });
+  
+  return bestByRole;
+};
+
+// Natural language query processor
+const processNaturalQuery = (query: string, vehicles: any[]): { type: string; data: any; message: string } => {
+  const queryLower = query.toLowerCase();
+  
+  // Compare two vehicles
+  const compareMatch = queryLower.match(/compare\s+(.*?)\s+(?:vs|versus|against|with)\s+(.*?)(?:\s|$)/);
+  if (compareMatch) {
+    const vehicle1Name = compareMatch[1].trim();
+    const vehicle2Name = compareMatch[2].trim();
+    
+    const vehicle1 = searchVehicles(vehicle1Name, vehicles)[0];
+    const vehicle2 = searchVehicles(vehicle2Name, vehicles)[0];
+    
+    if (vehicle1 && vehicle2) {
+      return {
+        type: 'comparison',
+        data: { vehicle1, vehicle2 },
+        message: `Comparing ${vehicle1.name} vs ${vehicle2.name}`
+      };
+    }
+  }
+  
+  // Best vehicle by nation
+  const nationMatch = queryLower.match(/(?:best|good|top).*?(?:chinese|american|russian|german|british|french|israeli|japanese|italian)/);
+  if (nationMatch) {
+    const nations = ['Chinese', 'American', 'Russian', 'German', 'British', 'French', 'Israeli', 'Japanese', 'Italian'];
+    const foundNation = nations.find(nation => queryLower.includes(nation.toLowerCase()));
+    
+    if (foundNation) {
+      const nationVehicles = vehicles.filter(v => v.faction === foundNation)
+        .map(v => ({ ...v, performanceScore: calculatePerformanceScore(v) }))
+        .sort((a, b) => b.performanceScore - a.performanceScore);
+      
+      return {
+        type: 'recommendation',
+        data: nationVehicles.slice(0, 3),
+        message: `Best ${foundNation} vehicles:`
+      };
+    }
+  }
+  
+  // Best by role
+  const roleMatch = queryLower.match(/(?:best|good|top).*?(?:mbt|tank|fighter|bomber|ifv|spg|air defense)/);
+  if (roleMatch) {
+    const roleMap: { [key: string]: string[] } = {
+      'mbt': ['Main Battle Tank', 'Tank'],
+      'tank': ['Main Battle Tank', 'Tank', 'Light Tank', 'Heavy Tank'],
+      'fighter': ['Fighter Jet', 'Fighter'],
+      'bomber': ['Bomber', 'Strategic Bomber'],
+      'ifv': ['Infantry Fighting Vehicle', 'IFV'],
+      'spg': ['Self-Propelled Gun', 'SPG'],
+      'air defense': ['Air Defense', 'SAM']
+    };
+    
+    const foundRole = Object.keys(roleMap).find(role => queryLower.includes(role));
+    if (foundRole) {
+      const roleTypes = roleMap[foundRole];
+      const roleVehicles = vehicles.filter(v => 
+        roleTypes.some(type => v.type.includes(type))
+      )
+      .map(v => ({ ...v, performanceScore: calculatePerformanceScore(v) }))
+      .sort((a, b) => b.performanceScore - a.performanceScore);
+      
+      return {
+        type: 'recommendation',
+        data: roleVehicles.slice(0, 3),
+        message: `Best ${foundRole.toUpperCase()} vehicles:`
+      };
+    }
+  }
+  
+  // Strongest by tier
+  const tierMatch = queryLower.match(/(?:strongest|best|top).*?tier\s*(i{1,3}|[1-4])/);
+  if (tierMatch) {
+    const tierStr = tierMatch[1];
+    const tier = /^\d$/.test(tierStr) ? toRomanNumeral(parseInt(tierStr)) : tierStr.toUpperCase();
+    
+    const tierVehicles = vehicles.filter(v => formatTier(v.tier) === tier)
+      .map(v => ({ ...v, performanceScore: calculatePerformanceScore(v) }))
+      .sort((a, b) => b.performanceScore - a.performanceScore);
+    
+    return {
+      type: 'recommendation',
+      data: tierVehicles.slice(0, 3),
+      message: `Strongest Tier ${tier} vehicles:`
+    };
+  }
+  
+  // General search
+  const searchResults = searchVehicles(query, vehicles);
+  if (searchResults.length > 0) {
+    return {
+      type: 'search',
+      data: searchResults.slice(0, 5),
+      message: `Found ${searchResults.length} vehicles matching "${query}":`
+    };
+  }
+  
+  return {
+    type: 'error',
+    data: null,
+    message: "I couldn't understand your query. Try asking about specific vehicles, comparisons, or recommendations."
+  };
 };
 
 // Battle Pass Data Structure
@@ -6845,7 +7046,7 @@ const MwtVehicleStats = () => {
   const [compare, setCompare] = useState<string[]>([])
   const [expandedVehicle, setExpandedVehicle] = useState("")
   const [chatOpen, setChatOpen] = useState(false)
-  const [chatMessages, setChatMessages] = useState<{ role: string; content: string }[]>([])
+  const [chatMessages, setChatMessages] = useState<{ role: string; content: string; data?: any; type?: string }[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [chatInput, setChatInput] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
@@ -6883,6 +7084,59 @@ const MwtVehicleStats = () => {
   // Battle Pass state
   const [battlePassOpen, setBattlePassOpen] = useState(false)
   const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
+
+  // Enhanced chatbot handler
+  const handleChatSubmit = async () => {
+    if (!chatInput.trim()) return;
+    
+    const userMessage = { role: 'user', content: chatInput };
+    setChatMessages(prev => [...prev, userMessage]);
+    setChatInput('');
+    setIsLoading(true);
+    
+    try {
+      // Process the natural language query
+      const result = processNaturalQuery(chatInput, VEHICLES);
+      
+      let botResponse;
+      
+      switch (result.type) {
+        case 'comparison':
+          botResponse = {
+            role: 'bot',
+            content: result.message,
+            data: result.data,
+            type: 'comparison'
+          };
+          break;
+          
+        case 'recommendation':
+        case 'search':
+          botResponse = {
+            role: 'bot',
+            content: result.message,
+            data: result.data,
+            type: result.type
+          };
+          break;
+          
+        default:
+          botResponse = {
+            role: 'bot',
+            content: result.message
+          };
+      }
+      
+      setChatMessages(prev => [...prev, botResponse]);
+    } catch (error) {
+      setChatMessages(prev => [...prev, {
+        role: 'bot',
+        content: 'Sorry, I encountered an error processing your request. Please try again.'
+      }]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const types = [...new Set(VEHICLES.map((v) => v.type))]
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
@@ -7043,220 +7297,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     setExpandedVehicle(expandedVehicle === id ? "" : id)
   }
 
-  // Advanced Fuzzy Search Implementation
-  const fuzzySearch = (query: string, vehicles = VEHICLES) => {
-    const normalizeText = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, '')
-    const queryNorm = normalizeText(query)
-    
-    return vehicles
-      .map(vehicle => {
-        const nameNorm = normalizeText(vehicle.name)
-        const typeNorm = normalizeText(vehicle.type)
-        const factionNorm = normalizeText(vehicle.faction)
-        
-        // Calculate similarity scores
-        let score = 0
-        
-        // Exact match bonus
-        if (nameNorm === queryNorm) score += 100
-        else if (nameNorm.includes(queryNorm)) score += 80
-        else if (queryNorm.includes(nameNorm)) score += 70
-        
-        // Partial matches
-        const queryWords = query.toLowerCase().split(/\s+/)
-        const nameWords = vehicle.name.toLowerCase().split(/\s+/)
-        
-        queryWords.forEach(qWord => {
-          nameWords.forEach(nWord => {
-            if (nWord.includes(qWord) || qWord.includes(nWord)) {
-              score += Math.min(qWord.length, nWord.length) * 5
-            }
-          })
-        })
-        
-        // Type and faction matches
-        if (typeNorm.includes(queryNorm) || queryNorm.includes(typeNorm)) score += 30
-        if (factionNorm.includes(queryNorm) || queryNorm.includes(factionNorm)) score += 25
-        
-        // Levenshtein distance for typos
-        const distance = levenshteinDistance(queryNorm, nameNorm)
-        if (distance <= 3) score += (10 - distance * 2)
-        
-        return { vehicle, score }
-      })
-      .filter(item => item.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .map(item => item.vehicle)
-  }
-  
-  // Levenshtein distance for typo tolerance
-  const levenshteinDistance = (str1: string, str2: string): number => {
-    const matrix = Array(str2.length + 1).fill(null).map(() => Array(str1.length + 1).fill(null))
-    
-    for (let i = 0; i <= str1.length; i++) matrix[0][i] = i
-    for (let j = 0; j <= str2.length; j++) matrix[j][0] = j
-    
-    for (let j = 1; j <= str2.length; j++) {
-      for (let i = 1; i <= str1.length; i++) {
-        const indicator = str1[i - 1] === str2[j - 1] ? 0 : 1
-        matrix[j][i] = Math.min(
-          matrix[j][i - 1] + 1,
-          matrix[j - 1][i] + 1,
-          matrix[j - 1][i - 1] + indicator
-        )
-      }
-    }
-    
-    return matrix[str2.length][str1.length]
-  }
-  
-  // Performance calculation for recommendations
-  const calculatePerformanceScore = (vehicle: any): number => {
-    let score = 0
-    const stats = vehicle.stats
-    
-    // Base stats scoring
-    score += (stats.health || 0) / 1000
-    score += (stats.speed || stats.cruiseSpeed || stats.afterburnerSpeed || 0) / 100
-    score += (stats.armor || 0) * 2
-    score += (stats.agility || 0) * 1.5
-    
-    // Weapon effectiveness
-    if (vehicle.weapons?.length) {
-      const avgDamage = vehicle.weapons.reduce((sum: number, w: any) => sum + (w.damage || 0), 0) / vehicle.weapons.length
-      const avgPen = vehicle.weapons.reduce((sum: number, w: any) => sum + (w.penetration || 0), 0) / vehicle.weapons.length
-      score += avgDamage / 100 + avgPen / 10
-    }
-    
-    // Tier bonus (higher tier = better tech)
-    const tierNum = typeof vehicle.tier === 'string' ? 
-      vehicle.tier.length : // Roman numerals by length
-      vehicle.tier
-    score += tierNum * 10
-    
-    return Math.round(score)
-  }
-  
-  // Vehicle comparison logic
-  const compareVehicles = (vehicle1: any, vehicle2: any) => {
-    const comparison = {
-      health: {
-        v1: vehicle1.stats.health || 0,
-        v2: vehicle2.stats.health || 0,
-        winner: ''
-      },
-      speed: {
-        v1: vehicle1.stats.speed || vehicle1.stats.cruiseSpeed || vehicle1.stats.afterburnerSpeed || 0,
-        v2: vehicle2.stats.speed || vehicle2.stats.cruiseSpeed || vehicle2.stats.afterburnerSpeed || 0,
-        winner: ''
-      },
-      armor: {
-        v1: vehicle1.stats.armor || 0,
-        v2: vehicle2.stats.armor || 0,
-        winner: ''
-      },
-      agility: {
-        v1: vehicle1.stats.agility || 0,
-        v2: vehicle2.stats.agility || 0,
-        winner: ''
-      },
-      firepower: {
-        v1: vehicle1.weapons?.reduce((sum: number, w: any) => sum + (w.damage || 0), 0) || 0,
-        v2: vehicle2.weapons?.reduce((sum: number, w: any) => sum + (w.damage || 0), 0) || 0,
-        winner: ''
-      }
-    }
-    
-    // Determine winners for each category
-    Object.keys(comparison).forEach(key => {
-      const cat = comparison[key as keyof typeof comparison]
-      if (cat.v1 > cat.v2) cat.winner = vehicle1.name
-      else if (cat.v2 > cat.v1) cat.winner = vehicle2.name
-      else cat.winner = 'Tie'
-    })
-    
-    return comparison
-  }
-
-  // Conversational AI response formatting
-  const formatVehicleCard = (vehicle: any, context = "", showFullDetails = false) => {
-    const maxSpeed = vehicle.stats.afterburnerSpeed || vehicle.stats.speed || 0
-    const keyStrengths: string[] = []
-    
-    // Determine key strengths
-    if (vehicle.stats.health > 25000) keyStrengths.push('High Durability')
-    if (maxSpeed > 500) keyStrengths.push('High Speed')
-    if (vehicle.stats.armor && vehicle.stats.armor > 100) keyStrengths.push('Heavy Armor')
-    if (vehicle.stats.agility && vehicle.stats.agility > 80) keyStrengths.push('High Agility')
-    if (vehicle.weapons && vehicle.weapons.length > 6) keyStrengths.push('Versatile Arsenal')
-    
-    let response = `**${vehicle.name}** | ${vehicle.faction} ${vehicle.type}\n`
-    response += `Tier ${formatTier(vehicle.tier)} • ${keyStrengths.join(' • ') || 'Balanced Platform'}\n\n`
-    
-    if (context) response += `${context}\n\n`
-    
-    // Key stats in conversational format
-    response += `**Key Specs:** ${vehicle.stats.health.toLocaleString()} HP`
-    if (maxSpeed > 0) response += ` • ${maxSpeed} km/h max speed`
-    if (vehicle.stats.armor) response += ` • ${vehicle.stats.armor} armor`
-    response += `\n\n`
-    
-    response += `**Role Analysis:** ${vehicle.description}\n`
-    
-    if (showFullDetails) {
-      response += `\n**Primary Weapons:**\n`
-      response += vehicle.weapons.slice(0, 3)
-        .map((w: any) => `• ${w.name} (${w.damage} DMG)`)
-        .join('\n')
-      if (vehicle.weapons.length > 3) {
-        response += `\n*...and ${vehicle.weapons.length - 3} more weapons*`
-      }
-    }
-    
-    return response
-  }
-  
-  // Comparison table formatter
-  const formatComparison = (v1: any, v2: any) => {
-    const comparison = compareVehicles(v1, v2)
-    
-    let response = `**${v1.name} vs ${v2.name}**\n\n`
-    response += `| Aspect | ${v1.name} | ${v2.name} | Winner |\n`
-    response += `|--------|----------|----------|---------|\n`
-    response += `| Health | ${comparison.health.v1.toLocaleString()} | ${comparison.health.v2.toLocaleString()} | **${comparison.health.winner}** |\n`
-    response += `| Speed | ${comparison.speed.v1} km/h | ${comparison.speed.v2} km/h | **${comparison.speed.winner}** |\n`
-    response += `| Armor | ${comparison.armor.v1} | ${comparison.armor.v2} | **${comparison.armor.winner}** |\n`
-    response += `| Agility | ${comparison.agility.v1} | ${comparison.agility.v2} | **${comparison.agility.winner}** |\n`
-    response += `| Firepower | ${comparison.firepower.v1.toLocaleString()} | ${comparison.firepower.v2.toLocaleString()} | **${comparison.firepower.winner}** |\n\n`
-    
-    // AI reasoning
-    const v1Score = calculatePerformanceScore(v1)
-    const v2Score = calculatePerformanceScore(v2)
-    const winner = v1Score > v2Score ? v1.name : v2Score > v1Score ? v2.name : 'Both'
-    
-    response += `**My Assessment:** `
-    if (winner !== 'Both') {
-      response += `I'd recommend the **${winner}** for most scenarios. `
-      if (winner === v1.name) {
-        response += `It has ${v1Score - v2Score} more performance points, mainly due to `
-      } else {
-        response += `It has ${v2Score - v1Score} more performance points, mainly due to `
-      }
-      
-      const advantages: string[] = []
-      if (comparison.health.winner === winner) advantages.push('superior durability')
-      if (comparison.speed.winner === winner) advantages.push('better mobility')
-      if (comparison.armor.winner === winner) advantages.push('better armor')
-      if (comparison.agility.winner === winner) advantages.push('better agility')
-      if (comparison.firepower.winner === winner) advantages.push('stronger firepower')
-      
-      response += advantages.join(' and ') + '.'
-    } else {
-      response += `Both vehicles are equally matched (${v1Score} pts each). Choose based on your preferred playstyle.`
-    }
-    
-    return response
-  }
 
     setTimeout(() => {
       const response = getVehicleInfo(chatInput)
@@ -8054,17 +8094,84 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             <div className="h-64 overflow-y-auto p-4 space-y-3">
               {chatMessages.map((msg, index) => (
                 <div key={index} className={`${msg.role === "user" ? "text-right" : "text-left"}`}>
-                  <div className="text-xs text-slate-400 mb-1">{msg.role === "user" ? "You:" : "Database:"}</div>
+                  <div className="text-xs text-slate-400 mb-1">{msg.role === "user" ? "You:" : "AI Assistant:"}</div>
                   <div
-                    className={`inline-block p-2 rounded-lg text-sm ${
+                    className={`inline-block p-2 rounded-lg text-sm max-w-[280px] ${
                       msg.role === "user" ? "bg-cyan-600 text-white" : "bg-slate-800 text-slate-200"
                     }`}
                   >
                     {msg.content}
+                    
+                    {/* Enhanced message rendering based on type */}
+                    {msg.type === 'comparison' && msg.data && (
+                      <div className="mt-3 space-y-3">
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          <div className="bg-slate-700 p-2 rounded">
+                            <div className="font-semibold text-cyan-300">{msg.data.vehicle1.name}</div>
+                            <div className="text-slate-300">{msg.data.vehicle1.faction} {msg.data.vehicle1.type}</div>
+                            <div className="text-slate-400">Tier {formatTier(msg.data.vehicle1.tier)}</div>
+                            <div className="mt-1 space-y-1">
+                              {Object.entries(msg.data.vehicle1.stats).map(([key, value]) => (
+                                <div key={key} className="flex justify-between">
+                                  <span className="capitalize">{key}:</span>
+                                  <span className="text-cyan-300">{value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="bg-slate-700 p-2 rounded">
+                            <div className="font-semibold text-cyan-300">{msg.data.vehicle2.name}</div>
+                            <div className="text-slate-300">{msg.data.vehicle2.faction} {msg.data.vehicle2.type}</div>
+                            <div className="text-slate-400">Tier {formatTier(msg.data.vehicle2.tier)}</div>
+                            <div className="mt-1 space-y-1">
+                              {Object.entries(msg.data.vehicle2.stats).map(([key, value]) => (
+                                <div key={key} className="flex justify-between">
+                                  <span className="capitalize">{key}:</span>
+                                  <span className="text-cyan-300">{value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {(msg.type === 'recommendation' || msg.type === 'search') && msg.data && (
+                      <div className="mt-3 space-y-2">
+                        {msg.data.slice(0, 3).map((vehicle: any, vIndex: number) => (
+                          <div key={vIndex} className="bg-slate-700 p-2 rounded text-xs">
+                            <div className="flex items-center justify-between mb-1">
+                              <div className="font-semibold text-cyan-300">{vehicle.name}</div>
+                              {vehicle.performanceScore && (
+                                <div className="flex items-center text-yellow-400">
+                                  <Star className="w-3 h-3 mr-1" />
+                                  <span>{vehicle.performanceScore}</span>
+                                </div>
+                              )}
+                            </div>
+                            <div className="text-slate-300">{vehicle.faction} {vehicle.type}</div>
+                            <div className="text-slate-400">Tier {formatTier(vehicle.tier)}</div>
+                            <div className="mt-1 flex gap-2 text-xs">
+                              {Object.entries(vehicle.stats).slice(0, 3).map(([key, value]) => (
+                                <div key={key} className="bg-slate-600 px-1 py-0.5 rounded">
+                                  <span className="capitalize">{key}: </span>
+                                  <span className="text-cyan-300">{value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
-              {isLoading && <div className="text-center text-slate-400">Thinking...</div>}
+              {isLoading && (
+                <div className="text-center text-slate-400 flex items-center justify-center gap-2">
+                  <Bot className="w-4 h-4 animate-pulse" />
+                  <span>Analyzing vehicles...</span>
+                </div>
+              )}
             </div>
 
             <div className="p-4 border-t border-slate-700">
@@ -8074,7 +8181,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   onKeyPress={(e) => e.key === "Enter" && handleChatSubmit()}
-                  placeholder="Ask about vehicles..."
+                  placeholder="Try: 'Compare Abrams vs T-90A' or 'Best Chinese MBT'"
                   className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded text-sm focus:ring-2 focus:ring-cyan-500"
                 />
                 <button
