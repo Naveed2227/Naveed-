@@ -674,7 +674,8 @@ const VEHICLES = [
     image: "T-14-Armata.jpg",
     stats: { health: 38900, speed: 70, reverseSpeed: 70, armor: "1200mm", agility: 34 },
     weapons: [
-      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "3BM69 Vacuum-1", type: "Main Gun", damage: 10670, penetration: 900 },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 920 },
       { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 },
       { name: "3BK21", type: "Main Gun", damage: 10250, penetration: 800 }
 
@@ -973,7 +974,9 @@ const VEHICLES = [
     stats: { health: 38100, speed: 75, armor: "1400mm", agility: 30 },
     weapons: [
       { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 1000 },
-      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1200 }
+      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1200 },
+      { name: "LEAD1", type: "Main Gun", damage: 10800, penetration: 850 }
+
     ],
     modules: {
       engine: [
@@ -1100,9 +1103,10 @@ const VEHICLES = [
     description: "Heavily armored main battle tank with unique rear-engine design and crew survivability focus.",
     stats: { health: 42500, speed: 64, armor: "1050mm", agility: 38 },
     weapons: [
-      { name: "IMI 120mm", type: "Main Gun", damage: 14800, penetration: 800 },
-      { name: "Spike NLOS", type: "Anti-Tank Missile", damage: 17200, penetration: 1150 },
-      { name: "M2HB 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "550 rpm" },
+      { name: "M322", type: "Main Gun", damage: 9900, penetration: 589 },
+      { name: "M338", type: "Main Gun", damage: 10000, penetration: 620 },
+      { name: "M339", type: "Main Gun", damage: 12800, penetration: 85 },
+      { name: "M325", type: "Main Gun", damage: 10200, penetration: 480 }
     ],
     modules: {
       engine: [
@@ -1135,6 +1139,7 @@ const VEHICLES = [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
+      { name: "M929", type: "Main Gun", damage: 550, penetration: 189 }
 
     ],
     modules: {
@@ -1396,7 +1401,8 @@ const VEHICLES = [
     weapons: [
       { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
       { name: "DM23", type: "Main Gun", damage: 8911, penetration: 337 },
-      { name: "DM33", type: "Main Gun", damage: 10620, penetration: 496 }
+      { name: "DM33", type: "Main Gun", damage: 10620, penetration: 496 },
+      { name: "DM63", type: "Main Gun", damage: 11760, penetration: 810 }
     ],
     modules: {
       engine: [
@@ -1601,7 +1607,8 @@ const VEHICLES = [
     "weapons": [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
-      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 }
+      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
+      { name: "M929", type: "Main Gun", damage: 550, penetration: 189 }
     ],
     "modules": {
       "engine": [
@@ -1640,7 +1647,9 @@ const VEHICLES = [
     },
     "weapons": [
       { name: "PMC287", type: "Main Gun", damage: 970, penetration: 195 },
-      { name: "PMC308", type: "Main Gun", damage: 300, penetration: 55 }
+      { name: "PMC308", type: "Main Gun", damage: 300, penetration: 55 },
+      { name: "MK246", type: "Main Gun", damage: 870, penetration: 117 },
+      { name: "MK266", type: "Main Gun", damage: 500, penetration: 55 },
     ],
     "modules": {
       "engine": [
@@ -1760,27 +1769,8 @@ const VEHICLES = [
     "agility": 55
   },
   "weapons": [
-    {
-      "name": "M3P 30mm Autocannon",
-      "type": "Autocannon",
-      "damage": 300,
-      "penetration": 80,
-      "rateOfFire": "850 rpm",
-      "ammo": 500,
-      "ammoInMagazine": 100,
-      "range": 1500
-    },
-    {
-      "name": "FIM-92 Stinger",
-      "type": "Surface-to-Air Missile",
-      "damage": 9000,
-      "penetration": 1000,
-      "reload": 10,
-      "ammo": 4,
-      "ammoInMagazine": 1,
-      "range": 3000,
-      "lockOnTime": "2 s"
-    }
+    { name: "M789", type: "Main Gun", damage: 633, penetration: 120 },
+ { name: "M799", type: "Main Gun", damage: 743, penetration: 60 }
   ],
   "modules": {
     "engine": [
@@ -1897,16 +1887,10 @@ const VEHICLES = [
     "agility": 30
   },
   "weapons": [
-    {
-      "name": "155mm Howitzer",
-      "type": "Artillery",
-      "damage": 14000,
-      "penetration": 100,
-      "reload": 20,
-      "ammo": 40,
-      "ammoInMagazine": 5,
-      "range": 4000
-    }
+    { name: "BEE17A/155", type: "Main Gun", damage: 16875, penetration: 135 },
+    { name: "GP155A", type: "Main Gun", damage: 11250, penetration: 200 },
+    { name: "GP155B", type: "Main Gun", damage: 10625, penetration: 250 },
+    { name: "GP155E", type: "Main Gun", damage: 10250, penetration: 400 }
   ],
   "modules": {
     "engine": [
@@ -1944,16 +1928,8 @@ const VEHICLES = [
     "agility": 28
   },
   "weapons": [
-    {
-      "name": "155mm Howitzer",
-      "type": "Artillery",
-      "damage": 13500,
-      "penetration": 100,
-      "reload": 18,
-      "ammo": 40,
-      "ammoInMagazine": 5,
-      "range": 4000
-    }
+    { name: "M107", type: "Main Gun", damage: 7200, penetration: 112 }
+
   ],
   "modules": {
     "engine": [
@@ -1992,27 +1968,8 @@ const VEHICLES = [
     "agility": 75
   },
   "weapons": [
-    {
-      "name": "Type 98 35mm Autocannon",
-      "type": "Autocannon",
-      "damage": 350,
-      "penetration": 70,
-      "rateOfFire": "1000 rpm",
-      "ammo": 500,
-      "ammoInMagazine": 100,
-      "range": 2000
-    },
-    {
-      "name": "PL-9 Missile",
-      "type": "Surface-to-Air Missile",
-      "damage": 9000,
-      "penetration": 1000,
-      "reload": 8,
-      "ammo": 8,
-      "ammoInMagazine": 2,
-      "range": 4000,
-      "lockOnTime": "2 s"
-    }
+   { name: "BZT-30", type: "Main Gun", damage: 500, penetration: 116 },
+   { name: "OZT-30", type: "Main Gun", damage: 680, penetration: 56 },
   ],
   "modules": {
     "engine": [
@@ -2054,6 +2011,87 @@ const VEHICLES = [
     { name: "BR-281SP", type: "Main Gun", damage: 1560, penetration: 147 },
     { name: "BR-281U", type: "Main Gun", damage: 1404, penetration: 156 },
     { name: "OR-281", type: "Main Gun", damage: 2106, penetration: 83 }
+
+  ],
+  "modules": {
+    "engine": [
+      { "name": "V-92S2F Diesel", "bonus": "+200 km/h speed" },
+      { "name": "V-92S2F-X Diesel", "bonus": "+400 km/h speed" },
+      { "name": "V-92S2F-Y Diesel", "bonus": "+600 km/h speed" }
+    ],
+    "armor": [
+      { "name": "Reactive Armor MK1", "bonus": "+20% armor" },
+      { "name": "Reactive Armor MK2", "bonus": "+40% armor" },
+      { "name": "Reactive Armor MK3", "bonus": "+60% armor" }
+    ],
+    "electronics": [
+      { "name": "Advanced FCS MK1", "bonus": "+20% targeting accuracy" },
+      { "name": "Advanced FCS MK2", "bonus": "+40% targeting accuracy" },
+      { "name": "Advanced FCS MK3", "bonus": "+60% targeting accuracy" }
+    ]
+  }
+},
+{
+  "id": 139,
+  "name": "ADATS",
+  "type": "Missile Carrier",
+  "faction": "American",
+  "tier": "IV",
+  image: "ADATS.jpg",
+  "description": "",
+  "stats": {
+    "health": 25500,
+    "speed": 66,
+    "reverseSpeed": 21,
+    "turretRotationSpeed": 45,
+    "hullRotationSpeed": 35,
+    "armor": 500,
+    "agility": 25
+  },
+  "weapons": [
+   { name: "PGU-32U/T", type: "Main Gun", damage: 405, penetration: 115 },
+   { name: "M791", type: "Main Gun", damage: 473, penetration: 111 },
+   { name: "M792", type: "Main Gun", damage: 608, penetration: 48 },
+   { name: "M919", type: "Main Gun", damage: 495, penetration: 140 }
+
+  ],
+  "modules": {
+    "engine": [
+      { "name": "V-92S2F Diesel", "bonus": "+200 km/h speed" },
+      { "name": "V-92S2F-X Diesel", "bonus": "+400 km/h speed" },
+      { "name": "V-92S2F-Y Diesel", "bonus": "+600 km/h speed" }
+    ],
+    "armor": [
+      { "name": "Reactive Armor MK1", "bonus": "+20% armor" },
+      { "name": "Reactive Armor MK2", "bonus": "+40% armor" },
+      { "name": "Reactive Armor MK3", "bonus": "+60% armor" }
+    ],
+    "electronics": [
+      { "name": "Advanced FCS MK1", "bonus": "+20% targeting accuracy" },
+      { "name": "Advanced FCS MK2", "bonus": "+40% targeting accuracy" },
+      { "name": "Advanced FCS MK3", "bonus": "+60% targeting accuracy" }
+    ]
+  }
+},
+{
+  "id": 140,
+  "name": "MGM-166 LOSAT",
+  "type": "Missile Carrier",
+  "faction": "American",
+  "tier": "IV",
+  image: "MGM-166.jpg",
+  "description": "",
+  "stats": {
+    "health": 29000,
+    "speed": 69,
+    "reverseSpeed": 24,
+    "turretRotationSpeed": 45,
+    "hullRotationSpeed": 35,
+    "armor": 500,
+    "agility": 41
+  },
+  "weapons": [
+   
 
   ],
   "modules": {
