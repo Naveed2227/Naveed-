@@ -197,7 +197,7 @@ const VEHICLES = [
     tier: "IV",
     image: "F-22-Raptor.jpg",
     description: "Air superiority fighter with unmatched stealth and supercruise capabilities.",
-    stats: { health: 25100, speed: 770, afterburnerSpeed: 2170, agility: 88 },
+    stats: { health: 25100, speed: 770, afterburnerSpeed: 2170, agility: 40 },
     weapons: [
      { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
       { "name": "GBU-39", "type": "Guided Bomb", "damage": 14700, "penetration": 120, "reload": 28 },
@@ -236,7 +236,7 @@ const VEHICLES = [
     image: "J-20-Mighty-Dragon.jpg",
     description: "Long-range stealth fighter designed for air superiority and strike missions.",
     image: "J-20-Mighty-Dragon.jpg",
-    stats: { health: 21200, speed: 694, afterburnerSpeed: 1803, agility: 78 },
+    stats: { health: 21200, speed: 848, afterburnerSpeed: 2200, agility: 52},
     weapons: [
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
       { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
@@ -364,7 +364,7 @@ const VEHICLES = [
     tier: "IV",
     image: "J-35A.jpg",
     description: "Fifth-generation stealth fighter with advanced sensor fusion and networking capabilities.",
-    stats: { health: 22600, speed: 762, afterburnerSpeed: 2199, agility: 82 },
+    stats: { health: 22600, speed: 780, afterburnerSpeed: 2250, agility: 48 },
     weapons: [
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
       { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
@@ -515,7 +515,7 @@ const VEHICLES = [
   tier: "IV",
   image: "F-35B-Lightning-II.jpg",
   description: "Fifth-generation stealth multirole fighter with STOVL capability.",
-  stats: { health: 23000, speed: 740, afterburnerSpeed: 2000, agility: 82 },
+  stats: { health: 20200, speed: 770, afterburnerSpeed: 1780, agility: 38 },
   weapons: [
      { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
       { "name": "GBU-31", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
@@ -636,7 +636,7 @@ const VEHICLES = [
   tier: "IV",
   image: "Su-75-Checkmate.jpg",
   description: "Light stealth fighter designed for export and versatile combat missions.",
-  stats: { health: 22000, speed: 755, afterburnerSpeed: 2100, agility: 85 },
+  stats: { health: 18900, speed: 900, afterburnerSpeed: 2310, agility: 60 },
   weapons: [
     
     { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
@@ -2432,7 +2432,7 @@ const VEHICLES = [
   tier: "III",
   image: "FA-18F-Super-Hornet.jpg",
   description: "Twin-engine carrier-based multirole fighter with excellent versatility for both air-to-air and air-to-ground combat.",
-  stats: { health: 19800, speed: 770, afterburnerSpeed: 1985, agility: 46 },
+  stats: { health: 18100, speed: 810, afterburnerSpeed: 1730, agility: 41 },
   weapons: [
     { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
       { "name": "GBU-12", "type": "Guided Bomb", "damage": 18590, "penetration": 120, "reload": 30 },
@@ -2466,7 +2466,7 @@ const VEHICLES = [
   tier: "III",
   image: "J16.jpg",
   description: "Chinese twin-seat multirole fighter derived from Su-30, capable of carrying heavy weapons payload.",
-  stats: { health: 21000, speed: 780, afterburnerSpeed: 2050, agility: 48 },
+  stats: { health: 21300, speed: 790, afterburnerSpeed: 2050, agility: 43 },
   weapons: [
     { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
       { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
@@ -2502,7 +2502,7 @@ const VEHICLES = [
   tier: "III",
   image: "Su-37-Terminator.jpg",
   description: "Experimental Russian fighter with thrust-vectoring for extreme maneuverability.",
-  stats: { health: 20500, speed: 765, afterburnerSpeed: 2020, agility: 82 },
+  stats: { health: 21700, speed: 800, afterburnerSpeed: 2250, agility: 48 },
   weapons: [
     { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
       { "name": "FAB-250", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
@@ -2540,7 +2540,7 @@ const VEHICLES = [
   tier: "III",
   image: "Su-25UB.jpg",
   description: "Twin-seat variant of the Su-25, specialized for ground attack with heavy armor.",
-  stats: { health: 24500, speed: 720, afterburnerSpeed: 1680, agility: 28 },
+  stats: { health: 20300, speed: 750, afterburnerSpeed: 860, agility: 32 },
   weapons: [
     { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
       { "name": "FAB-250", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
@@ -2643,7 +2643,7 @@ const VEHICLES = [
   tier: "III",
   image: "MiG-35.jpg",
   description: "Advanced MiG fighter with modern avionics, thrust-vectoring, and strong multirole performance.",
-  stats: { health: 20200, speed: 775, afterburnerSpeed: 2060, agility: 52 },
+  stats: { health: 18400, speed: 800, afterburnerSpeed: 2250, agility: 43 },
   weapons: [
     { name: "KAB-250", type: "Guided Bomb", damage: 14900, penetration: 130, reload: 25 },
     { name: "FAB-500", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
@@ -2682,7 +2682,7 @@ const VEHICLES = [
   tier: "III",
   image: "F-15EX-Eagle-II.jpg",
   description: "Latest advanced variant of the F-15 with modern avionics and expanded weapons payload.",
-  stats: { health: 23000, speed: 800, afterburnerSpeed: 2100, agility: 58 },
+  stats: { health: 19800, speed: 780, afterburnerSpeed: 2390, agility: 43 },
   weapons: [
     { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
     { name: "GBU-31", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
@@ -2756,7 +2756,7 @@ const VEHICLES = [
     tier: "III",
     image: "A-10A-Thunderbolt.jpg",
     description: "Close air support aircraft designed around the GAU-8 Avenger cannon.",
-    stats: { health: 28500, speed: 560, afterburnerSpeed: 706, agility: 55 },
+    stats: { health: 27600, speed: 560, afterburnerSpeed: 760, agility: 48 },
     weapons: [
      { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
     { name: "MK-84", type: "General-Purpose Bomb", damage: 19400, penetration: 360, reload: 40 },
@@ -4135,7 +4135,7 @@ const VEHICLES = [
     description:
       "Vertical/Short Takeoff and Landing (V/STOL) attack aircraft with excellent ground support capabilities.",
     image: "AV-8B-Harrier.jpg",
-    stats: { health: 18500, speed: 662, afterburnerSpeed: 1085, agility: 78 },
+    stats: { health: 18600, speed: 700, afterburnerSpeed: 960, agility: 34 },
     weapons: [
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
     { name: "LAU-10 x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
@@ -4208,7 +4208,7 @@ const VEHICLES = [
     tier: "II",
     description: "Twin-engine, variable-sweep wing fighter designed for fleet defense and air superiority.",
     image: "F-14D-Super-Tomcat.jpg",
-    stats: { health: 22800, speed: 913, afterburnerSpeed: 2485, agility: 72 },
+    stats: { health: 21400, speed: 600, afterburnerSpeed: 2240, agility: 52 },
     weapons: [
        { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
     { name: "GBU-31", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
@@ -4244,7 +4244,7 @@ const VEHICLES = [
     tier: "II",
     description: "Single-engine, multirole fighter with delta wing configuration and advanced avionics.",
     image: "J-10-Chengdu.jpg",
-    stats: { health: 19500, speed: 1200, afterburnerSpeed: 2120, agility: 82 },
+    stats: { health: 19900, speed: 820, afterburnerSpeed: 1990, agility: 49 },
     weapons: [
      { name: "Type 2(100)", type: "Bomb", damage: 14000, penetration: 110, reload: 30 },
     { name: "Type 90", type: "Short-Range AAM", damage: 6400, penetration: 320, reload: 40 },
@@ -4282,7 +4282,7 @@ const VEHICLES = [
     tier: "II",
     image: "MiG-31BM-Foxhound.jpg",
     description: "High-speed interceptor designed for long-range air defense missions.",
-    stats: { health: 26500, speed: 1500, afterburnerSpeed: 3000, agility: 65 },
+    stats: { health: 19700, speed: 790, afterburnerSpeed: 2700, agility: 37 },
     weapons: [
       { name: "KAB-250", type: "Guided Bomb", damage: 14900, penetration: 130, reload: 25 },
     { name: "FAB-500", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
@@ -4320,7 +4320,7 @@ const VEHICLES = [
     tier: "II",
     image: "Q-5A-Nanchang.jpg",
     description: "Ground attack aircraft derived from the MiG-19, optimized for close air support.",
-    stats: { health: 16800, speed: 1190, afterburnerSpeed: 1540, agility: 75 },
+    stats: { health: 16200, speed: 780, afterburnerSpeed: 1090, agility: 47 },
     weapons: [
      { name: "Type 2(100)", type: "Bomb", damage: 14000, penetration: 110, reload: 30 },
     { name: "Type 90", type: "Short-Range AAM", damage: 6400, penetration: 320, reload: 40 },
@@ -4397,7 +4397,7 @@ const VEHICLES = [
     tier: "II",
     description: "Legendary multi-role fighter with proven combat record and versatile weapon systems.",
     image: "F-4E-Phantom.jpg",
-    stats: { health: 19800, speed: 1472, afterburnerSpeed: 2370, agility: 68 },
+    stats: { health: 19300, speed: 790, afterburnerSpeed: 1910, agility: 35 },
     weapons: [
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
     { name: "LAU-10 x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
