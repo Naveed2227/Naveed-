@@ -3693,7 +3693,7 @@ const VEHICLES = [
     "type": "Light Tank",
     "faction": "Chinese",
     "tier": "III",
-    image: "ZBL-08.jpg",
+    image: "ZBL-08.jpg.png",
     "description": "Wheeled armored personnel carrier with good mobility, moderate armor, versatile weapon options.",
     "stats": { "health": 26900, "speed": 111, "armor": "40mm", "agility": 64 },
     "weapons": [
