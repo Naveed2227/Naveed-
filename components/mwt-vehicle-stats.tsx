@@ -712,7 +712,9 @@ const VEHICLES = [
       { name: "M829A3", type: "Main Gun", damage: 10450, penetration: 670 },
       { name: "MRM-KE", type: "Main Gun", damage: 9150, penetration: 980 },
       { name: "MRM-CE", type: "Main Gun", damage: 10000, penetration: 850 },
-      { name: "M830", type: "Main Gun", damage: 10930, penetration: 800 }
+      { name: "M830", type: "Main Gun", damage: 10930, penetration: 800 },
+      { name: "Stinger Launcher", type: "Missile", damage: 6110, penetration: 35, reload: 10 },
+      { name: "SwitchBlade 300", type: "Missile", damage: 5700, penetration: 190, reload: 12.4 }
     ],
     modules: {
       engine: [
@@ -842,7 +844,8 @@ const VEHICLES = [
       { name: "DM-11-1", type: "Main Gun", damage: 14850, penetration: 135 },
       { name: "DM-12-1", type: "Main Gun", damage: 12650, penetration: 800 },
       { name: "DM-33-1", type: "Main Gun", damage: 11500, penetration: 596 },
-      { name: "DM-73-1", type: "Main Gun", damage: 12100, penetration: 980 }
+      { name: "DM-73-1", type: "Main Gun", damage: 12100, penetration: 980 },
+      { name: "Hero 120", type: "Missile", damage: 8075, penetration: 440, reload: 13.5 }
     ],
     modules: {
       engine: [
@@ -975,7 +978,9 @@ const VEHICLES = [
     weapons: [
       { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 1000 },
       { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1200 },
-      { name: "LEAD1", type: "Main Gun", damage: 10800, penetration: 850 }
+      { name: "LEAD1", type: "Main Gun", damage: 10800, penetration: 850 },
+      { name: "VOG-17M", type: "Missile", damage: 2400, penetration: 60, reload: 1.7 },
+      { name: "VOG-30", type: "Missile", damage: 2700, penetration: 76, reload: 1.7 }
 
     ],
     modules: {
@@ -1139,7 +1144,8 @@ const VEHICLES = [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
-      { name: "M929", type: "Main Gun", damage: 550, penetration: 189 }
+      { name: "M929", type: "Main Gun", damage: 550, penetration: 189 },
+      { name: "9M120 Ataka", type: "Missile", damage: 9500, penetration: 750, reload: 6 }
 
     ],
     modules: {
@@ -1170,8 +1176,11 @@ const VEHICLES = [
     description: "Guided multiple launch rocket system with precision strike capability.",
     stats: { health: 29900, speed: 85, armor: "380mm", agility: 18 },
     weapons: [
-      { name: "SR-5 Guided Rocket", type: "Guided Rocket", damage: 20500, penetration: 750 },
-      { name: "QJC88 12.7mm", type: "Machine Gun", damage: 220, penetration: 35, rateOfFire: "600 rpm" },
+      { name: "BRE1 HE", type: "Missile", damage: 9400, penetration: 120, reload: 12 },
+      { name: "BRE7 HESH", type: "Missile", damage: 10100, penetration: 280, reload: 12 },
+      { name: "GR70 HE", type: "Missile", damage: 11100, penetration: 140, reload: 20 },
+      { name: "GR1 HESH", type: "Missile", damage: 13000, penetration: 200, reload: 20 },
+      { name: "Dragon Drone", type: "Missile", damage: 12350, penetration: 800, reload: 20 }
     ],
     modules: {
       engine: [
@@ -1236,7 +1245,8 @@ const VEHICLES = [
     weapons: [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
-      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 }
+      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
+      { name: "AAM 57E6M", type: "Missile", damage: 8910, penetration: 95, reload: 18 }
     ],
     modules: {
       engine: [
@@ -1608,7 +1618,9 @@ const VEHICLES = [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
-      { name: "M929", type: "Main Gun", damage: 550, penetration: 189 }
+      { name: "M929", type: "Main Gun", damage: 550, penetration: 189 },
+      { name: "VOG-17M", type: "Missile", damage: 2400, penetration: 60, reload: 1.7 },
+      { name: "VOG-30", type: "Missile", damage: 2700, penetration: 76, reload: 1.7 }
     ],
     "modules": {
       "engine": [
@@ -1650,6 +1662,7 @@ const VEHICLES = [
       { name: "PMC308", type: "Main Gun", damage: 300, penetration: 55 },
       { name: "MK246", type: "Main Gun", damage: 870, penetration: 117 },
       { name: "MK266", type: "Main Gun", damage: 500, penetration: 55 },
+      { name: "SPIKE-LR II", type: "Missile", damage: 9830, penetration: 750, reload: 10 }
     ],
     "modules": {
       "engine": [
@@ -1690,7 +1703,8 @@ const VEHICLES = [
       { name: "M392A2", type: "Main Gun", damage: 8510, penetration: 372 },
       { name: "M393A2", type: "Main Gun", damage: 10090, penetration: 127 },
       { name: "M456A2", type: "Main Gun", damage: 9320, penetration: 400 },
-      { name: "M900", type: "Main Gun", damage: 8910, penetration: 522 }
+      { name: "M900", type: "Main Gun", damage: 8910, penetration: 522 },
+      { name: "SwitchBlade 300", type: "Missile", damage: 5700, penetration: 190, reload: 12.4 }
     ],
     "modules": {
       "engine": [
@@ -1770,7 +1784,9 @@ const VEHICLES = [
   },
   "weapons": [
     { name: "M789", type: "Main Gun", damage: 633, penetration: 120 },
- { name: "M799", type: "Main Gun", damage: 743, penetration: 60 }
+ { name: "M799", type: "Main Gun", damage: 743, penetration: 60 },
+ { name: "Stinger Launcher", type: "Missile", damage: 6110, penetration: 35, reload: 10 },
+ { name: "AGM-114 Hellfire", type: "Missile", damage: 11700, penetration: 950, reload: 10 }
   ],
   "modules": {
     "engine": [
@@ -1808,16 +1824,8 @@ const VEHICLES = [
     "agility": 44
   },
   "weapons": [
-    {
-      "name": "Thermobaric Rockets",
-      "type": "Rocket Launcher",
-      "damage": 12000,
-      "penetration": 200,
-      "reload": 20,
-      "ammo": 24,
-      "ammoInMagazine": 12,
-      "range": 3500
-    }
+    { name: "M0.1.01.04 TBC", type: "Missile", damage: 4500, penetration: 260, reload: 24 },
+    { name: "M0.1.01.04M INC", type: "Missile", damage: 10500, penetration: 85, reload: 24 }
   ],
   "modules": {
     "engine": [
@@ -1847,9 +1855,11 @@ const VEHICLES = [
     description: "Multiple Launch Rocket System capable of delivering devastating area bombardment.",
     stats: { health: 31400, speed: 72, armor: "450mm", agility: 26 },
     weapons: [
-      { name: "M31 GMLRS", type: "Guided Rocket", damage: 22000, penetration: 800 },
-      { name: "ATACMS", type: "Tactical Missile", damage: 35000, penetration: 1200 },
-      { name: "M240 7.62mm", type: "Machine Gun", damage: 140, penetration: 18, rateOfFire: "750 rpm" },
+      { name: "M31", type: "Guided Rocket", damage: 18225, penetration: 165, reload: 15.7 },
+      { name: "M31", type: "Guided Rocket", damage: 15525, penetration: 400, reload: 15.7},
+      { name: "G-MLRS-ER", type: "Guided Rocket", damage: 16200, penetration: 250, reload: 15.7 },
+      { name: "ATACMS Block I", type: "Missile", damage: 20500, penetration: 200, reload: 20 },
+     { name: "ATACMS Block II", type: "Missile", damage: 21250, penetration: 600, reload: 20 }
     ],
     modules: {
       engine: [
@@ -1970,6 +1980,7 @@ const VEHICLES = [
   "weapons": [
    { name: "BZT-30", type: "Main Gun", damage: 500, penetration: 116 },
    { name: "OZT-30", type: "Main Gun", damage: 680, penetration: 56 },
+   { name: "FK-2000", type: "Missile", damage: 9720, penetration: 102, reload: 25 }
   ],
   "modules": {
     "engine": [
@@ -2010,7 +2021,8 @@ const VEHICLES = [
   "weapons": [
     { name: "BR-281SP", type: "Main Gun", damage: 1560, penetration: 147 },
     { name: "BR-281U", type: "Main Gun", damage: 1404, penetration: 156 },
-    { name: "OR-281", type: "Main Gun", damage: 2106, penetration: 83 }
+    { name: "OR-281", type: "Main Gun", damage: 2106, penetration: 83 },
+    { name: "9K135 Kornet", type: "Missile", damage: 10410, penetration: 1000, reload: 8 }
 
   ],
   "modules": {
@@ -2052,7 +2064,8 @@ const VEHICLES = [
    { name: "PGU-32U/T", type: "Main Gun", damage: 405, penetration: 115 },
    { name: "M791", type: "Main Gun", damage: 473, penetration: 111 },
    { name: "M792", type: "Main Gun", damage: 608, penetration: 48 },
-   { name: "M919", type: "Main Gun", damage: 495, penetration: 140 }
+   { name: "M919", type: "Main Gun", damage: 495, penetration: 140 },
+   { name: "MIM-146", type: "Missile", damage: 11400, penetration: 750, reload: 18 }
 
   ],
   "modules": {
@@ -2091,7 +2104,7 @@ const VEHICLES = [
     "agility": 41
   },
   "weapons": [
-   
+   { name: "LOSAT MGM", type: "Missile", damage: 16562, penetration: 764, reload: 20 }
 
   ],
   "modules": {
@@ -2886,7 +2899,9 @@ const VEHICLES = [
     "stats": { "health": 37200, "speed": 65, "armor": "800mm", "agility": 30 },
     "weapons": [
       { name: "XM578E1", type: "Main Gun", damage: 10400, penetration: 285 },
-      { name: "M657A2", type: "Main Gun", damage: 13500, penetration: 138 }
+      { name: "M657A2", type: "Main Gun", damage: 13500, penetration: 138 },
+      { name: "MGM51 Shillelagh", type: "Main Gun", damage: 9500, penetration: 431 },
+      { name: "M657A2", type: "Main Gun", damage: 11300, penetration: 380 }
 
     ],
     "modules": {
@@ -3214,7 +3229,10 @@ const VEHICLES = [
     "description": "Experimental 155mm self-propelled howitzer with automatic loading.",
     "stats": { "health": 34800, "speed": 67, "armor": "200mm", "agility": 38 },
     "weapons": [
-      { name: "M982", type: "Main Gun", damage: 6600, penetration: 280 }
+      { name: "M982 HEDP", type: "Main Gun", damage: 6600, penetration: 280 },
+      { name: "M795 HE", type: "Main Gun", damage: 12700, penetration: 950 },
+      { name: "M267A2 HEAT", type: "Main Gun", damage: 8900, penetration: 135 },
+      { name: "M864 CH", type: "Main Gun", damage: 8000, penetration: 85 }
     ],
     "modules": {
       "engine": [
@@ -3307,8 +3325,7 @@ const VEHICLES = [
     "description": "Korean SPAAG with 30mm cannons and short-range SAM missiles.",
     "stats": { "health": 23100, "speed": 60, "armor": "30mm", "agility": 35 },
     "weapons": [
-      { "name": "30mm Cannon - APDS", "type": "APDS", "damage": 200, "penetration": 80, "reload": 0.1 },
-      { "name": "Cheonma SAM Missile", "type": "SAM", "damage": 1200, "penetration": 250, "reload": 5 }
+      { name: "Crotale-NG-Launcher", type: "Missile", damage: 5790, penetration: 58, reload: 12 },
     ],
     "modules": {
       "engine": [
@@ -3367,7 +3384,8 @@ const VEHICLES = [
     "weapons": [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
-      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 }
+      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "ZUR 9M311", type: "Missile", damage: 8100, penetration: 69, reload: 24 }
     ],
     "modules": {
       "engine": [
@@ -3395,7 +3413,8 @@ const VEHICLES = [
     "stats": { "health": 22000, "speed": 100, "armor": "25mm", "agility": 60 },
     "weapons": [
       { name: "30*160 APFSDS", type: "Main Gun", damage: 0, penetration: 128 },
-      { name: "30*160 HEI", type: "Main Gun", damage: 351, penetration: 60 }
+      { name: "30*160 HEI", type: "Main Gun", damage: 351, penetration: 60 },
+      { name: "FB-10A", type: "Missile", damage: 4800, penetration: 55, reload: 15 },
     ],
     "modules": {
       "engine": [
@@ -3422,9 +3441,7 @@ const VEHICLES = [
     "description": "US SPAAG with 20mm Vulcan cannon and Stinger SAM missiles.",
     "stats": { "health": 23500, "speed": 57, "armor": "30mm", "agility": 30 },
     "weapons": [
-      { "name": "20mm M61 Vulcan - APDS", "type": "APDS", "damage": 150, "penetration": 60, "reload": 0.05 },
-      { "name": "20mm M61 Vulcan - HEI", "type": "HEI", "damage": 220, "penetration": 35, "reload": 0.05 },
-      { "name": "FIM-92 Stinger", "type": "SAM", "damage": 950, "penetration": 220, "reload": 4 }
+      { name: "SAM Rokand", type: "Missile", damage: 8910, penetration: 85, reload: 6 }
     ],
     "modules": {
       "engine": [
@@ -3451,9 +3468,7 @@ const VEHICLES = [
     "description": "Chinese SPAAG equipped with 30mm autocannons and HJ-10 anti-air missiles.",
     "stats": { "health": 26000, "speed": 70, "armor": "30mm", "agility": 40 },
     "weapons": [
-      { "name": "30mm autocannon - APDS", "type": "APDS", "damage": 210, "penetration": 85, "reload": 0.1 },
-      { "name": "30mm autocannon - HEI", "type": "HEI", "damage": 280, "penetration": 45, "reload": 0.1 },
-      { "name": "HJ-10 SAM Missile", "type": "SAM", "damage": 1100, "penetration": 250, "reload": 5 }
+      { name: "HJ-10", type: "Missile", damage: 12558, penetration: 1400, reload: 13 }
     ],
     "modules": {
       "engine": [
@@ -3480,7 +3495,8 @@ const VEHICLES = [
     "description": "M113 variant carrying AGM-114 Hellfire missiles for ground and air targets.",
     "stats": { "health": 24500, "speed": 62, "armor": "25mm", "agility": 35 },
     "weapons": [
-      { "name": "AGM-114 Hellfire", "type": "ATGM", "damage": 1800, "penetration": 400, "reload": 5 }
+      { name: "ATGMs ARL", type: "Missile", damage: 9000, penetration: 950, reload: 10 },
+      { name: "ATGMs Laser", type: "Missile", damage: 10900, penetration: 1000, reload: 10 },
     ],
     "modules": {
       "engine": [
@@ -3507,8 +3523,9 @@ const VEHICLES = [
     "description": "Heavy Russian MLRS with 300mm rockets for long-range bombardment.",
     "stats": { "health": 26000, "speed": 60, "armor": "25mm", "agility": 23 },
     "weapons": [
-      { "name": "300mm Rocket - HE", "type": "Rocket", "damage": 2000, "penetration": 50, "reload": 15 },
-      { "name": "300mm Rocket - Cluster", "type": "Rocket", "damage": 1800, "penetration": 30, "reload": 15 }
+      { name: "9M542 HE", type: "Missile", damage: 18000, penetration: 120, reload: 16 },
+      { name: "9M530 HESH", type: "Missile", damage: 16600, penetration: 300, reload: 16 },
+      { name: "9M55K5 CH", type: "Missile", damage: 17100, penetration: 460, reload: 16 }
     ],
     "modules": {
       "engine": [
@@ -3535,8 +3552,9 @@ const VEHICLES = [
     "description": "Japanese 300mm MLRS for long-range artillery strikes.",
     "stats": { "health": 24500, "speed": 55, "armor": "25mm", "agility": 36 },
     "weapons": [
-      { "name": "300mm Rocket - HE", "type": "Rocket", "damage": 1900, "penetration": 50, "reload": 14 },
-      { "name": "300mm Rocket - Cluster", "type": "Rocket", "damage": 1700, "penetration": 30, "reload": 14 }
+      { name: "Type 81 FSBS", type: "Missile", damage: 11900, penetration: 165, reload: 20 },
+      { name: "Type 81 FFBE", type: "Missile", damage: 10600, penetration: 220, reload: 20 },
+      { name: "Type 81", type: "Missile", damage: 9350, penetration: 260, reload: 20 }
     ],
     "modules": {
       "engine": [
@@ -3563,9 +3581,7 @@ const VEHICLES = [
     "description": "Chinese SPAAG equipped with 30mm autocannons and short-range missiles.",
     "stats": { "health": 23000, "speed": 96, "armor": "30mm", "agility": 40 },
     "weapons": [
-      { "name": "30mm autocannon - APDS", "type": "APDS", "damage": 210, "penetration": 85, "reload": 0.1 },
-      { "name": "30mm autocannon - HEI", "type": "HEI", "damage": 280, "penetration": 45, "reload": 0.1 },
-      { "name": "AFT-09 SAM Missile", "type": "SAM", "damage": 1000, "penetration": 220, "reload": 5 }
+      { name: "ATGM HJ-9", type: "Missile", damage: 10192, penetration: 1200, reload: 6 }
     ],
     "modules": {
       "engine": [
@@ -3684,7 +3700,8 @@ const VEHICLES = [
       { name: "ZUBR6 APBC", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "Z0F8", type: "Main Gun", damage: 675, penetration: 50 },
       { name: "ZUBR8", type: "Main Gun", damage: 525, penetration: 165 },
-      { name: "M929", type: "Main Gun", damage: 680, penetration: 189 }
+      { name: "M929", type: "Main Gun", damage: 680, penetration: 189 },
+      { name: "HJ-73B", type: "Missile", damage: 7800, penetration: 500, reload: 6 }
 
     ],
     "modules": {
@@ -3775,7 +3792,9 @@ const VEHICLES = [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
-      { name: "M929", type: "Main Gun", damage: 680, penetration: 189 }
+      { name: "M929", type: "Main Gun", damage: 680, penetration: 189 },
+      { name: "9K135 Kornet", type: "Missile", damage: 9473, penetration: 1000, reload: 8 },
+      { name: "AGS-17", type: "Missile", damage: 2640, penetration: 50, reload: 6 }
     ],
     modules: {
       engine: [
