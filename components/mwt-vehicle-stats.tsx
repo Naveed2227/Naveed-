@@ -3820,7 +3820,7 @@ const VEHICLES = [
     "type": "Light Tank",
     "faction": "American",
     "tier": "III",
-    image: "M3A3 Bradley.jpg",
+    image: "M3A3-Bradley.jpg",
     "description": "Fast, armored infantry vehicle with strong firepower and decent survivability.",
     "stats": { "health": 26000, "speed": 84, "armor": "47mm", "agility": 40 },
     "weapons": [
