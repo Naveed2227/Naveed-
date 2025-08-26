@@ -7043,300 +7043,220 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     setExpandedVehicle(expandedVehicle === id ? "" : id)
   }
 
-  const handleChatSubmit = () => {
-    if (!chatInput.trim()) return
-
-    const userMessage = { role: "user", content: chatInput }
-    setChatMessages((prev) => [...prev, userMessage])
-    setIsLoading(true)
-
-    const getVehicleInfo = (query: string) => {
-      const lowerQuery = query.toLowerCase().trim()
-
-      // Enhanced vehicle search with better matching
-      const searchVehicle = (name: string) => {
-        const cleanName = name.toLowerCase().replace(/[-\s]/g, "")
-        return VEHICLES.find(
-          (v) =>
-            v.name.toLowerCase().includes(name.toLowerCase()) ||
-            v.name.toLowerCase().replace(/[-\s]/g, "").includes(cleanName) ||
-            cleanName.includes(v.name.toLowerCase().replace(/[-\s]/g, "")),
-        )
-      }
-
-      // Advanced data analysis functions
-      const analyzeVehicles = {
-        fastestTank: () => {
-          const tanks = VEHICLES.filter((v) => v.type === "Tank")
-          return tanks.reduce((prev, current) =>
-            (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
-          )
-        },
-        strongestTank: () => {
-          const tanks = VEHICLES.filter((v) => v.type === "Tank")
-          return tanks.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
-        },
-        fastestJet: () => {
-          const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
-          return jets.reduce((prev, current) => {
-            const prevSpeed = prev.stats.afterburnerSpeed || prev.stats.speed || prev.stats.cruiseSpeed || 0
-            const currentSpeed = current.stats.afterburnerSpeed || current.stats.speed || current.stats.cruiseSpeed || 0
-            return prevSpeed > currentSpeed ? prev : current
-          })
-        },
-        strongestJet: () => {
-          const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
-          return jets.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
-        },
-        fastestHelicopter: () => {
-          const helicopters = VEHICLES.filter((v) => v.type === "helicopter")
-          return helicopters.reduce((prev, current) =>
-            (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
-          )
-        },
-        strongestHelicopter: () => {
-          const helicopters = VEHICLES.filter((v) => v.type === "helicopter")
-          return helicopters.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
-        },
-        mostArmoredVehicle: () => {
-          return VEHICLES.filter((v) => v.stats.armor).reduce((prev, current) =>
-            (prev.stats.armor || 0) > (current.stats.armor || 0) ? prev : current,
-          )
-        },
-        mostAgileVehicle: () => {
-          return VEHICLES.filter((v) => v.stats.agility).reduce((prev, current) =>
-            (prev.stats.agility || 0) > (current.stats.agility || 0) ? prev : current,
-          )
-        },
-        bestByNation: (nation: string) => {
-          const nationVehicles = VEHICLES.filter((v) => v.faction.toLowerCase().includes(nation.toLowerCase()))
-          return nationVehicles.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
-        },
-      }
-
-      // Enhanced response formatting
-      const formatVehicleDetails = (vehicle: any, context = "") => {
-        let response = `🎯 ${vehicle.name} (${vehicle.faction} ${vehicle.type})\n\n`
-
-        if (context) response += `${context}\n\n`
-
-        response += `📊 COMBAT SPECIFICATIONS:\n`
-        response += `• Health: ${vehicle.stats.health.toLocaleString()} HP\n`
-
-        if (vehicle.stats.speed) response += `• Speed: ${vehicle.stats.speed} km/h\n`
-        if (vehicle.stats.cruiseSpeed) response += `• Cruise Speed: ${vehicle.stats.cruiseSpeed} km/h\n`
-        if (vehicle.stats.afterburnerSpeed) response += `• Afterburner Speed: ${vehicle.stats.afterburnerSpeed} km/h\n`
-        if (vehicle.stats.armor) response += `• Armor: ${vehicle.stats.armor}\n`
-        if (vehicle.stats.agility) response += `• Agility: ${vehicle.stats.agility}\n`
-
-        response += `• Combat Tier: ${formatTier(vehicle.tier)}\n`
-        response += `• Nation: ${vehicle.faction}\n\n`
-
-        response += `📝 TACTICAL ANALYSIS:\n${vehicle.description}\n\n`
-
-        response += `⚔️ WEAPON SYSTEMS (${vehicle.weapons.length} total):\n`
-        response += vehicle.weapons
-          .map(
-            (w) =>
-              `• ${w.name}: ${w.damage} DMG, ${w.penetration} PEN${w.rateOfFire ? `, ${w.rateOfFire} RPM` : ""}${w.lockTime ? `, ${w.lockTime}s lock` : ""}`,
-          )
-          .join("\n")
-
-        return response
-      }
-
-      // Advanced query processing with ChatGPT-like intelligence
-
-      // Fastest vehicle queries
-      if (lowerQuery.includes("fastest tank") || lowerQuery.includes("quickest tank")) {
-        const fastest = analyzeVehicles.fastestTank()
-        return formatVehicleDetails(
-          fastest,
-          `🏃‍♂️ FASTEST TANK ANALYSIS:\nAfter analyzing all ${VEHICLES.filter((v) => v.type === "Tank").length} tanks in the database, the ${fastest.name} emerges as the speed champion with ${fastest.stats.speed} km/h maximum velocity.`,
-        )
-      }
-
-      if (
-        lowerQuery.includes("fastest jet") ||
-        lowerQuery.includes("quickest jet") ||
-        lowerQuery.includes("fastest fighter")
-      ) {
-        const fastest = analyzeVehicles.fastestJet()
-        const maxSpeed = fastest.stats.afterburnerSpeed || fastest.stats.speed || fastest.stats.cruiseSpeed
-        return formatVehicleDetails(
-          fastest,
-          `✈️ FASTEST FIGHTER JET ANALYSIS:\nAnalyzing ${VEHICLES.filter((v) => v.type === "Fighter Jet").length} fighter aircraft, the ${fastest.name} dominates with ${maxSpeed} km/h maximum speed capability.`,
-        )
-      }
-
-      if (lowerQuery.includes("fastest helicopter") || lowerQuery.includes("quickest helicopter")) {
-        const fastest = analyzeVehicles.fastestHelicopter()
-        return formatVehicleDetails(
-          fastest,
-          `🚁 FASTEST HELICOPTER ANALYSIS:\nAmong ${VEHICLES.filter((v) => v.type === "Helicopter").length} rotorcraft, the ${fastest.name} achieves the highest speed of ${fastest.stats.speed} km/h.`,
-        )
-      }
-
-      // Strongest/toughest vehicle queries
-      if (
-        lowerQuery.includes("strongest tank") ||
-        lowerQuery.includes("toughest tank") ||
-        lowerQuery.includes("most durable tank")
-      ) {
-        const strongest = analyzeVehicles.strongestTank()
-        return formatVehicleDetails(
-          strongest,
-          `🛡️ STRONGEST TANK ANALYSIS:\nAfter evaluating durability across all armored vehicles, the ${strongest.name} stands as the ultimate survivor with ${strongest.stats.health.toLocaleString()} HP.`,
-        )
-      }
-
-      if (
-        lowerQuery.includes("strongest jet") ||
-        lowerQuery.includes("toughest jet") ||
-        lowerQuery.includes("most durable jet")
-      ) {
-        const strongest = analyzeVehicles.strongestJet()
-        return formatVehicleDetails(
-          strongest,
-          `🛡️ STRONGEST FIGHTER JET ANALYSIS:\nEvaluating combat survivability, the ${strongest.name} leads with ${strongest.stats.health.toLocaleString()} HP structural integrity.`,
-        )
-      }
-
-      if (lowerQuery.includes("strongest helicopter") || lowerQuery.includes("toughest helicopter")) {
-        const strongest = analyzeVehicles.strongestHelicopter()
-        return formatVehicleDetails(
-          strongest,
-          `🛡️ STRONGEST HELICOPTER ANALYSIS:\nFor rotorcraft durability, the ${strongest.name} excels with ${strongest.stats.health.toLocaleString()} HP.`,
-        )
-      }
-
-      // Most armored/agile queries
-      if (lowerQuery.includes("most armored") || lowerQuery.includes("best armor")) {
-        const mostArmored = analyzeVehicles.mostArmoredVehicle()
-        return formatVehicleDetails(
-          mostArmored,
-          `🛡️ MOST ARMORED VEHICLE:\nMaximum protection analysis reveals the ${mostArmored.name} with ${mostArmored.stats.armor} armor rating.`,
-        )
-      }
-
-      if (lowerQuery.includes("most agile") || lowerQuery.includes("best agility")) {
-        const mostAgile = analyzeVehicles.mostAgileVehicle()
-        return formatVehicleDetails(
-          mostAgile,
-          `🎯 MOST AGILE VEHICLE:\nManeuverability champion is the ${mostAgile.name} with ${mostAgile.stats.agility} agility rating.`,
-        )
-      }
-
-      // Nation-specific best queries with intelligence
-      if (lowerQuery.includes("best russian") || lowerQuery.includes("strongest russian")) {
-        const best = analyzeVehicles.bestByNation("russian")
-        return formatVehicleDetails(
-          best,
-          `🇷🇺 BEST RUSSIAN VEHICLE:\nRussian military engineering peaks with this exceptional combat platform.`,
-        )
-      }
-
-      if (
-        lowerQuery.includes("best american") ||
-        lowerQuery.includes("best usa") ||
-        lowerQuery.includes("strongest american")
-      ) {
-        const best = analyzeVehicles.bestByNation("american")
-        return formatVehicleDetails(
-          best,
-          `🇺🇸 BEST AMERICAN VEHICLE:\nAmerican technological superiority demonstrated through this advanced system.`,
-        )
-      }
-
-      if (
-        lowerQuery.includes("best chinese") ||
-        lowerQuery.includes("best china") ||
-        lowerQuery.includes("strongest chinese")
-      ) {
-        const best = analyzeVehicles.bestByNation("chinese")
-        return formatVehicleDetails(
-          best,
-          `🇨🇳 BEST CHINESE VEHICLE:\nChinese military innovation showcased in this cutting-edge platform.`,
-        )
-      }
-
-      if (lowerQuery.includes("best german") || lowerQuery.includes("strongest german")) {
-        const best = analyzeVehicles.bestByNation("german")
-        return formatVehicleDetails(best, `🇩🇪 BEST GERMAN VEHICLE:\nGerman precision engineering at its finest.`)
-      }
-
-      // Vehicle comparison logic with enhanced analysis
-      if (lowerQuery.includes(" vs ") || lowerQuery.includes(" versus ")) {
-        const parts = lowerQuery.split(/ vs | versus /)
-        if (parts.length === 2) {
-          const vehicle1 = searchVehicle(parts[0].trim())
-          const vehicle2 = searchVehicle(parts[1].trim())
-
-          if (vehicle1 && vehicle2) {
-            const formatComparisonStats = (vehicle: any) => {
-              let stats = `• Health: ${vehicle.stats.health.toLocaleString()} HP\n`
-              if (vehicle.stats.speed) stats += `• Speed: ${vehicle.stats.speed} km/h\n`
-              if (vehicle.stats.cruiseSpeed) stats += `• Cruise Speed: ${vehicle.stats.cruiseSpeed} km/h\n`
-              if (vehicle.stats.afterburnerSpeed)
-                stats += `• Afterburner Speed: ${vehicle.stats.afterburnerSpeed} km/h\n`
-              if (vehicle.stats.armor) stats += `• Armor: ${vehicle.stats.armor}\n`
-              if (vehicle.stats.agility) stats += `• Agility: ${vehicle.stats.agility}\n`
-              stats += `• Tier: ${formatTier(vehicle.tier)}\n`
-              stats += `• Primary Weapons: ${vehicle.weapons
-                .slice(0, 3)
-                .map((w) => w.name)
-                .join(", ")}`
-              return stats
+  // Advanced Fuzzy Search Implementation
+  const fuzzySearch = (query: string, vehicles = VEHICLES) => {
+    const normalizeText = (text: string) => text.toLowerCase().replace(/[^a-z0-9]/g, '')
+    const queryNorm = normalizeText(query)
+    
+    return vehicles
+      .map(vehicle => {
+        const nameNorm = normalizeText(vehicle.name)
+        const typeNorm = normalizeText(vehicle.type)
+        const factionNorm = normalizeText(vehicle.faction)
+        
+        // Calculate similarity scores
+        let score = 0
+        
+        // Exact match bonus
+        if (nameNorm === queryNorm) score += 100
+        else if (nameNorm.includes(queryNorm)) score += 80
+        else if (queryNorm.includes(nameNorm)) score += 70
+        
+        // Partial matches
+        const queryWords = query.toLowerCase().split(/\s+/)
+        const nameWords = vehicle.name.toLowerCase().split(/\s+/)
+        
+        queryWords.forEach(qWord => {
+          nameWords.forEach(nWord => {
+            if (nWord.includes(qWord) || qWord.includes(nWord)) {
+              score += Math.min(qWord.length, nWord.length) * 5
             }
-
-            const getMaxSpeed = (vehicle: any) =>
-              vehicle.stats.afterburnerSpeed || vehicle.stats.speed || vehicle.stats.cruiseSpeed || 0
-
-            return (
-              `⚔️ AI TACTICAL ANALYSIS SYSTEM (AITAS): ${vehicle1.name} vs ${vehicle2.name}\n\n` +
-              `🔵 ${vehicle1.name} (${vehicle1.faction} ${vehicle1.type}):\n${formatComparisonStats(vehicle1)}\n\n` +
-              `🔴 ${vehicle2.name} (${vehicle2.faction} ${vehicle2.type}):\n${formatComparisonStats(vehicle2)}\n\n` +
-              `🏆 COMBAT SUPERIORITY ANALYSIS:\n` +
-              `• Survivability: ${vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name} (${Math.max(vehicle1.stats.health, vehicle2.stats.health).toLocaleString()} HP advantage)\n` +
-              `• Speed: ${getMaxSpeed(vehicle1) > getMaxSpeed(vehicle2) ? vehicle1.name : vehicle2.name} (${Math.max(getMaxSpeed(vehicle1), getMaxSpeed(vehicle2))} km/h max)\n` +
-              `• Firepower: ${vehicle1.weapons.length > vehicle2.weapons.length ? vehicle1.name : vehicle2.name} (${Math.max(vehicle1.weapons.length, vehicle2.weapons.length)} weapon systems)\n` +
-              `• Tier Advantage: ${vehicle1.tier === vehicle2.tier ? "Equal tier" : vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name}\n\n` +
-              `🎯 TACTICAL RECOMMENDATION: ${vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name + " for survivability" : vehicle2.name + " for survivability"}`
-            )
-          }
-        }
+          })
+        })
+        
+        // Type and faction matches
+        if (typeNorm.includes(queryNorm) || queryNorm.includes(typeNorm)) score += 30
+        if (factionNorm.includes(queryNorm) || queryNorm.includes(factionNorm)) score += 25
+        
+        // Levenshtein distance for typos
+        const distance = levenshteinDistance(queryNorm, nameNorm)
+        if (distance <= 3) score += (10 - distance * 2)
+        
+        return { vehicle, score }
+      })
+      .filter(item => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map(item => item.vehicle)
+  }
+  
+  // Levenshtein distance for typo tolerance
+  const levenshteinDistance = (str1: string, str2: string): number => {
+    const matrix = Array(str2.length + 1).fill(null).map(() => Array(str1.length + 1).fill(null))
+    
+    for (let i = 0; i <= str1.length; i++) matrix[0][i] = i
+    for (let j = 0; j <= str2.length; j++) matrix[j][0] = j
+    
+    for (let j = 1; j <= str2.length; j++) {
+      for (let i = 1; i <= str1.length; i++) {
+        const indicator = str1[i - 1] === str2[j - 1] ? 0 : 1
+        matrix[j][i] = Math.min(
+          matrix[j][i - 1] + 1,
+          matrix[j - 1][i] + 1,
+          matrix[j - 1][i - 1] + indicator
+        )
       }
-
-      // Individual vehicle search with enhanced details
-      const foundVehicle = searchVehicle(lowerQuery)
-      if (foundVehicle) {
-        return formatVehicleDetails(foundVehicle)
-      }
-
-      // Tier and nation listings with intelligence
-      if (lowerQuery.includes("tier ii") || lowerQuery.includes("tier 2")) {
-        const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier II")
-        return `🎖️ TIER II COMBAT VEHICLES (${tierVehicles.length} platforms):\n\nThese intermediate-tier vehicles offer balanced performance for developing commanders:\n\n${tierVehicles.map((v) => `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP`).join("\n")}`
-      }
-
-      if (lowerQuery.includes("tier iii") || lowerQuery.includes("tier 3")) {
-        const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier III")
-        return `🎖️ TIER III COMBAT VEHICLES (${tierVehicles.length} platforms):\n\nAdvanced military hardware for experienced operators:\n\n${tierVehicles.map((v) => `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP`).join("\n")}`
-      }
-
-      if (lowerQuery.includes("tier iv") || lowerQuery.includes("tier 4")) {
-        const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier IV")
-        return `🎖️ TIER IV COMBAT VEHICLES (${tierVehicles.length} platforms):\n\nCutting-edge military technology for elite commanders:\n\n${tierVehicles.map((v) => `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP`).join("\n")}`
-      }
-
-      // Enhanced help and default responses
-      if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
-        return `🤖 MWT AI TACTICAL ANALYSIS SYSTEM (AITAS)\n\nI'm an advanced military vehicle analysis system. I can provide:\n\n🔍 VEHICLE ANALYSIS:\n• "Su-57M" - Complete specifications\n• "T-14 vs Abrams X" - Tactical comparisons\n\n🏆 PERFORMANCE QUERIES:\n• "Fastest tank" - Speed analysis\n• "Strongest jet" - Durability rankings\n• "Most armored vehicle" - Protection analysis\n\n🌍 NATION ANALYSIS:\n• "Best Russian vehicle" - National superiority\n• "American vehicles" - Fleet listings\n\n📊 DATA INSIGHTS:\n• "Tier IV vehicles" - Tier breakdowns\n• "Market vehicles" - Premium platforms\n\nWhat tactical intelligence do you need?`
-      }
-
-      // Default intelligent response
-      return `🤖 MWT AI TACTICAL ANALYSIS SYSTEM (AITAS) - Advanced Military Analysis System\n\nI didn't recognize that specific query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n💡 TRY ASKING:\n• "What's the fastest tank?" - Performance analysis\n• "Su-57M vs F-22" - Combat comparisons\n• "Best Chinese vehicle" - National rankings\n• "Tier IV vehicles" - Category listings\n\nI'm designed to think analytically about military vehicle performance, tactics, and specifications. What would you like to analyze?`
     }
+    
+    return matrix[str2.length][str1.length]
+  }
+  
+  // Performance calculation for recommendations
+  const calculatePerformanceScore = (vehicle: any): number => {
+    let score = 0
+    const stats = vehicle.stats
+    
+    // Base stats scoring
+    score += (stats.health || 0) / 1000
+    score += (stats.speed || stats.cruiseSpeed || stats.afterburnerSpeed || 0) / 100
+    score += (stats.armor || 0) * 2
+    score += (stats.agility || 0) * 1.5
+    
+    // Weapon effectiveness
+    if (vehicle.weapons?.length) {
+      const avgDamage = vehicle.weapons.reduce((sum: number, w: any) => sum + (w.damage || 0), 0) / vehicle.weapons.length
+      const avgPen = vehicle.weapons.reduce((sum: number, w: any) => sum + (w.penetration || 0), 0) / vehicle.weapons.length
+      score += avgDamage / 100 + avgPen / 10
+    }
+    
+    // Tier bonus (higher tier = better tech)
+    const tierNum = typeof vehicle.tier === 'string' ? 
+      vehicle.tier.length : // Roman numerals by length
+      vehicle.tier
+    score += tierNum * 10
+    
+    return Math.round(score)
+  }
+  
+  // Vehicle comparison logic
+  const compareVehicles = (vehicle1: any, vehicle2: any) => {
+    const comparison = {
+      health: {
+        v1: vehicle1.stats.health || 0,
+        v2: vehicle2.stats.health || 0,
+        winner: ''
+      },
+      speed: {
+        v1: vehicle1.stats.speed || vehicle1.stats.cruiseSpeed || vehicle1.stats.afterburnerSpeed || 0,
+        v2: vehicle2.stats.speed || vehicle2.stats.cruiseSpeed || vehicle2.stats.afterburnerSpeed || 0,
+        winner: ''
+      },
+      armor: {
+        v1: vehicle1.stats.armor || 0,
+        v2: vehicle2.stats.armor || 0,
+        winner: ''
+      },
+      agility: {
+        v1: vehicle1.stats.agility || 0,
+        v2: vehicle2.stats.agility || 0,
+        winner: ''
+      },
+      firepower: {
+        v1: vehicle1.weapons?.reduce((sum: number, w: any) => sum + (w.damage || 0), 0) || 0,
+        v2: vehicle2.weapons?.reduce((sum: number, w: any) => sum + (w.damage || 0), 0) || 0,
+        winner: ''
+      }
+    }
+    
+    // Determine winners for each category
+    Object.keys(comparison).forEach(key => {
+      const cat = comparison[key as keyof typeof comparison]
+      if (cat.v1 > cat.v2) cat.winner = vehicle1.name
+      else if (cat.v2 > cat.v1) cat.winner = vehicle2.name
+      else cat.winner = 'Tie'
+    })
+    
+    return comparison
+  }
+
+  // Conversational AI response formatting
+  const formatVehicleCard = (vehicle: any, context = "", showFullDetails = false) => {
+    const maxSpeed = vehicle.stats.afterburnerSpeed || vehicle.stats.speed || 0
+    const keyStrengths: string[] = []
+    
+    // Determine key strengths
+    if (vehicle.stats.health > 25000) keyStrengths.push('High Durability')
+    if (maxSpeed > 500) keyStrengths.push('High Speed')
+    if (vehicle.stats.armor && vehicle.stats.armor > 100) keyStrengths.push('Heavy Armor')
+    if (vehicle.stats.agility && vehicle.stats.agility > 80) keyStrengths.push('High Agility')
+    if (vehicle.weapons && vehicle.weapons.length > 6) keyStrengths.push('Versatile Arsenal')
+    
+    let response = `**${vehicle.name}** | ${vehicle.faction} ${vehicle.type}\n`
+    response += `Tier ${formatTier(vehicle.tier)} • ${keyStrengths.join(' • ') || 'Balanced Platform'}\n\n`
+    
+    if (context) response += `${context}\n\n`
+    
+    // Key stats in conversational format
+    response += `**Key Specs:** ${vehicle.stats.health.toLocaleString()} HP`
+    if (maxSpeed > 0) response += ` • ${maxSpeed} km/h max speed`
+    if (vehicle.stats.armor) response += ` • ${vehicle.stats.armor} armor`
+    response += `\n\n`
+    
+    response += `**Role Analysis:** ${vehicle.description}\n`
+    
+    if (showFullDetails) {
+      response += `\n**Primary Weapons:**\n`
+      response += vehicle.weapons.slice(0, 3)
+        .map((w: any) => `• ${w.name} (${w.damage} DMG)`)
+        .join('\n')
+      if (vehicle.weapons.length > 3) {
+        response += `\n*...and ${vehicle.weapons.length - 3} more weapons*`
+      }
+    }
+    
+    return response
+  }
+  
+  // Comparison table formatter
+  const formatComparison = (v1: any, v2: any) => {
+    const comparison = compareVehicles(v1, v2)
+    
+    let response = `**${v1.name} vs ${v2.name}**\n\n`
+    response += `| Aspect | ${v1.name} | ${v2.name} | Winner |\n`
+    response += `|--------|----------|----------|---------|\n`
+    response += `| Health | ${comparison.health.v1.toLocaleString()} | ${comparison.health.v2.toLocaleString()} | **${comparison.health.winner}** |\n`
+    response += `| Speed | ${comparison.speed.v1} km/h | ${comparison.speed.v2} km/h | **${comparison.speed.winner}** |\n`
+    response += `| Armor | ${comparison.armor.v1} | ${comparison.armor.v2} | **${comparison.armor.winner}** |\n`
+    response += `| Agility | ${comparison.agility.v1} | ${comparison.agility.v2} | **${comparison.agility.winner}** |\n`
+    response += `| Firepower | ${comparison.firepower.v1.toLocaleString()} | ${comparison.firepower.v2.toLocaleString()} | **${comparison.firepower.winner}** |\n\n`
+    
+    // AI reasoning
+    const v1Score = calculatePerformanceScore(v1)
+    const v2Score = calculatePerformanceScore(v2)
+    const winner = v1Score > v2Score ? v1.name : v2Score > v1Score ? v2.name : 'Both'
+    
+    response += `**My Assessment:** `
+    if (winner !== 'Both') {
+      response += `I'd recommend the **${winner}** for most scenarios. `
+      if (winner === v1.name) {
+        response += `It has ${v1Score - v2Score} more performance points, mainly due to `
+      } else {
+        response += `It has ${v2Score - v1Score} more performance points, mainly due to `
+      }
+      
+      const advantages: string[] = []
+      if (comparison.health.winner === winner) advantages.push('superior durability')
+      if (comparison.speed.winner === winner) advantages.push('better mobility')
+      if (comparison.armor.winner === winner) advantages.push('better armor')
+      if (comparison.agility.winner === winner) advantages.push('better agility')
+      if (comparison.firepower.winner === winner) advantages.push('stronger firepower')
+      
+      response += advantages.join(' and ') + '.'
+    } else {
+      response += `Both vehicles are equally matched (${v1Score} pts each). Choose based on your preferred playstyle.`
+    }
+    
+    return response
+  }
 
     setTimeout(() => {
       const response = getVehicleInfo(chatInput)
