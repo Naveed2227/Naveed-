@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Zap, Shield, Target, Star } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 // Roman numeral conversion utility
@@ -34,207 +34,6 @@ const formatTier = (tier: string | number): string => {
   }
   // Otherwise convert to Roman numeral
   return toRomanNumeral(tier);
-};
-
-// Fuzzy search utility
-const fuzzySearch = (query: string, text: string): number => {
-  const queryLower = query.toLowerCase();
-  const textLower = text.toLowerCase();
-  
-  // Exact match gets highest score
-  if (textLower === queryLower) return 100;
-  if (textLower.includes(queryLower)) return 80;
-  
-  // Calculate fuzzy match score
-  let score = 0;
-  let queryIndex = 0;
-  
-  for (let i = 0; i < textLower.length && queryIndex < queryLower.length; i++) {
-    if (textLower[i] === queryLower[queryIndex]) {
-      score += 1;
-      queryIndex++;
-    }
-  }
-  
-  return queryIndex === queryLower.length ? (score / queryLower.length) * 60 : 0;
-};
-
-// Enhanced vehicle search with fuzzy matching
-const searchVehicles = (query: string, vehicles: any[]): any[] => {
-  if (!query.trim()) return vehicles;
-  
-  const results = vehicles.map(vehicle => {
-    const nameScore = fuzzySearch(query, vehicle.name);
-    const typeScore = fuzzySearch(query, vehicle.type) * 0.7;
-    const factionScore = fuzzySearch(query, vehicle.faction) * 0.6;
-    const tierScore = fuzzySearch(query, vehicle.tier) * 0.5;
-    
-    const totalScore = Math.max(nameScore, typeScore, factionScore, tierScore);
-    
-    return { ...vehicle, searchScore: totalScore };
-  })
-  .filter(vehicle => vehicle.searchScore > 20)
-  .sort((a, b) => b.searchScore - a.searchScore);
-  
-  return results;
-};
-
-// Calculate vehicle performance score
-const calculatePerformanceScore = (vehicle: any): number => {
-  const stats = vehicle.stats;
-  let score = 0;
-  
-  // Normalize stats based on vehicle type
-  if (vehicle.type.includes('Tank') || vehicle.type.includes('MBT')) {
-    score = (stats.health * 0.3) + (stats.armor * 0.4) + (stats.firepower * 0.3);
-  } else if (vehicle.type.includes('Fighter') || vehicle.type.includes('Jet')) {
-    score = (stats.speed * 0.4) + (stats.agility * 0.3) + (stats.health * 0.3);
-  } else {
-    // General scoring
-    const statValues = Object.values(stats).filter(val => typeof val === 'number');
-    score = statValues.reduce((sum: number, val: any) => sum + val, 0) / statValues.length;
-  }
-  
-  return Math.round(score);
-};
-
-// Get best vehicles by nation
-const getBestVehiclesByNation = (vehicles: any[]): { [key: string]: any } => {
-  const nationGroups = vehicles.reduce((acc, vehicle) => {
-    if (!acc[vehicle.faction]) acc[vehicle.faction] = [];
-    acc[vehicle.faction].push({ ...vehicle, performanceScore: calculatePerformanceScore(vehicle) });
-    return acc;
-  }, {});
-  
-  const bestByNation: { [key: string]: any } = {};
-  Object.keys(nationGroups).forEach(nation => {
-    bestByNation[nation] = nationGroups[nation]
-      .sort((a: any, b: any) => b.performanceScore - a.performanceScore)[0];
-  });
-  
-  return bestByNation;
-};
-
-// Get best vehicles by role/type
-const getBestVehiclesByRole = (vehicles: any[]): { [key: string]: any } => {
-  const roleGroups = vehicles.reduce((acc, vehicle) => {
-    if (!acc[vehicle.type]) acc[vehicle.type] = [];
-    acc[vehicle.type].push({ ...vehicle, performanceScore: calculatePerformanceScore(vehicle) });
-    return acc;
-  }, {});
-  
-  const bestByRole: { [key: string]: any } = {};
-  Object.keys(roleGroups).forEach(role => {
-    bestByRole[role] = roleGroups[role]
-      .sort((a: any, b: any) => b.performanceScore - a.performanceScore)[0];
-  });
-  
-  return bestByRole;
-};
-
-// Natural language query processor
-const processNaturalQuery = (query: string, vehicles: any[]): { type: string; data: any; message: string } => {
-  const queryLower = query.toLowerCase();
-  
-  // Compare two vehicles
-  const compareMatch = queryLower.match(/compare\s+(.*?)\s+(?:vs|versus|against|with)\s+(.*?)(?:\s|$)/);
-  if (compareMatch) {
-    const vehicle1Name = compareMatch[1].trim();
-    const vehicle2Name = compareMatch[2].trim();
-    
-    const vehicle1 = searchVehicles(vehicle1Name, vehicles)[0];
-    const vehicle2 = searchVehicles(vehicle2Name, vehicles)[0];
-    
-    if (vehicle1 && vehicle2) {
-      return {
-        type: 'comparison',
-        data: { vehicle1, vehicle2 },
-        message: `Comparing ${vehicle1.name} vs ${vehicle2.name}`
-      };
-    }
-  }
-  
-  // Best vehicle by nation
-  const nationMatch = queryLower.match(/(?:best|good|top).*?(?:chinese|american|russian|german|british|french|israeli|japanese|italian)/);
-  if (nationMatch) {
-    const nations = ['Chinese', 'American', 'Russian', 'German', 'British', 'French', 'Israeli', 'Japanese', 'Italian'];
-    const foundNation = nations.find(nation => queryLower.includes(nation.toLowerCase()));
-    
-    if (foundNation) {
-      const nationVehicles = vehicles.filter(v => v.faction === foundNation)
-        .map(v => ({ ...v, performanceScore: calculatePerformanceScore(v) }))
-        .sort((a, b) => b.performanceScore - a.performanceScore);
-      
-      return {
-        type: 'recommendation',
-        data: nationVehicles.slice(0, 3),
-        message: `Best ${foundNation} vehicles:`
-      };
-    }
-  }
-  
-  // Best by role
-  const roleMatch = queryLower.match(/(?:best|good|top).*?(?:mbt|tank|fighter|bomber|ifv|spg|air defense)/);
-  if (roleMatch) {
-    const roleMap: { [key: string]: string[] } = {
-      'mbt': ['Main Battle Tank', 'Tank'],
-      'tank': ['Main Battle Tank', 'Tank', 'Light Tank', 'Heavy Tank'],
-      'fighter': ['Fighter Jet', 'Fighter'],
-      'bomber': ['Bomber', 'Strategic Bomber'],
-      'ifv': ['Infantry Fighting Vehicle', 'IFV'],
-      'spg': ['Self-Propelled Gun', 'SPG'],
-      'air defense': ['Air Defense', 'SAM']
-    };
-    
-    const foundRole = Object.keys(roleMap).find(role => queryLower.includes(role));
-    if (foundRole) {
-      const roleTypes = roleMap[foundRole];
-      const roleVehicles = vehicles.filter(v => 
-        roleTypes.some(type => v.type.includes(type))
-      )
-      .map(v => ({ ...v, performanceScore: calculatePerformanceScore(v) }))
-      .sort((a, b) => b.performanceScore - a.performanceScore);
-      
-      return {
-        type: 'recommendation',
-        data: roleVehicles.slice(0, 3),
-        message: `Best ${foundRole.toUpperCase()} vehicles:`
-      };
-    }
-  }
-  
-  // Strongest by tier
-  const tierMatch = queryLower.match(/(?:strongest|best|top).*?tier\s*(i{1,3}|[1-4])/);
-  if (tierMatch) {
-    const tierStr = tierMatch[1];
-    const tier = /^\d$/.test(tierStr) ? toRomanNumeral(parseInt(tierStr)) : tierStr.toUpperCase();
-    
-    const tierVehicles = vehicles.filter(v => formatTier(v.tier) === tier)
-      .map(v => ({ ...v, performanceScore: calculatePerformanceScore(v) }))
-      .sort((a, b) => b.performanceScore - a.performanceScore);
-    
-    return {
-      type: 'recommendation',
-      data: tierVehicles.slice(0, 3),
-      message: `Strongest Tier ${tier} vehicles:`
-    };
-  }
-  
-  // General search
-  const searchResults = searchVehicles(query, vehicles);
-  if (searchResults.length > 0) {
-    return {
-      type: 'search',
-      data: searchResults.slice(0, 5),
-      message: `Found ${searchResults.length} vehicles matching "${query}":`
-    };
-  }
-  
-  return {
-    type: 'error',
-    data: null,
-    message: "I couldn't understand your query. Try asking about specific vehicles, comparisons, or recommendations."
-  };
 };
 
 // Battle Pass Data Structure
@@ -6750,76 +6549,6 @@ const VEHICLES = [
   }
 ];
 
-// Battle Pass Data
-const BATTLE_PASS_MONTHS = [
-  {
-    id: 1,
-    month: "January 2024",
-    title: "Arctic Storm",
-    description: "Frozen battlefields and winter warfare dominate this month's operations. Elite units deploy advanced cold-weather equipment.",
-    image: "arctic-storm-event.jpg",
-    vehicles: [
-      VEHICLES.find(v => v.name === "T-14 Armata"),
-      VEHICLES.find(v => v.name === "Leopard 2A7+")
-    ].filter(Boolean)
-  },
-  {
-    id: 2,
-    month: "February 2024",
-    title: "Desert Thunder",
-    description: "High-intensity desert combat with advanced air support and armored divisions clashing in sandy terrain.",
-    image: "desert-thunder-event.jpg",
-    vehicles: [
-      VEHICLES.find(v => v.name === "F-22 Raptor"),
-      VEHICLES.find(v => v.name === "Abrams X")
-    ].filter(Boolean)
-  },
-  {
-    id: 3,
-    month: "March 2024",
-    title: "Urban Siege",
-    description: "Close-quarters urban warfare featuring specialized equipment for city combat and building clearing operations.",
-    image: "urban-siege-event.jpg",
-    vehicles: [
-      VEHICLES.find(v => v.name === "BMPT Terminator 2"),
-      VEHICLES.find(v => v.name === "M1128 Stryker")
-    ].filter(Boolean)
-  },
-  {
-    id: 4,
-    month: "April 2024",
-    title: "Naval Strike",
-    description: "Amphibious operations and carrier-based missions with advanced naval aviation and marine assault units.",
-    image: "naval-strike-event.jpg",
-    vehicles: [
-      VEHICLES.find(v => v.name === "F/A-18F Super Hornet"),
-      VEHICLES.find(v => v.name === "Type 16 MCV")
-    ].filter(Boolean)
-  },
-  {
-    id: 5,
-    month: "May 2024",
-    title: "Stealth Operations",
-    description: "Covert missions featuring next-generation stealth technology and advanced reconnaissance platforms.",
-    image: "stealth-ops-event.jpg",
-    vehicles: [
-      VEHICLES.find(v => v.name === "Su-57M"),
-      VEHICLES.find(v => v.name === "Ka-58 Black Ghost")
-    ].filter(Boolean)
-  },
-  {
-    id: 6,
-    month: "June 2024",
-    title: "Air Supremacy",
-    description: "Aerial dominance campaigns with cutting-edge fighter jets and advanced air-to-air combat systems.",
-    image: "air-supremacy-event.jpg",
-    vehicles: [
-      VEHICLES.find(v => v.name === "J-20 Mighty Dragon"),
-      VEHICLES.find(v => v.name === "MiG-41M")
-    ].filter(Boolean)
-  }
-];
-
 const getAircraftRole = (vehicle: any) => {
   if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== "Helicopter") return null
 
@@ -7046,7 +6775,7 @@ const MwtVehicleStats = () => {
   const [compare, setCompare] = useState<string[]>([])
   const [expandedVehicle, setExpandedVehicle] = useState("")
   const [chatOpen, setChatOpen] = useState(false)
-  const [chatMessages, setChatMessages] = useState<{ role: string; content: string; data?: any; type?: string }[]>([])
+  const [chatMessages, setChatMessages] = useState<{ role: string; content: string }[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [chatInput, setChatInput] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
@@ -7084,59 +6813,6 @@ const MwtVehicleStats = () => {
   // Battle Pass state
   const [battlePassOpen, setBattlePassOpen] = useState(false)
   const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
-
-  // Enhanced chatbot handler
-  const handleChatSubmit = async () => {
-    if (!chatInput.trim()) return;
-    
-    const userMessage = { role: 'user', content: chatInput };
-    setChatMessages(prev => [...prev, userMessage]);
-    setChatInput('');
-    setIsLoading(true);
-    
-    try {
-      // Process the natural language query
-      const result = processNaturalQuery(chatInput, VEHICLES);
-      
-      let botResponse;
-      
-      switch (result.type) {
-        case 'comparison':
-          botResponse = {
-            role: 'bot',
-            content: result.message,
-            data: result.data,
-            type: 'comparison'
-          };
-          break;
-          
-        case 'recommendation':
-        case 'search':
-          botResponse = {
-            role: 'bot',
-            content: result.message,
-            data: result.data,
-            type: result.type
-          };
-          break;
-          
-        default:
-          botResponse = {
-            role: 'bot',
-            content: result.message
-          };
-      }
-      
-      setChatMessages(prev => [...prev, botResponse]);
-    } catch (error) {
-      setChatMessages(prev => [...prev, {
-        role: 'bot',
-        content: 'Sorry, I encountered an error processing your request. Please try again.'
-      }]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const types = [...new Set(VEHICLES.map((v) => v.type))]
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
@@ -7297,6 +6973,300 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     setExpandedVehicle(expandedVehicle === id ? "" : id)
   }
 
+  const handleChatSubmit = () => {
+    if (!chatInput.trim()) return
+
+    const userMessage = { role: "user", content: chatInput }
+    setChatMessages((prev) => [...prev, userMessage])
+    setIsLoading(true)
+
+    const getVehicleInfo = (query: string) => {
+      const lowerQuery = query.toLowerCase().trim()
+
+      // Enhanced vehicle search with better matching
+      const searchVehicle = (name: string) => {
+        const cleanName = name.toLowerCase().replace(/[-\s]/g, "")
+        return VEHICLES.find(
+          (v) =>
+            v.name.toLowerCase().includes(name.toLowerCase()) ||
+            v.name.toLowerCase().replace(/[-\s]/g, "").includes(cleanName) ||
+            cleanName.includes(v.name.toLowerCase().replace(/[-\s]/g, "")),
+        )
+      }
+
+      // Advanced data analysis functions
+      const analyzeVehicles = {
+        fastestTank: () => {
+          const tanks = VEHICLES.filter((v) => v.type === "Tank")
+          return tanks.reduce((prev, current) =>
+            (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
+          )
+        },
+        strongestTank: () => {
+          const tanks = VEHICLES.filter((v) => v.type === "Tank")
+          return tanks.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
+        },
+        fastestJet: () => {
+          const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
+          return jets.reduce((prev, current) => {
+            const prevSpeed = prev.stats.afterburnerSpeed || prev.stats.speed || prev.stats.cruiseSpeed || 0
+            const currentSpeed = current.stats.afterburnerSpeed || current.stats.speed || current.stats.cruiseSpeed || 0
+            return prevSpeed > currentSpeed ? prev : current
+          })
+        },
+        strongestJet: () => {
+          const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
+          return jets.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
+        },
+        fastestHelicopter: () => {
+          const helicopters = VEHICLES.filter((v) => v.type === "helicopter")
+          return helicopters.reduce((prev, current) =>
+            (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
+          )
+        },
+        strongestHelicopter: () => {
+          const helicopters = VEHICLES.filter((v) => v.type === "helicopter")
+          return helicopters.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
+        },
+        mostArmoredVehicle: () => {
+          return VEHICLES.filter((v) => v.stats.armor).reduce((prev, current) =>
+            (prev.stats.armor || 0) > (current.stats.armor || 0) ? prev : current,
+          )
+        },
+        mostAgileVehicle: () => {
+          return VEHICLES.filter((v) => v.stats.agility).reduce((prev, current) =>
+            (prev.stats.agility || 0) > (current.stats.agility || 0) ? prev : current,
+          )
+        },
+        bestByNation: (nation: string) => {
+          const nationVehicles = VEHICLES.filter((v) => v.faction.toLowerCase().includes(nation.toLowerCase()))
+          return nationVehicles.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
+        },
+      }
+
+      // Enhanced response formatting
+      const formatVehicleDetails = (vehicle: any, context = "") => {
+        let response = `🎯 ${vehicle.name} (${vehicle.faction} ${vehicle.type})\n\n`
+
+        if (context) response += `${context}\n\n`
+
+        response += `📊 COMBAT SPECIFICATIONS:\n`
+        response += `• Health: ${vehicle.stats.health.toLocaleString()} HP\n`
+
+        if (vehicle.stats.speed) response += `• Speed: ${vehicle.stats.speed} km/h\n`
+        if (vehicle.stats.cruiseSpeed) response += `• Cruise Speed: ${vehicle.stats.cruiseSpeed} km/h\n`
+        if (vehicle.stats.afterburnerSpeed) response += `• Afterburner Speed: ${vehicle.stats.afterburnerSpeed} km/h\n`
+        if (vehicle.stats.armor) response += `• Armor: ${vehicle.stats.armor}\n`
+        if (vehicle.stats.agility) response += `• Agility: ${vehicle.stats.agility}\n`
+
+        response += `• Combat Tier: ${formatTier(vehicle.tier)}\n`
+        response += `• Nation: ${vehicle.faction}\n\n`
+
+        response += `📝 TACTICAL ANALYSIS:\n${vehicle.description}\n\n`
+
+        response += `⚔️ WEAPON SYSTEMS (${vehicle.weapons.length} total):\n`
+        response += vehicle.weapons
+          .map(
+            (w) =>
+              `• ${w.name}: ${w.damage} DMG, ${w.penetration} PEN${w.rateOfFire ? `, ${w.rateOfFire} RPM` : ""}${w.lockTime ? `, ${w.lockTime}s lock` : ""}`,
+          )
+          .join("\n")
+
+        return response
+      }
+
+      // Advanced query processing with ChatGPT-like intelligence
+
+      // Fastest vehicle queries
+      if (lowerQuery.includes("fastest tank") || lowerQuery.includes("quickest tank")) {
+        const fastest = analyzeVehicles.fastestTank()
+        return formatVehicleDetails(
+          fastest,
+          `🏃‍♂️ FASTEST TANK ANALYSIS:\nAfter analyzing all ${VEHICLES.filter((v) => v.type === "Tank").length} tanks in the database, the ${fastest.name} emerges as the speed champion with ${fastest.stats.speed} km/h maximum velocity.`,
+        )
+      }
+
+      if (
+        lowerQuery.includes("fastest jet") ||
+        lowerQuery.includes("quickest jet") ||
+        lowerQuery.includes("fastest fighter")
+      ) {
+        const fastest = analyzeVehicles.fastestJet()
+        const maxSpeed = fastest.stats.afterburnerSpeed || fastest.stats.speed || fastest.stats.cruiseSpeed
+        return formatVehicleDetails(
+          fastest,
+          `✈️ FASTEST FIGHTER JET ANALYSIS:\nAnalyzing ${VEHICLES.filter((v) => v.type === "Fighter Jet").length} fighter aircraft, the ${fastest.name} dominates with ${maxSpeed} km/h maximum speed capability.`,
+        )
+      }
+
+      if (lowerQuery.includes("fastest helicopter") || lowerQuery.includes("quickest helicopter")) {
+        const fastest = analyzeVehicles.fastestHelicopter()
+        return formatVehicleDetails(
+          fastest,
+          `🚁 FASTEST HELICOPTER ANALYSIS:\nAmong ${VEHICLES.filter((v) => v.type === "Helicopter").length} rotorcraft, the ${fastest.name} achieves the highest speed of ${fastest.stats.speed} km/h.`,
+        )
+      }
+
+      // Strongest/toughest vehicle queries
+      if (
+        lowerQuery.includes("strongest tank") ||
+        lowerQuery.includes("toughest tank") ||
+        lowerQuery.includes("most durable tank")
+      ) {
+        const strongest = analyzeVehicles.strongestTank()
+        return formatVehicleDetails(
+          strongest,
+          `🛡️ STRONGEST TANK ANALYSIS:\nAfter evaluating durability across all armored vehicles, the ${strongest.name} stands as the ultimate survivor with ${strongest.stats.health.toLocaleString()} HP.`,
+        )
+      }
+
+      if (
+        lowerQuery.includes("strongest jet") ||
+        lowerQuery.includes("toughest jet") ||
+        lowerQuery.includes("most durable jet")
+      ) {
+        const strongest = analyzeVehicles.strongestJet()
+        return formatVehicleDetails(
+          strongest,
+          `🛡️ STRONGEST FIGHTER JET ANALYSIS:\nEvaluating combat survivability, the ${strongest.name} leads with ${strongest.stats.health.toLocaleString()} HP structural integrity.`,
+        )
+      }
+
+      if (lowerQuery.includes("strongest helicopter") || lowerQuery.includes("toughest helicopter")) {
+        const strongest = analyzeVehicles.strongestHelicopter()
+        return formatVehicleDetails(
+          strongest,
+          `🛡️ STRONGEST HELICOPTER ANALYSIS:\nFor rotorcraft durability, the ${strongest.name} excels with ${strongest.stats.health.toLocaleString()} HP.`,
+        )
+      }
+
+      // Most armored/agile queries
+      if (lowerQuery.includes("most armored") || lowerQuery.includes("best armor")) {
+        const mostArmored = analyzeVehicles.mostArmoredVehicle()
+        return formatVehicleDetails(
+          mostArmored,
+          `🛡️ MOST ARMORED VEHICLE:\nMaximum protection analysis reveals the ${mostArmored.name} with ${mostArmored.stats.armor} armor rating.`,
+        )
+      }
+
+      if (lowerQuery.includes("most agile") || lowerQuery.includes("best agility")) {
+        const mostAgile = analyzeVehicles.mostAgileVehicle()
+        return formatVehicleDetails(
+          mostAgile,
+          `🎯 MOST AGILE VEHICLE:\nManeuverability champion is the ${mostAgile.name} with ${mostAgile.stats.agility} agility rating.`,
+        )
+      }
+
+      // Nation-specific best queries with intelligence
+      if (lowerQuery.includes("best russian") || lowerQuery.includes("strongest russian")) {
+        const best = analyzeVehicles.bestByNation("russian")
+        return formatVehicleDetails(
+          best,
+          `🇷🇺 BEST RUSSIAN VEHICLE:\nRussian military engineering peaks with this exceptional combat platform.`,
+        )
+      }
+
+      if (
+        lowerQuery.includes("best american") ||
+        lowerQuery.includes("best usa") ||
+        lowerQuery.includes("strongest american")
+      ) {
+        const best = analyzeVehicles.bestByNation("american")
+        return formatVehicleDetails(
+          best,
+          `🇺🇸 BEST AMERICAN VEHICLE:\nAmerican technological superiority demonstrated through this advanced system.`,
+        )
+      }
+
+      if (
+        lowerQuery.includes("best chinese") ||
+        lowerQuery.includes("best china") ||
+        lowerQuery.includes("strongest chinese")
+      ) {
+        const best = analyzeVehicles.bestByNation("chinese")
+        return formatVehicleDetails(
+          best,
+          `🇨🇳 BEST CHINESE VEHICLE:\nChinese military innovation showcased in this cutting-edge platform.`,
+        )
+      }
+
+      if (lowerQuery.includes("best german") || lowerQuery.includes("strongest german")) {
+        const best = analyzeVehicles.bestByNation("german")
+        return formatVehicleDetails(best, `🇩🇪 BEST GERMAN VEHICLE:\nGerman precision engineering at its finest.`)
+      }
+
+      // Vehicle comparison logic with enhanced analysis
+      if (lowerQuery.includes(" vs ") || lowerQuery.includes(" versus ")) {
+        const parts = lowerQuery.split(/ vs | versus /)
+        if (parts.length === 2) {
+          const vehicle1 = searchVehicle(parts[0].trim())
+          const vehicle2 = searchVehicle(parts[1].trim())
+
+          if (vehicle1 && vehicle2) {
+            const formatComparisonStats = (vehicle: any) => {
+              let stats = `• Health: ${vehicle.stats.health.toLocaleString()} HP\n`
+              if (vehicle.stats.speed) stats += `• Speed: ${vehicle.stats.speed} km/h\n`
+              if (vehicle.stats.cruiseSpeed) stats += `• Cruise Speed: ${vehicle.stats.cruiseSpeed} km/h\n`
+              if (vehicle.stats.afterburnerSpeed)
+                stats += `• Afterburner Speed: ${vehicle.stats.afterburnerSpeed} km/h\n`
+              if (vehicle.stats.armor) stats += `• Armor: ${vehicle.stats.armor}\n`
+              if (vehicle.stats.agility) stats += `• Agility: ${vehicle.stats.agility}\n`
+              stats += `• Tier: ${formatTier(vehicle.tier)}\n`
+              stats += `• Primary Weapons: ${vehicle.weapons
+                .slice(0, 3)
+                .map((w) => w.name)
+                .join(", ")}`
+              return stats
+            }
+
+            const getMaxSpeed = (vehicle: any) =>
+              vehicle.stats.afterburnerSpeed || vehicle.stats.speed || vehicle.stats.cruiseSpeed || 0
+
+            return (
+              `⚔️ AI TACTICAL ANALYSIS SYSTEM (AITAS): ${vehicle1.name} vs ${vehicle2.name}\n\n` +
+              `🔵 ${vehicle1.name} (${vehicle1.faction} ${vehicle1.type}):\n${formatComparisonStats(vehicle1)}\n\n` +
+              `🔴 ${vehicle2.name} (${vehicle2.faction} ${vehicle2.type}):\n${formatComparisonStats(vehicle2)}\n\n` +
+              `🏆 COMBAT SUPERIORITY ANALYSIS:\n` +
+              `• Survivability: ${vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name} (${Math.max(vehicle1.stats.health, vehicle2.stats.health).toLocaleString()} HP advantage)\n` +
+              `• Speed: ${getMaxSpeed(vehicle1) > getMaxSpeed(vehicle2) ? vehicle1.name : vehicle2.name} (${Math.max(getMaxSpeed(vehicle1), getMaxSpeed(vehicle2))} km/h max)\n` +
+              `• Firepower: ${vehicle1.weapons.length > vehicle2.weapons.length ? vehicle1.name : vehicle2.name} (${Math.max(vehicle1.weapons.length, vehicle2.weapons.length)} weapon systems)\n` +
+              `• Tier Advantage: ${vehicle1.tier === vehicle2.tier ? "Equal tier" : vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name}\n\n` +
+              `🎯 TACTICAL RECOMMENDATION: ${vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name + " for survivability" : vehicle2.name + " for survivability"}`
+            )
+          }
+        }
+      }
+
+      // Individual vehicle search with enhanced details
+      const foundVehicle = searchVehicle(lowerQuery)
+      if (foundVehicle) {
+        return formatVehicleDetails(foundVehicle)
+      }
+
+      // Tier and nation listings with intelligence
+      if (lowerQuery.includes("tier ii") || lowerQuery.includes("tier 2")) {
+        const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier II")
+        return `🎖️ TIER II COMBAT VEHICLES (${tierVehicles.length} platforms):\n\nThese intermediate-tier vehicles offer balanced performance for developing commanders:\n\n${tierVehicles.map((v) => `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP`).join("\n")}`
+      }
+
+      if (lowerQuery.includes("tier iii") || lowerQuery.includes("tier 3")) {
+        const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier III")
+        return `🎖️ TIER III COMBAT VEHICLES (${tierVehicles.length} platforms):\n\nAdvanced military hardware for experienced operators:\n\n${tierVehicles.map((v) => `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP`).join("\n")}`
+      }
+
+      if (lowerQuery.includes("tier iv") || lowerQuery.includes("tier 4")) {
+        const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier IV")
+        return `🎖️ TIER IV COMBAT VEHICLES (${tierVehicles.length} platforms):\n\nCutting-edge military technology for elite commanders:\n\n${tierVehicles.map((v) => `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP`).join("\n")}`
+      }
+
+      // Enhanced help and default responses
+      if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
+        return `🤖 MWT AI TACTICAL ANALYSIS SYSTEM (AITAS)\n\nI'm an advanced military vehicle analysis system. I can provide:\n\n🔍 VEHICLE ANALYSIS:\n• "Su-57M" - Complete specifications\n• "T-14 vs Abrams X" - Tactical comparisons\n\n🏆 PERFORMANCE QUERIES:\n• "Fastest tank" - Speed analysis\n• "Strongest jet" - Durability rankings\n• "Most armored vehicle" - Protection analysis\n\n🌍 NATION ANALYSIS:\n• "Best Russian vehicle" - National superiority\n• "American vehicles" - Fleet listings\n\n📊 DATA INSIGHTS:\n• "Tier IV vehicles" - Tier breakdowns\n• "Market vehicles" - Premium platforms\n\nWhat tactical intelligence do you need?`
+      }
+
+      // Default intelligent response
+      return `🤖 MWT AI TACTICAL ANALYSIS SYSTEM (AITAS) - Advanced Military Analysis System\n\nI didn't recognize that specific query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n💡 TRY ASKING:\n• "What's the fastest tank?" - Performance analysis\n• "Su-57M vs F-22" - Combat comparisons\n• "Best Chinese vehicle" - National rankings\n• "Tier IV vehicles" - Category listings\n\nI'm designed to think analytically about military vehicle performance, tactics, and specifications. What would you like to analyze?`
+    }
 
     setTimeout(() => {
       const response = getVehicleInfo(chatInput)
@@ -8094,84 +8064,17 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             <div className="h-64 overflow-y-auto p-4 space-y-3">
               {chatMessages.map((msg, index) => (
                 <div key={index} className={`${msg.role === "user" ? "text-right" : "text-left"}`}>
-                  <div className="text-xs text-slate-400 mb-1">{msg.role === "user" ? "You:" : "AI Assistant:"}</div>
+                  <div className="text-xs text-slate-400 mb-1">{msg.role === "user" ? "You:" : "Database:"}</div>
                   <div
-                    className={`inline-block p-2 rounded-lg text-sm max-w-[280px] ${
+                    className={`inline-block p-2 rounded-lg text-sm ${
                       msg.role === "user" ? "bg-cyan-600 text-white" : "bg-slate-800 text-slate-200"
                     }`}
                   >
                     {msg.content}
-                    
-                    {/* Enhanced message rendering based on type */}
-                    {msg.type === 'comparison' && msg.data && (
-                      <div className="mt-3 space-y-3">
-                        <div className="grid grid-cols-2 gap-2 text-xs">
-                          <div className="bg-slate-700 p-2 rounded">
-                            <div className="font-semibold text-cyan-300">{msg.data.vehicle1.name}</div>
-                            <div className="text-slate-300">{msg.data.vehicle1.faction} {msg.data.vehicle1.type}</div>
-                            <div className="text-slate-400">Tier {formatTier(msg.data.vehicle1.tier)}</div>
-                            <div className="mt-1 space-y-1">
-                              {Object.entries(msg.data.vehicle1.stats).map(([key, value]) => (
-                                <div key={key} className="flex justify-between">
-                                  <span className="capitalize">{key}:</span>
-                                  <span className="text-cyan-300">{value}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                          <div className="bg-slate-700 p-2 rounded">
-                            <div className="font-semibold text-cyan-300">{msg.data.vehicle2.name}</div>
-                            <div className="text-slate-300">{msg.data.vehicle2.faction} {msg.data.vehicle2.type}</div>
-                            <div className="text-slate-400">Tier {formatTier(msg.data.vehicle2.tier)}</div>
-                            <div className="mt-1 space-y-1">
-                              {Object.entries(msg.data.vehicle2.stats).map(([key, value]) => (
-                                <div key={key} className="flex justify-between">
-                                  <span className="capitalize">{key}:</span>
-                                  <span className="text-cyan-300">{value}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    
-                    {(msg.type === 'recommendation' || msg.type === 'search') && msg.data && (
-                      <div className="mt-3 space-y-2">
-                        {msg.data.slice(0, 3).map((vehicle: any, vIndex: number) => (
-                          <div key={vIndex} className="bg-slate-700 p-2 rounded text-xs">
-                            <div className="flex items-center justify-between mb-1">
-                              <div className="font-semibold text-cyan-300">{vehicle.name}</div>
-                              {vehicle.performanceScore && (
-                                <div className="flex items-center text-yellow-400">
-                                  <Star className="w-3 h-3 mr-1" />
-                                  <span>{vehicle.performanceScore}</span>
-                                </div>
-                              )}
-                            </div>
-                            <div className="text-slate-300">{vehicle.faction} {vehicle.type}</div>
-                            <div className="text-slate-400">Tier {formatTier(vehicle.tier)}</div>
-                            <div className="mt-1 flex gap-2 text-xs">
-                              {Object.entries(vehicle.stats).slice(0, 3).map(([key, value]) => (
-                                <div key={key} className="bg-slate-600 px-1 py-0.5 rounded">
-                                  <span className="capitalize">{key}: </span>
-                                  <span className="text-cyan-300">{value}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 </div>
               ))}
-              {isLoading && (
-                <div className="text-center text-slate-400 flex items-center justify-center gap-2">
-                  <Bot className="w-4 h-4 animate-pulse" />
-                  <span>Analyzing vehicles...</span>
-                </div>
-              )}
+              {isLoading && <div className="text-center text-slate-400">Thinking...</div>}
             </div>
 
             <div className="p-4 border-t border-slate-700">
@@ -8181,7 +8084,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   onKeyPress={(e) => e.key === "Enter" && handleChatSubmit()}
-                  placeholder="Try: 'Compare Abrams vs T-90A' or 'Best Chinese MBT'"
+                  placeholder="Ask about vehicles..."
                   className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded text-sm focus:ring-2 focus:ring-cyan-500"
                 />
                 <button
