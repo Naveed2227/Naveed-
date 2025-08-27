@@ -7279,26 +7279,34 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      {/* Battle Pass Tab - Responsive */}
+      {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
-        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-r border-purple-400 min-h-[120px] sm:min-h-[140px] min-w-[44px] sm:min-w-[48px] flex items-center justify-center"
+        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-r border-purple-400 flex items-center justify-center
+                   min-h-[100px] min-w-[36px] 
+                   sm:min-h-[120px] sm:min-w-[42px] 
+                   md:min-h-[140px] md:min-w-[48px] 
+                   lg:min-h-[160px] lg:min-w-[52px]"
       >
-        {/* Mobile: Horizontal layout with icon + text */}
-        <div className="sm:hidden flex flex-col items-center justify-center px-3 py-4 text-white font-bold text-xs tracking-wide">
-          <svg className="w-5 h-5 mb-1" fill="currentColor" viewBox="0 0 24 24">
+        {/* Mobile: Compact icon + text */}
+        <div className="sm:hidden flex flex-col items-center justify-center px-2 py-3 text-white font-bold text-[10px] tracking-wide">
+          <svg className="w-4 h-4 mb-1" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
             <path d="M12 17L13.09 23.26L22 24L13.09 24.74L12 31L10.91 24.74L2 24L10.91 23.26L12 17Z" opacity="0.6"/>
           </svg>
-          <span className="text-center leading-tight">BATTLE<br/>PASS</span>
+          <span className="text-center leading-tight">BP</span>
         </div>
         
-        {/* Desktop: Vertical rotated text */}
+        {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
         <div 
-          className="hidden sm:flex px-3 py-6 text-white font-bold text-sm md:text-lg tracking-wider items-center justify-center ml-[-15px] mr-[-12px]"
+          className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider
+                     sm:px-2 sm:py-4 sm:text-xs sm:ml-[-8px] sm:mr-[-8px]
+                     md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px]
+                     lg:px-3 lg:py-6 lg:text-base lg:ml-[-15px] lg:mr-[-12px]"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
         >
-          BATTLE PASS
+          <span className="sm:block md:hidden">BATTLE<br/>PASS</span>
+          <span className="hidden md:block">BATTLE PASS</span>
         </div>
       </button>
 
@@ -7321,7 +7329,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               animate={{ x: 0 }}
               exit={{ x: -400 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed left-0 top-0 h-full bg-gradient-to-b from-slate-800 to-slate-900 border-r border-purple-500/30 z-50 overflow-y-auto shadow-2xl w-full sm:w-[400px] max-w-[400px]"
+              className="fixed left-0 top-0 h-full bg-gradient-to-b from-slate-800 to-slate-900 border-r border-purple-500/30 z-50 overflow-y-auto shadow-2xl 
+                         w-full max-w-full
+                         sm:w-[350px] sm:max-w-[350px]
+                         md:w-[400px] md:max-w-[400px]
+                         lg:w-[450px] lg:max-w-[450px]"
             >
               {/* Header */}
               <div className="p-6 bg-gradient-to-r from-lime-400 to-blue-600 border-b border-purple-400/30">
@@ -7343,8 +7355,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               </div>
 
               {/* Battle Pass List */}
-              <div className="p-6 space-y-4 mx-[-22px] w-[410px]">
-                <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2 ml-1.5">
+              <div className="space-y-4 
+                             p-4 mx-0 w-full
+                             sm:p-5 sm:mx-[-15px] sm:w-[365px]
+                             md:p-6 md:mx-[-22px] md:w-[422px]
+                             lg:p-6 lg:mx-[-22px] lg:w-[472px]">
+                <h3 className="font-semibold text-white mb-4 flex items-center gap-2
+                             text-lg ml-0
+                             sm:text-xl sm:ml-1
+                             md:text-xl md:ml-1.5">
                   <Calendar className="w-5 h-5 text-lime-300" />
                   Battle Passes
                 </h3>
@@ -7354,11 +7373,17 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     {/* Battle Pass Header */}
                     <button
                       onClick={() => setSelectedBattlePass(selectedBattlePass === battlePass.id ? null : battlePass.id)}
-                      className="p-4 text-left hover:bg-slate-700/30 transition-colors w-56"
+                      className="text-left hover:bg-slate-700/30 transition-colors w-full
+                                 p-3
+                                 sm:p-3.5 sm:w-full
+                                 md:p-4 md:w-56"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-4">
-                          <div className="h-16 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center border border-purple-400/30 overflow-hidden w-32 mr-1.5">
+                          <div className="bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center border border-purple-400/30 overflow-hidden
+                                       h-12 w-20 mr-1
+                                       sm:h-14 sm:w-24 sm:mr-1.5
+                                       md:h-16 md:w-32 md:mr-1.5">
                             <img 
                               src={battlePass.image} 
                               alt={battlePass.name}
@@ -7375,13 +7400,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             </div>
                           </div>
                           <div className="flex-1">
-                            <h4 className="text-lg font-bold text-white w-36">{battlePass.name}</h4>
-                            <p className="text-sm font-medium text-blue-300">{battlePass.month}</p>
+                            <h4 className="font-bold text-white
+                                         text-sm w-24
+                                         sm:text-base sm:w-28
+                                         md:text-lg md:w-36">{battlePass.name}</h4>
+                            <p className="font-medium text-blue-300
+                                        text-xs
+                                        sm:text-sm">{battlePass.month}</p>
                             
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className="text-white text-xs px-2 py-1 rounded-full font-medium bg-blue-600 w-[62px]">
+                          <span className="text-white font-medium bg-blue-600 rounded-full
+                                       text-[10px] px-1.5 py-0.5 w-12
+                                       sm:text-xs sm:px-2 sm:py-1 sm:w-14
+                                       md:text-xs md:px-2 md:py-1 md:w-[62px]">
                              Vehicles
                           </span>
                           {selectedBattlePass === battlePass.id ? (
@@ -7420,7 +7453,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                     }}
                                   >
                                     <div className="flex items-center space-x-3">
-                                      <div className="bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0 h-20 w-36 group-hover:border-purple-400/50 transition-colors">
+                                      <div className="bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0 group-hover:border-purple-400/50 transition-colors
+                                                     h-16 w-24
+                                                     sm:h-18 sm:w-28
+                                                     md:h-20 md:w-36">
                                         <img 
                                           src={`${vehicle.image}`} 
                                           alt={vehicle.name}
