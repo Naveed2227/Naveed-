@@ -7009,8 +7009,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         fastestJet: () => {
           const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
           return jets.reduce((prev, current) => {
-            const prevSpeed = prev.stats.afterburnerSpeed || prev.stats.speed || prev.stats.cruiseSpeed || 0
-            const currentSpeed = current.stats.afterburnerSpeed || current.stats.speed || current.stats.cruiseSpeed || 0
+            const prevSpeed = prev.stats.afterburnerSpeed || prev.stats.speed || 0
+            const currentSpeed = current.stats.afterburnerSpeed || current.stats.speed || 0
             return prevSpeed > currentSpeed ? prev : current
           })
         },
@@ -7044,35 +7044,30 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         },
       }
 
-      // Enhanced response formatting
+      // Clean and essential vehicle information formatting
       const formatVehicleDetails = (vehicle: any, context = "") => {
-        let response = `🎯 ${vehicle.name} (${vehicle.faction} ${vehicle.type})\n\n`
-
-        if (context) response += `${context}\n\n`
-
-        response += `📊 COMBAT SPECIFICATIONS:\n`
-        response += `• Health: ${vehicle.stats.health.toLocaleString()} HP\n`
-
-        if (vehicle.stats.speed) response += `• Speed: ${vehicle.stats.speed} km/h\n`
-        if (vehicle.stats.cruiseSpeed) response += `• Cruise Speed: ${vehicle.stats.cruiseSpeed} km/h\n`
-        if (vehicle.stats.afterburnerSpeed) response += `• Afterburner Speed: ${vehicle.stats.afterburnerSpeed} km/h\n`
-        if (vehicle.stats.armor) response += `• Armor: ${vehicle.stats.armor}\n`
-        if (vehicle.stats.agility) response += `• Agility: ${vehicle.stats.agility}\n`
-
-        response += `• Combat Tier: ${formatTier(vehicle.tier)}\n`
-        response += `• Nation: ${vehicle.faction}\n\n`
-
-        response += `📝 TACTICAL ANALYSIS:\n${vehicle.description}\n\n`
-
-        response += `⚔️ WEAPON SYSTEMS (${vehicle.weapons.length} total):\n`
-        response += vehicle.weapons
-          .map(
-            (w) =>
-              `• ${w.name}: ${w.damage} DMG, ${w.penetration} PEN${w.rateOfFire ? `, ${w.rateOfFire} RPM` : ""}${w.lockTime ? `, ${w.lockTime}s lock` : ""}`,
-          )
-          .join("\n")
-
-        return response
+        const vehicleSlug = vehicle.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-')
+        
+        // Create a structured message object instead of raw markdown
+        return {
+          type: 'vehicle_details',
+          vehicle: {
+            name: vehicle.name,
+            image: vehicle.image,
+            type: vehicle.type,
+            faction: vehicle.faction,
+            tier: formatTier(vehicle.tier),
+            description: vehicle.description,
+            stats: {
+              health: vehicle.stats.health,
+              speed: vehicle.stats.speed,
+              armor: vehicle.stats.armor,
+              agility: vehicle.stats.agility
+            },
+            url: `https://mwt-stats.com/vehicles/${vehicleSlug}`
+          },
+          context: context
+        }
       }
 
       // Advanced query processing with ChatGPT-like intelligence
@@ -7204,34 +7199,30 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
           if (vehicle1 && vehicle2) {
             const formatComparisonStats = (vehicle: any) => {
-              let stats = `• Health: ${vehicle.stats.health.toLocaleString()} HP\n`
-              if (vehicle.stats.speed) stats += `• Speed: ${vehicle.stats.speed} km/h\n`
-              if (vehicle.stats.cruiseSpeed) stats += `• Cruise Speed: ${vehicle.stats.cruiseSpeed} km/h\n`
-              if (vehicle.stats.afterburnerSpeed)
-                stats += `• Afterburner Speed: ${vehicle.stats.afterburnerSpeed} km/h\n`
-              if (vehicle.stats.armor) stats += `• Armor: ${vehicle.stats.armor}\n`
-              if (vehicle.stats.agility) stats += `• Agility: ${vehicle.stats.agility}\n`
-              stats += `• Tier: ${formatTier(vehicle.tier)}\n`
-              stats += `• Primary Weapons: ${vehicle.weapons
-                .slice(0, 3)
-                .map((w) => w.name)
-                .join(", ")}`
+              let stats = `• **Health:** ${vehicle.stats.health.toLocaleString()} HP\n\n`
+              if (vehicle.stats.speed) stats += `• **Speed:** ${vehicle.stats.speed} km/h\n\n`
+              if (vehicle.stats.armor) stats += `• **Armor:** ${vehicle.stats.armor}\n\n`
+              if (vehicle.stats.agility) stats += `• **Agility:** ${vehicle.stats.agility}\n\n`
+              stats += `• **Tier:** ${formatTier(vehicle.tier)}\n\n`
               return stats
             }
 
             const getMaxSpeed = (vehicle: any) =>
-              vehicle.stats.afterburnerSpeed || vehicle.stats.speed || vehicle.stats.cruiseSpeed || 0
+              vehicle.stats.afterburnerSpeed || vehicle.stats.speed || 0
 
             return (
-              `⚔️ AI TACTICAL ANALYSIS SYSTEM (AITAS): ${vehicle1.name} vs ${vehicle2.name}\n\n` +
-              `🔵 ${vehicle1.name} (${vehicle1.faction} ${vehicle1.type}):\n${formatComparisonStats(vehicle1)}\n\n` +
-              `🔴 ${vehicle2.name} (${vehicle2.faction} ${vehicle2.type}):\n${formatComparisonStats(vehicle2)}\n\n` +
-              `🏆 COMBAT SUPERIORITY ANALYSIS:\n` +
-              `• Survivability: ${vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name} (${Math.max(vehicle1.stats.health, vehicle2.stats.health).toLocaleString()} HP advantage)\n` +
-              `• Speed: ${getMaxSpeed(vehicle1) > getMaxSpeed(vehicle2) ? vehicle1.name : vehicle2.name} (${Math.max(getMaxSpeed(vehicle1), getMaxSpeed(vehicle2))} km/h max)\n` +
-              `• Firepower: ${vehicle1.weapons.length > vehicle2.weapons.length ? vehicle1.name : vehicle2.name} (${Math.max(vehicle1.weapons.length, vehicle2.weapons.length)} weapon systems)\n` +
-              `• Tier Advantage: ${vehicle1.tier === vehicle2.tier ? "Equal tier" : vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name}\n\n` +
-              `🎯 TACTICAL RECOMMENDATION: ${vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name + " for survivability" : vehicle2.name + " for survivability"}`
+              `**Vehicle Comparison: ${vehicle1.name} vs ${vehicle2.name}**\n\n` +
+              `![${vehicle1.name}](${vehicle1.image})\n` +
+              `**${vehicle1.name}** (${vehicle1.faction} ${vehicle1.type})\n` +
+              `${formatComparisonStats(vehicle1)}\n` +
+              `![${vehicle2.name}](${vehicle2.image})\n` +
+              `**${vehicle2.name}** (${vehicle2.faction} ${vehicle2.type})\n` +
+              `${formatComparisonStats(vehicle2)}\n` +
+              `**Analysis:**\n` +
+              `• Survivability: ${vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name} (${Math.max(vehicle1.stats.health, vehicle2.stats.health).toLocaleString()} HP)\n` +
+              `• Speed: ${getMaxSpeed(vehicle1) > getMaxSpeed(vehicle2) ? vehicle1.name : vehicle2.name} (${Math.max(getMaxSpeed(vehicle1), getMaxSpeed(vehicle2))} km/h)\n` +
+              `• Tier: ${vehicle1.tier === vehicle2.tier ? "Equal tier" : vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name}\n\n` +
+              `**Recommendation:** ${vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name} for superior survivability.`
             )
           }
         }
@@ -7243,29 +7234,66 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         return formatVehicleDetails(foundVehicle)
       }
 
-      // Tier and nation listings with intelligence
+      // Tier and nation listings with clean formatting
       if (lowerQuery.includes("tier ii") || lowerQuery.includes("tier 2")) {
         const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier II")
-        return `🎖️ TIER II COMBAT VEHICLES (${tierVehicles.length} platforms):\n\nThese intermediate-tier vehicles offer balanced performance for developing commanders:\n\n${tierVehicles.map((v) => `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP`).join("\n")}`
+        let response = `**Tier II Combat Vehicles**\n`
+        response += `${tierVehicles.length} intermediate-tier platforms:\n\n`
+        tierVehicles.forEach(v => {
+          response += `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP\n`
+        })
+        return response
       }
 
       if (lowerQuery.includes("tier iii") || lowerQuery.includes("tier 3")) {
         const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier III")
-        return `🎖️ TIER III COMBAT VEHICLES (${tierVehicles.length} platforms):\n\nAdvanced military hardware for experienced operators:\n\n${tierVehicles.map((v) => `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP`).join("\n")}`
+        let response = `**Tier III Combat Vehicles**\n`
+        response += `${tierVehicles.length} advanced platforms:\n\n`
+        tierVehicles.forEach(v => {
+          response += `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP\n`
+        })
+        return response
       }
 
       if (lowerQuery.includes("tier iv") || lowerQuery.includes("tier 4")) {
         const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier IV")
-        return `🎖️ TIER IV COMBAT VEHICLES (${tierVehicles.length} platforms):\n\nCutting-edge military technology for elite commanders:\n\n${tierVehicles.map((v) => `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP`).join("\n")}`
+        let response = `**Tier IV Combat Vehicles**\n`
+        response += `${tierVehicles.length} cutting-edge platforms:\n\n`
+        tierVehicles.forEach(v => {
+          response += `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP\n`
+        })
+        return response
       }
 
-      // Enhanced help and default responses
+      // Help and default responses with clean formatting
       if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
-        return `🤖 MWT AI TACTICAL ANALYSIS SYSTEM (AITAS)\n\nI'm an advanced military vehicle analysis system. I can provide:\n\n🔍 VEHICLE ANALYSIS:\n• "Su-57M" - Complete specifications\n• "T-14 vs Abrams X" - Tactical comparisons\n\n🏆 PERFORMANCE QUERIES:\n• "Fastest tank" - Speed analysis\n• "Strongest jet" - Durability rankings\n• "Most armored vehicle" - Protection analysis\n\n🌍 NATION ANALYSIS:\n• "Best Russian vehicle" - National superiority\n• "American vehicles" - Fleet listings\n\n📊 DATA INSIGHTS:\n• "Tier IV vehicles" - Tier breakdowns\n• "Market vehicles" - Premium platforms\n\nWhat tactical intelligence do you need?`
+        return `**MWT AI Tactical Analysis System**\n\n` +
+               `I can help you analyze military vehicles. Here's what I can do:\n\n` +
+               `**Vehicle Analysis:**\n` +
+               `• Individual specs: "Su-57M"\n` +
+               `• Head-to-head comparisons: "T-14 vs Abrams X"\n\n` +
+               `**Performance Queries:**\n` +
+               `• Speed analysis: "Fastest tank"\n` +
+               `• Durability rankings: "Strongest jet"\n` +
+               `• Protection analysis: "Most armored vehicle"\n\n` +
+               `**Nation Analysis:**\n` +
+               `• Best by nation: "Best Russian vehicle"\n` +
+               `• Fleet listings: "American vehicles"\n\n` +
+               `**Data Insights:**\n` +
+               `• Tier breakdowns: "Tier IV vehicles"\n` +
+               `• Category listings: "Market vehicles"\n\n` +
+               `What would you like to analyze?`
       }
 
-      // Default intelligent response
-      return `🤖 MWT AI TACTICAL ANALYSIS SYSTEM (AITAS) - Advanced Military Analysis System\n\nI didn't recognize that specific query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n💡 TRY ASKING:\n• "What's the fastest tank?" - Performance analysis\n• "Su-57M vs F-22" - Combat comparisons\n• "Best Chinese vehicle" - National rankings\n• "Tier IV vehicles" - Category listings\n\nI'm designed to think analytically about military vehicle performance, tactics, and specifications. What would you like to analyze?`
+      // Default response with clean formatting
+      return `**MWT AI Tactical Analysis System**\n\n` +
+             `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n` +
+             `**Try asking:**\n` +
+             `• "What's the fastest tank?" - Performance analysis\n` +
+             `• "Su-57M vs F-22" - Combat comparison\n` +
+             `• "Best Chinese vehicle" - Nation rankings\n` +
+             `• "Tier IV vehicles" - Category listings\n\n` +
+             `What would you like to analyze?`
     }
 
     setTimeout(() => {
@@ -8106,7 +8134,66 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       msg.role === "user" ? "bg-cyan-600 text-white" : "bg-slate-800 text-slate-200"
                     }`}
                   >
-                    {msg.content}
+                    {typeof msg.content === 'object' && msg.content.type === 'vehicle_details' ? (
+                      <div className="space-y-3">
+                        {/* Vehicle Image */}
+                        <img 
+                          src={msg.content.vehicle.image} 
+                          alt={msg.content.vehicle.name}
+                          className="w-full max-w-xs rounded-lg"
+                        />
+                        
+                        {/* Context */}
+                        {msg.content.context && (
+                          <div className="text-cyan-300 font-medium mb-2">
+                            {msg.content.context}
+                          </div>
+                        )}
+                        
+                        {/* Vehicle Name */}
+                        <h3 className="text-lg font-bold text-white">{msg.content.vehicle.name}</h3>
+                        
+                        {/* Vehicle Info */}
+                        <div className="space-y-1">
+                          <div><strong>Type:</strong> {msg.content.vehicle.type}</div>
+                          <div><strong>Faction:</strong> {msg.content.vehicle.faction}</div>
+                          <div><strong>Tier:</strong> {msg.content.vehicle.tier}</div>
+                        </div>
+                        
+                        {/* Description */}
+                        <div>
+                          <strong>Description:</strong>
+                          <div className="mt-1">{msg.content.vehicle.description}</div>
+                        </div>
+                        
+                        {/* Key Stats */}
+                        <div>
+                          <strong>Key Stats:</strong>
+                          <div className="mt-2 space-y-1">
+                            <div>• <strong>Health:</strong> {msg.content.vehicle.stats.health?.toLocaleString()} HP</div>
+                            {msg.content.vehicle.stats.speed && (
+                              <div>• <strong>Speed:</strong> {msg.content.vehicle.stats.speed} km/h</div>
+                            )}
+                            {msg.content.vehicle.stats.armor && (
+                              <div>• <strong>Armor:</strong> {msg.content.vehicle.stats.armor}</div>
+                            )}
+                            {msg.content.vehicle.stats.agility && (
+                              <div>• <strong>Agility:</strong> {msg.content.vehicle.stats.agility}</div>
+                            )}
+                          </div>
+                        </div>
+                        
+                        {/* View Vehicle Button */}
+                        <button
+                          onClick={() => window.open(msg.content.vehicle.url, '_blank')}
+                          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors mt-3"
+                        >
+                          View Vehicle
+                        </button>
+                      </div>
+                    ) : (
+                      msg.content
+                    )}
                   </div>
                 </div>
               ))}
