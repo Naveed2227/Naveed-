@@ -4425,79 +4425,37 @@ const VEHICLES = [
     },
   },
   
-  {
-    "id": 700,
-    "name": "M60",
-    "type": "Main Battle Tank",
-    "faction": "American",
-    "tier": "II",
-    "image": "M60.jpg",
-    "description": "American main battle tank designed for Tier II battles.",
-    "stats": {
-      "health": 30000,
-      "speed": 45,
-      "armor": "600mm",
-      "agility": 30
-    },
-    "weapons": [
-      {
-        "name": "M60 Main Gun",
-        "type": "Main Gun",
-        "damage": 10000,
-        "penetration": 600
-      },
-      {
-        "name": "M60 Secondary MG",
-        "type": "Machine Gun",
-        "damage": 150,
-        "penetration": 20,
-        "rateOfFire": "600 rpm"
-      }
+   {
+    id: 700,
+    name: "M60 Patton",
+    type: "Main Battle Tank",
+    faction: "American",
+    tier: "II",
+    image: "M60-Patton.jpg",
+    description: "Cold War era main battle tank with proven reliability and combat effectiveness.",
+    stats: { health: 32000, speed: 50, armor: "650mm", agility: 36 },
+    weapons: [
+      { name: "M68 105mm L52", type: "Main Gun", damage: 11800, penetration: 620 },
+      { name: "M85 12.7mm", type: "Machine Gun", damage: 180, penetration: 28, rateOfFire: "450 rpm" },
+      { name: "M240 7.62mm", type: "Coaxial MG", damage: 120, penetration: 15, rateOfFire: "750 rpm" },
     ],
-    "modules": {
-      "engine": [
-        {
-          "name": "M60 Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "M60 Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "M60 Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
+    modules: {
+      engine: [
+        { name: "Continental AVDS MK1", bonus: "+6 km/h speed" },
+        { name: "Continental AVDS MK2", bonus: "+12 km/h speed" },
+        { name: "Continental AVDS MK3", bonus: "+18 km/h speed" },
       ],
-      "armor": [
-        {
-          "name": "M60 Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "M60 Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "M60 Armor MK3",
-          "bonus": "+300mm protection"
-        }
+      armor: [
+        { name: "Steel Armor MK1", bonus: "+120mm protection" },
+        { name: "Steel Armor MK2", bonus: "+240mm protection" },
+        { name: "Steel Armor MK3", bonus: "+360mm protection" },
       ],
-      "fireControl": [
-        {
-          "name": "M60 FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "M60 FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "M60 FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+      fireControl: [
+        { name: "Optical Rangefinder MK1", bonus: "+10% accuracy" },
+        { name: "Optical Rangefinder MK2", bonus: "+18% accuracy" },
+        { name: "Optical Rangefinder MK3", bonus: "+26% accuracy" },
+      ],
+    },
   },
   {
     "id": 701,
@@ -5239,79 +5197,37 @@ const VEHICLES = [
       ]
     }
   },
-  {
-    "id": 711,
-    "name": "M3 Bradley",
-    "type": "Light Tank",
-    "faction": "American",
-    "tier": "II",
-    "image": "M3-Bradley.jpg",
-    "description": "American infantry fighting vehicle designed for Tier II battles.",
-    "stats": {
-      "health": 35500,
-      "speed": 46,
-      "armor": "620mm",
-      "agility": 31
-    },
-    "weapons": [
-      {
-        "name": "M3 Bradley Main Gun",
-        "type": "Main Gun",
-        "damage": 10500,
-        "penetration": 610
-      },
-      {
-        "name": "M3 Bradley Secondary MG",
-        "type": "Machine Gun",
-        "damage": 160,
-        "penetration": 21,
-        "rateOfFire": "611 rpm"
-      }
+    {
+    id: 711,
+    name: "M3 Bradley",
+    type: "Multirole-IFV",
+    faction: "American",
+    tier: "II",
+    description: "Infantry fighting vehicle with TOW missile system and troop transport capability.",
+    image: "M3-Bradley.jpg",
+    stats: { health: 25000, speed: 62, armor: "380mm", agility: 35 },
+    weapons: [
+      { name: "TOW-2 ATGM", type: "Anti-Tank Missile", damage: 14800, penetration: 780 },
+      { name: "M242 25mm", type: "Autocannon", damage: 320, penetration: 58, rateOfFire: "200 rpm" },
+      { name: "M240C 7.62mm", type: "Coaxial MG", damage: 110, penetration: 14, rateOfFire: "750 rpm" },
     ],
-    "modules": {
-      "engine": [
-        {
-          "name": "M3 Bradley Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "M3 Bradley Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "M3 Bradley Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
+    modules: {
+      engine: [
+        { name: "Cummins VTA-903T MK1", bonus: "+10 km/h speed" },
+        { name: "Cummins VTA-903T MK2", bonus: "+20 km/h speed" },
+        { name: "Cummins VTA-903T MK3", bonus: "+30 km/h speed" },
       ],
-      "armor": [
-        {
-          "name": "M3 Bradley Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "M3 Bradley Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "M3 Bradley Armor MK3",
-          "bonus": "+300mm protection"
-        }
+      armor: [
+        { name: "Aluminum Armor MK1", bonus: "+70mm protection" },
+        { name: "Aluminum Armor MK2", bonus: "+140mm protection" },
+        { name: "Aluminum Armor MK3", bonus: "+210mm protection" },
       ],
-      "fireControl": [
-        {
-          "name": "M3 Bradley FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "M3 Bradley FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "M3 Bradley FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+      fireControl: [
+        { name: "Integrated Sight MK1", bonus: "+12% accuracy" },
+        { name: "Integrated Sight MK2", bonus: "+22% accuracy" },
+        { name: "Integrated Sight MK3", bonus: "+32% accuracy" },
+      ],
+    },
   },
   {
     "id": 712,
@@ -5461,79 +5377,36 @@ const VEHICLES = [
       ]
     }
   },
-  {
-    "id": 714,
-    "name": "IT-1 Dragon",
-    "type": "Missile Carrier",
-    "faction": "Russian",
-    "tier": "II",
-    "image": "IT-1-Dragon.jpg",
-    "description": "Russian missile carrier designed for Tier II battles.",
-    "stats": {
-      "health": 37000,
-      "speed": 49,
-      "armor": "680mm",
-      "agility": 34
-    },
-    "weapons": [
-      {
-        "name": "IT-1 Dragon Main Gun",
-        "type": "Main Gun",
-        "damage": 12000,
-        "penetration": 640
-      },
-      {
-        "name": "IT-1 Dragon Secondary MG",
-        "type": "Machine Gun",
-        "damage": 190,
-        "penetration": 24,
-        "rateOfFire": "614 rpm"
-      }
+    {
+    id: 714,
+    name: "IT-1 Dragon",
+    type: "Missile Carrier",
+    faction: "Russian",
+    tier: "II",
+    description: "Experimental missile tank destroyer with unique guided missile system.",
+    image: "IT-1-Dragon.jpg",
+    stats: { health: 22800, speed: 50, armor: "520mm", agility: 55 },
+    weapons: [
+      { name: "3M7 Drakon ATGM", type: "Anti-Tank Missile", damage: 15200, penetration: 500 },
+      { name: "PKT 7.62mm", type: "Machine Gun", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
     ],
-    "modules": {
-      "engine": [
-        {
-          "name": "IT-1 Dragon Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "IT-1 Dragon Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "IT-1 Dragon Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
+    modules: {
+      engine: [
+        { name: "V-54K MK1", bonus: "+6 km/h speed" },
+        { name: "V-54K MK2", bonus: "+12 km/h speed" },
+        { name: "V-54K MK3", bonus: "+18 km/h speed" },
       ],
-      "armor": [
-        {
-          "name": "IT-1 Dragon Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "IT-1 Dragon Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "IT-1 Dragon Armor MK3",
-          "bonus": "+300mm protection"
-        }
+      armor: [
+        { name: "Steel Armor MK1", bonus: "+100mm protection" },
+        { name: "Steel Armor MK2", bonus: "+200mm protection" },
+        { name: "Steel Armor MK3", bonus: "+300mm protection" },
       ],
-      "fireControl": [
-        {
-          "name": "IT-1 Dragon FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "IT-1 Dragon FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "IT-1 Dragon FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+      fireControl: [
+        { name: "Missile Guidance MK1", bonus: "+15% accuracy" },
+        { name: "Missile Guidance MK2", bonus: "+25% accuracy" },
+        { name: "Missile Guidance MK3", bonus: "+35% accuracy" },
+      ],
+    },
   },
   {
     "id": 715,
@@ -5683,80 +5556,38 @@ const VEHICLES = [
       ]
     }
   },
-  {
-    "id": 717,
-    "name": "ZSU-23-4M4 Shilka",
-    "type": "Anti air",
-    "faction": "Russian",
-    "tier": "II",
-    "image": "ZSU-23-4M4-Shilka.jpg",
-    "description": "Russian anti-air designed for Tier II battles.",
-    "stats": {
-      "health": 38500,
-      "speed": 52,
-      "armor": "640mm",
-      "agility": 37
-    },
-    "weapons": [
-      {
-        "name": "ZSU-23-4M4 Shilka Main Gun",
-        "type": "Main Gun",
-        "damage": 11000,
-        "penetration": 670
-      },
-      {
-        "name": "ZSU-23-4M4 Shilka Secondary MG",
-        "type": "Machine Gun",
-        "damage": 170,
-        "penetration": 22,
-        "rateOfFire": "617 rpm"
-      }
+   {
+    id: 717,
+    name: "ZSU-23-4M4 Shilka",
+    type: "Anti-Air",
+    faction: "Russian",
+    tier: "II",
+    description: "Self-propelled anti-aircraft gun with quad 23mm cannons and radar guidance.",
+    image: "ZSU-23-4M4-Shilka.jpg",
+    stats: { health: 21000, speed: 68, armor: "280mm", agility: 32 },
+    weapons: [
+      { name: "AZP-23 23mm Quad", type: "Anti-Aircraft Gun", damage: 1800, penetration: 95, rateOfFire: "3400 rpm" },
+      { name: "9M311 Sosna", type: "SAM", damage: 7500, penetration: 380 },
     ],
-    "modules": {
-      "engine": [
-        {
-          "name": "ZSU-23-4M4 Shilka Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "ZSU-23-4M4 Shilka Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "ZSU-23-4M4 Shilka Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
+    modules: {
+      engine: [
+        { name: "V-6R MK1", bonus: "+6 km/h speed" },
+        { name: "V-6R MK2", bonus: "+12 km/h speed" },
+        { name: "V-6R MK3", bonus: "+18 km/h speed" },
       ],
-      "armor": [
-        {
-          "name": "ZSU-23-4M4 Shilka Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "ZSU-23-4M4 Shilka Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "ZSU-23-4M4 Shilka Armor MK3",
-          "bonus": "+300mm protection"
-        }
+      armor: [
+        { name: "Steel Armor MK1", bonus: "+50mm protection" },
+        { name: "Steel Armor MK2", bonus: "+100mm protection" },
+        { name: "Steel Armor MK3", bonus: "+150mm protection" },
       ],
-      "fireControl": [
-        {
-          "name": "ZSU-23-4M4 Shilka FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "ZSU-23-4M4 Shilka FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "ZSU-23-4M4 Shilka FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+      fireControl: [
+        { name: "Gun Dish Radar MK1", bonus: "+20% accuracy" },
+        { name: "Gun Dish Radar MK2", bonus: "+35% accuracy" },
+        { name: "Gun Dish Radar MK3", bonus: "+50% accuracy" },
+      ],
+    },
   },
+  
   {
     "id": 718,
     "name": "LAV-300",
