@@ -6774,6 +6774,7 @@ const MwtVehicleStats = () => {
   const [countryFilter, setCountryFilter] = useState("")
   const [compare, setCompare] = useState<string[]>([])
   const [expandedVehicle, setExpandedVehicle] = useState("")
+  const comparisonRef = useRef<HTMLDivElement>(null)
   const [chatOpen, setChatOpen] = useState(false)
   const [chatMessages, setChatMessages] = useState<{ role: string; content: string }[]>([])
   const [isLoading, setIsLoading] = useState(false)
@@ -6965,7 +6966,18 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     if (compare.includes(id)) {
       setCompare(compare.filter((vehicleId) => vehicleId !== id))
     } else if (compare.length < 2) {
-      setCompare([...compare, id])
+      const newCompare = [...compare, id]
+      setCompare(newCompare)
+      
+      // Auto-scroll to comparison when second vehicle is selected
+      if (newCompare.length === 2) {
+        setTimeout(() => {
+          comparisonRef.current?.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          })
+        }, 100)
+      }
     }
   }
 
@@ -8113,7 +8125,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
       <main className="max-w-7xl p-4 sm:p-6 mx-auto px-4 sm:px-6">
         {compare.length === 2 && (
-          <div className="mb-8 bg-slate-900/40 rounded-xl p-6 border border-slate-800">
+          <div ref={comparisonRef} className="mb-8 bg-slate-900/40 rounded-xl p-6 border border-slate-800">
             <h2 className="text-2xl font-bold text-cyan-400 mb-4">Vehicle Comparison</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {compare.map((id) => {
@@ -8121,7 +8133,17 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 if (!vehicle) return null
                 return (
                   <div key={id} className="bg-slate-800/50 rounded-lg p-4">
-                    <h3 className="text-xl font-semibold text-cyan-300 mb-2">{vehicle.name}</h3>
+                    <div className="flex flex-col items-center mb-4">
+                      <img
+                        src={vehicle.image}
+                        alt={vehicle.name}
+                        className="w-128 h-64 object-cover rounded-lg mb-3"
+                        onError={(e) => {
+                          e.currentTarget.src = "/placeholder-vehicle.png"
+                        }}
+                      />
+                      <h3 className="text-xl font-semibold text-cyan-300 mb-2 text-center">{vehicle.name}</h3>
+                    </div>
                     <p className="text-slate-400 text-sm mb-3">{vehicle.description}</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                       <div>
@@ -8129,8 +8151,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.health.toLocaleString()}</span>
                       </div>
                       <div>
-                        <span className="text-slate-400">Speed:</span>
+                        <span className="text-slate-400">Cruise speed:</span>
                         <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.speed} km/h</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400">Afterburner Speed:</span>
+                        <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.afterburnerSpeed} km/h</span>
                       </div>
                       {vehicle.stats.armor && (
                         <div>
