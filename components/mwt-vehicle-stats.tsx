@@ -7299,32 +7299,64 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           const vehicle2 = searchVehicle(parts[1].trim())
 
           if (vehicle1 && vehicle2) {
-            const formatComparisonStats = (vehicle: any) => {
-              let stats = `• **Health:** ${vehicle.stats.health.toLocaleString()} HP\n\n`
-              if (vehicle.stats.speed) stats += `• **Speed:** ${vehicle.stats.speed} km/h\n\n`
-              if (vehicle.stats.armor) stats += `• **Armor:** ${vehicle.stats.armor}\n\n`
-              if (vehicle.stats.agility) stats += `• **Agility:** ${vehicle.stats.agility}\n\n`
-              stats += `• **Tier:** ${formatTier(vehicle.tier)}\n\n`
-              return stats
+            const getCountryFlag = (faction: string) => {
+              const flags: { [key: string]: string } = {
+                'American': '🇺🇸',
+                'Russian': '🇷🇺', 
+                'Chinese': '🇨🇳',
+                'German': '🇩🇪',
+                'British': '🇬🇧',
+                'French': '🇫🇷',
+                'Israeli': '🇮🇱',
+                'Japanese': '🇯🇵',
+                'Italian': '🇮🇹'
+              }
+              return flags[faction] || '🏳️'
             }
 
-            const getMaxSpeed = (vehicle: any) =>
-              vehicle.stats.afterburnerSpeed || vehicle.stats.speed || 0
-
-            return (
-              `**Vehicle Comparison: ${vehicle1.name} vs ${vehicle2.name}**\n\n` +
-              `![${vehicle1.name}](${vehicle1.image})\n` +
-              `**${vehicle1.name}** (${vehicle1.faction} ${vehicle1.type})\n` +
-              `${formatComparisonStats(vehicle1)}\n` +
-              `![${vehicle2.name}](${vehicle2.image})\n` +
-              `**${vehicle2.name}** (${vehicle2.faction} ${vehicle2.type})\n` +
-              `${formatComparisonStats(vehicle2)}\n` +
-              `**Analysis:**\n` +
-              `• Survivability: ${vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name} (${Math.max(vehicle1.stats.health, vehicle2.stats.health).toLocaleString()} HP)\n` +
-              `• Speed: ${getMaxSpeed(vehicle1) > getMaxSpeed(vehicle2) ? vehicle1.name : vehicle2.name} (${Math.max(getMaxSpeed(vehicle1), getMaxSpeed(vehicle2))} km/h)\n` +
-              `• Tier: ${vehicle1.tier === vehicle2.tier ? "Equal tier" : vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name}\n\n` +
-              `**Recommendation:** ${vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name} for superior survivability.`
-            )
+            return {
+              type: 'vehicle_comparison',
+              vehicles: [
+                {
+                  name: vehicle1.name,
+                  image: vehicle1.image,
+                  faction: vehicle1.faction,
+                  type: vehicle1.type,
+                  tier: formatTier(vehicle1.tier),
+                  flag: getCountryFlag(vehicle1.faction),
+                  stats: {
+                    health: vehicle1.stats.health,
+                    speed: vehicle1.stats.speed,
+                    armor: vehicle1.stats.armor,
+                    agility: vehicle1.stats.agility
+                  }
+                },
+                {
+                  name: vehicle2.name,
+                  image: vehicle2.image,
+                  faction: vehicle2.faction,
+                  type: vehicle2.type,
+                  tier: formatTier(vehicle2.tier),
+                  flag: getCountryFlag(vehicle2.faction),
+                  stats: {
+                    health: vehicle2.stats.health,
+                    speed: vehicle2.stats.speed,
+                    armor: vehicle2.stats.armor,
+                    agility: vehicle2.stats.agility
+                  }
+                }
+              ],
+              analysis: {
+                survivability: vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name,
+                survivabilityValue: Math.max(vehicle1.stats.health, vehicle2.stats.health),
+                speed: (vehicle1.stats.speed || 0) > (vehicle2.stats.speed || 0) ? vehicle1.name : vehicle2.name,
+                speedValue: Math.max(vehicle1.stats.speed || 0, vehicle2.stats.speed || 0),
+                agility: (vehicle1.stats.agility || 0) > (vehicle2.stats.agility || 0) ? vehicle1.name : vehicle2.name,
+                agilityValue: Math.max(vehicle1.stats.agility || 0, vehicle2.stats.agility || 0),
+                tier: vehicle1.tier === vehicle2.tier ? "Equal tier" : vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name
+              },
+              recommendation: vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name
+            }
           }
         }
       }
@@ -8319,6 +8351,83 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         >
                           View Vehicle
                         </button>
+                      </div>
+                    ) : typeof msg.content === 'object' && msg.content.type === 'vehicle_comparison' ? (
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-bold text-white text-center">Vehicle Comparison</h3>
+                        
+                        {/* Vehicle 1 */}
+                        <div className="bg-slate-700/30 rounded-lg p-3 border border-slate-600">
+                          <img 
+                            src={`${msg.content.vehicles[0].image}`} 
+                            alt={msg.content.vehicles[0].name}
+                            className="w-full max-w-xs rounded-lg object-cover mb-3"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
+                          <h4 className="font-bold text-cyan-300 mb-2">
+                            {msg.content.vehicles[0].flag} {msg.content.vehicles[0].name}
+                          </h4>
+                          <div className="space-y-1 text-sm">
+                            <div>❤️ Health: {msg.content.vehicles[0].stats.health?.toLocaleString()} HP</div>
+                            {msg.content.vehicles[0].stats.speed && (
+                              <div>⚡ Speed: {msg.content.vehicles[0].stats.speed} km/h</div>
+                            )}
+                            {msg.content.vehicles[0].stats.agility && (
+                              <div>🌀 Agility: {msg.content.vehicles[0].stats.agility}</div>
+                            )}
+                            <div>🎖️ Tier: {msg.content.vehicles[0].tier}</div>
+                          </div>
+                        </div>
+
+                        {/* Vehicle 2 */}
+                        <div className="bg-slate-700/30 rounded-lg p-3 border border-slate-600">
+                          <img 
+                            src={`${msg.content.vehicles[1].image}`} 
+                            alt={msg.content.vehicles[1].name}
+                            className="w-full max-w-xs rounded-lg object-cover mb-3"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
+                          <h4 className="font-bold text-cyan-300 mb-2">
+                            {msg.content.vehicles[1].flag} {msg.content.vehicles[1].name}
+                          </h4>
+                          <div className="space-y-1 text-sm">
+                            <div>❤️ Health: {msg.content.vehicles[1].stats.health?.toLocaleString()} HP</div>
+                            {msg.content.vehicles[1].stats.speed && (
+                              <div>⚡ Speed: {msg.content.vehicles[1].stats.speed} km/h</div>
+                            )}
+                            {msg.content.vehicles[1].stats.agility && (
+                              <div>🌀 Agility: {msg.content.vehicles[1].stats.agility}</div>
+                            )}
+                            <div>🎖️ Tier: {msg.content.vehicles[1].tier}</div>
+                          </div>
+                        </div>
+
+                        {/* Analysis Section */}
+                        <div className="bg-slate-800/50 rounded-lg p-3 border border-slate-600">
+                          <h4 className="font-bold text-yellow-300 mb-2">📊 Analysis</h4>
+                          <div className="space-y-1 text-sm">
+                            <div>• Survivability: <strong>{msg.content.analysis.survivability}</strong> ({msg.content.analysis.survivabilityValue?.toLocaleString()} HP)</div>
+                            {msg.content.analysis.speedValue > 0 && (
+                              <div>• Speed: <strong>{msg.content.analysis.speed}</strong> ({msg.content.analysis.speedValue} km/h)</div>
+                            )}
+                            {msg.content.analysis.agilityValue > 0 && (
+                              <div>• Agility: <strong>{msg.content.analysis.agility}</strong> ({msg.content.analysis.agilityValue})</div>
+                            )}
+                            <div>• Tier: <strong>{msg.content.analysis.tier}</strong></div>
+                          </div>
+                        </div>
+
+                        {/* Recommendation */}
+                        <div className="bg-green-900/30 rounded-lg p-3 border border-green-600/50">
+                          <h4 className="font-bold text-green-300 mb-1">🏆 Recommendation</h4>
+                          <div className="text-sm">
+                            <strong>{msg.content.recommendation}</strong> for superior overall performance
+                          </div>
+                        </div>
                       </div>
                     ) : typeof msg.content === 'object' && msg.content.type === 'no_vehicle_found' ? (
                       <div className="text-slate-300 italic">
