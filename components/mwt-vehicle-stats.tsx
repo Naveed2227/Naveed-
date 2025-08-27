@@ -7044,11 +7044,46 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         },
       }
 
+      // Vehicle filtering and selection logic
+      const filterVehicles = (filters: {
+        tier?: number,
+        role?: string,
+        nation?: string,
+        premium?: boolean,
+        market?: boolean
+      }) => {
+        return VEHICLES.filter(vehicle => {
+          if (filters.tier && vehicle.tier !== filters.tier) return false
+          if (filters.role && !vehicle.type.toLowerCase().includes(filters.role.toLowerCase())) return false
+          if (filters.nation && !vehicle.faction.toLowerCase().includes(filters.nation.toLowerCase())) return false
+          if (filters.premium !== undefined && (vehicle as any).isPremium !== filters.premium) return false
+          if (filters.market !== undefined && (vehicle as any).isMarket !== filters.market) return false
+          return true
+        })
+      }
+
+      const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility' | 'speed' = 'health') => {
+        if (vehicles.length === 0) return null
+        
+        return vehicles.reduce((best, current) => {
+          const bestStat = best.stats[criteria] || 0
+          const currentStat = current.stats[criteria] || 0
+          return currentStat > bestStat ? current : best
+        })
+      }
+
       // Clean and essential vehicle information formatting
       const formatVehicleDetails = (vehicle: any, context = "") => {
+        if (!vehicle) {
+          return {
+            type: 'no_vehicle_found',
+            message: "No vehicles found for that Tier/Role/Nation combination."
+          }
+        }
+
         const vehicleSlug = vehicle.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-')
         
-        // Create a structured message object instead of raw markdown
+        // Create a structured message object with new emoji format
         return {
           type: 'vehicle_details',
           vehicle: {
@@ -7058,6 +7093,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             faction: vehicle.faction,
             tier: formatTier(vehicle.tier),
             description: vehicle.description,
+            isPremium: vehicle.isPremium || false,
+            isMarket: vehicle.isMarket || false,
             stats: {
               health: vehicle.stats.health,
               speed: vehicle.stats.speed,
@@ -7072,7 +7109,71 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
       // Advanced query processing with ChatGPT-like intelligence
 
-      // Fastest vehicle queries
+      // Enhanced "best" vehicle queries with filtering
+      if (lowerQuery.includes("best") || lowerQuery.includes("fastest") || lowerQuery.includes("strongest") || lowerQuery.includes("toughest")) {
+        let filters: any = {}
+        let criteria: 'health' | 'armor' | 'agility' | 'speed' = 'health'
+        
+        // Parse tier
+        const tierMatch = lowerQuery.match(/tier\s*(i{1,4}|v|vi{1,3}|ix|x|\d+)/i)
+        if (tierMatch) {
+          const tierStr = tierMatch[1].toLowerCase()
+          if (tierStr === 'i') filters.tier = 1
+          else if (tierStr === 'ii') filters.tier = 2
+          else if (tierStr === 'iii') filters.tier = 3
+          else if (tierStr === 'iv') filters.tier = 4
+          else if (tierStr === 'v') filters.tier = 5
+          else if (tierStr === 'vi') filters.tier = 6
+          else if (tierStr === 'vii') filters.tier = 7
+          else if (tierStr === 'viii') filters.tier = 8
+          else if (tierStr === 'ix') filters.tier = 9
+          else if (tierStr === 'x') filters.tier = 10
+          else filters.tier = parseInt(tierStr)
+        }
+        
+        // Parse role/type
+        if (lowerQuery.includes('tank')) filters.role = 'tank'
+        if (lowerQuery.includes('mbt')) filters.role = 'mbt'
+        if (lowerQuery.includes('fighter')) filters.role = 'fighter'
+        if (lowerQuery.includes('jet')) filters.role = 'jet'
+        if (lowerQuery.includes('helicopter')) filters.role = 'helicopter'
+        if (lowerQuery.includes('mlrs')) filters.role = 'mlrs'
+        
+        // Parse nation
+        if (lowerQuery.includes('american') || lowerQuery.includes('usa') || lowerQuery.includes('us')) filters.nation = 'american'
+        if (lowerQuery.includes('russian') || lowerQuery.includes('russia')) filters.nation = 'russian'
+        if (lowerQuery.includes('chinese') || lowerQuery.includes('china')) filters.nation = 'chinese'
+        if (lowerQuery.includes('german') || lowerQuery.includes('germany')) filters.nation = 'german'
+        if (lowerQuery.includes('british') || lowerQuery.includes('uk')) filters.nation = 'british'
+        if (lowerQuery.includes('french') || lowerQuery.includes('france')) filters.nation = 'french'
+        
+        // Parse premium/market
+        if (lowerQuery.includes('premium')) filters.premium = true
+        if (lowerQuery.includes('market')) filters.market = true
+        
+        // Determine criteria
+        if (lowerQuery.includes('fastest') || lowerQuery.includes('speed')) criteria = 'speed'
+        if (lowerQuery.includes('armored') || lowerQuery.includes('armor')) criteria = 'armor'
+        if (lowerQuery.includes('agile') || lowerQuery.includes('agility')) criteria = 'agility'
+        if (lowerQuery.includes('strongest') || lowerQuery.includes('toughest') || lowerQuery.includes('health')) criteria = 'health'
+        
+        const filteredVehicles = filterVehicles(filters)
+        const bestVehicle = getBestVehicle(filteredVehicles, criteria)
+        
+        if (!bestVehicle) {
+          return formatVehicleDetails(null)
+        }
+        
+        let contextMessage = `🏆 BEST VEHICLE ANALYSIS:\n`
+        if (filters.tier) contextMessage += `Tier ${formatTier(filters.tier)} `
+        if (filters.role) contextMessage += `${filters.role} `
+        if (filters.nation) contextMessage += `${filters.nation} `
+        contextMessage += `vehicles analyzed. ${bestVehicle.name} selected for superior ${criteria}.`
+        
+        return formatVehicleDetails(bestVehicle, contextMessage)
+      }
+
+      // Fastest vehicle queries (legacy support)
       if (lowerQuery.includes("fastest tank") || lowerQuery.includes("quickest tank")) {
         const fastest = analyzeVehicles.fastestTank()
         return formatVehicleDetails(
@@ -8138,10 +8239,24 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       <div className="space-y-3">
                         {/* Vehicle Image */}
                         <img 
-                          src={msg.content.vehicle.image} 
+                          src={`${msg.content.vehicle.image}`} 
                           alt={msg.content.vehicle.name}
-                          className="w-full max-w-xs rounded-lg"
+                          className="w-full max-w-xs rounded-lg object-cover"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                            const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                            if (fallback) fallback.style.display = 'flex';
+                          }}
                         />
+                        <div 
+                          className="w-full max-w-xs h-48 bg-slate-800 rounded-lg border border-slate-600 flex items-center justify-center text-slate-400" 
+                          style={{ display: 'none' }}
+                        >
+                          <div className="text-center">
+                            <div className="text-2xl mb-2">🚗</div>
+                            <div className="text-sm">Image not available</div>
+                          </div>
+                        </div>
                         
                         {/* Context */}
                         {msg.content.context && (
@@ -8150,46 +8265,64 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           </div>
                         )}
                         
-                        {/* Vehicle Name */}
-                        <h3 className="text-lg font-bold text-white">{msg.content.vehicle.name}</h3>
-                        
                         {/* Vehicle Info */}
-                        <div className="space-y-1">
-                          <div><strong>Type:</strong> {msg.content.vehicle.type}</div>
-                          <div><strong>Faction:</strong> {msg.content.vehicle.faction}</div>
-                          <div><strong>Tier:</strong> {msg.content.vehicle.tier}</div>
-                        </div>
-                        
-                        {/* Description */}
-                        <div>
-                          <strong>Description:</strong>
-                          <div className="mt-1">{msg.content.vehicle.description}</div>
+                        <div className="space-y-2">
+                          <h3 className="text-lg font-bold text-white">{msg.content.vehicle.name}</h3>
+                          
+                          <div className="space-y-1">
+                            <div><strong>Role:</strong> {msg.content.vehicle.type}</div>
+                            <div><strong>Nation:</strong> {msg.content.vehicle.faction}</div>
+                            <div><strong>Tier:</strong> {msg.content.vehicle.tier}</div>
+                            {(msg.content.vehicle.isPremium || msg.content.vehicle.isMarket) && (
+                              <div><strong>Type:</strong> 
+                                {msg.content.vehicle.isPremium && <span className="text-yellow-400 ml-1">Premium</span>}
+                                {msg.content.vehicle.isMarket && <span className="text-green-400 ml-1">Market</span>}
+                              </div>
+                            )}
+                          </div>
+                          
+                          <div>
+                            <strong>Description:</strong>
+                            <div className="mt-1 text-slate-300">{msg.content.vehicle.description}</div>
+                          </div>
                         </div>
                         
                         {/* Key Stats */}
                         <div>
                           <strong>Key Stats:</strong>
                           <div className="mt-2 space-y-1">
-                            <div>• <strong>Health:</strong> {msg.content.vehicle.stats.health?.toLocaleString()} HP</div>
+                            <div>• Health: {msg.content.vehicle.stats.health?.toLocaleString()} HP</div>
                             {msg.content.vehicle.stats.speed && (
-                              <div>• <strong>Speed:</strong> {msg.content.vehicle.stats.speed} km/h</div>
+                              <div>• Speed: {msg.content.vehicle.stats.speed} km/h</div>
                             )}
                             {msg.content.vehicle.stats.armor && (
-                              <div>• <strong>Armor:</strong> {msg.content.vehicle.stats.armor}</div>
+                              <div>• Armor: {msg.content.vehicle.stats.armor}</div>
                             )}
                             {msg.content.vehicle.stats.agility && (
-                              <div>• <strong>Agility:</strong> {msg.content.vehicle.stats.agility}</div>
+                              <div>• Agility: {msg.content.vehicle.stats.agility}</div>
                             )}
                           </div>
                         </div>
                         
                         {/* View Vehicle Button */}
                         <button
-                          onClick={() => window.open(msg.content.vehicle.url, '_blank')}
+                          onClick={() => {
+                            const vehicle = VEHICLES.find(v => v.name === msg.content.vehicle.name)
+                            if (vehicle) {
+                              setSearchQuery(vehicle.name);
+                              setBattlePassOpen(false);
+                              setExpandedVehicle(vehicle.id.toString());
+                              setChatOpen(false);
+                            }
+                          }}
                           className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors mt-3"
                         >
                           View Vehicle
                         </button>
+                      </div>
+                    ) : typeof msg.content === 'object' && msg.content.type === 'no_vehicle_found' ? (
+                      <div className="text-slate-300 italic">
+                        {msg.content.message}
                       </div>
                     ) : (
                       msg.content
