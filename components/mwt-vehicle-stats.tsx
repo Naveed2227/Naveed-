@@ -7045,6 +7045,52 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       }
 
       // Vehicle filtering and selection logic
+      // Step 1: Normalize input mapping
+      const normalizeCountry = (input: string): string => {
+        const countryMap: { [key: string]: string } = {
+          'american': 'USA',
+          'us': 'USA', 
+          'usa': 'USA',
+          'german': 'Germany',
+          'germany': 'Germany',
+          'russian': 'Russia',
+          'russia': 'Russia',
+          'british': 'UK',
+          'uk': 'UK',
+          'britain': 'UK',
+          'chinese': 'China',
+          'china': 'China',
+          'french': 'France',
+          'france': 'France',
+          'japanese': 'Japan',
+          'japan': 'Japan',
+          'israeli': 'Israel',
+          'israel': 'Israel',
+          'italian': 'Italy',
+          'italy': 'Italy'
+        }
+        return countryMap[input.toLowerCase()] || input
+      }
+
+      const normalizeRole = (input: string): string => {
+        const roleMap: { [key: string]: string } = {
+          'tank': 'MBT',
+          'mbt': 'MBT',
+          'main battle tank': 'MBT',
+          'jet': 'Fighter Jet',
+          'fighter': 'Fighter Jet',
+          'fighter jet': 'Fighter Jet',
+          'spa': 'Self-Propelled Artillery',
+          'self-propelled artillery': 'Self-Propelled Artillery',
+          'artillery': 'Self-Propelled Artillery',
+          'interceptor': 'Interceptor',
+          'helicopter': 'Helicopter',
+          'mlrs': 'MLRS'
+        }
+        return roleMap[input.toLowerCase()] || input
+      }
+
+      // Step 2: Strict filtering with exact database field matching
       const filterVehicles = (filters: {
         tier?: number,
         role?: string,
@@ -7054,21 +7100,40 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       }) => {
         return VEHICLES.filter(vehicle => {
           if (filters.tier && vehicle.tier !== filters.tier) return false
-          if (filters.role && !vehicle.type.toLowerCase().includes(filters.role.toLowerCase())) return false
-          if (filters.nation && !vehicle.faction.toLowerCase().includes(filters.nation.toLowerCase())) return false
+          if (filters.role && vehicle.type !== filters.role) return false // Exact match
+          if (filters.nation && vehicle.faction !== filters.nation) return false // Exact match
           if (filters.premium !== undefined && (vehicle as any).isPremium !== filters.premium) return false
           if (filters.market !== undefined && (vehicle as any).isMarket !== filters.market) return false
           return true
         })
       }
 
-      const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility' | 'speed' = 'health') => {
+      const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'spa_combined' = 'health') => {
         if (vehicles.length === 0) return null
         
         return vehicles.reduce((best, current) => {
-          const bestStat = best.stats[criteria] || 0
-          const currentStat = current.stats[criteria] || 0
-          return currentStat > bestStat ? current : best
+          let bestScore = 0
+          let currentScore = 0
+          
+          if (criteria === 'mbt_combined') {
+            // MBT: Health + Armor
+            bestScore = (best.stats.health || 0) + (best.stats.armor || 0)
+            currentScore = (current.stats.health || 0) + (current.stats.armor || 0)
+          } else if (criteria === 'jet_combined') {
+            // Jets: Speed + Agility
+            bestScore = (best.stats.speed || 0) + (best.stats.agility || 0)
+            currentScore = (current.stats.speed || 0) + (current.stats.agility || 0)
+          } else if (criteria === 'spa_combined') {
+            // SPA: Damage + Range (fallback to health if damage/range not available)
+            bestScore = (best.stats.damage || best.stats.health || 0) + (best.stats.range || best.stats.armor || 0)
+            currentScore = (current.stats.damage || current.stats.health || 0) + (current.stats.range || current.stats.armor || 0)
+          } else {
+            // Single stat criteria
+            bestScore = best.stats[criteria] || 0
+            currentScore = current.stats[criteria] || 0
+          }
+          
+          return currentScore > bestScore ? current : best
         })
       }
 
@@ -7077,7 +7142,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         if (!vehicle) {
           return {
             type: 'no_vehicle_found',
-            message: "No vehicles found for that Tier/Role/Nation combination."
+            message: "🔍 Searching through all available vehicles..."
           }
         }
 
@@ -7109,71 +7174,161 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
       // Advanced query processing with ChatGPT-like intelligence
 
-      // Enhanced "best" vehicle queries with filtering
-      if (lowerQuery.includes("best") || lowerQuery.includes("fastest") || lowerQuery.includes("strongest") || lowerQuery.includes("toughest")) {
+      // Enhanced "best" vehicle queries with intelligent filtering
+      if (lowerQuery.includes("best") || lowerQuery.includes("top") || lowerQuery.includes("fastest") || lowerQuery.includes("strongest") || lowerQuery.includes("toughest")) {
         let filters: any = {}
         let criteria: 'health' | 'armor' | 'agility' | 'speed' = 'health'
         
-        // Parse tier
+        // Parse tier with multiple formats
         const tierMatch = lowerQuery.match(/tier\s*(i{1,4}|v|vi{1,3}|ix|x|\d+)/i)
         if (tierMatch) {
           const tierStr = tierMatch[1].toLowerCase()
-          if (tierStr === 'i') filters.tier = 1
-          else if (tierStr === 'ii') filters.tier = 2
-          else if (tierStr === 'iii') filters.tier = 3
-          else if (tierStr === 'iv') filters.tier = 4
-          else if (tierStr === 'v') filters.tier = 5
-          else if (tierStr === 'vi') filters.tier = 6
-          else if (tierStr === 'vii') filters.tier = 7
-          else if (tierStr === 'viii') filters.tier = 8
-          else if (tierStr === 'ix') filters.tier = 9
-          else if (tierStr === 'x') filters.tier = 10
+          if (tierStr === 'i' || tierStr === '1') filters.tier = 1
+          else if (tierStr === 'ii' || tierStr === '2') filters.tier = 2
+          else if (tierStr === 'iii' || tierStr === '3') filters.tier = 3
+          else if (tierStr === 'iv' || tierStr === '4') filters.tier = 4
+          else if (tierStr === 'v' || tierStr === '5') filters.tier = 5
+          else if (tierStr === 'vi' || tierStr === '6') filters.tier = 6
+          else if (tierStr === 'vii' || tierStr === '7') filters.tier = 7
+          else if (tierStr === 'viii' || tierStr === '8') filters.tier = 8
+          else if (tierStr === 'ix' || tierStr === '9') filters.tier = 9
+          else if (tierStr === 'x' || tierStr === '10') filters.tier = 10
           else filters.tier = parseInt(tierStr)
         }
         
-        // Parse role/type
-        if (lowerQuery.includes('tank')) filters.role = 'tank'
-        if (lowerQuery.includes('mbt')) filters.role = 'mbt'
-        if (lowerQuery.includes('fighter')) filters.role = 'fighter'
-        if (lowerQuery.includes('jet')) filters.role = 'jet'
-        if (lowerQuery.includes('helicopter')) filters.role = 'helicopter'
-        if (lowerQuery.includes('mlrs')) filters.role = 'mlrs'
-        
-        // Parse nation
-        if (lowerQuery.includes('american') || lowerQuery.includes('usa') || lowerQuery.includes('us')) filters.nation = 'american'
-        if (lowerQuery.includes('russian') || lowerQuery.includes('russia')) filters.nation = 'russian'
-        if (lowerQuery.includes('chinese') || lowerQuery.includes('china')) filters.nation = 'chinese'
-        if (lowerQuery.includes('german') || lowerQuery.includes('germany')) filters.nation = 'german'
-        if (lowerQuery.includes('british') || lowerQuery.includes('uk')) filters.nation = 'british'
-        if (lowerQuery.includes('french') || lowerQuery.includes('france')) filters.nation = 'french'
-        
-        // Parse premium/market
-        if (lowerQuery.includes('premium')) filters.premium = true
-        if (lowerQuery.includes('market')) filters.market = true
-        
-        // Determine criteria
-        if (lowerQuery.includes('fastest') || lowerQuery.includes('speed')) criteria = 'speed'
-        if (lowerQuery.includes('armored') || lowerQuery.includes('armor')) criteria = 'armor'
-        if (lowerQuery.includes('agile') || lowerQuery.includes('agility')) criteria = 'agility'
-        if (lowerQuery.includes('strongest') || lowerQuery.includes('toughest') || lowerQuery.includes('health')) criteria = 'health'
-        
-        const filteredVehicles = filterVehicles(filters)
-        const bestVehicle = getBestVehicle(filteredVehicles, criteria)
-        
-        if (!bestVehicle) {
-          return formatVehicleDetails(null)
+        // Step 1: Normalize input using mapping functions
+        if (lowerQuery.includes('mbt') || lowerQuery.includes('main battle tank') || lowerQuery.includes('tank')) {
+          filters.role = normalizeRole('tank')
+        } else if (lowerQuery.includes('spa') || lowerQuery.includes('self-propelled artillery') || lowerQuery.includes('artillery')) {
+          filters.role = normalizeRole('spa')
+        } else if (lowerQuery.includes('interceptor')) {
+          filters.role = normalizeRole('interceptor')
+        } else if (lowerQuery.includes('fighter jet') || lowerQuery.includes('fighter')) {
+          filters.role = normalizeRole('fighter')
+        } else if (lowerQuery.includes('jet')) {
+          filters.role = normalizeRole('jet')
+        } else if (lowerQuery.includes('helicopter')) {
+          filters.role = normalizeRole('helicopter')
+        } else if (lowerQuery.includes('mlrs')) {
+          filters.role = normalizeRole('mlrs')
         }
         
-        let contextMessage = `🏆 BEST VEHICLE ANALYSIS:\n`
-        if (filters.tier) contextMessage += `Tier ${formatTier(filters.tier)} `
-        if (filters.role) contextMessage += `${filters.role} `
-        if (filters.nation) contextMessage += `${filters.nation} `
-        contextMessage += `vehicles analyzed. ${bestVehicle.name} selected for superior ${criteria}.`
+        // Step 1: Normalize country input
+        if (lowerQuery.includes('american') || lowerQuery.includes('usa') || lowerQuery.includes('us')) {
+          filters.nation = normalizeCountry('american')
+        } else if (lowerQuery.includes('russian') || lowerQuery.includes('russia')) {
+          filters.nation = normalizeCountry('russian')
+        } else if (lowerQuery.includes('chinese') || lowerQuery.includes('china')) {
+          filters.nation = normalizeCountry('chinese')
+        } else if (lowerQuery.includes('german') || lowerQuery.includes('germany')) {
+          filters.nation = normalizeCountry('german')
+        } else if (lowerQuery.includes('british') || lowerQuery.includes('uk') || lowerQuery.includes('britain')) {
+          filters.nation = normalizeCountry('british')
+        } else if (lowerQuery.includes('french') || lowerQuery.includes('france')) {
+          filters.nation = normalizeCountry('french')
+        } else if (lowerQuery.includes('japanese') || lowerQuery.includes('japan')) {
+          filters.nation = normalizeCountry('japanese')
+        } else if (lowerQuery.includes('israeli') || lowerQuery.includes('israel')) {
+          filters.nation = normalizeCountry('israeli')
+        } else if (lowerQuery.includes('italian') || lowerQuery.includes('italy')) {
+          filters.nation = normalizeCountry('italian')
+        }
+        
+        // Step 3: Determine criteria based on normalized role
+        if (filters.role === 'Fighter Jet' || filters.role === 'Interceptor') {
+          criteria = 'jet_combined' // Speed + Agility
+        } else if (filters.role === 'MBT') {
+          criteria = 'mbt_combined' // Health + Armor
+        } else if (filters.role === 'Self-Propelled Artillery') {
+          criteria = 'spa_combined' // Damage + Range
+        }
+        
+        // Step 2: Strict filtering before any fallback
+        let filteredVehicles = filterVehicles(filters)
+        let bestVehicle = getBestVehicle(filteredVehicles, criteria)
+        let contextMessage = ""
+        let fallbackUsed = false
+        let fallbackType = ""
+        
+        // Store original filters for display and fallback logic
+        const originalFilters = { ...filters }
+        
+        // Step 4: Tier enforcement - check if requested tier exists
+        let tierAvailabilityMessage = ""
+        if (originalFilters.tier && !bestVehicle) {
+          // Check if the role exists in other tiers
+          const roleOnlyFilters = { role: originalFilters.role, nation: originalFilters.nation }
+          const roleVehicles = filterVehicles(roleOnlyFilters)
+          if (roleVehicles.length > 0) {
+            const availableTiers = [...new Set(roleVehicles.map(v => v.tier))].sort()
+            tierAvailabilityMessage = `No Tier ${formatTier(originalFilters.tier)} ${originalFilters.role} found. Available tiers: ${availableTiers.map(t => formatTier(t)).join(', ')}.`
+          }
+        }
+        
+        // Fallback A: Ignore tier, match country + role
+        if (!bestVehicle && filters.tier && (filters.nation || filters.role)) {
+          delete filters.tier
+          filteredVehicles = filterVehicles(filters)
+          bestVehicle = getBestVehicle(filteredVehicles, criteria)
+          if (bestVehicle) {
+            fallbackUsed = true
+            fallbackType = "tier ignored"
+          } else {
+            filters.tier = originalFilters.tier // Reset
+          }
+        }
+        
+        // Fallback B: Ignore country, match tier + role
+        if (!bestVehicle && filters.nation && (filters.tier || filters.role)) {
+          filters = { ...originalFilters } // Reset to original
+          delete filters.nation
+          filteredVehicles = filterVehicles(filters)
+          bestVehicle = getBestVehicle(filteredVehicles, criteria)
+          if (bestVehicle) {
+            fallbackUsed = true
+            fallbackType = "country ignored"
+          } else {
+            filters.nation = originalFilters.nation // Reset
+          }
+        }
+        
+        // Fallback C: Ignore both, match role only
+        if (!bestVehicle && filters.role) {
+          filters = { role: originalFilters.role } // Keep only role
+          filteredVehicles = filterVehicles(filters)
+          bestVehicle = getBestVehicle(filteredVehicles, criteria)
+          if (bestVehicle) {
+            fallbackUsed = true
+            fallbackType = "tier and country ignored"
+          }
+        }
+        
+        // Final safety: Should never happen with proper vehicle database
+        if (!bestVehicle) {
+          filteredVehicles = VEHICLES
+          bestVehicle = getBestVehicle(filteredVehicles, criteria)
+          fallbackUsed = true
+          fallbackType = "all filters ignored"
+        }
+        
+        // Step 5: Build context message with fallback indication
+        if (fallbackUsed) {
+          contextMessage = `🔍 CLOSEST MATCH (${fallbackType}): `
+        }
+        
+        // Add tier availability message if applicable
+        if (tierAvailabilityMessage) {
+          contextMessage += tierAvailabilityMessage + " "
+        }
+        
+        // Use original filters for display to show what user requested
+        if (originalFilters.tier) contextMessage += `TIER ${formatTier(originalFilters.tier)} `
+        if (originalFilters.nation) contextMessage += `${originalFilters.nation.toUpperCase()} `
+        if (originalFilters.role) contextMessage += `${originalFilters.role.toUpperCase()} `
+        contextMessage += "RECOMMENDATION"
         
         return formatVehicleDetails(bestVehicle, contextMessage)
       }
-
-      // Fastest vehicle queries (legacy support)
       if (lowerQuery.includes("fastest tank") || lowerQuery.includes("quickest tank")) {
         const fastest = analyzeVehicles.fastestTank()
         return formatVehicleDetails(
@@ -8297,14 +8452,33 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           </div>
                         )}
                         
-                        {/* Vehicle Info */}
+                        {/* Vehicle Info with Enhanced Header */}
                         <div className="space-y-2">
-                          <h3 className="text-lg font-bold text-white">{msg.content.vehicle.name}</h3>
+                          <div className="text-center">
+                            <div className="text-2xl mb-1">
+                              {(() => {
+                                const flags: { [key: string]: string } = {
+                                  'American': '🇺🇸',
+                                  'Russian': '🇷🇺', 
+                                  'Chinese': '🇨🇳',
+                                  'German': '🇩🇪',
+                                  'British': '🇬🇧',
+                                  'French': '🇫🇷',
+                                  'Israeli': '🇮🇱',
+                                  'Japanese': '🇯🇵',
+                                  'Italian': '🇮🇹'
+                                }
+                                return flags[msg.content.vehicle.faction] || '🏳️'
+                              })()}
+                            </div>
+                            <h3 className="text-lg font-bold text-white">{msg.content.vehicle.name}</h3>
+                            <div className="text-sm text-cyan-300">
+                              {msg.content.vehicle.type} • {msg.content.vehicle.tier}
+                            </div>
+                          </div>
                           
                           <div className="space-y-1">
-                            <div><strong>Role:</strong> {msg.content.vehicle.type}</div>
                             <div><strong>Nation:</strong> {msg.content.vehicle.faction}</div>
-                            <div><strong>Tier:</strong> {msg.content.vehicle.tier}</div>
                             {(msg.content.vehicle.isPremium || msg.content.vehicle.isMarket) && (
                               <div><strong>Type:</strong> 
                                 {msg.content.vehicle.isPremium && <span className="text-yellow-400 ml-1">Premium</span>}
@@ -8319,20 +8493,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           </div>
                         </div>
                         
-                        {/* Key Stats */}
+                        {/* Key Stats with Emojis */}
                         <div>
                           <strong>Key Stats:</strong>
                           <div className="mt-2 space-y-1">
-                            <div>• Health: {msg.content.vehicle.stats.health?.toLocaleString()} HP</div>
+                            <div>❤️ Health: {msg.content.vehicle.stats.health?.toLocaleString()} HP</div>
                             {msg.content.vehicle.stats.speed && (
-                              <div>• Speed: {msg.content.vehicle.stats.speed} km/h</div>
+                              <div>⚡ Speed: {msg.content.vehicle.stats.speed} km/h</div>
                             )}
                             {msg.content.vehicle.stats.armor && (
-                              <div>• Armor: {msg.content.vehicle.stats.armor}</div>
+                              <div>🛡️ Armor: {msg.content.vehicle.stats.armor}</div>
                             )}
                             {msg.content.vehicle.stats.agility && (
-                              <div>• Agility: {msg.content.vehicle.stats.agility}</div>
+                              <div>🌀 Agility: {msg.content.vehicle.stats.agility}</div>
                             )}
+                            <div>🎖️ Tier: {msg.content.vehicle.tier}</div>
                           </div>
                         </div>
                         
