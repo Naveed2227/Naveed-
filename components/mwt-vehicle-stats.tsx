@@ -7044,6 +7044,192 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         },
       }
 
+        // Sample vehicle data for testing
+      const testVehicles = [
+        {
+          name: "Abrams X",
+          country: "USA",
+          tier: 3,
+          role: "MBT",
+          health: 40300,
+          armor: 1100,
+          speed: 75,
+          agility: 35,
+          image: "abrams-x.jpg"
+        },
+        {
+          name: "Challenger 3",
+          country: "UK",
+          tier: 4,
+          role: "MBT",
+          health: 43000,
+          armor: 1180,
+          speed: 70,
+          agility: 32,
+          image: "challenger3.jpg"
+        },
+        {
+          name: "MiG-41M",
+          country: "Russia",
+          tier: 4,
+          role: "Fighter Jet",
+          health: 23800,
+          speed: 1800,
+          agility: 75,
+          image: "mig41m.jpg"
+        },
+        {
+          name: "F-35C Lightning II",
+          country: "USA",
+          tier: 3,
+          role: "Fighter Jet",
+          health: 22500,
+          speed: 1650,
+          agility: 68,
+          image: "f35c.jpg"
+        }
+      ]
+
+      // Enhanced synonym mapping
+      const countryMap: { [key: string]: string } = { 
+        american: "USA", us: "USA", usa: "USA", 
+        german: "Germany", germany: "Germany",
+        russian: "Russia", russia: "Russia", 
+        british: "UK", uk: "UK", britain: "UK",
+        chinese: "China", china: "China",
+        french: "France", france: "France",
+        japanese: "Japan", japan: "Japan",
+        israeli: "Israel", israel: "Israel",
+        italian: "Italy", italy: "Italy"
+      }
+      
+      const roleMap: { [key: string]: string } = { 
+        tank: "MBT", mbt: "MBT", "main battle tank": "MBT", 
+        jet: "Fighter Jet", fighter: "Fighter Jet", "fighter jet": "Fighter Jet",
+        spa: "Self-Propelled Artillery", "self-propelled artillery": "Self-Propelled Artillery",
+        artillery: "Self-Propelled Artillery",
+        interceptor: "Interceptor",
+        helicopter: "Helicopter",
+        mlrs: "MLRS"
+      }
+      
+      const tierMap: { [key: string]: number } = { 
+        "tier 1": 1, "tier i": 1, "tier 2": 2, "tier ii": 2, 
+        "tier 3": 3, "tier iii": 3, "tier 4": 4, "tier iv": 4,
+        "tier 5": 5, "tier v": 5, "tier 6": 6, "tier vi": 6,
+        "tier 7": 7, "tier vii": 7, "tier 8": 8, "tier viii": 8,
+        "tier 9": 9, "tier ix": 9, "tier 10": 10, "tier x": 10
+      }
+
+      // Parse query function
+      const parseQuery = (query: string) => {
+        const lowerQuery = query.toLowerCase()
+        let country, tier, role
+
+        for (const key in countryMap) {
+          if (lowerQuery.includes(key)) {
+            country = countryMap[key]
+            break
+          }
+        }
+        for (const key in roleMap) {
+          if (lowerQuery.includes(key)) {
+            role = roleMap[key]
+            break
+          }
+        }
+        for (const key in tierMap) {
+          if (lowerQuery.includes(key)) {
+            tier = tierMap[key]
+            break
+          }
+        }
+
+        return { country, tier, role }
+      }
+
+      // Ranking function - use VEHICLES database structure
+      const rankVehicle = (vehicle: any) => {
+        if (vehicle.type === "MBT") return (vehicle.stats.health || 0) + (vehicle.stats.armor || 0)
+        if (vehicle.type === "Fighter Jet") return (vehicle.stats.speed || 0) + (vehicle.stats.agility || 0)
+        if (vehicle.type === "Self-Propelled Artillery") return (vehicle.stats.damage || vehicle.stats.health || 0) + (vehicle.stats.range || vehicle.stats.armor || 0)
+        return vehicle.stats.health || 0
+      }
+
+      // Strict filtering with fallback - ALWAYS use full VEHICLES database
+      const findBestVehicle = (query: string) => {
+        const { country, tier, role } = parseQuery(query)
+        
+        // Always use full VEHICLES database
+        const vehicleData = VEHICLES
+
+        // First try exact match with proper field mapping
+        let results = vehicleData.filter((v: any) => {
+          const countryMatch = !country || v.faction === country
+          const tierMatch = !tier || v.tier === tier
+          const roleMatch = !role || v.type === role
+          return countryMatch && tierMatch && roleMatch
+        })
+
+        let note = ""
+        let fallbackUsed = false
+
+        // If we have all three criteria but no exact match, try fallbacks
+        if (results.length === 0 && country && tier && role) {
+          // Fallback A: Ignore tier, match country + role
+          results = vehicleData.filter((v: any) => v.faction === country && v.type === role)
+          if (results.length > 0) {
+            const availableTiers = [...new Set(results.map((v: any) => v.tier))].sort()
+            note = `No Tier ${tier} ${role}s found in ${country}. Available tiers: ${availableTiers.map(t => formatTier(t)).join(', ')}.`
+            fallbackUsed = true
+          }
+        }
+        
+        // Fallback B: Ignore country, match tier + role
+        if (results.length === 0 && tier && role) {
+          results = vehicleData.filter((v: any) => v.tier === tier && v.type === role)
+          if (results.length > 0) {
+            note = `No ${country || 'specified country'} Tier ${tier} ${role}s found. Showing vehicles from other nations.`
+            fallbackUsed = true
+          }
+        }
+        
+        // Fallback C: Match role only
+        if (results.length === 0 && role) {
+          results = vehicleData.filter((v: any) => v.type === role)
+          if (results.length > 0) {
+            note = `No Tier ${tier || 'specified tier'} ${role}s found. Showing best available ${role}.`
+            fallbackUsed = true
+          }
+        }
+
+        if (results.length === 0) return null
+
+        // Pick top ranked
+        const best = results.sort((a: any, b: any) => rankVehicle(b) - rankVehicle(a))[0]
+
+        return {
+          type: 'vehicle_details',
+          vehicle: {
+            name: best.name,
+            image: best.image,
+            type: best.type,
+            faction: best.faction,
+            tier: formatTier(best.tier),
+            description: best.description,
+            isPremium: (best as any).isPremium || false,
+            isMarket: (best as any).isMarket || false,
+            stats: {
+              health: best.stats.health,
+              speed: best.stats.speed,
+              armor: best.stats.armor,
+              agility: best.stats.agility
+            }
+          },
+          context: fallbackUsed ? `🔍 CLOSEST MATCH: ${note}` : `🎯 EXACT MATCH: TIER ${formatTier(best.tier)} ${best.faction} ${best.type} RECOMMENDATION`
+        }
+      }
+
       // Vehicle filtering and selection logic
       // Step 1: Normalize input mapping
       const normalizeCountry = (input: string): string => {
@@ -7173,6 +7359,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       }
 
       // Advanced query processing with ChatGPT-like intelligence
+
+      // Try the new findBestVehicle function first
+      if (lowerQuery.includes("best") || lowerQuery.includes("top") || lowerQuery.includes("fastest") || lowerQuery.includes("strongest") || lowerQuery.includes("toughest")) {
+        const result = findBestVehicle(lowerQuery)
+        if (result) {
+          return result
+        }
+        // Fallback to original logic if new function doesn't find anything
+      }
 
       // Enhanced "best" vehicle queries with intelligent filtering
       if (lowerQuery.includes("best") || lowerQuery.includes("top") || lowerQuery.includes("fastest") || lowerQuery.includes("strongest") || lowerQuery.includes("toughest")) {
