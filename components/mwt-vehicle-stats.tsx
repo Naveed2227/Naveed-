@@ -5494,11 +5494,11 @@ const VEHICLES = [
     "faction": "Chinese",
     "tier": "II",
     "image": "PGZ-04A.jpg",
-    "description": "Chinese self-propelled anti-aircraft system, equipped with twin 35 mm cannons and radar for short-range air defense.",
-"health": 38000,
-"speed": 51,
-"armor": "620mm",
-
+    "description": "Chinese self-propelled anti-aircraft system, equipped with twin 35 mm cannons and radar for short-range air defense.",
+    "stats": {
+      "health": 38000,
+      "speed": 51,
+      "armor": "620mm",
       "agility": 36
     },
     "weapons": [
