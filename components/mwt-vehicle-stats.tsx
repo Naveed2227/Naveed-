@@ -5419,19 +5419,15 @@ const VEHICLES = [
     },
   },
   {
-    "id": 715,
-    "name": "M163 VADS",
-    "type": "Anti air",
-    "faction": "American",
-    "tier": "II",
-    "image": "M163-VADS.jpg",
-    "description": "U.S. self-propelled anti-aircraft system, mounting a 20 mm Vulcan cannon on an M113 chassis.": {
-      "health": 37500,
-      "speed": 50,
-      "armor": "600mm",
-      "agility": 35
-    },
-    "weapons": [
+  "name": "M163 VADS",
+  "faction": "American",
+  "tier": "II",
+  "image": "M163-VADS.jpg",
+  "description": "U.S. self-propelled anti-aircraft system, mounting a 20 mm Vulcan cannon on an M113 chassis.",
+  "health": 37500,
+  "speed": 50,
+  "armor": "600mm",
+  "weapons": [
       {
         "name": "M163 VADS Main Gun",
         "type": "Main Gun",
