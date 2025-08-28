@@ -8478,8 +8478,16 @@ const MwtVehicleStats = () => {
       "T-14 Armata (152)",
       "Leopard 2A7+",
       "Object 640"
+
     ]
     return marketVehicles.includes(vehicleName)
+  }
+
+  const isConstructionVehicle = (vehicleName: string) => {
+    const constructionVehicles = [
+      "Altay"
+    ]
+    return constructionVehicles.includes(vehicleName)
   }
 
 
@@ -8582,7 +8590,7 @@ ${weaponsList}
 🔧 UPGRADE MODULES:
 ${modulesList}
 
-${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : "🆓 Standard Vehicle"}`
+${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : isConstructionVehicle(vehicle.name) ? "🚧 CONSTRUCTION VEHICLE - Under Development" : isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : "🆓 Standard Vehicle"}`
   }
 
   const filteredVehicles = VEHICLES.filter((vehicle) => {
@@ -9903,13 +9911,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         : ""
     }`}
 >
-  {/* Full border glow for Exclusive / Market (softer) */}
-  {(isExclusiveVehicle(vehicle.name) || isMarketVehicle(vehicle.name)) && (
+  {/* Full border glow for Exclusive / Market / Construction (softer) */}
+  {(isExclusiveVehicle(vehicle.name) || isMarketVehicle(vehicle.name) || isConstructionVehicle(vehicle.name)) && (
     <div
       className={`absolute top-0 left-0 w-full h-full rounded-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300
         ${
           isExclusiveVehicle(vehicle.name)
             ? "border-4 border-red-500/30 shadow-[0_0_12px_3px_rgba(239,68,68,0.25)]"
+            : isConstructionVehicle(vehicle.name)
+            ? "border-4 border-orange-500/30 shadow-[0_0_12px_3px_rgba(249,115,22,0.25)]"
             : "border-4 border-yellow-400/30 shadow-[0_0_12px_3px_rgba(234,179,8,0.25)]"
         }`}
     />
@@ -9937,6 +9947,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               {isMarketVehicle(vehicle.name) && (
                 <div className="absolute top-0 left-0 w-0 h-0 z-10">
                   <div className="h-0 border-b-transparent border-l-yellow-500 ml-0 w-[0-] w-[aut-] w-[auto-] w-[auto-10] w-[auto-10px] w-[au-10px] w-[-10px] border-l-[30px] border-r-0 border-b-[30px]" />
+                </div>
+              )}
+
+              {isConstructionVehicle(vehicle.name) && (
+                <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20 rounded-xl">
+                  <img
+                    src="Construction.png"
+                    alt="Under Construction"
+                    className="w-full h-full object-cover opacity-80"
+                  />
                 </div>
               )}
 
