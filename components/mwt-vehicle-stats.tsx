@@ -245,6 +245,7 @@ const VEHICLES = [
       { "name": "PL-10", "type": "Short-Range AAM", "damage": 7400, "penetration": 60, "reload": 20 },
       { "name": "AR-1", "type": "Anti-Radiation Missile", "damage": 7400, "penetration": 1000, "reload": 16 },
       { "name": "PL-15", "type": "BVR AAM", "damage": 7800, "penetration": 70, "reload": 30 },
+      { "name": "PL-12", "type": "BVR AAM", "damage": 7600, "penetration": 56, "reload": 30 },
       { "name": "AKF-98A", "type": "Air-to-Ground Missile", "damage": 20500, "penetration": 410, "reload": 40 }
 
     ],
@@ -488,6 +489,7 @@ const VEHICLES = [
       { "name": "GBU-31", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
       { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
       { "name": "AGM-65", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
+      { name: "AGM-84H/K", type: "Anti-Ship Missile", damage: 18900, penetration: 310, reload: 35 },
       { "name": "AIM-132", "type": "Short-Range AAM", "damage": 5200, "penetration": 65, "reload": 15 },
       { "name": "AIM-120", "type": "BVR AAM", "damage": 11300, "penetration": 60, "reload": 20 }
 
@@ -2050,7 +2052,7 @@ const VEHICLES = [
   "faction": "American",
   "tier": "IV",
   image: "ADATS.jpg",
-  "description": "",
+  "description": "A mobile air-defense system with radar-guided missiles, protecting forces from aerial threats.",
   "stats": {
     "health": 25500,
     "speed": 66,
@@ -2093,7 +2095,7 @@ const VEHICLES = [
   "faction": "American",
   "tier": "IV",
   image: "MGM-166.jpg",
-  "description": "",
+  "description": "A U.S. prototype missile, using hypervelocity kinetic energy to destroy heavily armored tanks at range.",
   "stats": {
     "health": 29000,
     "speed": 69,
@@ -2434,8 +2436,10 @@ const VEHICLES = [
   description: "Twin-engine carrier-based multirole fighter with excellent versatility for both air-to-air and air-to-ground combat.",
   stats: { health: 18100, speed: 810, afterburnerSpeed: 1730, agility: 41 },
   weapons: [
-    { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
+      { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+      { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
       { "name": "GBU-12", "type": "Guided Bomb", "damage": 18590, "penetration": 120, "reload": 30 },
+      { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
       { "name": "AGM-65", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
       { "name": "AIM-132", "type": "Short-Range Air-to-Air Missile", "damage": 5200, "penetration": 65, "reload": 15 },
       { "name": "AIM-120", "type": "Beyond Visual Range Air-to-Air Missile", "damage": 11300, "penetration": 60, "reload": 20 }
@@ -2472,6 +2476,7 @@ const VEHICLES = [
       { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
       { "name": "KD-88", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
       { "name": "PL-10", "type": "Short-Range Air-to-Air Missile", "damage": 7400, "penetration": 60, "reload": 20 },
+      { "name": "PL-12", "type": "BVR AAM", "damage": 7600, "penetration": 56, "reload": 30 },
       { "name": "PL-15", "type": "Beyond Visual Range Air-to-Air Missile", "damage": 7800, "penetration": 70, "reload": 30 },
       { "name": "AKF-98A", "type": "Air-to-Ground Missile", "damage": 20500, "penetration": 410, "reload": 40 }
 
@@ -4140,6 +4145,8 @@ const VEHICLES = [
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
     { name: "LAU-10 x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
     { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
+    { name: "MK-82 x3", type: "Bomb", damage: 14300, penetration: 120, reload: 40 },
+    { name: "AGM-62A", type: "Air-to-Surface Missile", damage: 17600, penetration: 240, reload: 28 },
     { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
     { name: "AIM-132", type: "Short-Range AAM", damage: 5200, penetration: 65, reload: 15 },
     { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 }
@@ -4215,7 +4222,8 @@ const VEHICLES = [
     { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
     { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
     { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
-    { name: "AIM-54", type: "Long-Range AAM", damage: 8600, penetration: 100, reload: 30 }
+    { name: "AIM-54", type: "Long-Range AAM", damage: 8600, penetration: 100, reload: 30 },
+    { name: "AIM-132", type: "Long-Range AAM", damage: 5200, penetration: 65, reload: 15 }
 
     ],
     modules: {
@@ -4249,6 +4257,7 @@ const VEHICLES = [
      { name: "Type 2(100)", type: "Bomb", damage: 14000, penetration: 110, reload: 30 },
     { name: "Type 90", type: "Short-Range AAM", damage: 6400, penetration: 320, reload: 40 },
     { name: "TL-20", type: "Guided Bomb", damage: 16120, penetration: 143, reload: 25 },
+    { name: "AR-1", type: "Guided Bomb", damage: 7400, penetration: 1000, reload: 16 },
     { name: "Type 3", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
     { name: "LT-2", type: "Air-to-Surface Missile", damage: 16200, penetration: 250, reload: 38 },
     { name: "PL-2", type: "Short-Range AAM", damage: 5800, penetration: 40, reload: 15 },
@@ -4326,6 +4335,7 @@ const VEHICLES = [
     { name: "Type 90", type: "Short-Range AAM", damage: 6400, penetration: 320, reload: 40 },
     { name: "Type 1", type: "Bomb", damage: 15100, penetration: 120, reload: 32 },
     { name: "Type 3", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
+    { name: "AR-1", type: "Guided Bomb", damage: 7400, penetration: 1000, reload: 16 },
     { name: "Type 130", type: "Air-to-Surface Missile", damage: 6900, penetration: 450, reload: 40 },
     { name: "PL-2", type: "Short-Range AAM", damage: 5800, penetration: 40, reload: 15 },
     { name: "PL-5", type: "Short-Range AAM", damage: 7100, penetration: 40, reload: 15 },
@@ -4464,7 +4474,7 @@ const VEHICLES = [
     "faction": "Russian",
     "tier": "II",
     "image": "Object-122-TM.jpg",
-    "description": "Russian main battle tank designed for Tier II battles.",
+    "description": "Soviet prototype main battle tank, based on the Type 59, mounting a 120 mm gun.",
     "stats": {
       "health": 30500,
       "speed": 46,
@@ -4538,7 +4548,7 @@ const VEHICLES = [
     "faction": "Japanese",
     "tier": "II",
     "image": "Type-74E.jpg",
-    "description": "Japanese main battle tank designed for Tier II battles.",
+    "description": "Japanese main battle tank, upgraded from the Type 74 series, featuring improved fire control systems.",
     "stats": {
       "health": 31000,
       "speed": 47,
@@ -4612,7 +4622,7 @@ const VEHICLES = [
     "faction": "Japanese",
     "tier": "II",
     "image": "Type-74G-Kai.jpg",
-    "description": "Japanese main battle tank designed for Tier II battles.",
+    "description": "An upgraded Japanese MBT variant, featuring enhanced armor, improved fire control, and modernized night-fighting capability.",
     "stats": {
       "health": 31500,
       "speed": 48,
@@ -4686,7 +4696,7 @@ const VEHICLES = [
     "faction": "Russian",
     "tier": "II",
     "image": "T-62.jpg",
-    "description": "Russian main battle tank designed for Tier II battles.",
+    "description": "Soviet main battle tank, armed with a 115 mm smoothbore gun and improved armor protection.",
     "stats": {
       "health": 32000,
       "speed": 49,
@@ -4760,7 +4770,7 @@ const VEHICLES = [
     "faction": "Russian",
     "tier": "II",
     "image": "T-62-545.jpg",
-    "description": "Russian main battle tank designed for Tier II battles.",
+    "description": "Soviet T-62 variant, equipped with the 545 hp V-55 engine and improved reliability.",
     "stats": {
       "health": 32500,
       "speed": 50,
@@ -4834,7 +4844,7 @@ const VEHICLES = [
     "faction": "American",
     "tier": "II",
     "image": "XM803.jpg",
-    "description": "American main battle tank designed for Tier II battles.",
+    "description": "American prototype main battle tank, developed from the MBT-70 project, featuring advanced firepower and mobility.",
     "stats": {
       "health": 33000,
       "speed": 51,
@@ -4908,7 +4918,7 @@ const VEHICLES = [
     "faction": "American",
     "tier": "II",
     "image": "XM1-GM.jpg",
-    "description": "American main battle tank designed for Tier II battles.",
+    "description": "U.S. prototype main battle tank by General Motors, competing against Chrysler’s design for the Abrams.",
     "stats": {
       "health": 33500,
       "speed": 52,
@@ -4982,7 +4992,7 @@ const VEHICLES = [
     "faction": "Russian",
     "tier": "II",
     "image": "BMP-2.jpg",
-    "description": "Russian infantry fighting vehicle designed for Tier II battles.",
+    "description": "Soviet infantry fighting vehicle, armed with a 30 mm autocannon and anti-tank guided missiles, supporting mechanized troops.",
     "stats": {
       "health": 34000,
       "speed": 53,
@@ -5056,7 +5066,7 @@ const VEHICLES = [
     "faction": "Russian",
     "tier": "II",
     "image": "BTR-82AT.jpg",
-    "description": "Russian infantry fighting vehicle designed for Tier II battles.",
+    "description": "Russian armored personnel carrier, upgraded with a 30 mm autocannon, improved armor, and anti-tank missile capability.",
     "stats": {
       "health": 34500,
       "speed": 54,
@@ -5130,7 +5140,7 @@ const VEHICLES = [
     "faction": "Russian",
     "tier": "II",
     "image": "BTR-82A1.jpg",
-    "description": "Russian infantry fighting vehicle designed for Tier II battles.",
+    "description": "Modern Russian armored personnel carrier, featuring a 30 mm autocannon, enhanced armor, and improved mobility for troops.",
     "stats": {
       "health": 35000,
       "speed": 45,
@@ -5236,7 +5246,7 @@ const VEHICLES = [
     "faction": "American",
     "tier": "II",
     "image": "M551-Sheridan.jpg",
-    "description": "American infantry fighting vehicle designed for Tier II battles.",
+    "description": "U.S. light tank, armed with a 152 mm gun-launcher capable of firing missiles and conventional rounds.",
     "stats": {
       "health": 36000,
       "speed": 47,
@@ -5310,7 +5320,7 @@ const VEHICLES = [
     "faction": "Russian",
     "tier": "II",
     "image": "Object-685.jpg",
-    "description": "Russian infantry fighting vehicle designed for Tier II battles.",
+    "description": "Soviet experimental amphibious light tank, designed for reconnaissance and river-crossing operations with light armor and armament.",
     "stats": {
       "health": 36500,
       "speed": 48,
@@ -5415,8 +5425,7 @@ const VEHICLES = [
     "faction": "American",
     "tier": "II",
     "image": "M163-VADS.jpg",
-    "description": "American anti-air designed for Tier II battles.",
-    "stats": {
+    "description": "U.S. self-propelled anti-aircraft system, mounting a 20 mm Vulcan cannon on an M113 chassis.": {
       "health": 37500,
       "speed": 50,
       "armor": "600mm",
@@ -5489,8 +5498,7 @@ const VEHICLES = [
     "faction": "Chinese",
     "tier": "II",
     "image": "PGZ-04A.jpg",
-    "description": "Chinese anti-air designed for Tier II battles.",
-    "stats": {
+    "description": "Chinese self-propelled anti-aircraft system, equipped with twin 35 mm cannons and radar for short-range air defense.": {
       "health": 38000,
       "speed": 51,
       "armor": "620mm",
@@ -5562,7 +5570,7 @@ const VEHICLES = [
     type: "Anti-Air",
     faction: "Russian",
     tier: "II",
-    description: "Self-propelled anti-aircraft gun with quad 23mm cannons and radar guidance.",
+    description: "Modernized Soviet/Russian self-propelled anti-aircraft system, armed with four 23 mm autocannons and radar targeting.",
     image: "ZSU-23-4M4-Shilka.jpg",
     stats: { health: 21000, speed: 68, armor: "280mm", agility: 32 },
     weapons: [
@@ -5595,7 +5603,7 @@ const VEHICLES = [
     "faction": "American",
     "tier": "II",
     "image": "LAV-300.jpg",
-    "description": "American tank destroyer designed for Tier II battles.",
+    "description": "U.S. wheeled armored vehicle, designed for reconnaissance and troop transport, armed with a turret-mounted autocannon.",
     "stats": {
       "health": 39000,
       "speed": 53,
@@ -5669,7 +5677,7 @@ const VEHICLES = [
     "faction": "Chinese",
     "tier": "II",
     "image": "PTL-02.jpg",
-    "description": "Chinese tank destroyer designed for Tier II battles.",
+    "description": "Chinese wheeled self-propelled anti-tank vehicle, armed with a 100 mm gun capable of firing guided missiles.",
     "stats": {
       "health": 39500,
       "speed": 54,
@@ -5743,7 +5751,7 @@ const VEHICLES = [
     "faction": "American",
     "tier": "II",
     "image": "M109.jpg",
-    "description": "American self-propelled howitzer designed for Tier II battles.",
+    "description": "U.S. self-propelled howitzer, mounting a 155 mm gun for long-range artillery support on a tracked chassis.",
     "stats": {
       "health": 40000,
       "speed": 45,
@@ -5817,7 +5825,7 @@ const VEHICLES = [
     "faction": "Chinese",
     "tier": "II",
     "image": "PLL-05.jpg",
-    "description": "Chinese self-propelled howitzer designed for Tier II battles.",
+    "description": "Chinese wheeled self-propelled howitzer, armed with a 120 mm gun-mortar capable of both direct and indirect fire.",
     "stats": {
       "health": 40500,
       "speed": 46,
@@ -5891,7 +5899,7 @@ const VEHICLES = [
     "faction": "Chinese",
     "tier": "II",
     "image": "PLZ-83.jpg",
-    "description": "Chinese self-propelled howitzer designed for Tier II battles.",
+    "description": "Chinese tracked self-propelled howitzer, equipped with a 152 mm gun for long-range artillery support.",
     "stats": {
       "health": 41000,
       "speed": 47,
@@ -5965,7 +5973,7 @@ const VEHICLES = [
     "faction": "Russian",
     "tier": "II",
     "image": "2S1-Gvozdika.jpg",
-    "description": "Russian self-propelled howitzer designed for Tier II battles.",
+    "description": "Soviet self-propelled 122 mm howitzer, fully tracked, providing mobile artillery support for mechanized units.",
     "stats": {
       "health": 41500,
       "speed": 48,
@@ -6039,7 +6047,7 @@ const VEHICLES = [
     "faction": "Russian",
     "tier": "II",
     "image": "2S3-Akatsiya.jpg",
-    "description": "Russian self-propelled howitzer designed for Tier II battles.",
+    "description": "Soviet self-propelled 152 mm howitzer, tracked, providing long-range artillery support with high mobility.",
     "stats": {
       "health": 42000,
       "speed": 49,
@@ -6113,7 +6121,7 @@ const VEHICLES = [
     "faction": "Japanese",
     "tier": "II",
     "image": "Type-74-SPH.jpg",
-    "description": "Japanese self-propelled howitzer designed for Tier II battles.",
+    "description": "Japanese self-propelled 105 mm howitzer, mounted on a tracked chassis for mobile artillery support.",
     "stats": {
       "health": 42500,
       "speed": 50,
