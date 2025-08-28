@@ -1302,9 +1302,42 @@ const VEHICLES = [
       ],
     },
   },
-
   {
     id: 119,
+    name: "M1 Abrams CATTB",
+    type: "Main Battle Tank",
+    faction: "American",
+    tier: "IV",
+    image: "M1-Abrams-CATTB.jpg",
+    description: "Mobile gun system with rapid deployment capability and stealth features.",
+    stats: { health: 28800, speed: 97, armor: "380mm", agility: 40.1 },
+    weapons: [
+      { name: "M392A2", type: "Main Gun", damage: 8510, penetration: 372 },
+      { name: "M393A2", type: "Main Gun", damage: 10090, penetration: 127 },
+      { name: "M456A2", type: "Main Gun", damage: 9320, penetration: 400 },
+      { name: "M900", type: "Main Gun", damage: 8910, penetration: 522 }
+    ],
+    modules: {
+      engine: [
+        { name: "Caterpillar C7 MK1", bonus: "+15 km/h speed" },
+        { name: "Caterpillar C7 MK2", bonus: "+30 km/h speed" },
+        { name: "Caterpillar C7 MK3", bonus: "+45 km/h speed" },
+      ],
+      armor: [
+        { name: "Ceramic Armor MK1", bonus: "+70mm protection" },
+        { name: "Ceramic Armor MK2", bonus: "+140mm protection" },
+        { name: "Ceramic Armor MK3", bonus: "+210mm protection" },
+      ],
+      fireControl: [
+        { name: "Digital FCS MK1", bonus: "+18% accuracy" },
+        { name: "Digital FCS MK2", bonus: "+32% accuracy" },
+        { name: "Digital FCS MK3", bonus: "+46% accuracy" },
+      ],
+    },
+  },
+
+  {
+    id: 120,
     name: "VT-4A1",
     type: "Main Battle Tank",
     faction: "Chinese",
@@ -1337,7 +1370,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 120,
+    id: 121,
     name: "ZTZ99A",
     type: "Main Battle Tank",
     faction: "Chinese",
@@ -1370,7 +1403,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 121,
+    id: 122,
     name: "ZTZ99-III",
     type: "Main Battle Tank",
     faction: "Chinese",
@@ -1403,7 +1436,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 122,
+    id: 123,
     name: "Challenger 3",
     type: "Main Battle Tank",
     faction: "British",
@@ -1436,7 +1469,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 123,
+    id: 124,
     name: "EMBT 120",
     type: "Main Battle Tank",
     faction: "French",
@@ -1469,7 +1502,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 124,
+    id: 125,
     name: "FV4034 Challenger 2 TES",
     type: "Main Battle Tank",
     faction: "British",
@@ -1501,7 +1534,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 125,
+    id: 126,
     name: "Karrar",
     type: "Main Battle Tank",
     faction: "Iranian",
@@ -1534,7 +1567,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 126,
+    id: 127,
     name: "Leclerc S2 AZUR",
     type: "Main Battle Tank",
     faction: "French",
@@ -1567,7 +1600,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 127,
+    id: 128,
     name: "Object 640",
     type: "Main Battle Tank",
     faction: "Russian",
@@ -1601,7 +1634,40 @@ const VEHICLES = [
     },
   },
   {
-    "id": 128,
+    id: 129,
+    name: "Leopard 2A-RC 3.0",
+    type: "Main Battle Tank",
+    faction: "German",
+    tier: "IV",
+    image: "Leopard-2A-RC-3.0.jpg",
+    description: "Mobile gun system with rapid deployment capability and stealth features.",
+    stats: { health: 28800, speed: 97, armor: "380mm", agility: 40.1 },
+    weapons: [
+      { name: "M392A2", type: "Main Gun", damage: 8510, penetration: 372 },
+      { name: "M393A2", type: "Main Gun", damage: 10090, penetration: 127 },
+      { name: "M456A2", type: "Main Gun", damage: 9320, penetration: 400 },
+      { name: "M900", type: "Main Gun", damage: 8910, penetration: 522 }
+    ],
+    modules: {
+      engine: [
+        { name: "Caterpillar C7 MK1", bonus: "+15 km/h speed" },
+        { name: "Caterpillar C7 MK2", bonus: "+30 km/h speed" },
+        { name: "Caterpillar C7 MK3", bonus: "+45 km/h speed" },
+      ],
+      armor: [
+        { name: "Ceramic Armor MK1", bonus: "+70mm protection" },
+        { name: "Ceramic Armor MK2", bonus: "+140mm protection" },
+        { name: "Ceramic Armor MK3", bonus: "+210mm protection" },
+      ],
+      fireControl: [
+        { name: "Digital FCS MK1", bonus: "+18% accuracy" },
+        { name: "Digital FCS MK2", bonus: "+32% accuracy" },
+        { name: "Digital FCS MK3", bonus: "+46% accuracy" },
+      ],
+    },
+  },
+  {
+    "id": 130,
     "name": "T-20 Monolit",
     "type": "Tank Destroyer",
     "faction": "Russian",
@@ -1644,7 +1710,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 129,
+    "id": 131,
     "name": "KF31 Lynx",
     "type": "Light Tank",
     "faction": "German",
@@ -1686,7 +1752,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 130,
+    "id": 132,
     "name": "M10 Booker",
     "type": "Light Tank",
     "faction": "American",
@@ -1728,7 +1794,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 131,
+    "id": 133,
     "name": "PL-01",
     "type": "Light Tank",
     "faction": "Polish",
@@ -1769,7 +1835,7 @@ const VEHICLES = [
     }
   },
   {
-  "id": 132,
+  "id": 134,
   "name": "M-SHORAD",
   "type": "Anti-Air",
   "faction": "American",
@@ -1810,7 +1876,7 @@ const VEHICLES = [
   }
 },
 {
-  "id": 133,
+  "id": 135,
   "name": "TOS-1A",
   "type": "MLRS",
   "faction": "Russian",
@@ -1849,7 +1915,7 @@ const VEHICLES = [
   }
 },
 {
-    id: 134,
+    id: 136,
     name: "M270 MLRS",
     type: "MLRS",
     faction: "American",
@@ -1883,7 +1949,7 @@ const VEHICLES = [
     },
   },
 {
-  "id": 135,
+  "id": 137,
   "name": "PLZ-05",
   "type": "SPA",
   "faction": "Chinese",
@@ -1924,7 +1990,7 @@ const VEHICLES = [
   }
 },
 {
-  "id": 136,
+  "id": 138,
   "name": "M109A6 Paladin",
   "type": "SPA",
   "faction": "American",
@@ -1964,7 +2030,7 @@ const VEHICLES = [
 },
 
 {
-  "id": 137,
+  "id": 139,
   "name": "FK 2000",
   "type": "Anti-Air",
   "faction": "Chinese",
@@ -2005,7 +2071,7 @@ const VEHICLES = [
 },
 
 {
-  "id": 138,
+  "id": 140,
   "name": "BM-57-2 Kochevnik",
   "type": "Tank Destroyer",
   "faction": "Russian",
@@ -2047,7 +2113,7 @@ const VEHICLES = [
   }
 },
 {
-  "id": 139,
+  "id": 141,
   "name": "ADATS",
   "type": "Missile Carrier",
   "faction": "American",
@@ -2090,7 +2156,7 @@ const VEHICLES = [
   }
 },
 {
-  "id": 140,
+  "id": 142,
   "name": "MGM-166 LOSAT",
   "type": "Missile Carrier",
   "faction": "American",
@@ -3882,8 +3948,38 @@ const VEHICLES = [
     ]
   }
 },
+  {
+  id: 501,
+  name: "Mi-24 Super Hind",
+  type: "Helicopter",
+  faction: "Russian",
+  tier: "III",
+  image: "Mi-24-Super-Hind.jpg",
+  description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
+  stats: { health: 26400, speed: 290, verticalSpeed: 60, agility: 60 },
+  weapons: [
+    { name: "9K121 Vikhr / 9K121 Vikhr-1", type: "ATGM", damage: 3200, penetration: 200 },
+    { name: "Ataka (where available)", type: "ATGM", damage: 3000, penetration: 180 },
+    { name: "Igla-V", type: "AAM (MANPADS)", damage: 1800, penetration: 90 },
+    { name: "S-8 / S-13 Rockets", type: "Rocket Pod", damage: 850, penetration: 55 },
+    { name: "23mm / 30mm Gun Pod", type: "Autocannon", damage: 180, penetration: 25 }
+  ],
+  modules: {
+    engine: [
+      { name: "VK-2500 Upgrade MK1", bonus: "+10% speed" },
+      { name: "VK-2500 Upgrade MK2", bonus: "+20% speed" }
+    ],
+    avionics: [
+      { name: "Hind Targeting Suite MK1", bonus: "+20% lock speed" },
+      { name: "Hind Targeting Suite MK2", bonus: "+35% lock speed" }
+    ],
+    defense: [
+      { name: "Vitebsk ECM MK1", bonus: "+20% missile defense" }
+    ]
+  }
+},
    {
-    id: 501,
+    id: 502,
     name: "AH-64E Apache",
     type: "Helicopter",
     faction: "American",
@@ -3915,7 +4011,7 @@ const VEHICLES = [
     },
   },
   {
-    id: 502,
+    id: 503,
     name: "OH-1 Ninja",
     type: "Helicopter",
     faction: "Japanese",
@@ -3944,7 +4040,7 @@ const VEHICLES = [
     }
   },
 {
-  id: 503,
+  id: 504,
   name: "Super Lynx Mk88A",
   type: "Helicopter",
   faction: "British",
@@ -3971,7 +4067,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 504,
+  id: 505,
   name: "Z-9WA Harbin",
   type: "Helicopter",
   faction: "Chinese",
@@ -4005,7 +4101,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 505,
+  id: 506,
   name: "Z-20 Harbin",
   type: "Helicopter",
   faction: "Chinese",
@@ -4035,7 +4131,7 @@ const VEHICLES = [
   }
 },
 {
-  id: 506,
+  id: 507,
   name: "MH-60L DAP",
   type: "Helicopter",
   faction: "American",
@@ -4069,7 +4165,7 @@ const VEHICLES = [
 },
 
 {
-  id: 507,
+  id: 508,
   name: "AH-1Z Viper",
   type: "Helicopter",
   faction: "American",
@@ -4102,7 +4198,7 @@ const VEHICLES = [
 },
   
 {
-  id: 508,
+  id: 509,
   name: "Ka-50 Black Shark",
   type: "Helicopter",
   faction: "Russian",
