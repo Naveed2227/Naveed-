@@ -8411,6 +8411,9 @@ const VEHICLES = [
 const getAircraftRole = (vehicle: any) => {
   if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== "Helicopter") return null
 
+  // Check for helicopters first
+  if (vehicle.type === "Helicopter") return "helicopter"
+
   // Specific aircraft role assignments
   if (vehicle.name.includes("J-10")) return "multi-role"
   if (vehicle.name.includes("J-50")) return "stealth"
@@ -8418,8 +8421,6 @@ const getAircraftRole = (vehicle: any) => {
   if (vehicle.name.includes("MiG-41M")) return "stealth"
   if (vehicle.name.includes("F-16C Night Falcon")) return "multi-role"
   if (vehicle.name.includes("TU-222")) return "bomber"
-  if (vehicle.name.includes("AH-64E Apache")) return "helicopter"
-  if (vehicle.name.includes("AH-64E Apache")) return "interceptor"
   if (vehicle.name.includes("MiG-35")) return "interceptor"
   if (vehicle.name.includes("MiG-31BM Foxhound")) return "interceptor"
   if (vehicle.name.includes("J-16")) return "multi-role"
@@ -8503,7 +8504,7 @@ const getAircraftRole = (vehicle: any) => {
 const getRoleIcon = (role: string | null) => {
   switch (role) {
     case "stealth":
-      return "/stealth-icon.png"
+      return "Stealth.png"
     case "multi-role":
       return "/multi-role-icon.png"
     case "ground-attack":
