@@ -3094,8 +3094,41 @@ const VEHICLES = [
       ]
     }
   },
-  {
+    {
     "id": 407,
+    "name": "M60A3 (MZK)",
+    "type": "Main Battle Tank",
+    "faction": "Turkish",
+    "tier": "III",
+    image: "M60A3-(MZK).jpg",
+    "description": "Improved export variant of ZTZ96 with enhanced protection and gun systems.",
+    "stats": { "health": 36900, "speed": 24, "armor": "770mm", "agility": 34 },
+    "weapons": [
+      { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
+      { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
+      { name: "Type1985 I", type: "Main Gun", damage: 10220, penetration: 466 },
+      { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Type 6C-A", "bonus": "+10% speed" },
+        { "name": "Type 6C-B", "bonus": "+20% speed" },
+        { "name": "Type 6C-C", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Composite + ERA MK1", "bonus": "+150mm armor" },
+        { "name": "Composite + ERA MK2", "bonus": "+300mm armor" },
+        { "name": "Composite + ERA MK3", "bonus": "+450mm armor" }
+      ],
+      "fireControl": [
+        { "name": "FCS ZTZ-96A MK1", "bonus": "+10% accuracy" },
+        { "name": "FCS ZTZ-96A MK2", "bonus": "+18% accuracy" },
+        { "name": "FCS ZTZ-96A MK3", "bonus": "+26% accuracy" }
+      ]
+    }
+  },
+  {
+    "id": 408,
     "name": "ZTZ85-II",
     "type": "Main Battle Tank",
     "faction": "Chinese",
@@ -3128,7 +3161,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 408,
+    "id": 409,
     "name": "ZTZ96",
     "type": "Main Battle Tank",
     "faction": "Chinese",
@@ -3161,7 +3194,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 409,
+    "id": 410,
     "name": "ZTZ-96A (P)",
     "type": "Main Battle Tank",
     "faction": "Chinese",
@@ -3193,8 +3226,41 @@ const VEHICLES = [
       ]
     }
   },
+    {
+    "id": 411,
+    "name": "AMX-30 Super",
+    "type": "Main Battle Tank",
+    "faction": "French",
+    "tier": "III",
+    image: "AMX-30-Super.jpg",
+    "description": "Improved export variant of ZTZ96 with enhanced protection and gun systems.",
+    "stats": { "health": 36900, "speed": 24, "armor": "770mm", "agility": 34 },
+    "weapons": [
+      { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
+      { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
+      { name: "Type1985 I", type: "Main Gun", damage: 10220, penetration: 466 },
+      { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Type 6C-A", "bonus": "+10% speed" },
+        { "name": "Type 6C-B", "bonus": "+20% speed" },
+        { "name": "Type 6C-C", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Composite + ERA MK1", "bonus": "+150mm armor" },
+        { "name": "Composite + ERA MK2", "bonus": "+300mm armor" },
+        { "name": "Composite + ERA MK3", "bonus": "+450mm armor" }
+      ],
+      "fireControl": [
+        { "name": "FCS ZTZ-96A MK1", "bonus": "+10% accuracy" },
+        { "name": "FCS ZTZ-96A MK2", "bonus": "+18% accuracy" },
+        { "name": "FCS ZTZ-96A MK3", "bonus": "+26% accuracy" }
+      ]
+    }
+  },
   {
-    "id": 410,
+    "id": 412,
     "name": "PLZ-07B",
     "type": "SPA",
     "faction": "Chinese",
@@ -3227,7 +3293,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 411,
+    "id": 413,
     "name": "M110A2",
     "type": "SPA",
     "faction": "American",
@@ -3259,7 +3325,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 412,
+    "id": 414,
     "name": "2S31 Vena",
     "type": "SPA",
     "faction": "Russian",
@@ -3292,7 +3358,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 413,
+    "id": 415,
     "name": "XM2001 Crusader",
     "type": "SPA",
     "faction": "American",
@@ -3325,7 +3391,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 414,
+    "id": 416,
     "name": "Gepard 1A2",
     "type": "Anti-Air",
     "faction": "German",
@@ -3356,7 +3422,7 @@ const VEHICLES = [
   },
    
   {
-    id: 415,
+    id: 417,
     name: "Otomatic 76",
     type: "Anti-Air",
     faction: "Italian",
@@ -3388,7 +3454,7 @@ const VEHICLES = [
     },
   },
   {
-    "id": 416,
+    "id": 418,
     "name": "K-31 Cheonma",
     "type": "Anti-Air",
     "faction": "SouthKorean",
@@ -3415,7 +3481,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 417,
+    "id": 419,
     "name": "PGZ-09",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3445,7 +3511,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 418,
+    "id": 420,
     "name": "2S6M1 Tunguska-M1",
     "type": "Anti-Air",
     "faction": "Russian",
@@ -3475,7 +3541,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 419,
+    "id": 421,
     "name": "Type 625E SHORAD",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3504,7 +3570,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 420,
+    "id": 422,
     "name": "XM975",
     "type": "Anti-Air",
     "faction": "American",
@@ -3531,7 +3597,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 421,
+    "id": 423,
     "name": "AFT-10",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3558,7 +3624,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 422,
+    "id": 424,
     "name": "M113 Hellfire",
     "type": "Missile Carrier",
     "faction": "American",
@@ -3586,7 +3652,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 423,
+    "id": 425,
     "name": "9A52-2 Smerch",
     "type": "MLRS",
     "faction": "Russian",
@@ -3615,7 +3681,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 424,
+    "id": 426,
     "name": "Type 89 MLRS",
     "type": "MLRS",
     "faction": "Chinese",
@@ -3644,7 +3710,36 @@ const VEHICLES = [
     }
   },
   {
-    "id": 425,
+    "id": 427,
+    "name": "Type 75 MLRS",
+    "type": "MLRS",
+    "faction": "Japanese",
+    "tier": "III",
+    image: "Type-75-MLRS.jpg",
+    "description": "Japanese 300mm MLRS for long-range artillery strikes.",
+    "stats": { "health": 24500, "speed": 55, "armor": "25mm", "agility": 36 },
+    "weapons": [
+      { name: "Type 81 FSBS", type: "Missile", damage: 11900, penetration: 165, reload: 20 },
+      { name: "Type 81 FFBE", type: "Missile", damage: 10600, penetration: 220, reload: 20 },
+      { name: "Type 81", type: "Missile", damage: 9350, penetration: 260, reload: 20 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel 12150L", "bonus": "+10% speed" },
+        { "name": "Diesel 12150L-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "MLRS FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "MLRS FCS MK2", "bonus": "+20% accuracy" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
+  },
+  {
+    "id": 428,
     "name": "AFT-09",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3671,7 +3766,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 426,
+    "id": 429,
     "name": "LAV-600",
     "type": "Tank Destroyer",
     "faction": "American",
@@ -3701,7 +3796,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 427,
+    "id": 430,
     "name": "HSTV-L",
     "type": "Light Tank",
     "faction": "American",
@@ -3729,7 +3824,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 428,
+    "id": 431,
     "name": "Rookiat MTTD",
     "type": "Light Tank",
     "faction": "British",
@@ -3760,7 +3855,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 429,
+    "id": 432,
     "name": "ZBL-08",
     "type": "Light Tank",
     "faction": "Chinese",
@@ -3792,7 +3887,39 @@ const VEHICLES = [
     }
   },
   {
-    "id": 430,
+    "id": 433,
+    "name": "ХM8 AGS",
+    "type": "Light Tank",
+    "faction": "American",
+    "tier": "III",
+    image: "ХM8-AGS.png",
+    "description": "Wheeled armored personnel carrier with good mobility, moderate armor, versatile weapon options.",
+    "stats": { "health": 26900, "speed": 111, "armor": "40mm", "agility": 64 },
+    "weapons": [
+      { name: "ZUBR6 APBC", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "Z0F8", type: "Main Gun", damage: 675, penetration: 50 },
+      { name: "ZUBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "M929", type: "Main Gun", damage: 680, penetration: 189 },
+      { name: "HJ-73B", type: "Missile", damage: 7800, penetration: 500, reload: 6 }
+
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
+  },
+  {
+    "id": 434,
     "name": "VBCI-2",
     "type": "Light Tank",
     "faction": "French",
@@ -3822,7 +3949,7 @@ const VEHICLES = [
     }
   },
   {
-    "id": 431,
+    "id": 435,
     "name": "WMA301",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -3852,7 +3979,7 @@ const VEHICLES = [
     }
   },
    {
-    id: 432,
+    id: 436,
     name: "BMD3",
     type: "Light Tank",
     faction: "Russian",
@@ -3887,7 +4014,7 @@ const VEHICLES = [
       }
     },
     {
-    "id": 433,
+    "id": 437,
     "name": "M3A3 Bradley",
     "type": "Light Tank",
     "faction": "American",
@@ -8583,6 +8710,15 @@ const MwtVehicleStats = () => {
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
       "Altay"
+      "M1 Abrams CATTB",
+      "Leopard 2A-RC 3.0",
+      "ХM8 AGS",
+      "AMX-30 Super",
+      "Type 75 MLRS",
+      "Mi-24 Super Hind",
+      "Centauro I 120",
+      "Strf 9040 BILL",
+      "M60A3 (MZK)"
     ]
     return constructionVehicles.includes(vehicleName)
   }
