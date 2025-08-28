@@ -5421,11 +5421,12 @@ const VEHICLES = [
   {
     "id": 715,
     "name": "M163 VADS",
-    "type": "Anti air",
+    "type": "Anti-Air",
     "faction": "American",
     "tier": "II",
     "image": "M163-VADS.jpg",
-    "description": "U.S. self-propelled anti-aircraft system, mounting a 20 mm Vulcan cannon on an M113 chassis.": {
+    "description": "U.S. self-propelled anti-aircraft system, mounting a 20 mm Vulcan cannon on an M113 chassis.",
+    "stats": {
       "health": 37500,
       "speed": 50,
       "armor": "600mm",
@@ -5494,11 +5495,12 @@ const VEHICLES = [
   {
     "id": 716,
     "name": "PGZ-04A",
-    "type": "Anti air",
+    "type": "Anti-Air",
     "faction": "Chinese",
     "tier": "II",
     "image": "PGZ-04A.jpg",
-    "description": "Chinese self-propelled anti-aircraft system, equipped with twin 35 mm cannons and radar for short-range air defense.": {
+    "description": "Chinese self-propelled anti-aircraft system, equipped with twin 35 mm cannons and radar for short-range air defense.",
+    "stats": {
       "health": 38000,
       "speed": 51,
       "armor": "620mm",
