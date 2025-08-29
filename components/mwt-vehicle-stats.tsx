@@ -8710,7 +8710,7 @@ const MwtVehicleStats = () => {
 
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
-      "Altay"
+      "Altay",
       "M1 Abrams CATTB",
       "Leopard 2A-RC 3.0",
       "ХM8 AGS",
