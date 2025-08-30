@@ -44,7 +44,7 @@ const BATTLE_PASSES = [
     name: "Labor Legends",
     image: "2025-Sep.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: ["XM8 AGS", "M1 Abrams CATTB"], // Vehicle IDs from VEHICLES array
+    vehicles: ["ХM8 AGS", "M1 Abrams CATTB"], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["M1 Abrams CATTB"],
       free: ["XM8 AGS"]
@@ -3902,7 +3902,7 @@ const VEHICLES = [
     "type": "Light Tank",
     "faction": "American",
     "tier": "III",
-    image: "ХM8-AGS.png",
+    image: "ХM8-AGS.jpg",
     "description": "Wheeled armored personnel carrier with good mobility, moderate armor, versatile weapon options.",
     "stats": { "health": 26900, "speed": 111, "armor": "40mm", "agility": 64 },
     "weapons": [
