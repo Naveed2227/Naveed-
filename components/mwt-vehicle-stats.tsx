@@ -16,14 +16,47 @@ const toRomanNumeral = (num: number | string): string => {
     { value: 1, numeral: 'I' }
   ];
   
+  let result = '';
+  for (const { value, numeral } of romanNumerals) {
+    while (numValue >= value) {
+      result += numeral;
+      numValue -= value;
+    }
+  }
+  return result || 'I';
+};
+
+// Convert tier to Roman numeral if it's not already
+const formatTier = (tier: string | number): string => {
+  // If already Roman numeral, return as is
+  if (typeof tier === 'string' && /^[IVX]+$/.test(tier)) {
+    return tier;
+  }
+  // Otherwise convert to Roman numeral
+  return toRomanNumeral(tier);
+};
+
+// Battle Pass Data Structure
 const BATTLE_PASSES = [
+ {
+    id: 10,
+    month: "September 2025",
+    name: "Labor Legends",
+    image: "2025-Sep.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: ["XM8 AGS", "M1 Abrams CATTB"], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["M1 Abrams CATTB"],
+      free: ["XM8 AGS"]
+    }
+  },
   {
     id: 9,
     month: "August 2025",
     name: "Sentinels union",
-    image: "2025-Aug.jpg",
+    image: "2025-Aug.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: ["EMBT 120", "KF31 Lynx"], // ✅ fixed newline bug
+    vehicles: ["KF31 Lynx", "EMBT 120"], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["EMBT 120"],
       free: ["KF-31"]
@@ -33,11 +66,11 @@ const BATTLE_PASSES = [
     id: 8,
     month: "July 2025",
     name: "Steal Eagle",
-    image: "2025-Jul.jpg",
+    image: "2025-Jul.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: ["Object 640", "Type 16 MCV"],
+    vehicles: ["Type 16 MCV", "Object 640"], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["Object 640"],
+      premium: ["Obj 640"],
       free: ["Type 16 MCV"]
     }
   },
@@ -45,9 +78,9 @@ const BATTLE_PASSES = [
     id: 7,
     month: "June 2025",
     name: "Royal dragon",
-    image: "2025-Jun.jpg",
+    image: "2025-Jun.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: ["YF-23", "Gepard 1A2"],
+    vehicles: ["Gepard 1A2", "YF-23"], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["YF-23"],
       free: ["Gepard 1A2"]
@@ -57,9 +90,9 @@ const BATTLE_PASSES = [
     id: 6,
     month: "May 2025",
     name: "Golden Sky",
-    image: "2025-May.jpg",
+    image: "2025-May.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: ["Merkava MK.4", "M-SHORAD"],
+    vehicles: ["M-SHORAD", "Merkava Mk.4"], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["Merkava MK.4"],
       free: ["M-SHORAD"]
@@ -69,21 +102,21 @@ const BATTLE_PASSES = [
     id: 5,
     month: "April 2025",
     name: "Crosswind",
-    image: "2025-Apr.jpg",
+    image: "2025-Apr.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: ["Su-57M", "T-14 Armata"], // ✅ fixed nesting
+    vehicles: ["Type 625E SHORAD", "Su-57M"], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["Su-57M"],
-      free: ["Type 625E SHORAD"]
+      free: ["Type 625E"]
     }
   },
   {
     id: 4,
     month: "March 2025",
     name: "Living steel",
-    image: "2025-Mar.jpg",
+    image: "2025-Mar.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: ["Abrams X", "Leopard 2A7+"],
+    vehicles: ["Leopard 2A7+", "Abrams X"], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["Abram X"],
       free: ["Leopard 2A7+"]
@@ -93,9 +126,9 @@ const BATTLE_PASSES = [
     id: 3,
     month: "February 2025",
     name: "Operation G.H.O.S.T",
-    image: "2025-Feb.jpg",
+    image: "2025-Feb.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: ["Ka-58 Black Ghost", "HSTV-L"],
+    vehicles: ["HSTV-L", "Ka-58 Black Ghost"], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["KA-58"],
       free: ["HSTV-L"]
@@ -105,9 +138,9 @@ const BATTLE_PASSES = [
     id: 2,
     month: "January 2025",
     name: "Zero hour",
-    image: "2025-Jan.jpg",
+    image: "2025-Jan.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: ["TU-222", "Type 10"],
+    vehicles: ["Type 10","TU-222"], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["TU-222"],
       free: ["Type-10"]
@@ -117,16 +150,16 @@ const BATTLE_PASSES = [
     id: 1,
     month: "December 2024",
     name: "Season Two",
-    image: "2024-Dec.jpg",
+    image: "2024-Dec.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: ["KF-51 Panther", "VT-4A1"],
+    vehicles: ["VT-4A1", "KF-51 Panther"], // Vehicle IDs from VEHICLES array
     rewards: {
       premium: ["kF-51"],
       free: ["VT-4A1"]
     }
   }
-];
 
+];
 
 const VEHICLES = [
   {
@@ -855,12 +888,12 @@ const VEHICLES = [
     tier: "IV",
     image: "Altay.jpg",
     description: "Turkey’s modern main battle tank, emphasizing firepower, protection, mobility, and advanced technology.",
-    stats: { health: 38200, speed: 65,armor: "1200mm", agility: 70 },
+    stats: { health: 42600, speed: 62,armor: "1200mm", agility: 36 },
     weapons: [
       { name: "DM63A1 APFSDS", type: "Main Gun", damage: 18500, penetration: 950, reload: 5.2 },
       { name: "DM11", type: "Main Gun", damage: 4900, penetration: 87 },
       { name: "DM12A2 HEATFS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 },
-      { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 },
+      { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 }
     ],
     modules: {
       engine: [
@@ -1288,13 +1321,11 @@ const VEHICLES = [
     faction: "American",
     tier: "IV",
     image: "M1-Abrams-CATTB.jpg",
-    description: "Mobile gun system with rapid deployment capability and stealth features.",
-    stats: { health: 28800, speed: 97, armor: "380mm", agility: 40.1 },
+    description: "Experimental American tank with 140mm gun, advanced armor, and fire control, testing technologies to boost combat effectiveness.",
+    stats: { health: 43700, speed: 72, armor: "1100mm", agility: 36 },
     weapons: [
-      { name: "M392A2", type: "Main Gun", damage: 8510, penetration: 372 },
-      { name: "M393A2", type: "Main Gun", damage: 10090, penetration: 127 },
-      { name: "M456A2", type: "Main Gun", damage: 9320, penetration: 400 },
-      { name: "M900", type: "Main Gun", damage: 8910, penetration: 522 }
+      { name: "XM965", type: "Main Gun", damage: 16560, penetration: 1000, Reload: 8 },
+      { name: "XM964", type: "Main Gun", damage: 14640, penetration: 1050, Reload: 8 }
     ],
     modules: {
       engine: [
@@ -3081,12 +3112,12 @@ const VEHICLES = [
     "tier": "III",
     image: "M60A3-(MZK).jpg",
     "description": "Improved export variant of ZTZ96 with enhanced protection and gun systems.",
-    "stats": { "health": 36900, "speed": 24, "armor": "770mm", "agility": 34 },
+    "stats": { "health": 39100, "speed": 55, "armor": "770mm", "agility": 36 },
     "weapons": [
-      { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
-      { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
-      { name: "Type1985 I", type: "Main Gun", damage: 10220, penetration: 466 },
-      { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
+      { name: "DM12 HEAT", type: "Main Gun", damage: 10630, penetration: 400 },
+      { name: "DM512 HESH", type: "Main Gun", damage: 10090, penetration: 127 },
+      { name: "DM23 APFSDS", type: "Main Gun", damage: 9630, penetration: 337 },
+      { name: "DM33 APFSDS", type: "Main Gun", damage: 9940, penetration: 508 }
     ],
     "modules": {
       "engine": [
@@ -8681,6 +8712,7 @@ const MwtVehicleStats = () => {
       "SB-1",
       "T-14 Armata (152)",
       "Leopard 2A7+",
+      "M1 Abrams CATTB",
       "Object 640"
 
     ]
@@ -8689,16 +8721,14 @@ const MwtVehicleStats = () => {
 
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
-      "Altay",
-      "M1 Abrams CATTB",
+   
       "Leopard 2A-RC 3.0",
       "ХM8 AGS",
       "AMX-30 Super",
       "Type 75 MLRS",
       "Mi-24 Super Hind",
       "Centauro I 120",
-      "Strf 9040 BILL",
-      "M60A3 (MZK)"
+      "Strf 9040 BILL"
     ]
     return constructionVehicles.includes(vehicleName)
   }
