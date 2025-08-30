@@ -9937,13 +9937,13 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent mx-1.5">
-                <span className="hidden sm:inline">{"MWT Assistant (Unofficial)\n"}</span>
+                <span className="hidden sm:inline">{"MWT Assistant (Unofficial)"}</span>
                 <span className="sm:hidden">MWT Assistant</span>
               </h1>
               <p className="text-slate-400 mt-1 ml-2.5 text-sm hidden sm:block">    MWT Assistant</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
-              <div className="pb-6">
+              <div className="pb-6 w-auto">
                 <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
                   <div className="relative w-full sm:w-auto">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-400 w-4 h-4" />
@@ -9952,7 +9952,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       placeholder="Search vehicles..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-12 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent sm:w-52"
+                      className="w-full pl-10 pr-12 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent sm:w-56"
                     />
                     {searchQuery && (
                       <button
