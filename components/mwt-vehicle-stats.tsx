@@ -8796,7 +8796,7 @@ const MwtVehicleStats = () => {
 "AMX-30 Super",
 "M60A3 (MZK)",
 "Type 75 MLRS",
-"Mi-24 Super Hind"
+"Mi-24 Super Hind",
 "ZBL-08",
 "XM1 (GM)"
 
