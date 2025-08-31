@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
@@ -1218,7 +1217,7 @@ const VEHICLES = [
   {
     id: 116,
     name: "2S19 Msta-S",
-    type: "SPA",
+    type: "SPH",
     faction: "Russian",
     tier: "IV",
     image: "2S19-Msta-S.jpg",
@@ -1961,7 +1960,7 @@ const VEHICLES = [
 {
   "id": 137,
   "name": "PLZ-05",
-  "type": "SPA",
+  "type": "SPH",
   "faction": "Chinese",
   "tier": "IV",
   image: "PLZ-05.jpg",
@@ -2002,7 +2001,7 @@ const VEHICLES = [
 {
   "id": 138,
   "name": "M109A6 Paladin",
-  "type": "SPA",
+  "type": "SPH",
   "faction": "American",
   "tier": "IV",
   image: "M109A6-Paladin.jpg",
@@ -2079,9 +2078,40 @@ const VEHICLES = [
     ]
   }
 },
-
 {
-  "id": 140,
+    id: 140,
+    name: "Otomatic 76",
+    type: "Anti-Air",
+    faction: "Italian",
+    tier: "IV",
+    image: "Otomatic-76.jpg",
+    description: "Self-propelled anti-aircraft gun with rapid-fire 76mm cannon.",
+    stats: { health: 33700, speed: 62, armor: "380mm", agility: 36 },
+    weapons: [
+      { name: "76-62 APFSDS", type: "Main Gun", damage: 2340, penetration: 310 },
+      { name: "76-62 HE MOM", type: "Main Gun", damage: 1079.230769, penetration: 80 },
+      { name: "76-62 SAPOM", type: "Main Gun", damage: 1860, penetration: 160 }
+    ],
+    modules: {
+      engine: [
+        { name: "IVECO 8260 MK1", bonus: "+10 km/h speed" },
+        { name: "IVECO 8260 MK2", bonus: "+20 km/h speed" },
+        { name: "IVECO 8260 MK3", bonus: "+30 km/h speed" },
+      ],
+      armor: [
+        { name: "Steel Armor MK1", bonus: "+70mm protection" },
+        { name: "Steel Armor MK2", bonus: "+140mm protection" },
+        { name: "Steel Armor MK3", bonus: "+210mm protection" },
+      ],
+      fireControl: [
+        { name: "Radar FCS MK1", bonus: "+25% accuracy" },
+        { name: "Radar FCS MK2", bonus: "+40% accuracy" },
+        { name: "Radar FCS MK3", bonus: "+55% accuracy" },
+      ],
+    },
+  },
+{
+  "id": 141,
   "name": "BM-57-2 Kochevnik",
   "type": "Tank Destroyer",
   "faction": "Russian",
@@ -2123,7 +2153,7 @@ const VEHICLES = [
   }
 },
 {
-  "id": 141,
+  "id": 142,
   "name": "ADATS",
   "type": "Missile Carrier",
   "faction": "American",
@@ -2166,7 +2196,7 @@ const VEHICLES = [
   }
 },
 {
-  "id": 142,
+  "id": 143,
   "name": "MGM-166 LOSAT",
   "type": "Missile Carrier",
   "faction": "American",
@@ -3272,7 +3302,7 @@ const VEHICLES = [
   {
     "id": 412,
     "name": "PLZ-07B",
-    "type": "SPA",
+    "type": "SPH",
     "faction": "Chinese",
     "tier": "III",
     image: "PLZ-07B.jpg",
@@ -3305,8 +3335,8 @@ const VEHICLES = [
   {
     "id": 413,
     "name": "M110A2",
-    "type": "SPA",
-    "faction": "American",
+    "type": "SPH",
+    "faction": "Japanese",
     "tier": "III",
     image: "M110A2.jpg",
     "description": "American 203mm self-propelled artillery for heavy bombardment.",
@@ -3337,7 +3367,7 @@ const VEHICLES = [
   {
     "id": 414,
     "name": "2S31 Vena",
-    "type": "SPA",
+    "type": "SPH",
     "faction": "Russian",
     "tier": "III",
     image: "2S31-Vena.jpg",
@@ -3370,7 +3400,7 @@ const VEHICLES = [
   {
     "id": 415,
     "name": "XM2001 Crusader",
-    "type": "SPA",
+    "type": "SPH",
     "faction": "American",
     "tier": "III",
     image: "XM2001-Crusader.jpg",
@@ -3431,38 +3461,7 @@ const VEHICLES = [
     }
   },
    
-  {
-    id: 417,
-    name: "Otomatic 76",
-    type: "Anti-Air",
-    faction: "Italian",
-    tier: "III",
-    image: "Otomatic-76.jpg",
-    description: "Self-propelled anti-aircraft gun with rapid-fire 76mm cannon.",
-    stats: { health: 33700, speed: 62, armor: "380mm", agility: 36 },
-    weapons: [
-      { name: "76-62 APFSDS", type: "Main Gun", damage: 2340, penetration: 310 },
-      { name: "76-62 HE MOM", type: "Main Gun", damage: 1079.230769, penetration: 80 },
-      { name: "76-62 SAPOM", type: "Main Gun", damage: 1860, penetration: 160 }
-    ],
-    modules: {
-      engine: [
-        { name: "IVECO 8260 MK1", bonus: "+10 km/h speed" },
-        { name: "IVECO 8260 MK2", bonus: "+20 km/h speed" },
-        { name: "IVECO 8260 MK3", bonus: "+30 km/h speed" },
-      ],
-      armor: [
-        { name: "Steel Armor MK1", bonus: "+70mm protection" },
-        { name: "Steel Armor MK2", bonus: "+140mm protection" },
-        { name: "Steel Armor MK3", bonus: "+210mm protection" },
-      ],
-      fireControl: [
-        { name: "Radar FCS MK1", bonus: "+25% accuracy" },
-        { name: "Radar FCS MK2", bonus: "+40% accuracy" },
-        { name: "Radar FCS MK3", bonus: "+55% accuracy" },
-      ],
-    },
-  },
+  
   {
     "id": 418,
     "name": "K-31 Cheonma",
@@ -5983,7 +5982,7 @@ const VEHICLES = [
   {
     "id": 720,
     "name": "M109",
-    "type": "SPA",
+    "type": "SPH",
     "faction": "American",
     "tier": "II",
     "image": "M109.jpg",
@@ -6057,7 +6056,7 @@ const VEHICLES = [
   {
     "id": 721,
     "name": "PLL-05",
-    "type": "SPA",
+    "type": "SPH",
     "faction": "Chinese",
     "tier": "II",
     "image": "PLL-05.jpg",
@@ -6131,7 +6130,7 @@ const VEHICLES = [
   {
     "id": 722,
     "name": "PLZ-83",
-    "type": "SPA",
+    "type": "SPH",
     "faction": "Chinese",
     "tier": "II",
     "image": "PLZ-83.jpg",
@@ -6205,7 +6204,7 @@ const VEHICLES = [
   {
     "id": 723,
     "name": "2S1 Gvozdika",
-    "type": "SPA",
+    "type": "SPH",
     "faction": "Russian",
     "tier": "II",
     "image": "2S1-Gvozdika.jpg",
@@ -6279,7 +6278,7 @@ const VEHICLES = [
   {
     "id": 724,
     "name": "2S3 Akatsiya",
-    "type": "SPA",
+    "type": "SPH",
     "faction": "Russian",
     "tier": "II",
     "image": "2S3-Akatsiya.jpg",
@@ -6353,7 +6352,7 @@ const VEHICLES = [
   {
     "id": 725,
     "name": "Type 74 SPH",
-    "type": "SPA",
+    "type": "SPH",
     "faction": "Japanese",
     "tier": "II",
     "image": "Type-74-SPH.jpg",
@@ -8543,8 +8542,8 @@ const getTRoleIcon = (role: string | null) => {
       return "/MLRS.png"
     case "Missile Carrier":
       return "/MissileCarrier.png"
-    case "SPA":
-      return "/SPA.png"
+    case "SPH":
+      return "/SPH.png"
     case "AA":
       return "/AA.png"
     default:
@@ -8713,6 +8712,7 @@ const MwtVehicleStats = () => {
       "T-14 Armata (152)",
       "Leopard 2A7+",
       "M1 Abrams CATTB",
+      "XM8 AGS",
       "Object 640"
 
     ]
@@ -8764,7 +8764,6 @@ const MwtVehicleStats = () => {
 "J-10B",
 "Mitsubishi F-2B",
 "J-50",
-"Z-11WB Changhe",
 "Tiger HAD",
 "EC665 Tiger UHT",
 "M1 Abrams Block III",
@@ -8790,7 +8789,16 @@ const MwtVehicleStats = () => {
 "PGZ-09",
 "Type-61",
 "T54E1",
-"BTR-60PB"
+"BTR-60PB",
+"Altay",
+"Leopard 2A-RC 3.0",
+"MGM-166 LOSAT",
+"AMX-30 Super",
+"M60A3 (MZK)",
+"Type 75 MLRS",
+"Mi-24 Super Hind"
+"ZBL-08",
+"XM1 (GM)"
 
         
 
@@ -9004,8 +9012,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       const roleMap: { [key: string]: string } = { 
         tank: "MBT", mbt: "MBT", "main battle tank": "MBT", 
         jet: "Fighter Jet", fighter: "Fighter Jet", "fighter jet": "Fighter Jet",
-        spa: "Self-Propelled Artillery", "self-propelled artillery": "Self-Propelled Artillery",
-        artillery: "Self-Propelled Artillery",
+        sph: "Self-Propelled Howitzer", "self-propelled artillery": "Self-Propelled Howitzer",
+        artillery: "Self-Propelled Howitzer",
         interceptor: "Interceptor",
         helicopter: "Helicopter",
         mlrs: "MLRS"
@@ -9050,7 +9058,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       const rankVehicle = (vehicle: any) => {
         if (vehicle.type === "MBT") return (vehicle.stats.health || 0) + (vehicle.stats.armor || 0)
         if (vehicle.type === "Fighter Jet") return (vehicle.stats.speed || 0) + (vehicle.stats.agility || 0)
-        if (vehicle.type === "Self-Propelled Artillery") return (vehicle.stats.damage || vehicle.stats.health || 0) + (vehicle.stats.range || vehicle.stats.armor || 0)
+        if (vehicle.type === "Self-Propelled Howitzer") return (vehicle.stats.damage || vehicle.stats.health || 0) + (vehicle.stats.range || vehicle.stats.armor || 0)
         return vehicle.stats.health || 0
       }
 
@@ -9164,9 +9172,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           'jet': 'Fighter Jet',
           'fighter': 'Fighter Jet',
           'fighter jet': 'Fighter Jet',
-          'spa': 'Self-Propelled Artillery',
-          'self-propelled artillery': 'Self-Propelled Artillery',
-          'artillery': 'Self-Propelled Artillery',
+          'sph': 'Self-Propelled Howitzer',
+          'self-propelled artillery': 'Self-Propelled Howitzer',
+          'artillery': 'Self-Propelled Howitzer',
           'interceptor': 'Interceptor',
           'helicopter': 'Helicopter',
           'mlrs': 'MLRS'
@@ -9192,7 +9200,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         })
       }
 
-      const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'spa_combined' = 'health') => {
+      const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'sph_combined' = 'health') => {
         if (vehicles.length === 0) return null
         
         return vehicles.reduce((best, current) => {
@@ -9207,8 +9215,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             // Jets: Speed + Agility
             bestScore = (best.stats.speed || 0) + (best.stats.agility || 0)
             currentScore = (current.stats.speed || 0) + (current.stats.agility || 0)
-          } else if (criteria === 'spa_combined') {
-            // SPA: Damage + Range (fallback to health if damage/range not available)
+          } else if (criteria === 'sph_combined') {
+            // SPH: Damage + Range (fallback to health if damage/range not available)
             bestScore = (best.stats.damage || best.stats.health || 0) + (best.stats.range || best.stats.armor || 0)
             currentScore = (current.stats.damage || current.stats.health || 0) + (current.stats.range || current.stats.armor || 0)
           } else {
@@ -9332,8 +9340,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           criteria = 'jet_combined' // Speed + Agility
         } else if (filters.role === 'MBT') {
           criteria = 'mbt_combined' // Health + Armor
-        } else if (filters.role === 'Self-Propelled Artillery') {
-          criteria = 'spa_combined' // Damage + Range
+        } else if (filters.role === 'Self-Propelled Howitzer') {
+          criteria = 'sph_combined' // Damage + Range
         }
         
         // Step 2: Strict filtering before any fallback
@@ -10238,7 +10246,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               )}
 
               {(vehicle.type === "Main Battle Tank" || vehicle.type === "Light Tank" || vehicle.type === "Tank Destroyer" || 
-                vehicle.type === "MLRS" || vehicle.type === "Missile Carrier" || vehicle.type === "SPA" || 
+                vehicle.type === "MLRS" || vehicle.type === "Missile Carrier" || vehicle.type === "SPH" || 
                 vehicle.type === "Anti-Air") && (
                 <div className="absolute top-4 right-4 px-0 py-0 pl-0 pb-2.5 pt-0 border-t-0 my-[-3px] mx-[-4px]">
                   {(() => {
