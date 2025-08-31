@@ -2274,7 +2274,7 @@ const VEHICLES = [
     type: "Helicopter",
     faction: "Chinese",
     tier: "IV",
-    image: "Z-19E.jpg",
+    image: "Z-19E.png",
     description: "Light attack and reconnaissance helicopter with stealth characteristics.",
     stats: { health: 16000, speed: 280, verticalSpeed: 15, agility: 85 },
     weapons: [
@@ -8567,7 +8567,7 @@ const getFlagImage = (faction: string): string => {
     Turkish: "/Turkey.webp",
     Canadian: "/canada-flag.png",
     Israeli: "/israel-flag.webp",
-    French: "/france-flag.webp",
+    French: "/france-flag.png",
     Italian: "/italy-flag.png",
     Ukrainian: "/ukraine-flag.png",
     Swedish: "/sweden-flag.png",
