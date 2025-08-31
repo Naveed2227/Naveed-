@@ -10272,7 +10272,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <img
                     src={vehicle.image}
                     alt={`${vehicle.name} vehicle`}
-                    className="w-full h-48 object-cover rounded-lg border border-slate-700 shadow-lg"
+                    className="w-full h-48 object-cover rounded-lg mb-3 bg-slate-800/20 shadow-lg"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
                     }}
