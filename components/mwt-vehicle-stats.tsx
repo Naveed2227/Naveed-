@@ -3470,7 +3470,7 @@ const VEHICLES = [
     "tier": "III",
     image: "K-31-Cheonma.jpg",
     "description": "Korean SPAAG with 30mm cannons and short-range SAM missiles.",
-    "stats": { "health": 23100, "speed": 60, "armor": "30mm", "agility": 35 },
+    "stats": { "health": 23100, "speed": 60, "armor": "25mm", "agility": 35 },
     "weapons": [
       { name: "Crotale-NG-Launcher", type: "Missile", damage: 5790, penetration: 58, reload: 12 },
     ],
@@ -3496,7 +3496,7 @@ const VEHICLES = [
     "faction": "Chinese",
     "tier": "III",
     image: "PGZ-09.jpg",
-    "description": "Chinese SPAAG with twin 35mm cannons and short-range missiles.",
+    "description": "Tracked Chinese self-propelled AA, twin 35mm guns, light armor, medium mobility, excels against helicopters and low-flying aircraft.",
     "stats": { "health": 25500, "speed": 60, "armor": "30mm", "agility": 30 },
     "weapons": [
       { name: "DKG01A", type: "Main Gun", damage: 270, penetration: 59 },
@@ -3586,7 +3586,7 @@ const VEHICLES = [
     "tier": "III",
     image: "XM975.jpg",
     "description": "US SPAAG with 20mm Vulcan cannon and Stinger SAM missiles.",
-    "stats": { "health": 23500, "speed": 57, "armor": "30mm", "agility": 30 },
+    "stats": { "health": 23500, "speed": 57, "armor": "40mm", "agility": 30 },
     "weapons": [
       { name: "SAM Rokand", type: "Missile", damage: 8910, penetration: 85, reload: 6 }
     ],
@@ -5479,7 +5479,7 @@ const VEHICLES = [
     "faction": "American",
     "tier": "II",
     "image": "M551-Sheridan.jpg",
-    "description": "U.S. light tank, armed with a 152 mm gun-launcher capable of firing missiles and conventional rounds.",
+    "description": "The M551 Sheridan is a lightweight U.S. airborne tank with a 152mm gun-launcher, amphibious capability, and limited armor protection.",
     "stats": {
       "health": 36000,
       "speed": 47,
