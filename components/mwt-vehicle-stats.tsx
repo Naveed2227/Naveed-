@@ -3612,7 +3612,7 @@ const VEHICLES = [
     "faction": "Chinese",
     "tier": "III",
     image: "AFT-10.jpg",
-    "description": "Chinese SPAAG equipped with 30mm autocannons and HJ-10 anti-air missiles.",
+    "description": "Modern armored combat vehicle with high mobility, HJ-10 Missiles, advanced targeting, versatile for battlefield assaults and defense operationsand",
     "stats": { "health": 26000, "speed": 70, "armor": "30mm", "agility": 40 },
     "weapons": [
       { name: "HJ-10", type: "Missile", damage: 12558, penetration: 1400, reload: 13 }
