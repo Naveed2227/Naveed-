@@ -3754,7 +3754,7 @@ const VEHICLES = [
     "faction": "Chinese",
     "tier": "III",
     image: "AFT-09.jpg",
-    "description": "Chinese SPAAG equipped with 30mm autocannons and short-range missiles.",
+    "description": "Mobile missile tank with reinforced armor, launches guided missiles, excels in long-range strikes, tactical support, and battlefield versatility.",
     "stats": { "health": 23000, "speed": 96, "armor": "30mm", "agility": 40 },
     "weapons": [
       { name: "ATGM HJ-9", type: "Missile", damage: 10192, penetration: 1200, reload: 6 }
