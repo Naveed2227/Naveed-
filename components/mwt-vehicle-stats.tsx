@@ -3901,7 +3901,7 @@ const VEHICLES = [
     "type": "Light Tank",
     "faction": "American",
     "tier": "III",
-    image: "ХM8.png",
+    image: "XM8.png",
     "description": "Wheeled armored personnel carrier with good mobility, moderate armor, versatile weapon options.",
     "stats": { "health": 26900, "speed": 111, "armor": "40mm", "agility": 64 },
     "weapons": [
