@@ -3988,7 +3988,36 @@ const VEHICLES = [
     }
   },
    {
-    id: 436,
+    "id": 436,
+    "name": "Centauro I 120",
+    "type": "Tank Destroyer",
+    "faction": "Italian",
+    "tier": "III",
+    image: "Centauro-I-120.jpg",
+    "description": "Italian wheeled tank destroyer, 120mm gun, fast and mobile, light armor, strong firepower, ideal for hit-and-run and reconnaissance.",
+    "stats": { "health": 28200, "speed": 110, "armor": "40mm", "agility": 35 },
+    "weapons": [
+      { name: "DM33 APFSDS", type: "Main Gun", damage: 9940, penetration: 508 },
+      { name: "DM12A1 HEATFS", type: "Main Gun", damage: 9900, penetration: 400 },
+      { name: "CL3143 APFSDS", type: "Main Gun", damage: 11500, penetration: 690 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel 12150L", "bonus": "+10% speed" },
+        { "name": "Diesel 12150L-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "MLRS FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "MLRS FCS MK2", "bonus": "+20% accuracy" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
+  },
+   {
+    id: 437,
     name: "BMD3",
     type: "Light Tank",
     faction: "Russian",
@@ -4023,7 +4052,7 @@ const VEHICLES = [
       }
     },
     {
-    "id": 437,
+    "id": 438,
     "name": "M3A3 Bradley",
     "type": "Light Tank",
     "faction": "American",
@@ -8798,7 +8827,8 @@ const MwtVehicleStats = () => {
 "Type 75 MLRS",
 "Mi-24 Super Hind",
 "ZBL-08",
-"XM1 (GM)"
+"XM1 (GM)",
+"Centauro I 120"
 
         
 
