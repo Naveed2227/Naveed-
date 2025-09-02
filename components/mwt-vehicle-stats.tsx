@@ -10851,8 +10851,19 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                      Anonymous crash and performance data may be collected automatically by Google Play Services.
                   </p>
                   <p>
-                    Ads shown in the app may use cookies or similar technologies under their own policies.
+                     Ads shown in the app may use cookies or similar technologies under their own policies.
                   </p>
+<p>
+  <a 
+    href="https://sites.google.com/view/mwt-app-policy/home" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className="text-cyan-400 underline hover:text-cyan-300"
+  >
+    Read the Policy
+  </a>
+</p>
+
                   <p className="text-sm text-slate-400">
                     Created by Naveed2227 • Version 1.00.0 • Built with CSS and TypeScript
                   </p>
