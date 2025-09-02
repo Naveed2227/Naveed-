@@ -10855,7 +10855,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   </p>
 <p>
   <a 
-    href="https://sites.google.com/view/mwt-app-policy/home" 
+    href="https://sites.google.com/view/mwtassistantpppolicy/home" 
     target="_blank" 
     rel="noopener noreferrer" 
     className="text-cyan-400 underline hover:text-cyan-300"
