@@ -8682,6 +8682,7 @@ const MwtVehicleStats = () => {
   const vehiclesPerPage = 15
 
   const [showAbout, setShowAbout] = useState(false)
+  const [showUpdates, setShowUpdates] = useState(false)
   const [showCredits, setShowCredits] = useState(false)
 
   const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
@@ -10811,6 +10812,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               About
             </button>
             <button
+              onClick={() => setShowUpdates(true)}
+              className="text-cyan-400 hover:text-cyan-300 underline font-medium"
+            >
+              Updates
+            </button>
+            <button
               onClick={() => setShowCredits(true)}
               className="text-cyan-400 hover:text-cyan-300 underline font-medium"
             >
@@ -10832,16 +10839,22 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
                 <div className="space-y-4 text-slate-300">
                   <p>
-                    MWT Assistant is a comprehensive database and analysis tool for MWT vehicles.
-                    This application provides detailed specifications, tactical analysis, and comparison tools for
-                    military vehicles.
+                    MWT Assistant is your all-in-one companion for tracking and managing MWT-related data. Access real-time statistics, detailed information, and updates for vehicles and units with ease. Whether you’re analyzing performance, monitoring progress, or staying informed about the latest developments, MWT Assistant keeps everything organized in a simple, intuitive interface.
                   </p>
                   <p>
-                    Features include vehicle statistics, weapon specifications, upgrade modules, AI-powered tactical
-                    analysis, and advanced filtering capabilities.
+                    Features include vehicle statistics, weapon specifications, upgrade modules, AI-powered tactical analysis, and advanced filtering capabilities.
+                  </p>
+                  <p>
+                    MWT Assistant does not collect, store, or share personal information. Data shown is provided for informational purposes and we strive to ensure its accuracy, but we cannot guarantee completeness.
+                  </p>
+                  <p>
+                     Anonymous crash and performance data may be collected automatically by Google Play Services.
+                  </p>
+                  <p>
+                    Ads shown in the app may use cookies or similar technologies under their own policies.
                   </p>
                   <p className="text-sm text-slate-400">
-                    Created by Naveed2227 • Version 1.0 • Built with CSS and TypeScript
+                    Created by Naveed2227 • Version 1.00.0 • Built with CSS and TypeScript
                   </p>
                    <p className="text-sm text-slate-400"> 
                     Contact:
@@ -10855,67 +10868,33 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <p className="text-sm text-slate-400"> 
                     Inst: @naveed_2227
                   </p>
+                </div>
+              </div>
+            </div>
+          </div>
+         )}
 
+      
+
+        {showUpdates && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-slate-800 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-2xl font-bold text-cyan-400">Updates of MWT Assistant (Unofficial) </h2>
+                  <button onClick={() => setShowUpdates(false)} className="text-slate-400 hover:text-white">
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+                <div className="space-y-4 text-slate-300">
                   <div className="mt-6 pt-4 border-t border-slate-600">
                     <h3 className="text-xl font-semibold text-cyan-400 mb-3">Updates</h3>
                     <div className="space-y-3">
                      <div className="bg-slate-700/50 p-3 rounded-lg">
+  
+
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version Beta 1.5    (19/8/2025)</span>
-                          <span className="text-sm text-slate-400">Latest</span>
-                        </div>
-                        <ul className="text-sm text-slate-300 space-y-1">
-                          <li>• Added 26 new Vehicles including LAV-600, ZTZ-96(P) and PT-91 Twardy</li>
-                          <li>• Majour Bugs fixed</li>
-                        </ul>
-                      </div>
-                      <div className="bg-slate-700/50 p-3 rounded-lg">
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version Beta 1.4    (18/8/2025)</span>
-                          <span className="text-sm text-slate-400">Previous</span>
-                        </div>
-                        <ul className="text-sm text-slate-300 space-y-1">
-                          <li>• Added 20 new Vehicles including Mi-35, Ka-58 Black Ghost and SB1</li>
-                          <li>• New Vehicle Red Tag for Exclusive vehicles (Gatcha)</li>
-                          <li>• Minor bugs fixed</li>
-                        </ul>
-                      </div>
-                      <div className="bg-slate-700/50 p-3 rounded-lg">
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version Beta 1.3    (17/8/2025)</span>
-                          <span className="text-sm text-slate-400">Old</span>
-                        </div>
-                        <ul className="text-sm text-slate-300 space-y-1">
-                          <li>• Added 34 new Vehicles including YF-23, T20 monolit and Su-37 Terminator</li>
-                          <li>• New Tank Role drop doen box</li>
-                          <li>• Tu-222 now has the Bomber Icon</li>
-                        </ul>
-                      </div>
-                      <div className="bg-slate-700/50 p-3 rounded-lg">
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version Beta 1.2    (16/8/2025)</span>
-                          <span className="text-sm text-slate-400">Old</span>
-                        </div>
-                        <ul className="text-sm text-slate-300 space-y-1">
-                          <li>• Added 7 new aircraft including AV-8B Harrier II and F-14D Super Tomcat</li>
-                          <li>• Fixed header positioning to stay in place during scroll</li>
-                          <li>• Enhanced AI chat system with improved vehicle analysis</li>
-                        </ul>
-                      </div>
-                      <div className="bg-slate-700/50 p-3 rounded-lg">
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version Beta 1.1    (16/8/2025)</span>
-                          <span className="text-sm text-slate-400">Old</span>
-                        </div>
-                        <ul className="text-sm text-slate-300 space-y-1">
-                          <li>• Added country flag indicators for all vehicles</li>
-                          <li>• Implemented market vehicle gold badges</li>
-                          <li>• Enhanced weapons modal with detailed specifications</li>
-                        </ul>
-                      </div>
-                      <div className="bg-slate-700/50 p-3 rounded-lg">
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version Beta 1.0    (16/8/2025)</span>
+                          <span className="font-medium text-cyan-300">Version 1.0.00   (16/9/2025)</span>
                           <span className="text-sm text-slate-400">Initial</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
@@ -10924,13 +10903,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <li>• Vehicle comparison and filtering system</li>
                         </ul>
                       </div>
+                    
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        )}
+         )}
+                  
 
         {showCredits && (
           <div className="fixed inset-0 flex justify-center z-50 items-center opacity-100 bg-[rgba(0,0,0,0.4655797066895858)]">
