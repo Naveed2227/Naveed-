@@ -8588,7 +8588,7 @@ const getFlagImage = (faction: string): string => {
     Russian: "/russia-flag.png",
     American: "/America.png",
     Chinese: "/china-flag.png",
-    German: "/germany-flag.jpeg",
+    German: "/germany-flag.png",
     British: "/british-flag.png",
     European: "/eu-flag.png",
     Japanese: "/japan-flag.webp",
