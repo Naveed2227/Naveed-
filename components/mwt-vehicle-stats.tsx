@@ -10798,8 +10798,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             onClick={() => setChatOpen(true)}
             className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 p-3 sm:p-4 bg-cyan-600 hover:bg-cyan-700 text-white rounded-full shadow-lg transition-colors z-40"
           >
-            <BotMessageSquareIcon className="h-6 w-6 sm:h-8 sm:w-8" />
-            <span className="hidden sm:inline ml-2">Ask AI</span>
+            <BotMessageSquareIcon className="h-6 w-6 sm:h-8 sm:w-8 mx-3" />
+            <span className="hidden sm:inline mb-1 ml-2 mt-0 mr-0">Ask AI</span>
           </button>
         )}
 
