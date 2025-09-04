@@ -36,17 +36,17 @@ export default function RootLayout({
         {/* Sticky AdSense Banner */}
         <div className="fixed bottom-0 left-0 w-full z-50 bg-transparent">
           <ins
-            className="adsbygoogle"
-            style={{ display: "block" }}
-            data-ad-client="ca-pub-3940256099942544" // Google test client
-data-ad-slot="6300978111" // test ad slot
+  className="adsbygoogle"
+  style={{ display: "block" }}
+  data-ad-client="ca-pub-3940256099942544"
+  data-ad-slot="6300978111"
+  data-ad-format="auto"
+  data-full-width-responsive="true"
+></ins>
+<Script id="ads-init" strategy="afterInteractive">
+  {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+</Script>
 
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          ></ins>
-          <Script id="ads-init" strategy="afterInteractive">
-            {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-          </Script>
         </div>
       </body>
     </html>
