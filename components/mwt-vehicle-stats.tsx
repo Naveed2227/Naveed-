@@ -8673,6 +8673,7 @@ const MwtVehicleStats = () => {
   const [compare, setCompare] = useState<string[]>([])
   const [expandedVehicle, setExpandedVehicle] = useState("")
   const comparisonRef = useRef<HTMLDivElement>(null)
+  const chatMessagesEndRef = useRef<HTMLDivElement>(null)
   const [chatOpen, setChatOpen] = useState(false)
   const [chatMessages, setChatMessages] = useState<{ role: string; content: string }[]>([])
   const [isLoading, setIsLoading] = useState(false)
@@ -8688,6 +8689,11 @@ const MwtVehicleStats = () => {
   const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
   const weaponsModalRef = useRef<HTMLDivElement>(null)
   
+  // Auto-scroll chat to bottom when messages change
+  useEffect(() => {
+    chatMessagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages]);
+
   // Click outside handler for weapons modal
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -10769,6 +10775,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
               ))}
               {isLoading && <div className="text-center text-slate-400">Thinking...</div>}
+              {/* Scroll target for auto-scrolling */}
+              <div ref={chatMessagesEndRef} />
             </div>
 
             <div className="p-4 border-t border-slate-700">
