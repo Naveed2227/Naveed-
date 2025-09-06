@@ -1,8 +1,8 @@
-"use client"
-import React, { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
-import { useRouter } from "next/navigation"
+"use client";
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 // Roman numeral conversion utility
 const toRomanNumeral = (num: number | string): string => {
@@ -9749,10 +9749,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         
         {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
         <div 
-          className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider
-                     sm:px-2 sm:py-4 sm:text-xs sm:ml-[-8px] sm:mr-[-8px]
-                     md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px]
-                     lg:px-3 lg:py-6 lg:text-base lg:ml-[-15px] lg:mr-[-12px]"
+          className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider sm:px-2 sm:py-4 sm:text-xs sm:ml-[-8px] sm:mr-[-8px] md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px] lg:px-3 lg:py-6 lg:text-base lg:ml-[-15px] lg:mr-[-12px]"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
         >
           <span className="sm:block md:hidden">BATTLE<br/>PASS</span>
