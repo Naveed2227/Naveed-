@@ -4,9 +4,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
-     crossorigin="anonymous"></script>
-
 
 
 // Roman numeral conversion utility
