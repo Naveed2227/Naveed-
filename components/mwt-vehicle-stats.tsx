@@ -39,11 +39,11 @@ const formatTier = (tier: string | number): string => {
 
 // Vehicle Rarity System
 const getVehicleRarity = (vehicleName: string) => {
-  const commonVehicles = ["F-16C Fighting Falcon", "A-10 Thunderbolt II", "AH-64 Apache", "UH-60 Black Hawk", "M1A2 Abrams", "M2 Bradley", "Leopard 2A7", "Challenger 2", "T-90M", "BMP-3"];
-  const enhancedVehicles = ["F-22 Raptor", "F-35 Lightning II", "AH-1Z Viper", "Mi-28 Havoc", "Merkava Mk.4", "Type 99A", "Leclerc", "CV90", "BTR-82A"];
-  const rareVehicles = ["Su-57M", "F-117 Nighthawk", "Ka-52 Alligator", "AH-64E Guardian", "T-14 Armata", "Leopard 2A8", "M1A2 SEPv3", "Type 10"];
-  const epicVehicles = ["B-2 Spirit", "Tu-160 Blackjack", "Mi-26 Halo", "CH-47 Chinook", "Object 640", "KF31 Lynx", "EMBT 120"];
-  const legendaryVehicles = ["SR-71 Blackbird", "YF-23", "X-47B Pegasus", "Future Combat Vehicle", "Tempest Fighter", "FCAS"];
+  const commonVehicles = [];
+  const enhancedVehicles = ["F-22 Raptor", "F-35 Lightning II", "J-20 Mighty Dragon"];
+  const rareVehicles = [];
+  const epicVehicles = ["Su-57M"];
+  const legendaryVehicles = [];
 
   if (commonVehicles.includes(vehicleName)) return "Common";
   if (enhancedVehicles.includes(vehicleName)) return "Enhanced";
