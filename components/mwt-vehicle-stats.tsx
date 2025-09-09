@@ -37,6 +37,34 @@ const formatTier = (tier: string | number): string => {
   return toRomanNumeral(tier);
 };
 
+// Vehicle Rarity System
+const getVehicleRarity = (vehicleName: string) => {
+  const commonVehicles = ["F-16C Fighting Falcon", "A-10 Thunderbolt II", "AH-64 Apache", "UH-60 Black Hawk", "M1A2 Abrams", "M2 Bradley", "Leopard 2A7", "Challenger 2", "T-90M", "BMP-3"];
+  const enhancedVehicles = ["F-22 Raptor", "F-35 Lightning II", "AH-1Z Viper", "Mi-28 Havoc", "Merkava Mk.4", "Type 99A", "Leclerc", "CV90", "BTR-82A"];
+  const rareVehicles = ["Su-57M", "F-117 Nighthawk", "Ka-52 Alligator", "AH-64E Guardian", "T-14 Armata", "Leopard 2A8", "M1A2 SEPv3", "Type 10"];
+  const epicVehicles = ["B-2 Spirit", "Tu-160 Blackjack", "Mi-26 Halo", "CH-47 Chinook", "Object 640", "KF31 Lynx", "EMBT 120"];
+  const legendaryVehicles = ["SR-71 Blackbird", "YF-23", "X-47B Pegasus", "Future Combat Vehicle", "Tempest Fighter", "FCAS"];
+
+  if (commonVehicles.includes(vehicleName)) return "Common";
+  if (enhancedVehicles.includes(vehicleName)) return "Enhanced";
+  if (rareVehicles.includes(vehicleName)) return "Rare";
+  if (epicVehicles.includes(vehicleName)) return "Epic";
+  if (legendaryVehicles.includes(vehicleName)) return "Legendary";
+  return "Common"; // Default to Common for unlisted vehicles
+};
+
+// Get rarity color
+const getRarityColor = (rarity: string) => {
+  switch (rarity) {
+    case "Common": return "bg-gray-600 text-gray-100";
+    case "Enhanced": return "bg-green-600 text-green-100";
+    case "Rare": return "bg-blue-600 text-blue-100";
+    case "Epic": return "bg-purple-600 text-purple-100";
+    case "Legendary": return "bg-orange-600 text-orange-100";
+    default: return "bg-gray-600 text-gray-100";
+  }
+};
+
 // Battle Pass Data Structure
 const BATTLE_PASSES = [
  {
@@ -8795,9 +8823,9 @@ const MwtVehicleStats = () => {
   }
 
   const antiFlareMissiles = [
-    "Kh-47M2 Kinzhal",
-    "SAM Rokand",
-    "AIM-120",
+"Kh-47M2 Kinzhal",
+"SAM Rokand",
+"AIM-120",
 "Naval Spike ER",
 "Red Arrow",
 "R-77",
@@ -8815,8 +8843,8 @@ const MwtVehicleStats = () => {
   ]
 
   const antiWarningMissiles = [
-    "SAM Rokand",
-    "Kh-47M2 Kinzhal",
+"SAM Rokand",
+"Kh-47M2 Kinzhal",
 "AIM-120",
 "AIM-9",
 "AIM-132",
@@ -8854,9 +8882,9 @@ const MwtVehicleStats = () => {
 "9K135 Kornet",
 "SwitchBlade 300",
 "Hero 120",
-"LASER ATGM (ATGMs Laser)",   // game category entry (user list)
-"ATGMs ARL",                  // game category entry (user list)
-"9K135",                      // shorthand / duplicate safe-listing
+"LASER ATGM (ATGMs Laser)",  
+"ATGMs ARL",                  
+"9K135",                     
 "9M14"
 
   ]
@@ -10029,7 +10057,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                       <div className="bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0 group-hover:border-purple-400/50 transition-colors
                                                      h-16 w-24
                                                      sm:h-18 sm:w-28
-                                                     md:h-20 md:w-36">
+                                                     md:h-20 md:w-36 relative">
                                         <img 
                                           src={`${vehicle.image}`} 
                                           alt={vehicle.name}
@@ -10043,6 +10071,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                           <span className="text-xs font-bold text-cyan-400">
                                             {vehicle.name.substring(0, 2)}
                                           </span>
+                                        </div>
+                                        {/* Rarity Tag for Battle Pass */}
+                                        <div className="absolute top-1 left-1 z-20">
+                                          <div className={`px-1 py-0.5 rounded text-xs font-semibold shadow-lg ${getRarityColor(getVehicleRarity(vehicle.name))}`}>
+                                            {getVehicleRarity(vehicle.name)}
+                                          </div>
                                         </div>
                                       </div>
                                       <div className="flex-1 min-w-0">
@@ -10432,7 +10466,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
               {/* Vehicle Image Display */}
               {vehicle.image && (
-                <div className="opacity-100 mb-4 flex-col pb-[-6px] pb-[-px] pb-[-6px]">
+                <div className="opacity-100 mb-4 flex-col pb-[-6px] pb-[-px] pb-[-6px] relative">
                   <img
                     src={vehicle.image}
                     alt={`${vehicle.name} vehicle`}
@@ -10441,6 +10475,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       e.currentTarget.style.display = 'none';
                     }}
                   />
+                  {/* Rarity Tag */}
+                  <div className="absolute top-2 left-2 z-20">
+                    <div className={`px-2 py-1 rounded text-xs font-semibold shadow-lg ${getRarityColor(getVehicleRarity(vehicle.name))}`}>
+                      {getVehicleRarity(vehicle.name)}
+                    </div>
+                  </div>
                 </div>
               )}
 
