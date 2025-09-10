@@ -39,18 +39,160 @@ const formatTier = (tier: string | number): string => {
 
 // Vehicle Rarity System
 const getVehicleRarity = (vehicleName: string) => {
-  const commonVehicles = [];
-  const enhancedVehicles = ["F-22 Raptor", "F-35 Lightning II", "J-20 Mighty Dragon"];
-  const rareVehicles = [];
-  const epicVehicles = ["Su-57M"];
-  const legendaryVehicles = [];
+  const commonVehicles = [
+"F-35B Lightning II",
+"F/A-18F Super Hornet",
+"Mi-35P",
+"AH-64E",
+"Z-19E",
+"Z-9G",
+"MH-6",
+"SUPER LYNX",
+"Z-9WA",
+"MH-60L",
+"F-4E Phantom",
+"J-10 Chengdu",
+"MiG-31BM Foxhound",
+"Q-5A Nanchang",
+"J-15",
+"M41 Walker Bulldog",
+"LAV-25",
+"LAV-150",
+"M113A1 FMS AIP",
+"XM800T",
+"WZ-120",
+"WZ-121",
+"WZ-501",
+"WZ-501A",
+"WZ-211",
+"T-55A",
+"BMP-1",
+"BMP-1K",
+"BTR-80",
+"BTR-80A",
+"ZSU-57-2",
+"PT-76B",
+"Type-61",
+"ZSU-57-2",
+"M60",
+"T-62",
+"BMP-2",
+"BTR-82AT",
+"BTR-82A1",
+"M3 Bradley",
+"PGZ-04A",
+"ZSU-23-4M4 Shilka",
+"LAV-300",
+"PTL-02",
+"PLZ-83",
+"2S1 Gvozdika",
+"M1A1 Abrams",
+"T-72A",
+"ZTZ85-II",
+"PLZ-07B",
+"2S6M1 Tunguska-M1",
+"XM975",
+"M113 Hellfire",
+"LAV-600",
+"T-90A",
+"ZTZ99A",
+"ADATS",
+"Pantsir S-1",
+"M1128 Stryker",
+"PLZ-05",
+
+
+ ];
+  const enhancedVehicles = [
+"F-22 Raptor",
+"J-20 Mighty Dragon",
+"J-35",
+"T-14 Armata",
+"2S19 Msta-S",
+"BMPT Terminator 2",
+"Mi-28NM",
+"WZ-10",
+"AH-1Z",
+"Z-11WB",
+"MI-8TV",
+"Z-20",
+"AH-84",
+"F-14D Super Tomcat",
+"J-16",
+"Su 25UB",
+"F-15EX Eagle II",
+"A-10 ThunderBolt",
+"M42A1 Duster",
+"T114 BAT",
+"WZ-120C",
+"Type 74E",
+"Type 74G/Kai",
+"T-62 545",
+"XM1 (GM)",
+"M163 VADS",
+"2S3 Akatsiya",
+"MBT70",
+"ZTZ96",
+"9A52-2 Smerch",
+
+];
+  const rareVehicles = [
+"Type 10",
+"Challenger 3",
+"Leopard 2A7+",
+"T-14 Armata (152)",
+"KF31 Lynx",
+"M10 Booker",
+"M-SHORAD",
+"M109A6 Paladin",
+"Otomatic 76",
+"F-16C Night Falcon",
+"Mitsubishi F2B",
+"KA-50",
+"T54E1",
+"CM25",
+"T-55AMD",
+"SU-152 Taran",
+"Leopard 2A4",
+"PT-91 Twardy",
+"ZTZ-96A (P)",
+"2S31 Vena",
+"K-31 Cheonma",
+"Type 625E SHORAD",
+"Type 89 MLRS",
+"AFT-09",
+"WMA301",
+"AFT-10",
+"Type 16 MCV",
+"VT-4A1",
+"Gepard 1A2",
+
+];
+  const epicVehicles = [
+"Su-57 Felon",
+"Su-57M",
+"YF-23",
+"Su-75 Checkmate",
+"KF-51 Panther",
+"EMBT 120",
+"Type 90",
+"XM2001 Crusader",
+"KA-58",
+
+];
+  const legendaryVehicles = [
+"TU-222",
+"TOS-1A",
+"FK 2000",
+"SB-1",
+];
 
   if (commonVehicles.includes(vehicleName)) return "Common";
   if (enhancedVehicles.includes(vehicleName)) return "Enhanced";
   if (rareVehicles.includes(vehicleName)) return "Rare";
   if (epicVehicles.includes(vehicleName)) return "Epic";
   if (legendaryVehicles.includes(vehicleName)) return "Legendary";
-  return "Common"; // Default to Common for unlisted vehicles
+  return ""; // Default to Common for unlisted vehicles
 };
 
 // Get rarity color
