@@ -70,7 +70,6 @@ const getVehicleRarity = (vehicleName: string) => {
 "BMP-1K",
 "BTR-80",
 "BTR-80A",
-"ZSU-57-2",
 "PT-76B",
 "Type-61",
 "ZSU-57-2",
@@ -100,6 +99,8 @@ const getVehicleRarity = (vehicleName: string) => {
 "Pantsir S-1",
 "M1128 Stryker",
 "PLZ-05",
+
+
 
 
  ];
@@ -165,7 +166,11 @@ const getVehicleRarity = (vehicleName: string) => {
 "AFT-10",
 "Type 16 MCV",
 "VT-4A1",
-"Gepard 1A2",
+"Leopard 2A7 Plus",
+
+
+
+
 
 ];
   const epicVehicles = [
@@ -177,6 +182,11 @@ const getVehicleRarity = (vehicleName: string) => {
 "EMBT 120",
 "Type 90",
 "XM2001 Crusader",
+"KA-58",
+"Gepard 1A2",
+"Abrams X",
+"Merkava Mk.4",
+"Object 640",
 "KA-58",
 
 ];
