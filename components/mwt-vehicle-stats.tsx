@@ -3446,7 +3446,7 @@ const VEHICLES = [
     "tier": "III",
     image: "AMX-30-Super.jpg",
     "description": "Improved export variant of ZTZ96 with enhanced protection and gun systems.",
-    "stats": { "health": 36900, "speed": 24, "armor": "770mm", "agility": 34 },
+    "stats": { "health": 36000, "speed": 65, "armor": "770mm", "agility": 42 },
     "weapons": [
       { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
       { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
@@ -3898,7 +3898,7 @@ const VEHICLES = [
     "tier": "III",
     image: "Type-75-MLRS.jpg",
     "description": "Japanese 300mm MLRS for long-range artillery strikes.",
-    "stats": { "health": 24500, "speed": 55, "armor": "25mm", "agility": 36 },
+    "stats": { "health": 22800, "speed": 55, "armor": "25mm", "agility": 30 },
     "weapons": [
       { name: "Type 81 FSBS", type: "Missile", damage: 11900, penetration: 165, reload: 20 },
       { name: "Type 81 FFBE", type: "Missile", damage: 10600, penetration: 220, reload: 20 },
@@ -4263,7 +4263,7 @@ const VEHICLES = [
   tier: "III",
   image: "Mi-35P-Hind-F.jpg",
   description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
-  stats: { health: 26400, speed: 290, verticalSpeed: 60, agility: 60 },
+  stats: { health: 26400, speed: 290, verticalSpeed: 25, agility: 60 },
   weapons: [
     { name: "9K121 Vikhr / 9K121 Vikhr-1", type: "ATGM", damage: 3200, penetration: 200 },
     { name: "Ataka (where available)", type: "ATGM", damage: 3000, penetration: 180 },
@@ -4293,7 +4293,7 @@ const VEHICLES = [
   tier: "III",
   image: "Mi-24-Super-Hind.jpg",
   description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
-  stats: { health: 26400, speed: 290, verticalSpeed: 60, agility: 60 },
+  stats: { health: 28100, speed: 335, verticalSpeed: 25, agility: 60 },
   weapons: [
     { name: "9K121 Vikhr / 9K121 Vikhr-1", type: "ATGM", damage: 3200, penetration: 200 },
     { name: "Ataka (where available)", type: "ATGM", damage: 3000, penetration: 180 },
