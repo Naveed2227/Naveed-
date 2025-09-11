@@ -100,6 +100,18 @@ const getVehicleRarity = (vehicleName: string) => {
 "Pantsir S-1",
 "M1128 Stryker",
 "PLZ-05",
+"Mi-35P Hind-F",
+"Ka-52M",
+"AH-64E Apache",
+"Super Lynx Mk88A",
+"Z-9WA Harbin",
+"MH-60L DAP",
+"Su-37 Terminator",
+"Su-35S",
+"Su-39",
+"MiG-35",
+"Alpha Jet",
+"Su-24M",
 
 
 
@@ -135,6 +147,18 @@ const getVehicleRarity = (vehicleName: string) => {
 "MBT70",
 "ZTZ96",
 "9A52-2 Smerch",
+"Z-20 Harbin",
+"AH-1Z Viper",
+"Ka-50 Black Shark",
+"Z-9G Harbin",
+"Mi-8TV",
+"MH-6 Little Bird",
+"Z-11WB Changhe",
+"AV-8B Harrier II",
+"Su-25UB",
+"A-10A Thunderbolt",
+
+
 
 ];
   const rareVehicles = [
@@ -148,8 +172,6 @@ const getVehicleRarity = (vehicleName: string) => {
 "M109A6 Paladin",
 "Otomatic 76",
 "F-16C Night Falcon",
-"Mitsubishi F2B",
-"KA-50",
 "T54E1",
 "CM25",
 "T-55AMD",
@@ -167,6 +189,8 @@ const getVehicleRarity = (vehicleName: string) => {
 "Type 16 MCV",
 "VT-4A1",
 "Leopard 2A7 Plus",
+"Ka-50 Black Shark",
+"Mitsubishi F-2B",
 
 
 
@@ -187,7 +211,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Abrams X",
 "Merkava Mk.4",
 "Object 640",
-"KA-58",
+"Ka-58 Black Ghost",
 
 ];
   const legendaryVehicles = [
