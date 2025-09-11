@@ -10057,17 +10057,20 @@ return (
   </div>
 );
 
-        
-    
-        <div 
-          className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider
-                     sm:px-2 sm:py-4 sm:text-xs sm:ml-[-8px] sm:mr-[-8px]
-                     md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px]
-                     lg:px-3 lg:py-6 lg:text-base lg:ml-[-15px] lg:mr-[-12px]"
-          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
-        >
-          <span className="sm:block md:hidden">BATTLE<br/>PASS</span>
-          <span className="hidden md:block">BATTLE PASS</span>
+  <div 
+  className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider
+             sm:px-2 sm:py-4 sm:text-xs sm:ml-[-8px] sm:mr-[-8px]
+             md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px]
+             lg:px-3 lg:py-6 lg:text-base lg:ml-[-15px] lg:mr-[-12px]"
+  style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+>
+  <span className="sm:block md:hidden">
+    BATTLE<br/>PASS
+  </span>
+  <span className="hidden md:block">
+    BATTLE PASS
+  </span>
+</div>
         </div>
       </button>
 
