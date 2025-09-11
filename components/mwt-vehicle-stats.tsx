@@ -7076,182 +7076,120 @@ const MwtVehicleStats = () => {
     }
   }, [weaponsModalOpenId])
   
-  // Sidebar state
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [activeTab, setActiveTab] = useState("battlepass")
-  const [expandedMonth, setExpandedMonth] = useState<number | null>(null)
-  
-  // Battle Pass state
-  const [battlePassOpen, setBattlePassOpen] = useState(false)
-  const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
+// Sidebar state
+const [sidebarOpen, setSidebarOpen] = useState(false)
+const [activeTab, setActiveTab] = useState("battlepass")
+const [expandedMonth, setExpandedMonth] = useState<number | null>(null)
 
-  // Enhanced chatbot handler
-  const handleChatSubmit = async () => {
-    if (!chatInput.trim()) return;
-    
-    const userMessage = { role: 'user', content: chatInput };
-    setChatMessages(prev => [...prev, userMessage]);
-    setChatInput('');
-    setIsLoading(true);
-    
-    try {
-      // Process the natural language query
-      const result = processNaturalQuery(chatInput, VEHICLES);
-      
-      let botResponse;
-      
-      switch (result.type) {
-        case 'comparison':
-          botResponse = {
-            role: 'bot',
-            content: result.message,
-            data: result.data,
-            type: 'comparison'
-          };
-          break;
-          
-        case 'recommendation':
-        case 'search':
-          botResponse = {
-            role: 'bot',
-            content: result.message,
-            data: result.data,
-            type: result.type
-          };
-          break;
-          
-        default:
-          botResponse = {
-            role: 'bot',
-            content: result.message
-          };
-      }
-      
-      setChatMessages(prev => [...prev, botResponse]);
-    } catch (error) {
-      setChatMessages(prev => [...prev, {
-        role: 'bot',
-        content: 'Sorry, I encountered an error processing your request. Please try again.'
-      }]);
-    } finally {
-      setIsLoading(false);
+// Battle Pass state
+const [battlePassOpen, setBattlePassOpen] = useState(false)
+const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
+
+// Chatbot state
+const [chatInput, setChatInput] = useState("")
+const [chatMessages, setChatMessages] = useState<any[]>([])
+const [isLoading, setIsLoading] = useState(false)
+
+// Enhanced chatbot handler (single version)
+const handleChatSubmit = async () => {
+  if (!chatInput.trim()) return;
+
+  const userMessage = { role: 'user', content: chatInput };
+  setChatMessages(prev => [...prev, userMessage]);
+  setChatInput('');
+  setIsLoading(true);
+
+  try {
+    // Process the natural language query
+    const result = processNaturalQuery(chatInput, VEHICLES);
+
+    let botResponse;
+
+    switch (result.type) {
+      case 'comparison':
+        botResponse = {
+          role: 'bot',
+          content: result.message,
+          data: result.data,
+          type: 'comparison'
+        };
+        break;
+
+      case 'recommendation':
+      case 'search':
+        botResponse = {
+          role: 'bot',
+          content: result.message,
+          data: result.data,
+          type: result.type
+        };
+        break;
+
+      default:
+        botResponse = {
+          role: 'bot',
+          content: result.message
+        };
     }
-  };
 
-  const types = [...new Set(VEHICLES.map((v) => v.type))]
-  const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
-  const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
-
-  const isMarketVehicle = (vehicleName: string) => {
-    const marketVehicles = [
-      "Abrams X",
-      "Type 10",
-      "Su-57M",
-      "TU-222",
-      "Merkava Mk.4",
-      "KF-51 Panther",
-      "HSTV-L",
-      "Ka-58 Black Ghost",
-      "T-14 (152)",
-      "Leopard 2A7V",
-      "Type 16 MCV",
-      "M-SHORAD",
-      "EMBT 120",
-      "KF31 Lynx",
-      "VT-4A1",
-      "YF-23",
-      "Gepard 1A2",
-      "Type 625E SHORAD",
-      "SB-1",
-      "T-14 Armata (152)",
-      "Leopard 2A7+",
-      "Object 640"
-    ]
-    return marketVehicles.includes(vehicleName)
+    setChatMessages(prev => [...prev, botResponse]);
+  } catch (error) {
+    setChatMessages(prev => [...prev, {
+      role: 'bot',
+      content: 'Sorry, I encountered an error processing your request. Please try again.'
+    }]);
+  } finally {
+    setIsLoading(false);
   }
+};
 
+// Vehicle filters
+const types = [...new Set(VEHICLES.map((v) => v.type))]
+const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
+const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
 
+// Market/Exclusive vehicle helpers
+const isMarketVehicle = (vehicleName: string) => {
+  const marketVehicles = [
+    "Abrams X", "Type 10", "Su-57M", "TU-222", "Merkava Mk.4", "KF-51 Panther",
+    "HSTV-L", "Ka-58 Black Ghost", "T-14 (152)", "Leopard 2A7V", "Type 16 MCV",
+    "M-SHORAD", "EMBT 120", "KF31 Lynx", "VT-4A1", "YF-23", "Gepard 1A2",
+    "Type 625E SHORAD", "SB-1", "T-14 Armata (152)", "Leopard 2A7+", "Object 640"
+  ];
+  return marketVehicles.includes(vehicleName);
+}
 
-  const isExclusiveVehicle = (vehicleName: string) => {
-    const exclusiveVehicles = [
-"Leopard 2A4",
-"Alpha Jet",
-"Su-24M",
-"M270 MLRS",
-"Otomatic 76",
-"F-16C Night Falcon",
-"MiG-41M",
-"IT-1 Dragon",
-"SR-5 GMLRS",
-"T-25 Pamir",
-"T-104 Bastion",
-"Challenger 3",
-"FV4034 Challenger 2 TES",
-"Karrar",
-"Leclerc S2 AZUR",
-"T-20 Monolit",
-"M10 Booker",
-"PL-01",
-"TOS-1A",
-"BMD3",
-"M109A6 Paladin",
-"FK 2000",
-"BM-57-2 Kochevnik",
-"Su-39",
-"J-10B",
-"Mitsubishi F-2B",
-"J-50",
-"Z-11WB Changhe",
-"Tiger HAD",
-"EC665 Tiger UHT",
-"M1 Abrams Block III",
-"PT-91 Twardy",
-"T-64BV",
-"ZTZ-96A (P)",
-"M110A2",
-"2S31 Vena",
-"Type 90",
-"XM2001 Crusader",
-"K-31 Cheonma",
-"AFT-10",
-"Type 89 MLRS",
-"AFT-09",
-"WMA301",
-"Type 61",
-"VBCI-2",
-"Rookiat MTTD",
-"M1 Abrams Block 3",
-"J-15",
-"Su-35S",
-"OH-1 Ninja",
-"PGZ-09",
-"Type-61",
-"T54E1",
-"BTR-60PB"
+const isExclusiveVehicle = (vehicleName: string) => {
+  const exclusiveVehicles = [
+    "Leopard 2A4", "Alpha Jet", "Su-24M", "M270 MLRS", "Otomatic 76",
+    "F-16C Night Falcon", "MiG-41M", "IT-1 Dragon", "SR-5 GMLRS", "T-25 Pamir",
+    "T-104 Bastion", "Challenger 3", "FV4034 Challenger 2 TES", "Karrar",
+    "Leclerc S2 AZUR", "T-20 Monolit", "M10 Booker", "PL-01", "TOS-1A", "BMD3",
+    "M109A6 Paladin", "FK 2000", "BM-57-2 Kochevnik", "Su-39", "J-10B",
+    "Mitsubishi F-2B", "J-50", "Z-11WB Changhe", "Tiger HAD", "EC665 Tiger UHT",
+    "M1 Abrams Block III", "PT-91 Twardy", "T-64BV", "ZTZ-96A (P)", "M110A2",
+    "2S31 Vena", "Type 90", "XM2001 Crusader", "K-31 Cheonma", "AFT-10",
+    "Type 89 MLRS", "AFT-09", "WMA301", "Type 61", "VBCI-2", "Rookiat MTTD",
+    "M1 Abrams Block 3", "J-15", "Su-35S", "OH-1 Ninja", "PGZ-09", "Type-61",
+    "T54E1", "BTR-60PB"
+  ];
+  return exclusiveVehicles.includes(vehicleName);
+}
 
-        
+// Get detailed vehicle info
+const getVehicleDetailedInfo = (vehicle: any) => {
+  const weaponsList = vehicle.weapons
+    .map((weapon: any) => `${weapon.name}: ${weapon.damage} DMG, ${weapon.penetration} PEN, ${weapon.reload} REL`)
+    .join("\n");
 
-]
-    return exclusiveVehicles.includes(vehicleName)
-  }
+  const modulesList = Object.entries(vehicle.modules || {})
+    .map(([category, modules]: [string, any]) =>
+      `${category}: ${Array.isArray(modules) ? modules.map((m: any) => m.name).join(", ") : "N/A"}`
+    )
+    .join("\n");
 
+  return `🎯 ${vehicle.name} - ${vehicle.type}
 
-
-  const getVehicleDetailedInfo = (vehicle: any) => {
-    const weaponsList = vehicle.weapons
-      .map((weapon: any) => weapon.name + ": " + weapon.damage + " DMG, " + weapon.penetration + " PEN, " + weapon.reload + " REL")
-
-      .join("\n")
-
-    const modulesList = Object.entries(vehicle.modules || {})
-      .map(
-        ([category, modules]: [string, any]) =>
-          `${category}: ${Array.isArray(modules) ? modules.map((m: any) => m.name).join(", ") : "N/A"}`,
-      )
-      .join("\n")
-
-    return `🎯 ${vehicle.name} - ${vehicle.type}
-  
 📊 SPECIFICATIONS:
 • Faction: ${vehicle.faction}
 • Tier: ${formatTier(vehicle.tier)}
@@ -7270,48 +7208,34 @@ ${weaponsList}
 🔧 UPGRADE MODULES:
 ${modulesList}
 
-${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : "🆓 Standard Vehicle"}`
+${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : "🆓 Standard Vehicle"}`;
+}
+
+// Filtered & paginated vehicles
+const filteredVehicles = VEHICLES.filter((vehicle) => {
+  const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const matchesType = !typeFilter || vehicle.type === typeFilter
+  const matchesTier = !tierFilter || formatTier(vehicle.tier) === tierFilter
+  const matchesCountry = !countryFilter || vehicle.faction === countryFilter
+  return matchesSearch && matchesType && matchesTier && matchesCountry
+})
+
+const indexOfLastVehicle = currentPage * vehiclesPerPage
+const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage
+const paginatedVehicles = filteredVehicles.slice(indexOfFirstVehicle, indexOfLastVehicle)
+
+// Compare / Expand helpers
+const toggleCompare = (id: string) => {
+  if (compare.includes(id)) {
+    setCompare(compare.filter((vehicleId) => vehicleId !== id))
+  } else if (compare.length < 2) {
+    setCompare([...compare, id])
   }
+}
 
-  const filteredVehicles = VEHICLES.filter((vehicle) => {
-    const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesType = !typeFilter || vehicle.type === typeFilter
-    const matchesTier = !tierFilter || formatTier(vehicle.tier) === tierFilter
-    const matchesCountry = !countryFilter || vehicle.faction === countryFilter
-    return matchesSearch && matchesType && matchesTier && matchesCountry
-  })
-
-  const indexOfLastVehicle = currentPage * vehiclesPerPage
-  const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage
-  const paginatedVehicles = filteredVehicles.slice(indexOfFirstVehicle, indexOfLastVehicle)
-
-  const toggleCompare = (id: string) => {
-    if (compare.includes(id)) {
-      setCompare(compare.filter((vehicleId) => vehicleId !== id))
-    } else if (compare.length < 2) {
-      setCompare([...compare, id])
-    }
-  }
-
-  const toggleExpand = (id: string) => {
-    setExpandedVehicle(expandedVehicle === id ? "" : id)
-  }
-
-  const handleChatSubmit = () => {
-    if (!chatInput.trim()) return
-    
-    const userMessage = { role: "user", content: chatInput }
-    setChatMessages((prev) => [...prev, userMessage])
-    setIsLoading(true)
-
-    setTimeout(() => {
-      const response = getVehicleInfo(chatInput)
-      const botMessage = { role: "assistant", content: response }
-      setChatMessages((prev) => [...prev, botMessage])
-      setIsLoading(false)
-      setChatInput("")
-    }, 1000)
-  }
+const toggleExpand = (id: string) => {
+  setExpandedVehicle(expandedVehicle === id ? "" : id)
+}
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
@@ -8511,6 +8435,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   )
 }
 
-
+const handleChatSubmit
 
 export default MwtVehicleStats;
