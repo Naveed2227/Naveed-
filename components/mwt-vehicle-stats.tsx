@@ -42,6 +42,7 @@ const getVehicleRarity = (vehicleName: string) => {
   const commonVehicles = [
 "F-35B Lightning II",
 "F/A-18F Super Hornet",
+"J-20 Mighty Dragon",
 "Mi-35P",
 "AH-64E",
 "Z-19E",
@@ -106,7 +107,6 @@ const getVehicleRarity = (vehicleName: string) => {
  ];
   const enhancedVehicles = [
 "F-22 Raptor",
-"J-20 Mighty Dragon",
 "J-35",
 "T-14 Armata",
 "2S19 Msta-S",
