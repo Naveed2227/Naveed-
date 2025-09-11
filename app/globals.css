@@ -121,6 +121,3 @@
     @apply bg-background text-foreground;
   }
 }
-.banner-ad {
-  @apply fixed bottom-0 left-0 w-full bg-white text-center z-[9999];
-}
