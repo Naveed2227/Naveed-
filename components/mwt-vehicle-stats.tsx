@@ -10034,7 +10034,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     }, 1000)
   }
 
-  return (
+return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {/* Battle Pass Tab - Fully Responsive */}
       <button
@@ -10493,16 +10493,27 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className={`group relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 transition-all duration-300 ${
-      formatTier(vehicle.tier) === "II"
-        ? "hover:border-green-500 hover:shadow-[0_0_12px_1px_rgba(34,197,94,0.6)]"
-        : formatTier(vehicle.tier) === "III"
-        ? "hover:border-blue-500 hover:shadow-[0_0_12px_1px_rgba(29,78,216,0.6)]"
-        : formatTier(vehicle.tier) === "IV"
-        ? "hover:border-purple-500 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
-        : formatTier(vehicle.tier) === "I"
-        ? "hover:border-white-300 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
-        : ""
-    }`}
+                formatTier(vehicle.tier) === "II"
+                  ? "hover:border-green-500 hover:shadow-[0_0_12px_1px_rgba(34,197,94,0.6)]"
+                  : formatTier(vehicle.tier) === "III"
+                  ? "hover:border-blue-500 hover:shadow-[0_0_12px_1px_rgba(29,78,216,0.6)]"
+                  : formatTier(vehicle.tier) === "IV"
+                  ? "hover:border-purple-500 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
+                  : formatTier(vehicle.tier) === "I"
+                  ? "hover:border-white-300 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
+                  : ""
+              }`}
+            >
+              {/* Add your vehicle card content here */}
+              <div>Vehicle Card Content</div>
+            </motion.div>
+          ))}
+        </div>
+      </main>
+    </div>
+  );
+    
+    
 >
   {/* Full border glow for Exclusive / Market / Construction (softer) */}
   {(isExclusiveVehicle(vehicle.name) || isMarketVehicle(vehicle.name) || isConstructionVehicle(vehicle.name)) && (
