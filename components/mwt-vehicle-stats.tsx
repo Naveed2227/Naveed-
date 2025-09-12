@@ -243,7 +243,6 @@ const getVehicleRarity = (vehicleName: string) => {
 "Karrar",
 "M1 Abrams Block 3",
 "Altay",
-"AMX-30 Super",
 "Type 75 MLRS",
 
 
@@ -11394,9 +11393,26 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+          
+        
+
+            {/* Media Section */}
+<div className="mt-6">
+  <h3 className="text-xl font-bold text-cyan-400 mb-4">Media Supporters</h3>
+
+  {/* YouTube */}
+  <div className="mb-3">
+    <h4 className="text-xl font-bold text-cyan-400 mb-3">YouTubers:</h3>
+    <ul className="list-disc list-inside text-slate-400 text-sm space-y-2">
+      <li><span className="text-white font-bold text-xl">Mr.Hasori</span></li>
+    </ul>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+)}
 
         {/* Vehicle Info Modal */}
         {vehicleInfoOpen && (
