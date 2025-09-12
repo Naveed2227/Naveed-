@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useRouter } from "next/navigation"
 
+
+
 // Roman numeral conversion utility
 const toRomanNumeral = (num: number | string): string => {
   let numValue = typeof num === 'string' ? parseInt(num) : num;
@@ -34,7 +36,6 @@ const formatTier = (tier: string | number): string => {
   // Otherwise convert to Roman numeral
   return toRomanNumeral(tier);
 };
-
 
 // Vehicle Rarity System
 const getVehicleRarity = (vehicleName: string) => {
@@ -3457,7 +3458,7 @@ const VEHICLES = [
     "tier": "III",
     image: "AMX-30-Super.jpg",
     "description": "Improved export variant of ZTZ96 with enhanced protection and gun systems.",
-    "stats": { "health": 36900, "speed": 24, "armor": "770mm", "agility": 34 },
+    "stats": { "health": 36000, "speed": 65, "armor": "770mm", "agility": 42 },
     "weapons": [
       { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
       { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
@@ -3909,7 +3910,7 @@ const VEHICLES = [
     "tier": "III",
     image: "Type-75-MLRS.jpg",
     "description": "Japanese 300mm MLRS for long-range artillery strikes.",
-    "stats": { "health": 24500, "speed": 55, "armor": "25mm", "agility": 36 },
+    "stats": { "health": 22800, "speed": 55, "armor": "25mm", "agility": 30 },
     "weapons": [
       { name: "Type 81 FSBS", type: "Missile", damage: 11900, penetration: 165, reload: 20 },
       { name: "Type 81 FFBE", type: "Missile", damage: 10600, penetration: 220, reload: 20 },
@@ -4274,7 +4275,7 @@ const VEHICLES = [
   tier: "III",
   image: "Mi-35P-Hind-F.jpg",
   description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
-  stats: { health: 26400, speed: 290, verticalSpeed: 60, agility: 60 },
+  stats: { health: 26400, speed: 290, verticalSpeed: 25, agility: 60 },
   weapons: [
     { name: "9K121 Vikhr / 9K121 Vikhr-1", type: "ATGM", damage: 3200, penetration: 200 },
     { name: "Ataka (where available)", type: "ATGM", damage: 3000, penetration: 180 },
@@ -4304,7 +4305,7 @@ const VEHICLES = [
   tier: "III",
   image: "Mi-24-Super-Hind.jpg",
   description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
-  stats: { health: 26400, speed: 290, verticalSpeed: 60, agility: 60 },
+  stats: { health: 28100, speed: 335, verticalSpeed: 25, agility: 60 },
   weapons: [
     { name: "9K121 Vikhr / 9K121 Vikhr-1", type: "ATGM", damage: 3200, penetration: 200 },
     { name: "Ataka (where available)", type: "ATGM", damage: 3000, penetration: 180 },
@@ -4995,8 +4996,8 @@ const VEHICLES = [
     "image": "Type-74E.jpg",
     "description": "Japanese main battle tank, upgraded from the Type 74 series, featuring improved fire control systems.",
     "stats": {
-      "health": 31000,
-      "speed": 47,
+      "health": 30000,
+      "speed": 54,
       "armor": "640mm",
       "agility": 32
     },
@@ -5069,10 +5070,10 @@ const VEHICLES = [
     "image": "Type-74G-Kai.jpg",
     "description": "An upgraded Japanese MBT variant, featuring enhanced armor, improved fire control, and modernized night-fighting capability.",
     "stats": {
-      "health": 31500,
-      "speed": 48,
+      "health": 31000,
+      "speed": 54,
       "armor": "660mm",
-      "agility": 33
+      "agility": 32
     },
     "weapons": [
       {
@@ -5143,10 +5144,10 @@ const VEHICLES = [
     "image": "T-62.jpg",
     "description": "Soviet main battle tank, armed with a 115 mm smoothbore gun and improved armor protection.",
     "stats": {
-      "health": 32000,
-      "speed": 49,
+      "health": 29000,
+      "speed": 51,
       "armor": "680mm",
-      "agility": 34
+      "agility": 44
     },
     "weapons": [
       {
@@ -5217,10 +5218,10 @@ const VEHICLES = [
     "image": "T-62-545.jpg",
     "description": "Soviet T-62 variant, equipped with the 545 hp V-55 engine and improved reliability.",
     "stats": {
-      "health": 32500,
-      "speed": 50,
+      "health": 31000,
+      "speed": 51,
       "armor": "600mm",
-      "agility": 35
+      "agility": 44
     },
     "weapons": [
       {
@@ -5291,10 +5292,10 @@ const VEHICLES = [
     "image": "XM803.jpg",
     "description": "American prototype main battle tank, developed from the MBT-70 project, featuring advanced firepower and mobility.",
     "stats": {
-      "health": 33000,
-      "speed": 51,
+      "health": 35000,
+      "speed": 60,
       "armor": "620mm",
-      "agility": 36
+      "agility": 30
     },
     "weapons": [
       {
@@ -5439,10 +5440,10 @@ const VEHICLES = [
     "image": "BMP-2.jpg",
     "description": "Soviet infantry fighting vehicle, armed with a 30 mm autocannon and anti-tank guided missiles, supporting mechanized troops.",
     "stats": {
-      "health": 34000,
-      "speed": 53,
+      "health": 23000,
+      "speed": 68,
       "armor": "660mm",
-      "agility": 38
+      "agility": 36
     },
     "weapons": [
       {
@@ -5513,10 +5514,10 @@ const VEHICLES = [
     "image": "BTR-82AT.jpg",
     "description": "Russian armored personnel carrier, upgraded with a 30 mm autocannon, improved armor, and anti-tank missile capability.",
     "stats": {
-      "health": 34500,
-      "speed": 54,
+      "health": 22800,
+      "speed": 87,
       "armor": "680mm",
-      "agility": 39
+      "agility": 45
     },
     "weapons": [
       {
@@ -5587,10 +5588,10 @@ const VEHICLES = [
     "image": "BTR-82A1.jpg",
     "description": "Modern Russian armored personnel carrier, featuring a 30 mm autocannon, enhanced armor, and improved mobility for troops.",
     "stats": {
-      "health": 35000,
-      "speed": 45,
+      "health": 22000,
+      "speed": 87,
       "armor": "600mm",
-      "agility": 30
+      "agility": 40
     },
     "weapons": [
       {
@@ -5767,10 +5768,10 @@ const VEHICLES = [
     "image": "Object-685.jpg",
     "description": "Soviet experimental amphibious light tank, designed for reconnaissance and river-crossing operations with light armor and armament.",
     "stats": {
-      "health": 36500,
-      "speed": 48,
+      "health": 24500,
+      "speed": 70,
       "armor": "660mm",
-      "agility": 33
+      "agility": 39
     },
     "weapons": [
       {
@@ -5840,7 +5841,7 @@ const VEHICLES = [
     tier: "II",
     description: "Experimental missile tank destroyer with unique guided missile system.",
     image: "IT-1-Dragon.jpg",
-    stats: { health: 22800, speed: 50, armor: "520mm", agility: 55 },
+    stats: { health: 23000, speed: 65, armor: "520mm", agility: 35 },
     weapons: [
       { name: "3M7 Drakon ATGM", type: "Anti-Tank Missile", damage: 15200, penetration: 500 },
       { name: "PKT 7.62mm", type: "Machine Gun", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
@@ -5872,10 +5873,10 @@ const VEHICLES = [
     "image": "M163-VADS.jpg",
     "description": "U.S. self-propelled anti-aircraft system, mounting a 20 mm Vulcan cannon on an M113 chassis.",
     "stats": {
-      "health": 37500,
-      "speed": 50,
+      "health": 22000,
+      "speed": 62,
       "armor": "600mm",
-      "agility": 35
+      "agility": 30
     },
     "weapons": [
       {
@@ -5946,10 +5947,10 @@ const VEHICLES = [
     "image": "PGZ-04A.jpg",
     "description": "Chinese self-propelled anti-aircraft system, equipped with twin 35 mm cannons and radar for short-range air defense.",
     "stats": {
-      "health": 38000,
-      "speed": 51,
+      "health": 22000,
+      "speed": 62,
       "armor": "620mm",
-      "agility": 36
+      "agility": 30
     },
     "weapons": [
       {
@@ -6052,10 +6053,10 @@ const VEHICLES = [
     "image": "LAV-300.jpg",
     "description": "U.S. wheeled armored vehicle, designed for reconnaissance and troop transport, armed with a turret-mounted autocannon.",
     "stats": {
-      "health": 39000,
-      "speed": 53,
+      "health": 21500,
+      "speed": 95,
       "armor": "660mm",
-      "agility": 38
+      "agility": 45
     },
     "weapons": [
       {
@@ -6126,10 +6127,10 @@ const VEHICLES = [
     "image": "PTL-02.jpg",
     "description": "Chinese wheeled self-propelled anti-tank vehicle, armed with a 100 mm gun capable of firing guided missiles.",
     "stats": {
-      "health": 39500,
-      "speed": 54,
+      "health": 23500,
+      "speed": 85,
       "armor": "680mm",
-      "agility": 39
+      "agility": 25
     },
     "weapons": [
       {
@@ -6200,10 +6201,10 @@ const VEHICLES = [
     "image": "M109.jpg",
     "description": "U.S. self-propelled howitzer, mounting a 155 mm gun for long-range artillery support on a tracked chassis.",
     "stats": {
-      "health": 40000,
-      "speed": 45,
+      "health": 24000,
+      "speed": 57,
       "armor": "600mm",
-      "agility": 30
+      "agility": 25
     },
     "weapons": [
       {
@@ -6274,10 +6275,10 @@ const VEHICLES = [
     "image": "PLL-05.jpg",
     "description": "Chinese wheeled self-propelled howitzer, armed with a 120 mm gun-mortar capable of both direct and indirect fire.",
     "stats": {
-      "health": 40500,
-      "speed": 46,
+      "health": 21000,
+      "speed": 85,
       "armor": "620mm",
-      "agility": 31
+      "agility": 25
     },
     "weapons": [
       {
@@ -6348,10 +6349,10 @@ const VEHICLES = [
     "image": "PLZ-83.jpg",
     "description": "Chinese tracked self-propelled howitzer, equipped with a 152 mm gun for long-range artillery support.",
     "stats": {
-      "health": 41000,
-      "speed": 47,
+      "health": 26000,
+      "speed": 57,
       "armor": "640mm",
-      "agility": 32
+      "agility": 28
     },
     "weapons": [
       {
@@ -6422,10 +6423,10 @@ const VEHICLES = [
     "image": "2S1-Gvozdika.jpg",
     "description": "Soviet self-propelled 122 mm howitzer, fully tracked, providing mobile artillery support for mechanized units.",
     "stats": {
-      "health": 41500,
-      "speed": 48,
+      "health": 20000,
+      "speed": 61,
       "armor": "660mm",
-      "agility": 33
+      "agility": 32
     },
     "weapons": [
       {
@@ -6496,10 +6497,10 @@ const VEHICLES = [
     "image": "2S3-Akatsiya.jpg",
     "description": "Soviet self-propelled 152 mm howitzer, tracked, providing long-range artillery support with high mobility.",
     "stats": {
-      "health": 42000,
-      "speed": 49,
+      "health": 25000,
+      "speed": 60,
       "armor": "680mm",
-      "agility": 34
+      "agility": 30
     },
     "weapons": [
       {
@@ -9144,7 +9145,7 @@ const MwtVehicleStats = () => {
         
 
 ]
-   return exclusiveVehicles.includes(vehicleName)
+    return exclusiveVehicles.includes(vehicleName)
   }
 
 
@@ -10210,7 +10211,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                       <div className="bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0 group-hover:border-purple-400/50 transition-colors
                                                      h-16 w-24
                                                      sm:h-18 sm:w-28
-                                                     md:h-20 md:w-36">
+                                                     md:h-20 md:w-36 relative">
                                         <img 
                                           src={`${vehicle.image}`} 
                                           alt={vehicle.name}
@@ -10225,7 +10226,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                             {vehicle.name.substring(0, 2)}
                                           </span>
                                         </div>
-                                         {/* Rarity Tag for Battle Pass */}
+                                        {/* Rarity Tag for Battle Pass */}
                                         <div className="absolute top-1 left-1 z-20">
                                           <div className={`px-1 py-0.5 rounded text-xs font-semibold shadow-lg ${getRarityColor(getVehicleRarity(vehicle.name))}`}>
                                             {getVehicleRarity(vehicle.name)}
@@ -10617,7 +10618,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <span className="text-sm text-slate-400 font-semibold">({vehicle.faction})</span>
               </div>
 
-               {/* Vehicle Image Display */}
+              {/* Vehicle Image Display */}
               {vehicle.image && (
                 <div className="opacity-100 mb-4 flex-col pb-[-6px] pb-[-px] pb-[-6px] relative">
                   <img
@@ -11091,6 +11092,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
               ))}
               {isLoading && <div className="text-center text-slate-400">Thinking...</div>}
+              {/* Scroll target for auto-scrolling */}
+              <div ref={chatMessagesEndRef} />
             </div>
 
             <div className="p-4 border-t border-slate-700">
@@ -11333,9 +11336,34 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
+
+
+
+
+            {/* Media Section */}
+     {/* Media Section */}
+<div className="mt-6">
+  <h3 className="text-xl font-bold text-cyan-400 mb-4">Media Supporters</h3>
+
+  {/* YouTube */}
+  <div className="mb-3">
+    <h4 className="text-xl font-bold text-cyan-400 mb-3">YouTubers:</h3>
+    <ul className="list-disc list-inside text-slate-400 text-sm space-y-2">
+      <li><span className="text-white font-bold text-xl">Mr.Hasori</span></li>
+    </ul>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+)}
+
+
+
+
+
+
 
         {/* Vehicle Info Modal */}
         {vehicleInfoOpen && (
@@ -11377,7 +11405,55 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               <div className="space-y-4">
                 {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon, index) => (
                   <div key={index} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
-                    <h4 className="text-lg font-semibold text-cyan-300 mb-2">{weapon.name}</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="text-lg font-semibold text-cyan-300">{weapon.name}</h4>
+                      <div className="flex flex-col gap-1">
+                        {missileHasTags(weapon.name).map((tag, tagIndex) => (
+                          <div key={tagIndex} className="flex items-center gap-1 bg-slate-700/50 px-2 py-1 rounded text-xs">
+                            {tag === 'anti-flare' && (
+                              <>
+                                <div className="w-3 h-3 text-orange-400">
+                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                  </svg>
+                                </div>
+                                <span className="text-orange-400 font-medium">Anti-Flare</span>
+                              </>
+                            )}
+                            {tag === 'anti-warning' && (
+                              <>
+                                <div className="w-3 h-3 text-red-400">
+                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                  </svg>
+                                </div>
+                                <span className="text-red-400 font-medium">Anti-Warning</span>
+                              </>
+                            )}
+                            {tag === 'long-range' && (
+                              <>
+                                <div className="w-3 h-3 text-blue-400">
+                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                                  </svg>
+                                </div>
+                                <span className="text-blue-400 font-medium">Long-Range</span>
+                              </>
+                            )}
+                            {tag === 'laser-guided' && (
+                              <>
+                                <div className="w-3 h-3 text-green-400">
+                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                    <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
+                                  </svg>
+                                </div>
+                                <span className="text-green-400 font-medium">Laser-Guided</span>
+                              </>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                       <div>
                         <span className="text-slate-400">Damage: </span>
