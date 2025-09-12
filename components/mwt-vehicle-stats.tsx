@@ -10120,18 +10120,17 @@ if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
     `• Category listings: "Market vehicles"\n\n` +
     `What would you like to analyze?`
   );
-}
-
-        // Default response with clean formatting
-        return (
-          `**MWT AI Tactical Analysis System**\n\n` +
-          `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n`
-        );
-    }
-
-    // React component return
+    
+    // Default response with clean formatting
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      `**MWT AI Tactical Analysis System**\n\n` +
+      `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n`
+    );
+  }
+
+  // React component return
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
     {/* Battle Pass Tab - Fully Responsive */}
     <button
       onClick={() => setBattlePassOpen(!battlePassOpen)}
