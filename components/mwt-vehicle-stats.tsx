@@ -10125,7 +10125,7 @@ if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
   return `**MWT AI Tactical Analysis System**\n\nI didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n`;
 }
 
-return (
+
   <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
     {/* Battle Pass Tab - Fully Responsive */}
     <button
