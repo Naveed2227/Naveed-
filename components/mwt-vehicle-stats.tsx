@@ -10120,13 +10120,13 @@ if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
     `• Category listings: "Market vehicles"\n\n` +
     `What would you like to analyze?`
   );
-    
-    // Default response with clean formatting
-    return `**MWT AI Tactical Analysis System**\n\nI didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n`;
-  }
+ if (!recognizedQuery) {
+  // Default response with clean formatting
+  return `**MWT AI Tactical Analysis System**\n\nI didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n`;
+}
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+return (
+  <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
     {/* Battle Pass Tab - Fully Responsive */}
     <button
       onClick={() => setBattlePassOpen(!battlePassOpen)}
@@ -10135,14 +10135,14 @@ if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
       {/* Mobile: Compact icon + text */}
       <div className="sm:hidden flex flex-col items-center justify-center px-2 py-3 text-white font-bold text-[10px] tracking-wide">
         <svg className="w-4 h-4 mb-1" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
-          <path d="M12 17L13.09 23.26L22 24L13.09 24.74L12 31L10.91 24.74L2 24L10.91 23.26L12 17Z" opacity="0.6"/>
+          <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" />
+          <path d="M12 17L13.09 23.26L22 24L13.09 24.74L12 31L10.91 24.74L2 24L10.91 23.26L12 17Z" opacity="0.6" />
         </svg>
         <span className="text-center leading-tight">BP</span>
       </div>
-      
+
       {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
-      <div 
+      <div
         className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider
                    sm:px-2 sm:py-4 sm:text-xs sm:ml-[-8px] sm:mr-[-8px]
                    md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px]
@@ -10153,6 +10153,8 @@ if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
         <span className="hidden md:block">BATTLE PASS</span>
       </div>
     </button>
+
+
 
 
 
