@@ -9358,70 +9358,36 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       // Get fastest helicopter
       if (lowerQuery.includes("fastest helicopter") || lowerQuery.includes("fastest heli")) {
         const helicopters = VEHICLES.filter((v) => v.type === "Helicopter")
-        if (helicopters.length === 0) return "No helicopters found in the database."
-        
         const fastestHeli = helicopters.reduce((prev, current) => 
-          (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current
+          (prev.stats.speed > current.stats.speed) ? prev : current
         )
-        return `The fastest helicopter is the **${fastestHeli.name}** with a top speed of **${fastestHeli.stats.speed || 'N/A'} km/h**.`
+        return `The fastest helicopter is the **${fastestHeli.name}** with a top speed of **${fastestHeli.stats.speed} km/h**.`
+      }
+            (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
+          )
+        },
+        strongestHelicopter: () => {
+          const helicopters = VEHICLES.filter((v) => v.type === "helicopter")
+          return helicopters.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
+        },
+        mostArmoredVehicle: () => {
+          return VEHICLES.filter((v) => v.stats.armor).reduce((prev, current) =>
+            (prev.stats.armor || 0) > (current.stats.armor || 0) ? prev : current,
+          )
+        },
+        mostAgileVehicle: () => {
+          return VEHICLES.filter((v) => v.stats.agility).reduce((prev, current) =>
+            (prev.stats.agility || 0) > (current.stats.agility || 0) ? prev : current,
+          )
+        },
+        bestByNation: (nation: string) => {
+          const nationVehicles = VEHICLES.filter((v) => v.faction.toLowerCase().includes(nation.toLowerCase()))
+          return nationVehicles.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
+        },
       }
 
-      // Get strongest helicopter
-      if (lowerQuery.includes("strongest helicopter") || lowerQuery.includes("toughest heli")) {
-        const helicopters = VEHICLES.filter((v) => v.type === "Helicopter")
-        if (helicopters.length === 0) return "No helicopters found in the database."
-        
-        const strongestHeli = helicopters.reduce((prev, current) => 
-          (prev.stats.health || 0) > (current.stats.health || 0) ? prev : current
-        )
-        return `The most durable helicopter is the **${strongestHeli.name}** with **${strongestHeli.stats.health?.toLocaleString() || 'N/A'} HP**.`
-      }
-
-      // Get most armored vehicle
-      if (lowerQuery.includes("most armored") || lowerQuery.includes("best armor")) {
-        const armoredVehicles = VEHICLES.filter((v) => v.stats.armor)
-        if (armoredVehicles.length === 0) return "No armored vehicles found in the database."
-        
-        const mostArmored = armoredVehicles.reduce((prev, current) =>
-          (prev.stats.armor || 0) > (current.stats.armor || 0) ? prev : current
-        )
-        return `The most heavily armored vehicle is the **${mostArmored.name}** with **${mostArmored.stats.armor} armor**.`
-      }
-
-      // Get most agile vehicle
-      if (lowerQuery.includes("most agile") || lowerQuery.includes("best maneuverability")) {
-        const agileVehicles = VEHICLES.filter((v) => v.stats.agility)
-        if (agileVehicles.length === 0) return "No vehicles with agility data found in the database."
-        
-        const mostAgile = agileVehicles.reduce((prev, current) =>
-          (prev.stats.agility || 0) > (current.stats.agility || 0) ? prev : current
-        )
-        return `The most agile vehicle is the **${mostAgile.name}** with an agility rating of **${mostAgile.stats.agility}**.`
-      }
-
-      // Get best vehicle by nation
-      if (lowerQuery.startsWith("best ") && (lowerQuery.includes("russian") || lowerQuery.includes("american") || lowerQuery.includes("chinese") || lowerQuery.includes("european"))) {
-        const nation = lowerQuery.split(" ")[1]
-        const nationVehicles = VEHICLES.filter((v) => v.faction.toLowerCase().includes(nation.toLowerCase()))
-        
-        if (nationVehicles.length === 0) return `No vehicles found for ${nation} in the database.`
-        
-        const bestVehicle = nationVehicles.reduce((prev, current) => 
-          ((prev.stats.health || 0) + (prev.stats.armor || 0) + (prev.stats.damage || 0)) > 
-          ((current.stats.health || 0) + (current.stats.armor || 0) + (current.stats.damage || 0)) 
-            ? prev 
-            : current
-        )
-        
-        return `The best ${nation} vehicle is the **${bestVehicle.name}** with ${bestVehicle.stats.health?.toLocaleString()} HP and ${bestVehicle.stats.armor || 'N/A'} armor.`
-      }
-
-      // Default response for unknown queries
-      return "I'm sorry, I didn't understand your query. You can ask about vehicle stats, compare vehicles, or ask for the best vehicle in a specific category."
-    }
-
-    // Sample vehicle data for testing
-    const testVehicles = [
+        // Sample vehicle data for testing
+      const testVehicles = [
         {
           name: "Abrams X",
           country: "USA",
