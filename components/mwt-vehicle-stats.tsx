@@ -8847,29 +8847,38 @@ const getTierColor = (tier: string) => {
 }
 
 const MwtVehicleStats = () => {
-  const router = useRouter()
-  const [searchQuery, setSearchQuery] = useState("")
-  const [typeFilter, setTypeFilter] = useState("")
-  const [tierFilter, setTierFilter] = useState("")
-  const [countryFilter, setCountryFilter] = useState("")
-  const [compare, setCompare] = useState<string[]>([])
-  const [expandedVehicle, setExpandedVehicle] = useState("")
-  const comparisonRef = useRef<HTMLDivElement>(null)
-  const chatMessagesEndRef = useRef<HTMLDivElement>(null)
-  const [chatOpen, setChatOpen] = useState(false)
-  const [chatMessages, setChatMessages] = useState<{ role: string; content: string }[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [chatInput, setChatInput] = useState("")
-  const [currentPage, setCurrentPage] = useState(1)
-  const [vehicleInfoOpen, setVehicleInfoOpen] = useState<string | null>(null)
-  const vehiclesPerPage = 15
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState("");
+  const [tierFilter, setTierFilter] = useState("");
+  const [countryFilter, setCountryFilter] = useState("");
+  const [compare, setCompare] = useState<string[]>([]);
+  const [expandedVehicle, setExpandedVehicle] = useState("");
+  const comparisonRef = useRef<HTMLDivElement>(null);
+  const chatMessagesEndRef = useRef<HTMLDivElement>(null);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<{ role: string; content: string }[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [chatInput, setChatInput] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [vehicleInfoOpen, setVehicleInfoOpen] = useState<string | null>(null);
+  const vehiclesPerPage = 15;
 
-  const [showAbout, setShowAbout] = useState(false)
-  const [showUpdates, setShowUpdates] = useState(false)
-  const [showCredits, setShowCredits] = useState(false)
+  const [showAbout, setShowAbout] = useState(false);
+  const [showUpdates, setShowUpdates] = useState(false);
+  const [showCredits, setShowCredits] = useState(false);
 
-  const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
-  const weaponsModalRef = useRef<HTMLDivElement>(null)
+  const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null);
+  const weaponsModalRef = useRef<HTMLDivElement>(null);
+  
+  // Sidebar state
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("battlepass");
+  const [expandedMonth, setExpandedMonth] = useState<number | null>(null);
+  
+  // Battle Pass state
+  const [battlePassOpen, setBattlePassOpen] = useState(false);
+  const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null);
   
   // Auto-scroll chat to bottom when messages change
   useEffect(() => {
@@ -10415,18 +10424,17 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               const vehicle1 = VEHICLES.find((v) => v.id.toString() === compare[0])
               const vehicle2 = VEHICLES.find((v) => v.id.toString() === compare[1])
               if (vehicle1 && vehicle2) {
-                const generateComparisonAnalysis = (vehicle1: any, vehicle2: any): string => {
-                  const healthWinner = vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name
-                  const speedWinner = vehicle1.stats.speed > vehicle2.stats.speed ? vehicle1.name : vehicle2.name
-                  const agilityWinner = vehicle1.stats.agility > vehicle2.stats.agility ? vehicle1.name : vehicle2.name
+                const healthWinner = vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name
+                const speedWinner = vehicle1.stats.speed > vehicle2.stats.speed ? vehicle1.name : vehicle2.name
+                const agilityWinner = vehicle1.stats.agility > vehicle2.stats.agility ? vehicle1.name : vehicle2.name
 
-                  let analysis = `🤖 AI TACTICAL ANALYSIS\n\n`
+                let analysis = `🤖 AI TACTICAL ANALYSIS\n\n`
 
-                  // Performance comparison
-                  analysis += `PERFORMANCE OVERVIEW:\n`
-                  analysis += `• Survivability: ${healthWinner} dominates with ${healthWinner === vehicle1.name ? vehicle1.stats.health.toLocaleString() : vehicle2.stats.health.toLocaleString()} HP\n`
-                  analysis += `• Mobility: ${speedWinner} leads with ${speedWinner === vehicle1.name ? vehicle1.stats.speed : vehicle2.stats.speed} km/h\n`
-                  analysis += `• Maneuverability: ${agilityWinner} excels with ${agilityWinner === vehicle1.name ? vehicle1.stats.agility : vehicle2.stats.agility} agility\n\n`
+                // Performance comparison
+                analysis += `PERFORMANCE OVERVIEW:\n`
+                analysis += `• Survivability: ${healthWinner} dominates with ${healthWinner === vehicle1.name ? vehicle1.stats.health.toLocaleString() : vehicle2.stats.health.toLocaleString()} HP\n`
+                analysis += `• Mobility: ${speedWinner} leads with ${speedWinner === vehicle1.name ? vehicle1.stats.speed : vehicle2.stats.speed} km/h\n`
+                analysis += `• Maneuverability: ${agilityWinner} excels with ${agilityWinner === vehicle1.name ? vehicle1.stats.agility : vehicle2.stats.agility} agility\n\n`
 
                   // Tactical analysis
                   analysis += `TACTICAL ASSESSMENT:\n`
