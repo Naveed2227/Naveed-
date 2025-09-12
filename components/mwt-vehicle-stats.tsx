@@ -9276,80 +9276,82 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   }
 
   // Function to get vehicle information based on query
-  const getVehicleInfo = (query: string): string => {
-    const lowerQuery = query.toLowerCase()
+  const getVehicleInfo = (query: string): any => {
+    const lowerQuery = query.toLowerCase();
 
-    // Check for specific queries
-    if (lowerQuery.includes("fastest") || lowerQuery.includes("fastest vehicle")) {
-      const fastest = VEHICLES.reduce((prev, current) => 
-        (prev.stats.speed > current.stats.speed) ? prev : current
-      )
-      return `The fastest vehicle is the **${fastest.name}** with a top speed of **${fastest.stats.speed} km/h**.`
+    // Vehicle analysis functions
+    const analyzeVehicles = {
+      fastestTank: () => VEHICLES.filter(v => v.type === "Tank").reduce((p, c) => (p.stats.speed > c.stats.speed ? p : c)),
+      strongestTank: () => VEHICLES.filter(v => v.type === "Tank").reduce((p, c) => (p.stats.health > c.stats.health ? p : c)),
+      fastestJet: () => VEHICLES.filter(v => v.type === "Fighter Jet").reduce((p, c) => ((p.stats.afterburnerSpeed || p.stats.speed) > (c.stats.afterburnerSpeed || c.stats.speed) ? p : c)),
+      strongestJet: () => VEHICLES.filter(v => v.type === "Fighter Jet").reduce((p, c) => (p.stats.health > c.stats.health ? p : c)),
+      fastestHelicopter: () => VEHICLES.filter(v => v.type === "Helicopter").reduce((p, c) => (p.stats.speed > c.stats.speed ? p : c)),
+      strongestHelicopter: () => VEHICLES.filter(v => v.type === "Helicopter").reduce((p, c) => (p.stats.health > c.stats.health ? p : c)),
+      mostArmoredVehicle: () => VEHICLES.filter(v => v.stats.armor).reduce((p, c) => (p.stats.armor > c.stats.armor ? p : c)),
+      mostAgileVehicle: () => VEHICLES.filter(v => v.stats.agility).reduce((p, c) => (p.stats.agility > c.stats.agility ? p : c)),
+      bestByNation: (nation: string) => {
+        const nationVehicles = VEHICLES.filter(v => v.faction.toLowerCase().includes(nation.toLowerCase()));
+        return nationVehicles.reduce((p, c) => (p.stats.health > c.stats.health ? p : c));
+      }
+    };
+
+    // Tier and nation listings
+    if (lowerQuery.includes("tier iv") || lowerQuery.includes("tier 4")) {
+      const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier IV");
+      let response = `**Tier IV Combat Vehicles**\n`;
+      response += `${tierVehicles.length} cutting-edge platforms:\n\n`;
+      tierVehicles.forEach(v => {
+        response += `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP\n`;
+      });
+      return response;
     }
 
-    if (lowerQuery.includes("strongest") || lowerQuery.includes("toughest")) {
-      const strongest = VEHICLES.reduce((prev, current) => 
-        (prev.stats.health > current.stats.health) ? prev : current
-      )
-      return `The most durable vehicle is the **${strongest.name}** with **${strongest.stats.health.toLocaleString()} HP**.`
-    }
+    // Help and default responses
+    if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
 
-    // Default response
-    return `I'm an AI assistant for Modern War Thunder. I can help you find information about vehicles, compare stats, and more. Try asking about a specific vehicle or type 'help' for suggestions.`
+  // Help and default responses
+  if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
+    return (
+      `**MWT AI Tactical Analysis System**\n\n` +
+      `I can help you analyze military vehicles. Here's what I can do:\n\n` +
+      `**Vehicle Analysis:**\n` +
+      `• Individual specs: "Su-57M"\n` +
+      `• Head-to-head comparisons: "T-14 vs Abrams X"\n\n` +
+      `**Performance Queries:**\n` +
+      `• Speed analysis: "Fastest tank"\n` +
+      `• Durability rankings: "Strongest jet"\n` +
+      `• Protection analysis: "Most armored vehicle"\n\n` +
+      `**Nation Analysis:**\n` +
+      `• Best by nation: "Best Russian vehicle"\n` +
+      `• Fleet listings: "American vehicles"\n\n` +
+      `**Data Insights:**\n` +
+      `• Tier breakdowns: "Tier IV vehicles"\n` +
+      `• Category listings: "Market vehicles"\n\n` +
+      `What would you like to analyze?`
+    );
   }
 
-  const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!chatInput.trim()) return
-
-    // Add user message to chat
-    const userMessage = { role: "user" as const, content: chatInput }
-    setChatMessages((prev) => [...prev, userMessage])
-    setIsLoading(true)
-
-    // Simulate AI response after a short delay
-    setTimeout(() => {
-      try {
-        const response = getVehicleInfo(chatInput)
-        const botMessage = { 
-          role: "assistant" as const, 
-          content: response 
-        }
-        setChatMessages((prev) => [...prev, botMessage])
-      } catch (error) {
-        console.error('Error generating response:', error)
-        const errorMessage = { 
-          role: "assistant" as const, 
-          content: "I'm sorry, I encountered an error processing your request. Please try again." 
-        }
-        setChatMessages((prev) => [...prev, errorMessage])
-      } finally {
-        setIsLoading(false)
-        setChatInput("")
-      }
-    }, 1000)
+  // Default response
+  if (lowerQuery.includes("fastest jet") || lowerQuery.includes("fastest plane")) {
+    const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
+    const fastestJet = jets.reduce((prev, current) => 
+      (prev.stats.speed > current.stats.speed) ? prev : current
+    )
+    return `The fastest jet is the **${fastestJet.name}** with a top speed of **${fastestJet.stats.speed} km/h**.`
   }
 
-    if (lowerQuery.includes("strongest") || lowerQuery.includes("toughest")) {
-      const strongest = VEHICLES.reduce((prev, current) => 
-        (prev.stats.health > current.stats.health) ? prev : current
-      )
-      return `The most durable vehicle is the **${strongest.name}** with **${strongest.stats.health.toLocaleString()} HP**.`
-    }
+  if (lowerQuery.includes("strongest jet") || lowerQuery.includes("toughest plane")) {
+    const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
+    const strongestJet = jets.reduce((prev, current) => 
+      (prev.stats.health > current.stats.health) ? prev : current
+    )
+    return `The most durable jet is the **${strongestJet.name}** with **${strongestJet.stats.health.toLocaleString()} HP**.`
+  }
 
-      // Get fastest jet
-      if (lowerQuery.includes("fastest jet") || lowerQuery.includes("fastest plane")) {
-        const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
-        const fastestJet = jets.reduce((prev, current) => 
-          (prev.stats.speed > current.stats.speed) ? prev : current
-        )
-        return `The fastest jet is the **${fastestJet.name}** with a top speed of **${fastestJet.stats.speed} km/h**.`
-      }
-
-      // Get strongest jet
-      if (lowerQuery.includes("strongest jet") || lowerQuery.includes("toughest plane")) {
-        const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
-        const strongestJet = jets.reduce((prev, current) => 
+  if (lowerQuery.includes("fastest helicopter") || lowerQuery.includes("fastest heli")) {
+    const helicopters = VEHICLES.filter((v) => v.type === "Helicopter");
+    const fastestHeli = helicopters.reduce((prev, current) =>
+      (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current
           (prev.stats.health > current.stats.health) ? prev : current
         )
         return `The most durable jet is the **${strongestJet.name}** with **${strongestJet.stats.health.toLocaleString()} HP**.`
@@ -10120,16 +10122,16 @@ if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
   );
 }
 
-    // Default response with clean formatting
-    return (
-      `**MWT AI Tactical Analysis System**\n\n` +
-      `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n`
-    );
-  }
+        // Default response with clean formatting
+        return (
+          `**MWT AI Tactical Analysis System**\n\n` +
+          `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n`
+        );
+    }
 
-  // React component return
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    // React component return
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
     {/* Battle Pass Tab - Fully Responsive */}
     <button
       onClick={() => setBattlePassOpen(!battlePassOpen)}
