@@ -192,7 +192,9 @@ const getVehicleRarity = (vehicleName: string) => {
 "Su-24M",
 "Ka-50 Black Shark",
 "OH-1 Ninja",
-
+"T-95M",
+"M1 Abrams CATTB",
+"Leclerc S2 AZUR",
 
 
 
@@ -214,6 +216,20 @@ const getVehicleRarity = (vehicleName: string) => {
 "Ka-58 Black Ghost",
 "J-50",
 "MiG-41M",
+"T-20 Monolit",
+"PL-01",
+"M270 MLRS",
+"BM-57-2 Kochevnik",
+"MGM-166 LOSAT",
+"T-104 Bastion",
+"SR-5 GMLRS",
+"ZTZ99-III",
+"FV4034 Challenger 2 TES",
+"Karrar",
+"M1 Abrams Block 3",
+"Altay",
+
+
 
 ];
   const legendaryVehicles = [
