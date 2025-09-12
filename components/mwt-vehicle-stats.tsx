@@ -4,64 +4,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-
-
-// Types
-interface Weapon {
-  name: string;
-  type: string;
-  damage: number;
-  penetration: number;
-  reload: number;
-  rateOfFire?: string;
-  lockTime?: string;
-  tags?: string[];
-}
-
-interface Module {
-  name: string;
-  bonus: string;
-  category: string;
-}
-
-interface VehicleStats {
-  health?: number;
-  armor?: number;
-  agility?: number;
-  speed?: number;
-  range?: number;
-  damage?: number;
-  [key: string]: number | undefined;
-}
-
-interface Vehicle {
-  id: string | number;
-  name: string;
-  type: string;
-  tier: string | number;
-  faction: string;
-  stats: VehicleStats;
-  weapons: Weapon[];
-  modules?: Record<string, Module[]>;
-  isPremium?: boolean;
-  isMarket?: boolean;
-  description?: string;
-  image?: string;
-  thumbnail?: string;
-  [key: string]: any; // For any additional properties
-}
-
-interface VehicleFilters {
-  tier?: string | number;
-  role?: string;
-  nation?: string;
-  premium?: boolean;
-  market?: boolean;
-  [key: string]: any;
-}
-
-type VehicleCriteria = 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'sph_combined';
-
 // Roman numeral conversion utility
 const toRomanNumeral = (num: number | string): string => {
   let numValue = typeof num === 'string' ? parseInt(num) : num;
@@ -92,6 +34,7 @@ const formatTier = (tier: string | number): string => {
   // Otherwise convert to Roman numeral
   return toRomanNumeral(tier);
 };
+
 
 // Vehicle Rarity System
 const getVehicleRarity = (vehicleName: string) => {
@@ -272,6 +215,8 @@ const getRarityColor = (rarity: string) => {
     default: return "bg-gray-600 text-gray-100";
   }
 };
+
+
 
 // Battle Pass Data Structure
 const BATTLE_PASSES = [
@@ -3512,7 +3457,7 @@ const VEHICLES = [
     "tier": "III",
     image: "AMX-30-Super.jpg",
     "description": "Improved export variant of ZTZ96 with enhanced protection and gun systems.",
-    "stats": { "health": 36000, "speed": 65, "armor": "770mm", "agility": 42 },
+    "stats": { "health": 36900, "speed": 24, "armor": "770mm", "agility": 34 },
     "weapons": [
       { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
       { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
@@ -3964,7 +3909,7 @@ const VEHICLES = [
     "tier": "III",
     image: "Type-75-MLRS.jpg",
     "description": "Japanese 300mm MLRS for long-range artillery strikes.",
-    "stats": { "health": 22800, "speed": 55, "armor": "25mm", "agility": 30 },
+    "stats": { "health": 24500, "speed": 55, "armor": "25mm", "agility": 36 },
     "weapons": [
       { name: "Type 81 FSBS", type: "Missile", damage: 11900, penetration: 165, reload: 20 },
       { name: "Type 81 FFBE", type: "Missile", damage: 10600, penetration: 220, reload: 20 },
@@ -4329,7 +4274,7 @@ const VEHICLES = [
   tier: "III",
   image: "Mi-35P-Hind-F.jpg",
   description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
-  stats: { health: 26400, speed: 290, verticalSpeed: 25, agility: 60 },
+  stats: { health: 26400, speed: 290, verticalSpeed: 60, agility: 60 },
   weapons: [
     { name: "9K121 Vikhr / 9K121 Vikhr-1", type: "ATGM", damage: 3200, penetration: 200 },
     { name: "Ataka (where available)", type: "ATGM", damage: 3000, penetration: 180 },
@@ -4359,7 +4304,7 @@ const VEHICLES = [
   tier: "III",
   image: "Mi-24-Super-Hind.jpg",
   description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
-  stats: { health: 28100, speed: 335, verticalSpeed: 25, agility: 60 },
+  stats: { health: 26400, speed: 290, verticalSpeed: 60, agility: 60 },
   weapons: [
     { name: "9K121 Vikhr / 9K121 Vikhr-1", type: "ATGM", damage: 3200, penetration: 200 },
     { name: "Ataka (where available)", type: "ATGM", damage: 3000, penetration: 180 },
@@ -5050,8 +4995,8 @@ const VEHICLES = [
     "image": "Type-74E.jpg",
     "description": "Japanese main battle tank, upgraded from the Type 74 series, featuring improved fire control systems.",
     "stats": {
-      "health": 30000,
-      "speed": 54,
+      "health": 31000,
+      "speed": 47,
       "armor": "640mm",
       "agility": 32
     },
@@ -5124,10 +5069,10 @@ const VEHICLES = [
     "image": "Type-74G-Kai.jpg",
     "description": "An upgraded Japanese MBT variant, featuring enhanced armor, improved fire control, and modernized night-fighting capability.",
     "stats": {
-      "health": 31000,
-      "speed": 54,
+      "health": 31500,
+      "speed": 48,
       "armor": "660mm",
-      "agility": 32
+      "agility": 33
     },
     "weapons": [
       {
@@ -5198,10 +5143,10 @@ const VEHICLES = [
     "image": "T-62.jpg",
     "description": "Soviet main battle tank, armed with a 115 mm smoothbore gun and improved armor protection.",
     "stats": {
-      "health": 29000,
-      "speed": 51,
+      "health": 32000,
+      "speed": 49,
       "armor": "680mm",
-      "agility": 44
+      "agility": 34
     },
     "weapons": [
       {
@@ -5272,10 +5217,10 @@ const VEHICLES = [
     "image": "T-62-545.jpg",
     "description": "Soviet T-62 variant, equipped with the 545 hp V-55 engine and improved reliability.",
     "stats": {
-      "health": 31000,
-      "speed": 51,
+      "health": 32500,
+      "speed": 50,
       "armor": "600mm",
-      "agility": 44
+      "agility": 35
     },
     "weapons": [
       {
@@ -5346,10 +5291,10 @@ const VEHICLES = [
     "image": "XM803.jpg",
     "description": "American prototype main battle tank, developed from the MBT-70 project, featuring advanced firepower and mobility.",
     "stats": {
-      "health": 35000,
-      "speed": 60,
+      "health": 33000,
+      "speed": 51,
       "armor": "620mm",
-      "agility": 30
+      "agility": 36
     },
     "weapons": [
       {
@@ -5494,10 +5439,10 @@ const VEHICLES = [
     "image": "BMP-2.jpg",
     "description": "Soviet infantry fighting vehicle, armed with a 30 mm autocannon and anti-tank guided missiles, supporting mechanized troops.",
     "stats": {
-      "health": 23000,
-      "speed": 68,
+      "health": 34000,
+      "speed": 53,
       "armor": "660mm",
-      "agility": 36
+      "agility": 38
     },
     "weapons": [
       {
@@ -5568,10 +5513,10 @@ const VEHICLES = [
     "image": "BTR-82AT.jpg",
     "description": "Russian armored personnel carrier, upgraded with a 30 mm autocannon, improved armor, and anti-tank missile capability.",
     "stats": {
-      "health": 22800,
-      "speed": 87,
+      "health": 34500,
+      "speed": 54,
       "armor": "680mm",
-      "agility": 45
+      "agility": 39
     },
     "weapons": [
       {
@@ -5642,10 +5587,10 @@ const VEHICLES = [
     "image": "BTR-82A1.jpg",
     "description": "Modern Russian armored personnel carrier, featuring a 30 mm autocannon, enhanced armor, and improved mobility for troops.",
     "stats": {
-      "health": 22000,
-      "speed": 87,
+      "health": 35000,
+      "speed": 45,
       "armor": "600mm",
-      "agility": 40
+      "agility": 30
     },
     "weapons": [
       {
@@ -5822,10 +5767,10 @@ const VEHICLES = [
     "image": "Object-685.jpg",
     "description": "Soviet experimental amphibious light tank, designed for reconnaissance and river-crossing operations with light armor and armament.",
     "stats": {
-      "health": 24500,
-      "speed": 70,
+      "health": 36500,
+      "speed": 48,
       "armor": "660mm",
-      "agility": 39
+      "agility": 33
     },
     "weapons": [
       {
@@ -5895,7 +5840,7 @@ const VEHICLES = [
     tier: "II",
     description: "Experimental missile tank destroyer with unique guided missile system.",
     image: "IT-1-Dragon.jpg",
-    stats: { health: 23000, speed: 65, armor: "520mm", agility: 35 },
+    stats: { health: 22800, speed: 50, armor: "520mm", agility: 55 },
     weapons: [
       { name: "3M7 Drakon ATGM", type: "Anti-Tank Missile", damage: 15200, penetration: 500 },
       { name: "PKT 7.62mm", type: "Machine Gun", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
@@ -5927,10 +5872,10 @@ const VEHICLES = [
     "image": "M163-VADS.jpg",
     "description": "U.S. self-propelled anti-aircraft system, mounting a 20 mm Vulcan cannon on an M113 chassis.",
     "stats": {
-      "health": 22000,
-      "speed": 62,
+      "health": 37500,
+      "speed": 50,
       "armor": "600mm",
-      "agility": 30
+      "agility": 35
     },
     "weapons": [
       {
@@ -6001,10 +5946,10 @@ const VEHICLES = [
     "image": "PGZ-04A.jpg",
     "description": "Chinese self-propelled anti-aircraft system, equipped with twin 35 mm cannons and radar for short-range air defense.",
     "stats": {
-      "health": 22000,
-      "speed": 62,
+      "health": 38000,
+      "speed": 51,
       "armor": "620mm",
-      "agility": 30
+      "agility": 36
     },
     "weapons": [
       {
@@ -6107,10 +6052,10 @@ const VEHICLES = [
     "image": "LAV-300.jpg",
     "description": "U.S. wheeled armored vehicle, designed for reconnaissance and troop transport, armed with a turret-mounted autocannon.",
     "stats": {
-      "health": 21500,
-      "speed": 95,
+      "health": 39000,
+      "speed": 53,
       "armor": "660mm",
-      "agility": 45
+      "agility": 38
     },
     "weapons": [
       {
@@ -6181,10 +6126,10 @@ const VEHICLES = [
     "image": "PTL-02.jpg",
     "description": "Chinese wheeled self-propelled anti-tank vehicle, armed with a 100 mm gun capable of firing guided missiles.",
     "stats": {
-      "health": 23500,
-      "speed": 85,
+      "health": 39500,
+      "speed": 54,
       "armor": "680mm",
-      "agility": 25
+      "agility": 39
     },
     "weapons": [
       {
@@ -6255,10 +6200,10 @@ const VEHICLES = [
     "image": "M109.jpg",
     "description": "U.S. self-propelled howitzer, mounting a 155 mm gun for long-range artillery support on a tracked chassis.",
     "stats": {
-      "health": 24000,
-      "speed": 57,
+      "health": 40000,
+      "speed": 45,
       "armor": "600mm",
-      "agility": 25
+      "agility": 30
     },
     "weapons": [
       {
@@ -6329,10 +6274,10 @@ const VEHICLES = [
     "image": "PLL-05.jpg",
     "description": "Chinese wheeled self-propelled howitzer, armed with a 120 mm gun-mortar capable of both direct and indirect fire.",
     "stats": {
-      "health": 21000,
-      "speed": 85,
+      "health": 40500,
+      "speed": 46,
       "armor": "620mm",
-      "agility": 25
+      "agility": 31
     },
     "weapons": [
       {
@@ -6403,10 +6348,10 @@ const VEHICLES = [
     "image": "PLZ-83.jpg",
     "description": "Chinese tracked self-propelled howitzer, equipped with a 152 mm gun for long-range artillery support.",
     "stats": {
-      "health": 26000,
-      "speed": 57,
+      "health": 41000,
+      "speed": 47,
       "armor": "640mm",
-      "agility": 28
+      "agility": 32
     },
     "weapons": [
       {
@@ -6477,10 +6422,10 @@ const VEHICLES = [
     "image": "2S1-Gvozdika.jpg",
     "description": "Soviet self-propelled 122 mm howitzer, fully tracked, providing mobile artillery support for mechanized units.",
     "stats": {
-      "health": 20000,
-      "speed": 61,
+      "health": 41500,
+      "speed": 48,
       "armor": "660mm",
-      "agility": 32
+      "agility": 33
     },
     "weapons": [
       {
@@ -6551,10 +6496,10 @@ const VEHICLES = [
     "image": "2S3-Akatsiya.jpg",
     "description": "Soviet self-propelled 152 mm howitzer, tracked, providing long-range artillery support with high mobility.",
     "stats": {
-      "health": 25000,
-      "speed": 60,
+      "health": 42000,
+      "speed": 49,
       "armor": "680mm",
-      "agility": 30
+      "agility": 34
     },
     "weapons": [
       {
@@ -8684,7 +8629,7 @@ const VEHICLES = [
   }
 ];
 
-const getAircraftRole = (vehicle: Vehicle): string | null => {
+const getAircraftRole = (vehicle: any) => {
   if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== "Helicopter") return null
 
   // Check for helicopters first
@@ -8707,7 +8652,7 @@ const getAircraftRole = (vehicle: Vehicle): string | null => {
 
   const weapons = vehicle.weapons || []
   const hasStealthWeapons = weapons.some(
-    (w: Weapon) =>
+    (w: any) =>
       w.name.includes("Kinzhal") ||
       w.name.includes("GROM") ||
       vehicle.name.includes("F-22") ||
@@ -8720,7 +8665,7 @@ const getAircraftRole = (vehicle: Vehicle): string | null => {
   )
 
   const hasGroundAttackWeapons = weapons.some(
-    (w: Weapon) =>
+    (w: any) =>
       w.type.includes("Ground") ||
       w.type.includes("Bomb") ||
       w.name.includes("Maverick") ||
@@ -8733,7 +8678,7 @@ const getAircraftRole = (vehicle: Vehicle): string | null => {
   )
 
   const hasInterceptorCharacteristics = weapons.some(
-    (w: Weapon) =>
+    (w: any) =>
       w.type.includes("AAM") ||
       w.name.includes("Phoenix") ||
       vehicle.name.includes("MiG-31") ||
@@ -8765,7 +8710,7 @@ const getAircraftRole = (vehicle: Vehicle): string | null => {
     vehicle.name.includes("SB-1")
 
   const hasMultiRoleWeapons = weapons.some(
-    (w: Weapon) => w.type.includes("Air-to-Ground") && weapons.some((w2: Weapon) => w2.type.includes("AAM")),
+    (w: any) => w.type.includes("Air-to-Ground") && weapons.some((w2: any) => w2.type.includes("AAM")),
   )
 
   if (hasStealthWeapons) return "stealth"
@@ -8846,7 +8791,7 @@ const getFlagImage = (faction: string): string => {
   return flags[faction] || "/default-flag.png"
 }
 
-const generateComparisonAnalysis = (vehicle1: Vehicle, vehicle2: Vehicle): string => {
+const generateComparisonAnalysis = (vehicle1: any, vehicle2: any): string => {
   const healthWinner = vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name
   const speedWinner = vehicle1.stats.speed > vehicle2.stats.speed ? vehicle1.name : vehicle2.name
   const agilityWinner = vehicle1.stats.agility > vehicle2.stats.agility ? vehicle1.name : vehicle2.name
@@ -8903,38 +8848,29 @@ const getTierColor = (tier: string) => {
 }
 
 const MwtVehicleStats = () => {
-  const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [typeFilter, setTypeFilter] = useState("");
-  const [tierFilter, setTierFilter] = useState("");
-  const [countryFilter, setCountryFilter] = useState("");
-  const [compare, setCompare] = useState<string[]>([]);
-  const [expandedVehicle, setExpandedVehicle] = useState("");
-  const comparisonRef = useRef<HTMLDivElement>(null);
-  const chatMessagesEndRef = useRef<HTMLDivElement>(null);
-  const [chatOpen, setChatOpen] = useState(false);
-  const [chatMessages, setChatMessages] = useState<{ role: string; content: string }[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [chatInput, setChatInput] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [vehicleInfoOpen, setVehicleInfoOpen] = useState<string | null>(null);
-  const vehiclesPerPage = 15;
+  const router = useRouter()
+  const [searchQuery, setSearchQuery] = useState("")
+  const [typeFilter, setTypeFilter] = useState("")
+  const [tierFilter, setTierFilter] = useState("")
+  const [countryFilter, setCountryFilter] = useState("")
+  const [compare, setCompare] = useState<string[]>([])
+  const [expandedVehicle, setExpandedVehicle] = useState("")
+  const comparisonRef = useRef<HTMLDivElement>(null)
+  const chatMessagesEndRef = useRef<HTMLDivElement>(null)
+  const [chatOpen, setChatOpen] = useState(false)
+  const [chatMessages, setChatMessages] = useState<{ role: string; content: string }[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [chatInput, setChatInput] = useState("")
+  const [currentPage, setCurrentPage] = useState(1)
+  const [vehicleInfoOpen, setVehicleInfoOpen] = useState<string | null>(null)
+  const vehiclesPerPage = 15
 
-  const [showAbout, setShowAbout] = useState(false);
-  const [showUpdates, setShowUpdates] = useState(false);
-  const [showCredits, setShowCredits] = useState(false);
+  const [showAbout, setShowAbout] = useState(false)
+  const [showUpdates, setShowUpdates] = useState(false)
+  const [showCredits, setShowCredits] = useState(false)
 
-  const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null);
-  const weaponsModalRef = useRef<HTMLDivElement>(null);
-  
-  // Sidebar state
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("battlepass");
-  const [expandedMonth, setExpandedMonth] = useState<number | null>(null);
-  
-  // Battle Pass state
-  const [battlePassOpen, setBattlePassOpen] = useState(false);
-  const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null);
+  const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
+  const weaponsModalRef = useRef<HTMLDivElement>(null)
   
   // Auto-scroll chat to bottom when messages change
   useEffect(() => {
@@ -8957,6 +8893,15 @@ const MwtVehicleStats = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [weaponsModalOpenId])
+  
+  // Sidebar state
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [activeTab, setActiveTab] = useState("battlepass")
+  const [expandedMonth, setExpandedMonth] = useState<number | null>(null)
+  
+  // Battle Pass state
+  const [battlePassOpen, setBattlePassOpen] = useState(false)
+  const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
 
   const types = [...new Set(VEHICLES.map((v) => v.type))]
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
@@ -9204,16 +9149,16 @@ const MwtVehicleStats = () => {
 
 
 
-  const getVehicleDetailedInfo = (vehicle: Vehicle) => {
+  const getVehicleDetailedInfo = (vehicle: any) => {
     const weaponsList = vehicle.weapons
-      .map((weapon: Weapon) => `${weapon.name}: ${weapon.damage} DMG, ${weapon.penetration} PEN, ${weapon.reload} REL`)
+      .map((weapon: any) => weapon.name + ": " + weapon.damage + " DMG, " + weapon.penetration + " PEN, " + weapon.reload + " REL")
 
       .join("\n")
 
     const modulesList = Object.entries(vehicle.modules || {})
       .map(
-        ([category, modules]: [string, Module[]]) =>
-          `${category}: ${Array.isArray(modules) ? modules.map((m: Module) => m.name).join(", ") : "N/A"}`,
+        ([category, modules]: [string, any]) =>
+          `${category}: ${Array.isArray(modules) ? modules.map((m: any) => m.name).join(", ") : "N/A"}`,
       )
       .join("\n")
 
@@ -9275,127 +9220,76 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     setExpandedVehicle(expandedVehicle === id ? "" : id)
   }
 
-  // Function to get vehicle information based on query
-  const getVehicleInfo = (query: string): any => {
-    const lowerQuery = query.toLowerCase();
+  const handleChatSubmit = () => {
+    if (!chatInput.trim()) return
 
-    // Vehicle analysis functions
-    const analyzeVehicles = {
-      fastestTank: () => VEHICLES.filter(v => v.type === "Tank").reduce((p, c) => (p.stats.speed > c.stats.speed ? p : c)),
-      strongestTank: () => VEHICLES.filter(v => v.type === "Tank").reduce((p, c) => (p.stats.health > c.stats.health ? p : c)),
-      fastestJet: () => VEHICLES.filter(v => v.type === "Fighter Jet").reduce((p, c) => ((p.stats.afterburnerSpeed || p.stats.speed) > (c.stats.afterburnerSpeed || c.stats.speed) ? p : c)),
-      strongestJet: () => VEHICLES.filter(v => v.type === "Fighter Jet").reduce((p, c) => (p.stats.health > c.stats.health ? p : c)),
-      fastestHelicopter: () => VEHICLES.filter(v => v.type === "Helicopter").reduce((p, c) => (p.stats.speed > c.stats.speed ? p : c)),
-      strongestHelicopter: () => VEHICLES.filter(v => v.type === "Helicopter").reduce((p, c) => (p.stats.health > c.stats.health ? p : c)),
-      mostArmoredVehicle: () => VEHICLES.filter(v => v.stats.armor).reduce((p, c) => (p.stats.armor > c.stats.armor ? p : c)),
-      mostAgileVehicle: () => VEHICLES.filter(v => v.stats.agility).reduce((p, c) => (p.stats.agility > c.stats.agility ? p : c)),
-      bestByNation: (nation: string) => {
-        const nationVehicles = VEHICLES.filter(v => v.faction.toLowerCase().includes(nation.toLowerCase()));
-        return nationVehicles.reduce((p, c) => (p.stats.health > c.stats.health ? p : c));
-      }
-    };
+    const userMessage = { role: "user", content: chatInput }
+    setChatMessages((prev) => [...prev, userMessage])
+    setIsLoading(true)
 
-    // Tier and nation listings
-    if (lowerQuery.includes("tier iv") || lowerQuery.includes("tier 4")) {
-      const tierVehicles = VEHICLES.filter((v) => v.tier === "Tier IV");
-      let response = `**Tier IV Combat Vehicles**\n`;
-      response += `${tierVehicles.length} cutting-edge platforms:\n\n`;
-      tierVehicles.forEach(v => {
-        response += `• ${v.name} (${v.faction} ${v.type}) - ${v.stats.health.toLocaleString()} HP\n`;
-      });
-      return response;
-    }
+    const getVehicleInfo = (query: string) => {
+      const lowerQuery = query.toLowerCase().trim()
 
-    // Help and default responses
-    if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
-
-  // Help and default responses
-  if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
-    return (
-      `**MWT AI Tactical Analysis System**\n\n` +
-      `I can help you analyze military vehicles. Here's what I can do:\n\n` +
-      `**Vehicle Analysis:**\n` +
-      `• Individual specs: "Su-57M"\n` +
-      `• Head-to-head comparisons: "T-14 vs Abrams X"\n\n` +
-      `**Performance Queries:**\n` +
-      `• Speed analysis: "Fastest tank"\n` +
-      `• Durability rankings: "Strongest jet"\n` +
-      `• Protection analysis: "Most armored vehicle"\n\n` +
-      `**Nation Analysis:**\n` +
-      `• Best by nation: "Best Russian vehicle"\n` +
-      `• Fleet listings: "American vehicles"\n\n` +
-      `**Data Insights:**\n` +
-      `• Tier breakdowns: "Tier IV vehicles"\n` +
-      `• Category listings: "Market vehicles"\n\n` +
-      `What would you like to analyze?`
-    );
-  }
-
-  // Default response
-  if (lowerQuery.includes("fastest jet") || lowerQuery.includes("fastest plane")) {
-    const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
-    const fastestJet = jets.reduce((prev, current) => 
-      (prev.stats.speed > current.stats.speed) ? prev : current
-    )
-    return `The fastest jet is the **${fastestJet.name}** with a top speed of **${fastestJet.stats.speed} km/h**.`
-  }
-
-  if (lowerQuery.includes("strongest jet") || lowerQuery.includes("toughest plane")) {
-    const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
-    const strongestJet = jets.reduce((prev, current) => 
-      (prev.stats.health > current.stats.health) ? prev : current
-    )
-    return `The most durable jet is the **${strongestJet.name}** with **${strongestJet.stats.health.toLocaleString()} HP**.`
-  }
-
-  if (lowerQuery.includes("fastest helicopter") || lowerQuery.includes("fastest heli")) {
-    const helicopters = VEHICLES.filter((v) => v.type === "Helicopter");
-    const fastestHeli = helicopters.reduce((prev, current) =>
-      (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current
-          (prev.stats.health > current.stats.health) ? prev : current
+      // Enhanced vehicle search with better matching
+      const searchVehicle = (name: string) => {
+        const cleanName = name.toLowerCase().replace(/[-\s]/g, "")
+        return VEHICLES.find(
+          (v) =>
+            v.name.toLowerCase().includes(name.toLowerCase()) ||
+            v.name.toLowerCase().replace(/[-\s]/g, "").includes(cleanName) ||
+            cleanName.includes(v.name.toLowerCase().replace(/[-\s]/g, "")),
         )
-        return `The most durable jet is the **${strongestJet.name}** with **${strongestJet.stats.health.toLocaleString()} HP**.`
       }
 
-     // Get fastest helicopter
-if (lowerQuery.includes("fastest helicopter") || lowerQuery.includes("fastest heli")) {
-  const helicopters = VEHICLES.filter((v) => v.type === "Helicopter");
-  const fastestHeli = helicopters.reduce((prev, current) =>
-    (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current
-  );
-  return `The fastest helicopter is the **${fastestHeli.name}** with a top speed of **${fastestHeli.stats.speed} km/h**.`;
-}
-
-// Additional vehicle stat helpers
-const vehicleStats = {
-  strongestHelicopter: () => {
-    const helicopters = VEHICLES.filter((v) => v.type === "helicopter");
-    return helicopters.reduce((prev, current) =>
-      (prev.stats.health || 0) > (current.stats.health || 0) ? prev : current
-    );
-  },
-
-  mostArmoredVehicle: () => {
-    return VEHICLES.filter((v) => v.stats.armor).reduce((prev, current) =>
-      (prev.stats.armor || 0) > (current.stats.armor || 0) ? prev : current
-    );
-  },
-
-  mostAgileVehicle: () => {
-    return VEHICLES.filter((v) => v.stats.agility).reduce((prev, current) =>
-      (prev.stats.agility || 0) > (current.stats.agility || 0) ? prev : current
-    );
-  },
-
-  bestByNation: (nation: string) => {
-    const nationVehicles = VEHICLES.filter((v) =>
-      v.faction.toLowerCase().includes(nation.toLowerCase())
-    );
-    return nationVehicles.reduce((prev, current) =>
-      (prev.stats.health || 0) > (current.stats.health || 0) ? prev : current
-    );
-  },
-};
+      // Advanced data analysis functions
+      const analyzeVehicles = {
+        fastestTank: () => {
+          const tanks = VEHICLES.filter((v) => v.type === "Tank")
+          return tanks.reduce((prev, current) =>
+            (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
+          )
+        },
+        strongestTank: () => {
+          const tanks = VEHICLES.filter((v) => v.type === "Tank")
+          return tanks.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
+        },
+        fastestJet: () => {
+          const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
+          return jets.reduce((prev, current) => {
+            const prevSpeed = prev.stats.afterburnerSpeed || prev.stats.speed || 0
+            const currentSpeed = current.stats.afterburnerSpeed || current.stats.speed || 0
+            return prevSpeed > currentSpeed ? prev : current
+          })
+        },
+        strongestJet: () => {
+          const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
+          return jets.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
+        },
+        fastestHelicopter: () => {
+          const helicopters = VEHICLES.filter((v) => v.type === "helicopter")
+          return helicopters.reduce((prev, current) =>
+            (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
+          )
+        },
+        strongestHelicopter: () => {
+          const helicopters = VEHICLES.filter((v) => v.type === "helicopter")
+          return helicopters.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
+        },
+        mostArmoredVehicle: () => {
+          return VEHICLES.filter((v) => v.stats.armor).reduce((prev, current) =>
+            (prev.stats.armor || 0) > (current.stats.armor || 0) ? prev : current,
+          )
+        },
+        mostAgileVehicle: () => {
+          return VEHICLES.filter((v) => v.stats.agility).reduce((prev, current) =>
+            (prev.stats.agility || 0) > (current.stats.agility || 0) ? prev : current,
+          )
+        },
+        bestByNation: (nation: string) => {
+          const nationVehicles = VEHICLES.filter((v) => v.faction.toLowerCase().includes(nation.toLowerCase()))
+          return nationVehicles.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
+        },
+      }
 
         // Sample vehicle data for testing
       const testVehicles = [
@@ -9502,7 +9396,7 @@ const vehicleStats = {
       }
 
       // Ranking function - use VEHICLES database structure
-      const rankVehicle = (vehicle: Vehicle): number => {
+      const rankVehicle = (vehicle: any) => {
         if (vehicle.type === "MBT") return (vehicle.stats.health || 0) + (vehicle.stats.armor || 0)
         if (vehicle.type === "Fighter Jet") return (vehicle.stats.speed || 0) + (vehicle.stats.agility || 0)
         if (vehicle.type === "Self-Propelled Howitzer") return (vehicle.stats.damage || vehicle.stats.health || 0) + (vehicle.stats.range || vehicle.stats.armor || 0)
@@ -9517,7 +9411,7 @@ const vehicleStats = {
         const vehicleData = VEHICLES
 
         // First try exact match with proper field mapping
-        let results = vehicleData.filter((v: Vehicle) => {
+        let results = vehicleData.filter((v: any) => {
           const countryMatch = !country || v.faction === country
           const tierMatch = !tier || v.tier === tier
           const roleMatch = !role || v.type === role
@@ -9647,7 +9541,7 @@ const vehicleStats = {
         })
       }
 
-      const getBestVehicle = (vehicles: Vehicle[], criteria: 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'sph_combined' = 'health') => {
+      const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'sph_combined' = 'health') => {
         if (vehicles.length === 0) return null
         
         return vehicles.reduce((best, current) => {
@@ -10100,63 +9994,75 @@ const vehicleStats = {
         })
         return response
       }
-// Help and default responses with clean formatting
-if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
+
+      // Help and default responses with clean formatting
+      if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
+        return `**MWT AI Tactical Analysis System**\n\n` +
+               `I can help you analyze military vehicles. Here's what I can do:\n\n` +
+               `**Vehicle Analysis:**\n` +
+               `• Individual specs: "Su-57M"\n` +
+               `• Head-to-head comparisons: "T-14 vs Abrams X"\n\n` +
+               `**Performance Queries:**\n` +
+               `• Speed analysis: "Fastest tank"\n` +
+               `• Durability rankings: "Strongest jet"\n` +
+               `• Protection analysis: "Most armored vehicle"\n\n` +
+               `**Nation Analysis:**\n` +
+               `• Best by nation: "Best Russian vehicle"\n` +
+               `• Fleet listings: "American vehicles"\n\n` +
+               `**Data Insights:**\n` +
+               `• Tier breakdowns: "Tier IV vehicles"\n` +
+               `• Category listings: "Market vehicles"\n\n` +
+               `What would you like to analyze?`
+      }
+
+      // Default response with clean formatting
+      return `**MWT AI Tactical Analysis System**\n\n` +
+             `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n` +
+             `**Try asking:**\n` +
+             `• "What's the fastest tank?" - Performance analysis\n` +
+             `• "Su-57M vs F-22" - Combat comparison\n` +
+             `• "Best Chinese vehicle" - Nation rankings\n` +
+             `• "Tier IV vehicles" - Category listings\n\n` +
+             `What would you like to analyze?`
+    }
+
+    setTimeout(() => {
+      const response = getVehicleInfo(chatInput)
+      const botMessage = { role: "assistant", content: response }
+      setChatMessages((prev) => [...prev, botMessage])
+      setIsLoading(false)
+      setChatInput("")
+    }, 1000)
+  }
+
   return (
-    `**MWT AI Tactical Analysis System**\n\n` +
-    `I can help you analyze military vehicles. Here's what I can do:\n\n` +
-    `**Vehicle Analysis:**\n` +
-    `• Individual specs: "Su-57M"\n` +
-    `• Head-to-head comparisons: "T-14 vs Abrams X"\n\n` +
-    `**Performance Queries:**\n` +
-    `• Speed analysis: "Fastest tank"\n` +
-    `• Durability rankings: "Strongest jet"\n` +
-    `• Protection analysis: "Most armored vehicle"\n\n` +
-    `**Nation Analysis:**\n` +
-    `• Best by nation: "Best Russian vehicle"\n` +
-    `• Fleet listings: "American vehicles"\n\n` +
-    `**Data Insights:**\n` +
-    `• Tier breakdowns: "Tier IV vehicles"\n` +
-    `• Category listings: "Market vehicles"\n\n` +
-    `What would you like to analyze?`
-  );
- if (!recognizedQuery) {
-  // Default response with clean formatting
-  return `**MWT AI Tactical Analysis System**\n\nI didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n`;
-}
-
-
-  <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-    {/* Battle Pass Tab - Fully Responsive */}
-    <button
-      onClick={() => setBattlePassOpen(!battlePassOpen)}
-      className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-purple-400 flex items-center justify-center min-h-[100px] min-w-[36px] sm:min-h-[120px] sm:min-w-[42px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r"
-    >
-      {/* Mobile: Compact icon + text */}
-      <div className="sm:hidden flex flex-col items-center justify-center px-2 py-3 text-white font-bold text-[10px] tracking-wide">
-        <svg className="w-4 h-4 mb-1" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z" />
-          <path d="M12 17L13.09 23.26L22 24L13.09 24.74L12 31L10.91 24.74L2 24L10.91 23.26L12 17Z" opacity="0.6" />
-        </svg>
-        <span className="text-center leading-tight">BP</span>
-      </div>
-
-      {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
-      <div
-        className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider
-                   sm:px-2 sm:py-4 sm:text-xs sm:ml-[-8px] sm:mr-[-8px]
-                   md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px]
-                   lg:px-3 lg:py-6 lg:text-base lg:ml-[-15px] lg:mr-[-12px]"
-        style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      {/* Battle Pass Tab - Fully Responsive */}
+      <button
+        onClick={() => setBattlePassOpen(!battlePassOpen)}
+        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-purple-400 flex items-center justify-center min-h-[100px] min-w-[36px] sm:min-h-[120px] sm:min-w-[42px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r"
       >
-        <span className="sm:block md:hidden">BATTLE<br/>PASS</span>
-        <span className="hidden md:block">BATTLE PASS</span>
-      </div>
-    </button>
-
-
-
-
+        {/* Mobile: Compact icon + text */}
+        <div className="sm:hidden flex flex-col items-center justify-center px-2 py-3 text-white font-bold text-[10px] tracking-wide">
+          <svg className="w-4 h-4 mb-1" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+            <path d="M12 17L13.09 23.26L22 24L13.09 24.74L12 31L10.91 24.74L2 24L10.91 23.26L12 17Z" opacity="0.6"/>
+          </svg>
+          <span className="text-center leading-tight">BP</span>
+        </div>
+        
+        {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
+        <div 
+          className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider
+                     sm:px-2 sm:py-4 sm:text-xs sm:ml-[-8px] sm:mr-[-8px]
+                     md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px]
+                     lg:px-3 lg:py-6 lg:text-base lg:ml-[-15px] lg:mr-[-12px]"
+          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+        >
+          <span className="sm:block md:hidden">BATTLE<br/>PASS</span>
+          <span className="hidden md:block">BATTLE PASS</span>
+        </div>
+      </button>
 
       {/* Battle Pass Panel */}
       <AnimatePresence>
@@ -10506,10 +10412,51 @@ if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
             </div>
 
             {(() => {
-              const vehicle1 = VEHICLES.find((v) => v.id.toString() === compare[0]);
-              const vehicle2 = VEHICLES.find((v) => v.id.toString() === compare[1]);
-              
+              const vehicle1 = VEHICLES.find((v) => v.id.toString() === compare[0])
+              const vehicle2 = VEHICLES.find((v) => v.id.toString() === compare[1])
               if (vehicle1 && vehicle2) {
+                const generateComparisonAnalysis = (vehicle1: any, vehicle2: any): string => {
+                  const healthWinner = vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name
+                  const speedWinner = vehicle1.stats.speed > vehicle2.stats.speed ? vehicle1.name : vehicle2.name
+                  const agilityWinner = vehicle1.stats.agility > vehicle2.stats.agility ? vehicle1.name : vehicle2.name
+
+                  let analysis = `🤖 AI TACTICAL ANALYSIS\n\n`
+
+                  // Performance comparison
+                  analysis += `PERFORMANCE OVERVIEW:\n`
+                  analysis += `• Survivability: ${healthWinner} dominates with ${healthWinner === vehicle1.name ? vehicle1.stats.health.toLocaleString() : vehicle2.stats.health.toLocaleString()} HP\n`
+                  analysis += `• Mobility: ${speedWinner} leads with ${speedWinner === vehicle1.name ? vehicle1.stats.speed : vehicle2.stats.speed} km/h\n`
+                  analysis += `• Maneuverability: ${agilityWinner} excels with ${agilityWinner === vehicle1.name ? vehicle1.stats.agility : vehicle2.stats.agility} agility\n\n`
+
+                  // Tactical analysis
+                  analysis += `TACTICAL ASSESSMENT:\n`
+                  if (vehicle1.type === vehicle2.type) {
+                    analysis += `Both are ${vehicle1.type}s, making this a direct role comparison. `
+                  } else {
+                    analysis += `Cross-role comparison: ${vehicle1.type} vs ${vehicle2.type}. `
+                  }
+
+                  // Tier analysis
+                  if (vehicle1.tier === vehicle2.tier) {
+                    analysis += `Same tier (${vehicle1.tier}) vehicles with balanced matchup potential.\n`
+                  } else {
+                    const higherTier = vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name
+                    analysis += `${higherTier} has tier advantage, expect superior technology and capabilities.\n`
+                  }
+
+                  // Weapon analysis
+                  analysis += `\nWEAPON SYSTEMS:\n`
+                  analysis += `• ${vehicle1.name}: ${vehicle1.weapons.length} weapon systems\n`
+                  analysis += `• ${vehicle2.name}: ${vehicle2.weapons.length} weapon systems\n`
+
+                  // Faction analysis
+                  if (vehicle1.faction !== vehicle2.faction) {
+                    analysis += `\nFACTION DOCTRINE:\n`
+                    analysis += `${vehicle1.faction} vs ${vehicle2.faction} represents different military philosophies and engineering approaches.`
+                  }
+
+                  return analysis
+                }
                 return (
                   <div className="mt-6 bg-slate-800/30 rounded-lg p-4 border border-cyan-500/20">
                     <h3 className="text-lg font-semibold text-cyan-400 mb-3 flex items-center gap-2">
@@ -10519,9 +10466,9 @@ if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
                       {generateComparisonAnalysis(vehicle1, vehicle2)}
                     </div>
                   </div>
-                );
+                )
               }
-              return null;
+              return null
             })()}
 
             <button
@@ -10557,8 +10504,6 @@ if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
         ? "hover:border-white-300 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
         : ""
     }`}
-    
-    
 >
   {/* Full border glow for Exclusive / Market / Construction (softer) */}
   {(isExclusiveVehicle(vehicle.name) || isMarketVehicle(vehicle.name) || isConstructionVehicle(vehicle.name)) && (
