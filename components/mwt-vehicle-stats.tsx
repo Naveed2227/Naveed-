@@ -9355,36 +9355,42 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         return `The most durable jet is the **${strongestJet.name}** with **${strongestJet.stats.health.toLocaleString()} HP**.`
       }
 
-      // Get fastest helicopter
-      if (lowerQuery.includes("fastest helicopter") || lowerQuery.includes("fastest heli")) {
-        const helicopters = VEHICLES.filter((v) => v.type === "Helicopter")
-        const fastestHeli = helicopters.reduce((prev, current) => 
-          (prev.stats.speed > current.stats.speed) ? prev : current
-        )
-        return `The fastest helicopter is the **${fastestHeli.name}** with a top speed of **${fastestHeli.stats.speed} km/h**.`
-      }
-            (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
-          )
-        },
-        strongestHelicopter: () => {
-          const helicopters = VEHICLES.filter((v) => v.type === "helicopter")
-          return helicopters.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
-        },
-        mostArmoredVehicle: () => {
-          return VEHICLES.filter((v) => v.stats.armor).reduce((prev, current) =>
-            (prev.stats.armor || 0) > (current.stats.armor || 0) ? prev : current,
-          )
-        },
-        mostAgileVehicle: () => {
-          return VEHICLES.filter((v) => v.stats.agility).reduce((prev, current) =>
-            (prev.stats.agility || 0) > (current.stats.agility || 0) ? prev : current,
-          )
-        },
-        bestByNation: (nation: string) => {
-          const nationVehicles = VEHICLES.filter((v) => v.faction.toLowerCase().includes(nation.toLowerCase()))
-          return nationVehicles.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
-        },
-      }
+     // Get fastest helicopter
+if (lowerQuery.includes("fastest helicopter") || lowerQuery.includes("fastest heli")) {
+  const helicopters = VEHICLES.filter((v) => v.type === "Helicopter");
+  const fastestHeli = helicopters.reduce((prev, current) =>
+    (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current
+  );
+  return `The fastest helicopter is the **${fastestHeli.name}** with a top speed of **${fastestHeli.stats.speed} km/h**.`;
+},
+
+strongestHelicopter: () => {
+  const helicopters = VEHICLES.filter((v) => v.type === "helicopter");
+  return helicopters.reduce((prev, current) =>
+    (prev.stats.health || 0) > (current.stats.health || 0) ? prev : current
+  );
+},
+
+mostArmoredVehicle: () => {
+  return VEHICLES.filter((v) => v.stats.armor).reduce((prev, current) =>
+    (prev.stats.armor || 0) > (current.stats.armor || 0) ? prev : current
+  );
+},
+
+mostAgileVehicle: () => {
+  return VEHICLES.filter((v) => v.stats.agility).reduce((prev, current) =>
+    (prev.stats.agility || 0) > (current.stats.agility || 0) ? prev : current
+  );
+},
+
+bestByNation: (nation: string) => {
+  const nationVehicles = VEHICLES.filter((v) =>
+    v.faction.toLowerCase().includes(nation.toLowerCase())
+  );
+  return nationVehicles.reduce((prev, current) =>
+    (prev.stats.health || 0) > (current.stats.health || 0) ? prev : current
+  );
+},
 
         // Sample vehicle data for testing
       const testVehicles = [
