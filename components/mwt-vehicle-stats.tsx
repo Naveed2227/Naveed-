@@ -10024,6 +10024,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
              `• "Tier IV vehicles" - Category listings\n\n` +
              `What would you like to analyze?`
     }
+  }
 
     setTimeout(() => {
       const response = getVehicleInfo(chatInput)
