@@ -9275,54 +9275,94 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     setExpandedVehicle(expandedVehicle === id ? "" : id)
   }
 
-  const handleChatSubmit = () => {
+  // Function to get vehicle information based on query
+  const getVehicleInfo = (query: string): string => {
+    const lowerQuery = query.toLowerCase()
+
+    // Check for specific queries
+    if (lowerQuery.includes("fastest") || lowerQuery.includes("fastest vehicle")) {
+      const fastest = VEHICLES.reduce((prev, current) => 
+        (prev.stats.speed > current.stats.speed) ? prev : current
+      )
+      return `The fastest vehicle is the **${fastest.name}** with a top speed of **${fastest.stats.speed} km/h**.`
+    }
+
+    if (lowerQuery.includes("strongest") || lowerQuery.includes("toughest")) {
+      const strongest = VEHICLES.reduce((prev, current) => 
+        (prev.stats.health > current.stats.health) ? prev : current
+      )
+      return `The most durable vehicle is the **${strongest.name}** with **${strongest.stats.health.toLocaleString()} HP**.`
+    }
+
+    // Default response
+    return `I'm an AI assistant for Modern War Thunder. I can help you find information about vehicles, compare stats, and more. Try asking about a specific vehicle or type 'help' for suggestions.`
+  }
+
+  const handleSendMessage = (e: React.FormEvent) => {
+    e.preventDefault()
     if (!chatInput.trim()) return
 
-    const userMessage = { role: "user", content: chatInput }
+    // Add user message to chat
+    const userMessage = { role: "user" as const, content: chatInput }
     setChatMessages((prev) => [...prev, userMessage])
     setIsLoading(true)
 
-    const getVehicleInfo = (query: string) => {
-      const lowerQuery = query.toLowerCase().trim()
+    // Simulate AI response after a short delay
+    setTimeout(() => {
+      try {
+        const response = getVehicleInfo(chatInput)
+        const botMessage = { 
+          role: "assistant" as const, 
+          content: response 
+        }
+        setChatMessages((prev) => [...prev, botMessage])
+      } catch (error) {
+        console.error('Error generating response:', error)
+        const errorMessage = { 
+          role: "assistant" as const, 
+          content: "I'm sorry, I encountered an error processing your request. Please try again." 
+        }
+        setChatMessages((prev) => [...prev, errorMessage])
+      } finally {
+        setIsLoading(false)
+        setChatInput("")
+      }
+    }, 1000)
+  }
 
-      // Enhanced vehicle search with better matching
-      const searchVehicle = (name: string) => {
-        const cleanName = name.toLowerCase().replace(/[-\s]/g, "")
-        return VEHICLES.find(
-          (v) =>
-            v.name.toLowerCase().includes(name.toLowerCase()) ||
-            v.name.toLowerCase().replace(/[-\s]/g, "").includes(cleanName) ||
-            cleanName.includes(v.name.toLowerCase().replace(/[-\s]/g, "")),
+    if (lowerQuery.includes("strongest") || lowerQuery.includes("toughest")) {
+      const strongest = VEHICLES.reduce((prev, current) => 
+        (prev.stats.health > current.stats.health) ? prev : current
+      )
+      return `The most durable vehicle is the **${strongest.name}** with **${strongest.stats.health.toLocaleString()} HP**.`
+    }
+
+      // Get fastest jet
+      if (lowerQuery.includes("fastest jet") || lowerQuery.includes("fastest plane")) {
+        const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
+        const fastestJet = jets.reduce((prev, current) => 
+          (prev.stats.speed > current.stats.speed) ? prev : current
         )
+        return `The fastest jet is the **${fastestJet.name}** with a top speed of **${fastestJet.stats.speed} km/h**.`
       }
 
-      // Advanced data analysis functions
-      const analyzeVehicles = {
-        fastestTank: () => {
-          const tanks = VEHICLES.filter((v) => v.type === "Tank")
-          return tanks.reduce((prev, current) =>
-            (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
-          )
-        },
-        strongestTank: () => {
-          const tanks = VEHICLES.filter((v) => v.type === "Tank")
-          return tanks.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
-        },
-        fastestJet: () => {
-          const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
-          return jets.reduce((prev, current) => {
-            const prevSpeed = prev.stats.afterburnerSpeed || prev.stats.speed || 0
-            const currentSpeed = current.stats.afterburnerSpeed || current.stats.speed || 0
-            return prevSpeed > currentSpeed ? prev : current
-          })
-        },
-        strongestJet: () => {
-          const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
-          return jets.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
-        },
-        fastestHelicopter: () => {
-          const helicopters = VEHICLES.filter((v) => v.type === "helicopter")
-          return helicopters.reduce((prev, current) =>
+      // Get strongest jet
+      if (lowerQuery.includes("strongest jet") || lowerQuery.includes("toughest plane")) {
+        const jets = VEHICLES.filter((v) => v.type === "Fighter Jet")
+        const strongestJet = jets.reduce((prev, current) => 
+          (prev.stats.health > current.stats.health) ? prev : current
+        )
+        return `The most durable jet is the **${strongestJet.name}** with **${strongestJet.stats.health.toLocaleString()} HP**.`
+      }
+
+      // Get fastest helicopter
+      if (lowerQuery.includes("fastest helicopter") || lowerQuery.includes("fastest heli")) {
+        const helicopters = VEHICLES.filter((v) => v.type === "Helicopter")
+        const fastestHeli = helicopters.reduce((prev, current) => 
+          (prev.stats.speed > current.stats.speed) ? prev : current
+        )
+        return `The fastest helicopter is the **${fastestHeli.name}** with a top speed of **${fastestHeli.stats.speed} km/h**.`
+      }
             (prev.stats.speed || 0) > (current.stats.speed || 0) ? prev : current,
           )
         },
@@ -10073,26 +10113,13 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       // Default response with clean formatting
       return `**MWT AI Tactical Analysis System**\n\n` +
              `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n` +
-             `**Try asking:**\n` +
-             `• "What's the fastest tank?" - Performance analysis\n` +
-             `• "Su-57M vs F-22" - Combat comparison\n` +
-             `• "Best Chinese vehicle" - Nation rankings\n` +
-             `• "Tier IV vehicles" - Category listings\n\n` +
-             `What would you like to analyze?`
     }
-  }
+  }, 1000)
+}
 
-    setTimeout(() => {
-      const response = getVehicleInfo(chatInput)
-      const botMessage = { role: "assistant", content: response }
-      setChatMessages((prev) => [...prev, botMessage])
-      setIsLoading(false)
-      setChatInput("")
-    }, 1000)
-  }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+return (
+  <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+  // ...
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
