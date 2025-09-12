@@ -10118,12 +10118,10 @@ const vehicleStats = {
                `• Category listings: "Market vehicles"\n\n` +
                `What would you like to analyze?`
       }
-
-      // Default response with clean formatting
-      return `**MWT AI Tactical Analysis System**\n\n` +
-             `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n` +
-    }
-  }, 1000)
+// Default response with clean formatting
+return `**MWT AI Tactical Analysis System**\n\n` +
+       `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n`;
+}, 1000);
 }
 
 return (
