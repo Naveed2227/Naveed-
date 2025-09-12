@@ -10225,6 +10225,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                             {vehicle.name.substring(0, 2)}
                                           </span>
                                         </div>
+                                         {/* Rarity Tag for Battle Pass */}
+                                        <div className="absolute top-1 left-1 z-20">
+                                          <div className={`px-1 py-0.5 rounded text-xs font-semibold shadow-lg ${getRarityColor(getVehicleRarity(vehicle.name))}`}>
+                                            {getVehicleRarity(vehicle.name)}
+                                          </div>
+                                        </div>
                                       </div>
                                       <div className="flex-1 min-w-0">
                                         <div className="text-sm font-semibold text-white truncate group-hover:text-purple-300 transition-colors">{vehicle.name}</div>
@@ -10611,9 +10617,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <span className="text-sm text-slate-400 font-semibold">({vehicle.faction})</span>
               </div>
 
-              {/* Vehicle Image Display */}
+               {/* Vehicle Image Display */}
               {vehicle.image && (
-                <div className="opacity-100 mb-4 flex-col pb-[-6px] pb-[-px] pb-[-6px]">
+                <div className="opacity-100 mb-4 flex-col pb-[-6px] pb-[-px] pb-[-6px] relative">
                   <img
                     src={vehicle.image}
                     alt={`${vehicle.name} vehicle`}
@@ -10622,6 +10628,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       e.currentTarget.style.display = 'none';
                     }}
                   />
+                  {/* Rarity Tag */}
+                  <div className="absolute top-2 left-2 z-20">
+                    <div className={`px-2 py-1 rounded text-xs font-semibold shadow-lg ${getRarityColor(getVehicleRarity(vehicle.name))}`}>
+                      {getVehicleRarity(vehicle.name)}
+                    </div>
+                  </div>
                 </div>
               )}
 
