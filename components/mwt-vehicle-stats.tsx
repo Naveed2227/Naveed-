@@ -10098,61 +10098,66 @@ const vehicleStats = {
         })
         return response
       }
-
-      // Help and default responses with clean formatting
-      if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
-        return `**MWT AI Tactical Analysis System**\n\n` +
-               `I can help you analyze military vehicles. Here's what I can do:\n\n` +
-               `**Vehicle Analysis:**\n` +
-               `• Individual specs: "Su-57M"\n` +
-               `• Head-to-head comparisons: "T-14 vs Abrams X"\n\n` +
-               `**Performance Queries:**\n` +
-               `• Speed analysis: "Fastest tank"\n` +
-               `• Durability rankings: "Strongest jet"\n` +
-               `• Protection analysis: "Most armored vehicle"\n\n` +
-               `**Nation Analysis:**\n` +
-               `• Best by nation: "Best Russian vehicle"\n` +
-               `• Fleet listings: "American vehicles"\n\n` +
-               `**Data Insights:**\n` +
-               `• Tier breakdowns: "Tier IV vehicles"\n` +
-               `• Category listings: "Market vehicles"\n\n` +
-               `What would you like to analyze?`
-      }
-// Default response with clean formatting
-return `**MWT AI Tactical Analysis System**\n\n` +
-       `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n`;
-}, 1000);
+// Help and default responses with clean formatting
+if (lowerQuery.includes("help") || lowerQuery.includes("what can you do")) {
+  return (
+    `**MWT AI Tactical Analysis System**\n\n` +
+    `I can help you analyze military vehicles. Here's what I can do:\n\n` +
+    `**Vehicle Analysis:**\n` +
+    `• Individual specs: "Su-57M"\n` +
+    `• Head-to-head comparisons: "T-14 vs Abrams X"\n\n` +
+    `**Performance Queries:**\n` +
+    `• Speed analysis: "Fastest tank"\n` +
+    `• Durability rankings: "Strongest jet"\n` +
+    `• Protection analysis: "Most armored vehicle"\n\n` +
+    `**Nation Analysis:**\n` +
+    `• Best by nation: "Best Russian vehicle"\n` +
+    `• Fleet listings: "American vehicles"\n\n` +
+    `**Data Insights:**\n` +
+    `• Tier breakdowns: "Tier IV vehicles"\n` +
+    `• Category listings: "Market vehicles"\n\n` +
+    `What would you like to analyze?`
+  );
 }
 
-return (
-  <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-  // ...
-      {/* Battle Pass Tab - Fully Responsive */}
-      <button
-        onClick={() => setBattlePassOpen(!battlePassOpen)}
-        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-purple-400 flex items-center justify-center min-h-[100px] min-w-[36px] sm:min-h-[120px] sm:min-w-[42px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r"
+    // Default response with clean formatting
+    return (
+      `**MWT AI Tactical Analysis System**\n\n` +
+      `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n`
+    );
+  }
+
+  // React component return
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    {/* Battle Pass Tab - Fully Responsive */}
+    <button
+      onClick={() => setBattlePassOpen(!battlePassOpen)}
+      className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-purple-400 flex items-center justify-center min-h-[100px] min-w-[36px] sm:min-h-[120px] sm:min-w-[42px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r"
+    >
+      {/* Mobile: Compact icon + text */}
+      <div className="sm:hidden flex flex-col items-center justify-center px-2 py-3 text-white font-bold text-[10px] tracking-wide">
+        <svg className="w-4 h-4 mb-1" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
+          <path d="M12 17L13.09 23.26L22 24L13.09 24.74L12 31L10.91 24.74L2 24L10.91 23.26L12 17Z" opacity="0.6"/>
+        </svg>
+        <span className="text-center leading-tight">BP</span>
+      </div>
+      
+      {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
+      <div 
+        className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider
+                   sm:px-2 sm:py-4 sm:text-xs sm:ml-[-8px] sm:mr-[-8px]
+                   md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px]
+                   lg:px-3 lg:py-6 lg:text-base lg:ml-[-15px] lg:mr-[-12px]"
+        style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
       >
-        {/* Mobile: Compact icon + text */}
-        <div className="sm:hidden flex flex-col items-center justify-center px-2 py-3 text-white font-bold text-[10px] tracking-wide">
-          <svg className="w-4 h-4 mb-1" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
-            <path d="M12 17L13.09 23.26L22 24L13.09 24.74L12 31L10.91 24.74L2 24L10.91 23.26L12 17Z" opacity="0.6"/>
-          </svg>
-          <span className="text-center leading-tight">BP</span>
-        </div>
-        
-        {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
-        <div 
-          className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider
-                     sm:px-2 sm:py-4 sm:text-xs sm:ml-[-8px] sm:mr-[-8px]
-                     md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px]
-                     lg:px-3 lg:py-6 lg:text-base lg:ml-[-15px] lg:mr-[-12px]"
-          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
-        >
-          <span className="sm:block md:hidden">BATTLE<br/>PASS</span>
-          <span className="hidden md:block">BATTLE PASS</span>
-        </div>
-      </button>
+        <span className="sm:block md:hidden">BATTLE<br/>PASS</span>
+        <span className="hidden md:block">BATTLE PASS</span>
+      </div>
+    </button>
+
+
 
       {/* Battle Pass Panel */}
       <AnimatePresence>
