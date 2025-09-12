@@ -110,6 +110,10 @@ const getVehicleRarity = (vehicleName: string) => {
 "MH-60L DAP",
 "Z-9G Harbin",
 "MH-6 Little Bird",
+"M1 Abrams",
+"M3A3 Bradley",
+"ZBL-08",
+"M110A2",
 
 
 
@@ -151,6 +155,13 @@ const getVehicleRarity = (vehicleName: string) => {
 "Z-11WB Changhe",
 "Z-20 Harbin",
 "AH-1Z Viper",
+"MBT-70",
+"PGZ-09",
+"HSTV-L",
+"XM8 AGS",
+"VBCI-2",
+"Centauro I 120",
+
 
 
 
@@ -195,6 +206,10 @@ const getVehicleRarity = (vehicleName: string) => {
 "T-95M",
 "M1 Abrams CATTB",
 "Leclerc S2 AZUR",
+"T-64BV",
+"M60A3 (MZK)",
+"Rookiat MTTD",
+"BMD3",
 
 
 
@@ -228,6 +243,9 @@ const getVehicleRarity = (vehicleName: string) => {
 "Karrar",
 "M1 Abrams Block 3",
 "Altay",
+"AMX-30 Super",
+"Type 75 MLRS",
+
 
 
 
