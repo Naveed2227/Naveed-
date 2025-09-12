@@ -10180,7 +10180,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
                     </button>
 
-                    {/* Expanded Vehicle List */}
+                   {/* Expanded Vehicle List */}
                     <AnimatePresence>
                       {selectedBattlePass === battlePass.id && (
                         <motion.div
@@ -10251,6 +10251,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 );
                               })}
                             </div>
+
                             
                             {/* Rewards Section */}
                             <div className="mt-4 pt-4 border-t border-slate-700/50">
@@ -10880,16 +10881,36 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
 
         {/* Chat Interface */}
-        {chatOpen && (
-          <div className="fixed bottom-4 right-4 h-96 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 w-[344px] sm:w-[400px] max-w-[90vw]">
-            <div className="flex items-center justify-between p-4 border-b border-slate-700">
-              <h3 className="font-semibold text-cyan-300">Vehicle Database Chat</h3>
-              <button onClick={() => setChatOpen(false)} className="text-slate-400 hover:text-white">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+       {chatOpen && (
+  <div className="fixed bofloat bottom-20 right-4 h-96 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 w-[344px] sm:w-[400px] max-w-[90vw] relative mx-0 mx-64 mx-72 mx-12 mx-3.5 mx-4 mx-3.5 mx-3 mx-px   <div className="flex items-center justify-between p-4 border-b border-slate-700">
+      <h3 className="font-semibold text-cyan-300">Vehicle Database Chat</h3>
+      <button onClick={() => setChatOpen(false)} className="text-slate-400 hover:text-white">
+        <X className="w-5 h-5" />
+      </button>
+    </div>
 
-            <div className="h-64 overflow-y-auto p-4 space-y-3">
+    <div 
+      ref={chatContainerRef}
+      className="flex-1 overflow-y-auto p-4 space-y-3"
+      onScroll={handleScroll}
+    >
+      {chatMessages.map((msg, index) => (
+        <div key={index} className={`${msg.role === "user" ? "text-right" : "text-left"}`}>
+          {/* Your existing message rendering */}
+        </div>
+      ))}
+    </div>
+
+    {/* Optionally add input box here */}
+  </div>
+)}
+
+
+            <div 
+              ref={chatContainerRef}
+              className="h-64 overflow-y-auto p-4 space-y-3"
+              onScroll={handleScroll}
+            >
               {chatMessages.map((msg, index) => (
                 <div key={index} className={`${msg.role === "user" ? "text-right" : "text-left"}`}>
                   <div className="text-xs text-slate-400 mb-1">{msg.role === "user" ? "You:" : "Database:"}</div>
@@ -11091,9 +11112,28 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
               ))}
               {isLoading && <div className="text-center text-slate-400">Thinking...</div>}
-              {/* Scroll target for auto-scrolling */}
-              <div ref={chatMessagesEndRef} />
+              <div ref={messagesEndRef} />
             </div>
+
+            {/* Floating Recent Message Button */}
+            <AnimatePresence>
+              {showRecentMessageButton && (
+                <div className="px-4 py-2 border-t border-slate-700 bg-slate-800/50">
+                  <motion.button
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    onClick={scrollToBottom}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md shadow-md flex items-center justify-center space-x-1.5 transition-all duration-200 text-xs font-medium border border-blue-500"
+                  >
+                    <span>New messages</span>
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </motion.button>
+                </div>
+              )}
+            </AnimatePresence>
 
             <div className="p-4 border-t border-slate-700">
               <div className="flex gap-2">
@@ -11335,34 +11375,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
                 </div>
               </div>
-
-
-
-
-            {/* Media Section */}
-     {/* Media Section */}
-<div className="mt-6">
-  <h3 className="text-xl font-bold text-cyan-400 mb-4">Media Supporters</h3>
-
-  {/* YouTube */}
-  <div className="mb-3">
-    <h4 className="text-xl font-bold text-cyan-400 mb-3">YouTubers:</h3>
-    <ul className="list-disc list-inside text-slate-400 text-sm space-y-2">
-      <li><span className="text-white font-bold text-xl">Mr.Hasori</span></li>
-    </ul>
-  </div>
-</div>
-
-
-    </div>
-  </div>
-)}
-
-
-
-
-
-
+            </div>
+          </div>
+        )}
 
         {/* Vehicle Info Modal */}
         {vehicleInfoOpen && (
@@ -11404,55 +11419,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               <div className="space-y-4">
                 {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon, index) => (
                   <div key={index} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="text-lg font-semibold text-cyan-300">{weapon.name}</h4>
-                      <div className="flex flex-col gap-1">
-                        {missileHasTags(weapon.name).map((tag, tagIndex) => (
-                          <div key={tagIndex} className="flex items-center gap-1 bg-slate-700/50 px-2 py-1 rounded text-xs">
-                            {tag === 'anti-flare' && (
-                              <>
-                                <div className="w-3 h-3 text-orange-400">
-                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                  </svg>
-                                </div>
-                                <span className="text-orange-400 font-medium">Anti-Flare</span>
-                              </>
-                            )}
-                            {tag === 'anti-warning' && (
-                              <>
-                                <div className="w-3 h-3 text-red-400">
-                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                  </svg>
-                                </div>
-                                <span className="text-red-400 font-medium">Anti-Warning</span>
-                              </>
-                            )}
-                            {tag === 'long-range' && (
-                              <>
-                                <div className="w-3 h-3 text-blue-400">
-                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-                                  </svg>
-                                </div>
-                                <span className="text-blue-400 font-medium">Long-Range</span>
-                              </>
-                            )}
-                            {tag === 'laser-guided' && (
-                              <>
-                                <div className="w-3 h-3 text-green-400">
-                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                    <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
-                                  </svg>
-                                </div>
-                                <span className="text-green-400 font-medium">Laser-Guided</span>
-                              </>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                    <h4 className="text-lg font-semibold text-cyan-300 mb-2">{weapon.name}</h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                       <div>
                         <span className="text-slate-400">Damage: </span>
