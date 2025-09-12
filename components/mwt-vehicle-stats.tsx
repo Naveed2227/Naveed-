@@ -9144,7 +9144,7 @@ const MwtVehicleStats = () => {
         
 
 ]
-    return exclusiveVehicles.includes(vehicleName)
+   return exclusiveVehicles.includes(vehicleName)
   }
 
 
@@ -10035,7 +10035,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     }, 1000)
   }
 
- return (
+  return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {/* Battle Pass Tab - Fully Responsive */}
       <button
@@ -10180,7 +10180,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
                     </button>
 
-                   {/* Expanded Vehicle List */}
+                    {/* Expanded Vehicle List */}
                     <AnimatePresence>
                       {selectedBattlePass === battlePass.id && (
                         <motion.div
@@ -10210,7 +10210,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                       <div className="bg-slate-600 rounded-lg overflow-hidden border border-slate-500 flex-shrink-0 group-hover:border-purple-400/50 transition-colors
                                                      h-16 w-24
                                                      sm:h-18 sm:w-28
-                                                     md:h-20 md:w-36 relative">
+                                                     md:h-20 md:w-36">
                                         <img 
                                           src={`${vehicle.image}`} 
                                           alt={vehicle.name}
@@ -10224,12 +10224,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                           <span className="text-xs font-bold text-cyan-400">
                                             {vehicle.name.substring(0, 2)}
                                           </span>
-                                        </div>
-                                        {/* Rarity Tag for Battle Pass */}
-                                        <div className="absolute top-1 left-1 z-20">
-                                          <div className={`px-1 py-0.5 rounded text-xs font-semibold shadow-lg ${getRarityColor(getVehicleRarity(vehicle.name))}`}>
-                                            {getVehicleRarity(vehicle.name)}
-                                          </div>
                                         </div>
                                       </div>
                                       <div className="flex-1 min-w-0">
@@ -10251,7 +10245,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 );
                               })}
                             </div>
-
                             
                             {/* Rewards Section */}
                             <div className="mt-4 pt-4 border-t border-slate-700/50">
@@ -10620,7 +10613,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
               {/* Vehicle Image Display */}
               {vehicle.image && (
-                <div className="opacity-100 mb-4 flex-col pb-[-6px] pb-[-px] pb-[-6px] relative">
+                <div className="opacity-100 mb-4 flex-col pb-[-6px] pb-[-px] pb-[-6px]">
                   <img
                     src={vehicle.image}
                     alt={`${vehicle.name} vehicle`}
@@ -10629,12 +10622,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       e.currentTarget.style.display = 'none';
                     }}
                   />
-                  {/* Rarity Tag */}
-                  <div className="absolute top-2 left-2 z-20">
-                    <div className={`px-2 py-1 rounded text-xs font-semibold shadow-lg ${getRarityColor(getVehicleRarity(vehicle.name))}`}>
-                      {getVehicleRarity(vehicle.name)}
-                    </div>
-                  </div>
                 </div>
               )}
 
@@ -10881,36 +10868,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
 
         {/* Chat Interface */}
-       {chatOpen && (
-  <div className="fixed bofloat bottom-20 right-4 h-96 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 w-[344px] sm:w-[400px] max-w-[90vw] relative mx-0 mx-64 mx-72 mx-12 mx-3.5 mx-4 mx-3.5 mx-3 mx-px   <div className="flex items-center justify-between p-4 border-b border-slate-700">
-      <h3 className="font-semibold text-cyan-300">Vehicle Database Chat</h3>
-      <button onClick={() => setChatOpen(false)} className="text-slate-400 hover:text-white">
-        <X className="w-5 h-5" />
-      </button>
-    </div>
+        {chatOpen && (
+          <div className="fixed bottom-4 right-4 h-96 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 w-[344px] sm:w-[400px] max-w-[90vw]">
+            <div className="flex items-center justify-between p-4 border-b border-slate-700">
+              <h3 className="font-semibold text-cyan-300">Vehicle Database Chat</h3>
+              <button onClick={() => setChatOpen(false)} className="text-slate-400 hover:text-white">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-    <div 
-      ref={chatContainerRef}
-      className="flex-1 overflow-y-auto p-4 space-y-3"
-      onScroll={handleScroll}
-    >
-      {chatMessages.map((msg, index) => (
-        <div key={index} className={`${msg.role === "user" ? "text-right" : "text-left"}`}>
-          {/* Your existing message rendering */}
-        </div>
-      ))}
-    </div>
-
-    {/* Optionally add input box here */}
-  </div>
-)}
-
-
-            <div 
-              ref={chatContainerRef}
-              className="h-64 overflow-y-auto p-4 space-y-3"
-              onScroll={handleScroll}
-            >
+            <div className="h-64 overflow-y-auto p-4 space-y-3">
               {chatMessages.map((msg, index) => (
                 <div key={index} className={`${msg.role === "user" ? "text-right" : "text-left"}`}>
                   <div className="text-xs text-slate-400 mb-1">{msg.role === "user" ? "You:" : "Database:"}</div>
@@ -11112,28 +11079,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
               ))}
               {isLoading && <div className="text-center text-slate-400">Thinking...</div>}
-              <div ref={messagesEndRef} />
             </div>
-
-            {/* Floating Recent Message Button */}
-            <AnimatePresence>
-              {showRecentMessageButton && (
-                <div className="px-4 py-2 border-t border-slate-700 bg-slate-800/50">
-                  <motion.button
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    onClick={scrollToBottom}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md shadow-md flex items-center justify-center space-x-1.5 transition-all duration-200 text-xs font-medium border border-blue-500"
-                  >
-                    <span>New messages</span>
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                    </svg>
-                  </motion.button>
-                </div>
-              )}
-            </AnimatePresence>
 
             <div className="p-4 border-t border-slate-700">
               <div className="flex gap-2">
