@@ -6,6 +6,62 @@ import { useRouter } from "next/navigation"
 
 
 
+// Types
+interface Weapon {
+  name: string;
+  type: string;
+  damage: number;
+  penetration: number;
+  reload: number;
+  rateOfFire?: string;
+  lockTime?: string;
+  tags?: string[];
+}
+
+interface Module {
+  name: string;
+  bonus: string;
+  category: string;
+}
+
+interface VehicleStats {
+  health?: number;
+  armor?: number;
+  agility?: number;
+  speed?: number;
+  range?: number;
+  damage?: number;
+  [key: string]: number | undefined;
+}
+
+interface Vehicle {
+  id: string | number;
+  name: string;
+  type: string;
+  tier: string | number;
+  faction: string;
+  stats: VehicleStats;
+  weapons: Weapon[];
+  modules?: Record<string, Module[]>;
+  isPremium?: boolean;
+  isMarket?: boolean;
+  description?: string;
+  image?: string;
+  thumbnail?: string;
+  [key: string]: any; // For any additional properties
+}
+
+interface VehicleFilters {
+  tier?: string | number;
+  role?: string;
+  nation?: string;
+  premium?: boolean;
+  market?: boolean;
+  [key: string]: any;
+}
+
+type VehicleCriteria = 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'sph_combined';
+
 // Roman numeral conversion utility
 const toRomanNumeral = (num: number | string): string => {
   let numValue = typeof num === 'string' ? parseInt(num) : num;
@@ -8628,7 +8684,7 @@ const VEHICLES = [
   }
 ];
 
-const getAircraftRole = (vehicle: any) => {
+const getAircraftRole = (vehicle: Vehicle): string | null => {
   if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== "Helicopter") return null
 
   // Check for helicopters first
@@ -8651,7 +8707,7 @@ const getAircraftRole = (vehicle: any) => {
 
   const weapons = vehicle.weapons || []
   const hasStealthWeapons = weapons.some(
-    (w: any) =>
+    (w: Weapon) =>
       w.name.includes("Kinzhal") ||
       w.name.includes("GROM") ||
       vehicle.name.includes("F-22") ||
@@ -8664,7 +8720,7 @@ const getAircraftRole = (vehicle: any) => {
   )
 
   const hasGroundAttackWeapons = weapons.some(
-    (w: any) =>
+    (w: Weapon) =>
       w.type.includes("Ground") ||
       w.type.includes("Bomb") ||
       w.name.includes("Maverick") ||
@@ -8677,7 +8733,7 @@ const getAircraftRole = (vehicle: any) => {
   )
 
   const hasInterceptorCharacteristics = weapons.some(
-    (w: any) =>
+    (w: Weapon) =>
       w.type.includes("AAM") ||
       w.name.includes("Phoenix") ||
       vehicle.name.includes("MiG-31") ||
@@ -8709,7 +8765,7 @@ const getAircraftRole = (vehicle: any) => {
     vehicle.name.includes("SB-1")
 
   const hasMultiRoleWeapons = weapons.some(
-    (w: any) => w.type.includes("Air-to-Ground") && weapons.some((w2: any) => w2.type.includes("AAM")),
+    (w: Weapon) => w.type.includes("Air-to-Ground") && weapons.some((w2: Weapon) => w2.type.includes("AAM")),
   )
 
   if (hasStealthWeapons) return "stealth"
@@ -8790,7 +8846,7 @@ const getFlagImage = (faction: string): string => {
   return flags[faction] || "/default-flag.png"
 }
 
-const generateComparisonAnalysis = (vehicle1: any, vehicle2: any): string => {
+const generateComparisonAnalysis = (vehicle1: Vehicle, vehicle2: Vehicle): string => {
   const healthWinner = vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name
   const speedWinner = vehicle1.stats.speed > vehicle2.stats.speed ? vehicle1.name : vehicle2.name
   const agilityWinner = vehicle1.stats.agility > vehicle2.stats.agility ? vehicle1.name : vehicle2.name
@@ -8901,15 +8957,6 @@ const MwtVehicleStats = () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [weaponsModalOpenId])
-  
-  // Sidebar state
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [activeTab, setActiveTab] = useState("battlepass")
-  const [expandedMonth, setExpandedMonth] = useState<number | null>(null)
-  
-  // Battle Pass state
-  const [battlePassOpen, setBattlePassOpen] = useState(false)
-  const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
 
   const types = [...new Set(VEHICLES.map((v) => v.type))]
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
@@ -9157,16 +9204,16 @@ const MwtVehicleStats = () => {
 
 
 
-  const getVehicleDetailedInfo = (vehicle: any) => {
+  const getVehicleDetailedInfo = (vehicle: Vehicle) => {
     const weaponsList = vehicle.weapons
-      .map((weapon: any) => weapon.name + ": " + weapon.damage + " DMG, " + weapon.penetration + " PEN, " + weapon.reload + " REL")
+      .map((weapon: Weapon) => `${weapon.name}: ${weapon.damage} DMG, ${weapon.penetration} PEN, ${weapon.reload} REL`)
 
       .join("\n")
 
     const modulesList = Object.entries(vehicle.modules || {})
       .map(
-        ([category, modules]: [string, any]) =>
-          `${category}: ${Array.isArray(modules) ? modules.map((m: any) => m.name).join(", ") : "N/A"}`,
+        ([category, modules]: [string, Module[]]) =>
+          `${category}: ${Array.isArray(modules) ? modules.map((m: Module) => m.name).join(", ") : "N/A"}`,
       )
       .join("\n")
 
@@ -9404,7 +9451,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       }
 
       // Ranking function - use VEHICLES database structure
-      const rankVehicle = (vehicle: any) => {
+      const rankVehicle = (vehicle: Vehicle): number => {
         if (vehicle.type === "MBT") return (vehicle.stats.health || 0) + (vehicle.stats.armor || 0)
         if (vehicle.type === "Fighter Jet") return (vehicle.stats.speed || 0) + (vehicle.stats.agility || 0)
         if (vehicle.type === "Self-Propelled Howitzer") return (vehicle.stats.damage || vehicle.stats.health || 0) + (vehicle.stats.range || vehicle.stats.armor || 0)
@@ -9419,7 +9466,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         const vehicleData = VEHICLES
 
         // First try exact match with proper field mapping
-        let results = vehicleData.filter((v: any) => {
+        let results = vehicleData.filter((v: Vehicle) => {
           const countryMatch = !country || v.faction === country
           const tierMatch = !tier || v.tier === tier
           const roleMatch = !role || v.type === role
@@ -9549,7 +9596,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         })
       }
 
-      const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'sph_combined' = 'health') => {
+      const getBestVehicle = (vehicles: Vehicle[], criteria: 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'sph_combined' = 'health') => {
         if (vehicles.length === 0) return null
         
         return vehicles.reduce((best, current) => {
@@ -10421,50 +10468,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             </div>
 
             {(() => {
-              const vehicle1 = VEHICLES.find((v) => v.id.toString() === compare[0])
-              const vehicle2 = VEHICLES.find((v) => v.id.toString() === compare[1])
+              const vehicle1 = VEHICLES.find((v) => v.id.toString() === compare[0]);
+              const vehicle2 = VEHICLES.find((v) => v.id.toString() === compare[1]);
+              
               if (vehicle1 && vehicle2) {
-                const healthWinner = vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name
-                const speedWinner = vehicle1.stats.speed > vehicle2.stats.speed ? vehicle1.name : vehicle2.name
-                const agilityWinner = vehicle1.stats.agility > vehicle2.stats.agility ? vehicle1.name : vehicle2.name
-
-                let analysis = `🤖 AI TACTICAL ANALYSIS\n\n`
-
-                // Performance comparison
-                analysis += `PERFORMANCE OVERVIEW:\n`
-                analysis += `• Survivability: ${healthWinner} dominates with ${healthWinner === vehicle1.name ? vehicle1.stats.health.toLocaleString() : vehicle2.stats.health.toLocaleString()} HP\n`
-                analysis += `• Mobility: ${speedWinner} leads with ${speedWinner === vehicle1.name ? vehicle1.stats.speed : vehicle2.stats.speed} km/h\n`
-                analysis += `• Maneuverability: ${agilityWinner} excels with ${agilityWinner === vehicle1.name ? vehicle1.stats.agility : vehicle2.stats.agility} agility\n\n`
-
-                  // Tactical analysis
-                  analysis += `TACTICAL ASSESSMENT:\n`
-                  if (vehicle1.type === vehicle2.type) {
-                    analysis += `Both are ${vehicle1.type}s, making this a direct role comparison. `
-                  } else {
-                    analysis += `Cross-role comparison: ${vehicle1.type} vs ${vehicle2.type}. `
-                  }
-
-                  // Tier analysis
-                  if (vehicle1.tier === vehicle2.tier) {
-                    analysis += `Same tier (${vehicle1.tier}) vehicles with balanced matchup potential.\n`
-                  } else {
-                    const higherTier = vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name
-                    analysis += `${higherTier} has tier advantage, expect superior technology and capabilities.\n`
-                  }
-
-                  // Weapon analysis
-                  analysis += `\nWEAPON SYSTEMS:\n`
-                  analysis += `• ${vehicle1.name}: ${vehicle1.weapons.length} weapon systems\n`
-                  analysis += `• ${vehicle2.name}: ${vehicle2.weapons.length} weapon systems\n`
-
-                  // Faction analysis
-                  if (vehicle1.faction !== vehicle2.faction) {
-                    analysis += `\nFACTION DOCTRINE:\n`
-                    analysis += `${vehicle1.faction} vs ${vehicle2.faction} represents different military philosophies and engineering approaches.`
-                  }
-
-                  return analysis
-                }
                 return (
                   <div className="mt-6 bg-slate-800/30 rounded-lg p-4 border border-cyan-500/20">
                     <h3 className="text-lg font-semibold text-cyan-400 mb-3 flex items-center gap-2">
@@ -10474,9 +10481,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       {generateComparisonAnalysis(vehicle1, vehicle2)}
                     </div>
                   </div>
-                )
+                );
               }
-              return null
+              return null;
             })()}
 
             <button
