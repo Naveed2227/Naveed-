@@ -10200,41 +10200,48 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       canvas.width = img.width;
       canvas.height = img.height;
       const ctx = canvas.getContext('2d');
-      ctx?.drawImage(img, 0, 0);
-      
-      // Convert to PNG and create download
-      const pngUrl = canvas.toDataURL('image/png');
-      link.href = pngUrl;
-      // Keep the original vehicle name but replace invalid filename characters with underscores
-      const safeName = vehicleName.replace(/[<>:"/\\|?*\x00-\x1F]/g, '_').replace(/\s+/g, ' ').trim();
-      link.download = `${safeName}.png`;
-      
-      // Append to body, click and remove
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      if (ctx) {
+        ctx.drawImage(img, 0, 0);
+        
+        // Convert to PNG and create download
+        const pngUrl = canvas.toDataURL('image/png');
+        link.href = pngUrl;
+        // Keep the original vehicle name but replace invalid filename characters with underscores
+        const safeName = vehicleName.replace(/[<>:"/\\|?*\x00-\x1F]/g, '_').replace(/\s+/g, ' ').trim();
+        link.download = `${safeName}.png`;
+        
+        // Append to body, click and remove
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
     };
 
-    // Set the source of the image to the original URL
-    img.src = imageUrl;
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 sm:p-6 relative">
-      <main>
-        {/* Main content here */}
-      </main>
-      
-      <AnimatePresence>
-        {isDetailModalOpen && selectedVehicle && (
-          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
-              className="bg-slate-800 rounded-lg max-w-[98vw] w-full max-h-[95vh] overflow-y-auto"
-            >
-              <div className="p-6">
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 sm:p-6 relative">
+        <main>
+          {/* Main content here */}
+        </main>
+        
+        <AnimatePresence>
+          {isDetailModalOpen && selectedVehicle && (
+            <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+              <motion.div 
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 50 }}
+                className="bg-slate-800 rounded-lg max-w-[98vw] w-full max-h-[95vh] overflow-y-auto"
+              >
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <div className="flex items-center gap-3 mb-1">
+                        <img
+                          src={getFlagImage(selectedVehicle.faction) || "/placeholder.svg"}
+                          alt={`${selectedVehicle.faction} flag`}
+                          className="w-8 h-6 object-cover rounded shadow-md"
+                        />
+                        <h2 className="text-2xl font-bold text-cyan-300">{selectedVehicle.name}</h2>
                 <div className="flex justify-between items-start mb-6">
                   <div>
                     <div className="flex items-center gap-3 mb-1">
