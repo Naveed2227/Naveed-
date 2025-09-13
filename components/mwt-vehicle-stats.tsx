@@ -104,7 +104,6 @@ const getVehicleRarity = (vehicleName: string) => {
 "Ka-52M",
 "Mi-35P Hind-F",
 "AH-64E Apache",
-"Mi-24 Super Hind",
 "Super Lynx Mk88A",
 "Z-9WA",
 "MH-60L DAP",
@@ -214,6 +213,7 @@ const getVehicleRarity = (vehicleName: string) => {
 
 
 
+
 ];
   const epicVehicles = [
 "Su-57 Felon",
@@ -245,6 +245,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Altay",
 "AMX-30 Super",
 "Type 75 MLRS",
+"Mi-24 Super Hind",
 
 
 
@@ -4365,13 +4366,25 @@ const VEHICLES = [
   tier: "III",
   image: "Mi-24-Super-Hind.jpg",
   description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
-  stats: { health: 26400, speed: 290, verticalSpeed: 60, agility: 60 },
+  stats: { health: 28100, speed: 335, verticalSpeed: 25, agility: 79 },
   weapons: [
-    { name: "9K121 Vikhr / 9K121 Vikhr-1", type: "ATGM", damage: 3200, penetration: 200 },
-    { name: "Ataka (where available)", type: "ATGM", damage: 3000, penetration: 180 },
-    { name: "Igla-V", type: "AAM (MANPADS)", damage: 1800, penetration: 90 },
-    { name: "S-8 / S-13 Rockets", type: "Rocket Pod", damage: 850, penetration: 55 },
-    { name: "23mm / 30mm Gun Pod", type: "Autocannon", damage: 180, penetration: 25 }
+    { name: "9K38 Igla-V", type: "AAM (MANPADS)", damage: 4076, penetration: 30, reload: 15 },
+    { name: "R-60", type: "AAM", damage: 4600, penetration: 36, reload: 10 },
+    { name: "DENEL ZT3 Ingwe", type: "Missile", damage: 10260, 
+    penetration: 220, reload: 25 },
+    { name: "S-24", type: "Missile", damage: 14600, 
+    penetration: 180, reload: 15 },
+    { name: "KAB-250", type: "Missile", damage: 14900, 
+    penetration: 130, reload: 25 },
+    { name: "9M120 Attack", type: "Missile", damage: 7500, 
+    penetration: 850, reload: 25 },
+    { name: "Attack ATGM", type: "Missile", damage: 7500, 
+    penetration: 850, reload: 30 },
+    { name: "UB-32-57", type: "Rocket Pod", damage: 3900, penetration: 55, reload: 20 },
+    { name: "B8v20", type: "Rocket Pod", damage: 5100, penetration: 420, reload: 20 },
+    { name: "B-13L", type: "Rocket Pod", damage: 11960, penetration: 160, reload: 40 },
+    { name: "20x139RD APDS", type: "Cannon", damage: 430, penetration: 107 },
+    { name: "20x139H HEI", type: "Cannon", damage: 200, penetration: 42 } 
   ],
   modules: {
     engine: [
@@ -9006,7 +9019,6 @@ const MwtVehicleStats = () => {
       "ХM8 AGS",
       "AMX-30 Super",
       "Type 75 MLRS",
-      "Mi-24 Super Hind",
       "Centauro I 120",
       "Strf 9040 BILL"
     ]
@@ -9016,125 +9028,150 @@ const MwtVehicleStats = () => {
 
 
   // Missile tagging system
-  const missileHasTags = (missileName: string) => {
-    const tags = []
-    
-    // Maintain specific order: Anti-Flare, Anti-Warning, Long-Range, Laser-guided
-    if (antiFlareMissiles.includes(missileName)) {
-      tags.push('anti-flare')
-    }
-    if (antiWarningMissiles.includes(missileName)) {
-      tags.push('anti-warning')
-    }
-    if (longRangeMissiles.includes(missileName)) {
-      tags.push('long-range')
-    }
-    if (laserGuidedMissiles.includes(missileName)) {
-      tags.push('laser-guided')
-    }
-    
-    return tags
+ const antiFlareMissiles = [
+  "Kh-47M2 Kinzhal",
+  "SAM Rokand",
+  "AIM-120",
+  "Naval Spike ER",
+  "Red Arrow",
+  "R-77",
+  "R-37",
+  "PL-15",
+  "AIM-54",
+  "R-40TD",
+  "R-93M",
+  "Storm Shadow",
+  "YJ-1000",
+  "KD-88",
+  "CM-102A",
+  "AGM-84H/K",
+  "9K38 Igla-V",
+  "R-60"
+];
+
+const antiWarningMissiles = [
+  "SAM Rokand",
+  "Kh-47M2 Kinzhal",
+  "AIM-120",
+  "AIM-9",
+  "AIM-132",
+  "AIM-7",
+  "AAM-3",
+  "AAM-4",
+  "AAM-5",
+  "AAM-6",
+  "R-73",
+  "R-60",
+  "R-27",
+  "R-37",
+  "R-93M",
+  "R-40TD",
+  "PL-2",
+  "PL-5",
+  "PL-7",
+  "PL-10",
+  "PL-12",
+  "PL-15",
+  "Type 90",
+  "9K38",
+  "Stinger",
+  "Fliegerfaust 2 Stinger",
+  "HJ-73",
+  "HJ-73B",
+  "HJ-9",
+  "9M14 Malyutka",
+  "9M117",
+  "9M120 Ataka",
+  "BGM-71A",
+  "BGM-71H",
+  "BGM-71C",
+  "BGM-71E",
+  "9K135 Kornet",
+  "SwitchBlade 300",
+  "Hero 120",
+  "LASER ATGM (ATGMs Laser)",
+  "ATGMs ARL",
+  "9K135",
+  "9M14",
+  "Denel ZT3 Ingwe"
+];
+
+const longRangeMissiles = [
+  "Kh-47M2 Kinzhal",
+  "Storm Shadow",
+  "R-37",
+  "PL-15",
+  "Kh-59M",
+  "Kh-69",
+  "AIM-54",
+  "KD-88",
+  "YJ-1000",
+  "CM-102A",
+  "AGM-84H/K",
+  "ASM-3",
+  "Kh-47M2",
+  "Kh-38ME",
+  "Kh-38MLE",
+  "S-24",
+  "KAB-250"
+];
+
+const laserGuidedMissiles = [
+  "Kh-47M2 Kinzhal",
+  "AIM-120",
+  "AGM-12B",
+  "TL-20",
+  "Kh-59M",
+  "Kh-23M",
+  "Kh-25MLE",
+  "9K121 Vikhr",
+  "Kh-38MLE",
+  "AGM-169",
+  "9M120 Ataka",
+  "Denel ZT3 Ingwe",
+  "KAB-250"
+];
+
+const rocketPods = [
+  "UB-32-57",
+  "B-8V20",
+  "B-13L",
+  "LAU-61",
+  "LAU-10 x3",
+  "Type 90",
+  "Type 130",
+  "LAU-51",
+  "LAU-51 x2",
+  "B8M1",
+  "B-13L",
+  "Type 90 x2",
+  "JLAU-3/A",
+  "C-13DF",
+];
+
+const missileHasTags = (missileName: string) => {
+  const tags = []
+
+  // Maintain specific order: Anti-Flare, Anti-Warning, Long-Range, Laser-guided, Rocket Pod
+  if (antiFlareMissiles.includes(missileName)) {
+    tags.push('anti-flare')
+  }
+  if (antiWarningMissiles.includes(missileName)) {
+    tags.push('anti-warning')
+  }
+  if (longRangeMissiles.includes(missileName)) {
+    tags.push('long-range')
+  }
+  if (laserGuidedMissiles.includes(missileName)) {
+    tags.push('laser-guided')
+  }
+  if (rocketPods.includes(missileName)) {
+    tags.push('rocket-pod')
   }
 
-  const antiFlareMissiles = [
-"Kh-47M2 Kinzhal",
-"SAM Rokand",
-"AIM-120",
-"Naval Spike ER",
-"Red Arrow",
-"R-77",
-"R-37",
-"PL-15",
-"AIM-54",
-"R-40TD",
-"R-93M",
-"Storm Shadow",
-"YJ-1000",
-"KD-88",
-"CM-102A",
-"AGM-84H/K"
+  return tags
+}
 
-  ]
-
-  const antiWarningMissiles = [
-"SAM Rokand",
-"Kh-47M2 Kinzhal",
-"AIM-120",
-"AIM-9",
-"AIM-132",
-"AIM-7",
-"AAM-3",
-"AAM-4",
-"AAM-5",
-"AAM-6",
-"R-73",
-"R-60",
-"R-27",
-"R-37",
-"R-93M",
-"R-40TD",
-"PL-2",
-"PL-5",
-"PL-7",
-"PL-10",
-"PL-12",
-"PL-15",
-"Type 90",
-"9K38",
-"Stinger",
-"Fliegerfaust 2 Stinger",
-"HJ-73",
-"HJ-73B",
-"HJ-9",
-"9M14 Malyutka",
-"9M117",
-"9M120 Ataka",
-"BGM-71A",
-"BGM-71H",
-"BGM-71C",
-"BGM-71E",
-"9K135 Kornet",
-"SwitchBlade 300",
-"Hero 120",
-"LASER ATGM (ATGMs Laser)",  
-"ATGMs ARL",                  
-"9K135",                     
-"9M14"
-
-  ]
-
-  const longRangeMissiles = [
-"Kh-47M2 Kinzhal",
-"Storm Shadow",
-"R-37",
-"PL-15",
-"Kh-59M",
-"Kh-69",
-"AIM-54",
-"KD-88",
-"YJ-1000",
-"CM-102A",
-"AGM-84H/K",
-"ASM-3",
-"Kh-47M2",
-"Kh-38ME",
-"Kh-38MLE"
-  ]
-
-  const laserGuidedMissiles = [
-"Kh-47M2 Kinzhal",
-"AIM-120",
-"AIM-120",
-"AGM-12B",
-"TL-20",
-"Kh-59M",
-"Kh-23M",
-"Kh-25MLE",
-"9K121 Vikhr",
-"Kh-38MLE",
-"AGM-169"
-
-  ]
 
   const isExclusiveVehicle = (vehicleName: string) => {
     const exclusiveVehicles = [
@@ -11463,7 +11500,66 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               <div className="space-y-4">
                 {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon, index) => (
                   <div key={index} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
-                    <h4 className="text-lg font-semibold text-cyan-300 mb-2">{weapon.name}</h4>
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="text-lg font-semibold text-cyan-300">{weapon.name}</h4>
+                      <div className="flex flex-col gap-1">
+                        {missileHasTags(weapon.name).map((tag, tagIndex) => (
+                          <div key={tagIndex} className="flex items-center gap-1 bg-slate-700/50 px-2 py-1 rounded text-xs">
+                            {tag === 'anti-flare' && (
+                              <>
+                                <div className="w-3 h-3 text-orange-400">
+                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                  </svg>
+                                </div>
+                                <span className="text-orange-400 font-medium">Anti-Flare</span>
+                              </>
+                            )}
+                            {tag === 'anti-warning' && (
+                              <>
+                                <div className="w-3 h-3 text-red-400">
+                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                  </svg>
+                                </div>
+                                <span className="text-red-400 font-medium">Anti-Warning</span>
+                              </>
+                            )}
+                            {tag === 'long-range' && (
+                              <>
+                                <div className="w-3 h-3 text-blue-400">
+                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                                  </svg>
+                                </div>
+                                <span className="text-blue-400 font-medium">Long-Range</span>
+                              </>
+                            )}
+                             {tag === 'rocket-pod' && (
+                              <>
+                                <div className="w-3 h-3 text-purple-400">
+                                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                   <path d="M12 2C11.45 2 11 2.45 11 3v9H5l7 7 7-7h-6V3c0-.55-.45-1-1-1z"/>
+                                 </svg>
+                                </div>
+                         
+                                <span className="text-purple-400 font-medium">Rocket-Pod</span>
+                              </>
+                            )}
+                            {tag === 'laser-guided' && (
+                              <>
+                                <div className="w-3 h-3 text-green-400">
+                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                    <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
+                                  </svg>
+                                </div>
+                                <span className="text-green-400 font-medium">Laser-Guided</span>
+                              </>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                       <div>
                         <span className="text-slate-400">Damage: </span>
