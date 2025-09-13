@@ -12048,10 +12048,18 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           </div>
         )}
       </main>
+      
+      {/* Add any missing closing tags here */}
+      {isDetailModalOpen && selectedVehicle && (
+        <AnimatePresence>
+          {/* Modal content here */}
+        </AnimatePresence>
+      )}
+      
+      {/* Add any other missing components */}
+      
     </div>
-  )
+  );
 }
-
-
 
 export default MwtVehicleStats;
