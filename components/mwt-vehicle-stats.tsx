@@ -10214,22 +10214,24 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       link.click();
       document.body.removeChild(link);
     };
-    
-    // Set the source of the image to the original URL
-  img.src = imageUrl;
-}; // ← ADD THIS CLOSING BRACE
 
-return (
-  <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 sm:p-6 relative">
-    <main>
-    {/* Detailed Vehicle Modal */}
-    <AnimatePresence>
-      {isDetailModalOpen && selectedVehicle && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
+    // Set the source of the image to the original URL
+    img.src = imageUrl;
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 sm:p-6 relative">
+      <main>
+        {/* Main content here */}
+      </main>
+      
+      <AnimatePresence>
+        {isDetailModalOpen && selectedVehicle && (
+          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
               className="bg-slate-800 rounded-lg max-w-[98vw] w-full max-h-[95vh] overflow-y-auto"
             >
               <div className="p-6">
