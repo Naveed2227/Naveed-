@@ -8927,7 +8927,6 @@ const MwtVehicleStats = () => {
   const [typeFilter, setTypeFilter] = useState("")
   const [tierFilter, setTierFilter] = useState("")
   const [countryFilter, setCountryFilter] = useState("")
-  const [selectedRarities, setSelectedRarities] = useState<string[]>([])
   const [compare, setCompare] = useState<string[]>([])
   const [expandedVehicle, setExpandedVehicle] = useState("")
   const comparisonRef = useRef<HTMLDivElement>(null)
@@ -8983,7 +8982,6 @@ const MwtVehicleStats = () => {
   const types = [...new Set(VEHICLES.map((v) => v.type))]
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
   const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
-  const rarities = ["Common", "Enhanced", "Rare", "Epic", "Legendary"]
 
   const isMarketVehicle = (vehicleName: string) => {
     const marketVehicles = [
@@ -9292,8 +9290,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     const matchesType = !typeFilter || vehicle.type === typeFilter
     const matchesTier = !tierFilter || formatTier(vehicle.tier) === tierFilter
     const matchesCountry = !countryFilter || vehicle.faction === countryFilter
-    const matchesRarity = selectedRarities.length === 0 || selectedRarities.includes(getVehicleRarity(vehicle.name))
-    return matchesSearch && matchesType && matchesTier && matchesCountry && matchesRarity
+    return matchesSearch && matchesType && matchesTier && matchesCountry
   })
 
   const indexOfLastVehicle = currentPage * vehiclesPerPage
@@ -10160,7 +10157,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
-              className="bg-slate-800 rounded-lg max-w-[98vw] w-full max-h-[95vh] overflow-y-auto"
+              className="bg-slate-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
             >
               <div className="p-6">
                 <div className="flex justify-between items-start mb-6">
@@ -10187,8 +10184,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                  {/* Specifications and Weapons - Left Columns */}
-                  <div className={selectedVehicle.image ? "lg:col-span-2" : "lg:col-span-3"}>
+                  <div className="lg:col-span-2">
                     <div className="bg-slate-900 rounded-lg p-4 mb-6">
                       <h3 className="text-lg font-semibold mb-4 text-cyan-300">Specifications</h3>
                       <div className="space-y-3">
@@ -10226,24 +10222,24 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     )}
                   </div>
 
-                  {/* Vehicle Image - Right Column */}
-                  {selectedVehicle.image && (
-                    <div className="lg:col-span-1">
+                  <div className="lg:col-span-1 space-y-6">
+                    {selectedVehicle.image && (
                       <div className="bg-slate-900 rounded-lg overflow-hidden">
                         <img 
                           src={selectedVehicle.image} 
                           alt={selectedVehicle.name}
-                          className="w-full h-auto object-cover max-h-[250px]"
+                          className="w-full h-auto object-cover"
                         />
                       </div>
-                      {selectedVehicle.description && (
-                        <div className="bg-slate-900 rounded-lg p-4 mt-4">
-                          <h3 className="text-lg font-semibold mb-3 text-cyan-300">Description</h3>
-                          <p className="text-slate-300">{selectedVehicle.description}</p>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                    )}
+                    
+                    {selectedVehicle.description && (
+                      <div className="bg-slate-900 rounded-lg p-4">
+                        <h3 className="text-lg font-semibold mb-3 text-cyan-300">Description</h3>
+                        <p className="text-slate-300">{selectedVehicle.description}</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -10567,40 +10563,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </option>
                     ))}
                   </select>
-                </div>
-
-                {/* Rarity Toggle Buttons */}
-                <div className="mt-4">
-                  <h3 className="text-sm font-medium text-slate-300 mb-2">Filter by Rarity:</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {rarities.map((rarity) => (
-                      <button
-                        key={rarity}
-                        onClick={() => {
-                          if (selectedRarities.includes(rarity)) {
-                            setSelectedRarities(selectedRarities.filter(r => r !== rarity))
-                          } else {
-                            setSelectedRarities([...selectedRarities, rarity])
-                          }
-                        }}
-                        className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-200 ${
-                          selectedRarities.includes(rarity)
-                            ? getRarityColor(rarity) + " ring-2 ring-white/50"
-                            : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                        }`}
-                      >
-                        {rarity}
-                      </button>
-                    ))}
-                    {selectedRarities.length > 0 && (
-                      <button
-                        onClick={() => setSelectedRarities([])}
-                        className="px-3 py-1 rounded-full text-xs font-semibold bg-red-600 text-white hover:bg-red-700 transition-colors"
-                      >
-                        Clear All
-                      </button>
-                    )}
-                  </div>
                 </div>
               </div>
             </div>
