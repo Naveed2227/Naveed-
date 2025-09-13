@@ -10135,10 +10135,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     }, 1000)
   }
 
-  // Function to handle opening the detailed view
+  // Function to handle opening the detailed view in a new tab
   const openVehicleDetails = (vehicle: any) => {
-    setSelectedVehicle(vehicle);
-    setIsDetailModalOpen(true);
+    // Encode the vehicle data to pass it in the URL
+    const vehicleData = encodeURIComponent(JSON.stringify(vehicle));
+    window.open(`/vehicle-details?data=${vehicleData}`, '_blank');
   };
 
   // Function to close the detailed view
