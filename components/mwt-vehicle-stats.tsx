@@ -10135,11 +10135,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     }, 1000)
   }
 
-  // Function to handle opening the detailed view in a new tab
+  // Function to handle opening the detailed view
   const openVehicleDetails = (vehicle: any) => {
-    // Encode the vehicle data to pass it in the URL
-    const vehicleData = encodeURIComponent(JSON.stringify(vehicle));
-    window.open(`/vehicle-details?data=${vehicleData}`, '_blank');
+    setSelectedVehicle(vehicle);
+    setIsDetailModalOpen(true);
   };
 
   // Function to close the detailed view
@@ -11722,6 +11721,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   )
 }
 
-get ai
+
 
 export default MwtVehicleStats;
