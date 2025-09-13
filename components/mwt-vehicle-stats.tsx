@@ -10221,6 +10221,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 sm:p-6 relative">
+      <main>
       {/* Detailed Vehicle Modal */}
       <AnimatePresence>
         {isDetailModalOpen && selectedVehicle && (
@@ -12049,15 +12050,106 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         )}
       </main>
       
-      {/* Add any missing closing tags here */}
-      {isDetailModalOpen && selectedVehicle && (
-        <AnimatePresence>
-          {/* Modal content here */}
-        </AnimatePresence>
-      )}
-      
-      {/* Add any other missing components */}
-      
+      <AnimatePresence>
+        {isDetailModalOpen && selectedVehicle && (
+          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              className="bg-slate-800 rounded-lg max-w-4xl w-full max-h-[95vh] overflow-y-auto"
+            >
+              <div className="p-6">
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <h2 className="text-2xl font-bold text-cyan-300">{selectedVehicle.name}</h2>
+                    <div className="flex items-center mt-2 space-x-4">
+                      <span className="px-3 py-1 bg-slate-700 rounded-full text-sm">
+                        {selectedVehicle.faction}
+                      </span>
+                      <span className="px-3 py-1 bg-slate-700 rounded-full text-sm">
+                        {selectedVehicle.type}
+                      </span>
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${getTierColor(selectedVehicle.tier)}`}>
+                        Tier {formatTier(selectedVehicle.tier)}
+                      </span>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={closeVehicleDetails}
+                    className="text-slate-400 hover:text-white p-1"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="relative">
+                    <img
+                      src={selectedVehicle.image}
+                      alt={selectedVehicle.name}
+                      className="w-full h-64 object-cover rounded-lg"
+                    />
+                    <div className="mt-4 flex justify-center space-x-2">
+                      <button
+                        onClick={() => handleDownloadImage(selectedVehicle.image, selectedVehicle.name)}
+                        className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-md text-sm font-medium transition-colors"
+                      >
+                        Download Image
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="bg-slate-800/50 p-4 rounded-lg">
+                      <h3 className="text-lg font-semibold text-cyan-300 mb-3">Vehicle Stats</h3>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <span className="text-slate-400">Health: </span>
+                          <span className="text-white font-medium">{selectedVehicle.health}</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-400">Speed: </span>
+                          <span className="text-white font-medium">{selectedVehicle.speed} km/h</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-400">Armor: </span>
+                          <span className="text-white font-medium">{selectedVehicle.armor || 'N/A'}</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-400">Agility: </span>
+                          <span className="text-white font-medium">{selectedVehicle.agility || 'N/A'}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {selectedVehicle.weapons && selectedVehicle.weapons.length > 0 && (
+                      <div className="bg-slate-800/50 p-4 rounded-lg">
+                        <h3 className="text-lg font-semibold text-cyan-300 mb-3">Weapons</h3>
+                        <div className="space-y-3">
+                          {selectedVehicle.weapons.map((weapon, index) => (
+                            <div key={index} className="bg-slate-700/50 p-3 rounded">
+                              <h4 className="font-medium text-white">{weapon.name}</h4>
+                              <div className="grid grid-cols-2 gap-2 mt-2 text-sm">
+                                <div>Damage: <span className="text-cyan-300">{weapon.damage}</span></div>
+                                <div>Penetration: <span className="text-cyan-300">{weapon.penetration}</span></div>
+                                <div>Reload: <span className="text-cyan-300">{weapon.reload}s</span></div>
+                                {weapon.rateOfFire && (
+                                  <div>Rate of Fire: <span className="text-cyan-300">{weapon.rateOfFire} rpm</span></div>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
