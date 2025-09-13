@@ -8933,7 +8933,7 @@ const MwtVehicleStats = () => {
   const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
   const weaponsModalRef = useRef<HTMLDivElement>(null)
   
-  // Auto-scroll chat to bottom when messages change
+   // Auto-scroll chat to bottom when messages change
   useEffect(() => {
     chatMessagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatMessages]);
@@ -11152,6 +11152,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
               ))}
               {isLoading && <div className="text-center text-slate-400">Thinking...</div>}
+              {/* Scroll target for auto-scrolling */}
+              <div ref={chatMessagesEndRef} />
             </div>
 
             <div className="p-4 border-t border-slate-700">
