@@ -11308,99 +11308,117 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   
 
          {showCredits && (
-          <div className="fixed inset-0 flex justify-center z-50 items-center opacity-100 bg-[rgba(0,0,0,0.4655797066895858)]">
-            <div className="bg-slate-900 p-6 rounded-lg max-w-4xl mx-4 max-h-[80vh] overflow-y-auto h-full px-6 w-full opacity-100">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-bold text-cyan-400">Credits</h3>
-                <button onClick={() => setShowCredits(false)} className="text-slate-400 hover:text-white text-2xl">
-                  ✕
-                </button>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                <div>
-                  <h4 className="text-white font-semibold">Naveed2227</h4>
-                  <p className="text-slate-400 text-sm">Lead developer and creator</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Hoffman Derpin</h4>
-                  <p className="text-slate-400 text-sm">Supporter,Writer</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Spector404</h4>
-                  <p className="text-slate-400 text-sm">Supporter,Writer</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Unnamed</h4>
-                  <p className="text-slate-400 text-sm">Suggester</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Hollyninja456</h4>
-                  <p className="text-slate-400 text-sm">Writer, Supporter</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Flarakrad</h4>
-                  <p className="text-slate-400 text-sm">Contributer</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Yeti</h4>
-                  <p className="text-slate-400 text-sm">Yeti</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Yx190</h4>
-                  <p className="text-slate-400 text-sm">Supporter, Writer</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">QWE</h4>
-                  <p className="text-slate-400 text-sm">Server Moderator, Supporter, Coordinator</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">OberstLeutnantFerid</h4>
-                  <p className="text-slate-400 text-sm">Militarist Officer</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Top Gun</h4>
-                  <p className="text-slate-400 text-sm">Server Moderator, supporter, Coordinator</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">White Windu</h4>
-                  <p className="text-slate-400 text-sm">Adviser, Coordination Manager</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Shiroko_Chan</h4>
-                  <p className="text-slate-400 text-sm">Server Moderator, Supporter, Iwak</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Eidolon X</h4>
-                  <p className="text-slate-400 text-sm">Adviser, Lurks</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Nesli27</h4>
-                  <p className="text-slate-400 text-sm">Supporter</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold"> 枕頭 </h4>
-                  <p className="text-slate-400 text-sm">Supporter</p>
-                </div>
-                 <div>
-                  <h4 className="text-white font-semibold">VIPER2729</h4>
-                  <p className="text-slate-400 text-sm">Supporter</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">THE DAWN</h4>
-                  <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">白叔</h4>
-                  <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
-                </div>
-              </div>
-           
-  
+  <div className="fixed inset-0 flex justify-center z-50 items-center opacity-100 bg-[rgba(0,0,0,0.4655797066895858)]">
+    <div className="bg-slate-900 p-6 rounded-lg max-w-4xl mx-4 max-h-[80vh] overflow-y-auto h-full px-6 w-full opacity-100">
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-xl font-bold text-cyan-400">Credits</h3>
+        <button
+          onClick={() => setShowCredits(false)}
+          className="text-slate-400 hover:text-white text-2xl"
+        >
+          ✕
+        </button>
+      </div>
+
+      {/* Original Credits Section */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10">
+        <div>
+          <h4 className="text-white font-semibold">Naveed2227</h4>
+          <p className="text-slate-400 text-sm">Lead developer and creator</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Hoffman Derpin</h4>
+          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Spector404</h4>
+          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Unnamed</h4>
+          <p className="text-slate-400 text-sm">Suggester</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Hollyninja456</h4>
+          <p className="text-slate-400 text-sm">Writer, Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Flarakrad</h4>
+          <p className="text-slate-400 text-sm">Contributer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Yeti</h4>
+          <p className="text-slate-400 text-sm">Yeti</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Yx190</h4>
+          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">QWE</h4>
+          <p className="text-slate-400 text-sm">Server Moderator, Supporter, Coordinator</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">OberstLeutnantFerid</h4>
+          <p className="text-slate-400 text-sm">Militarist Officer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Top Gun</h4>
+          <p className="text-slate-400 text-sm">Server Moderator, Supporter, Coordinator</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">White Windu</h4>
+          <p className="text-slate-400 text-sm">Adviser, Coordination Manager</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Shiroko_Chan</h4>
+          <p className="text-slate-400 text-sm">Server Moderator, Supporter, Iwak</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Eidolon X</h4>
+          <p className="text-slate-400 text-sm">Adviser, Lurks</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Nesli27</h4>
+          <p className="text-slate-400 text-sm">Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">枕頭</h4>
+          <p className="text-slate-400 text-sm">Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">VIPER2729</h4>
+          <p className="text-slate-400 text-sm">Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">THE DAWN</h4>
+          <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">白叔</h4>
+          <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
+        </div>
+      </div>
+
+      {/* Media Members Section */}
+      <div className="mb-6">
+        <h3 className="text-xl font-bold text-cyan-400 mb-4">Media supporters</h3>
+
+        <h4 className="text-lg font-bold text-cyan-200 mb-2"></h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div>
+            <h4 className="text-white font-semibold">Mr.Hasori</h4>
+            <p className="text-slate-400 text-sm">YouTube Content Creator</p>
+          </div>
+          <div>
+            <h4 className="text-white font-semibold">QWE</h4>
+            <p className="text-slate-400 text-sm">Promotional Designer</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
-
-
-    
 )}
 
         {/* Vehicle Info Modal */}
