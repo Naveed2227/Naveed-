@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Eye } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 // Roman numeral conversion utility
@@ -8975,7 +8975,9 @@ const MwtVehicleStats = () => {
   
   // Battle Pass state
   const [battlePassOpen, setBattlePassOpen] = useState(false)
-  const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
+    const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
+  const [selectedVehicle, setSelectedVehicle] = useState<any>(null)
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
 
   const types = [...new Set(VEHICLES.map((v) => v.type))]
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
@@ -10133,8 +10135,138 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     }, 1000)
   }
 
+  // Function to handle opening the detailed view
+  const openVehicleDetails = (vehicle: any) => {
+    setSelectedVehicle(vehicle);
+    setIsDetailModalOpen(true);
+  };
+
+  // Function to close the detailed view
+  const closeVehicleDetails = () => {
+    setIsDetailModalOpen(false);
+    setSelectedVehicle(null);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 sm:p-6 relative">
+      {/* Detailed Vehicle Modal */}
+      <AnimatePresence>
+        {isDetailModalOpen && selectedVehicle && (
+          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              className="bg-slate-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            >
+              <div className="p-6">
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <h2 className="text-2xl font-bold text-cyan-300">{selectedVehicle.name}</h2>
+                    <div className="flex items-center mt-2 space-x-4">
+                      <span className="px-3 py-1 bg-slate-700 rounded-full text-sm">
+                        {selectedVehicle.faction}
+                      </span>
+                      <span className="px-3 py-1 bg-slate-700 rounded-full text-sm">
+                        {selectedVehicle.type}
+                      </span>
+                      <span className={`px-3 py-1 rounded-full text-sm ${getTierColor(selectedVehicle.tier)}`}>
+                        Tier {formatTier(selectedVehicle.tier)}
+                      </span>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={closeVehicleDetails}
+                    className="p-2 rounded-full hover:bg-slate-700 transition-colors"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <div className="bg-slate-900 rounded-lg p-4 mb-6">
+                      <h3 className="text-lg font-semibold mb-4 text-cyan-300">Specifications</h3>
+                      <div className="space-y-3">
+                        {Object.entries(selectedVehicle.stats || {}).map(([key, value]) => (
+                          <div key={key} className="flex justify-between py-2 border-b border-slate-700">
+                            <span className="text-slate-300 capitalize">{key.replace(/_/g, ' ')}</span>
+                            <span className="font-medium">{String(value)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {selectedVehicle.weapons && selectedVehicle.weapons.length > 0 && (
+                      <div className="bg-slate-900 rounded-lg p-4">
+                        <h3 className="text-lg font-semibold mb-4 text-cyan-300">Weapons</h3>
+                        <div className="space-y-4">
+                          {selectedVehicle.weapons.map((weapon: any, idx: number) => (
+                            <div key={idx} className="bg-slate-800/50 rounded-lg p-4">
+                              <h4 className="font-medium text-cyan-200">{weapon.name}</h4>
+                              <div className="grid grid-cols-2 gap-2 mt-2 text-sm">
+                                {Object.entries(weapon).filter(([key]) => !['name', 'description'].includes(key)).map(([key, value]) => (
+                                  <div key={key} className="flex justify-between">
+                                    <span className="text-slate-400 capitalize">{key.replace(/_/g, ' ')}:</span>
+                                    <span className="text-slate-200">{String(value)}</span>
+                                  </div>
+                                ))}
+                              </div>
+                              {weapon.description && (
+                                <p className="mt-2 text-sm text-slate-400">{weapon.description}</p>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    {selectedVehicle.description && (
+                      <div className="bg-slate-900 rounded-lg p-4 mb-6">
+                        <h3 className="text-lg font-semibold mb-3 text-cyan-300">Description</h3>
+                        <p className="text-slate-300">{selectedVehicle.description}</p>
+                      </div>
+                    )}
+
+                    {selectedVehicle.modules && Object.keys(selectedVehicle.modules).length > 0 && (
+                      <div className="bg-slate-900 rounded-lg p-4">
+                        <h3 className="text-lg font-semibold mb-4 text-cyan-300">Upgrade Modules</h3>
+                        <div className="space-y-4">
+                          {Object.entries(selectedVehicle.modules).map(([category, modules]: [string, any]) => (
+                            <div key={category}>
+                              <h4 className="font-medium text-cyan-200 mb-2 capitalize">{category.replace(/_/g, ' ')}</h4>
+                              <div className="space-y-2">
+                                {modules.map((module: any, idx: number) => (
+                                  <div key={idx} className="bg-slate-800/50 rounded p-3">
+                                    <div className="font-medium">{module.name}</div>
+                                    {module.effects && (
+                                      <ul className="mt-1 text-sm text-slate-300 space-y-1">
+                                        {module.effects.map((effect: string, i: number) => (
+                                          <li key={i} className="flex items-start">
+                                            <span className="text-green-400 mr-2">•</span>
+                                            <span>{effect}</span>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
@@ -10784,39 +10916,52 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
               </div>
 
-              <div className="flex gap-2 mb-3">
-                <button
-                  onClick={() => toggleCompare(vehicle.id.toString())}
-                  disabled={compare.length >= 2 && !compare.includes(vehicle.id.toString())}
-                  className={`flex-1 text-sm rounded transition-colors tabular-nums px-5 py-4 font-bold ${
-                    compare.includes(vehicle.id.toString())
-                      ? "bg-cyan-600 text-white"
-                      : compare.length >= 2
-                        ? "bg-slate-600 text-slate-400 cursor-not-allowed"
-                        : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                  }`}
-                >
-                  {compare.includes(vehicle.id.toString()) ? "✓ Compare" : "Compare"}
-                </button>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setWeaponsModalOpenId(vehicle.id.toString())
-                  }}
-                  className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-semibold rounded transition-colors"
+<div className="flex flex-col gap-3 w-full">
+                <div className="flex items-center gap-3 w-full">
+                  <button 
+                    onClick={() => openVehicleDetails(vehicle)}
+                    className="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white py-2 px-4 rounded-md text-base font-medium transition-colors"
+                  >
+                    View Details
+                  </button>
+                  <button
+                    onClick={() => setVehicleInfoOpen(vehicle.id.toString())}
+                    className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-cyan-600/20 hover:bg-cyan-600/30 rounded-full transition-colors"
+                    title="Get AI Analysis"
+                  >
+                    <Bot className="text-sky-300 hover:text-cyan-300 w-5 h-5" />
+                  </button>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-3 w-full">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      if (compare.includes(vehicle.id.toString())) {
+                        setCompare(compare.filter((id) => id !== vehicle.id.toString()))
+                      } else if (compare.length < 2) {
+                        setCompare([...compare, vehicle.id.toString()])
+                      }
+                    }}
+                    disabled={!compare.includes(vehicle.id.toString()) && compare.length >= 2}
+                    className={`text-base rounded-md transition-colors tabular-nums px-4 py-2 font-medium ${
+                      compare.includes(vehicle.id.toString())
+                        ? "bg-cyan-600 text-white"
+                        : compare.length >= 2
+                          ? "bg-slate-600 text-slate-400 cursor-not-allowed"
+                          : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                    }`}
+                  >
+                    {compare.includes(vehicle.id.toString()) ? "✓ Compare" : "Compare"}
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setWeaponsModalOpenId(vehicle.id.toString())
+                    }}
+                    className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white text-base font-medium rounded-md transition-colors"
                 >
                   Weapons
-                </button>
-
-                <button
-                  onClick={() => setVehicleInfoOpen(vehicle.id.toString())}
-                  className="p-2 bg-cyan-600/20 hover:bg-cyan-600/30 rounded-full transition-colors group"
-                  title="Get AI Analysis"
-                >
-                  <Bot className="group-hover:text-cyan-300 text-sky-300 w-[30px] h-[30px]" />
                 </button>
               </div>
 
@@ -11218,10 +11363,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         {!chatOpen && (
           <button
             onClick={() => setChatOpen(true)}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 p-3 sm:p-4 bg-cyan-600 hover:bg-cyan-700 text-white rounded-full shadow-lg transition-colors z-40"
+            className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 z-40 flex items-center justify-center"
           >
-            <BotMessageSquareIcon className="h-6 w-6 sm:h-8 sm:w-8" />
-            <span className="hidden sm:inline ml-2">Ask AI</span>
+            <Bot className="w-6 h-6" />
           </button>
         )}
 
@@ -11597,6 +11741,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   )
 }
 
-
+get ai
 
 export default MwtVehicleStats;
