@@ -10135,10 +10135,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     }, 1000)
   }
 
-  // Function to handle opening the detailed view
+  // Function to handle opening the detailed view in a new tab
   const openVehicleDetails = (vehicle: any) => {
-    setSelectedVehicle(vehicle);
-    setIsDetailModalOpen(true);
+    // Encode the vehicle data to pass it in the URL
+    const vehicleData = encodeURIComponent(JSON.stringify(vehicle));
+    window.open(`/vehicle-details?data=${vehicleData}`, '_blank');
   };
 
   // Function to close the detailed view
@@ -10183,8 +10184,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                  <div className="lg:col-span-2">
                     <div className="bg-slate-900 rounded-lg p-4 mb-6">
                       <h3 className="text-lg font-semibold mb-4 text-cyan-300">Specifications</h3>
                       <div className="space-y-3">
@@ -10222,41 +10223,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     )}
                   </div>
 
-                  <div>
-                    {selectedVehicle.description && (
-                      <div className="bg-slate-900 rounded-lg p-4 mb-6">
-                        <h3 className="text-lg font-semibold mb-3 text-cyan-300">Description</h3>
-                        <p className="text-slate-300">{selectedVehicle.description}</p>
+                  <div className="lg:col-span-1 space-y-6">
+                    {selectedVehicle.image && (
+                      <div className="bg-slate-900 rounded-lg overflow-hidden">
+                        <img 
+                          src={selectedVehicle.image} 
+                          alt={selectedVehicle.name}
+                          className="w-full h-auto object-cover"
+                        />
                       </div>
                     )}
-
-                    {selectedVehicle.modules && Object.keys(selectedVehicle.modules).length > 0 && (
+                    
+                    {selectedVehicle.description && (
                       <div className="bg-slate-900 rounded-lg p-4">
-                        <h3 className="text-lg font-semibold mb-4 text-cyan-300">Upgrade Modules</h3>
-                        <div className="space-y-4">
-                          {Object.entries(selectedVehicle.modules).map(([category, modules]: [string, any]) => (
-                            <div key={category}>
-                              <h4 className="font-medium text-cyan-200 mb-2 capitalize">{category.replace(/_/g, ' ')}</h4>
-                              <div className="space-y-2">
-                                {modules.map((module: any, idx: number) => (
-                                  <div key={idx} className="bg-slate-800/50 rounded p-3">
-                                    <div className="font-medium">{module.name}</div>
-                                    {module.effects && (
-                                      <ul className="mt-1 text-sm text-slate-300 space-y-1">
-                                        {module.effects.map((effect: string, i: number) => (
-                                          <li key={i} className="flex items-start">
-                                            <span className="text-green-400 mr-2">•</span>
-                                            <span>{effect}</span>
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    )}
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
+                        <h3 className="text-lg font-semibold mb-3 text-cyan-300">Description</h3>
+                        <p className="text-slate-300">{selectedVehicle.description}</p>
                       </div>
                     )}
                   </div>
