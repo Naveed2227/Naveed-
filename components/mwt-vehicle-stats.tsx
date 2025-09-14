@@ -11593,10 +11593,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         })()}
                       </div>
                       {vehicle.description && (
-                        <div className="mt-4">
-                          <h4 className="text-base font-bold text-cyan-300 mb-2 border-b border-slate-700 pb-1">DESCRIPTION</h4>
-                          <p className="text-slate-300 text-sm">{vehicle.description}</p>
-                        </div>
+                        <p className="text-slate-300 text-sm">{vehicle.description}</p>
                       )}
                     </div>
                   </div>
@@ -11749,7 +11746,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           </div>
                           {vehicle.description && (
                             <div className="p-4">
-                              <h4 className="text-base font-bold text-cyan-300 mb-2 border-b border-slate-700 pb-1">DESCRIPTION</h4>
                               <p className="text-slate-300 text-sm">{vehicle.description}</p>
                             </div>
                           )}
