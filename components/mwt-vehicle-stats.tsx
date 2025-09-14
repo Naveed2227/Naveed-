@@ -8981,7 +8981,7 @@ const MwtVehicleStats = () => {
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
   const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
 
-  const isMarketVehicle = (vehicleName: string) => {
+ const isMarketVehicle = (vehicleName: string) => {
     const marketVehicles = [
       "Abrams X",
       "Type 10",
@@ -9173,6 +9173,43 @@ const missileHasTags = (missileName: string) => {
 }
 
 
+  // List of vehicles with Active Protection Systems (APS)
+  const hasAPS = (vehicleName: string) => {
+    const apsVehicles = [
+"BMPT Terminator 2",
+"T-14 Armata",
+"T-14 Armata (152)",
+"T-95M",
+"Merkava Mk.4",
+"KF-51 Panther",
+"M1 Abrams CATTB",
+"M1 Abrams Block 3",
+"Abrams X",
+"Leclerc S2 AZUR",
+"Type 10",
+"Challenger 3",
+"Leopard 2A7+",
+"Leopard 2A7 Plus",
+"VT-4A1",
+"ZTZ99A",
+"ZTZ99-III",
+"KF31 Lynx",
+"Karrar",
+"PL-01",
+"T-55AMD",
+"T-62 545",
+"T-64BV",
+"T-72A",
+"T-90A",
+"ZTZ96",
+"ZTZ-96A (P)",
+"PT-91 Twardy",
+"M1 Abrams",
+"M1A1 Abrams",
+    ];
+    return apsVehicles.includes(vehicleName);
+  };
+
   const isExclusiveVehicle = (vehicleName: string) => {
     const exclusiveVehicles = [
 "Leopard 2A4",
@@ -9288,7 +9325,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     const matchesType = !typeFilter || vehicle.type === typeFilter
     const matchesTier = !tierFilter || formatTier(vehicle.tier) === tierFilter
     const matchesCountry = !countryFilter || vehicle.faction === countryFilter
-    return matchesSearch && matchesType && matchesTier && matchesCountry
+    const matchesRarity = selectedRarities.length === 0 || selectedRarities.includes(getVehicleRarity(vehicle.name))
+    return matchesSearch && matchesType && matchesTier && matchesCountry && matchesRarity
   })
 
   const indexOfLastVehicle = currentPage * vehiclesPerPage
@@ -10133,8 +10171,354 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     }, 1000)
   }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+  // Function to handle opening the detailed view
+  const openVehicleDetails = (vehicle: any) => {
+    setSelectedVehicle(vehicle);
+    setIsDetailModalOpen(true);
+  };
+
+  // Function to close the detailed view
+  const closeVehicleDetails = () => {
+    setIsDetailModalOpen(false);
+    setSelectedVehicle(null);
+  };
+
+  const handleDownloadImage = (imageUrl: string, vehicleName: string) => {
+    // Create a temporary anchor element
+    const link = document.createElement('a');
+    
+    // Create a new image to handle the download
+    const img = new Image();
+    img.crossOrigin = 'Anonymous'; // Handle CORS if needed
+    
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(img, 0, 0);
+        
+        // Convert to PNG and create download
+        const pngUrl = canvas.toDataURL('image/png');
+        link.href = pngUrl;
+        // Keep the original vehicle name but replace invalid filename characters with underscores
+        const safeName = vehicleName.replace(/[<>:"/\\|?*\x00-\x1F]/g, '_').replace(/\s+/g, ' ').trim();
+        link.download = `${safeName}.png`;
+        
+        // Append to body, click and remove
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    };
+
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white p-4 sm:p-6 relative">
+        <main>
+          {/* Main content here */}
+        </main>
+        
+        <AnimatePresence>
+          {isDetailModalOpen && selectedVehicle && (
+            <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+              <motion.div 
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 50 }}
+                className="bg-slate-800 rounded-lg max-w-[98vw] w-full max-h-[95vh] overflow-y-auto"
+              >
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <div className="flex items-center gap-3 mb-1">
+                        <img
+                          src={getFlagImage(selectedVehicle.faction) || "/placeholder.svg"}
+                          alt={`${selectedVehicle.faction} flag`}
+                          className="w-8 h-6 object-cover rounded shadow-md"
+                        />
+                        <h2 className="text-2xl font-bold text-cyan-300">{selectedVehicle.name}</h2>
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <div className="flex items-center gap-3 mb-1">
+                      <img
+                        src={getFlagImage(selectedVehicle.faction) || "/placeholder.svg"}
+                        alt={`${selectedVehicle.faction} flag`}
+                        className="w-8 h-6 object-cover rounded shadow-md"
+                      />
+                      <h2 className="text-2xl font-bold text-cyan-300">{selectedVehicle.name}</h2>
+                    </div>
+                    <div className="flex items-center mt-2 space-x-4">
+                      <span className="px-3 py-1 bg-slate-700 rounded-full text-sm">
+                        {selectedVehicle.faction}
+                      </span>
+                      <span className="px-3 py-1 bg-slate-700 rounded-full text-sm">
+                        {selectedVehicle.type}
+                      </span>
+                      <span className={`px-3 py-1 rounded-full text-sm text-white font-semibold ${
+                        formatTier(selectedVehicle.tier) === "I" ? "bg-gray-500" :
+                        formatTier(selectedVehicle.tier) === "II" ? "bg-green-500" :
+                        formatTier(selectedVehicle.tier) === "III" ? "bg-blue-900" :
+                        formatTier(selectedVehicle.tier) === "IV" ? "bg-purple-600" : "bg-gray-500"
+                      }`}>
+                        Tier {formatTier(selectedVehicle.tier)}
+                      </span>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={closeVehicleDetails}
+                    className="p-2 rounded-full hover:bg-slate-700 transition-colors"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+
+                {/* Vehicle Type Indicator - Removed as per user request */}
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Specifications and Weapons - Left Column */}
+                  <div className={selectedVehicle.image ? "lg:col-span-1" : "lg:col-span-2"}>
+                    <div className="bg-slate-900 rounded-lg p-4 mb-6">
+                      <h3 className="text-lg font-semibold mb-4 text-cyan-300">Specifications</h3>
+                      <div className="space-y-3">
+                        {Object.entries(selectedVehicle.stats || {}).map(([key, value]) => (
+                          <div key={key} className="flex justify-between py-2 border-b border-slate-700">
+                            <span className="text-slate-300 capitalize">{key.replace(/_/g, ' ')}</span>
+                            <span className="font-medium">{String(value)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {selectedVehicle.weapons && selectedVehicle.weapons.length > 0 && (
+                      <div className="bg-slate-900 rounded-lg p-4">
+                        <h3 className="text-lg font-semibold mb-4 text-cyan-300">Weapons</h3>
+                        <div className="space-y-4">
+                          {selectedVehicle.weapons.map((weapon: any, idx: number) => {
+                            // Use the missile tagging system to get tags for this weapon
+                            const weaponTags = missileHasTags(weapon.name);
+                            
+                            return (
+                              <div key={idx} className="bg-slate-800/50 rounded-lg p-4">
+                                <div className="flex items-start justify-between mb-3">
+                                  <h4 className="font-medium text-cyan-200">{weapon.name}</h4>
+                                  <div className="flex flex-wrap gap-1">
+                                    {weaponTags.map((tag, tagIdx) => (
+                                      <div key={tagIdx} className="flex items-center gap-1 bg-slate-700/50 px-2 py-1 rounded text-xs">
+                                        {tag === 'anti-flare' && (
+                                          <>
+                                            <div className="w-3 h-3 text-orange-400">
+                                              <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                              </svg>
+                                            </div>
+                                            <span className="text-orange-400 font-medium">Anti-Flare</span>
+                                          </>
+                                        )}
+                                        {tag === 'anti-warning' && (
+                                          <>
+                                            <div className="w-3 h-3 text-red-400">
+                                              <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                              </svg>
+                                            </div>
+                                            <span className="text-red-400 font-medium">Anti-Warning</span>
+                                          </>
+                                        )}
+                                        {tag === 'long-range' && (
+                                          <>
+                                            <div className="w-3 h-3 text-blue-400">
+                                              <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                                              </svg>
+                                            </div>
+                                            <span className="text-blue-400 font-medium">Long-Range</span>
+                                          </>
+                                        )}
+                                        {tag === 'rocket-pod' && (
+                                          <>
+                                            <div className="w-3 h-3 text-purple-400">
+                                              <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                                <path d="M12 2C11.45 2 11 2.45 11 3v9H5l7 7 7-7h-6V3c0-.55-.45-1-1-1z"/>
+                                              </svg>
+                                            </div>
+                                            <span className="text-purple-400 font-medium">Rocket-Pod</span>
+                                          </>
+                                        )}
+                                        {tag === 'laser-guided' && (
+                                          <>
+                                            <div className="w-3 h-3 text-green-400">
+                                              <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                                <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
+                                              </svg>
+                                            </div>
+                                            <span className="text-green-400 font-medium">Laser-Guided</span>
+                                          </>
+                                        )}
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-2 mt-2 text-sm">
+                                  {Object.entries(weapon).filter(([key]) => !['name', 'description'].includes(key)).map(([key, value]) => (
+                                    <div key={key} className="flex justify-between">
+                                      <span className="text-slate-400 capitalize">{key.replace(/_/g, ' ')}:</span>
+                                      <span className="text-slate-200">{String(value)}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                                {weapon.description && (
+                                  <p className="mt-2 text-sm text-slate-400">{weapon.description}</p>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Vehicle Image - Right Column */}
+                  {selectedVehicle.image && (
+                    <div className="lg:col-span-1">
+                      <div className="bg-slate-900 rounded-lg overflow-hidden aspect-[5/3]">
+                        <img 
+                          src={selectedVehicle.image} 
+                          alt={selectedVehicle.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <button 
+                        onClick={() => handleDownloadImage(selectedVehicle.image, selectedVehicle.name)}
+                        className="w-full mt-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg flex items-center justify-center gap-2 transition-colors"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                          <polyline points="7 10 12 15 17 10"></polyline>
+                          <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download Image
+                      </button>
+                      <div className="bg-slate-900 rounded-lg p-4 mt-4">
+                        {/* Vehicle Details */}
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                          <div>
+                            <p className="text-sm text-slate-400">Type</p>
+                            <p className="text-slate-200 font-medium">{selectedVehicle.type || 'N/A'}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-slate-400">Tier</p>
+                            <p className="text-slate-200 font-medium">
+                              {selectedVehicle.tier ? `Tier ${selectedVehicle.tier}` : 'N/A'}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-slate-400">Country</p>
+                            <div className="flex items-center gap-2">
+                              {selectedVehicle.country && (
+                                <span className="text-sm">
+                                  {getCountryFlag(selectedVehicle.country)}
+                                </span>
+                              )}
+                              <span className="text-slate-200 font-medium">
+                                {selectedVehicle.country || 'N/A'}
+                              </span>
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-sm text-slate-400">Rarity</p>
+                            <div className="flex items-center gap-2">
+                              {getRarityBadge(selectedVehicle.rarity || 'Common')}
+                              <span className="text-slate-200 font-medium">
+                                {selectedVehicle.rarity || 'Common'}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Description */}
+                        {selectedVehicle.description && (
+                          <>
+                            <h3 className="text-lg font-semibold mb-3 text-cyan-300">Description</h3>
+                            <p className="text-slate-300 mb-4">{selectedVehicle.description}</p>
+                          </>
+                        )}
+                          
+                          {/* APS Section - Only show if vehicle is in APS list */}
+                          {hasAPS(selectedVehicle.name) && (
+                            <div className="mt-4 pt-4 border-t border-slate-700">
+                              <h3 className="text-lg font-semibold mb-3 text-cyan-300">Active Protection System</h3>
+                              <div className="flex items-start gap-3">
+                                <div className="mt-0.5">
+                                  <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                  </svg>
+                                </div>
+                                <div>
+                                  <h4 className="font-medium text-slate-200">{selectedVehicle.stats.aps_system}</h4>
+                                  {selectedVehicle.stats.aps_cooldown && (
+                                    <p className="text-slate-400 text-sm">
+                                      Cooldown: {selectedVehicle.stats.aps_cooldown}s
+                                    </p>
+                                  )}
+                                  {selectedVehicle.stats.aps_description && (
+                                    <p className="text-slate-400 text-sm mt-1">
+                                      {selectedVehicle.stats.aps_description}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {/* How to obtain section */}
+                          <div className="mt-4 pt-4 border-t border-slate-700">
+                            <h3 className="text-lg font-semibold mb-3 text-cyan-300">How to Obtain</h3>
+                            <div className="flex items-center justify-start gap-2 mb-3">
+                              {isMarketVehicle(selectedVehicle.name) ? (
+                                <span className="px-4 py-2 bg-yellow-600/30 border border-yellow-400/50 text-yellow-200 rounded-full text-sm font-medium flex items-center gap-2">
+                                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                  </svg>
+                                  Market Vehicle
+                                </span>
+                              ) : isExclusiveVehicle(selectedVehicle.name) ? (
+                                <span className="px-4 py-2 bg-purple-600/30 border border-purple-400/50 text-purple-200 rounded-full text-sm font-medium flex items-center gap-2">
+                                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                  </svg>
+                                  Premium Vehicle
+                                </span>
+                              ) : (
+                                <span className="px-4 py-2 bg-blue-600/30 border border-blue-400/50 text-blue-200 rounded-full text-sm font-medium flex items-center gap-2">
+                                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84l5.5 2.35L9 11.48l-4.135 4.135a1 1 0 001.06 1.06l4.14-4.14 4.14 4.14a1 1 0 001.06-1.06L11 11.48l.936-.936 5.5 2.35a1 1 0 000-1.84l-7-3z" />
+                                  </svg>
+                                  Standard Vehicle
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-slate-300">
+                              {isMarketVehicle(selectedVehicle.name) ? (
+                                'This vehicle is available for purchase in the in-game market.'
+                              ) : isExclusiveVehicle(selectedVehicle.name) ? (
+                                'This vehicle is available through special events or Gatchas.'
+                              ) : (
+                                'This vehicle is available through standard store with Dollars and Gold.'
+                              )}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
@@ -10382,8 +10766,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       </AnimatePresence>
 
       <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 shadow-sm">
-        <div className="max-w-7xl mx-auto p-4 sm:p-6">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="max-w-7xl mx-auto p-3 sm:p-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent mx-1.5">
                 <span className="hidden sm:inline">{"MWT Assistant (Unofficial)"}</span>
@@ -10392,7 +10776,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               <p className="text-slate-400 mt-1 ml-2.5 text-sm hidden sm:block">    MWT Assistant</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
-              <div className="pb-6 w-auto">
+              <div className="pb-4 w-auto">
                 <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
                   <div className="relative w-full sm:w-auto">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-400 w-4 h-4" />
@@ -10451,6 +10835,67 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </option>
                     ))}
                   </select>
+                </div>
+
+                {/* Rarity Toggle Switches */}
+                <div className="mt-3">
+                  <h3 className="text-sm font-medium text-slate-300 mb-2">Filter by Rarity:</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {rarities.map((rarity) => (
+                      <div key={rarity} className="flex items-center space-x-2">
+                        <div className="relative">
+                          <input
+                            type="checkbox"
+                            id={`rarity-${rarity}`}
+                            checked={selectedRarities.includes(rarity)}
+                            onChange={() => {
+                              if (selectedRarities.includes(rarity)) {
+                                setSelectedRarities(selectedRarities.filter(r => r !== rarity))
+                              } else {
+                                setSelectedRarities([...selectedRarities, rarity])
+                              }
+                            }}
+                            className="sr-only"
+                          />
+                          <label
+                            htmlFor={`rarity-${rarity}`}
+                            className={`block w-12 h-6 rounded-full cursor-pointer transition-all duration-300 ${
+                              selectedRarities.includes(rarity)
+                                ? rarity === "Common" ? "bg-gray-600" :
+                                  rarity === "Enhanced" ? "bg-green-600" :
+                                  rarity === "Rare" ? "bg-blue-600" :
+                                  rarity === "Epic" ? "bg-purple-600" :
+                                  rarity === "Legendary" ? "bg-yellow-600" : "bg-cyan-500"
+                                : "bg-slate-600"
+                            }`}
+                          >
+                            <div
+                              className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
+                                selectedRarities.includes(rarity)
+                                  ? "translate-x-6"
+                                  : "translate-x-0.5"
+                              } mt-0.5`}
+                            />
+                          </label>
+                        </div>
+                        <span className={`text-xs font-medium ${
+                          selectedRarities.includes(rarity)
+                            ? "text-cyan-300"
+                            : "text-slate-400"
+                        }`}>
+                          {rarity}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  {selectedRarities.length > 0 && (
+                    <button
+                      onClick={() => setSelectedRarities([])}
+                      className="mt-2 px-3 py-1 rounded-lg text-xs font-semibold bg-red-600 text-white hover:bg-red-700 transition-colors"
+                    >
+                      Clear All
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -10784,39 +11229,52 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
               </div>
 
-              <div className="flex gap-2 mb-3">
-                <button
-                  onClick={() => toggleCompare(vehicle.id.toString())}
-                  disabled={compare.length >= 2 && !compare.includes(vehicle.id.toString())}
-                  className={`flex-1 text-sm rounded transition-colors tabular-nums px-5 py-4 font-bold ${
-                    compare.includes(vehicle.id.toString())
-                      ? "bg-cyan-600 text-white"
-                      : compare.length >= 2
-                        ? "bg-slate-600 text-slate-400 cursor-not-allowed"
-                        : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                  }`}
-                >
-                  {compare.includes(vehicle.id.toString()) ? "✓ Compare" : "Compare"}
-                </button>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setWeaponsModalOpenId(vehicle.id.toString())
-                  }}
-                  className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-semibold rounded transition-colors"
+<div className="flex flex-col gap-3 w-full">
+                <div className="flex items-center gap-3 w-full">
+                  <button 
+                    onClick={() => openVehicleDetails(vehicle)}
+                    className="flex-1 bg-slate-700 hover:bg-slate-600 text-slate-300 py-2 px-4 rounded-md text-base font-medium transition-colors"
+                  >
+                    View Details
+                  </button>
+                  <button
+                    onClick={() => setVehicleInfoOpen(vehicle.id.toString())}
+                    className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-cyan-600/20 hover:bg-cyan-600/30 rounded-full transition-colors"
+                    title="Get AI Analysis"
+                  >
+                    <Bot className="text-sky-300 hover:text-cyan-300 w-5 h-5" />
+                  </button>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-3 w-full">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      if (compare.includes(vehicle.id.toString())) {
+                        setCompare(compare.filter((id) => id !== vehicle.id.toString()))
+                      } else if (compare.length < 2) {
+                        setCompare([...compare, vehicle.id.toString()])
+                      }
+                    }}
+                    disabled={!compare.includes(vehicle.id.toString()) && compare.length >= 2}
+                    className={`text-base rounded-md transition-colors tabular-nums px-4 py-2 font-medium ${
+                      compare.includes(vehicle.id.toString())
+                        ? "bg-cyan-600 text-white"
+                        : compare.length >= 2
+                          ? "bg-slate-600 text-slate-400 cursor-not-allowed"
+                          : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                    }`}
+                  >
+                    {compare.includes(vehicle.id.toString()) ? "✓ Compare" : "Compare"}
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setWeaponsModalOpenId(vehicle.id.toString())
+                    }}
+                    className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 text-base font-medium rounded-md transition-colors"
                 >
                   Weapons
-                </button>
-
-                <button
-                  onClick={() => setVehicleInfoOpen(vehicle.id.toString())}
-                  className="p-2 bg-cyan-600/20 hover:bg-cyan-600/30 rounded-full transition-colors group"
-                  title="Get AI Analysis"
-                >
-                  <Bot className="group-hover:text-cyan-300 text-sky-300 w-[30px] h-[30px]" />
                 </button>
               </div>
 
@@ -11218,10 +11676,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         {!chatOpen && (
           <button
             onClick={() => setChatOpen(true)}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 p-3 sm:p-4 bg-cyan-600 hover:bg-cyan-700 text-white rounded-full shadow-lg transition-colors z-40"
+            className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 z-40 flex items-center justify-center"
           >
-            <BotMessageSquareIcon className="h-6 w-6 sm:h-8 sm:w-8" />
-            <span className="hidden sm:inline ml-2">Ask AI</span>
+            <Bot className="w-6 h-6" />
           </button>
         )}
 
@@ -11498,105 +11955,208 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               </div>
 
               <div className="space-y-4">
-                {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon, index) => (
-                  <div key={index} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="text-lg font-semibold text-cyan-300">{weapon.name}</h4>
-                      <div className="flex flex-col gap-1">
-                        {missileHasTags(weapon.name).map((tag, tagIndex) => (
-                          <div key={tagIndex} className="flex items-center gap-1 bg-slate-700/50 px-2 py-1 rounded text-xs">
-                            {tag === 'anti-flare' && (
-                              <>
-                                <div className="w-3 h-3 text-orange-400">
-                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                  </svg>
-                                </div>
-                                <span className="text-orange-400 font-medium">Anti-Flare</span>
-                              </>
-                            )}
-                            {tag === 'anti-warning' && (
-                              <>
-                                <div className="w-3 h-3 text-red-400">
-                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                  </svg>
-                                </div>
-                                <span className="text-red-400 font-medium">Anti-Warning</span>
-                              </>
-                            )}
-                            {tag === 'long-range' && (
-                              <>
-                                <div className="w-3 h-3 text-blue-400">
-                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-                                  </svg>
-                                </div>
-                                <span className="text-blue-400 font-medium">Long-Range</span>
-                              </>
-                            )}
-                             {tag === 'rocket-pod' && (
-                              <>
-                                <div className="w-3 h-3 text-purple-400">
-                                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                   <path d="M12 2C11.45 2 11 2.45 11 3v9H5l7 7 7-7h-6V3c0-.55-.45-1-1-1z"/>
-                                 </svg>
-                                </div>
-                         
-                                <span className="text-purple-400 font-medium">Rocket-Pod</span>
-                              </>
-                            )}
-                            {tag === 'laser-guided' && (
-                              <>
-                                <div className="w-3 h-3 text-green-400">
-                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                    <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
-                                  </svg>
-                                </div>
-                                <span className="text-green-400 font-medium">Laser-Guided</span>
-                              </>
-                            )}
+                {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon, index) => {
+                  // Use the missile tagging system to get tags for this weapon
+                  const weaponTags = missileHasTags(weapon.name);
+                  
+                  return (
+                    <div key={index} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+                      <div className="flex items-start justify-between mb-3">
+                        <h4 className="text-lg font-semibold text-cyan-300">{weapon.name}</h4>
+                        <div className="flex flex-wrap gap-1">
+                          {weaponTags.map((tag, tagIdx) => (
+                            <div key={tagIdx} className="flex items-center gap-1 bg-slate-700/50 px-2 py-1 rounded text-xs">
+                              {tag === 'anti-flare' && (
+                                <>
+                                  <div className="w-3 h-3 text-orange-400">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                  </div>
+                                  <span className="text-orange-400 font-medium">Anti-Flare</span>
+                                </>
+                              )}
+                              {tag === 'anti-warning' && (
+                                <>
+                                  <div className="w-3 h-3 text-red-400">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                  </div>
+                                  <span className="text-red-400 font-medium">Anti-Warning</span>
+                                </>
+                              )}
+                              {tag === 'long-range' && (
+                                <>
+                                  <div className="w-3 h-3 text-blue-400">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                                    </svg>
+                                  </div>
+                                  <span className="text-blue-400 font-medium">Long-Range</span>
+                                </>
+                              )}
+                              {tag === 'rocket-pod' && (
+                                <>
+                                  <div className="w-3 h-3 text-purple-400">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                      <path d="M12 2C11.45 2 11 2.45 11 3v9H5l7 7 7-7h-6V3c0-.55-.45-1-1-1z"/>
+                                    </svg>
+                                  </div>
+                                  <span className="text-purple-400 font-medium">Rocket-Pod</span>
+                                </>
+                              )}
+                              {tag === 'laser-guided' && (
+                                <>
+                                  <div className="w-3 h-3 text-green-400">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                      <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
+                                    </svg>
+                                  </div>
+                                  <span className="text-green-400 font-medium">Laser-Guided</span>
+                                </>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <span className="text-slate-400">Damage: </span>
+                          <span className="text-cyan-300 font-bold text-lg">{weapon.damage}</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-400">Penetration: </span>
+                          <span className="text-cyan-300 font-bold text-lg">{weapon.penetration}</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-400">Reload: </span>
+                          <span className="text-cyan-300 font-bold text-lg">{weapon.reload}</span>
+                        </div>
+                        {weapon.rateOfFire && (
+                          <div>
+                            <span className="text-slate-400">Rate of Fire: </span>
+                            <span className="text-cyan-300">{weapon.rateOfFire}</span>
                           </div>
-                        ))}
+                        )}
+                        {weapon.lockTime && (
+                          <div>
+                            <span className="text-slate-400">Lock Time: </span>
+                            <span className="text-cyan-300">{weapon.lockTime}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <span className="text-slate-400">Damage: </span>
-                        <span className="text-cyan-300 font-bold text-lg">{weapon.damage}</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-400">Penetration: </span>
-                        <span className="text-cyan-300 font-bold text-lg">{weapon.penetration}</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-400">Reload: </span>
-                        <span className="text-cyan-300 font-bold text-lg">{weapon.reload}</span>
-                      </div>
-                      {weapon.rateOfFire && (
-                        <div>
-                          <span className="text-slate-400">Rate of Fire: </span>
-                          <span className="text-cyan-300">{weapon.rateOfFire}</span>
-                        </div>
-                      )}
-                      {weapon.lockTime && (
-                        <div>
-                          <span className="text-slate-400">Lock Time: </span>
-                          <span className="text-cyan-300">{weapon.lockTime}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
         )}
       </main>
-    </div>
-  )
+      
+      <AnimatePresence>
+        {isDetailModalOpen && selectedVehicle && (
+          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 50 }}
+              className="bg-slate-800 rounded-lg max-w-4xl w-full max-h-[95vh] overflow-y-auto"
+            >
+              <div className="p-6">
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <h2 className="text-2xl font-bold text-cyan-300">{selectedVehicle.name}</h2>
+                    <div className="flex items-center mt-2 space-x-4">
+                      <span className="px-3 py-1 bg-slate-700 rounded-full text-sm">
+                        {selectedVehicle.faction}
+                      </span>
+                      <span className="px-3 py-1 bg-slate-700 rounded-full text-sm">
+                        {selectedVehicle.type}
+                      </span>
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${getTierColor(selectedVehicle.tier)}`}>
+                        Tier {formatTier(selectedVehicle.tier)}
+                      </span>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={closeVehicleDetails}
+                    className="text-slate-400 hover:text-white p-1"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="relative">
+                    <img
+                      src={selectedVehicle.image}
+                      alt={selectedVehicle.name}
+                      className="w-full h-64 object-cover rounded-lg"
+                    />
+                    <div className="mt-4 flex justify-center space-x-2">
+                      <button
+                        onClick={() => handleDownloadImage(selectedVehicle.image, selectedVehicle.name)}
+                        className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-md text-sm font-medium transition-colors"
+                      >
+                        Download Image
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="bg-slate-800/50 p-4 rounded-lg">
+                      <h3 className="text-lg font-semibold text-cyan-300 mb-3">Vehicle Stats</h3>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <span className="text-slate-400">Health: </span>
+                          <span className="text-white font-medium">{selectedVehicle.health}</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-400">Speed: </span>
+                          <span className="text-white font-medium">{selectedVehicle.speed} km/h</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-400">Armor: </span>
+                          <span className="text-white font-medium">{selectedVehicle.armor || 'N/A'}</span>
+                        </div>
+                        <div>
+                          <span className="text-slate-400">Agility: </span>
+                          <span className="text-white font-medium">{selectedVehicle.agility || 'N/A'}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {selectedVehicle.weapons && selectedVehicle.weapons.length > 0 && (
+                      <div className="bg-slate-800/50 p-4 rounded-lg">
+                        <h3 className="text-lg font-semibold text-cyan-300 mb-3">Weapons</h3>
+                        <div className="space-y-3">
+                          {selectedVehicle.weapons.map((weapon, index) => (
+                            <div key={index} className="bg-slate-700/50 p-3 rounded">
+                              <h4 className="font-medium text-white">{weapon.name}</h4>
+                              <div className="grid grid-cols-2 gap-2 mt-2 text-sm">
+                                <div>Damage: <span className="text-cyan-300">{weapon.damage}</span></div>
+                                <div>Penetration: <span className="text-cyan-300">{weapon.penetration}</span></div>
+                                <div>Reload: <span className="text-cyan-300">{weapon.reload}s</span></div>
+                                {weapon.rateOfFire && (
+                                  <div>Rate of Fire: <span className="text-cyan-300">{weapon.rateOfFire} rpm</span></div>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    
+  );
 }
-
-
 
 export default MwtVehicleStats;
