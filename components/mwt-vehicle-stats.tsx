@@ -8922,7 +8922,23 @@ const getTierColor = (tier: string) => {
 }
 
 // StatBar component with upgrade toggles
-const StatBar = ({ label, value, baseValue, maxValue = 100, upgradeLevel = 0 }) => {
+interface StatBarProps {
+  label: string;
+  value: number;
+  baseValue: number;
+  maxValue?: number;
+  upgradeLevel?: number;
+  onUpgradeChange?: (level: number) => void;
+}
+
+const StatBar: React.FC<StatBarProps> = ({ 
+  label, 
+  value, 
+  baseValue, 
+  maxValue = 100, 
+  upgradeLevel = 0, 
+  onUpgradeChange = () => {} 
+}) => {
   const upgradeColors = [
     { level: 0, color: 'bg-gray-300', textColor: 'text-gray-300' },
     { level: 1, color: 'bg-green-500', textColor: 'text-green-500' },
@@ -8934,11 +8950,24 @@ const StatBar = ({ label, value, baseValue, maxValue = 100, upgradeLevel = 0 }) 
   const percentage = Math.min(100, (displayValue / maxValue) * 100);
   const basePercentage = Math.min(100, ((baseValue || 0) / maxValue) * 100);
 
+  // Handle upgrade button click
+  const handleUpgradeClick = (e: React.MouseEvent, level: number) => {
+    e.stopPropagation();
+    onUpgradeChange(level);
+  };
+
   return (
     <div className="mb-2">
       <div className="flex justify-between items-center mb-1">
         <span className="text-xs font-medium text-gray-300">{label}</span>
-        <span className="text-xs font-bold text-white">{displayValue}</span>
+        <span className="text-xs font-bold text-white">
+          {displayValue}
+          {upgradeLevel > 0 && (
+            <span className={`ml-1 ${upgradeColors[upgradeLevel].textColor}`}>
+              (U{upgradeLevel})
+            </span>
+          )}
+        </span>
       </div>
       
       <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden relative">
@@ -8957,8 +8986,24 @@ const StatBar = ({ label, value, baseValue, maxValue = 100, upgradeLevel = 0 }) 
           />
         )}
       </div>
-      <div className="flex justify-between items-center mt-1">
-        <span className="text-xs text-slate-400">{displayValue}</span>
+      
+      <div className="flex justify-between items-center mt-2">
+        <div className="flex space-x-1">
+          {[1, 2, 3].map((level) => (
+            <button
+              key={level}
+              type="button"
+              onClick={(e) => handleUpgradeClick(e, level)}
+              className={`text-xs px-2 py-1 rounded transition-colors ${
+                upgradeLevel === level
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              U{level}
+            </button>
+          ))}
+        </div>
         {upgradeLevel > 0 && (
           <span className={`text-xs ${upgradeColors[upgradeLevel].textColor} font-medium`}>
             {label.toLowerCase() === 'agility' 
@@ -8972,20 +9017,88 @@ const StatBar = ({ label, value, baseValue, maxValue = 100, upgradeLevel = 0 }) 
   );
 };
 
+// ComparisonStatBar component for side-by-side stat comparison
+const ComparisonStatBar = ({ 
+  label, 
+  value1, 
+  value2, 
+  maxValue,
+  upgradeLevel1 = 0,
+  upgradeLevel2 = 0,
+  showUpgrade = false
+}) => {
+  const upgradeColors = [
+    { level: 0, color: 'bg-gray-500', textColor: 'text-gray-500' },
+    { level: 1, color: 'bg-green-500', textColor: 'text-green-500' },
+    { level: 2, color: 'bg-blue-500', textColor: 'text-blue-500' },
+    { level: 3, color: 'bg-purple-500', textColor: 'text-purple-500' },
+  ];
+
+  const percentage1 = Math.min(100, (value1 / maxValue) * 100);
+  const percentage2 = Math.min(100, (value2 / maxValue) * 100);
+  const color1 = upgradeColors[upgradeLevel1] || upgradeColors[0];
+  const color2 = upgradeColors[upgradeLevel2] || upgradeColors[0];
+
+  return (
+    <div className="mb-4">
+      <div className="flex justify-between items-center mb-1">
+        <span className="text-xs font-medium text-gray-300">{label}</span>
+        <div className="flex items-center gap-2">
+          <span className={`text-xs font-bold ${color1.textColor}`}>
+            {value1.toLocaleString()}
+            {showUpgrade && upgradeLevel1 > 0 && (
+              <span className="ml-1">(U{upgradeLevel1})</span>
+            )}
+          </span>
+          <span className="text-gray-400">/</span>
+          <span className={`text-xs font-bold ${color2.textColor}`}>
+            {value2.toLocaleString()}
+            {showUpgrade && upgradeLevel2 > 0 && (
+              <span className="ml-1">(U{upgradeLevel2})</span>
+            )}
+          </span>
+        </div>
+      </div>
+      
+      <div className="flex items-center h-4 w-full bg-gray-800 rounded-full overflow-hidden">
+        <div 
+          className={`h-full ${color1.color} transition-all duration-300`}
+          style={{ width: `${percentage1}%` }}
+        />
+        <div className="flex-1 h-full bg-transparent" />
+        <div 
+          className={`h-full ${color2.color} transition-all duration-300`}
+          style={{ width: `${percentage2}%` }}
+        />
+      </div>
+    </div>
+  );
+};
+
 const MwtVehicleStats = () => {
   const router = useRouter()
-  const [upgradeLevel, setUpgradeLevel] = useState(0);
+  const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
   
-  const handleUpgradeChange = (level: number) => {
-    setUpgradeLevel(prevLevel => prevLevel === level ? 0 : level);
+  const handleUpgradeChange = (vehicleId: string, level: number) => {
+    setUpgradeLevels(prev => {
+      const newLevels = { ...prev };
+      // If clicking the same level, reset to 0 (base), otherwise set to the new level
+      newLevels[vehicleId] = prev[vehicleId] === level ? 0 : level;
+      return newLevels;
+    });
   };
   
-  const getUpgradedValue = (baseValue: number, statType: string) => {
-    if (upgradeLevel === 0) return baseValue;
+  const getUpgradedValue = (vehicle: any, statType: string) => {
+    const upgradeLevel = upgradeLevels[vehicle.id] || 0;
+    if (upgradeLevel === 0) return vehicle.stats[statType] || 0;
+    
+    // Convert statType to lowercase for consistent comparison
+    const statTypeLower = statType.toLowerCase();
+    const baseValue = vehicle.stats[statType] || 0;
     
     let boostMultiplier = 1;
     
-    if (statType.toLowerCase() === 'agility') {
+    if (statTypeLower === 'agility') {
       // Special handling for agility
       switch(upgradeLevel) {
         case 1: boostMultiplier = 1.0333; break; // 3.33%
@@ -8997,9 +9110,9 @@ const MwtVehicleStats = () => {
       boostMultiplier = 1 + (upgradeLevel * 0.1); // 1.1, 1.2, or 1.3
     }
     
-    const boostableStats = ['health', 'speed', 'agility', 'afterburnerSpeed', 'verticalSpeed', 'damage'];
+    const boostableStats = ['health', 'speed', 'agility', 'afterburnerspeed', 'verticalspeed', 'damage'];
     
-    if (boostableStats.includes(statType.toLowerCase())) {
+    if (boostableStats.includes(statTypeLower)) {
       return Math.round(baseValue * boostMultiplier);
     }
     return baseValue;
@@ -10627,53 +10740,152 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         
         {compare.length === 2 && (
           <div ref={comparisonRef} className="mb-8 bg-slate-900/40 rounded-xl p-6 border border-slate-800">
-            <h2 className="text-2xl font-bold text-cyan-400 mb-4">Vehicle Comparison</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {compare.map((id) => {
-                const vehicle = VEHICLES.find((v) => v.id.toString() === id)
-                if (!vehicle) return null
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold text-cyan-400">Vehicle Comparison</h2>
+              
+              {/* Upgrade Toggles */}
+              <div className="flex items-center space-x-2 bg-slate-800/50 p-1 rounded-full">
+                {[1, 2, 3].map((level) => {
+                  const isActive = upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level;
+                  return (
+                    <button
+                      key={level}
+                      onClick={() => {
+                        const newLevel = isActive ? 0 : level;
+                        handleUpgradeChange(compare[0], newLevel);
+                        handleUpgradeChange(compare[1], newLevel);
+                      }}
+                      className={`w-8 h-8 flex items-center justify-center rounded-full transition-all ${
+                        isActive 
+                          ? level === 1 ? 'bg-green-500/20' 
+                            : level === 2 ? 'bg-blue-500/20' 
+                            : 'bg-purple-500/20'
+                          : 'bg-transparent hover:bg-slate-700/50'
+                      }`}
+                    >
+                      <span className={`text-xs font-bold ${
+                        isActive 
+                          ? level === 1 ? 'text-green-400' 
+                            : level === 2 ? 'text-blue-400' 
+                            : 'text-purple-400'
+                          : 'text-slate-400'
+                      }`}>
+                        U{level}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {compare.map((id, idx) => {
+                const vehicle = VEHICLES.find((v) => v.id.toString() === id);
+                if (!vehicle) return null;
+                
+                const currentUpgradeLevel = upgradeLevels[id] || 0;
+                const upgradedHealth = getUpgradedValue(vehicle, 'health');
+                const upgradedSpeed = getUpgradedValue(vehicle, 'speed');
+                const upgradedAgility = getUpgradedValue(vehicle, 'agility');
+                const upgradedAfterburner = getUpgradedValue(vehicle, 'afterburnerSpeed');
+                
                 return (
-                  <div key={id} className="bg-slate-800/50 rounded-lg p-4">
+                  <div key={id} className={`bg-slate-800/50 rounded-lg p-4 border ${
+                    idx === 0 ? 'border-cyan-500/30' : 'border-purple-500/30'
+                  }`}>
                     <div className="flex flex-col items-center mb-4">
-                      <img
-                        src={vehicle.image}
-                        alt={vehicle.name}
-                        className="w-128 h-64 object-cover rounded-lg mb-3"
-                        onError={(e) => {
-                          e.currentTarget.src = "/placeholder-vehicle.png"
-                        }}
-                      />
-                      <div className="flex items-center justify-center space-x-2 mb-2">
-                        <h3 className="text-xl font-semibold text-cyan-300 text-center">{vehicle.name}</h3>
+                      <div className="relative w-full h-48 mb-3">
+                        <img
+                          src={vehicle.image}
+                          alt={vehicle.name}
+                          className="w-full h-full object-cover rounded-lg"
+                          onError={(e) => {
+                            e.currentTarget.src = "/placeholder-vehicle.png";
+                          }}
+                        />
+                        {currentUpgradeLevel > 0 && (
+                          <div className={`absolute -top-2 -right-2 px-2 py-1 rounded-full text-xs font-bold ${
+                            currentUpgradeLevel === 1 ? 'bg-green-500/90 text-white' 
+                              : currentUpgradeLevel === 2 ? 'bg-blue-500/90 text-white' 
+                              : 'bg-purple-500/90 text-white'
+                          }`}>
+                            U{currentUpgradeLevel}
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold text-cyan-300">
+                          {vehicle.name}
+                        </h3>
+                        <div className="text-sm text-slate-400">
+                          {vehicle.type} • {vehicle.faction} • Tier {formatTier(vehicle.tier)}
+                        </div>
                       </div>
                     </div>
-                    <p className="text-slate-400 text-sm mb-3">{vehicle.description}</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                      <div>
-                        <span className="text-slate-400">Health:</span>
-                        <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.health.toLocaleString()}</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-400">Cruise speed:</span>
-                        <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.speed} km/h</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-400">Afterburner Speed:</span>
-                        <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.afterburnerSpeed} km/h</span>
-                      </div>
-                      {vehicle.stats.armor && (
-                        <div>
-                          <span className="text-slate-400">Armor:</span>
-                          <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.armor}</span>
+                    
+                    <div className="space-y-1">
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="bg-slate-800/70 p-2 rounded">
+                          <div className="text-xs text-slate-400">Health</div>
+                          <div className="text-lg font-bold text-cyan-300">
+                            {upgradedHealth.toLocaleString()}
+                          </div>
+                          {currentUpgradeLevel > 0 && (
+                            <div className="text-xs mt-0.5">
+                              <span className="text-green-400">
+                                +{Math.round((upgradedHealth / vehicle.stats.health - 1) * 100)}%
+                              </span>
+                            </div>
+                          )}
                         </div>
-                      )}
-                      <div>
-                        <span className="text-slate-400">Agility:</span>
-                        <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.agility}</span>
+                        
+                        <div className="bg-slate-800/70 p-2 rounded">
+                          <div className="text-xs text-slate-400">Speed</div>
+                          <div className="text-lg font-bold text-cyan-300">
+                            {upgradedSpeed} km/h
+                          </div>
+                          {currentUpgradeLevel > 0 && (
+                            <div className="text-xs mt-0.5">
+                              <span className="text-green-400">
+                                +{Math.round((upgradedSpeed / vehicle.stats.speed - 1) * 100)}%
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {upgradedAfterburner > 0 && (
+                          <div className="bg-slate-800/70 p-2 rounded">
+                            <div className="text-xs text-slate-400">Afterburner</div>
+                            <div className="text-lg font-bold text-cyan-300">
+                              {upgradedAfterburner} km/h
+                            </div>
+                            {currentUpgradeLevel > 0 && (
+                              <div className="text-xs mt-0.5">
+                                <span className="text-green-400">
+                                  +{Math.round((upgradedAfterburner / (vehicle.stats.afterburnerSpeed || upgradedAfterburner) - 1) * 100)}%
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                        
+                        <div className="bg-slate-800/70 p-2 rounded">
+                          <div className="text-xs text-slate-400">Agility</div>
+                          <div className="text-lg font-bold text-cyan-300">
+                            {upgradedAgility}
+                          </div>
+                          {currentUpgradeLevel > 0 && (
+                            <div className="text-xs mt-0.5">
+                              <span className="text-green-400">
+                                +{Math.round((upgradedAgility / (vehicle.stats.agility || upgradedAgility) - 1) * 100)}%
+                              </span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
 
@@ -11715,22 +11927,25 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           key={level}
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleUpgradeChange(level);
+                            const newLevels = { ...upgradeLevels };
+                            newLevels[compare[0]] = level;
+                            newLevels[compare[1]] = level;
+                            setUpgradeLevels(newLevels);
                           }}
                           className={`relative w-10 h-10 flex items-center justify-center rounded-full transition-all ${
-                            upgradeLevel === level 
+                            (upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level)
                               ? level === 1 ? 'bg-green-600/20' 
                                 : level === 2 ? 'bg-blue-600/20' 
                                 : 'bg-purple-600/20'
-                              : 'bg-transparent hover:bg-slate-700/50'
+                              : 'bg-gray-700/50 hover:bg-gray-600/50'
                           }`}
                         >
                           <img 
                             src={`/U${level}.png`} 
                             alt={`U${level}`} 
-                            className={`w-6 h-6 ${upgradeLevel === level ? 'opacity-100' : 'opacity-60'}`}
+                            className={`w-6 h-6 ${(upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level) ? 'opacity-100' : 'opacity-60'}`}
                           />
-                          {upgradeLevel === level && (
+                          {(upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level) && (
                             <div className="absolute inset-0 rounded-full border-2 border-white/30" />
                           )}
                         </button>
@@ -11750,14 +11965,38 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   {/* Image and Description - Mobile First (shown before other content) */}
                   <div className="block lg:hidden mb-6">
                     <div className="bg-slate-800/80 rounded-lg overflow-hidden">
-                      <img
-                        src={vehicle.image}
-                        alt={vehicle.name}
-                        className="w-full h-64 object-cover"
-                        onError={(e) => {
-                          e.currentTarget.src = "/placeholder-vehicle.png"
-                        }}
-                      />
+                      <div className="relative">
+                        <img
+                          src={vehicle.image}
+                          alt={vehicle.name}
+                          className="w-full h-64 object-cover"
+                          onError={(e) => {
+                            e.currentTarget.src = "/placeholder-vehicle.png"
+                          }}
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 p-4">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              // Create a temporary link to download the image
+                              const link = document.createElement('a');
+                              link.href = vehicle.image;
+                              link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
+                              document.body.appendChild(link);
+                              link.click();
+                              document.body.removeChild(link);
+                            }}
+                            className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                              <polyline points="7 10 12 15 17 10"></polyline>
+                              <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            <span>Download Image</span>
+                          </button>
+                        </div>
+                      </div>
                       {vehicle.description && (
                         <div className="p-4">
                           <h4 className="text-base font-bold text-cyan-300 mb-2">DESCRIPTION</h4>
@@ -11776,29 +12015,48 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         
                         {/* Upgrade Toggles */}
                         <div className="mb-4 p-3 bg-slate-800/50 rounded-lg">
-                          <div className="text-xs text-slate-400 uppercase tracking-wider mb-2">UPGRADE LEVEL</div>
                           <div className="flex justify-between">
                             <button
-                              onClick={() => handleUpgradeChange(0)}
-                              className={`px-3 py-1 text-xs rounded ${upgradeLevel === 0 ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                              onClick={() => {
+                                const newLevels = { ...upgradeLevels };
+                                newLevels[compare[0]] = 0;
+                                newLevels[compare[1]] = 0;
+                                setUpgradeLevels(newLevels);
+                              }}
+                              className={`px-3 py-1 text-xs rounded ${upgradeLevels[compare[0]] === 0 && upgradeLevels[compare[1]] === 0 ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300'}`}
                             >
                               BASE
                             </button>
                             <button
-                              onClick={() => handleUpgradeChange(1)}
-                              className={`px-3 py-1 text-xs rounded ${upgradeLevel === 1 ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                              onClick={() => {
+                                const newLevels = { ...upgradeLevels };
+                                newLevels[compare[0]] = 1;
+                                newLevels[compare[1]] = 1;
+                                setUpgradeLevels(newLevels);
+                              }}
+                              className={`px-3 py-1 text-xs rounded ${upgradeLevels[compare[0]] === 1 && upgradeLevels[compare[1]] === 1 ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-300'}`}
                             >
                               U1 (+10%)
                             </button>
                             <button
-                              onClick={() => handleUpgradeChange(2)}
-                              className={`px-3 py-1 text-xs rounded ${upgradeLevel === 2 ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                              onClick={() => {
+                                const newLevels = { ...upgradeLevels };
+                                newLevels[compare[0]] = 2;
+                                newLevels[compare[1]] = 2;
+                                setUpgradeLevels(newLevels);
+                              }}
+                              className={`px-3 py-1 text-xs rounded ${upgradeLevels[compare[0]] === 2 && upgradeLevels[compare[1]] === 2 ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
                             >
                               U2 (+20%)
                             </button>
                             <button
-                              onClick={() => handleUpgradeChange(3)}
-                              className={`px-3 py-1 text-xs rounded ${upgradeLevel === 3 ? 'bg-purple-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                              onClick={() => {
+                                const newLevels = { ...upgradeLevels };
+                                newLevels[compare[0]] = 3;
+                                newLevels[compare[1]] = 3;
+                                setUpgradeLevels(newLevels);
+                              }}
+                              className={`px-3 py-1 text-xs rounded ${upgradeLevels[compare[0]] === 3 && upgradeLevels[compare[1]] === 3 ? 'bg-purple-600 text-white' : 'bg-gray-700 text-gray-300'}`}
                             >
                               U3 (+30%)
                             </button>
@@ -11810,10 +12068,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <div className="bg-slate-800/80 rounded-lg p-4">
                             <StatBar 
                               label="HEALTH" 
-                              value={getUpgradedValue(vehicle.stats.health, 'health')} 
+                              value={getUpgradedValue(vehicle, 'health')} 
                               baseValue={vehicle.stats.health}
                               maxValue={2000}
-                              upgradeLevel={upgradeLevel}
+                              upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                              onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
                             />
                           </div>
 
@@ -11823,20 +12082,22 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="CRUISE SPEED" 
-                                  value={getUpgradedValue(vehicle.stats.speed, 'speed')} 
+                                  value={getUpgradedValue(vehicle, 'speed')} 
                                   baseValue={vehicle.stats.speed}
                                   maxValue={3000}
-                                  upgradeLevel={upgradeLevel}
+                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="AFTERBURNER SPEED" 
-                                  value={getUpgradedValue(vehicle.stats.afterburnerSpeed, 'afterburnerSpeed')} 
+                                  value={getUpgradedValue(vehicle, 'afterburnerSpeed')} 
                                   baseValue={vehicle.stats.afterburnerSpeed}
                                   maxValue={4000}
-                                  upgradeLevel={upgradeLevel}
+                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
@@ -11849,20 +12110,22 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="CRUISE SPEED" 
-                                  value={vehicle.stats.speed || 0} 
+                                  value={getUpgradedValue(vehicle, 'speed')} 
+                                  baseValue={vehicle.stats.speed}
                                   maxValue={500}
-                                  showUpgrades={true}
-                                  onUpgradeChange={handleUpgradeChange}
+                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="VERTICAL SPEED" 
-                                  value={getUpgradedValue(vehicle.stats.verticalSpeed, 'verticalSpeed')} 
+                                  value={getUpgradedValue(vehicle, 'verticalSpeed')} 
                                   baseValue={vehicle.stats.verticalSpeed}
                                   maxValue={30}
-                                  upgradeLevel={upgradeLevel}
+                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">m/s</div>
                               </div>
@@ -11875,10 +12138,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="SPEED" 
-                                  value={getUpgradedValue(vehicle.stats.speed, 'speed')} 
+                                  value={getUpgradedValue(vehicle, 'speed')} 
                                   baseValue={vehicle.stats.speed}
                                   maxValue={100}
-                                  upgradeLevel={upgradeLevel}
+                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
@@ -11906,10 +12170,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             <div className="bg-slate-800/80 rounded-lg p-4">
                               <StatBar 
                                 label="AGILITY" 
-                                value={getUpgradedValue(vehicle.stats.agility, 'agility')} 
+                                value={getUpgradedValue(vehicle, 'agility')} 
                                 baseValue={vehicle.stats.agility}
                                 maxValue={100}
-                                upgradeLevel={upgradeLevel}
+                                upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
                               />
                             </div>
                           )}
@@ -12035,11 +12300,35 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           </div>
                           <div className="relative w-full pb-[56.25%] mb-4">
                             {vehicle.image ? (
-                              <img 
-                                src={vehicle.image} 
-                                alt={vehicle.name} 
-                                className="absolute inset-0 w-full h-full object-cover"
-                              />
+                              <>
+                                <img 
+                                  src={vehicle.image} 
+                                  alt={vehicle.name} 
+                                  className="absolute inset-0 w-full h-full object-cover"
+                                />
+                                <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-center">
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      // Create a temporary link to download the image
+                                      const link = document.createElement('a');
+                                      link.href = vehicle.image;
+                                      link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
+                                      document.body.appendChild(link);
+                                      link.click();
+                                      document.body.removeChild(link);
+                                    }}
+                                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
+                                  >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                      <polyline points="7 10 12 15 17 10"></polyline>
+                                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    <span>Download Image</span>
+                                  </button>
+                                </div>
+                              </>
                             ) : (
                               <div className="absolute inset-0 bg-slate-700 flex items-center justify-center text-slate-400">
                                 No image available
