@@ -9793,17 +9793,6 @@ const toggleCompare = (id: string) => {
         let fallbackType = ""
         
         // Store original filters for display and fallback logic
-        const originalFilters = { ...filters }
-        
-        // Step 4: Tier enforcement - check if requested tier exists
-        let tierAvailabilityMessage = ""
-        if (originalFilters.tier && !bestVehicle) {
-          // Check if the role exists in other tiers
-          const roleOnlyFilters = { role: originalFilters.role, nation: originalFilters.nation }
-          const roleVehicles = filterVehicles(roleOnlyFilters)
-          if (roleVehicles.length > 0) {
-            const availableTiers = [...new Set(roleVehicles.map(v => v.tier))].sort()
-            tierAvailabilityMessage = `No Tier ${formatTier(originalFilters.tier)} ${originalFilters.role} found. Available tiers: ${availableTiers.map(t => formatTier(t)).join(', ')}.`
           }
         }
         
@@ -12166,9 +12155,7 @@ const toggleCompare = (id: string) => {
         )}
       </main>
     </div>
-  )
-}
-
-
+  );
+};
 
 export default MwtVehicleStats;
