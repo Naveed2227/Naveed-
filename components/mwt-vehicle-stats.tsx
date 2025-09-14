@@ -9033,6 +9033,23 @@ const MwtVehicleStats = () => {
 
 
   // Missile tagging system
+ const rocketPods = [
+  "UB-32-57",
+  "B-8V20",
+  "B-13L",
+  "LAU-61",
+  "LAU-10 x3",
+  "Type 90",
+  "Type 130",
+  "LAU-51",
+  "LAU-51 x2",
+  "B8M1",
+  "B-13L",
+  "Type 90 x2",
+  "JLAU-3/A",
+  "C-13DF",
+];
+
  const antiFlareMissiles = [
   "Kh-47M2 Kinzhal",
   "SAM Rokand",
@@ -9304,18 +9321,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     if (compare.includes(id)) {
       setCompare(compare.filter((vehicleId) => vehicleId !== id))
     } else if (compare.length < 2) {
-      const newCompare = [...compare, id]
-      setCompare(newCompare)
-      
-      // Auto-scroll to comparison when second vehicle is selected
-      if (newCompare.length === 2) {
-        setTimeout(() => {
-          comparisonRef.current?.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start' 
-          })
-        }, 100)
-      }
+      setCompare([...compare, id])
     }
   }
 
@@ -10151,7 +10157,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
             <path d="M12 17L13.09 23.26L22 24L13.09 24.74L12 31L10.91 24.74L2 24L10.91 23.26L12 17Z" opacity="0.6"/>
           </svg>
-          <span className="text-center leading-tight">BP</span>
+          <span>Battle Pass</span>
         </div>
         
         {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
@@ -10472,31 +10478,304 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
       </header>
 
-      <main className="max-w-7xl p-4 sm:p-6 mx-auto px-4 sm:px-6">
-        {compare.length === 2 && (
-          <div ref={comparisonRef} className="mb-8 bg-slate-900/40 rounded-xl p-6 border border-slate-800">
-            <h2 className="text-2xl font-bold text-cyan-400 mb-4">Vehicle Comparison</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {compare.map((id) => {
-                const vehicle = VEHICLES.find((v) => v.id.toString() === id)
-                if (!vehicle) return null
-                return (
-                  <div key={id} className="bg-slate-800/50 rounded-lg p-4">
-                    <div className="flex flex-col items-center mb-4">
-                      <img
-                        src={vehicle.image}
-                        alt={vehicle.name}
-                        className="w-128 h-64 object-cover rounded-lg mb-3"
-                        onError={(e) => {
-                          e.currentTarget.src = "/placeholder-vehicle.png"
-                        }}
-                      />
-                      <div className="flex items-center justify-center space-x-2 mb-2">
-                        <h3 className="text-xl font-semibold text-cyan-300 text-center">{vehicle.name}</h3>
+      <main className="max-w-7xl p-4 sm:p-6 mx-auto px-4 sm:px-6 pb-24">
+        {/* Comparison Bottom Bar */}
+        {compare.length > 0 && (
+          <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 border-t border-slate-700 shadow-lg z-50">
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <h3 className="text-lg font-semibold text-cyan-400">
+                    {compare.length === 1 ? 'Select second vehicle' : 'Comparison ready'}
+                  </h3>
+                  <div className="flex items-center space-x-4">
+                    {compare.map((id, index) => {
+                      const vehicle = VEHICLES.find(v => v.id.toString() === id);
+                      return (
+                        <div key={id} className="relative group w-24 flex-shrink-0">
+                          <div className="relative">
+                            <img 
+                              src={vehicle?.image} 
+                              alt={vehicle?.name}
+                              className="w-24 h-16 object-cover rounded border border-slate-600"
+                              onError={(e) => { e.currentTarget.src = "/placeholder-vehicle.png" }}
+                            />
+                            <div className="absolute -top-2 -right-2 bg-cyan-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                              {index + 1}
+                            </div>
+                            <button 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setCompare(compare.filter(vid => vid !== id));
+                              }}
+                              className="absolute -top-2 -left-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-xs"
+                            >
+                              ×
+                            </button>
+                          </div>
+                          <div className="text-xs text-center mt-1 truncate" title={vehicle?.name}>
+                            {vehicle?.name}
+                          </div>
+                        </div>
+                      );
+                    })}
+                    {compare.length === 1 && (
+                      <div className="w-24 h-16 border-2 border-dashed border-cyan-500 rounded flex flex-col items-center justify-center text-cyan-400">
+                        <div>Select</div>
+                        <div>vehicle</div>
                       </div>
-                    </div>
-                    <p className="text-slate-400 text-sm mb-3">{vehicle.description}</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                    )}
+                  </div>
+                </div>
+                <div className="flex space-x-3">
+                  <button
+                    onClick={() => setCompare([])}
+                    className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  {compare.length === 2 && (
+                    <button
+                      onClick={() => {
+                        comparisonRef.current?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg transition-colors"
+                    >
+                      View Comparison
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {compare.length === 2 && (
+          <div ref={comparisonRef} className="fixed bottom-0 left-0 right-0 bg-slate-900/95 border-t border-slate-700 z-50 p-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold text-cyan-400">Vehicle Comparison</h2>
+                <button 
+                  onClick={() => setCompare([])}
+                  className="text-slate-400 hover:text-white"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Vehicle 1 */}
+                <div className="bg-slate-800/50 p-4 rounded-lg">
+                  {(() => {
+                    const vehicle = VEHICLES.find(v => v.id.toString() === compare[0]);
+                    if (!vehicle) return null;
+                    return (
+                      <div>
+                        <div className="flex items-center space-x-4 mb-4">
+                          <div className="w-20 h-16 bg-slate-700/50 rounded overflow-hidden">
+                            <img
+                              src={vehicle.image}
+                              alt={vehicle.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => { e.currentTarget.src = "/placeholder-vehicle.png" }}
+                            />
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-white">{vehicle.name}</h3>
+                            <div className="text-cyan-400 text-sm">{vehicle.type} • Tier {formatTier(vehicle.tier)}</div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          {[
+                            { label: 'Health', key: 'health', suffix: '' },
+                            { label: 'Speed', key: 'speed', suffix: ' km/h' },
+                            { label: 'Afterburner', key: 'afterburnerSpeed', suffix: ' km/h' },
+                            { label: 'Armor', key: 'armor', suffix: '' },
+                          ].map(({ label, key, suffix }) => {
+                            const value = vehicle.stats?.[key] || 0;
+                            const vehicle2 = VEHICLES.find(v => v.id.toString() === compare[1]);
+                            const value2 = vehicle2?.stats?.[key] || 0;
+                            const isBetter = value > value2;
+                            const isEqual = value === value2;
+                            
+                            return (
+                              <div key={key} className="space-y-1">
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-300">{label}</span>
+                                  <span className={`font-medium ${isBetter ? 'text-green-400' : isEqual ? 'text-slate-300' : 'text-slate-500'}`}>
+                                    {value.toLocaleString()}{suffix}
+                                  </span>
+                                </div>
+                                <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
+                                  <div 
+                                    className={`h-full ${isBetter ? 'bg-cyan-500' : 'bg-slate-600'}`}
+                                    style={{ width: `${Math.min((value / (Math.max(value, value2) * 1.1)) * 100, 100)}%` }}
+                                  ></div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </div>
+                
+                {/* Vehicle 2 */}
+                <div className="bg-slate-800/50 p-4 rounded-lg">
+                  {(() => {
+                    const vehicle = VEHICLES.find(v => v.id.toString() === compare[1]);
+                    if (!vehicle) return null;
+                    return (
+                      <div>
+                        <div className="flex items-center space-x-4 mb-4">
+                          <div className="w-20 h-16 bg-slate-700/50 rounded overflow-hidden">
+                            <img
+                              src={vehicle.image}
+                              alt={vehicle.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => { e.currentTarget.src = "/placeholder-vehicle.png" }}
+                            />
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-white">{vehicle.name}</h3>
+                            <div className="text-cyan-400 text-sm">{vehicle.type} • Tier {formatTier(vehicle.tier)}</div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          {[
+                            { label: 'Health', key: 'health', suffix: '' },
+                            { label: 'Speed', key: 'speed', suffix: ' km/h' },
+                            { label: 'Afterburner', key: 'afterburnerSpeed', suffix: ' km/h' },
+                            { label: 'Armor', key: 'armor', suffix: '' },
+                          ].map(({ label, key, suffix }) => {
+                            const value = vehicle.stats?.[key] || 0;
+                            const vehicle1 = VEHICLES.find(v => v.id.toString() === compare[0]);
+                            const value1 = vehicle1?.stats?.[key] || 0;
+                            const isBetter = value > value1;
+                            const isEqual = value === value1;
+                            
+                            return (
+                              <div key={key} className="space-y-1">
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-300">{label}</span>
+                                  <span className={`font-medium ${isBetter ? 'text-green-400' : isEqual ? 'text-slate-300' : 'text-slate-500'}`}>
+                                    {value.toLocaleString()}{suffix}
+                                  </span>
+                                </div>
+                                <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
+                                  <div 
+                                    className={`h-full ${isBetter ? 'bg-orange-500' : 'bg-slate-600'}`}
+                                    style={{ width: `${Math.min((value / (Math.max(value, value1) * 1.1)) * 100, 100)}%` }}
+                                  ></div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </div>
+              </div>
+              
+              <div className="mt-4 flex justify-center">
+                <button 
+                  onClick={() => setCompare([])}
+                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+                >
+                  Close Comparison
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+            
+            {/* Weapons Comparison */}
+            {(() => {
+              const vehicle1 = VEHICLES.find(v => v.id.toString() === compare[0]);
+              const vehicle2 = VEHICLES.find(v => v.id.toString() === compare[1]);
+              
+              if (!vehicle1?.weapons || !vehicle2?.weapons) return null;
+              
+              const allWeaponNames = [
+                ...new Set([
+                  ...(vehicle1.weapons?.map(w => w.name) || []),
+                  ...(vehicle2.weapons?.map(w => w.name) || [])
+                ])
+              ];
+              
+              return (
+                <div className="p-6 border-t border-slate-700">
+                  <h3 className="text-lg font-semibold text-cyan-400 mb-4">Weapons Comparison</h3>
+                  <div className="space-y-4">
+                    {allWeaponNames.map(weaponName => {
+                      const weapon1 = vehicle1.weapons?.find(w => w.name === weaponName);
+                      const weapon2 = vehicle2.weapons?.find(w => w.name === weaponName);
+                      const tags1 = weapon1 ? missileHasTags(weapon1.name) : [];
+                      const tags2 = weapon2 ? missileHasTags(weapon2.name) : [];
+                      
+                      return (
+                        <div key={weaponName} className="bg-slate-800/50 rounded-lg p-4">
+                          <div className="flex justify-between items-start mb-3">
+                            <h4 className="font-medium text-white">{weaponName}</h4>
+                            <div className="flex flex-wrap gap-1">
+                              {[...new Set([...tags1, ...tags2])].map((tag, i) => (
+                                <span 
+                                  key={i}
+                                  className={`text-xs px-2 py-1 rounded-full ${
+                                    tag === 'anti-flare' ? 'bg-orange-500/20 text-orange-400' :
+                                    tag === 'anti-warning' ? 'bg-red-500/20 text-red-400' :
+                                    tag === 'long-range' ? 'bg-blue-500/20 text-blue-400' :
+                                    tag === 'rocket-pod' ? 'bg-purple-500/20 text-purple-400' :
+                                    tag === 'laser-guided' ? 'bg-green-500/20 text-green-400' :
+                                    'bg-slate-700/50 text-slate-300'
+                                  }`}
+                                >
+                                  {tag.replace('-', ' ')}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          
+                          <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                              {weapon1 ? (
+                                Object.entries(weapon1).filter(([key]) => key !== 'name').map(([key, value]) => (
+                                  <div key={key} className="text-sm">
+                                    <span className="text-slate-400">{key.replace(/([A-Z])/g, ' $1').trim()}: </span>
+                                    <span className="text-white font-medium">{String(value)}</span>
+                                  </div>
+                                ))
+                              ) : (
+                                <div className="text-slate-500 text-sm italic">Not equipped</div>
+                              )}
+                            </div>
+                            
+                            <div className="space-y-2">
+                              {weapon2 ? (
+                                Object.entries(weapon2).filter(([key]) => key !== 'name').map(([key, value]) => (
+                                  <div key={key} className="text-sm">
+                                    <span className="text-slate-400">{key.replace(/([A-Z])/g, ' $1').trim()}: </span>
+                                    <span className="text-white font-medium">{String(value)}</span>
+                                  </div>
+                                ))
+                              ) : (
+                                <div className="text-slate-500 text-sm italic">Not equipped</div>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+        )}
                       <div>
                         <span className="text-slate-400">Health:</span>
                         <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.health.toLocaleString()}</span>
@@ -10835,19 +11114,40 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     Weapons
                   </button>
                   
-                  <button
-                    onClick={() => toggleCompare(vehicle.id.toString())}
-                    disabled={compare.length >= 2 && !compare.includes(vehicle.id.toString())}
-                    className={`flex-1 px-4 py-2 text-sm font-semibold rounded transition-all duration-200 shadow-md ${
-                      compare.includes(vehicle.id.toString())
-                        ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700"
-                        : compare.length >= 2
-                          ? "bg-slate-600 text-slate-400 cursor-not-allowed"
-                          : "bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800"
-                    }`}
-                  >
-                    {compare.includes(vehicle.id.toString()) ? "✓ Compare" : "Compare"}
-                  </button>
+                  <div className="relative flex-1">
+                    <button
+                      onClick={() => {
+                        if (compare.length < 2 || compare.includes(vehicle.id.toString())) {
+                          toggleCompare(vehicle.id.toString());
+                        }
+                      }}
+                      disabled={compare.length >= 2 && !compare.includes(vehicle.id.toString())}
+                      className={`w-full px-4 py-2 text-sm font-semibold rounded transition-all duration-200 shadow-md flex items-center justify-center gap-2 ${
+                        compare.includes(vehicle.id.toString())
+                          ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700"
+                          : compare.length > 0
+                            ? "bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:from-amber-600 hover:to-orange-700"
+                            : "bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800"
+                      } ${compare.length >= 2 && !compare.includes(vehicle.id.toString()) ? "opacity-50 cursor-not-allowed" : ""}`}
+                    >
+                      {compare.includes(vehicle.id.toString()) 
+                        ? <span className="flex items-center">
+                            <span className="bg-white/20 rounded-full w-5 h-5 flex items-center justify-center mr-1">
+                              {compare.indexOf(vehicle.id.toString()) + 1}
+                            </span>
+                            Selected
+                          </span>
+                        : compare.length > 0 
+                          ? `Select (${compare.length}/2)`
+                          : "Compare"
+                      }
+                    </button>
+                    {compare.length > 0 && !compare.includes(vehicle.id.toString()) && (
+                      <div className="absolute -top-2 -right-2 bg-amber-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                        {compare.length}/2
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -10866,10 +11166,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         {vehicle.weapons.map((weapon: any, idx: number) => (
                           <div key={idx} className="bg-slate-800/30 rounded p-2">
                             <div className="flex justify-between items-start">
-                              <div>
-                                <div className="font-medium text-cyan-200">{weapon.name}</div>
-                                <div className="text-xs text-slate-400">{weapon.type}</div>
-                              </div>
+                              <div className="font-medium text-cyan-200">{weapon.name}</div>
                               <div className="text-right text-xs">
                                 <div className="text-cyan-300 font-bold">DMG: {weapon.damage}</div>
                                 <div className="text-cyan-300 font-bold">PEN: {weapon.penetration}</div>
@@ -11624,11 +11921,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           {vehicle.weapons?.length > 0 ? (
                             vehicle.weapons.map((weapon: any, idx: number) => (
                               <div key={idx} className="bg-slate-800/80 rounded-lg p-3 border border-slate-700/50">
-                                <div className="flex items-center justify-between mb-2">
+                                <div className="mb-2">
                                   <h4 className="text-base font-medium text-cyan-300">{weapon.name}</h4>
-                                  <span className="text-xs bg-cyan-900/30 text-cyan-300 px-2 py-0.5 rounded">
-                                    {weapon.type || 'WEAPON'}
-                                  </span>
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 text-sm">
                                   <div>
@@ -11650,6 +11944,62 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                     </div>
                                   )}
                                 </div>
+                                <div className="mt-2 flex flex-wrap gap-1">
+                                  {missileHasTags(weapon.name).map((tag, tagIndex) => (
+                                    <div key={tagIndex} className="flex items-center gap-1 bg-slate-700/50 px-2 py-1 rounded text-xs">
+                                      {tag === 'anti-flare' && (
+                                        <>
+                                          <div className="w-3 h-3 text-orange-400">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                            </svg>
+                                          </div>
+                                          <span className="text-orange-400 font-medium">Anti-Flare</span>
+                                        </>
+                                      )}
+                                      {tag === 'anti-warning' && (
+                                        <>
+                                          <div className="w-3 h-3 text-red-400">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                            </svg>
+                                          </div>
+                                          <span className="text-red-400 font-medium">Anti-Warning</span>
+                                        </>
+                                      )}
+                                      {tag === 'long-range' && (
+                                        <>
+                                          <div className="w-3 h-3 text-blue-400">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                                            </svg>
+                                          </div>
+                                          <span className="text-blue-400 font-medium">Long-Range</span>
+                                        </>
+                                      )}
+                                      {tag === 'rocket-pod' && (
+                                        <>
+                                          <div className="w-3 h-3 text-purple-400">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                              <path d="M12 2C11.45 2 11 2.45 11 3v9H5l7 7 7-7h-6V3c0-.55-.45-1-1-1z"/>
+                                            </svg>
+                                          </div>
+                                          <span className="text-purple-400 font-medium">Rocket-Pod</span>
+                                        </>
+                                      )}
+                                      {tag === 'laser-guided' && (
+                                        <>
+                                          <div className="w-3 h-3 text-green-400">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                              <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
+                                            </svg>
+                                          </div>
+                                          <span className="text-green-400 font-medium">Laser-Guided</span>
+                                        </>
+                                      )}
+                                    </div>
+                                  ))}
+                                </div>
                               </div>
                             ))
                           ) : (
@@ -11659,9 +12009,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
                     </div>
 
-                    {/* Right column - Vehicle Image */}
+                    {/* Right column - Vehicle Image and Description */}
                     <div className="w-full lg:w-1/2">
-                      <div className="bg-slate-800/80 rounded-lg overflow-hidden h-full">
+                      <div className="bg-slate-800/80 rounded-lg overflow-hidden">
                         <div className="p-4">
                           <div className="flex flex-wrap gap-2 justify-center mb-4">
                             <span className="px-2 py-1 bg-slate-700/90 text-xs rounded-full text-slate-300">
@@ -11670,8 +12020,18 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             <span className="px-2 py-1 bg-blue-900/50 text-xs rounded-full text-blue-300">
                               Tier {formatTier(vehicle.tier)}
                             </span>
+                            <span className={`px-2 py-1 text-xs rounded-full ${
+                              getVehicleRarity(vehicle.name) === 'Common' ? 'bg-gray-600 text-white' :
+                              getVehicleRarity(vehicle.name) === 'Enhanced' ? 'bg-green-600 text-white' :
+                              getVehicleRarity(vehicle.name) === 'Rare' ? 'bg-blue-600 text-white' :
+                              getVehicleRarity(vehicle.name) === 'Epic' ? 'bg-purple-600 text-white' :
+                              getVehicleRarity(vehicle.name) === 'Legendary' ? 'bg-yellow-600 text-white' :
+                              'bg-cyan-500 text-white'
+                            }`}>
+                              {getVehicleRarity(vehicle.name) || 'Standard'}
+                            </span>
                           </div>
-                          <div className="relative w-full pb-[56.25%]">
+                          <div className="relative w-full pb-[56.25%] mb-4">
                             {vehicle.image ? (
                               <img 
                                 src={vehicle.image} 
@@ -11679,21 +12039,31 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 className="absolute inset-0 w-full h-full object-cover"
                               />
                             ) : (
-                              <div className="absolute inset-0 bg-slate-800 flex items-center justify-center text-slate-500">
+                              <div className="absolute inset-0 bg-slate-700 flex items-center justify-center text-slate-400">
                                 No image available
                               </div>
                             )}
                           </div>
-                          {vehicle.description && (
-                            <div className="p-4">
-                              <p className="text-slate-300 text-sm">{vehicle.description}</p>
-                            </div>
-                          )}
+                        </div>
+                        
+                        {/* Description section - Moved to be directly under the image */}
+                        {vehicle.description && (
+                          <div className="px-4 pb-4 -mt-2">
+                            <div className="text-sm font-bold text-cyan-400 mb-1 uppercase tracking-wider">DESCRIPTION</div>
+                            <p className="text-slate-300 text-sm">{vehicle.description}</p>
+                          </div>
+                        )}
+                        
+                        {/* Vehicle Specifications */}
+                        <div className="p-4 border-t border-slate-700">
+                          <h3 className="text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">VEHICLE SPECIFICATIONS</h3>
+                          <div className="grid grid-cols-2 gap-3">
+                            {/* Add your vehicle specification items here */}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  
                 </div>
               </motion.div>
             </div>
@@ -11814,7 +12184,5 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     </div>
   )
 }
-
-
 
 export default MwtVehicleStats;
