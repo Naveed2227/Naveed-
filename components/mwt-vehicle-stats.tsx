@@ -9033,23 +9033,6 @@ const MwtVehicleStats = () => {
 
 
   // Missile tagging system
- const rocketPods = [
-  "UB-32-57",
-  "B-8V20",
-  "B-13L",
-  "LAU-61",
-  "LAU-10 x3",
-  "Type 90",
-  "Type 130",
-  "LAU-51",
-  "LAU-51 x2",
-  "B8M1",
-  "B-13L",
-  "Type 90 x2",
-  "JLAU-3/A",
-  "C-13DF",
-];
-
  const antiFlareMissiles = [
   "Kh-47M2 Kinzhal",
   "SAM Rokand",
@@ -9321,7 +9304,18 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     if (compare.includes(id)) {
       setCompare(compare.filter((vehicleId) => vehicleId !== id))
     } else if (compare.length < 2) {
-      setCompare([...compare, id])
+      const newCompare = [...compare, id]
+      setCompare(newCompare)
+      
+      // Auto-scroll to comparison when second vehicle is selected
+      if (newCompare.length === 2) {
+        setTimeout(() => {
+          comparisonRef.current?.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          })
+        }, 100)
+      }
     }
   }
 
@@ -10157,7 +10151,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
             <path d="M12 17L13.09 23.26L22 24L13.09 24.74L12 31L10.91 24.74L2 24L10.91 23.26L12 17Z" opacity="0.6"/>
           </svg>
-          <span>Battle Pass</span>
+          <span className="text-center leading-tight">BP</span>
         </div>
         
         {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
@@ -10551,231 +10545,29 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         )}
         
         {compare.length === 2 && (
-          <div ref={comparisonRef} className="fixed bottom-0 left-0 right-0 bg-slate-900/95 border-t border-slate-700 z-50 p-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-cyan-400">Vehicle Comparison</h2>
-                <button 
-                  onClick={() => setCompare([])}
-                  className="text-slate-400 hover:text-white"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Vehicle 1 */}
-                <div className="bg-slate-800/50 p-4 rounded-lg">
-                  {(() => {
-                    const vehicle = VEHICLES.find(v => v.id.toString() === compare[0]);
-                    if (!vehicle) return null;
-                    return (
-                      <div>
-                        <div className="flex items-center space-x-4 mb-4">
-                          <div className="w-20 h-16 bg-slate-700/50 rounded overflow-hidden">
-                            <img
-                              src={vehicle.image}
-                              alt={vehicle.name}
-                              className="w-full h-full object-cover"
-                              onError={(e) => { e.currentTarget.src = "/placeholder-vehicle.png" }}
-                            />
-                          </div>
-                          <div>
-                            <h3 className="font-bold text-white">{vehicle.name}</h3>
-                            <div className="text-cyan-400 text-sm">{vehicle.type} • Tier {formatTier(vehicle.tier)}</div>
-                          </div>
-                        </div>
-                        
-                        <div className="space-y-3">
-                          {[
-                            { label: 'Health', key: 'health', suffix: '' },
-                            { label: 'Speed', key: 'speed', suffix: ' km/h' },
-                            { label: 'Afterburner', key: 'afterburnerSpeed', suffix: ' km/h' },
-                            { label: 'Armor', key: 'armor', suffix: '' },
-                          ].map(({ label, key, suffix }) => {
-                            const value = vehicle.stats?.[key] || 0;
-                            const vehicle2 = VEHICLES.find(v => v.id.toString() === compare[1]);
-                            const value2 = vehicle2?.stats?.[key] || 0;
-                            const isBetter = value > value2;
-                            const isEqual = value === value2;
-                            
-                            return (
-                              <div key={key} className="space-y-1">
-                                <div className="flex justify-between text-sm">
-                                  <span className="text-slate-300">{label}</span>
-                                  <span className={`font-medium ${isBetter ? 'text-green-400' : isEqual ? 'text-slate-300' : 'text-slate-500'}`}>
-                                    {value.toLocaleString()}{suffix}
-                                  </span>
-                                </div>
-                                <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
-                                  <div 
-                                    className={`h-full ${isBetter ? 'bg-cyan-500' : 'bg-slate-600'}`}
-                                    style={{ width: `${Math.min((value / (Math.max(value, value2) * 1.1)) * 100, 100)}%` }}
-                                  ></div>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
+          <div ref={comparisonRef} className="mb-8 bg-slate-900/40 rounded-xl p-6 border border-slate-800">
+            <h2 className="text-2xl font-bold text-cyan-400 mb-4">Vehicle Comparison</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              {compare.map((id) => {
+                const vehicle = VEHICLES.find((v) => v.id.toString() === id)
+                if (!vehicle) return null
+                return (
+                  <div key={id} className="bg-slate-800/50 rounded-lg p-4">
+                    <div className="flex flex-col items-center mb-4">
+                      <img
+                        src={vehicle.image}
+                        alt={vehicle.name}
+                        className="w-128 h-64 object-cover rounded-lg mb-3"
+                        onError={(e) => {
+                          e.currentTarget.src = "/placeholder-vehicle.png"
+                        }}
+                      />
+                      <div className="flex items-center justify-center space-x-2 mb-2">
+                        <h3 className="text-xl font-semibold text-cyan-300 text-center">{vehicle.name}</h3>
                       </div>
-                    );
-                  })()}
-                </div>
-                
-                {/* Vehicle 2 */}
-                <div className="bg-slate-800/50 p-4 rounded-lg">
-                  {(() => {
-                    const vehicle = VEHICLES.find(v => v.id.toString() === compare[1]);
-                    if (!vehicle) return null;
-                    return (
-                      <div>
-                        <div className="flex items-center space-x-4 mb-4">
-                          <div className="w-20 h-16 bg-slate-700/50 rounded overflow-hidden">
-                            <img
-                              src={vehicle.image}
-                              alt={vehicle.name}
-                              className="w-full h-full object-cover"
-                              onError={(e) => { e.currentTarget.src = "/placeholder-vehicle.png" }}
-                            />
-                          </div>
-                          <div>
-                            <h3 className="font-bold text-white">{vehicle.name}</h3>
-                            <div className="text-cyan-400 text-sm">{vehicle.type} • Tier {formatTier(vehicle.tier)}</div>
-                          </div>
-                        </div>
-                        
-                        <div className="space-y-3">
-                          {[
-                            { label: 'Health', key: 'health', suffix: '' },
-                            { label: 'Speed', key: 'speed', suffix: ' km/h' },
-                            { label: 'Afterburner', key: 'afterburnerSpeed', suffix: ' km/h' },
-                            { label: 'Armor', key: 'armor', suffix: '' },
-                          ].map(({ label, key, suffix }) => {
-                            const value = vehicle.stats?.[key] || 0;
-                            const vehicle1 = VEHICLES.find(v => v.id.toString() === compare[0]);
-                            const value1 = vehicle1?.stats?.[key] || 0;
-                            const isBetter = value > value1;
-                            const isEqual = value === value1;
-                            
-                            return (
-                              <div key={key} className="space-y-1">
-                                <div className="flex justify-between text-sm">
-                                  <span className="text-slate-300">{label}</span>
-                                  <span className={`font-medium ${isBetter ? 'text-green-400' : isEqual ? 'text-slate-300' : 'text-slate-500'}`}>
-                                    {value.toLocaleString()}{suffix}
-                                  </span>
-                                </div>
-                                <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
-                                  <div 
-                                    className={`h-full ${isBetter ? 'bg-orange-500' : 'bg-slate-600'}`}
-                                    style={{ width: `${Math.min((value / (Math.max(value, value1) * 1.1)) * 100, 100)}%` }}
-                                  ></div>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    );
-                  })()}
-                </div>
-              </div>
-              
-              <div className="mt-4 flex justify-center">
-                <button 
-                  onClick={() => setCompare([])}
-                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
-                >
-                  Close Comparison
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-            
-            {/* Weapons Comparison */}
-            {(() => {
-              const vehicle1 = VEHICLES.find(v => v.id.toString() === compare[0]);
-              const vehicle2 = VEHICLES.find(v => v.id.toString() === compare[1]);
-              
-              if (!vehicle1?.weapons || !vehicle2?.weapons) return null;
-              
-              const allWeaponNames = [
-                ...new Set([
-                  ...(vehicle1.weapons?.map(w => w.name) || []),
-                  ...(vehicle2.weapons?.map(w => w.name) || [])
-                ])
-              ];
-              
-              return (
-                <div className="p-6 border-t border-slate-700">
-                  <h3 className="text-lg font-semibold text-cyan-400 mb-4">Weapons Comparison</h3>
-                  <div className="space-y-4">
-                    {allWeaponNames.map(weaponName => {
-                      const weapon1 = vehicle1.weapons?.find(w => w.name === weaponName);
-                      const weapon2 = vehicle2.weapons?.find(w => w.name === weaponName);
-                      const tags1 = weapon1 ? missileHasTags(weapon1.name) : [];
-                      const tags2 = weapon2 ? missileHasTags(weapon2.name) : [];
-                      
-                      return (
-                        <div key={weaponName} className="bg-slate-800/50 rounded-lg p-4">
-                          <div className="flex justify-between items-start mb-3">
-                            <h4 className="font-medium text-white">{weaponName}</h4>
-                            <div className="flex flex-wrap gap-1">
-                              {[...new Set([...tags1, ...tags2])].map((tag, i) => (
-                                <span 
-                                  key={i}
-                                  className={`text-xs px-2 py-1 rounded-full ${
-                                    tag === 'anti-flare' ? 'bg-orange-500/20 text-orange-400' :
-                                    tag === 'anti-warning' ? 'bg-red-500/20 text-red-400' :
-                                    tag === 'long-range' ? 'bg-blue-500/20 text-blue-400' :
-                                    tag === 'rocket-pod' ? 'bg-purple-500/20 text-purple-400' :
-                                    tag === 'laser-guided' ? 'bg-green-500/20 text-green-400' :
-                                    'bg-slate-700/50 text-slate-300'
-                                  }`}
-                                >
-                                  {tag.replace('-', ' ')}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                              {weapon1 ? (
-                                Object.entries(weapon1).filter(([key]) => key !== 'name').map(([key, value]) => (
-                                  <div key={key} className="text-sm">
-                                    <span className="text-slate-400">{key.replace(/([A-Z])/g, ' $1').trim()}: </span>
-                                    <span className="text-white font-medium">{String(value)}</span>
-                                  </div>
-                                ))
-                              ) : (
-                                <div className="text-slate-500 text-sm italic">Not equipped</div>
-                              )}
-                            </div>
-                            
-                            <div className="space-y-2">
-                              {weapon2 ? (
-                                Object.entries(weapon2).filter(([key]) => key !== 'name').map(([key, value]) => (
-                                  <div key={key} className="text-sm">
-                                    <span className="text-slate-400">{key.replace(/([A-Z])/g, ' $1').trim()}: </span>
-                                    <span className="text-white font-medium">{String(value)}</span>
-                                  </div>
-                                ))
-                              ) : (
-                                <div className="text-slate-500 text-sm italic">Not equipped</div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })()}
-          </div>
-        )}
+                    </div>
+                    <p className="text-slate-400 text-sm mb-3">{vehicle.description}</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                       <div>
                         <span className="text-slate-400">Health:</span>
                         <span className="text-cyan-300 font-medium ml-2">{vehicle.stats.health.toLocaleString()}</span>
@@ -12044,22 +11836,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               </div>
                             )}
                           </div>
-                        </div>
-                        
-                        {/* Description section - Moved to be directly under the image */}
-                        {vehicle.description && (
-                          <div className="px-4 pb-4 -mt-2">
-                            <div className="text-sm font-bold text-cyan-400 mb-1 uppercase tracking-wider">DESCRIPTION</div>
-                            <p className="text-slate-300 text-sm">{vehicle.description}</p>
-                          </div>
-                        )}
-                        
-                        {/* Vehicle Specifications */}
-                        <div className="p-4 border-t border-slate-700">
-                          <h3 className="text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">VEHICLE SPECIFICATIONS</h3>
-                          <div className="grid grid-cols-2 gap-3">
-                            {/* Add your vehicle specification items here */}
-                          </div>
+                          
+                          {/* Description section */}
+                          {vehicle.description && (
+                            <div className="pt-4 border-t border-slate-700">
+                              <h4 className="text-base font-bold text-cyan-300 mb-2">DESCRIPTION</h4>
+                              <p className="text-slate-300 text-sm">{vehicle.description}</p>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -12184,5 +11968,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     </div>
   )
 }
+
+
 
 export default MwtVehicleStats;
