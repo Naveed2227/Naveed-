@@ -11637,6 +11637,26 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 
                 {/* Main content */}
                 <div className="p-6 bg-slate-900">
+                  {/* Image and Description - Mobile First (shown before other content) */}
+                  <div className="block lg:hidden mb-6">
+                    <div className="bg-slate-800/80 rounded-lg overflow-hidden">
+                      <img
+                        src={vehicle.image}
+                        alt={vehicle.name}
+                        className="w-full h-64 object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = "/placeholder-vehicle.png"
+                        }}
+                      />
+                      {vehicle.description && (
+                        <div className="p-4">
+                          <h4 className="text-base font-bold text-cyan-300 mb-2">DESCRIPTION</h4>
+                          <p className="text-slate-300 text-sm">{vehicle.description}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
                   <div className="flex flex-col lg:flex-row gap-6">
                     {/* Left column - Stats and Weapons */}
                     <div className="w-full lg:w-1/2">
@@ -11801,8 +11821,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
                     </div>
 
-                    {/* Right column - Vehicle Image and Description */}
-                    <div className="w-full lg:w-1/2">
+                    {/* Right column - Vehicle Image and Description (Desktop only) */}
+                    <div className="hidden lg:block lg:w-1/2">
                       <div className="bg-slate-800/80 rounded-lg overflow-hidden">
                         <div className="p-4">
                           <div className="flex flex-wrap gap-2 justify-center mb-4">
