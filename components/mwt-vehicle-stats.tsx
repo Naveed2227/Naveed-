@@ -10157,7 +10157,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
             <path d="M12 17L13.09 23.26L22 24L13.09 24.74L12 31L10.91 24.74L2 24L10.91 23.26L12 17Z" opacity="0.6"/>
           </svg>
-          <span className="text-center leading-tight">BP</span>
+          <span>Battle Pass</span>
         </div>
         
         {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
@@ -10551,129 +10551,147 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         )}
         
         {compare.length === 2 && (
-          <div ref={comparisonRef} className="mb-8 bg-slate-900/40 rounded-xl border border-slate-800 overflow-hidden">
-            <div className="bg-slate-800/50 px-6 py-4 border-b border-slate-700">
-              <h2 className="text-2xl font-bold text-cyan-400">Vehicle Comparison</h2>
-              <p className="text-slate-400 text-sm">Compare stats between two vehicles</p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3">
-              {/* Left Vehicle */}
-              <div className="p-6">
-                {(() => {
-                  const vehicle = VEHICLES.find(v => v.id.toString() === compare[0]);
-                  if (!vehicle) return null;
-                  return (
-                    <div className="flex flex-col items-center">
-                      <div className="relative w-full h-40 bg-slate-800/50 rounded-lg overflow-hidden mb-3">
-                        <img
-                          src={vehicle.image}
-                          alt={vehicle.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => { e.currentTarget.src = "/placeholder-vehicle.png" }}
-                        />
-                      </div>
-                      <h3 className="text-lg font-bold text-white text-center">{vehicle.name}</h3>
-                      <div className="text-cyan-400 text-sm mb-2">{vehicle.type}</div>
-                      <div className="text-slate-400 text-xs">Tier {formatTier(vehicle.tier)}</div>
-                    </div>
-                  );
-                })()}
-              </div>
-              
-              {/* Right Vehicle */}
-              <div className="p-6">
-                {(() => {
-                  const vehicle = VEHICLES.find(v => v.id.toString() === compare[1]);
-                  if (!vehicle) return null;
-                  return (
-                    <div className="flex flex-col items-center">
-                      <div className="relative w-full h-40 bg-slate-800/50 rounded-lg overflow-hidden mb-3">
-                        <img
-                          src={vehicle.image}
-                          alt={vehicle.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => { e.currentTarget.src = "/placeholder-vehicle.png" }}
-                        />
-                      </div>
-                      <h3 className="text-lg font-bold text-white text-center">{vehicle.name}</h3>
-                      <div className="text-cyan-400 text-sm mb-2">{vehicle.type}</div>
-                      <div className="text-slate-400 text-xs">Tier {formatTier(vehicle.tier)}</div>
-                    </div>
-                  );
-                })()}
-              </div>
-              
-              {/* Close Button */}
-              <div className="p-4 flex justify-end">
-                <button
+          <div ref={comparisonRef} className="fixed bottom-0 left-0 right-0 bg-slate-900/95 border-t border-slate-700 z-50 p-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold text-cyan-400">Vehicle Comparison</h2>
+                <button 
                   onClick={() => setCompare([])}
                   className="text-slate-400 hover:text-white"
                 >
                   <X size={20} />
                 </button>
               </div>
-            </div>
-            
-            {/* Stats Comparison */}
-            <div className="p-6 bg-slate-800/30 border-t border-slate-700">
-              <h3 className="text-lg font-semibold text-cyan-400 mb-4">Stats Comparison</h3>
-              <div className="space-y-6">
-                {[
-                  { label: 'Health', key: 'health', suffix: '' },
-                  { label: 'Speed', key: 'speed', suffix: ' km/h' },
-                  { label: 'Afterburner Speed', key: 'afterburnerSpeed', suffix: ' km/h' },
-                  { label: 'Acceleration', key: 'acceleration', suffix: ' m/s²' },
-                  { label: 'Turn Rate', key: 'turnRate', suffix: ' °/s' },
-                  { label: 'Armor', key: 'armor', suffix: '' },
-                  { label: 'Weapon Slots', key: 'weaponSlots', suffix: '' },
-                ].map(({ label, key, suffix }) => {
-                  const vehicle1 = VEHICLES.find(v => v.id.toString() === compare[0]);
-                  const vehicle2 = VEHICLES.find(v => v.id.toString() === compare[1]);
-                  
-                  if (!vehicle1 || !vehicle2) return null;
-                  
-                  const value1 = vehicle1.stats?.[key] || 0;
-                  const value2 = vehicle2.stats?.[key] || 0;
-                  const difference = value1 - value2;
-                  const maxValue = Math.max(value1, value2) * 1.1; // Add 10% padding
-                  
-                  return (
-                    <div key={key} className="space-y-1">
-                      <div className="flex justify-between text-sm text-slate-300 mb-1">
-                        <span>{label}</span>
-                        <div className="flex space-x-4">
-                          <span className={`font-medium ${difference > 0 ? 'text-green-400' : 'text-slate-300'}`}>
-                            {value1.toLocaleString()}{suffix}
-                          </span>
-                          <span>vs</span>
-                          <span className={`font-medium ${difference < 0 ? 'text-orange-400' : 'text-slate-300'}`}>
-                            {value2.toLocaleString()}{suffix}
-                          </span>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Vehicle 1 */}
+                <div className="bg-slate-800/50 p-4 rounded-lg">
+                  {(() => {
+                    const vehicle = VEHICLES.find(v => v.id.toString() === compare[0]);
+                    if (!vehicle) return null;
+                    return (
+                      <div>
+                        <div className="flex items-center space-x-4 mb-4">
+                          <div className="w-20 h-16 bg-slate-700/50 rounded overflow-hidden">
+                            <img
+                              src={vehicle.image}
+                              alt={vehicle.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => { e.currentTarget.src = "/placeholder-vehicle.png" }}
+                            />
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-white">{vehicle.name}</h3>
+                            <div className="text-cyan-400 text-sm">{vehicle.type} • Tier {formatTier(vehicle.tier)}</div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-3">
+                          {[
+                            { label: 'Health', key: 'health', suffix: '' },
+                            { label: 'Speed', key: 'speed', suffix: ' km/h' },
+                            { label: 'Afterburner', key: 'afterburnerSpeed', suffix: ' km/h' },
+                            { label: 'Armor', key: 'armor', suffix: '' },
+                          ].map(({ label, key, suffix }) => {
+                            const value = vehicle.stats?.[key] || 0;
+                            const vehicle2 = VEHICLES.find(v => v.id.toString() === compare[1]);
+                            const value2 = vehicle2?.stats?.[key] || 0;
+                            const isBetter = value > value2;
+                            const isEqual = value === value2;
+                            
+                            return (
+                              <div key={key} className="space-y-1">
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-300">{label}</span>
+                                  <span className={`font-medium ${isBetter ? 'text-green-400' : isEqual ? 'text-slate-300' : 'text-slate-500'}`}>
+                                    {value.toLocaleString()}{suffix}
+                                  </span>
+                                </div>
+                                <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
+                                  <div 
+                                    className={`h-full ${isBetter ? 'bg-cyan-500' : 'bg-slate-600'}`}
+                                    style={{ width: `${Math.min((value / (Math.max(value, value2) * 1.1)) * 100, 100)}%` }}
+                                  ></div>
+                                </div>
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
-                      
-                      <div className="relative h-4 bg-slate-700/50 rounded-full overflow-hidden">
-                        <div 
-                          className="absolute top-0 bottom-0 left-0 bg-gradient-to-r from-cyan-500/70 to-cyan-600/70"
-                          style={{ width: `${(value1 / maxValue) * 100}%` }}
-                        ></div>
-                        <div 
-                          className="absolute top-0 bottom-0 right-0 bg-gradient-to-l from-orange-500/70 to-orange-600/70"
-                          style={{ width: `${(value2 / maxValue) * 100}%` }}
-                        ></div>
-                      </div>
-                      
-                      {difference !== 0 && (
-                        <div className={`text-xs text-right ${difference > 0 ? 'text-cyan-400' : 'text-orange-400'}`}>
-                          {Math.abs(difference).toLocaleString()}{suffix} {difference > 0 ? 'better' : 'worse'}
+                    );
+                  })()}
+                </div>
+                
+                {/* Vehicle 2 */}
+                <div className="bg-slate-800/50 p-4 rounded-lg">
+                  {(() => {
+                    const vehicle = VEHICLES.find(v => v.id.toString() === compare[1]);
+                    if (!vehicle) return null;
+                    return (
+                      <div>
+                        <div className="flex items-center space-x-4 mb-4">
+                          <div className="w-20 h-16 bg-slate-700/50 rounded overflow-hidden">
+                            <img
+                              src={vehicle.image}
+                              alt={vehicle.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => { e.currentTarget.src = "/placeholder-vehicle.png" }}
+                            />
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-white">{vehicle.name}</h3>
+                            <div className="text-cyan-400 text-sm">{vehicle.type} • Tier {formatTier(vehicle.tier)}</div>
+                          </div>
                         </div>
-                      )}
-                    </div>
-                  );
-                })}
+                        
+                        <div className="space-y-3">
+                          {[
+                            { label: 'Health', key: 'health', suffix: '' },
+                            { label: 'Speed', key: 'speed', suffix: ' km/h' },
+                            { label: 'Afterburner', key: 'afterburnerSpeed', suffix: ' km/h' },
+                            { label: 'Armor', key: 'armor', suffix: '' },
+                          ].map(({ label, key, suffix }) => {
+                            const value = vehicle.stats?.[key] || 0;
+                            const vehicle1 = VEHICLES.find(v => v.id.toString() === compare[0]);
+                            const value1 = vehicle1?.stats?.[key] || 0;
+                            const isBetter = value > value1;
+                            const isEqual = value === value1;
+                            
+                            return (
+                              <div key={key} className="space-y-1">
+                                <div className="flex justify-between text-sm">
+                                  <span className="text-slate-300">{label}</span>
+                                  <span className={`font-medium ${isBetter ? 'text-green-400' : isEqual ? 'text-slate-300' : 'text-slate-500'}`}>
+                                    {value.toLocaleString()}{suffix}
+                                  </span>
+                                </div>
+                                <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
+                                  <div 
+                                    className={`h-full ${isBetter ? 'bg-orange-500' : 'bg-slate-600'}`}
+                                    style={{ width: `${Math.min((value / (Math.max(value, value1) * 1.1)) * 100, 100)}%` }}
+                                  ></div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </div>
+              </div>
+              
+              <div className="mt-4 flex justify-center">
+                <button 
+                  onClick={() => setCompare([])}
+                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+                >
+                  Close Comparison
+                </button>
               </div>
             </div>
+          </div>
+        )}
             
             {/* Weapons Comparison */}
             {(() => {
