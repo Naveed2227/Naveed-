@@ -8944,29 +8944,34 @@ const MwtVehicleStats = () => {
   const [showCredits, setShowCredits] = useState(false)
 
   const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
+  const [vehicleDetailsOpenId, setVehicleDetailsOpenId] = useState<string | null>(null)
   const weaponsModalRef = useRef<HTMLDivElement>(null)
+  const vehicleDetailsModalRef = useRef<HTMLDivElement>(null)
   
    // Auto-scroll chat to bottom when messages change
   useEffect(() => {
     chatMessagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatMessages]);
 
-  // Click outside handler for weapons modal
+  // Click outside handler for modals
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (weaponsModalRef.current && !weaponsModalRef.current.contains(event.target as Node)) {
         setWeaponsModalOpenId(null)
       }
+      if (vehicleDetailsModalRef.current && !vehicleDetailsModalRef.current.contains(event.target as Node)) {
+        setVehicleDetailsOpenId(null)
+      }
     }
 
-    if (weaponsModalOpenId) {
+    if (weaponsModalOpenId || vehicleDetailsOpenId) {
       document.addEventListener('mousedown', handleClickOutside)
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [weaponsModalOpenId])
+  }, [weaponsModalOpenId, vehicleDetailsOpenId])
   
   // Sidebar state
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -10788,7 +10793,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 {/* First Row: View Details and Bot Icon */}
                 <div className="flex justify-between items-center gap-2">
                   <button
-                    onClick={() => openVehicleDetails(vehicle)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setVehicleDetailsOpenId(vehicle.id.toString());
+                    }}
                     className="flex-1 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg text-center"
                   >
                     View Details
@@ -11493,6 +11501,136 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             </div>
           </div>
         )}
+
+        {vehicleDetailsOpenId && (() => {
+          const vehicle = VEHICLES.find(v => v.id.toString() === vehicleDetailsOpenId);
+          if (!vehicle) return null;
+          
+          return (
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+              <motion.div 
+                ref={vehicleDetailsModalRef}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                className="bg-slate-900/95 border border-slate-700 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+              >
+                {/* Header with close button */}
+                <div className="p-4 border-b border-slate-700 flex justify-between items-center">
+                  <h2 className="text-xl font-bold text-white">{vehicle.name}</h2>
+                  <button
+                    onClick={() => setVehicleDetailsOpenId(null)}
+                    className="p-1.5 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                
+                {/* Main content */}
+                <div className="p-6">
+                  {/* Vehicle info and stats */}
+                  <div className="flex flex-col md:flex-row gap-6 mb-6">
+                    {/* Stats on the left */}
+                    <div className="w-full md:w-1/2">
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="bg-slate-800/50 rounded-lg p-4">
+                          <div className="text-sm text-slate-400 mb-1">Health</div>
+                          <div className="text-2xl font-bold text-cyan-300">{vehicle.stats.health || 'N/A'}</div>
+                        </div>
+                        <div className="bg-slate-800/50 rounded-lg p-4">
+                          <div className="text-sm text-slate-400 mb-1">Speed</div>
+                          <div className="text-2xl font-bold text-cyan-300">{vehicle.stats.speed || 'N/A'}</div>
+                        </div>
+                        <div className="bg-slate-800/50 rounded-lg p-4">
+                          <div className="text-sm text-slate-400 mb-1">Armor</div>
+                          <div className="text-2xl font-bold text-cyan-300">{vehicle.stats.armor || 'N/A'}</div>
+                        </div>
+                        <div className="bg-slate-800/50 rounded-lg p-4">
+                          <div className="text-sm text-slate-400 mb-1">Agility</div>
+                          <div className="text-2xl font-bold text-cyan-300">{vehicle.stats.agility || 'N/A'}</div>
+                        </div>
+                      </div>
+                      
+                      {/* Weapon Systems */}
+                      <div className="mt-6">
+                        <h3 className="text-lg font-semibold text-white mb-3">Weapon Systems</h3>
+                        <div className="grid grid-cols-1 gap-3">
+                          {vehicle.weapons?.length > 0 ? (
+                            vehicle.weapons.map((weapon: any, idx: number) => (
+                              <div key={idx} className="bg-slate-800/50 rounded-lg p-4">
+                                <div className="font-medium text-white mb-2">{weapon.name}</div>
+                                <div className="space-y-1">
+                                  {weapon.damage && (
+                                    <div className="flex justify-between text-sm">
+                                      <span className="text-slate-400">Damage:</span>
+                                      <span className="text-white">{weapon.damage}</span>
+                                    </div>
+                                  )}
+                                  {weapon.range && (
+                                    <div className="flex justify-between text-sm">
+                                      <span className="text-slate-400">Range:</span>
+                                      <span className="text-white">{weapon.range}</span>
+                                    </div>
+                                  )}
+                                  {weapon.fireRate && (
+                                    <div className="flex justify-between text-sm">
+                                      <span className="text-slate-400">Fire Rate:</span>
+                                      <span className="text-white">{weapon.fireRate}</span>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            ))
+                          ) : (
+                            <div className="text-slate-400 text-sm">No weapon data available</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Image and description on the right */}
+                    <div className="w-full md:w-1/2">
+                      <div className="bg-slate-800/50 rounded-lg overflow-hidden h-full flex flex-col">
+                        <div className="flex-1">
+                          {vehicle.image ? (
+                            <img 
+                              src={vehicle.image} 
+                              alt={vehicle.name} 
+                              className="w-full h-full max-h-80 object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-80 bg-slate-800 flex items-center justify-center text-slate-500">
+                              No image available
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-4">
+                          <h3 className="text-xl font-bold text-white mb-2">{vehicle.name}</h3>
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="px-2 py-1 bg-slate-700 text-xs rounded-full text-slate-300">
+                              {vehicle.type}
+                            </span>
+                            <span className="px-2 py-1 bg-blue-900/50 text-xs rounded-full text-blue-300">
+                              Tier {formatTier(vehicle.tier)}
+                            </span>
+                            <span className="px-2 py-1 bg-slate-700 text-xs rounded-full text-slate-300">
+                              {vehicle.faction}
+                            </span>
+                          </div>
+                          {vehicle.description && (
+                            <p className="text-slate-300 text-sm">{vehicle.description}</p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </motion.div>
+            </div>
+          );
+        })()}
 
         {weaponsModalOpenId && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
