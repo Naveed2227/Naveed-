@@ -11514,11 +11514,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                className="bg-slate-900/95 border border-slate-700 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+                className="bg-slate-900 rounded-xl w-full max-w-6xl max-h-[90vh] overflow-y-auto border border-slate-700"
               >
                 {/* Header with close button */}
-                <div className="p-4 border-b border-slate-700 flex justify-between items-center">
-                  <h2 className="text-xl font-bold text-white">{vehicle.name}</h2>
+                <div className="p-4 border-b border-slate-700 flex justify-end">
                   <button
                     onClick={() => setVehicleDetailsOpenId(null)}
                     className="p-1.5 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
@@ -11592,32 +11591,34 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     {/* Image and description on the right */}
                     <div className="w-full md:w-1/2">
                       <div className="bg-slate-800/50 rounded-lg overflow-hidden h-full flex flex-col">
-                        <div className="flex-1">
+                        <div className="p-4 pt-2">
+                          <h3 className="text-xl font-bold text-white mb-3 text-center">{vehicle.name}</h3>
+                          <div className="flex flex-wrap gap-2 justify-center mb-3">
+                            <span className="px-2 py-1 bg-slate-700/90 text-xs rounded-full text-slate-300">
+                              {vehicle.type}
+                            </span>
+                            <span className="px-2 py-1 bg-blue-900/80 text-xs rounded-full text-blue-300">
+                              Tier {formatTier(vehicle.tier)}
+                            </span>
+                            <span className="px-2 py-1 bg-slate-700/90 text-xs rounded-full text-slate-300">
+                              {vehicle.faction}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="relative w-full pb-[62.5%]"> {/* 16:10 aspect ratio */}
                           {vehicle.image ? (
                             <img 
                               src={vehicle.image} 
                               alt={vehicle.name} 
-                              className="w-full h-full max-h-80 object-cover"
+                              className="absolute inset-0 w-full h-full object-cover"
                             />
                           ) : (
-                            <div className="w-full h-80 bg-slate-800 flex items-center justify-center text-slate-500">
+                            <div className="absolute inset-0 bg-slate-800 flex items-center justify-center text-slate-500">
                               No image available
                             </div>
                           )}
                         </div>
                         <div className="p-4">
-                          <h3 className="text-xl font-bold text-white mb-2">{vehicle.name}</h3>
-                          <div className="flex items-center gap-2 mb-3">
-                            <span className="px-2 py-1 bg-slate-700 text-xs rounded-full text-slate-300">
-                              {vehicle.type}
-                            </span>
-                            <span className="px-2 py-1 bg-blue-900/50 text-xs rounded-full text-blue-300">
-                              Tier {formatTier(vehicle.tier)}
-                            </span>
-                            <span className="px-2 py-1 bg-slate-700 text-xs rounded-full text-slate-300">
-                              {vehicle.faction}
-                            </span>
-                          </div>
                           {vehicle.description && (
                             <p className="text-slate-300 text-sm">{vehicle.description}</p>
                           )}
@@ -11634,7 +11635,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
         {weaponsModalOpenId && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div ref={weaponsModalRef} className="bg-slate-900 rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto border border-slate-700">
+            <div ref={vehicleDetailsModalRef} className="bg-slate-900 rounded-xl p-6 w-full max-w-6xl max-h-[90vh] overflow-y-auto border border-slate-700">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-white">
                   {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.name} - Weapons
