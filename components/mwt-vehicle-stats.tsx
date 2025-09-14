@@ -11555,53 +11555,39 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
 
                       {/* Weapon Systems */}
-                      <div>
-                        <h3 className="text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">WEAPON SYSTEMS</h3>
-                        <div className="space-y-4">
+                      <div className="text-white">
+                        <div className="flex items-center justify-between mb-4">
+                          <h3 className="text-lg font-bold">Weapons</h3>
+                        </div>
+                        <div className="space-y-3">
                           {vehicle.weapons?.length > 0 ? (
                             vehicle.weapons.map((weapon: any, idx: number) => (
-                              <div key={idx} className="bg-slate-800/80 rounded-lg overflow-hidden">
-                                <div className="p-3 bg-slate-900/50 border-b border-slate-700">
-                                  <h4 className="text-base font-bold text-white">{weapon.name}</h4>
+                              <div key={idx} className="bg-slate-800/80 rounded-lg p-3 border border-slate-700/50">
+                                <div className="flex items-center justify-between mb-2">
+                                  <h4 className="text-base font-medium text-blue-400">{weapon.name}</h4>
+                                  <span className="text-xs bg-cyan-900/30 text-cyan-300 px-2 py-0.5 rounded">
+                                    {weapon.type || 'WEAPON'}
+                                  </span>
                                 </div>
-                                <div className="p-3">
-                                  <div className="flex items-center gap-2 mb-3">
-                                    <span className="text-xs bg-yellow-900/50 text-yellow-400 px-2 py-0.5 rounded">
-                                      {weapon.type || 'WEAPON'}
-                                    </span>
-                                    <span className="text-xs bg-green-900/50 text-green-300 px-2 py-0.5 rounded">
-                                      DAMAGE
-                                    </span>
+                                <div className="grid grid-cols-2 gap-2 text-sm">
+                                  <div>
+                                    <div className="text-slate-400 text-xs">Damage</div>
+                                    <div className="font-medium">{weapon.damage || 'N/A'}</div>
                                   </div>
-                                
-                                  {/* Stats Grid */}
-                                  <div className="grid grid-cols-2 gap-2 text-xs">
-                                    {/* Damage */}
-                                    <div className="bg-slate-700/50 rounded p-2">
-                                      <div className="text-slate-400 uppercase tracking-wider mb-1">DAMAGE</div>
-                                      <div className="text-white font-medium">{weapon.damage || 'N/A'}</div>
-                                    </div>
-                                    
-                                    {/* Penetration */}
-                                    <div className="bg-slate-700/50 rounded p-2">
-                                      <div className="text-slate-400 uppercase tracking-wider mb-1">PENETRATION</div>
-                                      <div className="text-white font-medium">{weapon.penetration || 'N/A'}</div>
-                                    </div>
-                                    
-                                    {/* Reload */}
-                                    <div className="bg-slate-700/50 rounded p-2">
-                                      <div className="text-slate-400 uppercase tracking-wider mb-1">RELOAD</div>
-                                      <div className="text-white font-medium">{weapon.reload || 'N/A'}</div>
-                                    </div>
-                                  
-                                  {/* Range - Optional, shown if available */}
+                                  <div>
+                                    <div className="text-slate-400 text-xs">Penetration</div>
+                                    <div className="font-medium">{weapon.penetration || 'N/A'}</div>
+                                  </div>
+                                  <div>
+                                    <div className="text-slate-400 text-xs">Reload</div>
+                                    <div className="font-medium">{weapon.reload ? `${weapon.reload}s` : 'N/A'}</div>
+                                  </div>
                                   {weapon.range && (
-                                    <div className="bg-slate-700/50 rounded p-2">
-                                      <div className="text-slate-400 uppercase tracking-wider mb-1">RANGE</div>
-                                      <div className="text-white font-medium">{weapon.range}</div>
+                                    <div>
+                                      <div className="text-slate-400 text-xs">Range</div>
+                                      <div className="font-medium">{weapon.range}m</div>
                                     </div>
                                   )}
-                                  </div>
                                 </div>
                               </div>
                             ))
