@@ -11527,100 +11527,124 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
                 
                 {/* Main content */}
-                <div className="p-6">
-                  {/* Vehicle info and stats */}
-                  <div className="flex flex-col md:flex-row gap-6 mb-6">
-                    {/* Stats on the left */}
-                    <div className="w-full md:w-1/2">
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-slate-800/50 rounded-lg p-4">
-                          <div className="text-sm text-slate-400 mb-1">Health</div>
-                          <div className="text-2xl font-bold text-cyan-300">{vehicle.stats.health || 'N/A'}</div>
-                        </div>
-                        <div className="bg-slate-800/50 rounded-lg p-4">
-                          <div className="text-sm text-slate-400 mb-1">Speed</div>
-                          <div className="text-2xl font-bold text-cyan-300">{vehicle.stats.speed || 'N/A'}</div>
-                        </div>
-                        <div className="bg-slate-800/50 rounded-lg p-4">
-                          <div className="text-sm text-slate-400 mb-1">Armor</div>
-                          <div className="text-2xl font-bold text-cyan-300">{vehicle.stats.armor || 'N/A'}</div>
-                        </div>
-                        <div className="bg-slate-800/50 rounded-lg p-4">
-                          <div className="text-sm text-slate-400 mb-1">Agility</div>
-                          <div className="text-2xl font-bold text-cyan-300">{vehicle.stats.agility || 'N/A'}</div>
+                <div className="p-6 bg-slate-900">
+                  <div className="flex flex-col lg:flex-row gap-6">
+                    {/* Left column - Stats and Weapons */}
+                    <div className="w-full lg:w-1/2">
+                      {/* Vehicle Specifications */}
+                      <div className="mb-6">
+                        <h3 className="text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">VEHICLE SPECIFICATIONS</h3>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div className="bg-slate-800/80 rounded p-3">
+                            <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Health</div>
+                            <div className="text-lg font-bold text-cyan-400">{vehicle.stats.health || 'N/A'}</div>
+                          </div>
+                          <div className="bg-slate-800/80 rounded p-3">
+                            <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Speed</div>
+                            <div className="text-lg font-bold text-cyan-400">{vehicle.stats.speed || 'N/A'}</div>
+                          </div>
+                          <div className="bg-slate-800/80 rounded p-3">
+                            <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Armor</div>
+                            <div className="text-lg font-bold text-cyan-400">{vehicle.stats.armor || 'N/A'}</div>
+                          </div>
+                          <div className="bg-slate-800/80 rounded p-3">
+                            <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Agility</div>
+                            <div className="text-lg font-bold text-cyan-400">{vehicle.stats.agility || 'N/A'}</div>
+                          </div>
                         </div>
                       </div>
-                      
+
                       {/* Weapon Systems */}
-                      <div className="mt-6">
-                        <h3 className="text-lg font-semibold text-white mb-3">Weapon Systems</h3>
-                        <div className="grid grid-cols-1 gap-3">
+                      <div>
+                        <h3 className="text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">WEAPON SYSTEMS</h3>
+                        <div className="space-y-4">
                           {vehicle.weapons?.length > 0 ? (
                             vehicle.weapons.map((weapon: any, idx: number) => (
-                              <div key={idx} className="bg-slate-800/50 rounded-lg p-4">
-                                <div className="font-medium text-white mb-2">{weapon.name}</div>
-                                <div className="space-y-1">
-                                  {weapon.damage && (
-                                    <div className="flex justify-between text-sm">
-                                      <span className="text-slate-400">Damage:</span>
-                                      <span className="text-white">{weapon.damage}</span>
+                              <div key={idx} className="bg-slate-800/80 rounded-lg overflow-hidden">
+                                <div className="p-3 bg-slate-900/50 border-b border-slate-700">
+                                  <h4 className="text-base font-bold text-white">{weapon.name}</h4>
+                                </div>
+                                <div className="p-3">
+                                  <div className="flex items-center gap-2 mb-3">
+                                    <span className="text-xs bg-yellow-900/50 text-yellow-400 px-2 py-0.5 rounded">
+                                      {weapon.type || 'WEAPON'}
+                                    </span>
+                                    <span className="text-xs bg-green-900/50 text-green-300 px-2 py-0.5 rounded">
+                                      DAMAGE
+                                    </span>
+                                  </div>
+                                
+                                  {/* Stats Grid */}
+                                  <div className="grid grid-cols-2 gap-2 text-xs">
+                                    {/* Damage */}
+                                    <div className="bg-slate-700/50 rounded p-2">
+                                      <div className="text-slate-400 uppercase tracking-wider mb-1">DAMAGE</div>
+                                      <div className="text-white font-medium">{weapon.damage || 'N/A'}</div>
                                     </div>
-                                  )}
+                                    
+                                    {/* Penetration */}
+                                    <div className="bg-slate-700/50 rounded p-2">
+                                      <div className="text-slate-400 uppercase tracking-wider mb-1">PENETRATION</div>
+                                      <div className="text-white font-medium">{weapon.penetration || 'N/A'}</div>
+                                    </div>
+                                    
+                                    {/* Reload */}
+                                    <div className="bg-slate-700/50 rounded p-2">
+                                      <div className="text-slate-400 uppercase tracking-wider mb-1">RELOAD</div>
+                                      <div className="text-white font-medium">{weapon.reload || 'N/A'}</div>
+                                    </div>
+                                  
+                                  {/* Range - Optional, shown if available */}
                                   {weapon.range && (
-                                    <div className="flex justify-between text-sm">
-                                      <span className="text-slate-400">Range:</span>
-                                      <span className="text-white">{weapon.range}</span>
+                                    <div className="bg-slate-700/50 rounded p-2">
+                                      <div className="text-slate-400 uppercase tracking-wider mb-1">RANGE</div>
+                                      <div className="text-white font-medium">{weapon.range}</div>
                                     </div>
                                   )}
-                                  {weapon.fireRate && (
-                                    <div className="flex justify-between text-sm">
-                                      <span className="text-slate-400">Fire Rate:</span>
-                                      <span className="text-white">{weapon.fireRate}</span>
-                                    </div>
-                                  )}
+                                  </div>
                                 </div>
                               </div>
                             ))
                           ) : (
-                            <div className="text-slate-400 text-sm">No weapon data available</div>
+                            <div className="text-slate-400 text-sm p-4 bg-slate-800/50 rounded">No weapon data available</div>
                           )}
                         </div>
                       </div>
                     </div>
-                    
-                    {/* Image and description on the right */}
-                    <div className="w-full md:w-1/2">
-                      <div className="bg-slate-800/50 rounded-lg overflow-hidden h-full flex flex-col">
-                        <div className="p-4 pt-2">
+
+                    {/* Right column - Vehicle Image */}
+                    <div className="w-full lg:w-1/2">
+                      <div className="bg-slate-800/80 rounded-lg overflow-hidden h-full">
+                        <div className="p-4">
                           <h3 className="text-xl font-bold text-white mb-3 text-center">{vehicle.name}</h3>
-                          <div className="flex flex-wrap gap-2 justify-center mb-3">
+                          <div className="flex flex-wrap gap-2 justify-center mb-4">
                             <span className="px-2 py-1 bg-slate-700/90 text-xs rounded-full text-slate-300">
                               {vehicle.type}
                             </span>
-                            <span className="px-2 py-1 bg-blue-900/80 text-xs rounded-full text-blue-300">
+                            <span className="px-2 py-1 bg-blue-900/50 text-xs rounded-full text-blue-300">
                               Tier {formatTier(vehicle.tier)}
                             </span>
                             <span className="px-2 py-1 bg-slate-700/90 text-xs rounded-full text-slate-300">
                               {vehicle.faction}
                             </span>
                           </div>
-                        </div>
-                        <div className="relative w-full pb-[62.5%]"> {/* 16:10 aspect ratio */}
-                          {vehicle.image ? (
-                            <img 
-                              src={vehicle.image} 
-                              alt={vehicle.name} 
-                              className="absolute inset-0 w-full h-full object-cover"
-                            />
-                          ) : (
-                            <div className="absolute inset-0 bg-slate-800 flex items-center justify-center text-slate-500">
-                              No image available
-                            </div>
-                          )}
-                        </div>
-                        <div className="p-4">
+                          <div className="relative w-full pb-[56.25%]">
+                            {vehicle.image ? (
+                              <img 
+                                src={vehicle.image} 
+                                alt={vehicle.name} 
+                                className="absolute inset-0 w-full h-full object-cover"
+                              />
+                            ) : (
+                              <div className="absolute inset-0 bg-slate-800 flex items-center justify-center text-slate-500">
+                                No image available
+                              </div>
+                            )}
+                          </div>
                           {vehicle.description && (
-                            <p className="text-slate-300 text-sm">{vehicle.description}</p>
+                            <div className="p-4">
+                              <p className="text-slate-300 text-sm">{vehicle.description}</p>
+                            </div>
                           )}
                         </div>
                       </div>
