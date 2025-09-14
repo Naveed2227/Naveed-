@@ -10784,41 +10784,53 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
               </div>
 
-              <div className="flex gap-2 mb-3">
-                <button
-                  onClick={() => toggleCompare(vehicle.id.toString())}
-                  disabled={compare.length >= 2 && !compare.includes(vehicle.id.toString())}
-                  className={`flex-1 text-sm rounded transition-colors tabular-nums px-5 py-4 font-bold ${
-                    compare.includes(vehicle.id.toString())
-                      ? "bg-cyan-600 text-white"
-                      : compare.length >= 2
-                        ? "bg-slate-600 text-slate-400 cursor-not-allowed"
-                        : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-                  }`}
-                >
-                  {compare.includes(vehicle.id.toString()) ? "✓ Compare" : "Compare"}
-                </button>
+              <div className="space-y-2 mb-3">
+                {/* First Row: View Details and Bot Icon */}
+                <div className="flex justify-between items-center gap-2">
+                  <button
+                    onClick={() => openVehicleDetails(vehicle)}
+                    className="flex-1 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg text-center"
+                  >
+                    View Details
+                  </button>
+                  
+                  <button
+                    onClick={() => setVehicleInfoOpen(vehicle.id.toString())}
+                    className="p-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center"
+                    title="AI Analysis"
+                  >
+                    <Bot className="w-4 h-4" />
+                  </button>
+                </div>
+                
+                {/* Second Row: Weapons and Compare */}
+                <div className="flex justify-between items-center gap-2">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setWeaponsModalOpenId(vehicle.id.toString())
+                    }}
+                    className="flex-1 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg"
+                  >
+                    Weapons
+                  </button>
+                  
+                  <button
+                    onClick={() => toggleCompare(vehicle.id.toString())}
+                    disabled={compare.length >= 2 && !compare.includes(vehicle.id.toString())}
+                    className={`flex-1 px-4 py-2 text-sm font-semibold rounded transition-all duration-200 shadow-md ${
+                      compare.includes(vehicle.id.toString())
+                        ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700"
+                        : compare.length >= 2
+                          ? "bg-slate-600 text-slate-400 cursor-not-allowed"
+                          : "bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800"
+                    }`}
+                  >
+                    {compare.includes(vehicle.id.toString()) ? "✓ Compare" : "Compare"}
+                  </button>
+                </div>
               </div>
 
-              <div className="flex justify-between items-center">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setWeaponsModalOpenId(vehicle.id.toString())
-                  }}
-                  className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-semibold rounded transition-colors"
-                >
-                  Weapons
-                </button>
-
-                <button
-                  onClick={() => setVehicleInfoOpen(vehicle.id.toString())}
-                  className="p-2 bg-cyan-600/20 hover:bg-cyan-600/30 rounded-full transition-colors group"
-                  title="Get AI Analysis"
-                >
-                  <Bot className="group-hover:text-cyan-300 text-sky-300 w-[30px] h-[30px]" />
-                </button>
-              </div>
 
               {expandedVehicle === vehicle.id.toString() && (
                 <motion.div
