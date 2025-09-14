@@ -11965,37 +11965,35 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   {/* Image and Description - Mobile First (shown before other content) */}
                   <div className="block lg:hidden mb-6">
                     <div className="bg-slate-800/80 rounded-lg overflow-hidden">
-                      <div className="relative">
-                        <img
-                          src={vehicle.image}
-                          alt={vehicle.name}
-                          className="w-full h-64 object-cover"
-                          onError={(e) => {
-                            e.currentTarget.src = "/placeholder-vehicle.png"
+                      <img
+                        src={vehicle.image}
+                        alt={vehicle.name}
+                        className="w-full h-64 object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = "/placeholder-vehicle.png"
+                        }}
+                      />
+                      <div className="mt-4 mb-2 flex justify-center">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const link = document.createElement('a');
+                            link.href = vehicle.image;
+                            link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
                           }}
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              // Create a temporary link to download the image
-                              const link = document.createElement('a');
-                              link.href = vehicle.image;
-                              link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
-                              document.body.appendChild(link);
-                              link.click();
-                              document.body.removeChild(link);
-                            }}
-                            className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                              <polyline points="7 10 12 15 17 10"></polyline>
-                              <line x1="12" y1="15" x2="12" y2="3"></line>
-                            </svg>
-                            <span>Download Image</span>
-                          </button>
-                        </div>
+                          className="flex items-center gap-1 text-xs text-blue-400 hover:text-blue-300 bg-slate-800/70 hover:bg-slate-700/70 px-3 py-1.5 rounded transition-colors"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                          </svg>
+                          <span>Download</span>
+                        </button>
+                      </div>
                       </div>
                       {vehicle.description && (
                         <div className="p-4">
