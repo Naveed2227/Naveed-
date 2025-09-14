@@ -9032,25 +9032,30 @@ const MwtVehicleStats = () => {
 
 
 
-  // Missile tagging system
- const rocketPods = [
-  "UB-32-57",
-  "B-8V20",
-  "B-13L",
-  "LAU-61",
-  "LAU-10 x3",
-  "Type 90",
-  "Type 130",
-  "LAU-51",
-  "LAU-51 x2",
-  "B8M1",
-  "B-13L",
-  "Type 90 x2",
-  "JLAU-3/A",
-  "C-13DF",
-];
+  // Type definitions for missile tags
+type MissileTag = 'anti-flare' | 'anti-warning' | 'long-range' | 'laser-guided' | 'rocket-pod';
 
- const antiFlareMissiles = [
+// Missile tagging system
+const rocketPods = [
+    "UB-32-57",
+    "B-8V20",
+    "B-13L",
+    "LAU-61",
+    "LAU-10 x3",
+    "Type 90",
+    "Type 130",
+    "LAU-51",
+    "LAU-51 x2",
+    "B8M1",
+    "B-13L",
+    "Type 90 x2",
+    "JLAU-3/A",
+    "C-13DF"
+  ];
+
+  // Pagination variables - moved to component body
+
+  const antiFlareMissiles = [
   "Kh-47M2 Kinzhal",
   "SAM Rokand",
   "AIM-120",
@@ -9154,46 +9159,31 @@ const laserGuidedMissiles = [
   "KAB-250"
 ];
 
-const rocketPods = [
-  "UB-32-57",
-  "B-8V20",
-  "B-13L",
-  "LAU-61",
-  "LAU-10 x3",
-  "Type 90",
-  "Type 130",
-  "LAU-51",
-  "LAU-51 x2",
-  "B8M1",
-  "B-13L",
-  "Type 90 x2",
-  "JLAU-3/A",
-  "C-13DF",
-];
-
-const missileHasTags = (missileName: string) => {
-  const tags = []
-
-  // Maintain specific order: Anti-Flare, Anti-Warning, Long-Range, Laser-guided, Rocket Pod
-  if (antiFlareMissiles.includes(missileName)) {
-    tags.push('anti-flare')
+const missileHasTags = (missileName: string): MissileTag[] => {
+  const tags: MissileTag[] = [];
+  
+  if (antiFlareMissiles.some(m => missileName.includes(m))) {
+    tags.push('anti-flare');
   }
-  if (antiWarningMissiles.includes(missileName)) {
-    tags.push('anti-warning')
+  
+  if (antiWarningMissiles.some(m => missileName.includes(m))) {
+    tags.push('anti-warning');
   }
-  if (longRangeMissiles.includes(missileName)) {
-    tags.push('long-range')
+  
+  if (longRangeMissiles.some(m => missileName.includes(m))) {
+    tags.push('long-range');
   }
-  if (laserGuidedMissiles.includes(missileName)) {
-    tags.push('laser-guided')
+  
+  if (laserGuidedMissiles.some(m => missileName.includes(m))) {
+    tags.push('laser-guided');
   }
-  if (rocketPods.includes(missileName)) {
-    tags.push('rocket-pod')
+  
+  if (rocketPods.some(r => missileName.includes(r))) {
+    tags.push('rocket-pod');
   }
-
-  return tags
-}
-
+  
+  return tags;
+};
 
   const isExclusiveVehicle = (vehicleName: string) => {
     const exclusiveVehicles = [
@@ -9311,16 +9301,17 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     const matchesTier = !tierFilter || formatTier(vehicle.tier) === tierFilter
     const matchesCountry = !countryFilter || vehicle.faction === countryFilter
     return matchesSearch && matchesType && matchesTier && matchesCountry
-  })
 
-  const indexOfLastVehicle = currentPage * vehiclesPerPage
-  const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage
-  const paginatedVehicles = filteredVehicles.slice(indexOfFirstVehicle, indexOfLastVehicle)
+const indexOfLastVehicle = currentPage * vehiclesPerPage;
+const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
+const paginatedVehicles = filteredVehicles.slice(indexOfFirstVehicle, indexOfLastVehicle);
+const totalPages = Math.ceil(filteredVehicles.length / vehiclesPerPage);
 
-  const toggleCompare = (id: string) => {
-    if (compare.includes(id)) {
-      setCompare(compare.filter((vehicleId) => vehicleId !== id))
-    } else if (compare.length < 2) {
+const toggleCompare = (id: string) => {
+  if (compare.includes(id)) {
+    setCompare(compare.filter((vehicleId) => vehicleId !== id));
+  } else if (compare.length < 2) {
+    setCompare([...compare, id]);
       setCompare([...compare, id])
     }
   }
@@ -10916,6 +10907,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               
             
             
+{{ ... }}
               <div className="absolute top-0 left-0 w-0 h-0 z-10">
 
                 <div
