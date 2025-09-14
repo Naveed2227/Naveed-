@@ -8921,8 +8921,89 @@ const getTierColor = (tier: string) => {
   }
 }
 
+// StatBar component with upgrade toggles
+const StatBar = ({ label, value, baseValue, maxValue = 100, upgradeLevel = 0 }) => {
+  const upgradeColors = [
+    { level: 0, color: 'bg-gray-300', textColor: 'text-gray-300' },
+    { level: 1, color: 'bg-green-500', textColor: 'text-green-500' },
+    { level: 2, color: 'bg-blue-600', textColor: 'text-blue-600' },
+    { level: 3, color: 'bg-purple-600', textColor: 'text-purple-600' },
+  ];
+
+  const displayValue = value;
+  const percentage = Math.min(100, (displayValue / maxValue) * 100);
+  const basePercentage = Math.min(100, ((baseValue || 0) / maxValue) * 100);
+
+  return (
+    <div className="mb-2">
+      <div className="flex justify-between items-center mb-1">
+        <span className="text-xs font-medium text-gray-300">{label}</span>
+        <span className="text-xs font-bold text-white">{displayValue}</span>
+      </div>
+      
+      <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden relative">
+        <div 
+          className="h-full bg-gray-300 absolute top-0 left-0 transition-all duration-300"
+          style={{ width: `${basePercentage}%` }}
+        />
+        {upgradeLevel > 0 && (
+          <div 
+            className={`h-full absolute top-0 left-0 transition-all duration-300 ${upgradeColors[upgradeLevel].color}`}
+            style={{ 
+              width: `${percentage}%`,
+              left: 0,
+              opacity: 0.8
+            }}
+          />
+        )}
+      </div>
+      <div className="flex justify-between items-center mt-1">
+        <span className="text-xs text-slate-400">{displayValue}</span>
+        {upgradeLevel > 0 && (
+          <span className={`text-xs ${upgradeColors[upgradeLevel].textColor} font-medium`}>
+            {label.toLowerCase() === 'agility' 
+              ? `+${(upgradeLevel * 3.33).toFixed(1)}%`
+              : `+${upgradeLevel * 10}%`
+            }
+          </span>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const MwtVehicleStats = () => {
   const router = useRouter()
+  const [upgradeLevel, setUpgradeLevel] = useState(0);
+  
+  const handleUpgradeChange = (level: number) => {
+    setUpgradeLevel(prevLevel => prevLevel === level ? 0 : level);
+  };
+  
+  const getUpgradedValue = (baseValue: number, statType: string) => {
+    if (upgradeLevel === 0) return baseValue;
+    
+    let boostMultiplier = 1;
+    
+    if (statType.toLowerCase() === 'agility') {
+      // Special handling for agility
+      switch(upgradeLevel) {
+        case 1: boostMultiplier = 1.0333; break; // 3.33%
+        case 2: boostMultiplier = 1.0666; break; // 6.66%
+        case 3: boostMultiplier = 1.1;    break; // 10%
+      }
+    } else {
+      // Standard boost for other stats
+      boostMultiplier = 1 + (upgradeLevel * 0.1); // 1.1, 1.2, or 1.3
+    }
+    
+    const boostableStats = ['health', 'speed', 'agility', 'afterburnerSpeed', 'verticalSpeed', 'damage'];
+    
+    if (boostableStats.includes(statType.toLowerCase())) {
+      return Math.round(baseValue * boostMultiplier);
+    }
+    return baseValue;
+  };
   const [searchQuery, setSearchQuery] = useState("")
   const [typeFilter, setTypeFilter] = useState("")
   const [tierFilter, setTierFilter] = useState("")
@@ -11627,12 +11708,41 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     />
                     <h2 className="text-xl font-bold text-white">{vehicle.name}</h2>
                   </div>
-                  <button
-                    onClick={() => setVehicleDetailsOpenId(null)}
-                    className="p-1.5 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
+                  <div className="flex items-center space-x-2">
+                    <div className="flex items-center bg-slate-800/80 rounded-full p-0.5">
+                      {[1, 2, 3].map((level) => (
+                        <button
+                          key={level}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleUpgradeChange(level);
+                          }}
+                          className={`relative w-10 h-10 flex items-center justify-center rounded-full transition-all ${
+                            upgradeLevel === level 
+                              ? level === 1 ? 'bg-green-600/20' 
+                                : level === 2 ? 'bg-blue-600/20' 
+                                : 'bg-purple-600/20'
+                              : 'bg-transparent hover:bg-slate-700/50'
+                          }`}
+                        >
+                          <img 
+                            src={`/U${level}.png`} 
+                            alt={`U${level}`} 
+                            className={`w-6 h-6 ${upgradeLevel === level ? 'opacity-100' : 'opacity-60'}`}
+                          />
+                          {upgradeLevel === level && (
+                            <div className="absolute inset-0 rounded-full border-2 border-white/30" />
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => setVehicleDetailsOpenId(null)}
+                      className="p-1.5 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
                 </div>
                 
                 {/* Main content */}
@@ -11663,23 +11773,72 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       {/* Vehicle Specifications */}
                       <div className="mb-6">
                         <h3 className="text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">VEHICLE SPECIFICATIONS</h3>
-                        <div className="grid grid-cols-2 gap-3">
+                        
+                        {/* Upgrade Toggles */}
+                        <div className="mb-4 p-3 bg-slate-800/50 rounded-lg">
+                          <div className="text-xs text-slate-400 uppercase tracking-wider mb-2">UPGRADE LEVEL</div>
+                          <div className="flex justify-between">
+                            <button
+                              onClick={() => handleUpgradeChange(0)}
+                              className={`px-3 py-1 text-xs rounded ${upgradeLevel === 0 ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                            >
+                              BASE
+                            </button>
+                            <button
+                              onClick={() => handleUpgradeChange(1)}
+                              className={`px-3 py-1 text-xs rounded ${upgradeLevel === 1 ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                            >
+                              U1 (+10%)
+                            </button>
+                            <button
+                              onClick={() => handleUpgradeChange(2)}
+                              className={`px-3 py-1 text-xs rounded ${upgradeLevel === 2 ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                            >
+                              U2 (+20%)
+                            </button>
+                            <button
+                              onClick={() => handleUpgradeChange(3)}
+                              className={`px-3 py-1 text-xs rounded ${upgradeLevel === 3 ? 'bg-purple-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                            >
+                              U3 (+30%)
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-4">
                           {/* Health - Always shown */}
-                          <div className="bg-slate-800/80 rounded p-3">
-                            <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Health</div>
-                            <div className="text-lg font-bold text-cyan-400">{vehicle.stats.health || 'N/A'}</div>
+                          <div className="bg-slate-800/80 rounded-lg p-4">
+                            <StatBar 
+                              label="HEALTH" 
+                              value={getUpgradedValue(vehicle.stats.health, 'health')} 
+                              baseValue={vehicle.stats.health}
+                              maxValue={2000}
+                              upgradeLevel={upgradeLevel}
+                            />
                           </div>
 
                           {/* For Jets and Bombers */}
                           {(vehicle.type === 'Fighter Jet' || vehicle.type === 'Attack Aircraft' || vehicle.type === 'Multirole Fighter' || vehicle.type === 'Bomber') && (
                             <>
-                              <div className="bg-slate-800/80 rounded p-3">
-                                <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Cruise Speed</div>
-                                <div className="text-lg font-bold text-cyan-400">{vehicle.stats.speed || 'N/A'} km/h</div>
+                              <div className="bg-slate-800/80 rounded-lg p-4">
+                                <StatBar 
+                                  label="CRUISE SPEED" 
+                                  value={getUpgradedValue(vehicle.stats.speed, 'speed')} 
+                                  baseValue={vehicle.stats.speed}
+                                  maxValue={3000}
+                                  upgradeLevel={upgradeLevel}
+                                />
+                                <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
-                              <div className="bg-slate-800/80 rounded p-3">
-                                <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Afterburner Speed</div>
-                                <div className="text-lg font-bold text-cyan-400">{vehicle.stats.afterburnerSpeed || 'N/A'} km/h</div>
+                              <div className="bg-slate-800/80 rounded-lg p-4">
+                                <StatBar 
+                                  label="AFTERBURNER SPEED" 
+                                  value={getUpgradedValue(vehicle.stats.afterburnerSpeed, 'afterburnerSpeed')} 
+                                  baseValue={vehicle.stats.afterburnerSpeed}
+                                  maxValue={4000}
+                                  upgradeLevel={upgradeLevel}
+                                />
+                                <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
                             </>
                           )}
@@ -11687,13 +11846,25 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           {/* For Helicopters */}
                           {(vehicle.type === 'Attack Helicopter' || vehicle.type === 'Scout Helicopter') && (
                             <>
-                              <div className="bg-slate-800/80 rounded p-3">
-                                <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Cruise Speed</div>
-                                <div className="text-lg font-bold text-cyan-400">{vehicle.stats.speed || 'N/A'} km/h</div>
+                              <div className="bg-slate-800/80 rounded-lg p-4">
+                                <StatBar 
+                                  label="CRUISE SPEED" 
+                                  value={vehicle.stats.speed || 0} 
+                                  maxValue={500}
+                                  showUpgrades={true}
+                                  onUpgradeChange={handleUpgradeChange}
+                                />
+                                <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
-                              <div className="bg-slate-800/80 rounded p-3">
-                                <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Vertical Speed</div>
-                                <div className="text-lg font-bold text-cyan-400">{vehicle.stats.verticalSpeed || 'N/A'} m/s</div>
+                              <div className="bg-slate-800/80 rounded-lg p-4">
+                                <StatBar 
+                                  label="VERTICAL SPEED" 
+                                  value={getUpgradedValue(vehicle.stats.verticalSpeed, 'verticalSpeed')} 
+                                  baseValue={vehicle.stats.verticalSpeed}
+                                  maxValue={30}
+                                  upgradeLevel={upgradeLevel}
+                                />
+                                <div className="text-xs text-slate-400 mt-1">m/s</div>
                               </div>
                             </>
                           )}
@@ -11701,14 +11872,28 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           {/* For Tanks/Other Vehicles */}
                           {!['Fighter Jet', 'Attack Aircraft', 'Multirole Fighter', 'Bomber', 'Attack Helicopter', 'Scout Helicopter'].includes(vehicle.type) && (
                             <>
-                              <div className="bg-slate-800/80 rounded p-3">
-                                <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Speed</div>
-                                <div className="text-lg font-bold text-cyan-400">{vehicle.stats.speed || 'N/A'} km/h</div>
+                              <div className="bg-slate-800/80 rounded-lg p-4">
+                                <StatBar 
+                                  label="SPEED" 
+                                  value={getUpgradedValue(vehicle.stats.speed, 'speed')} 
+                                  baseValue={vehicle.stats.speed}
+                                  maxValue={100}
+                                  upgradeLevel={upgradeLevel}
+                                />
+                                <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
                               {vehicle.stats.armor && (
-                                <div className="bg-slate-800/80 rounded p-3">
-                                  <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Armor</div>
-                                  <div className="text-lg font-bold text-cyan-400">{vehicle.stats.armor}</div>
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <div className="flex justify-between items-center mb-1">
+                                    <span className="text-xs font-medium text-gray-300">ARMOR</span>
+                                    <span className="text-sm font-bold text-white">{vehicle.stats.armor}</span>
+                                  </div>
+                                  <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                                    <div 
+                                      className="h-full bg-gray-300"
+                                      style={{ width: `${(parseInt(vehicle.stats.armor) / 500) * 100}%` }}
+                                    />
+                                  </div>
                                 </div>
                               )}
                             </>
@@ -11718,9 +11903,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           {(vehicle.type === 'Fighter Jet' || vehicle.type === 'Attack Aircraft' || 
                             vehicle.type === 'Multirole Fighter' || vehicle.type === 'Bomber' || 
                             vehicle.type === 'Attack Helicopter' || vehicle.type === 'Scout Helicopter') && (
-                            <div className="bg-slate-800/80 rounded p-3">
-                              <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Agility</div>
-                              <div className="text-lg font-bold text-cyan-400">{vehicle.stats.agility || 'N/A'}</div>
+                            <div className="bg-slate-800/80 rounded-lg p-4">
+                              <StatBar 
+                                label="AGILITY" 
+                                value={getUpgradedValue(vehicle.stats.agility, 'agility')} 
+                                baseValue={vehicle.stats.agility}
+                                maxValue={100}
+                                upgradeLevel={upgradeLevel}
+                              />
                             </div>
                           )}
                         </div>
