@@ -9077,7 +9077,9 @@ const ComparisonStatBar = ({
 
 const MwtVehicleStats = () => {
   const router = useRouter()
-  const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
+  const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({})
+  const [selectedVehicle, setSelectedVehicle] = useState<any>(null)
+  const [viewMode, setViewMode] = useState<'list' | 'details'>('list')
   
   const handleUpgradeChange = (vehicleId: string, level: number) => {
     setUpgradeLevels(prev => {
@@ -10327,18 +10329,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       const response = getVehicleInfo(chatInput)
       const botMessage = { role: "assistant", content: response }
       setChatMessages((prev) => [...prev, botMessage])
-      setIsLoading(false)
-      setChatInput("")
-    }, 1000)
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      {/* Battle Pass Tab - Fully Responsive */}
+    <div className="p-4 md:p-8">
       <button
-        onClick={() => setBattlePassOpen(!battlePassOpen)}
-        className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-purple-400 flex items-center justify-center min-h-[100px] min-w-[36px] sm:min-h-[120px] sm:min-w-[42px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r"
+        onClick={() => setSelectedVehicle(null)}
+        className="mb-6 flex items-center text-cyan-400 hover:text-cyan-300"
       >
+        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Vehicles
         {/* Mobile: Compact icon + text */}
         <div className="sm:hidden flex flex-col items-center justify-center px-2 py-3 text-white font-bold text-[10px] tracking-wide">
           <svg className="w-4 h-4 mb-1" fill="currentColor" viewBox="0 0 24 24">
@@ -10667,6 +10667,23 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       </header>
 
       <main className="max-w-7xl p-4 sm:p-6 mx-auto px-4 sm:px-6 pb-24">
+        {/* Back button when in details view */}
+        {viewMode === 'details' && selectedVehicle && (
+          <button
+            onClick={() => {
+              setViewMode('list');
+              setSelectedVehicle(null);
+              // Scroll to top when going back to list
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="mb-6 flex items-center text-cyan-400 hover:text-cyan-300 text-sm"
+          >
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Vehicles
+          </button>
+        )}
         {/* Comparison Bottom Bar */}
         {compare.length > 0 && (
           <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 border-t border-slate-700 shadow-lg z-50">
@@ -11171,11 +11188,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      setVehicleDetailsOpenId(vehicle.id.toString());
+                      setSelectedVehicle(vehicle);
+                      setViewMode('details');
+                      // Scroll to top of the page when viewing details
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className="flex-1 px-4 py-2 bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800 text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg text-center"
+                    className="flex-1 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 text-white hover:from-cyan-700 hover:to-blue-700 text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg text-center"
                   >
-                    View Details
+                    View Vehicle
                   </button>
                   
                   <button
@@ -11504,6 +11524,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           onClick={() => {
                             const vehicle = VEHICLES.find(v => v.name === msg.content.vehicle.name)
                             if (vehicle) {
+                              setSelectedVehicle(vehicle);
                               setSearchQuery(vehicle.name);
                               setBattlePassOpen(false);
                               setExpandedVehicle(vehicle.id.toString());
