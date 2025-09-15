@@ -8929,7 +8929,6 @@ interface StatBarProps {
   maxValue?: number;
   upgradeLevel?: number;
   onUpgradeChange?: (level: number) => void;
-  isAgility?: boolean;
 }
 
 const StatBar: React.FC<StatBarProps> = ({ 
@@ -8938,8 +8937,7 @@ const StatBar: React.FC<StatBarProps> = ({
   baseValue, 
   maxValue = 100, 
   upgradeLevel = 0, 
-  onUpgradeChange = () => {},
-  isAgility = false
+  onUpgradeChange = () => {} 
 }) => {
   const upgradeColors = [
     { level: 0, color: 'bg-gray-300', textColor: 'text-gray-300' },
@@ -8958,28 +8956,21 @@ const StatBar: React.FC<StatBarProps> = ({
     onUpgradeChange(level);
   };
 
-  const getUpgradePercentage = (level: number) => {
-    if (isAgility) {
-      return (level * 3.33).toFixed(1);
-    }
-    return level * 10;
-  };
-
   return (
-    <div className="mb-4">
+    <div className="mb-2">
       <div className="flex justify-between items-center mb-1">
         <span className="text-xs font-medium text-gray-300">{label}</span>
         <span className="text-xs font-bold text-white">
           {displayValue}
           {upgradeLevel > 0 && (
             <span className={`ml-1 ${upgradeColors[upgradeLevel].textColor}`}>
-              (U{upgradeLevel} +{getUpgradePercentage(upgradeLevel)}%)
+              (U{upgradeLevel})
             </span>
           )}
         </span>
       </div>
       
-      <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden relative mb-2">
+      <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden relative">
         <div 
           className="h-full bg-gray-300 absolute top-0 left-0 transition-all duration-300"
           style={{ width: `${basePercentage}%` }}
@@ -8996,35 +8987,31 @@ const StatBar: React.FC<StatBarProps> = ({
         )}
       </div>
       
-      <div className="flex justify-between items-center space-x-1">
-        <button
-          onClick={(e) => handleUpgradeClick(e, 0)}
-          className={`flex-1 py-1 text-xs rounded transition-colors ${
-            upgradeLevel === 0
-              ? 'bg-gray-600 text-white'
-              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-          }`}
-        >
-          BASE
-        </button>
-        {[1, 2, 3].map((level) => (
-          <button
-            key={level}
-            onClick={(e) => handleUpgradeClick(e, level)}
-            className={`flex-1 py-1 text-xs rounded transition-colors ${
-              upgradeLevel === level
-                ? level === 1 ? 'bg-green-600/90 text-white' 
-                  : level === 2 ? 'bg-blue-600/90 text-white' 
-                  : 'bg-purple-600/90 text-white'
-                : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-            }`}
-          >
-            <div className="flex flex-col items-center">
-              <span>U{level}</span>
-              <span className="text-[10px] opacity-80">+{getUpgradePercentage(level)}%</span>
-            </div>
-          </button>
-        ))}
+      <div className="flex justify-between items-center mt-2">
+        <div className="flex space-x-1">
+          {[1, 2, 3].map((level) => (
+            <button
+              key={level}
+              type="button"
+              onClick={(e) => handleUpgradeClick(e, level)}
+              className={`text-xs px-2 py-1 rounded transition-colors ${
+                upgradeLevel === level
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              U{level}
+            </button>
+          ))}
+        </div>
+        {upgradeLevel > 0 && (
+          <span className={`text-xs ${upgradeColors[upgradeLevel].textColor} font-medium`}>
+            {label.toLowerCase() === 'agility' 
+              ? `+${(upgradeLevel * 3.33).toFixed(1)}%`
+              : `+${upgradeLevel * 10}%`
+            }
+          </span>
+        )}
       </div>
     </div>
   );
@@ -9100,33 +9087,41 @@ const MwtVehicleStats = () => {
       return newLevels;
     });
   };
-
-  // Apply upgrade to a stat value based on upgrade level and stat type
-  const applyUpgrade = (baseValue: number, upgradeLevel: number, statType: string = '') => {
-    if (upgradeLevel === 0) return baseValue;
-    
-    // Special handling for agility (3.33% per level)
-    if (statType.toLowerCase() === 'agility') {
-      const multiplier = 1 + (upgradeLevel * 0.0333);
-      return Math.round(baseValue * multiplier);
-    }
-    
-    // 10% increase per level for other stats
-    const multiplier = 1 + (upgradeLevel * 0.1);
-    return Math.round(baseValue * multiplier);
-  };
   
   const getUpgradedValue = (vehicle: any, statType: string) => {
     const upgradeLevel = upgradeLevels[vehicle.id] || 0;
-    return applyUpgrade(vehicle.stats[statType] || 0, upgradeLevel, statType);
+    if (upgradeLevel === 0) return vehicle.stats[statType] || 0;
+    
+    // Convert statType to lowercase for consistent comparison
+    const statTypeLower = statType.toLowerCase();
+    const baseValue = vehicle.stats[statType] || 0;
+    
+    let boostMultiplier = 1;
+    
+    if (statTypeLower === 'agility') {
+      // Special handling for agility
+      switch(upgradeLevel) {
+        case 1: boostMultiplier = 1.0333; break; // 3.33%
+        case 2: boostMultiplier = 1.0666; break; // 6.66%
+        case 3: boostMultiplier = 1.1;    break; // 10%
+      }
+    } else {
+      // Standard boost for other stats
+      boostMultiplier = 1 + (upgradeLevel * 0.1); // 1.1, 1.2, or 1.3
+    }
+    
+    const boostableStats = ['health', 'speed', 'agility', 'afterburnerspeed', 'verticalspeed', 'damage'];
+    
+    if (boostableStats.includes(statTypeLower)) {
+      return Math.round(baseValue * boostMultiplier);
+    }
+    return baseValue;
   };
-
   const [searchQuery, setSearchQuery] = useState("")
   const [typeFilter, setTypeFilter] = useState("")
   const [tierFilter, setTierFilter] = useState("")
   const [countryFilter, setCountryFilter] = useState("")
   const [compare, setCompare] = useState<string[]>([])
-{{ ... }}
   const [expandedVehicle, setExpandedVehicle] = useState("")
   const comparisonRef = useRef<HTMLDivElement>(null)
   const chatMessagesEndRef = useRef<HTMLDivElement>(null)
@@ -10742,107 +10737,1450 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             </div>
           </div>
         )}
-                        <div className="flex gap-2 justify-center mt-2">
-                          {[1, 2, 3].map((level) => {
-                            const isActive = upgradeLevels[vehicle.id] === level;
-                            return (
-                              <button
-                                key={level}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleUpgradeChange(vehicle.id, level);
-                                }}
-                                className={`flex flex-col items-center justify-center w-8 h-8 rounded-full transition-colors ${
-                                  isActive
-                                    ? level === 1 
-                                      ? 'bg-green-600/20 text-green-400 border border-green-500/50'
-                                      : level === 2 
-                                        ? 'bg-blue-600/20 text-blue-400 border border-blue-500/50'
-                                        : 'bg-purple-600/20 text-purple-400 border border-purple-500/50'
-                                    : 'bg-slate-700/50 hover:bg-slate-600/50 text-slate-400'
-                                }`}
-                              >
-                                <span className="text-xs font-medium">U{level}</span>
-                                {isActive && (
-                                  <span className="text-[10px] mt-[-2px] text-slate-400">
-                                    {level * 10}%
-                                  </span>
-                                )}
-                              </button>
-                            );
-                          })}
-                        </div>
-          </div>
-          <div className="bg-slate-800/80 rounded-lg overflow-hidden">
-            <div className="p-4">
-              <div className="flex flex-wrap gap-2 justify-center mb-4">
-                <span className="px-2 py-1 bg-slate-700/90 text-xs rounded-full text-slate-300">
-                  {vehicle.type}
-                </span>
-                <span className="px-2 py-1 bg-blue-900/50 text-xs rounded-full text-blue-300">
-                  Tier {formatTier(vehicle.tier)}
-                </span>
-                <span className={`px-2 py-1 text-xs rounded-full ${
-                  getVehicleRarity(vehicle.name) === 'Common' ? 'bg-gray-600 text-white' :
-                  getVehicleRarity(vehicle.name) === 'Enhanced' ? 'bg-green-600 text-white' :
-                  getVehicleRarity(vehicle.name) === 'Rare' ? 'bg-blue-600 text-white' :
-                  getVehicleRarity(vehicle.name) === 'Epic' ? 'bg-purple-600 text-white' :
-                  getVehicleRarity(vehicle.name) === 'Legendary' ? 'bg-yellow-600 text-white' :
-                  'bg-cyan-500 text-white'
-                }`}>
-                  {getVehicleRarity(vehicle.name) || 'Standard'}
-                </span>
+        
+        {compare.length === 2 && (
+          <div ref={comparisonRef} className="mb-8 bg-slate-900/40 rounded-xl p-6 border border-slate-800">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold text-cyan-400">Vehicle Comparison</h2>
+              
+              {/* Upgrade Toggles */}
+              <div className="flex items-center space-x-2 bg-slate-800/50 p-1 rounded-full">
+                {[1, 2, 3].map((level) => {
+                  const isActive = upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level;
+                  return (
+                    <button
+                      key={level}
+                      onClick={() => {
+                        const newLevel = isActive ? 0 : level;
+                        handleUpgradeChange(compare[0], newLevel);
+                        handleUpgradeChange(compare[1], newLevel);
+                      }}
+                      className={`w-8 h-8 flex items-center justify-center rounded-full transition-all ${
+                        isActive 
+                          ? level === 1 ? 'bg-green-500/20' 
+                            : level === 2 ? 'bg-blue-500/20' 
+                            : 'bg-purple-500/20'
+                          : 'bg-transparent hover:bg-slate-700/50'
+                      }`}
+                    >
+                      <span className={`text-xs font-bold ${
+                        isActive 
+                          ? level === 1 ? 'text-green-400' 
+                            : level === 2 ? 'text-blue-400' 
+                            : 'text-purple-400'
+                          : 'text-slate-400'
+                      }`}>
+                        U{level}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
-              <div className="relative w-full pb-[56.25%] mb-4">
-                {vehicle.image ? (
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {compare.map((id, idx) => {
+                const vehicle = VEHICLES.find((v) => v.id.toString() === id);
+                if (!vehicle) return null;
+                
+                const currentUpgradeLevel = upgradeLevels[id] || 0;
+                const upgradedHealth = getUpgradedValue(vehicle, 'health');
+                const upgradedSpeed = getUpgradedValue(vehicle, 'speed');
+                const upgradedAgility = getUpgradedValue(vehicle, 'agility');
+                const upgradedAfterburner = getUpgradedValue(vehicle, 'afterburnerSpeed');
+                
+                return (
+                  <div key={id} className={`bg-slate-800/50 rounded-lg p-4 border ${
+                    idx === 0 ? 'border-cyan-500/30' : 'border-purple-500/30'
+                  }`}>
+                    <div className="flex flex-col items-center mb-4">
+                      <div className="relative w-full h-48 mb-3">
+                        <img
+                          src={vehicle.image}
+                          alt={vehicle.name}
+                          className="w-full h-full object-cover rounded-lg"
+                          onError={(e) => {
+                            e.currentTarget.src = "/placeholder-vehicle.png";
+                          }}
+                        />
+                        {currentUpgradeLevel > 0 && (
+                          <div className={`absolute -top-2 -right-2 px-2 py-1 rounded-full text-xs font-bold ${
+                            currentUpgradeLevel === 1 ? 'bg-green-500/90 text-white' 
+                              : currentUpgradeLevel === 2 ? 'bg-blue-500/90 text-white' 
+                              : 'bg-purple-500/90 text-white'
+                          }`}>
+                            U{currentUpgradeLevel}
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold text-cyan-300">
+                          {vehicle.name}
+                        </h3>
+                        <div className="text-sm text-slate-400">
+                          {vehicle.type} • {vehicle.faction} • Tier {formatTier(vehicle.tier)}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-1">
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="bg-slate-800/70 p-2 rounded">
+                          <div className="text-xs text-slate-400">Health</div>
+                          <div className="text-lg font-bold text-cyan-300">
+                            {upgradedHealth.toLocaleString()}
+                          </div>
+                          {currentUpgradeLevel > 0 && (
+                            <div className="text-xs mt-0.5">
+                              <span className="text-green-400">
+                                +{Math.round((upgradedHealth / vehicle.stats.health - 1) * 100)}%
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        
+                        <div className="bg-slate-800/70 p-2 rounded">
+                          <div className="text-xs text-slate-400">Speed</div>
+                          <div className="text-lg font-bold text-cyan-300">
+                            {upgradedSpeed} km/h
+                          </div>
+                          {currentUpgradeLevel > 0 && (
+                            <div className="text-xs mt-0.5">
+                              <span className="text-green-400">
+                                +{Math.round((upgradedSpeed / vehicle.stats.speed - 1) * 100)}%
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {upgradedAfterburner > 0 && (
+                          <div className="bg-slate-800/70 p-2 rounded">
+                            <div className="text-xs text-slate-400">Afterburner</div>
+                            <div className="text-lg font-bold text-cyan-300">
+                              {upgradedAfterburner} km/h
+                            </div>
+                            {currentUpgradeLevel > 0 && (
+                              <div className="text-xs mt-0.5">
+                                <span className="text-green-400">
+                                  +{Math.round((upgradedAfterburner / (vehicle.stats.afterburnerSpeed || upgradedAfterburner) - 1) * 100)}%
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                        
+                        <div className="bg-slate-800/70 p-2 rounded">
+                          <div className="text-xs text-slate-400">Agility</div>
+                          <div className="text-lg font-bold text-cyan-300">
+                            {upgradedAgility}
+                          </div>
+                          {currentUpgradeLevel > 0 && (
+                            <div className="text-xs mt-0.5">
+                              <span className="text-green-400">
+                                +{Math.round((upgradedAgility / (vehicle.stats.agility || upgradedAgility) - 1) * 100)}%
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {(() => {
+              const vehicle1 = VEHICLES.find((v) => v.id.toString() === compare[0])
+              const vehicle2 = VEHICLES.find((v) => v.id.toString() === compare[1])
+              if (vehicle1 && vehicle2) {
+                const generateComparisonAnalysis = (vehicle1: any, vehicle2: any): string => {
+                  const healthWinner = vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name
+                  const speedWinner = vehicle1.stats.speed > vehicle2.stats.speed ? vehicle1.name : vehicle2.name
+                  const agilityWinner = vehicle1.stats.agility > vehicle2.stats.agility ? vehicle1.name : vehicle2.name
+
+                  let analysis = `🤖 AI TACTICAL ANALYSIS\n\n`
+
+                  // Performance comparison
+                  analysis += `PERFORMANCE OVERVIEW:\n`
+                  analysis += `• Survivability: ${healthWinner} dominates with ${healthWinner === vehicle1.name ? vehicle1.stats.health.toLocaleString() : vehicle2.stats.health.toLocaleString()} HP\n`
+                  analysis += `• Mobility: ${speedWinner} leads with ${speedWinner === vehicle1.name ? vehicle1.stats.speed : vehicle2.stats.speed} km/h\n`
+                  analysis += `• Maneuverability: ${agilityWinner} excels with ${agilityWinner === vehicle1.name ? vehicle1.stats.agility : vehicle2.stats.agility} agility\n\n`
+
+                  // Tactical analysis
+                  analysis += `TACTICAL ASSESSMENT:\n`
+                  if (vehicle1.type === vehicle2.type) {
+                    analysis += `Both are ${vehicle1.type}s, making this a direct role comparison. `
+                  } else {
+                    analysis += `Cross-role comparison: ${vehicle1.type} vs ${vehicle2.type}. `
+                  }
+
+                  // Tier analysis
+                  if (vehicle1.tier === vehicle2.tier) {
+                    analysis += `Same tier (${vehicle1.tier}) vehicles with balanced matchup potential.\n`
+                  } else {
+                    const higherTier = vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name
+                    analysis += `${higherTier} has tier advantage, expect superior technology and capabilities.\n`
+                  }
+
+                  // Weapon analysis
+                  analysis += `\nWEAPON SYSTEMS:\n`
+                  analysis += `• ${vehicle1.name}: ${vehicle1.weapons.length} weapon systems\n`
+                  analysis += `• ${vehicle2.name}: ${vehicle2.weapons.length} weapon systems\n`
+
+                  // Faction analysis
+                  if (vehicle1.faction !== vehicle2.faction) {
+                    analysis += `\nFACTION DOCTRINE:\n`
+                    analysis += `${vehicle1.faction} vs ${vehicle2.faction} represents different military philosophies and engineering approaches.`
+                  }
+
+                  return analysis
+                }
+                return (
+                  <div className="mt-6 bg-slate-800/30 rounded-lg p-4 border border-cyan-500/20">
+                    <h3 className="text-lg font-semibold text-cyan-400 mb-3 flex items-center gap-2">
+                      🤖 AI Tactical Analysis System (AITAS)
+                    </h3>
+                    <div className="text-slate-300 text-sm whitespace-pre-line leading-relaxed">
+                      {generateComparisonAnalysis(vehicle1, vehicle2)}
+                    </div>
+                  </div>
+                )
+              }
+              return null
+            })()}
+
+            <button
+              onClick={() => setCompare([])}
+              className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+            >
+              Clear Comparison
+            </button>
+          </div>
+        )}
+
+        <div className="mb-6 flex items-center justify-between">
+          <p className="text-slate-400 mx-1.5">
+            Showing {indexOfFirstVehicle + 1}-{Math.min(indexOfLastVehicle, filteredVehicles.length)} of{" "}
+            {filteredVehicles.length} vehicles
+          </p>
+        </div>
+
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {paginatedVehicles.map((vehicle) => (
+            <motion.div
+              key={vehicle.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`group relative bg-slate-900/60 rounded-xl p-6 border border-slate-800 transition-all duration-300 ${
+      formatTier(vehicle.tier) === "II"
+        ? "hover:border-green-500 hover:shadow-[0_0_12px_1px_rgba(34,197,94,0.6)]"
+        : formatTier(vehicle.tier) === "III"
+        ? "hover:border-blue-500 hover:shadow-[0_0_12px_1px_rgba(29,78,216,0.6)]"
+        : formatTier(vehicle.tier) === "IV"
+        ? "hover:border-purple-500 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
+        : formatTier(vehicle.tier) === "I"
+        ? "hover:border-white-300 hover:shadow-[0_0_12px_1px_rgba(147,51,234,0.6)]"
+        : ""
+    }`}
+>
+  {/* Full border glow for Exclusive / Market / Construction (softer) */}
+  {(isExclusiveVehicle(vehicle.name) || isMarketVehicle(vehicle.name) || isConstructionVehicle(vehicle.name)) && (
+    <div
+      className={`absolute top-0 left-0 w-full h-full rounded-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300
+        ${
+          isExclusiveVehicle(vehicle.name)
+            ? "border-4 border-red-500/30 shadow-[0_0_12px_3px_rgba(239,68,68,0.25)]"
+            : isConstructionVehicle(vehicle.name)
+            ? "border-4 border-orange-500/30 shadow-[0_0_12px_3px_rgba(249,115,22,0.25)]"
+            : "border-4 border-yellow-400/30 shadow-[0_0_12px_3px_rgba(234,179,8,0.25)]"
+        }`}
+    />
+  )}
+
+
+              
+            
+            
+              <div className="absolute top-0 left-0 w-0 h-0 z-10">
+
+                <div
+                  className={`w-0 h-0 border-r-[40px] border-t-[40px] border-r-transparent text-fuchsia-800 ${
+                    formatTier(vehicle.tier) === "II"
+                      ? "border-t-green-500"
+                      : formatTier(vehicle.tier) === "III"
+                        ? "border-t-blue-700"
+                        : formatTier(vehicle.tier) === "IV"
+                          ? "border-t-purple-500"
+                          : "border-t-gray-500"
+                  }`}
+                />
+              </div>
+
+              {isMarketVehicle(vehicle.name) && (
+                <div className="absolute top-0 left-0 w-0 h-0 z-10">
+                  <div className="h-0 border-b-transparent border-l-yellow-500 ml-0 w-[0-] w-[aut-] w-[auto-] w-[auto-10] w-[auto-10px] w-[au-10px] w-[-10px] border-l-[30px] border-r-0 border-b-[30px]" />
+                </div>
+              )}
+
+              {isConstructionVehicle(vehicle.name) && (
+                <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20 rounded-xl">
+                  <img
+                    src="Construction.png"
+                    alt="Under Construction"
+                    className="w-full h-full object-cover opacity-80"
+                  />
+                </div>
+              )}
+
+              {isExclusiveVehicle(vehicle.name) && (
+                <div className="absolute top-0 left-0 w-0 h-0 z-10">
+                  <div className="h-0 border-b-transparent border-l-red-500 ml-0 w-[0-] w-[aut-] w-[auto-] w-[auto-10] w-[auto-10px] w-[au-10px] w-[-10px] border-r-0 border-b-[20px] border-l-[20px] text-rose-500 opacity-100" />
+                </div>
+              )}
+
+
+
+
+
+
+
+
+
+
+
+
+
+              {(vehicle.type === "Fighter Jet" || vehicle.type === "Bomber" || vehicle.type === "Helicopter") && (
+                <div className="absolute top-4 right-4 px-0 py-0 pl-0 pb-2.5 pt-0 border-t-0 mx-[-14px] my-[-3px]">
+                  {(() => {
+                    const role = getAircraftRole(vehicle)
+                    const iconPath = getRoleIcon(role)
+                    return iconPath ? (
+                      <img
+                        src={iconPath || "/placeholder.svg"}
+                        alt={`${role} aircraft`}
+                        className="h-6 w-auto opacity-80 object-contain"
+                      />
+                    ) : null
+                  })()}
+                </div>
+              )}
+
+              {(vehicle.type === "Main Battle Tank" || vehicle.type === "Light Tank" || vehicle.type === "Tank Destroyer" || 
+                vehicle.type === "MLRS" || vehicle.type === "Missile Carrier" || vehicle.type === "SPH" || 
+                vehicle.type === "Anti-Air") && (
+                <div className="absolute top-4 right-4 px-0 py-0 pl-0 pb-2.5 pt-0 border-t-0 my-[-3px] mx-[-4px]">
+                  {(() => {
+                    const tankType = vehicle.type === "Main Battle Tank" ? "MBT" : 
+                                   vehicle.type === "Anti-Air" ? "AA" : vehicle.type
+                    const iconPath = getTRoleIcon(tankType)
+                    return iconPath ? (
+                      <img
+                        src={iconPath || "/placeholder.svg"}
+                        alt={`${tankType} tank`}
+                        className="h-3 w-auto opacity-80 object-contain"
+                      />
+                    ) : null
+                  })()}
+                </div>
+              )}
+
+              <div className="flex items-center gap-3 mb-2 px-0">
+                <img
+                  src={getFlagImage(vehicle.faction) || "/placeholder.svg"}
+                  alt={`${vehicle.faction} flag`}
+                  className="w-8 h-6 object-cover rounded shadow-md"
+                />
+                <h3 className="text-xl font-bold text-white">{vehicle.name}</h3>
+                
+                <span className="text-sm text-slate-400 font-semibold">({vehicle.faction})</span>
+              </div>
+
+               {/* Vehicle Image Display */}
+              {vehicle.image && (
+                <div className="opacity-100 mb-4 flex-col pb-[-6px] pb-[-px] pb-[-6px] relative">
+                  <img
+                    src={vehicle.image}
+                    alt={`${vehicle.name} vehicle`}
+                    className="w-full h-48 object-cover rounded-lg mb-3 bg-slate-800/20 shadow-lg"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                  {/* Rarity Tag */}
+                  <div className="absolute top-2 left-2 z-20">
+                    <div className={`px-2 py-1 rounded text-xs font-semibold shadow-lg ${getRarityColor(getVehicleRarity(vehicle.name))}`}>
+                      {getVehicleRarity(vehicle.name)}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <p className="text-slate-300 text-sm mb-4 leading-relaxed">{vehicle.description}</p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className="text-xs text-slate-400 mb-1">Health</div>
+                  <div className="text-lg font-bold text-cyan-300">{vehicle.stats.health.toLocaleString()}</div>
+                </div>
+
+                {vehicle.type === "Fighter Jet" || vehicle.type === "Bomber" || vehicle.type === "Helicopter"? (
                   <>
-                    <img 
-                      src={vehicle.image} 
-                      alt={vehicle.name} 
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-center">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // Create a temporary link to download the image
-                          const link = document.createElement('a');
-                          link.href = vehicle.image;
-                          link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
-                          document.body.appendChild(link);
-                          link.click();
-                          document.body.removeChild(link);
-                        }}
-                        className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                          <polyline points="7 10 12 15 17 10"></polyline>
-                          <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        <span>Download Image</span>
-                      </button>
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <div className="text-xs text-slate-400 mb-1">Cruise Speed</div>
+                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.speed} km/h</div>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <div className="text-xs text-slate-400 mb-1">Afterburner Speed</div>
+                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.afterburnerSpeed} km/h</div>
+                    </div>
+                  </>
+                ) : vehicle.type === "Helicopter" ? (
+                  <>
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <div className="text-xs text-slate-400 mb-1">Speed</div>
+                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.speed} km/h</div>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <div className="text-xs text-slate-400 mb-1">Max Speed</div>
+                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.maxSpeed} km/h</div>
                     </div>
                   </>
                 ) : (
-                  <div className="absolute inset-0 bg-slate-700 flex items-center justify-center text-slate-400">
-                    No image available
-                  </div>
+                  <>
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <div className="text-xs text-slate-400 mb-1">Speed</div>
+                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.speed} km/h</div>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <div className="text-xs text-slate-400 mb-1">Armor</div>
+                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.armor}</div>
+                    </div>
+                  </>
                 )}
-              </div>
-              {vehicle.description && (
-                <div className="pt-4 border-t border-slate-700">
-                  <h4 className="text-base font-bold text-cyan-300 mb-2">DESCRIPTION</h4>
-                  <p className="text-slate-300 text-sm">{vehicle.description}</p>
+
+                <div className="bg-slate-800/50 rounded-lg p-3">
+                  <div className="text-xs text-slate-400 mb-1">Agility</div>
+                  <div className="text-lg font-bold text-cyan-300">{vehicle.stats.agility}</div>
                 </div>
+              </div>
+
+              <div className="space-y-2 mb-3">
+                {/* First Row: View Details and Bot Icon */}
+                <div className="flex justify-between items-center gap-2">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setVehicleDetailsOpenId(vehicle.id.toString());
+                    }}
+                    className="flex-1 px-4 py-2 bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800 text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg text-center"
+                  >
+                    View Details
+                  </button>
+                  
+                  <button
+                    onClick={() => setVehicleInfoOpen(vehicle.id.toString())}
+                    className="p-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center"
+                    title="AI Analysis"
+                  >
+                    <Bot className="w-4 h-4" />
+                  </button>
+                </div>
+                
+                {/* Second Row: Weapons and Compare */}
+                <div className="flex justify-between items-center gap-2">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setWeaponsModalOpenId(vehicle.id.toString())
+                    }}
+                    className="flex-1 px-4 py-2 bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800 text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg"
+                  >
+                    Weapons
+                  </button>
+                  
+                  <div className="relative flex-1">
+                    <button
+                      onClick={() => {
+                        if (compare.length < 2 || compare.includes(vehicle.id.toString())) {
+                          toggleCompare(vehicle.id.toString());
+                        }
+                      }}
+                      disabled={compare.length >= 2 && !compare.includes(vehicle.id.toString())}
+                      className={`w-full px-4 py-2 text-sm font-semibold rounded transition-all duration-200 shadow-md flex items-center justify-center gap-2 ${
+                        compare.includes(vehicle.id.toString())
+                          ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700"
+                          : compare.length > 0
+                            ? "bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:from-amber-600 hover:to-orange-700"
+                            : "bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800"
+                      } ${compare.length >= 2 && !compare.includes(vehicle.id.toString()) ? "opacity-50 cursor-not-allowed" : ""}`}
+                    >
+                      {compare.includes(vehicle.id.toString()) 
+                        ? <span className="flex items-center">
+                            <span className="bg-white/20 rounded-full w-5 h-5 flex items-center justify-center mr-1">
+                              {compare.indexOf(vehicle.id.toString()) + 1}
+                            </span>
+                            Selected
+                          </span>
+                        : compare.length > 0 
+                          ? `Select (${compare.length}/2)`
+                          : "Compare"
+                      }
+                    </button>
+                    {compare.length > 0 && !compare.includes(vehicle.id.toString()) && (
+                      <div className="absolute -top-2 -right-2 bg-amber-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                        {compare.length}/2
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+
+              {expandedVehicle === vehicle.id.toString() && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="mt-4 pt-4 border-t border-slate-700"
+                >
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="text-sm font-semibold text-cyan-300 mb-2">Weapons</h4>
+                      <div className="space-y-2">
+                        {vehicle.weapons.map((weapon: any, idx: number) => (
+                          <div key={idx} className="bg-slate-800/30 rounded p-2">
+                            <div className="flex justify-between items-start">
+                              <div className="font-medium text-cyan-200">{weapon.name}</div>
+                              <div className="text-right text-xs">
+                                <div className="text-cyan-300 font-bold">DMG: {weapon.damage}</div>
+                                <div className="text-cyan-300 font-bold">PEN: {weapon.penetration}</div>
+                                <div className="text-cyan-300 font-bold">REL: {weapon.reload}</div>
+                                {weapon.rateOfFire && <div className="text-slate-400">{weapon.rateOfFire}</div>}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="text-sm font-semibold text-cyan-300 mb-2">Upgrade Modules</h4>
+                      <div className="space-y-3">
+                        {Object.entries(vehicle.modules || {}).map(([category, modules]: [string, any]) => (
+                          <div key={category}>
+                            <div className="text-xs font-medium text-slate-300 mb-1 capitalize">{category}</div>
+                            <div className="space-y-1">
+                              {Array.isArray(modules) &&
+                                modules.map((module: any, idx: number) => (
+                                  <div key={idx} className="bg-slate-800/20 rounded px-2 py-1 text-xs">
+                                    <div className="font-medium text-cyan-200">{module.name}</div>
+                                    <div className="text-slate-400">{module.bonus}</div>
+                                  </div>
+                                ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               )}
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Pagination */}
+        <div className="flex justify-center flex-row mx-2 sm:mx-4 mt-2.5 leading-9">
+          <div className="flex gap-1 items-center flex-wrap justify-center">
+            {/* Previous Button */}
+            <button
+              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              disabled={currentPage === 1}
+              className={`px-3 py-2 text-sm rounded transition-colors ${
+                currentPage === 1 
+                  ? "bg-slate-800 text-slate-500 cursor-not-allowed" 
+                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+              }`}
+            >
+              &lt;
+            </button>
+
+            {/* Compact Page Numbers - Hidden on Mobile */}
+            <div className="hidden md:flex gap-1 items-center">
+              {(() => {
+                const totalPages = Math.ceil(filteredVehicles.length / vehiclesPerPage);
+                const current = currentPage;
+                const pages = [];
+
+                if (totalPages <= 7) {
+                  // Show all pages if 7 or fewer
+                  for (let i = 1; i <= totalPages; i++) {
+                    pages.push(i);
+                  }
+                } else {
+                  // Always show first page
+                  pages.push(1);
+                  
+                  if (current <= 4) {
+                    // Near beginning: 1 2 3 4 5 ... last
+                    for (let i = 2; i <= 5; i++) {
+                      pages.push(i);
+                    }
+                    pages.push('...');
+                    pages.push(totalPages);
+                  } else if (current >= totalPages - 3) {
+                    // Near end: 1 ... (last-4) (last-3) (last-2) (last-1) last
+                    pages.push('...');
+                    for (let i = totalPages - 4; i <= totalPages; i++) {
+                      pages.push(i);
+                    }
+                  } else {
+                    // Middle: 1 ... (current-1) current (current+1) ... last
+                    pages.push('...');
+                    for (let i = current - 1; i <= current + 1; i++) {
+                      pages.push(i);
+                    }
+                    pages.push('...');
+                    pages.push(totalPages);
+                  }
+                }
+
+                return pages.map((page, index) => {
+                  if (page === '...') {
+                    return (
+                      <span key={`ellipsis-${index}`} className="px-2 py-1 text-slate-400 text-sm">
+                        ...
+                      </span>
+                    );
+                  }
+                  return (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`px-3 py-2 text-sm rounded transition-colors mr-0.5 ${
+                        currentPage === page 
+                          ? "bg-cyan-700 text-white" 
+                          : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  );
+                });
+              })()}
             </div>
+
+            {/* Current Page Indicator - Visible on Mobile */}
+            <div className="md:hidden px-3 py-2 bg-slate-800 text-slate-300 rounded text-sm mx-2">
+              {currentPage} / {Math.ceil(filteredVehicles.length / vehiclesPerPage)}
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={() => setCurrentPage(Math.min(Math.ceil(filteredVehicles.length / vehiclesPerPage), currentPage + 1))}
+              disabled={currentPage === Math.ceil(filteredVehicles.length / vehiclesPerPage)}
+              className={`px-3 py-2 text-sm rounded transition-colors ${
+                currentPage === Math.ceil(filteredVehicles.length / vehiclesPerPage)
+                  ? "bg-slate-800 text-slate-500 cursor-not-allowed" 
+                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
+              }`}
+            >
+              &gt;
+            </button>
+          </div>
+        </div>
+
+        {/* Chat Interface */}
+        {chatOpen && (
+          <div className="fixed bottom-4 right-4 h-96 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 w-[344px] sm:w-[400px] max-w-[90vw]">
+            <div className="flex items-center justify-between p-4 border-b border-slate-700">
+              <h3 className="font-semibold text-cyan-300">Vehicle Database Chat</h3>
+              <button onClick={() => setChatOpen(false)} className="text-slate-400 hover:text-white">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="h-64 overflow-y-auto p-4 space-y-3">
+              {chatMessages.map((msg, index) => (
+                <div key={index} className={`${msg.role === "user" ? "text-right" : "text-left"}`}>
+                  <div className="text-xs text-slate-400 mb-1">{msg.role === "user" ? "You:" : "Database:"}</div>
+                  <div
+                    className={`inline-block p-2 rounded-lg text-sm ${
+                      msg.role === "user" ? "bg-cyan-600 text-white" : "bg-slate-800 text-slate-200"
+                    }`}
+                  >
+                    {typeof msg.content === 'object' && msg.content.type === 'vehicle_details' ? (
+                      <div className="space-y-3">
+                        {/* Vehicle Image */}
+                        <img 
+                          src={`${msg.content.vehicle.image}`} 
+                          alt={msg.content.vehicle.name}
+                          className="w-full max-w-xs rounded-lg object-cover"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                            const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                            if (fallback) fallback.style.display = 'flex';
+                          }}
+                        />
+                        <div 
+                          className="w-full max-w-xs h-48 bg-slate-800 rounded-lg border border-slate-600 flex items-center justify-center text-slate-400" 
+                          style={{ display: 'none' }}
+                        >
+                          <div className="text-center">
+                            <div className="text-2xl mb-2">🚗</div>
+                            <div className="text-sm">Image not available</div>
+                          </div>
+                        </div>
+                        
+                        {/* Context */}
+                        {msg.content.context && (
+                          <div className="text-cyan-300 font-medium mb-2">
+                            {msg.content.context}
+                          </div>
+                        )}
+                        
+                        {/* Vehicle Info with Enhanced Header */}
+                        <div className="space-y-2">
+                          <div className="text-center">
+                            <div className="text-2xl mb-1">
+                              {(() => {
+                                const flags: { [key: string]: string } = {
+                                  'American': '🇺🇸',
+                                  'Russian': '🇷🇺', 
+                                  'Chinese': '🇨🇳',
+                                  'German': '🇩🇪',
+                                  'British': '🇬🇧',
+                                  'French': '🇫🇷',
+                                  'Israeli': '🇮🇱',
+                                  'Japanese': '🇯🇵',
+                                  'Italian': '🇮🇹'
+                                }
+                                return flags[msg.content.vehicle.faction] || '🏳️'
+                              })()}
+                            </div>
+                            <h3 className="text-lg font-bold text-white">{msg.content.vehicle.name}</h3>
+                            <div className="text-sm text-cyan-300">
+                              {msg.content.vehicle.type} • {msg.content.vehicle.tier}
+                            </div>
+                          </div>
+                          
+                          <div className="space-y-1">
+                            <div><strong>Nation:</strong> {msg.content.vehicle.faction}</div>
+                            {(msg.content.vehicle.isPremium || msg.content.vehicle.isMarket) && (
+                              <div><strong>Type:</strong> 
+                                {msg.content.vehicle.isPremium && <span className="text-yellow-400 ml-1">Premium</span>}
+                                {msg.content.vehicle.isMarket && <span className="text-green-400 ml-1">Market</span>}
+                              </div>
+                            )}
+                          </div>
+                          
+                          <div>
+                            <strong>Description:</strong>
+                            <div className="mt-1 text-slate-300">{msg.content.vehicle.description}</div>
+                          </div>
+                        </div>
+                        
+                        {/* Key Stats with Emojis */}
+                        <div>
+                          <strong>Key Stats:</strong>
+                          <div className="mt-2 space-y-1">
+                            <div>❤️ Health: {msg.content.vehicle.stats.health?.toLocaleString()} HP</div>
+                            {msg.content.vehicle.stats.speed && (
+                              <div>⚡ Speed: {msg.content.vehicle.stats.speed} km/h</div>
+                            )}
+                            {msg.content.vehicle.stats.armor && (
+                              <div>🛡️ Armor: {msg.content.vehicle.stats.armor}</div>
+                            )}
+                            {msg.content.vehicle.stats.agility && (
+                              <div>🌀 Agility: {msg.content.vehicle.stats.agility}</div>
+                            )}
+                            <div>🎖️ Tier: {msg.content.vehicle.tier}</div>
+                          </div>
+                        </div>
+                        
+                        {/* View Vehicle Button */}
+                        <button
+                          onClick={() => {
+                            const vehicle = VEHICLES.find(v => v.name === msg.content.vehicle.name)
+                            if (vehicle) {
+                              setSearchQuery(vehicle.name);
+                              setBattlePassOpen(false);
+                              setExpandedVehicle(vehicle.id.toString());
+                              setChatOpen(false);
+                            }
+                          }}
+                          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors mt-3"
+                        >
+                          View Vehicle
+                        </button>
+                      </div>
+                    ) : typeof msg.content === 'object' && msg.content.type === 'vehicle_comparison' ? (
+                      <div className="space-y-4">
+                        <h3 className="text-lg font-bold text-white text-center">Vehicle Comparison</h3>
+                        
+                        {/* Vehicle 1 */}
+                        <div className="bg-slate-700/30 rounded-lg p-3 border border-slate-600">
+                          <img 
+                            src={`${msg.content.vehicles[0].image}`} 
+                            alt={msg.content.vehicles[0].name}
+                            className="w-full max-w-xs rounded-lg object-cover mb-3"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
+                          <h4 className="font-bold text-cyan-300 mb-2">
+                            {msg.content.vehicles[0].flag} {msg.content.vehicles[0].name}
+                          </h4>
+                          <div className="space-y-1 text-sm">
+                            <div>❤️ Health: {msg.content.vehicles[0].stats.health?.toLocaleString()} HP</div>
+                            {msg.content.vehicles[0].stats.speed && (
+                              <div>⚡ Speed: {msg.content.vehicles[0].stats.speed} km/h</div>
+                            )}
+                            {msg.content.vehicles[0].stats.agility && (
+                              <div>🌀 Agility: {msg.content.vehicles[0].stats.agility}</div>
+                            )}
+                            <div>🎖️ Tier: {msg.content.vehicles[0].tier}</div>
+                          </div>
+                        </div>
+
+                        {/* Vehicle 2 */}
+                        <div className="bg-slate-700/30 rounded-lg p-3 border border-slate-600">
+                          <img 
+                            src={`${msg.content.vehicles[1].image}`} 
+                            alt={msg.content.vehicles[1].name}
+                            className="w-full max-w-xs rounded-lg object-cover mb-3"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
+                          <h4 className="font-bold text-cyan-300 mb-2">
+                            {msg.content.vehicles[1].flag} {msg.content.vehicles[1].name}
+                          </h4>
+                          <div className="space-y-1 text-sm">
+                            <div>❤️ Health: {msg.content.vehicles[1].stats.health?.toLocaleString()} HP</div>
+                            {msg.content.vehicles[1].stats.speed && (
+                              <div>⚡ Speed: {msg.content.vehicles[1].stats.speed} km/h</div>
+                            )}
+                            {msg.content.vehicles[1].stats.agility && (
+                              <div>🌀 Agility: {msg.content.vehicles[1].stats.agility}</div>
+                            )}
+                            <div>🎖️ Tier: {msg.content.vehicles[1].tier}</div>
+                          </div>
+                        </div>
+
+                        {/* Analysis Section */}
+                        <div className="bg-slate-800/50 rounded-lg p-3 border border-slate-600">
+                          <h4 className="font-bold text-yellow-300 mb-2">📊 Analysis</h4>
+                          <div className="space-y-1 text-sm">
+                            <div>• Survivability: <strong>{msg.content.analysis.survivability}</strong> ({msg.content.analysis.survivabilityValue?.toLocaleString()} HP)</div>
+                            {msg.content.analysis.speedValue > 0 && (
+                              <div>• Speed: <strong>{msg.content.analysis.speed}</strong> ({msg.content.analysis.speedValue} km/h)</div>
+                            )}
+                            {msg.content.analysis.agilityValue > 0 && (
+                              <div>• Agility: <strong>{msg.content.analysis.agility}</strong> ({msg.content.analysis.agilityValue})</div>
+                            )}
+                            <div>• Tier: <strong>{msg.content.analysis.tier}</strong></div>
+                          </div>
+                        </div>
+
+                        {/* Recommendation */}
+                        <div className="bg-green-900/30 rounded-lg p-3 border border-green-600/50">
+                          <h4 className="font-bold text-green-300 mb-1">🏆 Recommendation</h4>
+                          <div className="text-sm">
+                            <strong>{msg.content.recommendation}</strong> for superior overall performance
+                          </div>
+                        </div>
+                      </div>
+                    ) : typeof msg.content === 'object' && msg.content.type === 'no_vehicle_found' ? (
+                      <div className="text-slate-300 italic">
+                        {msg.content.message}
+                      </div>
+                    ) : (
+                      msg.content
+                    )}
+                  </div>
+                </div>
+              ))}
+              {isLoading && <div className="text-center text-slate-400">Thinking...</div>}
+              {/* Scroll target for auto-scrolling */}
+              <div ref={chatMessagesEndRef} />
+            </div>
+
+            <div className="p-4 border-t border-slate-700">
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  onKeyPress={(e) => e.key === "Enter" && handleChatSubmit()}
+                  placeholder="Ask about vehicles..."
+                  className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded text-sm focus:ring-2 focus:ring-cyan-500"
+                />
+                <button
+                  onClick={handleChatSubmit}
+                  className="px-3 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded transition-colors"
+                >
+                  <Send className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Floating Chat Button */}
+        {!chatOpen && (
+          <button
+            onClick={() => setChatOpen(true)}
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 p-3 sm:p-4 bg-cyan-600 hover:bg-cyan-700 text-white rounded-full shadow-lg transition-colors z-40"
+          >
+            <BotMessageSquareIcon className="h-6 w-6 sm:h-8 sm:w-8" />
+            <span className="hidden sm:inline ml-2">Ask AI</span>
+          </button>
+        )}
+
+        <footer className="mt-8 sm:mt-16 pt-6 sm:pt-8 border-t border-slate-800">
+          <div className="text-center space-x-4 sm:space-x-8 px-4">
+            <button
+              onClick={() => setShowAbout(true)}
+              className="text-cyan-400 hover:text-cyan-300 underline font-medium"
+            >
+              About
+            </button>
+            <button
+              onClick={() => setShowUpdates(true)}
+              className="text-cyan-400 hover:text-cyan-300 underline font-medium"
+            >
+              Updates
+            </button>
+            <button
+              onClick={() => setShowCredits(true)}
+              className="text-cyan-400 hover:text-cyan-300 underline font-medium"
+            >
+              Credits
+            </button>
+          </div>
+        </footer>
+
+        {/* About Modal */}
+        {showAbout && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-slate-800 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-2xl font-bold text-cyan-400">About MWT Assistant (Unofficial) </h2>
+                  <button onClick={() => setShowAbout(false)} className="text-slate-400 hover:text-white">
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+                <div className="space-y-4 text-slate-300">
+                  <p>
+                    MWT Assistant is your all-in-one companion for tracking and managing MWT-related data. Access real-time statistics, detailed information, and updates for vehicles and units with ease. Whether you’re analyzing performance, monitoring progress, or staying informed about the latest developments, MWT Assistant keeps everything organized in a simple, intuitive interface.
+                  </p>
+                  <p>
+                    Features include vehicle statistics, weapon specifications, upgrade modules, AI-powered tactical analysis, and advanced filtering capabilities.
+                  </p>
+                  <p>
+                    MWT Assistant does not collect, store, or share personal information. Data shown is provided for informational purposes and we strive to ensure its accuracy, but we cannot guarantee completeness.
+                  </p>
+                  <p>
+                     Anonymous crash and performance data may be collected automatically by Google Play Services.
+                  </p>
+                  <p>
+                     Ads shown in the app may use cookies or similar technologies under their own policies.
+                  </p>
+<p>
+  <a 
+    href="https://sites.google.com/view/mwtassistantpppolicy/home" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className="text-cyan-400 underline hover:text-cyan-300"
+  >
+    Read the Policy
+  </a>
+</p>
+
+                  <p className="text-sm text-slate-400">
+                    Created by Naveed2227 • Version 1.00.0 • Built with CSS and TypeScript
+                  </p>
+                   <p className="text-sm text-slate-400"> 
+                    Contact:
+                  </p>
+                  <p className="text-sm text-slate-400"> 
+                    Email: naveed.miandad.007@gmail.com
+                  </p>
+                  <p className="text-sm text-slate-400"> 
+                    Discord: naveed27
+                  </p>
+                  <p className="text-sm text-slate-400"> 
+                    Inst: @naveed_2227
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+         )}
+
+      
+
+        {showUpdates && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-slate-800 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-2xl font-bold text-cyan-400">Updates of MWT Assistant (Unofficial) </h2>
+                  <button onClick={() => setShowUpdates(false)} className="text-slate-400 hover:text-white">
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+                <div className="space-y-4 text-slate-300">
+                  <div className="mt-6 pt-4 border-t border-slate-600">
+                    <h3 className="text-xl font-semibold text-cyan-400 mb-3">Updates</h3>
+                    <div className="space-y-3">
+                     <div className="bg-slate-700/50 p-3 rounded-lg">
+  
+
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.0.00   (16/9/2025)</span>
+                          <span className="text-sm text-slate-400">Initial</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Initial release with comprehensive vehicle database</li>
+                          <li>• AI-powered chat assistant for tactical analysis</li>
+                          <li>• Vehicle comparison and filtering system</li>
+                        </ul>
+                      </div>
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         )}
+                  
+
+         {showCredits && (
+  <div className="fixed inset-0 flex justify-center z-50 items-center opacity-100 bg-[rgba(0,0,0,0.4655797066895858)]">
+    <div className="bg-slate-900 p-6 rounded-lg max-w-4xl mx-4 max-h-[80vh] overflow-y-auto h-full px-6 w-full opacity-100">
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-xl font-bold text-cyan-400">Credits</h3>
+        <button
+          onClick={() => setShowCredits(false)}
+          className="text-slate-400 hover:text-white text-2xl"
+        >
+          ✕
+        </button>
+      </div>
+
+      {/* Original Credits Section */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10">
+        <div>
+          <h4 className="text-white font-semibold">Naveed2227</h4>
+          <p className="text-slate-400 text-sm">Lead developer and creator</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Hoffman Derpin</h4>
+          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Spector404</h4>
+          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Unnamed</h4>
+          <p className="text-slate-400 text-sm">Suggester</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Hollyninja456</h4>
+          <p className="text-slate-400 text-sm">Writer, Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Flarakrad</h4>
+          <p className="text-slate-400 text-sm">Contributer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Yeti</h4>
+          <p className="text-slate-400 text-sm">Yeti</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Yx190</h4>
+          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">QWE</h4>
+          <p className="text-slate-400 text-sm">Server Moderator, Supporter, Coordinator</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">OberstLeutnantFerid</h4>
+          <p className="text-slate-400 text-sm">Militarist Officer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Top Gun</h4>
+          <p className="text-slate-400 text-sm">Server Moderator, Supporter, Coordinator</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">White Windu</h4>
+          <p className="text-slate-400 text-sm">Adviser, Coordination Manager</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Shiroko_Chan</h4>
+          <p className="text-slate-400 text-sm">Server Moderator, Supporter, Iwak</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Eidolon X</h4>
+          <p className="text-slate-400 text-sm">Adviser, Lurks</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Nesli27</h4>
+          <p className="text-slate-400 text-sm">Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">枕頭</h4>
+          <p className="text-slate-400 text-sm">Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">VIPER2729</h4>
+          <p className="text-slate-400 text-sm">Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">THE DAWN</h4>
+          <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">白叔</h4>
+          <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
+        </div>
+      </div>
+
+      {/* Media Members Section */}
+      <div className="mb-6">
+        <h3 className="text-xl font-bold text-cyan-400 mb-4">Media supporters</h3>
+
+        <h4 className="text-lg font-bold text-cyan-200 mb-2"></h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div>
+            <h4 className="text-white font-semibold">Mr.Hasori</h4>
+            <p className="text-slate-400 text-sm">YouTube Content Creator</p>
+          </div>
+          <div>
+            <h4 className="text-white font-semibold">QWE</h4>
+            <p className="text-slate-400 text-sm">Promotional Designer</p>
           </div>
         </div>
       </div>
+
     </div>
   </div>
-</div>
+)}
+
+        {/* Vehicle Info Modal */}
+        {vehicleInfoOpen && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-slate-900 rounded-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+              <div className="flex items-center justify-between p-6 border-b border-slate-700">
+                <h3 className="text-xl font-bold text-cyan-300">AI Vehicle Analysis Syetem (AIVAS)  </h3>
+                <button onClick={() => setVehicleInfoOpen(null)} className="text-slate-400 hover:text-white">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <div className="p-6">
+                <pre className="whitespace-pre-wrap text-sm text-slate-200 leading-relaxed">
+                  {(() => {
+                    const vehicle = VEHICLES.find((v) => v.id.toString() === vehicleInfoOpen)
+                    return vehicle ? getVehicleDetailedInfo(vehicle) : "Vehicle not found"
+                  })()}
+                </pre>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {vehicleDetailsOpenId && (() => {
+          const vehicle = VEHICLES.find(v => v.id.toString() === vehicleDetailsOpenId);
+          if (!vehicle) return null;
+          
+          return (
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+              <motion.div 
+                ref={vehicleDetailsModalRef}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                className="bg-slate-900 rounded-xl w-full max-w-6xl max-h-[90vh] overflow-y-auto border border-slate-700"
+              >
+                {/* Header with close button and vehicle name */}
+                <div className="p-4 border-b border-slate-700 flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <img 
+                      src={getFlagImage(vehicle.faction)} 
+                      alt={vehicle.faction} 
+                      className="w-8 h-5 object-cover rounded-sm shadow"
+                    />
+                    <h2 className="text-xl font-bold text-white">{vehicle.name}</h2>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="flex items-center bg-slate-800/80 rounded-full p-0.5">
+                      {[1, 2, 3].map((level) => (
+                        <button
+                          key={level}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const newLevels = { ...upgradeLevels };
+                            newLevels[compare[0]] = level;
+                            newLevels[compare[1]] = level;
+                            setUpgradeLevels(newLevels);
+                          }}
+                          className={`relative w-10 h-10 flex items-center justify-center rounded-full transition-all ${
+                            (upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level)
+                              ? level === 1 ? 'bg-green-600/20' 
+                                : level === 2 ? 'bg-blue-600/20' 
+                                : 'bg-purple-600/20'
+                              : 'bg-gray-700/50 hover:bg-gray-600/50'
+                          }`}
+                        >
+                          <img 
+                            src={`/U${level}.png`} 
+                            alt={`U${level}`} 
+                            className={`w-6 h-6 ${(upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level) ? 'opacity-100' : 'opacity-60'}`}
+                          />
+                          {(upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level) && (
+                            <div className="absolute inset-0 rounded-full border-2 border-white/30" />
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => setVehicleDetailsOpenId(null)}
+                      className="p-1.5 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Main content */}
+                <div className="p-6 bg-slate-900">
+                  {/* Image and Description - Mobile First (shown before other content) */}
+                  <div className="block lg:hidden mb-6">
+                    <div className="bg-slate-800/80 rounded-lg overflow-hidden">
+                      <div className="relative">
+                        <img
+                          src={vehicle.image}
+                          alt={vehicle.name}
+                          className="w-full h-64 object-cover"
+                          onError={(e) => {
+                            e.currentTarget.src = "/placeholder-vehicle.png"
+                          }}
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 p-4">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              // Create a temporary link to download the image
+                              const link = document.createElement('a');
+                              link.href = vehicle.image;
+                              link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
+                              document.body.appendChild(link);
+                              link.click();
+                              document.body.removeChild(link);
+                            }}
+                            className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                              <polyline points="7 10 12 15 17 10"></polyline>
+                              <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            <span>Download Image</span>
+                          </button>
+                        </div>
+                      </div>
+                      {vehicle.description && (
+                        <div className="p-4">
+                          <h4 className="text-base font-bold text-cyan-300 mb-2">DESCRIPTION</h4>
+                          <p className="text-slate-300 text-sm">{vehicle.description}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col lg:flex-row gap-6">
+                    {/* Left column - Stats and Weapons */}
+                    <div className="w-full lg:w-1/2">
+                      {/* Vehicle Specifications */}
+                      <div className="mb-6">
+                        <h3 className="text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">VEHICLE SPECIFICATIONS</h3>
+                        
+                        {/* Upgrade Toggles */}
+                        <div className="mb-4 p-3 bg-slate-800/50 rounded-lg">
+                          <div className="flex justify-between">
+                            <button
+                              onClick={() => {
+                                const newLevels = { ...upgradeLevels };
+                                newLevels[compare[0]] = 0;
+                                newLevels[compare[1]] = 0;
+                                setUpgradeLevels(newLevels);
+                              }}
+                              className={`px-3 py-1 text-xs rounded ${upgradeLevels[compare[0]] === 0 && upgradeLevels[compare[1]] === 0 ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                            >
+                              BASE
+                            </button>
+                            <button
+                              onClick={() => {
+                                const newLevels = { ...upgradeLevels };
+                                newLevels[compare[0]] = 1;
+                                newLevels[compare[1]] = 1;
+                                setUpgradeLevels(newLevels);
+                              }}
+                              className={`px-3 py-1 text-xs rounded ${upgradeLevels[compare[0]] === 1 && upgradeLevels[compare[1]] === 1 ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                            >
+                              U1 (+10%)
+                            </button>
+                            <button
+                              onClick={() => {
+                                const newLevels = { ...upgradeLevels };
+                                newLevels[compare[0]] = 2;
+                                newLevels[compare[1]] = 2;
+                                setUpgradeLevels(newLevels);
+                              }}
+                              className={`px-3 py-1 text-xs rounded ${upgradeLevels[compare[0]] === 2 && upgradeLevels[compare[1]] === 2 ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                            >
+                              U2 (+20%)
+                            </button>
+                            <button
+                              onClick={() => {
+                                const newLevels = { ...upgradeLevels };
+                                newLevels[compare[0]] = 3;
+                                newLevels[compare[1]] = 3;
+                                setUpgradeLevels(newLevels);
+                              }}
+                              className={`px-3 py-1 text-xs rounded ${upgradeLevels[compare[0]] === 3 && upgradeLevels[compare[1]] === 3 ? 'bg-purple-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                            >
+                              U3 (+30%)
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-4">
+                          {/* Health - Always shown */}
+                          <div className="bg-slate-800/80 rounded-lg p-4">
+                            <StatBar 
+                              label="HEALTH" 
+                              value={getUpgradedValue(vehicle, 'health')} 
+                              baseValue={vehicle.stats.health}
+                              maxValue={2000}
+                              upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                              onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                            />
+                          </div>
+
+                          {/* For Jets and Bombers */}
+                          {(vehicle.type === 'Fighter Jet' || vehicle.type === 'Attack Aircraft' || vehicle.type === 'Multirole Fighter' || vehicle.type === 'Bomber') && (
+                            <>
+                              <div className="bg-slate-800/80 rounded-lg p-4">
+                                <StatBar 
+                                  label="CRUISE SPEED" 
+                                  value={getUpgradedValue(vehicle, 'speed')} 
+                                  baseValue={vehicle.stats.speed}
+                                  maxValue={3000}
+                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                />
+                                <div className="text-xs text-slate-400 mt-1">km/h</div>
+                              </div>
+                              <div className="bg-slate-800/80 rounded-lg p-4">
+                                <StatBar 
+                                  label="AFTERBURNER SPEED" 
+                                  value={getUpgradedValue(vehicle, 'afterburnerSpeed')} 
+                                  baseValue={vehicle.stats.afterburnerSpeed}
+                                  maxValue={4000}
+                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                />
+                                <div className="text-xs text-slate-400 mt-1">km/h</div>
+                              </div>
+                            </>
+                          )}
+
+                          {/* For Helicopters */}
+                          {(vehicle.type === 'Attack Helicopter' || vehicle.type === 'Scout Helicopter') && (
+                            <>
+                              <div className="bg-slate-800/80 rounded-lg p-4">
+                                <StatBar 
+                                  label="CRUISE SPEED" 
+                                  value={getUpgradedValue(vehicle, 'speed')} 
+                                  baseValue={vehicle.stats.speed}
+                                  maxValue={500}
+                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                />
+                                <div className="text-xs text-slate-400 mt-1">km/h</div>
+                              </div>
+                              <div className="bg-slate-800/80 rounded-lg p-4">
+                                <StatBar 
+                                  label="VERTICAL SPEED" 
+                                  value={getUpgradedValue(vehicle, 'verticalSpeed')} 
+                                  baseValue={vehicle.stats.verticalSpeed}
+                                  maxValue={30}
+                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                />
+                                <div className="text-xs text-slate-400 mt-1">m/s</div>
+                              </div>
+                            </>
+                          )}
+
+                          {/* For Tanks/Other Vehicles */}
+                          {!['Fighter Jet', 'Attack Aircraft', 'Multirole Fighter', 'Bomber', 'Attack Helicopter', 'Scout Helicopter'].includes(vehicle.type) && (
+                            <>
+                              <div className="bg-slate-800/80 rounded-lg p-4">
+                                <StatBar 
+                                  label="SPEED" 
+                                  value={getUpgradedValue(vehicle, 'speed')} 
+                                  baseValue={vehicle.stats.speed}
+                                  maxValue={100}
+                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                />
+                                <div className="text-xs text-slate-400 mt-1">km/h</div>
+                              </div>
+                              {vehicle.stats.armor && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <div className="flex justify-between items-center mb-1">
+                                    <span className="text-xs font-medium text-gray-300">ARMOR</span>
+                                    <span className="text-sm font-bold text-white">{vehicle.stats.armor}</span>
+                                  </div>
+                                  <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
+                                    <div 
+                                      className="h-full bg-gray-300"
+                                      style={{ width: `${(parseInt(vehicle.stats.armor) / 500) * 100}%` }}
+                                    />
+                                  </div>
+                                </div>
+                              )}
+                            </>
+                          )}
+
+                          {/* Agility - Shown for all aircraft */}
+                          {(vehicle.type === 'Fighter Jet' || vehicle.type === 'Attack Aircraft' || 
+                            vehicle.type === 'Multirole Fighter' || vehicle.type === 'Bomber' || 
+                            vehicle.type === 'Attack Helicopter' || vehicle.type === 'Scout Helicopter') && (
+                            <div className="bg-slate-800/80 rounded-lg p-4">
+                              <StatBar 
+                                label="AGILITY" 
+                                value={getUpgradedValue(vehicle, 'agility')} 
+                                baseValue={vehicle.stats.agility}
+                                maxValue={100}
+                                upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
                       {/* Weapon Systems */}
                       <div className="text-white">
                         <h3 className="text-lg font-bold mb-3">Weapons</h3>
