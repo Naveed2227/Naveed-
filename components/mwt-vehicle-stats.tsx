@@ -2487,7 +2487,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Mi-28NM.jpg",
     description: "Night hunter attack helicopter with all-weather combat capability.",
-    stats: { health: 22000, speed: 295, verticalSpeed: 15, agility: 75 },
+    stats: { health: 21840, speed: 225, verticalSpeed: 13, agility: 54 },
     weapons: [
       { name: "9M120 Ataka-V", type: "ATGM", damage: 17800, penetration: 1200 },
       { name: "S-13 Rockets", type: "Rocket Pod", damage: 9200, penetration: 420 },
@@ -2519,7 +2519,7 @@ const VEHICLES = [
     tier: "IV",
     image: "WZ-10.jpg",
     description: "Dedicated attack helicopter with tandem-seat configuration and advanced sensors.",
-    stats: { health: 19000, speed: 270, verticalSpeed: 14, agility: 72 },
+    stats: { health: 19968, speed: 206, verticalSpeed: 12, agility: 52 },
     weapons: [
       { name: "HJ-10", type: "ATGM", damage: 16500, penetration: 1100 },
       { name: "TY-90 AAM", type: "Air-to-Air Missile", damage: 8800, penetration: 440 },
@@ -2551,7 +2551,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Z-19E.png",
     description: "Light attack and reconnaissance helicopter with stealth characteristics.",
-    stats: { health: 16000, speed: 280, verticalSpeed: 15, agility: 85 },
+    stats: { health: 17472, speed: 213, verticalSpeed: 13, agility: 50 },
     weapons: [
       { name: "HJ-10", type: "ATGM", damage: 15800, penetration: 1050 },
       { name: "TY-90 AAM", type: "Air-to-Air Missile", damage: 8500, penetration: 420 },
@@ -2584,7 +2584,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Ka-58-Black-Ghost.jpg",
     description: "Stealth attack helicopter with advanced composite materials and reduced signature.",
-    stats: { health: 20000, speed: 320, verticalSpeed: 19, agility: 88 },
+    stats: { health: 21840, speed: 256, verticalSpeed: 16, agility: 60 },
     weapons: [
       { name: "9M120 Ataka-V", type: "ATGM", damage: 18200, penetration: 1220 },
       { name: "S-25 Rockets", type: "Heavy Rocket Pod", damage: 12500, penetration: 580 },
@@ -2616,7 +2616,7 @@ const VEHICLES = [
     tier: "IV",
     image: "SB-1.jpg",
     description: "High-speed American compound helicopter with heavy firepower including Storm Shadow missiles in MWT.",
-    stats: { health: 24000, speed: 350, verticalSpeed: 70, agility: 72 },
+    stats: { health: 19968, speed: 267, verticalSpeed: 15, agility: 58 },
     weapons: [
       { name: "Storm Shadow", type: "Guided Bomb/Missile", damage: 5500, penetration: 300 },
       { name: "AGM-114 Hellfire", type: "ATGM", damage: 3200, penetration: 200 },
@@ -2647,7 +2647,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Ka-52M.jpg",
     description: "Advanced reconnaissance and attack helicopter with coaxial rotor design.",
-    stats: { health: 21000, speed: 310, verticalSpeed: 16, agility: 80 },
+    stats: { health: 21840, speed: 236, verticalSpeed: 14, agility: 56 },
     weapons: [
       { name: "Vikhr ATGM", type: "Anti-Tank Missile", damage: 16800, penetration: 1120 },
       { name: "S-8 Rockets", type: "Rocket Pod", damage: 7800, penetration: 350 },
@@ -2679,7 +2679,7 @@ const VEHICLES = [
     tier: "IV",
     image: "AH-84.jpg",
     description: "Next-generation attack helicopter with stealth features and advanced weapons.",
-    stats: { health: 21500, speed: 325, verticalSpeed: 20, agility: 82 },
+    stats: { health: 19968, speed: 248, verticalSpeed: 15, agility: 58 },
     weapons: [
       { name: "AGM-179 JAGM", type: "Multi-Purpose Missile", damage: 17500, penetration: 1180 },
       { name: "Hydra 70 Rockets", type: "Rocket Pod", damage: 8500, penetration: 390 },
@@ -4336,7 +4336,7 @@ const VEHICLES = [
   tier: "III",
   image: "Mi-35P-Hind-F.jpg",
   description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
-  stats: { health: 26400, speed: 290, verticalSpeed: 60, agility: 60 },
+  stats: { health: 21840, speed: 221, verticalSpeed: 13, agility: 46 },
   weapons: [
     { name: "9K121 Vikhr / 9K121 Vikhr-1", type: "ATGM", damage: 3200, penetration: 200 },
     { name: "Ataka (where available)", type: "ATGM", damage: 3000, penetration: 180 },
@@ -4408,7 +4408,7 @@ const VEHICLES = [
     tier: "III",
     image: "AH-64E-Apache.jpg",
     description: "Advanced attack helicopter with multi-role capabilities and proven combat record.",
-    stats: { health: 20500, speed: 293, verticalSpeed: 17, agility: 78 },
+    stats: { health: 19968, speed: 223, verticalSpeed: 14, agility: 50 },
     weapons: [
       { name: "AGM-114 Hellfire", type: "Anti-Tank Missile", damage: 16500, penetration: 1100 },
       { name: "Hydra 70 Rockets", type: "Rocket Pod", damage: 8200, penetration: 380 },
@@ -4440,7 +4440,7 @@ const VEHICLES = [
     tier: "III",
     image: "OH-1-Ninja.jpg",
     description: "Agile Japanese attack/recon helicopter—fast and nimble with light AAMs in MWT.",
-    stats: { health: 18000, speed: 320, verticalSpeed: 75, agility: 80 },
+    stats: { health: 17472, speed: 244, verticalSpeed: 16, agility: 54 },
     weapons: [
       { name: "AIM-9 Sidewinder", type: "AAM", damage: 1600, penetration: 100 },
       { name: "AGM-65 Maverick", type: "ATGM", damage: 2800, penetration: 180 },
@@ -4469,7 +4469,7 @@ const VEHICLES = [
   tier: "III",
    image: "Super-Lynx-Mk88A.jpg",
   description: "British naval helicopter adapted for anti-ship and light attack roles (small weapon capacity in MWT).",
-  stats: { health: 10200, speed: 290, verticalSpeed: 55, agility: 68 },
+  stats: { health: 20020, speed: 229, verticalSpeed: 13, agility: 31 },
   weapons: [
     { name: "Sea Skua", type: "Anti-Ship Missile", damage: 4200, penetration: 250 },
     { name: "20mm Cannon", type: "Autocannon", damage: 150, penetration: 20, rateOfFire: "variable" }
@@ -4496,7 +4496,7 @@ const VEHICLES = [
   tier: "III",
    image: "Z-9WA-Harbin.jpg",
   description: "Heavily armed Z-9 variant with multi-mount capability (x4 mounts for some missiles in MWT).",
-  stats: { health: 19580, speed: 285, verticalSpeed: 60, agility: 60 },
+  stats: { health: 16198, speed: 244, verticalSpeed: 17, agility: 46 },
   weapons: [
     { name: "Type 57-1", type: "Rocket Pod", damage: 800, penetration: 50 },
     { name: "TY-90", type: "Air-to-Air Missile", damage: 1800, penetration: 90 },
@@ -4530,7 +4530,7 @@ const VEHICLES = [
   tier: "III",
    image: "Z-20-Harbin.jpg",
   description: "Modern multi-role Chinese helicopter with stub wings; carries Chinese ATGMs and rockets in MWT.",
-  stats: { health: 18400, speed: 280, verticalSpeed: 60, agility: 55 },
+  stats: { health: 16774, speed: 214, verticalSpeed: 46, agility: 42 },
   weapons: [
     { name: "AKD-9", type: "ATGM", damage: 2200, penetration: 150 },
     { name: "AKD-10", type: "ATGM", damage: 2800, penetration: 180 },
@@ -4560,7 +4560,7 @@ const VEHICLES = [
   tier: "III",
   image: "MH-60L-DAP.jpg",
   description: "Armed MH-60 variant (DAP) with a flexible loadout for rockets, ATGMs and air-to-air missiles.",
-  stats: { health: 19200, speed: 285, verticalSpeed: 62, agility: 58 },
+  stats: { health: 20020, speed: 209, verticalSpeed: 12, agility: 34 },
   weapons: [
     { name: "LAU-61", type: "Rocket Pod", damage: 800, penetration: 50 },
     { name: "AGR-20 BLR", type: "Rocket Pod", damage: 850, penetration: 55 },
@@ -4594,7 +4594,7 @@ const VEHICLES = [
   tier: "III",
   image: "AH-1Z-Viper.jpg",
   description: "Upgraded Cobra with improved sensors, weapons flexibility and survivability.",
-  stats: { health: 21120, speed: 287, verticalSpeed: 65, agility: 60 },
+  stats: { health: 17472, speed: 219, verticalSpeed: 14, agility: 46 },
   weapons: [
     { name: "AGM-114 Hellfire", type: "ATGM", damage: 3200, penetration: 200 },
     { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 2800, penetration: 180 },
@@ -4627,7 +4627,7 @@ const VEHICLES = [
   tier: "III",
   image: "Ka-50-Black-Shark.jpg",
   description: "Single-seat heavy attack helicopter with heavy ATGMs and cannon armament in MWT.",
-  stats: { health: 22000, speed: 295, verticalSpeed: 62, agility: 62 },
+  stats: { health: 19968, speed: 225, verticalSpeed: 14, agility: 54 },
   weapons: [
     { name: "Ataka / Ataka-V ATGM", type: "ATGM", damage: 3000, penetration: 180 },
     { name: "9M120 / Vikhr ATGM", type: "ATGM", damage: 3200, penetration: 200 },
@@ -12105,7 +12105,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           )}
 
                           {/* For Helicopters */}
-                          {(vehicle.type === 'Attack Helicopter' || vehicle.type === 'Scout Helicopter') && (
+                          {(vehicle.type === 'Attack Helicopter' || vehicle.type === 'Scout Helicopter' || vehicle.type === 'Helicopter') && (
                             <>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
@@ -12129,11 +12129,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 />
                                 <div className="text-xs text-slate-400 mt-1">m/s</div>
                               </div>
+                              <div className="bg-slate-800/80 rounded-lg p-4">
+                                <StatBar 
+                                  label="AGILITY" 
+                                  value={getUpgradedValue(vehicle, 'agility')} 
+                                  baseValue={vehicle.stats.agility}
+                                  maxValue={100}
+                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                />
+                              </div>
                             </>
                           )}
 
                           {/* For Tanks/Other Vehicles */}
-                          {!['Fighter Jet', 'Attack Aircraft', 'Multirole Fighter', 'Bomber', 'Attack Helicopter', 'Scout Helicopter'].includes(vehicle.type) && (
+                          {!['Fighter Jet', 'Attack Aircraft', 'Multirole Fighter', 'Bomber', 'Helicopter', 'Attack Helicopter', 'Scout Helicopter'].includes(vehicle.type) && (
                             <>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
@@ -12145,6 +12155,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                   onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
+                              </div>
+                              <div className="bg-slate-800/80 rounded-lg p-4">
+                                <StatBar 
+                                  label="AGILITY" 
+                                  value={getUpgradedValue(vehicle, 'agility')} 
+                                  baseValue={vehicle.stats.agility || 0}
+                                  maxValue={100}
+                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                />
                               </div>
                               {vehicle.stats.armor && (
                                 <div className="bg-slate-800/80 rounded-lg p-4">
