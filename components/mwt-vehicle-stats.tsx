@@ -11133,7 +11133,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <div className="text-lg font-bold text-cyan-300">{vehicle.stats.health.toLocaleString()}</div>
                 </div>
 
-                {vehicle.type === "Fighter Jet" || vehicle.type === "Bomber" || vehicle.type === "Helicopter"? (
+                {vehicle.type === "Fighter Jet" || vehicle.type === "Bomber" ? (
                   <>
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Cruise Speed</div>
@@ -11147,12 +11147,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 ) : vehicle.type === "Helicopter" ? (
                   <>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <div className="text-xs text-slate-400 mb-1">Speed</div>
+                      <div className="text-xs text-slate-400 mb-1">Cruise Speed</div>
                       <div className="text-lg font-bold text-cyan-300">{vehicle.stats.speed} km/h</div>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <div className="text-xs text-slate-400 mb-1">Max Speed</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.maxSpeed} km/h</div>
+                      <div className="text-xs text-slate-400 mb-1">Vertical Speed</div>
+                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.verticalSpeed || 'N/A'} m/s</div>
                     </div>
                   </>
                 ) : (
