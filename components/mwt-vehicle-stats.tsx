@@ -10667,28 +10667,28 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       </header>
 
       <main className="max-w-7xl p-4 sm:p-6 mx-auto px-4 sm:px-6 pb-24">
-        {/* Comparison Bottom Bar */}
+        {/* Comparison Bottom Bar - Mobile */}
         {compare.length > 0 && (
           <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 border-t border-slate-700 shadow-lg z-50">
-            <div className="max-w-7xl mx-auto px-4 py-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <h3 className="text-lg font-semibold text-cyan-400">
-                    {compare.length === 1 ? 'Select second vehicle' : 'Comparison ready'}
+            <div className="max-w-7xl mx-auto px-2 sm:px-4 py-2">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
+                <div className="flex items-center justify-between w-full sm:w-auto sm:space-x-2">
+                  <h3 className="text-sm sm:text-base font-semibold text-cyan-400 whitespace-nowrap">
+                    {compare.length === 1 ? 'Select 2nd vehicle' : 'Ready to compare'}
                   </h3>
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2 sm:space-x-3 overflow-x-auto w-full sm:w-auto pb-1">
                     {compare.map((id, index) => {
                       const vehicle = VEHICLES.find(v => v.id.toString() === id);
                       return (
-                        <div key={id} className="relative group w-24 flex-shrink-0">
+                        <div key={id} className="relative group flex-shrink-0 w-20 sm:w-24">
                           <div className="relative">
                             <img 
                               src={vehicle?.image} 
                               alt={vehicle?.name}
-                              className="w-24 h-16 object-cover rounded border border-slate-600"
+                              className="w-16 h-12 sm:w-20 sm:h-14 object-cover rounded border border-slate-600"
                               onError={(e) => { e.currentTarget.src = "/placeholder-vehicle.png" }}
                             />
-                            <div className="absolute -top-2 -right-2 bg-cyan-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                            <div className="absolute -top-1.5 -right-1.5 bg-cyan-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
                               {index + 1}
                             </div>
                             <button 
@@ -10696,40 +10696,40 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 e.stopPropagation();
                                 setCompare(compare.filter(vid => vid !== id));
                               }}
-                              className="absolute -top-2 -left-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-xs"
+                              className="absolute -top-1.5 -left-1.5 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-[10px]"
                             >
                               ×
                             </button>
                           </div>
-                          <div className="text-xs text-center mt-1 truncate" title={vehicle?.name}>
-                            {vehicle?.name}
+                          <div className="text-[10px] sm:text-xs text-center mt-0.5 truncate" title={vehicle?.name}>
+                            {vehicle?.name.split(' ').slice(0, 2).join(' ')}
                           </div>
                         </div>
                       );
                     })}
                     {compare.length === 1 && (
-                      <div className="w-24 h-16 border-2 border-dashed border-cyan-500 rounded flex flex-col items-center justify-center text-cyan-400">
+                      <div className="w-16 h-12 sm:w-20 sm:h-14 border-2 border-dashed border-cyan-500 rounded flex flex-col items-center justify-center text-cyan-400 text-xs sm:text-sm">
                         <div>Select</div>
                         <div>vehicle</div>
                       </div>
                     )}
                   </div>
                 </div>
-                <div className="flex space-x-3">
+                <div className="flex space-x-2 w-full sm:w-auto mt-2 sm:mt-0">
                   <button
                     onClick={() => setCompare([])}
-                    className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg transition-colors"
+                    className="px-3 py-1.5 text-xs sm:text-sm bg-slate-700 hover:bg-slate-600 text-slate-200 rounded transition-colors flex-1 sm:flex-none"
                   >
-                    Cancel
+                    Clear All
                   </button>
                   {compare.length === 2 && (
                     <button
                       onClick={() => {
                         comparisonRef.current?.scrollIntoView({ behavior: 'smooth' });
                       }}
-                      className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg transition-colors"
+                      className="px-3 py-1.5 text-xs sm:text-sm bg-cyan-600 hover:bg-cyan-500 text-white rounded transition-colors flex-1 sm:flex-none"
                     >
-                      View Comparison
+                      Compare Now
                     </button>
                   )}
                 </div>
