@@ -9176,7 +9176,18 @@ const MwtVehicleStats = () => {
   const [battlePassOpen, setBattlePassOpen] = useState(false)
   const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
 
-  const types = [...new Set(VEHICLES.map((v) => v.type))]
+  const types = [
+    'Fighter Jet',
+    'Bomber',
+    'Helicopter',
+    'Main Battle Tank',
+    'Light Tank',
+    'Tank Destroyer',
+    'MLRS',
+    'Missile Carrier',
+    'SPH',
+    'Anti-Air'
+  ].filter(type => new Set(VEHICLES.map(v => v.type)).has(type))
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
   const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
 
@@ -12397,23 +12408,29 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                   {isMarketVehicle(vehicle.name) ? (
                                     <div className="flex items-center gap-1">
                                       <img 
-                                        src="/images/Market.png" 
+                                        src="/Market.png" 
                                         alt="Market" 
-                                        className="w-4 h-4 object-contain"
+                                        className="w-8 h-8 object-contain"
                                         onError={(e) => {
+                                          console.error('Failed to load Market.png:', e);
                                           // Fallback to text if image fails to load
                                           const target = e.target as HTMLImageElement;
+                                          console.log('Image error target:', target);
+                                          console.log('Image src was:', target.src);
                                           target.style.display = 'none';
                                           const parent = target.parentElement;
                                           if (parent) {
                                             const textSpan = document.createElement('span');
                                             textSpan.className = 'text-base font-medium text-white';
-                                            textSpan.textContent = 'Market';
+                                            textSpan.textContent = 'Market (Image failed to load)';
                                             parent.appendChild(textSpan);
                                           }
                                         }}
+                                        onLoad={(e) => {
+                                          console.log('Successfully loaded Market.png');
+                                        }}
                                       />
-                                      <span className="text-base font-medium text-white"></span>
+                                      <span className="text-base font-medium text-white">Market</span>
                                     </div>
                                   ) : isExclusiveVehicle(vehicle.name) ? (
                                     <span className="text-base font-medium text-white">Event rewards or Gatcha</span>
