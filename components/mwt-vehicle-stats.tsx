@@ -12354,9 +12354,39 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           {vehicle.description && (
                             <div className="pt-4 border-t border-slate-700">
                               <h4 className="text-base font-bold text-cyan-300 mb-2">DESCRIPTION</h4>
-                              <p className="text-slate-300 text-sm">{vehicle.description}</p>
+                              <p className="text-slate-300 text-sm mb-4">{vehicle.description}</p>
                             </div>
                           )}
+                          
+                          {/* Basic Information Section */}
+                          <div className="pt-4 border-t border-slate-700">
+                            <h4 className="text-base font-bold text-cyan-300 mb-3">BASIC INFORMATION</h4>
+                            <div className="grid grid-cols-2 gap-3">
+                              <div className="bg-slate-800/50 rounded-lg p-3">
+                                <div className="text-xs text-slate-400 mb-1">Name</div>
+                                <div className="text-sm font-medium text-white">{vehicle.name}</div>
+                              </div>
+                              <div className="bg-slate-800/50 rounded-lg p-3">
+                                <div className="text-xs text-slate-400 mb-1">Faction</div>
+                                <div className="flex items-center space-x-2">
+                                  <img 
+                                    src={getFlagImage(vehicle.faction)} 
+                                    alt={vehicle.faction} 
+                                    className="w-5 h-3 object-cover rounded-sm shadow"
+                                  />
+                                  <span className="text-sm font-medium text-white">{vehicle.faction}</span>
+                                </div>
+                              </div>
+                              <div className="bg-slate-800/50 rounded-lg p-3">
+                                <div className="text-xs text-slate-400 mb-1">Type</div>
+                                <div className="text-sm font-medium text-white">{vehicle.type}</div>
+                              </div>
+                              <div className="bg-slate-800/50 rounded-lg p-3">
+                                <div className="text-xs text-slate-400 mb-1">Tier</div>
+                                <div className="text-sm font-medium text-white">{formatTier(vehicle.tier)}</div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
