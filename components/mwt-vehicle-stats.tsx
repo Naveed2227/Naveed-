@@ -11965,14 +11965,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   {/* Image and Description - Mobile First (shown before other content) */}
                   <div className="block lg:hidden mb-6">
                     <div className="bg-slate-800/80 rounded-lg overflow-hidden">
-                      <div className="relative">
+                      <div className="relative w-full min-h-[300px] flex items-center justify-center p-4 bg-black/30">
                         <img
                           src={vehicle.image}
                           alt={vehicle.name}
-                          className="w-full h-64 object-cover"
+                          className="max-w-full max-h-[300px] object-contain"
                           onError={(e) => {
                             e.currentTarget.src = "/placeholder-vehicle.png"
                           }}
+                          style={{ width: 'auto', height: 'auto' }}
                         />
                         <div className="absolute bottom-0 left-0 right-0 p-4">
                           <button
