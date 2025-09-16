@@ -12014,9 +12014,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       <div className="mb-6">
                         <h3 className="text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">VEHICLE SPECIFICATIONS</h3>
                         
-                        {/* Upgrade Toggles */}
+                        {/* Upgrade Toggles - Mobile */}
                         <div className="mb-4 p-3 bg-slate-800/50 rounded-lg">
-                          <div className="flex justify-between">
+                          <div className="flex flex-col space-y-2">
                             <button
                               onClick={() => {
                                 const newLevels = { ...upgradeLevels };
@@ -12024,43 +12024,36 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 newLevels[compare[1]] = 0;
                                 setUpgradeLevels(newLevels);
                               }}
-                              className={`px-3 py-1 text-xs rounded ${upgradeLevels[compare[0]] === 0 && upgradeLevels[compare[1]] === 0 ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+                              className={`px-3 py-2 text-sm rounded flex items-center justify-center ${upgradeLevels[compare[0]] === 0 && upgradeLevels[compare[1]] === 0 ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300'}`}
                             >
                               BASE
                             </button>
-                            <button
-                              onClick={() => {
-                                const newLevels = { ...upgradeLevels };
-                                newLevels[compare[0]] = 1;
-                                newLevels[compare[1]] = 1;
-                                setUpgradeLevels(newLevels);
-                              }}
-                              className={`px-3 py-1 text-xs rounded ${upgradeLevels[compare[0]] === 1 && upgradeLevels[compare[1]] === 1 ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-300'}`}
-                            >
-                              U1 (+10%)
-                            </button>
-                            <button
-                              onClick={() => {
-                                const newLevels = { ...upgradeLevels };
-                                newLevels[compare[0]] = 2;
-                                newLevels[compare[1]] = 2;
-                                setUpgradeLevels(newLevels);
-                              }}
-                              className={`px-3 py-1 text-xs rounded ${upgradeLevels[compare[0]] === 2 && upgradeLevels[compare[1]] === 2 ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
-                            >
-                              U2 (+20%)
-                            </button>
-                            <button
-                              onClick={() => {
-                                const newLevels = { ...upgradeLevels };
-                                newLevels[compare[0]] = 3;
-                                newLevels[compare[1]] = 3;
-                                setUpgradeLevels(newLevels);
-                              }}
-                              className={`px-3 py-1 text-xs rounded ${upgradeLevels[compare[0]] === 3 && upgradeLevels[compare[1]] === 3 ? 'bg-purple-600 text-white' : 'bg-gray-700 text-gray-300'}`}
-                            >
-                              U3 (+30%)
-                            </button>
+                            
+                            {[1, 2, 3].map((level) => (
+                              <button
+                                key={level}
+                                onClick={() => {
+                                  const newLevels = { ...upgradeLevels };
+                                  newLevels[compare[0]] = level;
+                                  newLevels[compare[1]] = level;
+                                  setUpgradeLevels(newLevels);
+                                }}
+                                className={`px-3 py-2 text-sm rounded flex items-center justify-start space-x-2 ${
+                                  (upgradeLevels[compare[0]] === level && upgradeLevels[compare[1]] === level)
+                                    ? level === 1 ? 'bg-green-600/20 text-green-400' 
+                                      : level === 2 ? 'bg-blue-600/20 text-blue-400' 
+                                      : 'bg-purple-600/20 text-purple-400'
+                                    : 'bg-gray-700/50 text-gray-300'
+                                }`}
+                              >
+                                <img 
+                                  src={`/U${level}.png`}
+                                  alt={`U${level}`}
+                                  className="w-5 h-5"
+                                />
+                                <span>U{level} {level === 1 ? '(+10%)' : level === 2 ? '(+20%)' : '(+30%)'}</span>
+                              </button>
+                            ))}
                           </div>
                         </div>
 
