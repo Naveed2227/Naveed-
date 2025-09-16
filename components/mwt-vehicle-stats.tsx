@@ -12290,8 +12290,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
                     </div>
 
-                    {/* Right column - Vehicle Image and Description (Desktop only) */}
-                    <div className="hidden lg:block lg:w-1/2">
+                    {/* Right column - Vehicle Image and Description */}
+                    <div className="w-full lg:w-1/2">
                       <div className="bg-slate-800/80 rounded-lg overflow-hidden">
                         <div className="p-4">
                           <div className="flex flex-wrap gap-2 justify-center mb-4">
@@ -12349,12 +12349,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               </div>
                             )}
                           </div>
-                          
-                          {/* Description section */}
+                        </div>
+                      </div>
+                      
+                      {/* Description section - Moved here for mobile */}
+                      <div className="mt-4 bg-slate-800/80 rounded-lg overflow-hidden">
+                        <div className="p-4">
                           {vehicle.description && (
-                            <div className="pt-4 border-t border-slate-700">
+                            <div className="pb-4">
                               <h4 className="text-base font-bold text-cyan-300 mb-2">DESCRIPTION</h4>
-                              <p className="text-slate-300 text-sm mb-4">{vehicle.description}</p>
+                              <p className="text-slate-300 text-sm">{vehicle.description}</p>
                             </div>
                           )}
                           
