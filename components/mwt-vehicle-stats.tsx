@@ -2487,7 +2487,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Mi-28NM.jpg",
     description: "Night hunter attack helicopter with all-weather combat capability.",
-    stats: { health: 21840, speed: 225, verticalSpeed: 13, agility: 54 },
+    stats: { health: 25480, speed: 229, verticalSpeed: 15, agility: 46 },
     weapons: [
       { name: "9M120 Ataka-V", type: "ATGM", damage: 17800, penetration: 1200 },
       { name: "S-13 Rockets", type: "Rocket Pod", damage: 9200, penetration: 420 },
@@ -2519,7 +2519,7 @@ const VEHICLES = [
     tier: "IV",
     image: "WZ-10.jpg",
     description: "Dedicated attack helicopter with tandem-seat configuration and advanced sensors.",
-    stats: { health: 19968, speed: 206, verticalSpeed: 12, agility: 52 },
+    stats: { health: 18200, speed: 221, verticalSpeed: 55, agility: 46 },
     weapons: [
       { name: "HJ-10", type: "ATGM", damage: 16500, penetration: 1100 },
       { name: "TY-90 AAM", type: "Air-to-Air Missile", damage: 8800, penetration: 440 },
@@ -2551,7 +2551,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Z-19E.png",
     description: "Light attack and reconnaissance helicopter with stealth characteristics.",
-    stats: { health: 17472, speed: 213, verticalSpeed: 13, agility: 50 },
+    stats: { health: 17290, speed: 214, verticalSpeed: 15, agility: 42 },
     weapons: [
       { name: "HJ-10", type: "ATGM", damage: 15800, penetration: 1050 },
       { name: "TY-90 AAM", type: "Air-to-Air Missile", damage: 8500, penetration: 420 },
@@ -2584,7 +2584,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Ka-58-Black-Ghost.jpg",
     description: "Stealth attack helicopter with advanced composite materials and reduced signature.",
-    stats: { health: 21840, speed: 256, verticalSpeed: 16, agility: 60 },
+    stats: { health: 25480, speed: 252, verticalSpeed: 17, agility: 50 },
     weapons: [
       { name: "9M120 Ataka-V", type: "ATGM", damage: 18200, penetration: 1220 },
       { name: "S-25 Rockets", type: "Heavy Rocket Pod", damage: 12500, penetration: 580 },
@@ -2616,7 +2616,7 @@ const VEHICLES = [
     tier: "IV",
     image: "SB-1.jpg",
     description: "High-speed American compound helicopter with heavy firepower including Storm Shadow missiles in MWT.",
-    stats: { health: 19968, speed: 267, verticalSpeed: 15, agility: 58 },
+    stats: { health: 23660, speed: 382, verticalSpeed: 69, agility: 57 },
     weapons: [
       { name: "Storm Shadow", type: "Guided Bomb/Missile", damage: 5500, penetration: 300 },
       { name: "AGM-114 Hellfire", type: "ATGM", damage: 3200, penetration: 200 },
@@ -2647,7 +2647,7 @@ const VEHICLES = [
     tier: "IV",
     image: "Ka-52M.jpg",
     description: "Advanced reconnaissance and attack helicopter with coaxial rotor design.",
-    stats: { health: 21840, speed: 236, verticalSpeed: 14, agility: 56 },
+    stats: { health: 23660, speed: 229, verticalSpeed: 16, agility: 50 },
     weapons: [
       { name: "Vikhr ATGM", type: "Anti-Tank Missile", damage: 16800, penetration: 1120 },
       { name: "S-8 Rockets", type: "Rocket Pod", damage: 7800, penetration: 350 },
@@ -2679,7 +2679,7 @@ const VEHICLES = [
     tier: "IV",
     image: "AH-84.jpg",
     description: "Next-generation attack helicopter with stealth features and advanced weapons.",
-    stats: { health: 19968, speed: 248, verticalSpeed: 15, agility: 58 },
+    stats: { health: 16380, speed: 244, verticalSpeed: 61, agility: 50 },
     weapons: [
       { name: "AGM-179 JAGM", type: "Multi-Purpose Missile", damage: 17500, penetration: 1180 },
       { name: "Hydra 70 Rockets", type: "Rocket Pod", damage: 8500, penetration: 390 },
@@ -4328,7 +4328,7 @@ const VEHICLES = [
       ]
     }
   },
-  {
+ {
   id: 500,
   name: "Mi-35P Hind-F",
   type: "Helicopter",
@@ -4408,7 +4408,7 @@ const VEHICLES = [
     tier: "III",
     image: "AH-64E-Apache.jpg",
     description: "Advanced attack helicopter with multi-role capabilities and proven combat record.",
-    stats: { health: 19968, speed: 223, verticalSpeed: 14, agility: 50 },
+    stats: { health: 19800, speed: 260, verticalSpeed: 65, agility: 56 },
     weapons: [
       { name: "AGM-114 Hellfire", type: "Anti-Tank Missile", damage: 16500, penetration: 1100 },
       { name: "Hydra 70 Rockets", type: "Rocket Pod", damage: 8200, penetration: 380 },
@@ -4440,7 +4440,7 @@ const VEHICLES = [
     tier: "III",
     image: "OH-1-Ninja.jpg",
     description: "Agile Japanese attack/recon helicopter—fast and nimble with light AAMs in MWT.",
-    stats: { health: 17472, speed: 244, verticalSpeed: 16, agility: 54 },
+    stats: { health: 16289, speed: 227, verticalSpeed: 24, agility: 53 },
     weapons: [
       { name: "AIM-9 Sidewinder", type: "AAM", damage: 1600, penetration: 100 },
       { name: "AGM-65 Maverick", type: "ATGM", damage: 2800, penetration: 180 },
@@ -4627,7 +4627,7 @@ const VEHICLES = [
   tier: "III",
   image: "Ka-50-Black-Shark.jpg",
   description: "Single-seat heavy attack helicopter with heavy ATGMs and cannon armament in MWT.",
-  stats: { health: 19968, speed: 225, verticalSpeed: 14, agility: 54 },
+  stats: { health: 21840, speed: 222, verticalSpeed: 53, agility: 50 },
   weapons: [
     { name: "Ataka / Ataka-V ATGM", type: "ATGM", damage: 3000, penetration: 180 },
     { name: "9M120 / Vikhr ATGM", type: "ATGM", damage: 3200, penetration: 200 },
@@ -4649,7 +4649,6 @@ const VEHICLES = [
     ]
   }
  },
-  
   {
     id: 600,
     name: "AV-8B Harrier II",
@@ -6711,14 +6710,14 @@ const VEHICLES = [
   },
 
 {
-  id: 800,
+    id: 800,
   name: "Z-9G Harbin",
   type: "Helicopter",
   faction: "Chinese",
   tier: "II",
   image: "Z-9G-Harbin.jpg",
   description: "Multi-role Chinese helicopter equipped with light rockets, cannons, and ATGMs in MWT.",
-  stats: { health: 17200, speed: 270, verticalSpeed: 55, agility: 60 },
+  stats: { health: 16900, speed: 305, verticalSpeed: 22, agility: 60 },
   weapons: [
     { name: "TY-90", type: "Air-to-Air Missile", damage: 1800, penetration: 90 },
     { name: "QJK-88", type: "ATGM", damage: 2400, penetration: 160 },
@@ -6748,7 +6747,7 @@ const VEHICLES = [
     tier: "II",
     description: "Versatile transport helicopter with light attack capabilities and proven reliability.",
     image: "Mi-8TV.jpg",
-    stats: { health: 25000, speed: 260, verticalSpeed: 12, agility: 55 },
+    stats: { health: 16616, speed: 200, verticalSpeed: 46, agility: 52 },
     weapons: [
       { name: "S-8 Rockets", type: "Rocket Pod", damage: 5800, penetration: 280 },
       { name: "PKT 7.62mm", type: "Machine Gun", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
@@ -6780,7 +6779,7 @@ const VEHICLES = [
   tier: "II",
   image: "MH-6-Little-Bird.jpg",
   description: "Ultra-light scout/assault helicopter used for special operations; light armament but excellent maneuverability.",
-  stats: { health: 6100, speed: 280, verticalSpeed: 45, agility: 75 },
+  stats: { health: 15000, speed: 282, verticalSpeed: 26, agility: 75 },
   weapons: [
     { name: "M134 Minigun", type: "Autocannon", damage: 120, penetration: 15, rateOfFire: "variable" },
     { name: "LAU-61 / Hydra-70 Rocket Pod", type: "Rocket Pod", damage: 800, penetration: 50 },
@@ -6809,7 +6808,7 @@ const VEHICLES = [
   tier: "II",
   image: "Z-11WB-Changhe.jpg",
   description: "Light Chinese helicopter (Changhe Z-11WB) with multiple light ATGM/rocket options.",
-  stats: { health: 7200, speed: 270, verticalSpeed: 50, agility: 70 },
+  stats: { health: 18421, speed: 170, verticalSpeed: 44, agility: 40 },
   weapons: [
     { name: "AKD-9", type: "ATGM", damage: 2200, penetration: 150 },
     { name: "AKD-10", type: "ATGM", damage: 2800, penetration: 180 },
@@ -6835,7 +6834,6 @@ const VEHICLES = [
     ]
   }
 },
-
 {
     "id": 900,
     "name": "M41 Walker Bulldog",
