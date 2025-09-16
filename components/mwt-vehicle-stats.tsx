@@ -3069,7 +3069,7 @@ const VEHICLES = [
   type: "Fighter Jet",
   faction: "Russian",
   tier: "III",
-  image: "Su-35S.jpg",
+  image: "Su-35S.png",
   description: "Highly maneuverable 4++ generation multirole fighter with thrust vectoring engines and powerful radar.",
   stats: { health: 23300, speed: 870, afterburnerSpeed: 2200, agility: 67 },
   weapons: [
@@ -10794,11 +10794,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     idx === 0 ? 'border-cyan-500/30' : 'border-purple-500/30'
                   }`}>
                     <div className="flex flex-col items-center mb-4">
-                      <div className="relative w-full h-48 mb-3">
+                      <div className="relative w-full min-h-[300px] max-h-[400px] mb-3 flex items-center justify-center">
                         <img
                           src={vehicle.image}
                           alt={vehicle.name}
-                          className="w-full h-full object-cover rounded-lg"
+                          className="max-w-full max-h-full object-contain"
                           onError={(e) => {
                             e.currentTarget.src = "/placeholder-vehicle.png";
                           }}
