@@ -12393,7 +12393,34 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               </div>
                               <div className="flex items-center justify-between">
                                 <span className="text-base text-slate-300">How to Obtain</span>
-                                <span className="text-base font-medium text-white">Researchable</span>
+                                <div className="flex items-center gap-2">
+                                  {isMarketVehicle(vehicle.name) ? (
+                                    <div className="flex items-center gap-1">
+                                      <img 
+                                        src="/images/Market.png" 
+                                        alt="Market" 
+                                        className="w-4 h-4 object-contain"
+                                        onError={(e) => {
+                                          // Fallback to text if image fails to load
+                                          const target = e.target as HTMLImageElement;
+                                          target.style.display = 'none';
+                                          const parent = target.parentElement;
+                                          if (parent) {
+                                            const textSpan = document.createElement('span');
+                                            textSpan.className = 'text-base font-medium text-white';
+                                            textSpan.textContent = 'Market';
+                                            parent.appendChild(textSpan);
+                                          }
+                                        }}
+                                      />
+                                      <span className="text-base font-medium text-white"></span>
+                                    </div>
+                                  ) : isExclusiveVehicle(vehicle.name) ? (
+                                    <span className="text-base font-medium text-white">Event rewards or Gatcha</span>
+                                  ) : (
+                                    <span className="text-base font-medium text-white">Dollar or Gold</span>
+                                  )}
+                                </div>
                               </div>
                             </div>
                           </div>
