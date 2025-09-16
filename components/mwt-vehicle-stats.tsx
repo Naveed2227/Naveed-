@@ -10611,17 +10611,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="w-full pl-10 pr-12 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent sm:w-56"
                     />
-                    {searchQuery && (
-                      <button
-                        onClick={() => {
-                          setSearchQuery("");
-                          setExpandedVehicle("");
-                        }}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white rounded-sm flex items-center justify-center text-xs font-bold transition-colors w-8 h-8"
-                      >
-                        ×
-                      </button>
-                    )}
                   </div>
                   <select
                     value={typeFilter}
@@ -10691,15 +10680,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             <div className="absolute -top-1.5 -right-1.5 bg-cyan-500 text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
                               {index + 1}
                             </div>
-                            <button 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setCompare(compare.filter(vid => vid !== id));
-                              }}
-                              className="absolute -top-1.5 -left-1.5 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-[10px]"
-                            >
-                              ×
-                            </button>
                           </div>
                           <div className="text-[10px] sm:text-xs text-center mt-0.5 truncate" title={vehicle?.name}>
                             {vehicle?.name.split(' ').slice(0, 2).join(' ')}
@@ -10724,10 +10704,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   </button>
                   {compare.length === 2 && (
                     <button
-                      onClick={() => {
-                        comparisonRef.current?.scrollIntoView({ behavior: 'smooth' });
-                      }}
-                      className="px-3 py-1.5 text-xs sm:text-sm bg-cyan-600 hover:bg-cyan-500 text-white rounded transition-colors flex-1 sm:flex-none"
+                      onClick={() => setShowComparison(true)}
+                      className="px-3 py-1.5 text-xs sm:text-sm bg-cyan-600 hover:bg-cyan-700 text-white rounded transition-colors whitespace-nowrap"
                     >
                       Compare Now
                     </button>
@@ -10743,38 +10721,66 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold text-cyan-400">Vehicle Comparison</h2>
               
-              {/* Upgrade Toggles */}
-              <div className="flex items-center space-x-2 bg-slate-800/50 p-1 rounded-full">
-                {[1, 2, 3].map((level) => {
-                  const isActive = upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level;
-                  return (
-                    <button
-                      key={level}
-                      onClick={() => {
-                        const newLevel = isActive ? 0 : level;
-                        handleUpgradeChange(compare[0], newLevel);
-                        handleUpgradeChange(compare[1], newLevel);
-                      }}
-                      className={`w-8 h-8 flex items-center justify-center rounded-full transition-all ${
-                        isActive 
-                          ? level === 1 ? 'bg-green-500/20' 
-                            : level === 2 ? 'bg-blue-500/20' 
-                            : 'bg-purple-500/20'
-                          : 'bg-transparent hover:bg-slate-700/50'
-                      }`}
-                    >
-                      <span className={`text-xs font-bold ${
-                        isActive 
-                          ? level === 1 ? 'text-green-400' 
-                            : level === 2 ? 'text-blue-400' 
-                            : 'text-purple-400'
-                          : 'text-slate-400'
-                      }`}>
-                        U{level}
-                      </span>
-                    </button>
-                  );
-                })}
+              {/* Upgrade Toggles - Desktop */}
+              <div className="hidden md:flex items-center space-x-2 bg-slate-800/50 p-2 rounded-lg">
+                <button
+                  onClick={() => {
+                    handleUpgradeChange(compare[0], 0);
+                    handleUpgradeChange(compare[1], 0);
+                  }}
+                  className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                    upgradeLevels[compare[0]] === 0 && upgradeLevels[compare[1]] === 0 
+                      ? 'bg-gray-600 text-white' 
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  }`}
+                >
+                  BASE
+                </button>
+                
+                <button
+                  onClick={() => {
+                    const newLevel = upgradeLevels[compare[0]] === 1 ? 0 : 1;
+                    handleUpgradeChange(compare[0], newLevel);
+                    handleUpgradeChange(compare[1], newLevel);
+                  }}
+                  className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                    upgradeLevels[compare[0]] === 1 || upgradeLevels[compare[1]] === 1
+                      ? 'bg-green-600/80 text-white' 
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  }`}
+                >
+                  U1 (+10%)
+                </button>
+                
+                <button
+                  onClick={() => {
+                    const newLevel = upgradeLevels[compare[0]] === 2 ? 0 : 2;
+                    handleUpgradeChange(compare[0], newLevel);
+                    handleUpgradeChange(compare[1], newLevel);
+                  }}
+                  className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                    upgradeLevels[compare[0]] === 2 || upgradeLevels[compare[1]] === 2
+                      ? 'bg-blue-600/80 text-white' 
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  }`}
+                >
+                  U2 (+20%)
+                </button>
+                
+                <button
+                  onClick={() => {
+                    const newLevel = upgradeLevels[compare[0]] === 3 ? 0 : 3;
+                    handleUpgradeChange(compare[0], newLevel);
+                    handleUpgradeChange(compare[1], newLevel);
+                  }}
+                  className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                    upgradeLevels[compare[0]] === 3 || upgradeLevels[compare[1]] === 3
+                      ? 'bg-purple-600/80 text-white' 
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                  }`}
+                >
+                  U3 (+30%)
+                </button>
               </div>
             </div>
             
@@ -11942,31 +11948,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         >
                           <img 
                             src={`/U${level}.png`} 
-                            alt={`U${level}`} 
-                            className={`w-6 h-6 ${(upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level) ? 'opacity-100' : 'opacity-60'}`}
-                          />
-                          {(upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level) && (
-                            <div className="absolute inset-0 rounded-full border-2 border-white/30" />
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                    <button
-                      onClick={() => setVehicleDetailsOpenId(null)}
-                      className="p-1.5 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
-                    >
-                      <X className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
-                
-                {/* Main content */}
-                <div className="p-6 bg-slate-900">
-                  {/* Image and Description - Mobile First (shown before other content) */}
-                  <div className="block lg:hidden mb-6">
-                    <div className="bg-slate-800/80 rounded-lg overflow-hidden">
-                      <div className="relative w-full min-h-[300px] flex items-center justify-center p-4 bg-black/30">
-                        <img
                           src={vehicle.image}
                           alt={vehicle.name}
                           className="max-w-full max-h-[300px] object-contain"
