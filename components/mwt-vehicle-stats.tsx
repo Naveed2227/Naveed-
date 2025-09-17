@@ -246,6 +246,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "AMX-30 Super",
 "Type 75 MLRS",
 "Mi-24 Super Hind",
+"Leopard 2A-RC 3.0",
 
 
 
@@ -1895,12 +1896,13 @@ const VEHICLES = [
     tier: "IV",
     image: "Leopard-2-A-RC-3.0.jpg",
     description: "Mobile gun system with rapid deployment capability and stealth features.",
-    stats: { health: 28800, speed: 97, armor: "380mm", agility: 40.1 },
+    stats: { health: 41900, speed: 70, armor: "300mm", agility: 38 },
     weapons: [
-      { name: "M392A2", type: "Main Gun", damage: 8510, penetration: 372 },
-      { name: "M393A2", type: "Main Gun", damage: 10090, penetration: 127 },
-      { name: "M456A2", type: "Main Gun", damage: 9320, penetration: 400 },
-      { name: "M900", type: "Main Gun", damage: 8910, penetration: 522 }
+      { name: "XM1401E APFSDS", type: "Main Gun", damage: 13090, penetration: 950 },
+      { name: "XME140 HEI", type: "Main Gun", damage: 13780, penetration: 103 },
+      { name: "XMH140 HEAT", type: "Main Gun", damage: 14080, penetration: 866 },
+      { name: "SpikeNLOS", type: "Missile", damage: 14250, penetration: 1000, reload: 3.6 },
+      
     ],
     modules: {
       engine: [
@@ -9223,8 +9225,8 @@ const MwtVehicleStats = () => {
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
    
-      "Leopard 2A-RC 3.0",
-      "ХM8 AGS",
+      
+     
       "AMX-30 Super",
       "Type 75 MLRS",
       "Centauro I 120",
@@ -12312,7 +12314,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             </span>
                             <span className={`px-2 py-1 text-xs rounded-full ${
                               getVehicleRarity(vehicle.name) === 'Common' ? 'bg-gray-600 text-white' :
-                              getVehicleRarity(vehicle.name) === 'Enhanced' ? 'bg-green-600 text-white' :
+                              getVehicleRarity(vehicle.name) === 'Enhanced' ? 'bg-green-300 text-white' :
                               getVehicleRarity(vehicle.name) === 'Rare' ? 'bg-blue-600 text-white' :
                               getVehicleRarity(vehicle.name) === 'Epic' ? 'bg-purple-600 text-white' :
                               getVehicleRarity(vehicle.name) === 'Legendary' ? 'bg-yellow-600 text-white' :
