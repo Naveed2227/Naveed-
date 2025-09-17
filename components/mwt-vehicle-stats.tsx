@@ -9075,9 +9075,114 @@ const ComparisonStatBar = ({
   );
 };
 
+// Login Form Component - Simplified to only ask for email
+const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userData: { email: string }) => void }) => {
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setIsLoading(true);
+
+    try {
+      if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        onLogin({ email });
+        onClose();
+      } else {
+        setError("Please enter a valid email address");
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl w-full max-w-md p-8 relative">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-2xl font-bold text-gray-900">Sign in</h2>
+          <button 
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700 focus:outline-none"
+          >
+            <X size={24} />
+          </button>
+        </div>
+        
+        {error && (
+          <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded">
+            <p className="text-sm">{error}</p>
+          </div>
+        )}
+        
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              Email
+            </label>
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Enter your email"
+                autoFocus
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
+                isLoading ? 'opacity-70 cursor-not-allowed' : ''
+              }`}
+            >
+              {isLoading ? 'Submitting...' : 'Continue with Email'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 const MwtVehicleStats = () => {
   const router = useRouter()
   const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
+  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  
+  // Load saved email from localStorage on component mount
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('mwt_user_email')
+    if (savedEmail) {
+      setUserEmail(savedEmail)
+      setIsLoggedIn(true)
+    }
+  }, []);
+
+  const handleLogin = (userData: { email: string }) => {
+    setIsLoggedIn(true)
+    setUserEmail(userData.email)
+    // Save email to localStorage
+    localStorage.setItem('mwt_user_email', userData.email)
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false)
+    setUserEmail("")
+    // Remove email from localStorage on logout
+    localStorage.removeItem('mwt_user_email')
+  };
   
   const handleUpgradeChange = (vehicleId: string, level: number) => {
     setUpgradeLevels(prev => {
@@ -10345,6 +10450,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
@@ -10608,9 +10714,27 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <span className="hidden sm:inline">{"MWT Assistant (Unofficial)"}</span>
                 <span className="sm:hidden">MWT Assistant</span>
               </h1>
-              <p className="text-slate-400 mt-1 ml-2.5 text-sm hidden sm:block">    MWT Assistant</p>
+              <p className="text-slate-400 mt-1 ml-2.5 text-sm hidden sm:block">MWT Assistant</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
+              {isLoggedIn ? (
+                <div className="flex items-center gap-2">
+                  <span className="text-slate-300 text-xs">{userEmail}</span>
+                  <button
+                    onClick={handleLogout}
+                    className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-xs font-medium"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowLoginForm(true)}
+                  className="px-4 py-0.5 bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-900 hover:to-blue-800 text-white rounded-sm transition-colors text-xs font-medium h-6 flex items-center justify-center"
+                >
+                  Sign In
+                </button>
+              )}
               <div className="pb-6 w-auto">
                 <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
                   <div className="relative w-full sm:w-auto">
