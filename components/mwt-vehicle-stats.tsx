@@ -1893,7 +1893,7 @@ const VEHICLES = [
     type: "Main Battle Tank",
     faction: "German",
     tier: "IV",
-    image: "Leopard-2A-RC-3.0.jpg",
+    image: "Leopard-2-A-RC-3.0.jpg",
     description: "Mobile gun system with rapid deployment capability and stealth features.",
     stats: { health: 28800, speed: 97, armor: "380mm", agility: 40.1 },
     weapons: [
