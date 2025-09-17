@@ -10343,14 +10343,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     }, 1000)
   }
 
-  // Handle sign in click
-  const handleSignIn = () => {
-    window.open('/login', '_blank');
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
@@ -10606,93 +10600,77 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         )}
       </AnimatePresence>
 
-      <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 shadow-sm relative z-50 px-4 sm:px-6">
+      <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 shadow-sm">
         <div className="max-w-7xl mx-auto p-4 sm:p-6">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 w-full">
-            <div className="flex-shrink-0">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent mx-1.5">
                 <span className="hidden sm:inline">{"MWT Assistant (Unofficial)"}</span>
                 <span className="sm:hidden">MWT Assistant</span>
               </h1>
-              <p className="text-slate-400 mt-1 ml-2.5 text-sm hidden sm:block">MWT Assistant</p>
+              <p className="text-slate-400 mt-1 ml-2.5 text-sm hidden sm:block">    MWT Assistant</p>
             </div>
-            <div className="flex items-center gap-3 w-full max-w-3xl">
-              <button
-                onClick={handleSignIn}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-full shadow hover:shadow-lg transition-all duration-200 flex items-center space-x-2 border-2 border-white/20 whitespace-nowrap flex-shrink-0"
-              >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-4 w-4" 
-                  viewBox="0 0 20 20" 
-                  fill="currentColor"
-                >
-                  <path 
-                    fillRule="evenodd" 
-                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" 
-                    clipRule="evenodd" 
-                  />
-                </svg>
-                <span>SIGN IN</span>
-              </button>
-              <div className="relative flex-grow">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-400 w-4 h-4" />
-                <input
-                  type="text"
-                  placeholder="Search vehicles..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-12 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => {
-                      setSearchQuery("");
-                      setExpandedVehicle("");
-                    }}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white rounded-sm flex items-center justify-center text-xs font-bold transition-colors w-8 h-8"
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="pb-6 w-auto">
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+                  <div className="relative w-full sm:w-auto">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-400 w-4 h-4" />
+                    <input
+                      type="text"
+                      placeholder="Search vehicles..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full pl-10 pr-12 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent sm:w-56"
+                    />
+                    {searchQuery && (
+                      <button
+                        onClick={() => {
+                          setSearchQuery("");
+                          setExpandedVehicle("");
+                        }}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white rounded-sm flex items-center justify-center text-xs font-bold transition-colors w-8 h-8"
+                      >
+                        ×
+                      </button>
+                    )}
+                  </div>
+                  <select
+                    value={typeFilter}
+                    onChange={(e) => setTypeFilter(e.target.value)}
+                    className="w-full sm:w-auto px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
                   >
-                    ×
-                  </button>
-                )}
-              </div>
-              <div className="flex items-center gap-2">
-                <select
-                  value={typeFilter}
-                  onChange={(e) => setTypeFilter(e.target.value)}
-                  className="w-full sm:w-auto px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
-                >
-                  <option value="">All Types</option>
-                  {types.map((type) => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </select>
-                <select
-                  value={tierFilter}
-                  onChange={(e) => setTierFilter(e.target.value)}
-                  className="w-full sm:w-auto px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
-                >
-                  <option value="">All Tiers</option>
-                  {tiers.map((tier) => (
-                    <option key={tier} value={tier}>
-                      Tier {tier}
-                    </option>
-                  ))}
-                </select>
-                <select
-                  value={countryFilter}
-                  onChange={(e) => setCountryFilter(e.target.value)}
-                  className="w-full sm:w-auto px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
-                >
-                  <option value="">All Countries</option>
-                  {countries.map((country) => (
-                    <option key={country} value={country}>
-                      {country}
-                    </option>
-                  ))}
-                </select>
+                    <option value="">All Types</option>
+                    {types.map((type) => (
+                      <option key={type} value={type}>
+                        {type}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    value={tierFilter}
+                    onChange={(e) => setTierFilter(e.target.value)}
+                    className="w-full sm:w-auto px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
+                  >
+                    <option value="">All Tiers</option>
+                    {tiers.map((tier) => (
+                      <option key={tier} value={tier}>
+                        Tier {tier}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    value={countryFilter}
+                    onChange={(e) => setCountryFilter(e.target.value)}
+                    className="w-full sm:w-auto px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
+                  >
+                    <option value="">All Countries</option>
+                    {countries.map((country) => (
+                      <option key={country} value={country}>
+                        {country}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
           </div>
