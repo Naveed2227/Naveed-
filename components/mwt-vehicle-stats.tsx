@@ -9088,19 +9088,6 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
 
     try {
       if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        // Save email to users.json
-        const response = await fetch('/api/save-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email }),
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to save email');
-        }
-
         onLogin({ email });
         onClose();
       } else {
@@ -9108,49 +9095,43 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
       }
     } catch (err) {
       setError("An error occurred. Please try again.");
-      console.error('Login error:', err);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-900/90 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-slate-800/95 border border-slate-700/70 backdrop-blur-lg rounded-xl w-full max-w-md p-6 relative shadow-2xl">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            Sign In
-          </h2>
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl w-full max-w-md p-8 relative">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-2xl font-bold text-gray-900">Sign in</h2>
           <button 
             onClick={onClose}
-            className="text-slate-400 hover:text-white transition-colors p-1 rounded-full hover:bg-slate-700/50"
+            className="text-gray-500 hover:text-gray-700 focus:outline-none"
           >
-            <X size={20} />
+            <X size={24} />
           </button>
         </div>
         
         {error && (
-          <div className="bg-red-900/50 border-l-4 border-red-500 text-red-200 p-4 mb-6 rounded-r">
+          <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded">
             <p className="text-sm">{error}</p>
           </div>
         )}
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-              Email Address
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              Email
             </label>
-            <div className="mt-1 relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg className="h-5 w-5 text-black-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-foreground text-background
+            <div className="mt-1 relative rounded-md shadow-sm">
+              <input
                 type="email"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-slate-800/80 border border-slate-700/70 text-white placeholder-slate-500/70 focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/70 block w-full pl-10 pr-3 py-3 rounded-lg sm:text-sm transition-all duration-200"
-                placeholder="your@email.com"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Enter your email"
                 autoFocus
                 required
               />
@@ -9161,35 +9142,14 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full flex justify-center items-center space-x-2 py-3 px-4 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-slate-900 transition-all duration-200 ${
-                isLoading ? 'opacity-70 cursor-not-allowed' : 'shadow-lg hover:shadow-blue-500/20'
+              className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
+                isLoading ? 'opacity-70 cursor-not-allowed' : ''
               }`}
             >
-              {isLoading ? (
-                <>
-                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Signing in...
-                </>
-              ) : (
-                <>
-                  <span>Continue with Email</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </>
-              )}
+              {isLoading ? 'Submitting...' : 'Continue with Email'}
             </button>
           </div>
         </form>
-        
-        <div className="mt-6 pt-6 border-t border-slate-700/70">
-          <p className="text-xs text-slate-400/80 text-center">
-            By signing in, you agree to our terms of service and privacy policy.
-          </p>
-        </div>
       </div>
     </div>
   );
@@ -9213,12 +9173,14 @@ const MwtVehicleStats = () => {
   const handleLogin = (userData: { email: string }) => {
     setIsLoggedIn(true)
     setUserEmail(userData.email)
+    // Save email to localStorage
     localStorage.setItem('mwt_user_email', userData.email)
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false)
     setUserEmail("")
+    // Remove email from localStorage on logout
     localStorage.removeItem('mwt_user_email')
   };
   
@@ -9318,9 +9280,7 @@ const MwtVehicleStats = () => {
   // Battle Pass state
   const [battlePassOpen, setBattlePassOpen] = useState(false)
   const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
-  const [showLoginForm, setShowLoginForm] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [userEmail, setUserEmail] = useState("")
+  const [isEditMode, setIsEditMode] = useState(false)
 
   const types = [
     'Fighter Jet',
@@ -10490,39 +10450,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white pt-16">
-      {/* Login Form Modal */}
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
-      
-      {/* Header with Login Button */}
-      <header className="bg-slate-800/50 backdrop-blur-md border-b border-slate-700/50 fixed top-0 left-0 right-0 z-40">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-white">MWT Vehicle Stats</h1>
-          <div>
-            {isLoggedIn ? (
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-300">Welcome, {userEmail}</span>
-                <button
-                  onClick={handleLogout}
-                  className="px-3 py-1.5 text-sm bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors"
-                >
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={() => setShowLoginForm(true)}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors flex items-center space-x-2"
-              >
-                <span>Login</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                </svg>
-              </button>
-            )}
-          </div>
-        </div>
-      </header>
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
@@ -10709,8 +10638,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                           alt={vehicle.name}
                                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
                                           onError={(e) => {
-                                            e.currentTarget.style.display = 'none';
-                                            e.currentTarget.nextElementSibling.style.display = 'flex';
+                                            e.currentTarget.src = "/placeholder-vehicle.png"
                                           }}
                                         />
                                         <div className="w-full h-full bg-gradient-to-br from-slate-600 to-slate-700 flex items-center justify-center" style={{display: 'none'}}>
@@ -10782,11 +10710,33 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         <div className="max-w-7xl mx-auto p-4 sm:p-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent mx-1.5">
-                <span className="hidden sm:inline">{"MWT Assistant (Unofficial)"}</span>
-                <span className="sm:hidden">MWT Assistant</span>
-              </h1>
-              <p className="text-slate-400 mt-1 ml-2.5 text-sm hidden sm:block">MWT Assistant</p>
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 text-transparent bg-clip-text">MWT Vehicle Stats</h1>
+                <p className="text-sm text-slate-400 mt-1">Comprehensive vehicle statistics and comparisons</p>
+              </div>
+              {userEmail === 'naveed.miandad.007@gmail.com' && (
+                <button
+                  onClick={() => setIsEditMode(!isEditMode)}
+                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-sm font-medium rounded-full border border-slate-600 hover:border-blue-400 transition-colors duration-200 flex items-center gap-2"
+                >
+                  {isEditMode ? (
+                    <>
+                      <span>View Mode</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                        <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                      </svg>
+                    </>
+                  ) : (
+                    <>
+                      <span>Edit Mode</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.793.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                      </svg>
+                    </>
+                  )}
+                </button>
+              )}
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
               {isLoggedIn ? (
