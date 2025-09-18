@@ -10714,7 +10714,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 text-transparent bg-clip-text">MWT Vehicle Stats</h1>
                 <p className="text-sm text-slate-400 mt-1">Comprehensive vehicle statistics and comparisons</p>
               </div>
-              {userEmail === 'naveed.miandad.007@gmail.com' && (
+              {[
+              'naveed.miandad.007@gmail.com',
+              'qwemwt@gmail.com', 
+              'ooaraikuromorimine@gmail.com'
+
+
+
+               ].includes(userEmail) && (
                 <button
                   onClick={() => setIsEditMode(!isEditMode)}
                   className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-sm font-medium rounded-full border border-slate-600 hover:border-blue-400 transition-colors duration-200 flex items-center gap-2"
