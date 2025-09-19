@@ -9154,7 +9154,7 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
     </div>
   );
 };
-const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
+const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => {
   const [VEHICLES, setVEHICLES] = useState(initialVehicles);
   const router = useRouter()
   const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
@@ -9164,25 +9164,35 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   
   // Load saved email and vehicle data from localStorage on component mount
   useEffect(() => {
-    const savedEmail = localStorage.getItem('mwt_user_email')
-    if (savedEmail) {
-      setUserEmail(savedEmail)
-      setIsLoggedIn(true)
-    }
-    
-    // Load saved vehicle data if it exists
-    const savedVehicleData = localStorage.getItem('mwt_vehicles_data')
-    if (savedVehicleData) {
-      try {
-        const parsedVehicleData = JSON.parse(savedVehicleData)
-        setVEHICLES(parsedVehicleData)
-        console.log('Loaded saved vehicle data from localStorage')
-      } catch (error) {
-        console.error('Error parsing saved vehicle data:', error)
-        // Fall back to initial vehicles if parsing fails
-        setVEHICLES(initialVehicles)
+    const initializeApp = async () => {
+      const savedEmail = localStorage.getItem('mwt_user_email')
+      if (savedEmail) {
+        setUserEmail(savedEmail)
+        setIsLoggedIn(true)
       }
-    }
+      
+      // Load saved vehicle data if it exists
+      const savedVehicleData = localStorage.getItem('mwt_vehicles_data')
+      if (savedVehicleData) {
+        try {
+          const parsedVehicleData = JSON.parse(savedVehicleData)
+          setVEHICLES(parsedVehicleData)
+          console.log('Loaded saved vehicle data from localStorage')
+        } catch (error) {
+          console.error('Error parsing saved vehicle data:', error)
+          // Fall back to initial vehicles if parsing fails
+          setVEHICLES(initialVehicles)
+        }
+      }
+
+      // Try to sync from cloud on app load
+      if (savedEmail) {
+        console.log('🔄 Checking for cloud updates...');
+        await syncFromCloud();
+      }
+    };
+
+    initializeApp();
 
     // Listen for storage changes from other tabs/windows
     const handleStorageChange = (e: StorageEvent) => {
@@ -9205,13 +9215,22 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       }
     }
 
+    // Set up periodic cloud sync check (every 30 seconds)
+    const cloudSyncInterval = setInterval(async () => {
+      if (userEmail && !isSaving) {
+        await syncFromCloud();
+      }
+    }, 30000);
+
     window.addEventListener('storage', handleStorageChange)
     window.addEventListener('vehicleDataUpdated', handleVehicleDataUpdate as EventListener)
+    
     return () => {
       window.removeEventListener('storage', handleStorageChange)
       window.removeEventListener('vehicleDataUpdated', handleVehicleDataUpdate as EventListener)
+      clearInterval(cloudSyncInterval);
     }
-  }, [initialVehicles]);
+  }, [initialVehicles, userEmail, isSaving]);
 
   const handleLogin = (userData: { email: string }) => {
     setIsLoggedIn(true)
@@ -9326,6 +9345,8 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [isEditMode, setIsEditMode] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [saveNotification, setSaveNotification] = useState('')
+  const [isSyncing, setIsSyncing] = useState(false)
+  const [lastSyncTime, setLastSyncTime] = useState<string | null>(null)
 
   // Allowed editors and edit overrides/persistence
   const allowedEditors = [
@@ -9348,6 +9369,99 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
     cur[parts[parts.length - 1]] = value
   }
 
+  // Cloud sync functions
+  // SETUP INSTRUCTIONS:
+  // 1. Go to https://jsonbin.io and create a free account
+  // 2. Create a new bin called "mwt-vehicles-sync"
+  // 3. Get your API key from the dashboard
+  // 4. Replace 'your-api-key-here' below with your actual API key
+  // 5. Replace 'mwt-vehicles-sync' with your actual bin ID
+  const syncToCloud = async (vehicleData: any[]) => {
+    try {
+      // Use a simple cloud storage service (JSONBin.io as example)
+      const response = await fetch('https://api.jsonbin.io/v3/b/mwt-vehicles-sync', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Master-Key': '$2a$10$your-api-key-here', // Replace with your JSONBin.io API key
+          'X-Bin-Name': 'MWT Vehicle Data'
+        },
+        body: JSON.stringify({
+          vehicles: vehicleData,
+          lastUpdated: new Date().toISOString(),
+          updatedBy: userEmail
+        })
+      });
+      
+      if (response.ok) {
+        console.log('✅ Data synced to cloud successfully');
+        return true;
+      } else {
+        console.error('❌ Failed to sync to cloud:', response.statusText);
+        return false;
+      }
+    } catch (error) {
+      console.error('❌ Cloud sync error:', error);
+      return false;
+    }
+  };
+
+  const syncFromCloud = async () => {
+    setIsSyncing(true);
+    try {
+      const response = await fetch('https://api.jsonbin.io/v3/b/mwt-vehicles-sync/latest', {
+        headers: {
+          'X-Master-Key': '$2a$10$your-api-key-here' // Replace with your JSONBin.io API key
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        if (data.record && data.record.vehicles) {
+          const cloudVehicles = data.record.vehicles;
+          const cloudTimestamp = new Date(data.record.lastUpdated).getTime();
+          const localTimestamp = localStorage.getItem('mwt_last_sync') ? 
+            parseInt(localStorage.getItem('mwt_last_sync')!) : 0;
+          
+          // Only update if cloud data is newer
+          if (cloudTimestamp > localTimestamp) {
+            setVEHICLES(cloudVehicles);
+            localStorage.setItem('mwt_vehicles_data', JSON.stringify(cloudVehicles));
+            localStorage.setItem('mwt_last_sync', cloudTimestamp.toString());
+            setLastSyncTime(new Date().toLocaleTimeString());
+            console.log('✅ Data synced from cloud successfully');
+            setSaveNotification('🔄 Data updated from cloud!');
+            setTimeout(() => setSaveNotification(''), 3000);
+            return true;
+          } else {
+            setLastSyncTime(new Date().toLocaleTimeString());
+            console.log('✅ Cloud sync checked - local data is up to date');
+          }
+        }
+      }
+    } catch (error) {
+      console.error('❌ Failed to sync from cloud:', error);
+      setSaveNotification('❌ Cloud sync failed - check connection');
+      setTimeout(() => setSaveNotification(''), 3000);
+    } finally {
+      setIsSyncing(false);
+    }
+    return false;
+  };
+
+  // Manual sync function for the sync button
+  const manualSync = async () => {
+    if (isSyncing || isSaving) return;
+    
+    setSaveNotification('🔄 Syncing with cloud...');
+    const success = await syncFromCloud();
+    
+    if (!success) {
+      setSaveNotification('✅ Already up to date!');
+      setTimeout(() => setSaveNotification(''), 3000);
+    }
+  };
+
   const saveEdit = async (vehicleId: string | number, path: string, value: any) => {
     const updatedVehicles = JSON.parse(JSON.stringify(VEHICLES));
     const vehicleIndex = updatedVehicles.findIndex(v => v.id == vehicleId);
@@ -9362,16 +9476,22 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       
       // Save to localStorage for persistence across sessions
       localStorage.setItem('mwt_vehicles_data', JSON.stringify(updatedVehicles));
+      localStorage.setItem('mwt_last_sync', Date.now().toString());
       
       // Dispatch a custom event to notify other components/tabs
       window.dispatchEvent(new CustomEvent('vehicleDataUpdated', { 
         detail: { vehicles: updatedVehicles } 
       }));
       
-      // Note: File system updates removed for client-side compatibility
-      // Data persistence is handled via localStorage
+      // Sync to cloud for cross-device synchronization
+      const cloudSyncSuccess = await syncToCloud(updatedVehicles);
       
-      setSaveNotification('✅ Changes saved successfully!');
+      if (cloudSyncSuccess) {
+        setSaveNotification('✅ Changes saved and synced to all devices!');
+      } else {
+        setSaveNotification('✅ Changes saved locally (cloud sync failed)');
+      }
+      
       setTimeout(() => setSaveNotification(''), 3000);
       console.log('Changes saved successfully');
     } catch (error) {
@@ -10866,6 +10986,29 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     </button>
                     {isEditMode && (
                       <button
+                        onClick={manualSync}
+                        disabled={isSyncing || isSaving}
+                        className={`px-3 py-2 text-sm font-medium rounded-full border transition-colors duration-200 flex items-center gap-2 ${
+                          isSyncing || isSaving
+                            ? 'bg-gray-700 border-gray-600 text-gray-400 cursor-not-allowed'
+                            : 'bg-blue-800 hover:bg-blue-700 border-blue-600 hover:border-blue-400 text-blue-100'
+                        }`}
+                        title="Sync data across all your devices"
+                      >
+                        {isSyncing ? (
+                          <>
+                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400"></div>
+                            Syncing...
+                          </>
+                        ) : (
+                          <>
+                            🔄 Sync Devices
+                          </>
+                        )}
+                      </button>
+                    )}
+                    {isEditMode && (
+                      <button
                         onClick={resetVehicleData}
                         className="px-3 py-2 bg-red-800 hover:bg-red-700 text-sm font-medium rounded-full border border-red-600 hover:border-red-400 transition-colors duration-200 flex items-center gap-2"
                         title="Reset all vehicle data to original"
@@ -10882,6 +11025,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   {isSaving && (
                     <div className="text-sm font-medium text-blue-400 bg-slate-800/50 px-3 py-1 rounded-full border border-blue-400/30">
                       💾 Saving changes...
+                    </div>
+                  )}
+                  {lastSyncTime && (
+                    <div className="text-xs text-slate-400 bg-slate-800/30 px-2 py-1 rounded-full border border-slate-600/30">
+                      Last sync: {lastSyncTime}
                     </div>
                   )}
                 </div>
