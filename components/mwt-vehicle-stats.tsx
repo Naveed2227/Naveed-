@@ -36,8 +36,9 @@ const formatTier = (tier: string | number): string => {
 };
 
 
-// Vehicle Rarity System - Move arrays outside function to avoid hoisting issues
-const commonVehicles: string[] = [
+// Vehicle Rarity System
+const getVehicleRarity = (vehicleName: string) => {
+  const commonVehicles = [
 "F-35B Lightning II",
 "F/A-18F Super Hornet",
 "J-20 Mighty Dragon",
@@ -117,8 +118,7 @@ const commonVehicles: string[] = [
 
 
  ];
-
-const enhancedVehicles: string[] = [
+  const enhancedVehicles = [
 "F-22 Raptor",
 "J-35",
 "T-14 Armata",
@@ -165,8 +165,7 @@ const enhancedVehicles: string[] = [
 
 
 ];
-
-const rareVehicles: string[] = [
+  const rareVehicles = [
 "Type 10",
 "Challenger 3",
 "Leopard 2A7+",
@@ -209,11 +208,14 @@ const rareVehicles: string[] = [
 "T-64BV",
 "M60A3 (MZK)",
 "Rookiat MTTD",
-"BMD3"
-];
+"BMD3",
 
-// Initialize epicVehicles array with explicit initialization
-const epicVehicles: string[] = [
+
+
+
+
+];
+  const epicVehicles = [
 "Su-57 Felon",
 "Su-57M",
 "YF-23",
@@ -244,17 +246,19 @@ const epicVehicles: string[] = [
 "AMX-30 Super",
 "Type 75 MLRS",
 "Mi-24 Super Hind",
-"Leopard 2A-RC 3.0"
-];
+"Leopard 2A-RC 3.0",
 
-const legendaryVehicles: string[] = [
+
+
+
+];
+  const legendaryVehicles = [
 "TU-222",
 "TOS-1A",
 "FK 2000",
 "SB-1",
 ];
 
-const getVehicleRarity = (vehicleName: string) => {
   if (commonVehicles.includes(vehicleName)) return "Common";
   if (enhancedVehicles.includes(vehicleName)) return "Enhanced";
   if (rareVehicles.includes(vehicleName)) return "Rare";
@@ -402,7 +406,7 @@ const BATTLE_PASSES = [
 
 ];
 
-let VEHICLES_DATA = [
+const VEHICLES_DATA = [
   {
     id: 1,
     name: "Su-57M",
@@ -9150,65 +9154,50 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
     </div>
   );
 };
-const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => {
-  // Initialize with initial vehicles, will load from API in useEffect
+const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [VEHICLES, setVEHICLES] = useState(initialVehicles);
-  
-  // Version check to ensure we're running the new system
-  console.log('🚀 MWT Vehicle Stats - New API System v2.0 Loaded');
   const router = useRouter()
   const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-  const [isSaving, setIsSaving] = useState(false);
   
-  // Load saved email and vehicle data from API on component mount
+  // Load saved email and vehicle data from localStorage on component mount
   useEffect(() => {
-    const initializeApp = async () => {
-      // Clear any old localStorage vehicle data to prevent conflicts
-      localStorage.removeItem('mwt_vehicles_data');
-      localStorage.removeItem('mwt_last_sync');
-      localStorage.removeItem('mwt_last_sync_time');
-      
-      const savedEmail = localStorage.getItem('mwt_user_email')
-      if (savedEmail) {
-        setUserEmail(savedEmail)
-        setIsLoggedIn(true)
-      }
-      
-      // Load vehicle data from API with cache busting
+    const savedEmail = localStorage.getItem('mwt_user_email')
+    if (savedEmail) {
+      setUserEmail(savedEmail)
+      setIsLoggedIn(true)
+    }
+    
+    // Load saved vehicle data if it exists
+    const savedVehicleData = localStorage.getItem('mwt_vehicles_data')
+    if (savedVehicleData) {
       try {
-        const response = await fetch(`/api/vehicles?t=${Date.now()}`);
-        if (response.ok) {
-          const contentType = response.headers.get('content-type');
-          if (contentType && contentType.includes('application/json')) {
-            const data = await response.json();
-            if (data.success && data.vehicles) {
-              setVEHICLES(data.vehicles);
-              console.log('✅ Loaded vehicle data from API (new system)');
-            } else {
-              console.log('📄 API returned invalid data, using hardcoded data');
-              setVEHICLES(VEHICLES_DATA);
-            }
-          } else {
-            console.log('📄 API returned HTML instead of JSON, using hardcoded data');
-            setVEHICLES(VEHICLES_DATA);
-          }
-        } else {
-          console.log('📄 API not available (status: ' + response.status + '), using hardcoded data');
-          setVEHICLES(VEHICLES_DATA);
-        }
+        const parsedVehicleData = JSON.parse(savedVehicleData)
+        setVEHICLES(parsedVehicleData)
+        console.log('Loaded saved vehicle data from localStorage')
       } catch (error) {
-        console.error('❌ Error loading vehicle data from API:', error);
-        console.log('📄 Falling back to hardcoded data');
-        setVEHICLES(VEHICLES_DATA);
+        console.error('Error parsing saved vehicle data:', error)
+        // Fall back to initial vehicles if parsing fails
+        setVEHICLES(initialVehicles)
       }
-    };
+    }
 
-    initializeApp();
+    // Listen for storage changes from other tabs/windows
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'mwt_vehicles_data' && e.newValue) {
+        try {
+          const updatedVehicleData = JSON.parse(e.newValue)
+          setVEHICLES(updatedVehicleData)
+          console.log('Vehicle data updated from another tab')
+        } catch (error) {
+          console.error('Error parsing updated vehicle data:', error)
+        }
+      }
+    }
 
-    // Listen for custom vehicle data update events (for cross-tab updates)
+    // Listen for custom vehicle data update events
     const handleVehicleDataUpdate = (e: CustomEvent) => {
       if (e.detail && e.detail.vehicles) {
         setVEHICLES(e.detail.vehicles)
@@ -9216,43 +9205,13 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
       }
     }
 
-    // Set up periodic API sync check (every 5 seconds to check for updates from other users)
-    const apiSyncInterval = setInterval(async () => {
-      if (userEmail && !isSaving) {
-        try {
-          const response = await fetch(`/api/vehicles?t=${Date.now()}`);
-          if (response.ok) {
-            const contentType = response.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
-              const data = await response.json();
-              if (data.success && data.vehicles) {
-                // Only update if data is different (simple check)
-                if (JSON.stringify(data.vehicles) !== JSON.stringify(VEHICLES)) {
-                  setVEHICLES(data.vehicles);
-                  setSaveNotification('🔄 Data updated by another user!');
-                  setTimeout(() => setSaveNotification(''), 2000);
-                  console.log('✅ API sync: Data updated from server (new system)');
-                } else {
-                  console.log('✅ API sync: Data is up to date (new system)');
-                }
-              }
-            } else {
-              console.log('⚠️ API sync: Server returned HTML instead of JSON, skipping sync');
-            }
-          }
-        } catch (error) {
-          console.error('❌ API sync error:', error);
-        }
-      }
-    }, 5000);
-
+    window.addEventListener('storage', handleStorageChange)
     window.addEventListener('vehicleDataUpdated', handleVehicleDataUpdate as EventListener)
-    
     return () => {
+      window.removeEventListener('storage', handleStorageChange)
       window.removeEventListener('vehicleDataUpdated', handleVehicleDataUpdate as EventListener)
-      clearInterval(apiSyncInterval);
     }
-  }, [initialVehicles, userEmail, isSaving]);
+  }, [initialVehicles]);
 
   const handleLogin = (userData: { email: string }) => {
     setIsLoggedIn(true)
@@ -9365,9 +9324,8 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
   const [battlePassOpen, setBattlePassOpen] = useState(false)
   const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
   const [isEditMode, setIsEditMode] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
   const [saveNotification, setSaveNotification] = useState('')
-  const [isSyncing, setIsSyncing] = useState(false)
-  const [lastSyncTime, setLastSyncTime] = useState<string | null>(null)
 
   // Allowed editors and edit overrides/persistence
   const allowedEditors = [
@@ -9385,49 +9343,10 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
     for (let i = 0; i < parts.length - 1; i++) {
       const p = parts[i]
       if (!(p in cur) || typeof cur[p] !== 'object') cur[p] = {}
+      cur = cur[p]
     }
     cur[parts[parts.length - 1]] = value
   }
-
-  // Manual sync function for the sync button
-  const manualSync = async () => {
-    if (isSyncing || isSaving) return;
-    
-    setIsSyncing(true);
-    setSaveNotification('🔄 Checking for updates (API system)...');
-    
-    try {
-      const response = await fetch(`/api/vehicles?t=${Date.now()}`);
-      if (response.ok) {
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          const data = await response.json();
-          if (data.success && data.vehicles) {
-            if (JSON.stringify(data.vehicles) !== JSON.stringify(VEHICLES)) {
-              setVEHICLES(data.vehicles);
-              setSaveNotification('✅ Data updated from server!');
-              console.log('✅ Manual sync: Data updated from server');
-            } else {
-              setSaveNotification('✅ Already up to date!');
-              console.log('✅ Manual sync: Data is up to date');
-            }
-          }
-        } else {
-          setSaveNotification('⚠️ API not properly configured - using local data');
-          console.log('⚠️ Manual sync: API returned HTML instead of JSON');
-        }
-      } else {
-        setSaveNotification('❌ API not available - using local data');
-        console.log('❌ Manual sync: API not available (status: ' + response.status + ')');
-      }
-    } catch (error) {
-      console.error('❌ Error during manual sync:', error);
-      setSaveNotification('❌ API not available - using local data');
-    } finally {
-      setIsSyncing(false);
-      setTimeout(() => setSaveNotification(''), 3000);
-    }
-  };
 
   const saveEdit = async (vehicleId: string | number, path: string, value: any) => {
     const updatedVehicles = JSON.parse(JSON.stringify(VEHICLES));
@@ -9441,104 +9360,41 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
       // Update the state immediately for live updates
       setVEHICLES(updatedVehicles);
       
-      // Save to API - this will overwrite the vehicles.json file on the server
-      const response = await fetch('/api/update-vehicles', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          vehicles: updatedVehicles,
-          userEmail: userEmail,
-          timestamp: new Date().toISOString()
-        })
-      });
-
-      if (response.ok) {
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          const result = await response.json();
-          setSaveNotification('✅ Changes saved permanently! All users will see updates immediately.');
-          console.log('✅ Changes saved to server successfully:', result.message);
-          
-          // Dispatch event to notify other tabs
-          window.dispatchEvent(new CustomEvent('vehicleDataUpdated', { 
-            detail: { vehicles: updatedVehicles } 
-          }));
-        } else {
-          // API returned HTML instead of JSON, but changes are still saved locally
-          setSaveNotification('✅ Changes saved locally (API not available)');
-          console.log('⚠️ API returned HTML, changes saved locally only');
-          
-          // Update the hardcoded data for this session
-          VEHICLES_DATA.splice(0, VEHICLES_DATA.length, ...updatedVehicles);
-          
-          // Dispatch event to notify other tabs
-          window.dispatchEvent(new CustomEvent('vehicleDataUpdated', { 
-            detail: { vehicles: updatedVehicles } 
-          }));
-        }
-      } else {
-        throw new Error(`Server returned status ${response.status}`);
-      }
+      // Save to localStorage for persistence across sessions
+      localStorage.setItem('mwt_vehicles_data', JSON.stringify(updatedVehicles));
       
-      setTimeout(() => setSaveNotification(''), 3000);
-    } catch (error) {
-      console.error('❌ Error saving changes:', error);
-      setSaveNotification(`❌ Error saving changes: ${error instanceof Error ? error.message : 'Unknown error'}`);
-      setTimeout(() => setSaveNotification(''), 5000);
-      
-      // If API save failed, at least keep the changes locally for this session
-      console.log('⚠️ Keeping changes locally since API save failed');
-      VEHICLES_DATA.splice(0, VEHICLES_DATA.length, ...updatedVehicles);
-      
-      // Dispatch event to notify other tabs
+      // Dispatch a custom event to notify other components/tabs
       window.dispatchEvent(new CustomEvent('vehicleDataUpdated', { 
         detail: { vehicles: updatedVehicles } 
       }));
+      
+      // Note: File system updates removed for client-side compatibility
+      // Data persistence is handled via localStorage
+      
+      setSaveNotification('✅ Changes saved successfully!');
+      setTimeout(() => setSaveNotification(''), 3000);
+      console.log('Changes saved successfully');
+    } catch (error) {
+      console.error('Error saving changes:', error);
+      setSaveNotification('❌ Error saving changes!');
+      setTimeout(() => setSaveNotification(''), 3000);
     } finally {
       setIsSaving(false);
     }
   }
 
   // Function to reset vehicle data to original
-  const resetVehicleData = async () => {
+  const resetVehicleData = () => {
     if (confirm('Are you sure you want to reset all vehicle data to original? This will remove all your edits.')) {
-      setIsSaving(true);
+      localStorage.removeItem('mwt_vehicles_data');
+      setVEHICLES(initialVehicles);
+      setSaveNotification('🔄 Vehicle data reset to original!');
+      setTimeout(() => setSaveNotification(''), 3000);
       
-      try {
-        // Reset to original data via API
-        const response = await fetch('/api/update-vehicles', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            vehicles: initialVehicles,
-            userEmail: userEmail,
-            timestamp: new Date().toISOString()
-          })
-        });
-
-        if (response.ok) {
-          setVEHICLES(initialVehicles);
-          setSaveNotification('🔄 Vehicle data reset to original for all users!');
-          
-          // Notify other tabs/components
-          window.dispatchEvent(new CustomEvent('vehicleDataUpdated', { 
-            detail: { vehicles: initialVehicles } 
-          }));
-        } else {
-          const error = await response.json();
-          throw new Error(error.error || 'Failed to reset data');
-        }
-      } catch (error) {
-        console.error('❌ Error resetting data:', error);
-        setSaveNotification(`❌ Error resetting data: ${error instanceof Error ? error.message : 'Unknown error'}`);
-      } finally {
-        setIsSaving(false);
-        setTimeout(() => setSaveNotification(''), 3000);
-      }
+      // Notify other tabs/components
+      window.dispatchEvent(new CustomEvent('vehicleDataUpdated', { 
+        detail: { vehicles: initialVehicles } 
+      }));
     }
   }
 
@@ -11010,29 +10866,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     </button>
                     {isEditMode && (
                       <button
-                        onClick={manualSync}
-                        disabled={isSyncing || isSaving}
-                        className={`px-3 py-2 text-sm font-medium rounded-full border transition-colors duration-200 flex items-center gap-2 ${
-                          isSyncing || isSaving
-                            ? 'bg-gray-700 border-gray-600 text-gray-400 cursor-not-allowed'
-                            : 'bg-blue-800 hover:bg-blue-700 border-blue-600 hover:border-blue-400 text-blue-100'
-                        }`}
-                        title="Sync data across all your devices"
-                      >
-                        {isSyncing ? (
-                          <>
-                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400"></div>
-                            Syncing...
-                          </>
-                        ) : (
-                          <>
-                            🔄 Sync Devices
-                          </>
-                        )}
-                      </button>
-                    )}
-                    {isEditMode && (
-                      <button
                         onClick={resetVehicleData}
                         className="px-3 py-2 bg-red-800 hover:bg-red-700 text-sm font-medium rounded-full border border-red-600 hover:border-red-400 transition-colors duration-200 flex items-center gap-2"
                         title="Reset all vehicle data to original"
@@ -11049,11 +10882,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   {isSaving && (
                     <div className="text-sm font-medium text-blue-400 bg-slate-800/50 px-3 py-1 rounded-full border border-blue-400/30">
                       💾 Saving changes...
-                    </div>
-                  )}
-                  {lastSyncTime && (
-                    <div className="text-xs text-slate-400 bg-slate-800/30 px-2 py-1 rounded-full border border-slate-600/30">
-                      Last sync: {lastSyncTime}
                     </div>
                   )}
                 </div>
@@ -13196,7 +13024,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               </div>
 
               <div className="space-y-4">
-                {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon: any, index: number) => (
+                {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon, index) => (
                   <div key={index} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
                     <div className="flex items-center justify-between mb-2">
                       <h4 className="text-lg font-semibold text-cyan-300">{weapon.name}</h4>
@@ -13296,21 +13124,5 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 }
 
 export default function Page() {
-  // Use a minimal fallback since the component will load from API
-  const fallbackVehicles = [
-    {
-      id: 1,
-      name: "Su-57M",
-      type: "Fighter Jet",
-      faction: "Russian",
-      tier: "IV",
-      description: "Advanced fifth-generation stealth fighter with supercruise capability and advanced avionics.",
-      image: "Su-57M.jpg",
-      stats: { health: 24500, speed: 762, afterburnerSpeed: 2100, agility: 85 },
-      weapons: [],
-      modules: { engine: [], stealth: [], avionics: [] }
-    }
-  ];
-  
-  return <MwtVehicleStats vehicles={fallbackVehicles} />
+  return <MwtVehicleStats vehicles={VEHICLES_DATA} />
 }
