@@ -1,7 +1,5 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
-import fs from 'fs';
-import path from 'path';
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -408,7 +406,7 @@ const BATTLE_PASSES = [
 
 ];
 
-import { VEHICLES } from './vehicles-data';
+const VEHICLES_DATA = [
   {
     id: 1,
     name: "Su-57M",
@@ -9370,25 +9368,8 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
         detail: { vehicles: updatedVehicles } 
       }));
       
-      // Also try to update the file directly if running in a Node.js environment
-      if (typeof window === 'undefined') {
-        const fs = require('fs');
-        const path = require('path');
-        
-        // Read the current file
-        const filePath = __filename;
-        let fileContent = fs.readFileSync(filePath, 'utf8');
-        
-        // Find and replace the vehicle data in the file
-        // This is a simplified approach - in production you'd want more robust parsing
-        const vehicleDataStart = fileContent.indexOf('const VEHICLES_DATA = [');
-        if (vehicleDataStart !== -1) {
-          const vehicleDataEnd = fileContent.indexOf('];', vehicleDataStart) + 2;
-          const newVehicleData = `const VEHICLES_DATA = ${JSON.stringify(updatedVehicles, null, 2)};`;
-          fileContent = fileContent.substring(0, vehicleDataStart) + newVehicleData + fileContent.substring(vehicleDataEnd);
-          fs.writeFileSync(filePath, fileContent);
-        }
-      }
+      // Note: File system updates removed for client-side compatibility
+      // Data persistence is handled via localStorage
       
       setSaveNotification('✅ Changes saved successfully!');
       setTimeout(() => setSaveNotification(''), 3000);
@@ -13140,4 +13121,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       </main>
     </div>
   )
+}
+
+export default function Page() {
+  return <MwtVehicleStats vehicles={VEHICLES_DATA} />
 }
