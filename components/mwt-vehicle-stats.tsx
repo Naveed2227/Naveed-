@@ -9282,6 +9282,75 @@ const MwtVehicleStats = () => {
   const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
   const [isEditMode, setIsEditMode] = useState(false)
 
+  // Allowed editors and edit overrides/persistence
+  const allowedEditors = [
+    'naveed.miandad.007@gmail.com',
+    'qwemwt@gmail.com',
+    'ooaraikuromorimine@gmail.com'
+  ]
+  const isEditor = allowedEditors.includes(userEmail)
+
+  // Edits persisted locally; applied over VEHICLES for rendering
+  const [edits, setEdits] = useState<Record<string, any>>({})
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('mwt_vehicle_overrides')
+      if (raw) setEdits(JSON.parse(raw))
+    } catch {}
+  }, [])
+
+  const saveEditsToStorage = (next: Record<string, any>) => {
+    try {
+      localStorage.setItem('mwt_vehicle_overrides', JSON.stringify(next))
+    } catch {}
+  }
+
+  // Utility to set a value by path like "stats.health" or "weapons[0].damage"
+  const setByPath = (obj: any, path: string, value: any) => {
+    const parts = path.replace(/\[(\d+)\]/g, '.$1').split('.')
+    let cur = obj
+    for (let i = 0; i < parts.length - 1; i++) {
+      const p = parts[i]
+      if (!(p in cur) || typeof cur[p] !== 'object') cur[p] = {}
+      cur = cur[p]
+    }
+    cur[parts[parts.length - 1]] = value
+  }
+
+  const saveEdit = (vehicleId: string | number, path: string, value: any) => {
+    const id = String(vehicleId)
+    const next = { ...edits }
+    if (!next[id]) next[id] = {}
+    // Clone nested structure to avoid mutations
+    const clone = JSON.parse(JSON.stringify(next[id]))
+    setByPath(clone, path, value)
+    next[id] = clone
+    setEdits(next)
+    saveEditsToStorage(next)
+  }
+
+  const applyEditsToVehicle = (vehicle: any) => {
+    const ov = edits[String(vehicle.id)]
+    if (!ov) return vehicle
+    // Deep merge (simple)
+    const merge = (a: any, b: any) => {
+      if (Array.isArray(a) && Array.isArray(b)) {
+        // If overrides provide an array, prefer override indexes merged
+        const out = a.map((v, i) => (b[i] !== undefined ? merge(v, b[i]) : v))
+        return out
+      } else if (a && typeof a === 'object' && b && typeof b === 'object') {
+        const out: any = { ...a }
+        for (const k of Object.keys(b)) out[k] = merge(a?.[k], b[k])
+        return out
+      }
+      return b !== undefined ? b : a
+    }
+    return merge(vehicle, ov)
+  }
+
+  const VEHICLES_VIEW = React.useMemo(() => VEHICLES.map(v => applyEditsToVehicle(v)), [edits])
+
   const types = [
     'Fighter Jet',
     'Bomber',
@@ -9295,7 +9364,7 @@ const MwtVehicleStats = () => {
     'Anti-Air'
   ].filter(type => new Set(VEHICLES.map(v => v.type)).has(type))
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
-  const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
+  const countries = [...new Set(VEHICLES_VIEW.map((v) => v.faction))].sort()
 
   const isMarketVehicle = (vehicleName: string) => {
     const marketVehicles = [
@@ -9599,7 +9668,7 @@ ${modulesList}
 ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : isConstructionVehicle(vehicle.name) ? "🚧 CONSTRUCTION VEHICLE - Under Development" : isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : "🆓 Standard Vehicle"}`
   }
 
-  const filteredVehicles = VEHICLES.filter((vehicle) => {
+  const filteredVehicles = VEHICLES_VIEW.filter((vehicle) => {
     const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesType = !typeFilter || vehicle.type === typeFilter
     const matchesTier = !tierFilter || formatTier(vehicle.tier) === tierFilter
@@ -11255,7 +11324,25 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   alt={`${vehicle.faction} flag`}
                   className="w-8 h-6 object-cover rounded shadow-md"
                 />
-                <h3 className="text-xl font-bold text-white">{vehicle.name}</h3>
+                <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                  {vehicle.name}
+                  {isEditor && isEditMode && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const next = prompt('Edit vehicle name', vehicle.name);
+                        if (next && next.trim() && next !== vehicle.name) {
+                          saveEdit(vehicle.id, 'name', next.trim());
+                        }
+                      }}
+                      className="text-[12px] leading-none hover:opacity-80"
+                      title="Edit Vehicle Name"
+                      aria-label="Edit Vehicle Name"
+                    >
+                      ✏️
+                    </button>
+                  )}
+                </h3>
                 
                 <span className="text-sm text-slate-400 font-semibold">({vehicle.faction})</span>
               </div>
@@ -11285,47 +11372,198 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
                 <div className="bg-slate-800/50 rounded-lg p-3">
                   <div className="text-xs text-slate-400 mb-1">Health</div>
-                  <div className="text-lg font-bold text-cyan-300">{vehicle.stats.health.toLocaleString()}</div>
+                  <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                    {vehicle.stats.health.toLocaleString()}
+                    {isEditor && isEditMode && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const raw = prompt('Edit Health (number)', String(vehicle.stats.health));
+                          if (raw !== null) {
+                            const val = parseInt(raw, 10);
+                            if (!isNaN(val)) saveEdit(vehicle.id, 'stats.health', val);
+                          }
+                        }}
+                        className="text-[12px] leading-none hover:opacity-80"
+                        title="Edit Health"
+                        aria-label="Edit Health"
+                      >
+                        ✏️
+                      </button>
+                    )}
+                  </div>
                 </div>
 
                 {vehicle.type === "Fighter Jet" || vehicle.type === "Bomber" ? (
                   <>
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Cruise Speed</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.speed} km/h</div>
+                      <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                        {vehicle.stats.speed} km/h
+                        {isEditor && isEditMode && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const raw = prompt('Edit Cruise Speed (km/h)', String(vehicle.stats.speed));
+                              if (raw !== null) {
+                                const val = parseInt(raw, 10);
+                                if (!isNaN(val)) saveEdit(vehicle.id, 'stats.speed', val);
+                              }
+                            }}
+                            className="text-[12px] leading-none hover:opacity-80"
+                            title="Edit Cruise Speed"
+                            aria-label="Edit Cruise Speed"
+                          >
+                            ✏️
+                          </button>
+                        )}
+                      </div>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Afterburner Speed</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.afterburnerSpeed} km/h</div>
+                      <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                        {vehicle.stats.afterburnerSpeed} km/h
+                        {isEditor && isEditMode && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const raw = prompt('Edit Afterburner Speed (km/h)', String(vehicle.stats.afterburnerSpeed));
+                              if (raw !== null) {
+                                const val = parseInt(raw, 10);
+                                if (!isNaN(val)) saveEdit(vehicle.id, 'stats.afterburnerSpeed', val);
+                              }
+                            }}
+                            className="text-[12px] leading-none hover:opacity-80"
+                            title="Edit Afterburner Speed"
+                            aria-label="Edit Afterburner Speed"
+                          >
+                            ✏️
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </>
                 ) : vehicle.type === "Helicopter" ? (
                   <>
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Cruise Speed</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.speed} km/h</div>
+                      <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                        {vehicle.stats.speed} km/h
+                        {isEditor && isEditMode && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const raw = prompt('Edit Cruise Speed (km/h)', String(vehicle.stats.speed));
+                              if (raw !== null) {
+                                const val = parseInt(raw, 10);
+                                if (!isNaN(val)) saveEdit(vehicle.id, 'stats.speed', val);
+                              }
+                            }}
+                            className="text-[12px] leading-none hover:opacity-80"
+                            title="Edit Cruise Speed"
+                            aria-label="Edit Cruise Speed"
+                          >
+                            ✏️
+                          </button>
+                        )}
+                      </div>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Vertical Speed</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.verticalSpeed || 'N/A'} m/s</div>
+                      <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                        {vehicle.stats.verticalSpeed || 'N/A'} m/s
+                        {isEditor && isEditMode && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const raw = prompt('Edit Vertical Speed (m/s)', String(vehicle.stats.verticalSpeed || '0'));
+                              if (raw !== null) {
+                                const val = parseFloat(raw);
+                                if (!isNaN(val as any)) saveEdit(vehicle.id, 'stats.verticalSpeed', val);
+                              }
+                            }}
+                            className="text-[12px] leading-none hover:opacity-80"
+                            title="Edit Vertical Speed"
+                            aria-label="Edit Vertical Speed"
+                          >
+                            ✏️
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </>
                 ) : (
                   <>
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Speed</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.speed} km/h</div>
+                      <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                        {vehicle.stats.speed} km/h
+                        {isEditor && isEditMode && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const raw = prompt('Edit Speed (km/h)', String(vehicle.stats.speed));
+                              if (raw !== null) {
+                                const val = parseInt(raw, 10);
+                                if (!isNaN(val)) saveEdit(vehicle.id, 'stats.speed', val);
+                              }
+                            }}
+                            className="text-[12px] leading-none hover:opacity-80"
+                            title="Edit Speed"
+                            aria-label="Edit Speed"
+                          >
+                            ✏️
+                          </button>
+                        )}
+                      </div>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Armor</div>
-                      <div className="text-lg font-bold text-cyan-300">{vehicle.stats.armor}</div>
+                      <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                        {vehicle.stats.armor}
+                        {isEditor && isEditMode && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const next = prompt('Edit Armor (e.g., "1100mm")', String(vehicle.stats.armor || ''));
+                              if (next !== null) {
+                                saveEdit(vehicle.id, 'stats.armor', next);
+                              }
+                            }}
+                            className="text-[12px] leading-none hover:opacity-80"
+                            title="Edit Armor"
+                            aria-label="Edit Armor"
+                          >
+                            ✏️
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </>
                 )}
 
                 <div className="bg-slate-800/50 rounded-lg p-3">
                   <div className="text-xs text-slate-400 mb-1">Agility</div>
-                  <div className="text-lg font-bold text-cyan-300">{vehicle.stats.agility}</div>
+                  <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                    {vehicle.stats.agility}
+                    {isEditor && isEditMode && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const raw = prompt('Edit Agility (0-100)', String(vehicle.stats.agility));
+                          if (raw !== null) {
+                            const val = parseInt(raw, 10);
+                            if (!isNaN(val)) saveEdit(vehicle.id, 'stats.agility', val);
+                          }
+                        }}
+                        className="text-[12px] leading-none hover:opacity-80"
+                        title="Edit Agility"
+                        aria-label="Edit Agility"
+                      >
+                        ✏️
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -12328,7 +12566,25 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 <div className="bg-slate-800/80 rounded-lg p-4">
                                   <div className="flex justify-between items-center mb-1">
                                     <span className="text-xs font-medium text-gray-300">ARMOR</span>
-                                    <span className="text-sm font-bold text-white">{vehicle.stats.armor}</span>
+                                    <span className="text-sm font-bold text-white flex items-center gap-1">
+                                      {vehicle.stats.armor}
+                                      {isEditor && isEditMode && (
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            const next = prompt('Edit Armor (e.g., "1100mm")', String(vehicle.stats.armor || ''));
+                                            if (next !== null) {
+                                              saveEdit(vehicle.id, 'stats.armor', next);
+                                            }
+                                          }}
+                                          className="ml-1 text-[10px] leading-none hover:opacity-80"
+                                          title="Edit Armor"
+                                          aria-label="Edit Armor"
+                                        >
+                                          ✏️
+                                        </button>
+                                      )}
+                                    </span>
                                   </div>
                                   <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
                                     <div 
@@ -12365,22 +12621,97 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         <div className="space-y-3">
                           {vehicle.weapons?.length > 0 ? (
                             vehicle.weapons.map((weapon: any, idx: number) => (
-                              <div key={idx} className="bg-slate-800/80 rounded-lg p-3 border border-slate-700/50">
+                              <div key={idx} className="bg-slate-800/80 rounded-lg p-3 border border-slate-700/50 group">
                                 <div className="mb-2">
-                                  <h4 className="text-base font-medium text-cyan-300">{weapon.name}</h4>
+                                  <h4 className="text-base font-medium text-cyan-300 flex items-center gap-2">
+                                    {weapon.name}
+                                    {isEditor && isEditMode && (
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          const next = prompt('Edit Weapon Name', String(weapon.name || ''));
+                                          if (next !== null) {
+                                            saveEdit(vehicle.id, `weapons[${idx}].name`, next.trim());
+                                          }
+                                        }}
+                                        className="text-[10px] leading-none hover:opacity-80"
+                                        title={`Edit ${weapon.name}`}
+                                        aria-label={`Edit ${weapon.name}`}
+                                      >
+                                        ✏️
+                                      </button>
+                                    )}
+                                  </h4>
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 text-sm">
                                   <div>
                                     <div className="text-slate-400 text-xs">Damage</div>
-                                    <div className="font-medium">{weapon.damage || 'N/A'}</div>
+                                    <div className="font-medium flex items-center gap-1">
+                                      {weapon.damage ?? 'N/A'}
+                                      {isEditor && isEditMode && (
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            const raw = prompt('Edit Damage (number)', String(weapon.damage ?? '0'));
+                                            if (raw !== null) {
+                                              const val = parseInt(raw, 10);
+                                              if (!isNaN(val)) saveEdit(vehicle.id, `weapons[${idx}].damage`, val);
+                                            }
+                                          }}
+                                          className="ml-1 text-[10px] leading-none hover:opacity-80"
+                                          title={`Edit Damage`}
+                                          aria-label={`Edit Damage`}
+                                        >
+                                          ✏️
+                                        </button>
+                                      )}
+                                    </div>
                                   </div>
                                   <div>
                                     <div className="text-slate-400 text-xs">Penetration</div>
-                                    <div className="font-medium">{weapon.penetration || 'N/A'}</div>
+                                    <div className="font-medium flex items-center gap-1">
+                                      {weapon.penetration ?? 'N/A'}
+                                      {isEditor && isEditMode && (
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            const raw = prompt('Edit Penetration (number)', String(weapon.penetration ?? '0'));
+                                            if (raw !== null) {
+                                              const val = parseInt(raw, 10);
+                                              if (!isNaN(val)) saveEdit(vehicle.id, `weapons[${idx}].penetration`, val);
+                                            }
+                                          }}
+                                          className="ml-1 text-[10px] leading-none hover:opacity-80"
+                                          title={`Edit Penetration`}
+                                          aria-label={`Edit Penetration`}
+                                        >
+                                          ✏️
+                                        </button>
+                                      )}
+                                    </div>
                                   </div>
                                   <div>
                                     <div className="text-slate-400 text-xs">Reload</div>
-                                    <div className="font-medium">{weapon.reload ? `${weapon.reload}s` : 'N/A'}</div>
+                                    <div className="font-medium flex items-center gap-1">
+                                      {weapon.reload != null ? `${weapon.reload}s` : 'N/A'}
+                                      {isEditor && isEditMode && (
+                                        <button
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            const raw = prompt('Edit Reload (seconds)', String(weapon.reload ?? '0'));
+                                            if (raw !== null) {
+                                              const val = parseFloat(raw);
+                                              if (!isNaN(val as any)) saveEdit(vehicle.id, `weapons[${idx}].reload`, val);
+                                            }
+                                          }}
+                                          className="ml-1 text-[10px] leading-none hover:opacity-80"
+                                          title={`Edit Reload`}
+                                          aria-label={`Edit Reload`}
+                                        >
+                                          ✏️
+                                        </button>
+                                      )}
+                                    </div>
                                   </div>
                                   {weapon.range && (
                                     <div>
