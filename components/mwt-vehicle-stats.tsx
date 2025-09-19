@@ -37,7 +37,7 @@ const formatTier = (tier: string | number): string => {
 
 
 // Vehicle Rarity System - Move arrays outside function to avoid hoisting issues
-const commonVehicles = [
+const commonVehicles: string[] = [
 "F-35B Lightning II",
 "F/A-18F Super Hornet",
 "J-20 Mighty Dragon",
@@ -118,7 +118,7 @@ const commonVehicles = [
 
  ];
 
-const enhancedVehicles = [
+const enhancedVehicles: string[] = [
 "F-22 Raptor",
 "J-35",
 "T-14 Armata",
@@ -166,7 +166,7 @@ const enhancedVehicles = [
 
 ];
 
-const rareVehicles = [
+const rareVehicles: string[] = [
 "Type 10",
 "Challenger 3",
 "Leopard 2A7+",
@@ -209,13 +209,11 @@ const rareVehicles = [
 "T-64BV",
 "M60A3 (MZK)",
 "Rookiat MTTD",
-"BMD3",
-
-
-
+"BMD3"
 ];
 
-const epicVehicles = [
+// Initialize epicVehicles array with explicit initialization
+const epicVehicles: string[] = [
 "Su-57 Felon",
 "Su-57M",
 "YF-23",
@@ -246,14 +244,10 @@ const epicVehicles = [
 "AMX-30 Super",
 "Type 75 MLRS",
 "Mi-24 Super Hind",
-"Leopard 2A-RC 3.0",
-
-
-
-
+"Leopard 2A-RC 3.0"
 ];
 
-const legendaryVehicles = [
+const legendaryVehicles: string[] = [
 "TU-222",
 "TOS-1A",
 "FK 2000",
@@ -9163,6 +9157,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
   
   // Load saved email and vehicle data from localStorage on component mount
   useEffect(() => {
@@ -9345,7 +9340,6 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
   const [battlePassOpen, setBattlePassOpen] = useState(false)
   const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
   const [isEditMode, setIsEditMode] = useState(false)
-  const [isSaving, setIsSaving] = useState(false)
   const [saveNotification, setSaveNotification] = useState('')
   const [isSyncing, setIsSyncing] = useState(false)
   const [lastSyncTime, setLastSyncTime] = useState<string | null>(null)
