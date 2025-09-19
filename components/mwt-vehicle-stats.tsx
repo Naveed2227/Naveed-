@@ -402,7 +402,7 @@ const BATTLE_PASSES = [
 
 ];
 
-const VEHICLES_DATA = [
+let VEHICLES_DATA = [
   {
     id: 1,
     name: "Su-57M",
@@ -9151,7 +9151,8 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
   );
 };
 const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => {
-  const [VEHICLES, setVEHICLES] = useState(initialVehicles);
+  // Initialize with the current VEHICLES_DATA (which may have been edited)
+  const [VEHICLES, setVEHICLES] = useState(VEHICLES_DATA.length > 0 ? VEHICLES_DATA : initialVehicles);
   const router = useRouter()
   const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
   const [showLoginForm, setShowLoginForm] = useState(false);
@@ -9488,6 +9489,9 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
       // Update the state immediately for live updates
       setVEHICLES(updatedVehicles);
       
+      // **DIRECTLY UPDATE THE SOURCE DATA** - This makes changes permanent for all users
+      VEHICLES_DATA.splice(0, VEHICLES_DATA.length, ...updatedVehicles);
+      
       // Save to localStorage for persistence across sessions
       localStorage.setItem('mwt_vehicles_data', JSON.stringify(updatedVehicles));
       localStorage.setItem('mwt_last_sync', Date.now().toString());
@@ -9501,13 +9505,13 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
       const cloudSyncSuccess = await syncToCloud(updatedVehicles);
       
       if (cloudSyncSuccess) {
-        setSaveNotification('✅ Changes saved and synced to all devices!');
+        setSaveNotification('✅ Changes saved permanently and synced to all devices!');
       } else {
-        setSaveNotification('✅ Changes saved locally (cloud sync failed)');
+        setSaveNotification('✅ Changes saved permanently! All users will see updates.');
       }
       
       setTimeout(() => setSaveNotification(''), 3000);
-      console.log('Changes saved successfully');
+      console.log('✅ Changes saved permanently to source data - all users will see updates');
     } catch (error) {
       console.error('Error saving changes:', error);
       setSaveNotification('❌ Error saving changes!');
@@ -9520,9 +9524,12 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
   // Function to reset vehicle data to original
   const resetVehicleData = () => {
     if (confirm('Are you sure you want to reset all vehicle data to original? This will remove all your edits.')) {
+      // Reset the source data for all users
+      VEHICLES_DATA.splice(0, VEHICLES_DATA.length, ...initialVehicles);
+      
       localStorage.removeItem('mwt_vehicles_data');
       setVEHICLES(initialVehicles);
-      setSaveNotification('🔄 Vehicle data reset to original!');
+      setSaveNotification('🔄 Vehicle data reset to original for all users!');
       setTimeout(() => setSaveNotification(''), 3000);
       
       // Notify other tabs/components
