@@ -1,5 +1,7 @@
 "use client"
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect } from "react";
+import fs from 'fs';
+import path from 'path';
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -406,7 +408,7 @@ const BATTLE_PASSES = [
 
 ];
 
-const VEHICLES = [
+import { VEHICLES } from './vehicles-data';
   {
     id: 1,
     name: "Su-57M",
@@ -9154,21 +9156,64 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
     </div>
   );
 };
-const MwtVehicleStats = () => {
+const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
+  const [VEHICLES, setVEHICLES] = useState(initialVehicles);
   const router = useRouter()
   const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   
-  // Load saved email from localStorage on component mount
+  // Load saved email and vehicle data from localStorage on component mount
   useEffect(() => {
     const savedEmail = localStorage.getItem('mwt_user_email')
     if (savedEmail) {
       setUserEmail(savedEmail)
       setIsLoggedIn(true)
     }
-  }, []);
+    
+    // Load saved vehicle data if it exists
+    const savedVehicleData = localStorage.getItem('mwt_vehicles_data')
+    if (savedVehicleData) {
+      try {
+        const parsedVehicleData = JSON.parse(savedVehicleData)
+        setVEHICLES(parsedVehicleData)
+        console.log('Loaded saved vehicle data from localStorage')
+      } catch (error) {
+        console.error('Error parsing saved vehicle data:', error)
+        // Fall back to initial vehicles if parsing fails
+        setVEHICLES(initialVehicles)
+      }
+    }
+
+    // Listen for storage changes from other tabs/windows
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'mwt_vehicles_data' && e.newValue) {
+        try {
+          const updatedVehicleData = JSON.parse(e.newValue)
+          setVEHICLES(updatedVehicleData)
+          console.log('Vehicle data updated from another tab')
+        } catch (error) {
+          console.error('Error parsing updated vehicle data:', error)
+        }
+      }
+    }
+
+    // Listen for custom vehicle data update events
+    const handleVehicleDataUpdate = (e: CustomEvent) => {
+      if (e.detail && e.detail.vehicles) {
+        setVEHICLES(e.detail.vehicles)
+        console.log('Vehicle data updated via custom event')
+      }
+    }
+
+    window.addEventListener('storage', handleStorageChange)
+    window.addEventListener('vehicleDataUpdated', handleVehicleDataUpdate as EventListener)
+    return () => {
+      window.removeEventListener('storage', handleStorageChange)
+      window.removeEventListener('vehicleDataUpdated', handleVehicleDataUpdate as EventListener)
+    }
+  }, [initialVehicles]);
 
   const handleLogin = (userData: { email: string }) => {
     setIsLoggedIn(true)
@@ -9281,6 +9326,8 @@ const MwtVehicleStats = () => {
   const [battlePassOpen, setBattlePassOpen] = useState(false)
   const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
   const [isEditMode, setIsEditMode] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const [saveNotification, setSaveNotification] = useState('')
 
   // Allowed editors and edit overrides/persistence
   const allowedEditors = [
@@ -9290,21 +9337,6 @@ const MwtVehicleStats = () => {
   ]
   const isEditor = allowedEditors.includes(userEmail)
 
-  // Edits persisted locally; applied over VEHICLES for rendering
-  const [edits, setEdits] = useState<Record<string, any>>({})
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem('mwt_vehicle_overrides')
-      if (raw) setEdits(JSON.parse(raw))
-    } catch {}
-  }, [])
-
-  const saveEditsToStorage = (next: Record<string, any>) => {
-    try {
-      localStorage.setItem('mwt_vehicle_overrides', JSON.stringify(next))
-    } catch {}
-  }
 
   // Utility to set a value by path like "stats.health" or "weapons[0].damage"
   const setByPath = (obj: any, path: string, value: any) => {
@@ -9318,38 +9350,75 @@ const MwtVehicleStats = () => {
     cur[parts[parts.length - 1]] = value
   }
 
-  const saveEdit = (vehicleId: string | number, path: string, value: any) => {
-    const id = String(vehicleId)
-    const next = { ...edits }
-    if (!next[id]) next[id] = {}
-    // Clone nested structure to avoid mutations
-    const clone = JSON.parse(JSON.stringify(next[id]))
-    setByPath(clone, path, value)
-    next[id] = clone
-    setEdits(next)
-    saveEditsToStorage(next)
-  }
+  const saveEdit = async (vehicleId: string | number, path: string, value: any) => {
+    const updatedVehicles = JSON.parse(JSON.stringify(VEHICLES));
+    const vehicleIndex = updatedVehicles.findIndex(v => v.id == vehicleId);
+    if (vehicleIndex === -1) return;
 
-  const applyEditsToVehicle = (vehicle: any) => {
-    const ov = edits[String(vehicle.id)]
-    if (!ov) return vehicle
-    // Deep merge (simple)
-    const merge = (a: any, b: any) => {
-      if (Array.isArray(a) && Array.isArray(b)) {
-        // If overrides provide an array, prefer override indexes merged
-        const out = a.map((v, i) => (b[i] !== undefined ? merge(v, b[i]) : v))
-        return out
-      } else if (a && typeof a === 'object' && b && typeof b === 'object') {
-        const out: any = { ...a }
-        for (const k of Object.keys(b)) out[k] = merge(a?.[k], b[k])
-        return out
+    setByPath(updatedVehicles[vehicleIndex], path, value);
+    setIsSaving(true);
+
+    try {
+      // Update the state immediately for live updates
+      setVEHICLES(updatedVehicles);
+      
+      // Save to localStorage for persistence across sessions
+      localStorage.setItem('mwt_vehicles_data', JSON.stringify(updatedVehicles));
+      
+      // Dispatch a custom event to notify other components/tabs
+      window.dispatchEvent(new CustomEvent('vehicleDataUpdated', { 
+        detail: { vehicles: updatedVehicles } 
+      }));
+      
+      // Also try to update the file directly if running in a Node.js environment
+      if (typeof window === 'undefined') {
+        const fs = require('fs');
+        const path = require('path');
+        
+        // Read the current file
+        const filePath = __filename;
+        let fileContent = fs.readFileSync(filePath, 'utf8');
+        
+        // Find and replace the vehicle data in the file
+        // This is a simplified approach - in production you'd want more robust parsing
+        const vehicleDataStart = fileContent.indexOf('const VEHICLES_DATA = [');
+        if (vehicleDataStart !== -1) {
+          const vehicleDataEnd = fileContent.indexOf('];', vehicleDataStart) + 2;
+          const newVehicleData = `const VEHICLES_DATA = ${JSON.stringify(updatedVehicles, null, 2)};`;
+          fileContent = fileContent.substring(0, vehicleDataStart) + newVehicleData + fileContent.substring(vehicleDataEnd);
+          fs.writeFileSync(filePath, fileContent);
+        }
       }
-      return b !== undefined ? b : a
+      
+      setSaveNotification('✅ Changes saved successfully!');
+      setTimeout(() => setSaveNotification(''), 3000);
+      console.log('Changes saved successfully');
+    } catch (error) {
+      console.error('Error saving changes:', error);
+      setSaveNotification('❌ Error saving changes!');
+      setTimeout(() => setSaveNotification(''), 3000);
+    } finally {
+      setIsSaving(false);
     }
-    return merge(vehicle, ov)
   }
 
-  const VEHICLES_VIEW = React.useMemo(() => VEHICLES.map(v => applyEditsToVehicle(v)), [edits])
+  // Function to reset vehicle data to original
+  const resetVehicleData = () => {
+    if (confirm('Are you sure you want to reset all vehicle data to original? This will remove all your edits.')) {
+      localStorage.removeItem('mwt_vehicles_data');
+      setVEHICLES(initialVehicles);
+      setSaveNotification('🔄 Vehicle data reset to original!');
+      setTimeout(() => setSaveNotification(''), 3000);
+      
+      // Notify other tabs/components
+      window.dispatchEvent(new CustomEvent('vehicleDataUpdated', { 
+        detail: { vehicles: initialVehicles } 
+      }));
+    }
+  }
+
+
+  const VEHICLES_VIEW = VEHICLES;
 
   const types = [
     'Fighter Jet',
@@ -9364,7 +9433,7 @@ const MwtVehicleStats = () => {
     'Anti-Air'
   ].filter(type => new Set(VEHICLES.map(v => v.type)).has(type))
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
-  const countries = [...new Set(VEHICLES_VIEW.map((v) => v.faction))].sort()
+  const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
 
   const isMarketVehicle = (vehicleName: string) => {
     const marketVehicles = [
@@ -9668,7 +9737,7 @@ ${modulesList}
 ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : isConstructionVehicle(vehicle.name) ? "🚧 CONSTRUCTION VEHICLE - Under Development" : isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : "🆓 Standard Vehicle"}`
   }
 
-  const filteredVehicles = VEHICLES_VIEW.filter((vehicle) => {
+  const filteredVehicles = VEHICLES.filter((vehicle) => {
     const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase())
     const matchesType = !typeFilter || vehicle.type === typeFilter
     const matchesTier = !tierFilter || formatTier(vehicle.tier) === tierFilter
@@ -10791,27 +10860,50 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
 
                ].includes(userEmail) && (
-                <button
-                  onClick={() => setIsEditMode(!isEditMode)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-sm font-medium rounded-full border border-slate-600 hover:border-blue-400 transition-colors duration-200 flex items-center gap-2"
-                >
-                  {isEditMode ? (
-                    <>
-                      <span>View Mode</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                        <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
-                      </svg>
-                    </>
-                  ) : (
-                    <>
-                      <span>Edit Mode</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.793.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                      </svg>
-                    </>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => setIsEditMode(!isEditMode)}
+                      className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-sm font-medium rounded-full border border-slate-600 hover:border-blue-400 transition-colors duration-200 flex items-center gap-2"
+                    >
+                      {isEditMode ? (
+                        <>
+                          <span>View Mode</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                            <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                          </svg>
+                        </>
+                      ) : (
+                        <>
+                          <span>Edit Mode</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.793.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                          </svg>
+                        </>
+                      )}
+                    </button>
+                    {isEditMode && (
+                      <button
+                        onClick={resetVehicleData}
+                        className="px-3 py-2 bg-red-800 hover:bg-red-700 text-sm font-medium rounded-full border border-red-600 hover:border-red-400 transition-colors duration-200 flex items-center gap-2"
+                        title="Reset all vehicle data to original"
+                      >
+                        🔄 Reset Data
+                      </button>
+                    )}
+                  </div>
+                  {saveNotification && (
+                    <div className="text-sm font-medium text-green-400 bg-slate-800/50 px-3 py-1 rounded-full border border-green-400/30">
+                      {saveNotification}
+                    </div>
                   )}
-                </button>
+                  {isSaving && (
+                    <div className="text-sm font-medium text-blue-400 bg-slate-800/50 px-3 py-1 rounded-full border border-blue-400/30">
+                      💾 Saving changes...
+                    </div>
+                  )}
+                </div>
               )}
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
@@ -13049,7 +13141,3 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     </div>
   )
 }
-
-
-
-export default MwtVehicleStats;
