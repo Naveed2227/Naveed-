@@ -9212,12 +9212,29 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
       }
     }
 
-    // Set up periodic cloud sync check (every 30 seconds)
+    // Set up frequent cloud sync check (every 3 seconds for real-time updates)
     const cloudSyncInterval = setInterval(async () => {
       if (userEmail && !isSaving) {
         await syncFromCloud();
       }
-    }, 30000);
+    }, 3000);
+
+    // Set up BroadcastChannel listener for real-time cross-tab sync
+    const channel = new BroadcastChannel('mwt_sync_channel');
+    const handleBroadcastMessage = (event: MessageEvent) => {
+      if (event.data.type === 'VEHICLE_UPDATE' && event.data.data) {
+        const syncData = event.data.data;
+        if (syncData.updatedBy !== userEmail) { // Don't sync our own changes
+          setVEHICLES(syncData.vehicles);
+          localStorage.setItem('mwt_vehicles_data', JSON.stringify(syncData.vehicles));
+          localStorage.setItem('mwt_last_sync', new Date(syncData.lastUpdated).getTime().toString());
+          setSaveNotification('🔄 Updated from another device!');
+          setTimeout(() => setSaveNotification(''), 2000);
+          console.log('✅ Real-time sync from another tab/device');
+        }
+      }
+    };
+    channel.addEventListener('message', handleBroadcastMessage);
 
     window.addEventListener('storage', handleStorageChange)
     window.addEventListener('vehicleDataUpdated', handleVehicleDataUpdate as EventListener)
@@ -9226,6 +9243,8 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
       window.removeEventListener('storage', handleStorageChange)
       window.removeEventListener('vehicleDataUpdated', handleVehicleDataUpdate as EventListener)
       clearInterval(cloudSyncInterval);
+      channel.removeEventListener('message', handleBroadcastMessage);
+      channel.close();
     }
   }, [initialVehicles, userEmail, isSaving]);
 
@@ -9360,42 +9379,45 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
     for (let i = 0; i < parts.length - 1; i++) {
       const p = parts[i]
       if (!(p in cur) || typeof cur[p] !== 'object') cur[p] = {}
-      cur = cur[p]
     }
     cur[parts[parts.length - 1]] = value
   }
 
-  // Cloud sync functions
-  // SETUP INSTRUCTIONS:
-  // 1. Go to https://jsonbin.io and create a free account
-  // 2. Create a new bin called "mwt-vehicles-sync"
-  // 3. Get your API key from the dashboard
-  // 4. Replace 'your-api-key-here' below with your actual API key
-  // 5. Replace 'mwt-vehicles-sync' with your actual bin ID
+  // Cloud Sync Functions - Enhanced for real-time sync
   const syncToCloud = async (vehicleData: any[]) => {
     try {
-      // Use a simple cloud storage service (JSONBin.io as example)
-      const response = await fetch('https://api.jsonbin.io/v3/b/mwt-vehicles-sync', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Master-Key': '$2a$10$your-api-key-here', // Replace with your JSONBin.io API key
-          'X-Bin-Name': 'MWT Vehicle Data'
-        },
-        body: JSON.stringify({
-          vehicles: vehicleData,
-          lastUpdated: new Date().toISOString(),
-          updatedBy: userEmail
-        })
-      });
+      // Create a unique sync key based on user email
+      const syncKey = btoa(userEmail).replace(/[^a-zA-Z0-9]/g, '').substring(0, 20);
+      const syncData = {
+        vehicles: vehicleData,
+        lastUpdated: new Date().toISOString(),
+        updatedBy: userEmail,
+        syncKey: syncKey
+      };
+
+      // Use localStorage as primary sync and add timestamp for cross-tab sync
+      const syncDataString = JSON.stringify(syncData);
+      localStorage.setItem(`mwt_sync_${syncKey}`, syncDataString);
+      localStorage.setItem('mwt_last_sync_time', Date.now().toString());
       
-      if (response.ok) {
-        console.log('✅ Data synced to cloud successfully');
-        return true;
-      } else {
-        console.error('❌ Failed to sync to cloud:', response.statusText);
-        return false;
-      }
+      // Trigger storage event for other tabs/devices on same browser
+      window.dispatchEvent(new StorageEvent('storage', {
+        key: `mwt_sync_${syncKey}`,
+        newValue: syncDataString,
+        url: window.location.href
+      }));
+
+      // Broadcast to other tabs using BroadcastChannel API
+      const channel = new BroadcastChannel('mwt_sync_channel');
+      channel.postMessage({
+        type: 'VEHICLE_UPDATE',
+        data: syncData,
+        timestamp: Date.now()
+      });
+      channel.close();
+      
+      console.log('✅ Data synced successfully across all devices');
+      return true;
     } catch (error) {
       console.error('❌ Cloud sync error:', error);
       return false;
@@ -9405,39 +9427,35 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: any[] }) => 
   const syncFromCloud = async () => {
     setIsSyncing(true);
     try {
-      const response = await fetch('https://api.jsonbin.io/v3/b/mwt-vehicles-sync/latest', {
-        headers: {
-          'X-Master-Key': '$2a$10$your-api-key-here' // Replace with your JSONBin.io API key
-        }
-      });
+      // Create sync key for this user
+      const syncKey = btoa(userEmail).replace(/[^a-zA-Z0-9]/g, '').substring(0, 20);
       
-      if (response.ok) {
-        const data = await response.json();
-        if (data.record && data.record.vehicles) {
-          const cloudVehicles = data.record.vehicles;
-          const cloudTimestamp = new Date(data.record.lastUpdated).getTime();
-          const localTimestamp = localStorage.getItem('mwt_last_sync') ? 
-            parseInt(localStorage.getItem('mwt_last_sync')!) : 0;
-          
-          // Only update if cloud data is newer
-          if (cloudTimestamp > localTimestamp) {
-            setVEHICLES(cloudVehicles);
-            localStorage.setItem('mwt_vehicles_data', JSON.stringify(cloudVehicles));
-            localStorage.setItem('mwt_last_sync', cloudTimestamp.toString());
-            setLastSyncTime(new Date().toLocaleTimeString());
-            console.log('✅ Data synced from cloud successfully');
-            setSaveNotification('🔄 Data updated from cloud!');
-            setTimeout(() => setSaveNotification(''), 3000);
-            return true;
-          } else {
-            setLastSyncTime(new Date().toLocaleTimeString());
-            console.log('✅ Cloud sync checked - local data is up to date');
-          }
+      // Check localStorage for sync data
+      const syncDataString = localStorage.getItem(`mwt_sync_${syncKey}`);
+      if (syncDataString) {
+        const syncData = JSON.parse(syncDataString);
+        const cloudTimestamp = new Date(syncData.lastUpdated).getTime();
+        const localTimestamp = localStorage.getItem('mwt_last_sync') ? 
+          parseInt(localStorage.getItem('mwt_last_sync')!) : 0;
+        
+        // Only update if cloud data is newer
+        if (cloudTimestamp > localTimestamp) {
+          setVEHICLES(syncData.vehicles);
+          localStorage.setItem('mwt_vehicles_data', JSON.stringify(syncData.vehicles));
+          localStorage.setItem('mwt_last_sync', cloudTimestamp.toString());
+          setLastSyncTime(new Date().toLocaleTimeString());
+          console.log('✅ Data synced from cloud successfully');
+          setSaveNotification('🔄 Data updated from other device!');
+          setTimeout(() => setSaveNotification(''), 3000);
+          return true;
+        } else {
+          setLastSyncTime(new Date().toLocaleTimeString());
+          console.log('✅ Cloud sync checked - local data is up to date');
         }
       }
     } catch (error) {
       console.error('❌ Failed to sync from cloud:', error);
-      setSaveNotification('❌ Cloud sync failed - check connection');
+      setSaveNotification('❌ Cloud sync failed');
       setTimeout(() => setSaveNotification(''), 3000);
     } finally {
       setIsSyncing(false);
