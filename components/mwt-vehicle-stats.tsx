@@ -36,9 +36,8 @@ const formatTier = (tier: string | number): string => {
 };
 
 
-// Vehicle Rarity System
-const getVehicleRarity = (vehicleName: string) => {
-  const commonVehicles = [
+// Vehicle Rarity System - Move arrays outside function to avoid hoisting issues
+const commonVehicles = [
 "F-35B Lightning II",
 "F/A-18F Super Hornet",
 "J-20 Mighty Dragon",
@@ -118,7 +117,8 @@ const getVehicleRarity = (vehicleName: string) => {
 
 
  ];
-  const enhancedVehicles = [
+
+const enhancedVehicles = [
 "F-22 Raptor",
 "J-35",
 "T-14 Armata",
@@ -165,7 +165,8 @@ const getVehicleRarity = (vehicleName: string) => {
 
 
 ];
-  const rareVehicles = [
+
+const rareVehicles = [
 "Type 10",
 "Challenger 3",
 "Leopard 2A7+",
@@ -212,10 +213,9 @@ const getVehicleRarity = (vehicleName: string) => {
 
 
 
-
-
 ];
-  const epicVehicles = [
+
+const epicVehicles = [
 "Su-57 Felon",
 "Su-57M",
 "YF-23",
@@ -252,13 +252,15 @@ const getVehicleRarity = (vehicleName: string) => {
 
 
 ];
-  const legendaryVehicles = [
+
+const legendaryVehicles = [
 "TU-222",
 "TOS-1A",
 "FK 2000",
 "SB-1",
 ];
 
+const getVehicleRarity = (vehicleName: string) => {
   if (commonVehicles.includes(vehicleName)) return "Common";
   if (enhancedVehicles.includes(vehicleName)) return "Enhanced";
   if (rareVehicles.includes(vehicleName)) return "Rare";
@@ -13172,7 +13174,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               </div>
 
               <div className="space-y-4">
-                {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon, index) => (
+                {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon: any, index: number) => (
                   <div key={index} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
                     <div className="flex items-center justify-between mb-2">
                       <h4 className="text-lg font-semibold text-cyan-300">{weapon.name}</h4>
