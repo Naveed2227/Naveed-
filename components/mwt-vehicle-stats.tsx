@@ -9102,9 +9102,9 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl w-full max-w-md p-8 relative">
+      <div className="rounded-2xl w-full max-w-md p-8 relative bg-[rgba(0,15,70,1)]">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">Sign in</h2>
+          <h2 className="text-2xl font-bold text-[rgba(0,81,255,1)]">Sign in</h2>
           <button 
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 focus:outline-none"
@@ -9121,7 +9121,7 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium mb-1 text-[rgba(0,98,255,1)]">
               Email
             </label>
             <div className="mt-1 relative rounded-md shadow-sm">
