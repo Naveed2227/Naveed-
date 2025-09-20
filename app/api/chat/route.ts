@@ -1,12 +1,28 @@
-// Real-time sync and persistence route
+// Real-time sync and persistence route using Firebase Realtime Database
 // - GET: Server-Sent Events (SSE) stream for all clients to receive updates instantly
-// - POST: Validate editor email, update VEHICLES_DATA in components/mwt-vehicle-stats.tsx, broadcast to SSE clients
+// - POST: Validate editor email, update vehicles in Firebase, broadcast to SSE clients
 
-import { promises as fs } from 'fs'
-import path from 'path'
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, set, onValue, off, get } from 'firebase/database';
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyBwWqkn2fY0ibA2dwib6hP2YcfdbMp1bRQ",
+  authDomain: "mwt-assistant-92593.firebaseapp.com",
+  databaseURL: "https://mwt-assistant-92593-default-rtdb.firebaseio.com",
+  projectId: "mwt-assistant-92593",
+  storageBucket: "mwt-assistant-92593.firebasestorage.app",
+  messagingSenderId: "233603868776",
+  appId: "1:233603868776:web:61a74b6ba8d715df8373dd",
+  measurementId: "G-STD2HQBK36"
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const VEHICLES_REF = ref(database, 'vehicles');
 
 // Keep a list of connected SSE clients
 const clients = new Set<WritableStreamDefaultWriter<Uint8Array>>()
@@ -19,6 +35,15 @@ const ALLOWED_EDITORS = new Set<string>([
   'qwemwt@gmail.com',
   'ooaraikuromorimine@gmail.com',
 ])
+
+// Listen for changes in Firebase and broadcast to all clients
+const onValueChange = onValue(VEHICLES_REF, (snapshot) => {
+  const data = snapshot.val();
+  if (data) {
+    latestVehicles = Array.isArray(data) ? data : [];
+    broadcast({ type: 'vehicles_update', vehicles: latestVehicles });
+  }
+});
 
 async function broadcast(payload: any) {
   const data = `event: message\ndata: ${JSON.stringify(payload)}\n\n`
@@ -48,21 +73,19 @@ export async function GET(req: Request) {
     if (latestVehicles && Array.isArray(latestVehicles)) {
       await writer.write(encoder.encode(`event: message\ndata: ${JSON.stringify({ type: 'vehicles_update', vehicles: latestVehicles })}\n\n`))
     } else {
-      // Try reading from the source file (works when file already converted to JSON by our POST)
-      try {
-        const filePath = path.join(process.cwd(), 'components', 'mwt-vehicle-stats.tsx')
-        const fileContents = await fs.readFile(filePath, 'utf8')
-        const match = fileContents.match(/const\s+VEHICLES_DATA\s*=\s*(\[[\s\S]*?\]);/m)
-        if (match && match[1]) {
-          try {
-            const parsed = JSON.parse(match[1])
-            await writer.write(encoder.encode(`event: message\ndata: ${JSON.stringify({ type: 'vehicles_update', vehicles: parsed })}\n\n`))
-          } catch {
-            // Not JSON (original TS object format); skip
+      // Try reading from Firebase if we don't have in-memory data
+      if (!latestVehicles) {
+        try {
+          const snapshot = await get(VEHICLES_REF);
+          if (snapshot.exists()) {
+            latestVehicles = snapshot.val();
+            if (Array.isArray(latestVehicles)) {
+              await writer.write(encoder.encode(`event: message\ndata: ${JSON.stringify({ type: 'vehicles_update', vehicles: latestVehicles })}\n\n`));
+            }
           }
+        } catch (error) {
+          console.error('Error reading from Firebase:', error);
         }
-      } catch {
-        // ignore initial read errors
       }
     }
   } catch {
@@ -111,39 +134,25 @@ export async function POST(req: Request) {
       return Response.json({ error: 'Invalid payload: vehicles must be an array' }, { status: 400 })
     }
 
-    // Update the VEHICLES_DATA array directly inside the main data file
-    const filePath = path.join(process.cwd(), 'components', 'mwt-vehicle-stats.tsx')
-    let fileContents = ''
+    // Update the vehicles in Firebase
     try {
-      fileContents = await fs.readFile(filePath, 'utf8')
+      await set(VEHICLES_REF, vehicles);
+      latestVehicles = [...vehicles];
     } catch (e) {
-      return Response.json({ error: `Failed to read data file: ${(e as Error).message}` }, { status: 500 })
+      console.error('Error updating Firebase:', e);
+      return Response.json({ error: `Failed to update vehicles in database: ${(e as Error).message}` }, { status: 500 });
     }
 
-    const vehiclesRegex = /const\s+VEHICLES_DATA\s*=\s*\[[\s\S]*?\];/m
-    if (!vehiclesRegex.test(fileContents)) {
-      return Response.json({ error: 'VEHICLES_DATA array not found in source file' }, { status: 500 })
-    }
-
-    const replacement = `const VEHICLES_DATA = ${JSON.stringify(vehicles, null, 2)};`
-    const updatedContents = fileContents.replace(vehiclesRegex, replacement)
-
-    // Attempt to write changes back to disk
-    try {
-      await fs.writeFile(filePath, updatedContents, 'utf8')
-    } catch (e) {
-      // In read-only environments, we still broadcast the update so clients see it immediately
-      latestVehicles = vehicles
-      await broadcast({ type: 'vehicles_update', vehicles })
-      return Response.json({ warning: 'File system is read-only; broadcasted update without persisting to file.' }, { status: 200 })
-    }
-
-    // Broadcast to all connected clients for real-time update
-    latestVehicles = vehicles
-    await broadcast({ type: 'vehicles_update', vehicles })
+    // Broadcast is handled by the Firebase onValue listener
 
     return Response.json({ ok: true })
   } catch (error) {
+    console.error('Error in POST handler:', error);
     return Response.json({ error: (error as Error).message }, { status: 500 })
+  } finally {
+    // Clean up the Firebase listener when the server shuts down
+    process.on('SIGTERM', () => {
+      off(VEHICLES_REF, 'value', onValueChange);
+    });
   }
 }
