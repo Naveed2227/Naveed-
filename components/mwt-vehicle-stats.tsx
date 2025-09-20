@@ -9468,6 +9468,20 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
   const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
 
+  const getLevelRewardInfo = (vehicleName: string) => {
+    const levelRewards = {
+      "Su-57 Felon": { level: 45, isFree: true },
+      "Mig 41": { level: 45, isFree: false },
+      "T95M": { level: 60, isFree: false },
+      "FV4034 Challenger 2 TES": { level: 60, isFree: false }
+    };
+    return levelRewards[vehicleName] || null;
+  }
+
+  const isLevelRewardVehicle = (vehicleName: string) => {
+    return getLevelRewardInfo(vehicleName) !== null;
+  }
+
   const isMarketVehicle = (vehicleName: string) => {
     const marketVehicles = [
       "Abrams X",
@@ -9494,7 +9508,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "M1 Abrams CATTB",
       "XM8 AGS",
       "Object 640"
-
     ]
     return marketVehicles.includes(vehicleName)
   }
@@ -13014,7 +13027,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               <div className="flex items-center justify-between">
                                 <span className="text-base text-slate-300">How to Obtain</span>
                                 <div className="flex items-center gap-2">
-                                  {isMarketVehicle(vehicle.name) ? (
+                                  {(() => {
+                                    const rewardInfo = getLevelRewardInfo(vehicle.name);
+                                    return rewardInfo ? (
+                                      <span className="text-base font-medium text-white">
+                                        Level {rewardInfo.level} reward ({rewardInfo.isFree ? 'Free' : 'Paid'})
+                                      </span>
+                                  ) : null;
+                                  })()}
+                                  {!isLevelRewardVehicle(vehicle.name) && isMarketVehicle(vehicle.name) ? (
                                     <div className="flex items-center gap-1">
                                       <img 
                                         src="/Market.png" 
