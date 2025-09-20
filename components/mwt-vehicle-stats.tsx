@@ -3,38 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { initializeApp, getApps } from "firebase/app"
-import { getAnalytics } from "firebase/analytics"
-import { getDatabase, ref as dbRef, onValue, update as dbUpdate } from "firebase/database"
-
-// Firebase Web App Config (provided by user)
-const firebaseConfig = {
-  apiKey: "AIzaSyCo23mrlqx3xlkVUmO39jvANcEI6_HRktg",
-  authDomain: "mwt-assistant-bdcde.firebaseapp.com",
-  projectId: "mwt-assistant-bdcde",
-  storageBucket: "mwt-assistant-bdcde.firebasestorage.app",
-  messagingSenderId: "77186731902",
-  appId: "1:77186731902:web:ed78df77e6978c71182d2f",
-  measurementId: "G-Q08CS0CTY8",
-  databaseURL: "https://mwt-assistant-bdcde-default-rtdb.firebaseio.com"
-}
-
-let __firebaseInitialized = false
-const ensureFirebase = () => {
-  if (typeof window === 'undefined') return
-  if (!__firebaseInitialized) {
-    try {
-      if (!getApps().length) {
-        initializeApp(firebaseConfig)
-      }
-      // Analytics is optional; guard in case of non-HTTPS or unsupported env
-      try { getAnalytics() } catch {}
-      __firebaseInitialized = true
-    } catch (e) {
-      console.warn('Firebase init failed:', e)
-    }
-  }
-}
 
 // Roman numeral conversion utility
 const toRomanNumeral = (num: number | string): string => {
@@ -9186,72 +9154,77 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
     </div>
   );
 };
-const MwtVehicleStats = () => {
-  const [VEHICLES, setVEHICLES] = useState<any[]>([]);
-  const [vehicles, setVehicles] = useState<any[]>([]);
+const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
+  const [VEHICLES, setVEHICLES] = useState(initialVehicles);
   const router = useRouter()
   const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   
-  // Subscribe to server updates via SSE; no localStorage usage for vehicle data
+  // Load saved email and vehicle data from localStorage on component mount
   useEffect(() => {
-    const es = new EventSource('/api/chat')
-
-    const onMessage = (ev: MessageEvent) => {
+    const savedEmail = localStorage.getItem('mwt_user_email')
+    if (savedEmail) {
+      setUserEmail(savedEmail)
+      setIsLoggedIn(true)
+    }
+    
+    // Load saved vehicle data if it exists
+    const savedVehicleData = localStorage.getItem('mwt_vehicles_data')
+    if (savedVehicleData) {
       try {
-        const payload = JSON.parse(ev.data as string)
-        if (payload && payload.type === 'vehicles_update' && Array.isArray(payload.vehicles)) {
-          setVEHICLES(payload.vehicles)
-          console.log('Vehicle data updated via SSE')
-        }
-      } catch (e) {
-        console.error('SSE parse error:', e)
+        const parsedVehicleData = JSON.parse(savedVehicleData)
+        setVEHICLES(parsedVehicleData)
+        console.log('Loaded saved vehicle data from localStorage')
+      } catch (error) {
+        console.error('Error parsing saved vehicle data:', error)
+        // Fall back to initial vehicles if parsing fails
+        setVEHICLES(initialVehicles)
       }
     }
 
-    es.addEventListener('message', onMessage as unknown as EventListener)
-    es.addEventListener('error', () => {
-      console.warn('SSE connection error; browser will attempt to reconnect automatically')
-    })
+    // Listen for storage changes from other tabs/windows
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'mwt_vehicles_data' && e.newValue) {
+        try {
+          const updatedVehicleData = JSON.parse(e.newValue)
+          setVEHICLES(updatedVehicleData)
+          console.log('Vehicle data updated from another tab')
+        } catch (error) {
+          console.error('Error parsing updated vehicle data:', error)
+        }
+      }
+    }
 
+    // Listen for custom vehicle data update events
+    const handleVehicleDataUpdate = (e: CustomEvent) => {
+      if (e.detail && e.detail.vehicles) {
+        setVEHICLES(e.detail.vehicles)
+        console.log('Vehicle data updated via custom event')
+      }
+    }
+
+    window.addEventListener('storage', handleStorageChange)
+    window.addEventListener('vehicleDataUpdated', handleVehicleDataUpdate as EventListener)
     return () => {
-      try { es.close() } catch {}
+      window.removeEventListener('storage', handleStorageChange)
+      window.removeEventListener('vehicleDataUpdated', handleVehicleDataUpdate as EventListener)
     }
-  }, [])
-
-  // Also subscribe to Firebase Realtime Database for global sync
-  useEffect(() => {
-    try {
-      ensureFirebase()
-      const db = getDatabase()
-      const vehiclesRef = dbRef(db, 'vehicles')
-      const unsubscribe = onValue(vehiclesRef, (snapshot) => {
-        const data = snapshot.val()
-        if (data) {
-          const arr = Array.isArray(data) ? data : Object.values(data)
-          setVehicles(arr as any[])
-          setVEHICLES(arr as any[])
-          console.log('Vehicle data updated via Firebase RTDB')
-        }
-      })
-      return () => {
-        try { unsubscribe() } catch {}
-      }
-    } catch (e) {
-      console.warn('Firebase RTDB subscription failed:', e)
-    }
-  }, [])
+  }, [initialVehicles]);
 
   const handleLogin = (userData: { email: string }) => {
     setIsLoggedIn(true)
     setUserEmail(userData.email)
+    // Save email to localStorage
+    localStorage.setItem('mwt_user_email', userData.email)
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false)
     setUserEmail("")
+    // Remove email from localStorage on logout
+    localStorage.removeItem('mwt_user_email')
   };
   
   const handleUpgradeChange = (vehicleId: string, level: number) => {
@@ -9377,35 +9350,30 @@ const MwtVehicleStats = () => {
 
   const saveEdit = async (vehicleId: string | number, path: string, value: any) => {
     const updatedVehicles = JSON.parse(JSON.stringify(VEHICLES));
-    const vehicleIndex = updatedVehicles.findIndex((v: any) => v.id == vehicleId);
+    const vehicleIndex = updatedVehicles.findIndex(v => v.id == vehicleId);
     if (vehicleIndex === -1) return;
 
     setByPath(updatedVehicles[vehicleIndex], path, value);
     setIsSaving(true);
 
     try {
-      // Optimistic update for snappy UX
-      const prev = VEHICLES
-      setVEHICLES(updatedVehicles)
-      setVehicles(updatedVehicles)
-
-      // Also update this single vehicle in Firebase RTDB for cloud sync
-      try {
-        ensureFirebase()
-        const db = getDatabase()
-        const updatedVehicle = updatedVehicles[vehicleIndex]
-        const vehiclePath = `vehicles/${String(updatedVehicle.id)}`
-        await dbUpdate(dbRef(db, vehiclePath), updatedVehicle)
-      } catch (e) {
-        console.warn('Firebase RTDB update failed:', e)
-        // Revert optimistic update on failure
-        setVEHICLES(prev)
-        setVehicles(prev)
-        throw e
-      }
-
-      setSaveNotification('✅ Changes saved successfully!')
-      setTimeout(() => setSaveNotification(''), 3000)
+      // Update the state immediately for live updates
+      setVEHICLES(updatedVehicles);
+      
+      // Save to localStorage for persistence across sessions
+      localStorage.setItem('mwt_vehicles_data', JSON.stringify(updatedVehicles));
+      
+      // Dispatch a custom event to notify other components/tabs
+      window.dispatchEvent(new CustomEvent('vehicleDataUpdated', { 
+        detail: { vehicles: updatedVehicles } 
+      }));
+      
+      // Note: File system updates removed for client-side compatibility
+      // Data persistence is handled via localStorage
+      
+      setSaveNotification('✅ Changes saved successfully!');
+      setTimeout(() => setSaveNotification(''), 3000);
+      console.log('Changes saved successfully');
     } catch (error) {
       console.error('Error saving changes:', error);
       setSaveNotification('❌ Error saving changes!');
@@ -9415,13 +9383,23 @@ const MwtVehicleStats = () => {
     }
   }
 
-  // Reset is disabled in Firebase-only mode (no local constant baseline)
-  const resetVehicleData = async () => {
-    alert('Reset is disabled: Firebase RTDB is the source of truth.')
+  // Function to reset vehicle data to original
+  const resetVehicleData = () => {
+    if (confirm('Are you sure you want to reset all vehicle data to original? This will remove all your edits.')) {
+      localStorage.removeItem('mwt_vehicles_data');
+      setVEHICLES(initialVehicles);
+      setSaveNotification('🔄 Vehicle data reset to original!');
+      setTimeout(() => setSaveNotification(''), 3000);
+      
+      // Notify other tabs/components
+      window.dispatchEvent(new CustomEvent('vehicleDataUpdated', { 
+        detail: { vehicles: initialVehicles } 
+      }));
+    }
   }
 
 
-  const VEHICLES_VIEW = vehicles.length ? vehicles : VEHICLES;
+  const VEHICLES_VIEW = VEHICLES;
 
   const types = [
     'Fighter Jet',
@@ -9434,9 +9412,9 @@ const MwtVehicleStats = () => {
     'Missile Carrier',
     'SPH',
     'Anti-Air'
-  ].filter(type => new Set(VEHICLES.map((v: any) => v.type)).has(type))
-  const tiers = [...new Set(VEHICLES.map((v: any) => formatTier(v.tier)))].sort()
-  const countries = [...new Set(VEHICLES.map((v: any) => v.faction))].sort()
+  ].filter(type => new Set(VEHICLES.map(v => v.type)).has(type))
+  const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
+  const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
 
   const isMarketVehicle = (vehicleName: string) => {
     const marketVehicles = [
@@ -10257,8 +10235,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           const roleOnlyFilters = { role: originalFilters.role, nation: originalFilters.nation }
           const roleVehicles = filterVehicles(roleOnlyFilters)
           if (roleVehicles.length > 0) {
-            const availableTiers = [...new Set(roleVehicles.map((v: any) => v.tier))].sort()
-            tierAvailabilityMessage = `No Tier ${formatTier(originalFilters.tier)} ${originalFilters.role} found. Available tiers: ${availableTiers.map((t: any) => formatTier(t)).join(', ')}.`
+            const availableTiers = [...new Set(roleVehicles.map(v => v.tier))].sort()
+            tierAvailabilityMessage = `No Tier ${formatTier(originalFilters.tier)} ${originalFilters.role} found. Available tiers: ${availableTiers.map(t => formatTier(t)).join(', ')}.`
           }
         }
         
@@ -13146,5 +13124,5 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 }
 
 export default function Page() {
-  return <MwtVehicleStats />
+  return <MwtVehicleStats vehicles={VEHICLES_DATA} />
 }
