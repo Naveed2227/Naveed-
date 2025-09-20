@@ -10627,7 +10627,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
         className="fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-purple-400 flex items-center justify-center min-h-[100px] min-w-[36px] sm:min-h-[120px] sm:min-w-[42px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r"
-{{ ... }}
       >
         {/* Mobile: Compact icon + text */}
         <div className="sm:hidden flex flex-col items-center justify-center px-2 py-3 text-white font-bold text-[10px] tracking-wide">
