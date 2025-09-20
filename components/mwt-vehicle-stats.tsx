@@ -3,6 +3,38 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { initializeApp, getApps } from "firebase/app"
+import { getAnalytics } from "firebase/analytics"
+import { getDatabase, ref as dbRef, onValue, set as dbSet } from "firebase/database"
+
+// Firebase Web App Config (provided by user)
+const firebaseConfig = {
+  apiKey: "AIzaSyCo23mrlqx3xlkVUmO39jvANcEI6_HRktg",
+  authDomain: "mwt-assistant-bdcde.firebaseapp.com",
+  projectId: "mwt-assistant-bdcde",
+  storageBucket: "mwt-assistant-bdcde.firebasestorage.app",
+  messagingSenderId: "77186731902",
+  appId: "1:77186731902:web:ed78df77e6978c71182d2f",
+  measurementId: "G-Q08CS0CTY8",
+  databaseURL: "https://mwt-assistant-bdcde-default-rtdb.firebaseio.com"
+}
+
+let __firebaseInitialized = false
+const ensureFirebase = () => {
+  if (typeof window === 'undefined') return
+  if (!__firebaseInitialized) {
+    try {
+      if (!getApps().length) {
+        initializeApp(firebaseConfig)
+      }
+      // Analytics is optional; guard in case of non-HTTPS or unsupported env
+      try { getAnalytics() } catch {}
+      __firebaseInitialized = true
+    } catch (e) {
+      console.warn('Firebase init failed:', e)
+    }
+  }
+}
 
 // Roman numeral conversion utility
 const toRomanNumeral = (num: number | string): string => {
@@ -9162,69 +9194,64 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   
-  // Load saved email and vehicle data from localStorage on component mount
+  // Subscribe to server updates via SSE; no localStorage usage for vehicle data
   useEffect(() => {
-    const savedEmail = localStorage.getItem('mwt_user_email')
-    if (savedEmail) {
-      setUserEmail(savedEmail)
-      setIsLoggedIn(true)
-    }
-    
-    // Load saved vehicle data if it exists
-    const savedVehicleData = localStorage.getItem('mwt_vehicles_data')
-    if (savedVehicleData) {
+    // Initialize with server-provided vehicles from props
+    setVEHICLES(initialVehicles)
+
+    const es = new EventSource('/api/chat')
+
+    const onMessage = (ev: MessageEvent) => {
       try {
-        const parsedVehicleData = JSON.parse(savedVehicleData)
-        setVEHICLES(parsedVehicleData)
-        console.log('Loaded saved vehicle data from localStorage')
-      } catch (error) {
-        console.error('Error parsing saved vehicle data:', error)
-        // Fall back to initial vehicles if parsing fails
-        setVEHICLES(initialVehicles)
-      }
-    }
-
-    // Listen for storage changes from other tabs/windows
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'mwt_vehicles_data' && e.newValue) {
-        try {
-          const updatedVehicleData = JSON.parse(e.newValue)
-          setVEHICLES(updatedVehicleData)
-          console.log('Vehicle data updated from another tab')
-        } catch (error) {
-          console.error('Error parsing updated vehicle data:', error)
+        const payload = JSON.parse(ev.data as string)
+        if (payload && payload.type === 'vehicles_update' && Array.isArray(payload.vehicles)) {
+          setVEHICLES(payload.vehicles)
+          console.log('Vehicle data updated via SSE')
         }
+      } catch (e) {
+        console.error('SSE parse error:', e)
       }
     }
 
-    // Listen for custom vehicle data update events
-    const handleVehicleDataUpdate = (e: CustomEvent) => {
-      if (e.detail && e.detail.vehicles) {
-        setVEHICLES(e.detail.vehicles)
-        console.log('Vehicle data updated via custom event')
-      }
-    }
+    es.addEventListener('message', onMessage as unknown as EventListener)
+    es.addEventListener('error', () => {
+      console.warn('SSE connection error; browser will attempt to reconnect automatically')
+    })
 
-    window.addEventListener('storage', handleStorageChange)
-    window.addEventListener('vehicleDataUpdated', handleVehicleDataUpdate as EventListener)
     return () => {
-      window.removeEventListener('storage', handleStorageChange)
-      window.removeEventListener('vehicleDataUpdated', handleVehicleDataUpdate as EventListener)
+      try { es.close() } catch {}
     }
-  }, [initialVehicles]);
+  }, [initialVehicles])
+
+  // Also subscribe to Firebase Realtime Database for global sync
+  useEffect(() => {
+    try {
+      ensureFirebase()
+      const db = getDatabase()
+      const vehiclesRef = dbRef(db, 'vehicles')
+      const unsubscribe = onValue(vehiclesRef, (snapshot) => {
+        const data = snapshot.val()
+        if (Array.isArray(data)) {
+          setVEHICLES(data)
+          console.log('Vehicle data updated via Firebase RTDB')
+        }
+      })
+      return () => {
+        try { unsubscribe() } catch {}
+      }
+    } catch (e) {
+      console.warn('Firebase RTDB subscription failed:', e)
+    }
+  }, [])
 
   const handleLogin = (userData: { email: string }) => {
     setIsLoggedIn(true)
     setUserEmail(userData.email)
-    // Save email to localStorage
-    localStorage.setItem('mwt_user_email', userData.email)
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false)
     setUserEmail("")
-    // Remove email from localStorage on logout
-    localStorage.removeItem('mwt_user_email')
   };
   
   const handleUpgradeChange = (vehicleId: string, level: number) => {
@@ -9350,30 +9377,42 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
 
   const saveEdit = async (vehicleId: string | number, path: string, value: any) => {
     const updatedVehicles = JSON.parse(JSON.stringify(VEHICLES));
-    const vehicleIndex = updatedVehicles.findIndex(v => v.id == vehicleId);
+    const vehicleIndex = updatedVehicles.findIndex((v: any) => v.id == vehicleId);
     if (vehicleIndex === -1) return;
 
     setByPath(updatedVehicles[vehicleIndex], path, value);
     setIsSaving(true);
 
     try {
-      // Update the state immediately for live updates
-      setVEHICLES(updatedVehicles);
-      
-      // Save to localStorage for persistence across sessions
-      localStorage.setItem('mwt_vehicles_data', JSON.stringify(updatedVehicles));
-      
-      // Dispatch a custom event to notify other components/tabs
-      window.dispatchEvent(new CustomEvent('vehicleDataUpdated', { 
-        detail: { vehicles: updatedVehicles } 
-      }));
-      
-      // Note: File system updates removed for client-side compatibility
-      // Data persistence is handled via localStorage
-      
-      setSaveNotification('✅ Changes saved successfully!');
-      setTimeout(() => setSaveNotification(''), 3000);
-      console.log('Changes saved successfully');
+      // Optimistic update for snappy UX
+      const prev = VEHICLES
+      setVEHICLES(updatedVehicles)
+
+      // Persist to server and broadcast globally
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ vehicles: updatedVehicles, editorEmail: userEmail })
+      })
+
+      if (!res.ok) {
+        const info = await res.json().catch(() => ({}))
+        // Revert optimistic update on failure
+        setVEHICLES(prev)
+        throw new Error(info.error || 'Failed to save changes')
+      }
+
+      // Also push to Firebase Realtime Database for cloud sync
+      try {
+        ensureFirebase()
+        const db = getDatabase()
+        await dbSet(dbRef(db, 'vehicles'), updatedVehicles)
+      } catch (e) {
+        console.warn('Firebase RTDB update failed:', e)
+      }
+
+      setSaveNotification('✅ Changes saved successfully!')
+      setTimeout(() => setSaveNotification(''), 3000)
     } catch (error) {
       console.error('Error saving changes:', error);
       setSaveNotification('❌ Error saving changes!');
@@ -9383,18 +9422,38 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
     }
   }
 
-  // Function to reset vehicle data to original
-  const resetVehicleData = () => {
+  // Function to reset vehicle data to original (server-side source of truth)
+  const resetVehicleData = async () => {
     if (confirm('Are you sure you want to reset all vehicle data to original? This will remove all your edits.')) {
-      localStorage.removeItem('mwt_vehicles_data');
-      setVEHICLES(initialVehicles);
-      setSaveNotification('🔄 Vehicle data reset to original!');
-      setTimeout(() => setSaveNotification(''), 3000);
-      
-      // Notify other tabs/components
-      window.dispatchEvent(new CustomEvent('vehicleDataUpdated', { 
-        detail: { vehicles: initialVehicles } 
-      }));
+      setIsSaving(true)
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ vehicles: initialVehicles, editorEmail: userEmail })
+        })
+        if (!res.ok) {
+          const info = await res.json().catch(() => ({}))
+          throw new Error(info.error || 'Failed to reset')
+        }
+        setVEHICLES(initialVehicles)
+        // Also update Firebase RTDB
+        try {
+          ensureFirebase()
+          const db = getDatabase()
+          await dbSet(dbRef(db, 'vehicles'), initialVehicles)
+        } catch (e2) {
+          console.warn('Firebase RTDB reset failed:', e2)
+        }
+        setSaveNotification('🔄 Vehicle data reset to original!')
+        setTimeout(() => setSaveNotification(''), 3000)
+      } catch (e) {
+        console.error('Error resetting vehicle data:', e)
+        setSaveNotification('❌ Error resetting data!')
+        setTimeout(() => setSaveNotification(''), 3000)
+      } finally {
+        setIsSaving(false)
+      }
     }
   }
 
