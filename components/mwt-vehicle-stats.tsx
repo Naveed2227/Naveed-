@@ -5,7 +5,7 @@ import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calenda
 import { useRouter } from "next/navigation"
 import { initializeApp, getApps } from "firebase/app"
 import { getAnalytics } from "firebase/analytics"
-import { getDatabase, ref as dbRef, onValue, set as dbSet } from "firebase/database"
+import { getDatabase, ref as dbRef, onValue, update as dbUpdate } from "firebase/database"
 
 // Firebase Web App Config (provided by user)
 const firebaseConfig = {
@@ -9186,8 +9186,9 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
     </div>
   );
 };
-const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
-  const [VEHICLES, setVEHICLES] = useState(initialVehicles);
+const MwtVehicleStats = () => {
+  const [VEHICLES, setVEHICLES] = useState<any[]>([]);
+  const [vehicles, setVehicles] = useState<any[]>([]);
   const router = useRouter()
   const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
   const [showLoginForm, setShowLoginForm] = useState(false);
@@ -9196,9 +9197,6 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   
   // Subscribe to server updates via SSE; no localStorage usage for vehicle data
   useEffect(() => {
-    // Initialize with server-provided vehicles from props
-    setVEHICLES(initialVehicles)
-
     const es = new EventSource('/api/chat')
 
     const onMessage = (ev: MessageEvent) => {
@@ -9221,7 +9219,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
     return () => {
       try { es.close() } catch {}
     }
-  }, [initialVehicles])
+  }, [])
 
   // Also subscribe to Firebase Realtime Database for global sync
   useEffect(() => {
@@ -9231,8 +9229,10 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       const vehiclesRef = dbRef(db, 'vehicles')
       const unsubscribe = onValue(vehiclesRef, (snapshot) => {
         const data = snapshot.val()
-        if (Array.isArray(data)) {
-          setVEHICLES(data)
+        if (data) {
+          const arr = Array.isArray(data) ? data : Object.values(data)
+          setVehicles(arr as any[])
+          setVEHICLES(arr as any[])
           console.log('Vehicle data updated via Firebase RTDB')
         }
       })
@@ -9387,28 +9387,21 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       // Optimistic update for snappy UX
       const prev = VEHICLES
       setVEHICLES(updatedVehicles)
+      setVehicles(updatedVehicles)
 
-      // Persist to server and broadcast globally
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ vehicles: updatedVehicles, editorEmail: userEmail })
-      })
-
-      if (!res.ok) {
-        const info = await res.json().catch(() => ({}))
-        // Revert optimistic update on failure
-        setVEHICLES(prev)
-        throw new Error(info.error || 'Failed to save changes')
-      }
-
-      // Also push to Firebase Realtime Database for cloud sync
+      // Also update this single vehicle in Firebase RTDB for cloud sync
       try {
         ensureFirebase()
         const db = getDatabase()
-        await dbSet(dbRef(db, 'vehicles'), updatedVehicles)
+        const updatedVehicle = updatedVehicles[vehicleIndex]
+        const vehiclePath = `vehicles/${String(updatedVehicle.id)}`
+        await dbUpdate(dbRef(db, vehiclePath), updatedVehicle)
       } catch (e) {
         console.warn('Firebase RTDB update failed:', e)
+        // Revert optimistic update on failure
+        setVEHICLES(prev)
+        setVehicles(prev)
+        throw e
       }
 
       setSaveNotification('✅ Changes saved successfully!')
@@ -9422,43 +9415,13 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
     }
   }
 
-  // Function to reset vehicle data to original (server-side source of truth)
+  // Reset is disabled in Firebase-only mode (no local constant baseline)
   const resetVehicleData = async () => {
-    if (confirm('Are you sure you want to reset all vehicle data to original? This will remove all your edits.')) {
-      setIsSaving(true)
-      try {
-        const res = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ vehicles: initialVehicles, editorEmail: userEmail })
-        })
-        if (!res.ok) {
-          const info = await res.json().catch(() => ({}))
-          throw new Error(info.error || 'Failed to reset')
-        }
-        setVEHICLES(initialVehicles)
-        // Also update Firebase RTDB
-        try {
-          ensureFirebase()
-          const db = getDatabase()
-          await dbSet(dbRef(db, 'vehicles'), initialVehicles)
-        } catch (e2) {
-          console.warn('Firebase RTDB reset failed:', e2)
-        }
-        setSaveNotification('🔄 Vehicle data reset to original!')
-        setTimeout(() => setSaveNotification(''), 3000)
-      } catch (e) {
-        console.error('Error resetting vehicle data:', e)
-        setSaveNotification('❌ Error resetting data!')
-        setTimeout(() => setSaveNotification(''), 3000)
-      } finally {
-        setIsSaving(false)
-      }
-    }
+    alert('Reset is disabled: Firebase RTDB is the source of truth.')
   }
 
 
-  const VEHICLES_VIEW = VEHICLES;
+  const VEHICLES_VIEW = vehicles.length ? vehicles : VEHICLES;
 
   const types = [
     'Fighter Jet',
@@ -9471,9 +9434,9 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
     'Missile Carrier',
     'SPH',
     'Anti-Air'
-  ].filter(type => new Set(VEHICLES.map(v => v.type)).has(type))
-  const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
-  const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
+  ].filter(type => new Set(VEHICLES.map((v: any) => v.type)).has(type))
+  const tiers = [...new Set(VEHICLES.map((v: any) => formatTier(v.tier)))].sort()
+  const countries = [...new Set(VEHICLES.map((v: any) => v.faction))].sort()
 
   const isMarketVehicle = (vehicleName: string) => {
     const marketVehicles = [
@@ -10294,8 +10257,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           const roleOnlyFilters = { role: originalFilters.role, nation: originalFilters.nation }
           const roleVehicles = filterVehicles(roleOnlyFilters)
           if (roleVehicles.length > 0) {
-            const availableTiers = [...new Set(roleVehicles.map(v => v.tier))].sort()
-            tierAvailabilityMessage = `No Tier ${formatTier(originalFilters.tier)} ${originalFilters.role} found. Available tiers: ${availableTiers.map(t => formatTier(t)).join(', ')}.`
+            const availableTiers = [...new Set(roleVehicles.map((v: any) => v.tier))].sort()
+            tierAvailabilityMessage = `No Tier ${formatTier(originalFilters.tier)} ${originalFilters.role} found. Available tiers: ${availableTiers.map((t: any) => formatTier(t)).join(', ')}.`
           }
         }
         
@@ -13183,5 +13146,5 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 }
 
 export default function Page() {
-  return <MwtVehicleStats vehicles={VEHICLES_DATA} />
+  return <MwtVehicleStats />
 }
