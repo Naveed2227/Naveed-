@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 /* =========================
    Radar Beam Animation
 ========================= */
@@ -83,23 +81,42 @@
 /* =========================
    Military Blue Scrollbar
 ========================= */
-::-webkit-scrollbar { width: 12px; }
-::-webkit-scrollbar-track { background: #04080e; }
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #04080e;
+}
 ::-webkit-scrollbar-thumb {
   background-color: rgba(59, 130, 246, 0.7);
   border-radius: 6px;
   border: 2px solid #04080e;
 }
-::-webkit-scrollbar-thumb:hover { background-color: rgba(59, 130, 246, 0.9); }
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(59, 130, 246, 0.9);
+}
 
 /* Firefox */
-* { scrollbar-width: thin; scrollbar-color: rgba(59, 130, 246, 0.7) #04080e; }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.7) #04080e;
+}
 
 /* =========================
    Responsive Adjustments
 ========================= */
 @media (max-width: 768px) {
-  .military-bg::before { width: 200vmax; height: 200vmax; }
-  .military-bg::after { font-size: clamp(6px, 2vw, 10px); top: 3%; right: 2%; }
-  .jet-marker { width: clamp(4px, 2vw, 8px); height: clamp(4px, 2vw, 8px); }
+  .military-bg::before {
+    width: 200vmax;
+    height: 200vmax;
+  }
+  .military-bg::after {
+    font-size: clamp(6px, 2vw, 10px);
+    top: 3%;
+    right: 2%;
+  }
+  .jet-marker {
+    width: clamp(4px, 2vw, 8px);
+    height: clamp(4px, 2vw, 8px);
+  }
 }
