@@ -1,9 +1,31 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+
 /* =========================
-   Military Radar Background
+   Radar Beam Animation
 ========================= */
+@keyframes radar-sweep {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Jet Marker (Single Dot with fade) */
+.jet-marker {
+  position: absolute;
+  width: clamp(6px, 1.5vw, 10px);
+  height: clamp(6px, 1.5vw, 10px);
+  background-color: rgba(144, 202, 249, 0.9);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  filter: drop-shadow(0 0 5px rgba(144, 202, 249, 0.7));
+  will-change: transform, opacity;
+  transition: opacity 1.5s linear;
+}
+
+/* Military Radar Background */
 .military-bg {
   position: fixed;
   top: 0;
@@ -21,12 +43,7 @@
   background-size: 25px 25px, 25px 25px, 100% 100%;
 }
 
-/* Radar Beam Animation */
-@keyframes radar-sweep {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
+/* Radar Beam */
 .military-bg::before {
   content: '';
   position: absolute;
@@ -61,19 +78,6 @@
   line-height: 2;
   white-space: pre;
   text-align: right;
-}
-
-/* Jet Marker Placeholder */
-.jet-marker {
-  position: absolute;
-  width: clamp(6px, 1.5vw, 10px);
-  height: clamp(6px, 1.5vw, 10px);
-  background-color: rgba(144, 202, 249, 0.9);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  filter: drop-shadow(0 0 5px rgba(144, 202, 249, 0.7));
-  transition: opacity 1.5s linear;
 }
 
 /* =========================
