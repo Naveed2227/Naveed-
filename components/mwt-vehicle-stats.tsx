@@ -2,60 +2,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
-import { initializeApp, getApps, getApp } from "firebase/app"
-import { getAnalytics, isSupported as isAnalyticsSupported, type Analytics } from "firebase/analytics"
-
-// Firebase config and initialization
-const firebaseConfig = {
-  apiKey: "AIzaSyBwWqkn2fY0ibA2dwib6hP2YcfdbMp1bRQ",
-  authDomain: "mwt-assistant-92593.firebaseapp.com",
-  databaseURL: "https://mwt-assistant-92593-default-rtdb.firebaseio.com",
-  projectId: "mwt-assistant-92593",
-  storageBucket: "mwt-assistant-92593.firebasestorage.app",
-  messagingSenderId: "233603868776",
-  appId: "1:233603868776:web:61a74b6ba8d715df8373dd",
-  measurementId: "G-STD2HQBK36"
-}
-
-// Avoid re-initializing during HMR or across imports
-const app = getApps().length ? getApp() : initializeApp(firebaseConfig)
-
-// Initialize Analytics only on the client and only if supported
-let analytics: Analytics | undefined
-if (typeof window !== "undefined") {
-  isAnalyticsSupported()
-    .then((supported) => {
-      if (supported) {
-        try { analytics = getAnalytics(app) } catch {}
-      }
-    })
-    .catch(() => {})
-}
-
-// Types
-type Vehicle = {
-  id: string | number;
-  name: string;
-  type: string;
-  faction: string;
-  tier: number | string;
-  description?: string;
-  image?: string;
-  stats: {
-    health?: number;
-    speed?: number;
-    armor?: number | string;
-    agility?: number;
-    afterburnerSpeed?: number;
-    [key: string]: any;
-  };
-  weapons?: any[];
-  [key: string]: any;
-};
-
-interface MwtVehicleStatsProps {
-  vehicles: Vehicle[];
-}
+import { useRouter } from "next/navigation"
+import { vehicleCurrencyData as vehiclePrices } from './currency'
 
 // Roman numeral conversion utility
 const toRomanNumeral = (num: number | string): string => {
@@ -9207,13 +9155,14 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
     </div>
   );
 };
-const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehicles }) => {
-  const [VEHICLES, setVEHICLES] = useState<Vehicle[]>(initialVehicles);
+const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
+  const [VEHICLES, setVEHICLES] = useState(initialVehicles);
+  const router = useRouter()
   const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-
+  
   // Load saved email and vehicle data from localStorage on component mount
   useEffect(() => {
     const savedEmail = localStorage.getItem('mwt_user_email')
@@ -10030,99 +9979,103 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         if (results.length === 0 && role) {
           results = vehicleData.filter((v: any) => v.type === role)
           if (results.length > 0) {
+            note = `No Tier ${tier || 'specified tier'} ${role}s found. Showing best available ${role}.`
+            fallbackUsed = true
+          }
+        }
 
-if (results.length === 0) return null
+        if (results.length === 0) return null
 
-// Pick top ranked
-const best = results.sort((a: any, b: any) => rankVehicle(b) - rankVehicle(a))[0]
+        // Pick top ranked
+        const best = results.sort((a: any, b: any) => rankVehicle(b) - rankVehicle(a))[0]
 
-return {
-type: 'vehicle_details',
-vehicle: {
-name: best.name,
-image: best.image,
-type: best.type,
-faction: best.faction,
-tier: formatTier(best.tier),
-description: best.description,
-isPremium: (best as any).isPremium || false,
-isMarket: (best as any).isMarket || false,
-stats: {
-health: best.stats.health,
-speed: best.stats.speed,
-armor: best.stats.armor,
-agility: best.stats.agility
-}
-},
-context: fallbackUsed ? `🔍 CLOSEST MATCH: ${note}` : `🎯 EXACT MATCH: TIER ${formatTier(best.tier)} ${best.faction} ${best.type} RECOMMENDATION`
-}
-}
+        return {
+          type: 'vehicle_details',
+          vehicle: {
+            name: best.name,
+            image: best.image,
+            type: best.type,
+            faction: best.faction,
+            tier: formatTier(best.tier),
+            description: best.description,
+            isPremium: (best as any).isPremium || false,
+            isMarket: (best as any).isMarket || false,
+            stats: {
+              health: best.stats.health,
+              speed: best.stats.speed,
+              armor: best.stats.armor,
+              agility: best.stats.agility
+            }
+          },
+          context: fallbackUsed ? `🔍 CLOSEST MATCH: ${note}` : `🎯 EXACT MATCH: TIER ${formatTier(best.tier)} ${best.faction} ${best.type} RECOMMENDATION`
+        }
+      }
 
-// Vehicle filtering and selection logic
-// Step 1: Normalize input mapping
-const normalizeCountry = (input: string): string => {
-const countryMap: { [key: string]: string } = {
-'american': 'USA',
-'us': 'USA', 
-'usa': 'USA',
-'german': 'Germany',
-'germany': 'Germany',
-'russian': 'Russia',
-'russia': 'Russia',
-'british': 'UK',
-'uk': 'UK',
-'britain': 'UK',
-'chinese': 'China',
-'china': 'China',
-'french': 'France',
-'france': 'France',
-'japanese': 'Japan',
-'japan': 'Japan',
-'israeli': 'Israel',
-'israel': 'Israel',
-'italian': 'Italy',
-'italy': 'Italy'
-}
-return countryMap[input.toLowerCase()] || input
-}
+      // Vehicle filtering and selection logic
+      // Step 1: Normalize input mapping
+      const normalizeCountry = (input: string): string => {
+        const countryMap: { [key: string]: string } = {
+          'american': 'USA',
+          'us': 'USA', 
+          'usa': 'USA',
+          'german': 'Germany',
+          'germany': 'Germany',
+          'russian': 'Russia',
+          'russia': 'Russia',
+          'british': 'UK',
+          'uk': 'UK',
+          'britain': 'UK',
+          'chinese': 'China',
+          'china': 'China',
+          'french': 'France',
+          'france': 'France',
+          'japanese': 'Japan',
+          'japan': 'Japan',
+          'israeli': 'Israel',
+          'israel': 'Israel',
+          'italian': 'Italy',
+          'italy': 'Italy'
+        }
+        return countryMap[input.toLowerCase()] || input
+      }
 
-const normalizeRole = (input: string): string => {
-const roleMap: { [key: string]: string } = {
-'tank': 'MBT',
-'mbt': 'MBT',
-'main battle tank': 'MBT',
-'jet': 'Fighter Jet',
-'fighter': 'Fighter Jet',
-'fighter jet': 'Fighter Jet',
-'sph': 'Self-Propelled Howitzer',
-'self-propelled artillery': 'Self-Propelled Howitzer',
-'artillery': 'Self-Propelled Howitzer',
-'interceptor': 'Interceptor',
-'helicopter': 'Helicopter',
-'mlrs': 'MLRS'
-}
-return roleMap[input.toLowerCase()] || input
-}
+      const normalizeRole = (input: string): string => {
+        const roleMap: { [key: string]: string } = {
+          'tank': 'MBT',
+          'mbt': 'MBT',
+          'main battle tank': 'MBT',
+          'jet': 'Fighter Jet',
+          'fighter': 'Fighter Jet',
+          'fighter jet': 'Fighter Jet',
+          'sph': 'Self-Propelled Howitzer',
+          'self-propelled artillery': 'Self-Propelled Howitzer',
+          'artillery': 'Self-Propelled Howitzer',
+          'interceptor': 'Interceptor',
+          'helicopter': 'Helicopter',
+          'mlrs': 'MLRS'
+        }
+        return roleMap[input.toLowerCase()] || input
+      }
 
-// Step 2: Strict filtering with exact database field matching
-const filterVehicles = (filters: {
-tier?: number,
-role?: string,
-nation?: string,
-premium?: boolean,
-market?: boolean
-}) => {
-return VEHICLES.filter(vehicle => {
-if (filters.tier && vehicle.tier !== filters.tier) return false
-if (filters.role && vehicle.type !== filters.role) return false // Exact match
-if (filters.nation && vehicle.faction !== filters.nation) return false // Exact match
-if (filters.premium !== undefined && (vehicle as any).isPremium !== filters.premium) return false
-if (filters.market !== undefined && (vehicle as any).isMarket !== filters.market) return false
-return true
-})
-}
+      // Step 2: Strict filtering with exact database field matching
+      const filterVehicles = (filters: {
+        tier?: number,
+        role?: string,
+        nation?: string,
+        premium?: boolean,
+        market?: boolean
+      }) => {
+        return VEHICLES.filter(vehicle => {
+          if (filters.tier && vehicle.tier !== filters.tier) return false
+          if (filters.role && vehicle.type !== filters.role) return false // Exact match
+          if (filters.nation && vehicle.faction !== filters.nation) return false // Exact match
+          if (filters.premium !== undefined && (vehicle as any).isPremium !== filters.premium) return false
+          if (filters.market !== undefined && (vehicle as any).isMarket !== filters.market) return false
+          return true
+        })
+      }
 
-const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'sph_combined' = 'health') => {
+      const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'sph_combined' = 'health') => {
         if (vehicles.length === 0) return null
         
         return vehicles.reduce((best, current) => {
@@ -10617,7 +10570,7 @@ const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
       {/* Battle Pass Tab - Fully Responsive */}
       <button
@@ -12424,7 +12377,7 @@ const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility
           if (!vehicle) return null;
           
           return (
-            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto overscroll-contain">
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
               <motion.div 
                 ref={vehicleDetailsModalRef}
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -12984,22 +12937,21 @@ const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility
                             <div className="space-y-4">
                               <div className="flex items-center justify-between">
                                 <span className="text-base text-slate-300">Type</span>
-                                <span className="text-base font-medium text-white">{vehicle.type}</span>
+                                <span className="text-base font-medium text-white">
+                                  {vehicle.type || 'Unknown'}
+                                </span>
                               </div>
                               <div className="flex items-center justify-between">
                                 <span className="text-base text-slate-300">Country</span>
-                                <div className="flex items-center space-x-2">
-                                  <img 
-                                    src={getFlagImage(vehicle.faction)} 
-                                    alt={vehicle.faction} 
-                                    className="w-6 h-4 object-cover rounded-sm shadow"
-                                  />
-                                  <span className="text-base font-medium text-white">{vehicle.faction}</span>
-                                </div>
+                                <span className="text-base font-medium text-white">
+                                  {vehicle.faction || 'Unknown'}
+                                </span>
                               </div>
                               <div className="flex items-center justify-between">
                                 <span className="text-base text-slate-300">Tier</span>
-                                <span className="text-base font-medium text-white">{formatTier(vehicle.tier)}</span>
+                                <span className="text-base font-medium text-white">
+                                  {formatTier(vehicle.tier) || 'Unknown'}
+                                </span>
                               </div>
                               <div className="flex items-center justify-between">
                                 <span className="text-base text-slate-300">Rarity</span>
@@ -13010,46 +12962,47 @@ const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility
                               <div className="flex items-center justify-between">
                                 <span className="text-base text-slate-300">How to Obtain</span>
                                 <div className="flex items-center gap-2">
-                                  {vehicle.name === 'Su-57 Felon' ? (
-                                    <span className="text-base font-medium text-white">Level 45 reward (Free)</span>
-                                  ) : vehicle.name === 'Mig 41' ? (
-                                    <span className="text-base font-medium text-white">Level 45 reward (Paid)</span>
-                                  ) : vehicle.name === 'T95M' ? (
-                                    <span className="text-base font-medium text-white">Level 60 reward (Paid)</span>
-                                  ) : vehicle.name === 'FV4034 Challenger 2 TES' ? (
-                                    <span className="text-base font-medium text-white">Level 60 reward (Paid)</span>
-                                  ) : isMarketVehicle(vehicle.name) ? (
-                                    <div className="flex items-center gap-1">
-                                      <img 
-                                        src="/Market.png" 
-                                        alt="Market" 
-                                        className="w-8 h-8 object-contain"
-                                        onError={(e) => {
-                                          console.error('Failed to load Market.png:', e);
-                                          // Fallback to text if image fails to load
-                                          const target = e.target as HTMLImageElement;
-                                          console.log('Image error target:', target);
-                                          console.log('Image src was:', target.src);
-                                          target.style.display = 'none';
-                                          const parent = target.parentElement;
-                                          if (parent) {
-                                            const textSpan = document.createElement('span');
-                                            textSpan.className = 'text-base font-medium text-white';
-                                            textSpan.textContent = 'Market (Image failed to load)';
-                                            parent.appendChild(textSpan);
-                                          }
-                                        }}
-                                        onLoad={(e) => {
-                                          console.log('Successfully loaded Market.png');
-                                        }}
-                                      />
-                                      <span className="text-base font-medium text-white">Market</span>
-                                    </div>
-                                  ) : isExclusiveVehicle(vehicle.name) ? (
-                                    <span className="text-base font-medium text-white">Event rewards or Gatcha</span>
-                                  ) : (
-                                    <span className="text-base font-medium text-white">Dollar or Gold</span>
-                                  )}
+                                  {(() => {
+                                    // Check if vehicle is exclusive first (highest priority)
+                                    if (isExclusiveVehicle(vehicle.name)) {
+                                      return <span className="text-slate-200">Event Reward or Gacha</span>;
+                                    }
+                                    
+                                    // Then check currency data
+                                    const price = vehiclePrices.find(p => p.name === vehicle.name);
+                                    if (price && price.amount !== null) {
+                                      return (
+                                        <span className="text-slate-200">{price.amount.toLocaleString()} {price.currency}s</span>
+                                      );
+                                    } else if (price && price.amount === null) {
+                                      return <span className="text-slate-200">Unavailable</span>;
+                                    } else if (isMarketVehicle(vehicle.name)) {
+                                      return (
+                                        <div className="flex items-center gap-1">
+                                          <img 
+                                            src="/Market.png" 
+                                            alt="Market" 
+                                            className="w-8 h-8 object-contain"
+                                            onError={(e) => {
+                                              console.error('Failed to load Market.png:', e);
+                                              const target = e.target as HTMLImageElement;
+                                              target.style.display = 'none';
+                                              const parent = target.parentElement;
+                                              if (parent) {
+                                                const textSpan = document.createElement('span');
+                                                textSpan.className = 'text-base font-medium text-white';
+                                                textSpan.textContent = 'Market';
+                                                parent.appendChild(textSpan);
+                                              }
+                                            }}
+                                          />
+                                          <span className="text-base font-medium text-white">Market</span>
+                                        </div>
+                                      );
+                                    } else {
+                                      return <span className="text-slate-200">Unavailable</span>;
+                                    }
+                                  })()}
                                 </div>
                               </div>
                             </div>
@@ -13065,8 +13018,8 @@ const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility
         })()}
 
         {weaponsModalOpenId && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto overscroll-contain">
-            <div ref={weaponsModalRef} className="bg-slate-900 rounded-xl p-6 w-full max-w-6xl max-h-[90vh] overflow-y-auto border border-slate-700">
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div ref={vehicleDetailsModalRef} className="bg-slate-900 rounded-xl p-6 w-full max-w-6xl max-h-[90vh] overflow-y-auto border border-slate-700">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-white">
                   {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.name} - Weapons

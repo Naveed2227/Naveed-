@@ -1,0 +1,21 @@
+export const vehicleCurrencyData = [
+  { name: "PLZ-05", currency: "Dollar", amount: 16,000,000 },
+  { name: "M1128 Stryker", currency: "Dollar", amount: 13,400,000 },
+  { name: "Pantsir S-1", currency: "Dollar", amount: 10,800,000 },
+  { name: "ZTZ99A", currency: "Dollar", amount: 15,000,000 },
+  { name: "T-90A", currency: "Dollar", amount: 14,700,000 },
+  { name: "ADATS", currency: "Gold", amount: 12,600 },
+  { name: "BMPT Terminator 2", currency: "Gold", amount: 15,400 },
+  { name: "2S19 Msta-S", currency: "Dollar", amount: 14,600,000 },
+  { name: "T-14 Armata", currency: "Dollar", amount: 16,200,000 },
+  { name: "Ka-52 Alligator*", currency: "Dollar", amount: 20,000,000 },
+  { name: "AH-84", currency: "Dollar", amount: 22,000,000 },
+  { name: "Mi-28NM", currency: "Gold", amount: 18,000 },
+  { name: "WZ-10", currency: "Gold", amount: 18,000 },
+  { name: "Z-19E", currency: "Dollar", amount: 16,000,000 },
+  { name: "F-22 Raptor", currency: "Gold", amount: 22,000 },
+  { name: "J-20 Mighty Dragon", currency: "Dollar", amount: 20,900,000 },
+  { name: "J-35", currency: "Gold", amount: 21,800 },
+  { name: "Su-75 Checkmate", currency: "Gold", amount: 20,000 },
+  { name: "F-35B Lightning II", currency: "Dollar", amount: 28,350,000 }
+];
