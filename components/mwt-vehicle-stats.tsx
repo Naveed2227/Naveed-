@@ -10121,14 +10121,8 @@ if (filters.market !== undefined && (vehicle as any).isMarket !== filters.market
 return true
 })
 }
-          if (filters.nation && vehicle.faction !== filters.nation) return false // Exact match
-          if (filters.premium !== undefined && (vehicle as any).isPremium !== filters.premium) return false
-          if (filters.market !== undefined && (vehicle as any).isMarket !== filters.market) return false
-          return true
-        })
-      }
 
-      const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'sph_combined' = 'health') => {
+const getBestVehicle = (vehicles: any[], criteria: 'health' | 'armor' | 'agility' | 'speed' | 'mbt_combined' | 'jet_combined' | 'sph_combined' = 'health') => {
         if (vehicles.length === 0) return null
         
         return vehicles.reduce((best, current) => {
@@ -12430,7 +12424,7 @@ return true
           if (!vehicle) return null;
           
           return (
-            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto overscroll-contain">
               <motion.div 
                 ref={vehicleDetailsModalRef}
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -13071,8 +13065,8 @@ return true
         })()}
 
         {weaponsModalOpenId && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div ref={vehicleDetailsModalRef} className="bg-slate-900 rounded-xl p-6 w-full max-w-6xl max-h-[90vh] overflow-y-auto border border-slate-700">
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto overscroll-contain">
+            <div ref={weaponsModalRef} className="bg-slate-900 rounded-xl p-6 w-full max-w-6xl max-h-[90vh] overflow-y-auto border border-slate-700">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-white">
                   {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.name} - Weapons
