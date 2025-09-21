@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import RadarBackground from "@/components/radar-background";
+import RadarBackground from "../components/radar-background";
 
 const inter = Inter({ subsets: ["latin"] });
 
