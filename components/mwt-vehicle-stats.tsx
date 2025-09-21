@@ -9468,20 +9468,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
   const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
 
-  const getLevelRewardInfo = (vehicleName: string) => {
-    const levelRewards = {
-      "Su-57 Felon": { level: 45, isFree: true },
-      "Mig 41": { level: 45, isFree: false },
-      "T95M": { level: 60, isFree: false },
-      "FV4034 Challenger 2 TES": { level: 60, isFree: false }
-    };
-    return levelRewards[vehicleName] || null;
-  }
-
-  const isLevelRewardVehicle = (vehicleName: string) => {
-    return getLevelRewardInfo(vehicleName) !== null;
-  }
-
   const isMarketVehicle = (vehicleName: string) => {
     const marketVehicles = [
       "Abrams X",
@@ -9508,6 +9494,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "M1 Abrams CATTB",
       "XM8 AGS",
       "Object 640"
+
     ]
     return marketVehicles.includes(vehicleName)
   }
@@ -10043,95 +10030,97 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         if (results.length === 0 && role) {
           results = vehicleData.filter((v: any) => v.type === role)
           if (results.length > 0) {
-            note = `No Tier ${tier || 'specified tier'} ${role}s found. Showing best available ${role}.`
-            fallbackUsed = true
-          }
-        }
 
-        if (results.length === 0) return null
+if (results.length === 0) return null
 
-        // Pick top ranked
-        const best = results.sort((a: any, b: any) => rankVehicle(b) - rankVehicle(a))[0]
+// Pick top ranked
+const best = results.sort((a: any, b: any) => rankVehicle(b) - rankVehicle(a))[0]
 
-        return {
-          type: 'vehicle_details',
-          vehicle: {
-            name: best.name,
-            image: best.image,
-            type: best.type,
-            faction: best.faction,
-            tier: formatTier(best.tier),
-            description: best.description,
-            isPremium: (best as any).isPremium || false,
-            isMarket: (best as any).isMarket || false,
-            stats: {
-              health: best.stats.health,
-              speed: best.stats.speed,
-              armor: best.stats.armor,
-              agility: best.stats.agility
-            }
-          },
-          context: fallbackUsed ? `🔍 CLOSEST MATCH: ${note}` : `🎯 EXACT MATCH: TIER ${formatTier(best.tier)} ${best.faction} ${best.type} RECOMMENDATION`
-        }
-      }
+return {
+type: 'vehicle_details',
+vehicle: {
+name: best.name,
+image: best.image,
+type: best.type,
+faction: best.faction,
+tier: formatTier(best.tier),
+description: best.description,
+isPremium: (best as any).isPremium || false,
+isMarket: (best as any).isMarket || false,
+stats: {
+health: best.stats.health,
+speed: best.stats.speed,
+armor: best.stats.armor,
+agility: best.stats.agility
+}
+},
+context: fallbackUsed ? `🔍 CLOSEST MATCH: ${note}` : `🎯 EXACT MATCH: TIER ${formatTier(best.tier)} ${best.faction} ${best.type} RECOMMENDATION`
+}
+}
 
-      // Vehicle filtering and selection logic
-      // Step 1: Normalize input mapping
-      const normalizeCountry = (input: string): string => {
-        const countryMap: { [key: string]: string } = {
-          'american': 'USA',
-          'us': 'USA', 
-          'usa': 'USA',
-          'german': 'Germany',
-          'germany': 'Germany',
-          'russian': 'Russia',
-          'russia': 'Russia',
-          'british': 'UK',
-          'uk': 'UK',
-          'britain': 'UK',
-          'chinese': 'China',
-          'china': 'China',
-          'french': 'France',
-          'france': 'France',
-          'japanese': 'Japan',
-          'japan': 'Japan',
-          'israeli': 'Israel',
-          'israel': 'Israel',
-          'italian': 'Italy',
-          'italy': 'Italy'
-        }
-        return countryMap[input.toLowerCase()] || input
-      }
+// Vehicle filtering and selection logic
+// Step 1: Normalize input mapping
+const normalizeCountry = (input: string): string => {
+const countryMap: { [key: string]: string } = {
+'american': 'USA',
+'us': 'USA', 
+'usa': 'USA',
+'german': 'Germany',
+'germany': 'Germany',
+'russian': 'Russia',
+'russia': 'Russia',
+'british': 'UK',
+'uk': 'UK',
+'britain': 'UK',
+'chinese': 'China',
+'china': 'China',
+'french': 'France',
+'france': 'France',
+'japanese': 'Japan',
+'japan': 'Japan',
+'israeli': 'Israel',
+'israel': 'Israel',
+'italian': 'Italy',
+'italy': 'Italy'
+}
+return countryMap[input.toLowerCase()] || input
+}
 
-      const normalizeRole = (input: string): string => {
-        const roleMap: { [key: string]: string } = {
-          'tank': 'MBT',
-          'mbt': 'MBT',
-          'main battle tank': 'MBT',
-          'jet': 'Fighter Jet',
-          'fighter': 'Fighter Jet',
-          'fighter jet': 'Fighter Jet',
-          'sph': 'Self-Propelled Howitzer',
-          'self-propelled artillery': 'Self-Propelled Howitzer',
-          'artillery': 'Self-Propelled Howitzer',
-          'interceptor': 'Interceptor',
-          'helicopter': 'Helicopter',
-          'mlrs': 'MLRS'
-        }
-        return roleMap[input.toLowerCase()] || input
-      }
+const normalizeRole = (input: string): string => {
+const roleMap: { [key: string]: string } = {
+'tank': 'MBT',
+'mbt': 'MBT',
+'main battle tank': 'MBT',
+'jet': 'Fighter Jet',
+'fighter': 'Fighter Jet',
+'fighter jet': 'Fighter Jet',
+'sph': 'Self-Propelled Howitzer',
+'self-propelled artillery': 'Self-Propelled Howitzer',
+'artillery': 'Self-Propelled Howitzer',
+'interceptor': 'Interceptor',
+'helicopter': 'Helicopter',
+'mlrs': 'MLRS'
+}
+return roleMap[input.toLowerCase()] || input
+}
 
-      // Step 2: Strict filtering with exact database field matching
-      const filterVehicles = (filters: {
-        tier?: number,
-        role?: string,
-        nation?: string,
-        premium?: boolean,
-        market?: boolean
-      }) => {
-        return VEHICLES.filter(vehicle => {
-          if (filters.tier && vehicle.tier !== filters.tier) return false
-          if (filters.role && vehicle.type !== filters.role) return false // Exact match
+// Step 2: Strict filtering with exact database field matching
+const filterVehicles = (filters: {
+tier?: number,
+role?: string,
+nation?: string,
+premium?: boolean,
+market?: boolean
+}) => {
+return VEHICLES.filter(vehicle => {
+if (filters.tier && vehicle.tier !== filters.tier) return false
+if (filters.role && vehicle.type !== filters.role) return false // Exact match
+if (filters.nation && vehicle.faction !== filters.nation) return false // Exact match
+if (filters.premium !== undefined && (vehicle as any).isPremium !== filters.premium) return false
+if (filters.market !== undefined && (vehicle as any).isMarket !== filters.market) return false
+return true
+})
+}
           if (filters.nation && vehicle.faction !== filters.nation) return false // Exact match
           if (filters.premium !== undefined && (vehicle as any).isPremium !== filters.premium) return false
           if (filters.market !== undefined && (vehicle as any).isMarket !== filters.market) return false
@@ -13027,15 +13016,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               <div className="flex items-center justify-between">
                                 <span className="text-base text-slate-300">How to Obtain</span>
                                 <div className="flex items-center gap-2">
-                                  {(() => {
-                                    const rewardInfo = getLevelRewardInfo(vehicle.name);
-                                    return rewardInfo ? (
-                                      <span className="text-base font-medium text-white">
-                                        Level {rewardInfo.level} reward ({rewardInfo.isFree ? 'Free' : 'Paid'})
-                                      </span>
-                                  ) : null;
-                                  })()}
-                                  {!isLevelRewardVehicle(vehicle.name) && isMarketVehicle(vehicle.name) ? (
+                                  {vehicle.name === 'Su-57 Felon' ? (
+                                    <span className="text-base font-medium text-white">Level 45 reward (Free)</span>
+                                  ) : vehicle.name === 'Mig 41' ? (
+                                    <span className="text-base font-medium text-white">Level 45 reward (Paid)</span>
+                                  ) : vehicle.name === 'T95M' ? (
+                                    <span className="text-base font-medium text-white">Level 60 reward (Paid)</span>
+                                  ) : vehicle.name === 'FV4034 Challenger 2 TES' ? (
+                                    <span className="text-base font-medium text-white">Level 60 reward (Paid)</span>
+                                  ) : isMarketVehicle(vehicle.name) ? (
                                     <div className="flex items-center gap-1">
                                       <img 
                                         src="/Market.png" 
