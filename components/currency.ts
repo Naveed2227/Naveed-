@@ -7,7 +7,7 @@ export const vehicleCurrencyData = [
   { name: "ADATS", currency: "Gold", amount: 12600 },
   { name: "BMPT Terminator 2", currency: "Gold", amount: 15400 },
   { name: "2S19 Msta-S", currency: "Dollar", amount: 14600000 },
-  { name: "T-14 Armata", currency: "Dollar", amount: 1,200000 },
+  { name: "T-14 Armata", currency: "Dollar", amount: 1200000 },
   { name: "Ka-52 Alligator*", currency: "Dollar", amount: 20000000 },
   { name: "AH-84", currency: "Dollar", amount: 22000000 },
   { name: "Mi-28NM", currency: "Gold", amount: 18000 },

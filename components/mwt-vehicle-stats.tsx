@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { vehicleCurrencyData as vehiclePrices } from './currency'
+import { vehicleCurrencyData } from './currency'
 
 // Roman numeral conversion utility
 const toRomanNumeral = (num: number | string): string => {
@@ -12969,12 +12969,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                     }
                                     
                                     // Then check currency data
-                                    const price = vehiclePrices.find(p => p.name === vehicle.name);
-                                    if (price && price.amount !== null) {
+                                    const currencyInfo = vehicleCurrencyData.find(v => v.name === vehicle.name);
+                                    if (currencyInfo && currencyInfo.amount !== null) {
                                       return (
-                                        <span className="text-slate-200">{price.amount.toLocaleString()} {price.currency}s</span>
+                                        <span className="text-slate-200">{currencyInfo.amount.toLocaleString()} {currencyInfo.currency}s</span>
                                       );
-                                    } else if (price && price.amount === null) {
+                                    } else if (currencyInfo && currencyInfo.amount === null) {
                                       return <span className="text-slate-200">Unavailable</span>;
                                     } else if (isMarketVehicle(vehicle.name)) {
                                       return (
