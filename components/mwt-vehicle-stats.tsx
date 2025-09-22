@@ -12397,35 +12397,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <h2 className="text-xl font-bold text-white">{vehicle.name}</h2>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <div className="flex items-center bg-slate-800/80 rounded-full p-0.5">
-                      {[1, 2, 3].map((level) => (
-                        <button
-                          key={level}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            const newLevels = { ...upgradeLevels };
-                            newLevels[compare[0]] = level;
-                            newLevels[compare[1]] = level;
-                            setUpgradeLevels(newLevels);
-                          }}
-                          className={`relative w-10 h-10 flex items-center justify-center rounded-full transition-all ${
-                            (upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level)
-                              ? level === 1 ? 'bg-green-600/20' 
-                                : level === 2 ? 'bg-blue-600/20' 
-                                : 'bg-purple-600/20'
-                              : 'bg-gray-700/50 hover:bg-gray-600/50'
-                          }`}
-                        >
-                          <img 
-                            src={`/U${level}.png`} 
-                            alt={`U${level}`} 
-                            className={`w-6 h-6 ${(upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level) ? 'opacity-100' : 'opacity-60'}`}
-                          />
-                          {(upgradeLevels[compare[0]] === level || upgradeLevels[compare[1]] === level) && (
-                            <div className="absolute inset-0 rounded-full border-2 border-white/30" />
-                          )}
-                        </button>
-                      ))}
+                    <div className="flex space-x-1">
+                      <img src="/U1.png" alt="U1" className="w-6 h-6" />
+                      <img src="/U2.png" alt="U2" className="w-6 h-6" />
+                      <img src="/U3.png" alt="U3" className="w-6 h-6" />
                     </div>
                     <button
                       onClick={() => setVehicleDetailsOpenId(null)}
@@ -12465,12 +12440,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             }}
                             className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
                           >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                              <polyline points="7 10 12 15 17 10"></polyline>
-                              <line x1="12" y1="15" x2="12" y2="3"></line>
-                            </svg>
-                            <span>Download Image</span>
+                            <img src="/U1.png" alt="U1" className="w-4 h-4" />
+                            <img src="/U2.png" alt="U2" className="w-4 h-4" />
+                            <img src="/U3.png" alt="U3" className="w-4 h-4" />
                           </button>
                         </div>
                       </div>
@@ -12490,48 +12462,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       <div className="mb-6">
                         <h3 className="text-sm font-semibold text-slate-300 mb-3 uppercase tracking-wider">VEHICLE SPECIFICATIONS</h3>
                         
-                        {/* Upgrade Toggles - Mobile */}
-                        <div className="mb-4 p-3 bg-slate-800/50 rounded-lg">
-                          <div className="flex flex-col space-y-2">
-                            <button
-                              onClick={() => {
-                                const newLevels = { ...upgradeLevels };
-                                newLevels[compare[0]] = 0;
-                                newLevels[compare[1]] = 0;
-                                setUpgradeLevels(newLevels);
-                              }}
-                              className={`px-3 py-2 text-sm rounded flex items-center justify-center ${upgradeLevels[compare[0]] === 0 && upgradeLevels[compare[1]] === 0 ? 'bg-gray-600 text-white' : 'bg-gray-700 text-gray-300'}`}
-                            >
-                              BASE
-                            </button>
-                            
-                            {[1, 2, 3].map((level) => (
-                              <button
-                                key={level}
-                                onClick={() => {
-                                  const newLevels = { ...upgradeLevels };
-                                  newLevels[compare[0]] = level;
-                                  newLevels[compare[1]] = level;
-                                  setUpgradeLevels(newLevels);
-                                }}
-                                className={`px-3 py-2 text-sm rounded flex items-center justify-start space-x-2 ${
-                                  (upgradeLevels[compare[0]] === level && upgradeLevels[compare[1]] === level)
-                                    ? level === 1 ? 'bg-green-600/20 text-green-400' 
-                                      : level === 2 ? 'bg-blue-600/20 text-blue-400' 
-                                      : 'bg-purple-600/20 text-purple-400'
-                                    : 'bg-gray-700/50 text-gray-300'
-                                }`}
-                              >
-                                <img 
-                                  src={`/U${level}.png`}
-                                  alt={`U${level}`}
-                                  className="w-5 h-5"
-                                />
-                                <span>U{level} {level === 1 ? '(+10%)' : level === 2 ? '(+20%)' : '(+30%)'}</span>
-                              </button>
-                            ))}
-                          </div>
-                        </div>
 
                         <div className="grid grid-cols-1 gap-4">
                           {/* Health - Always shown */}
