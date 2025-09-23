@@ -951,7 +951,7 @@ const VEHICLES_DATA = [
   tier: "IV",
   image: "X2-Shinshin.jpg",
   description: "Japan’s stealth technology demonstrator, testing advanced avionics, radar, and maneuverability for future fighters.",
-  stats: { health: 18900, speed: 900, afterburnerSpeed: 2310, agility: 60 },
+  stats: { health: 0, speed: 0, afterburnerSpeed: 0, agility: 0 },
   weapons: [
     
 
@@ -1978,7 +1978,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Leopard-2A8.jpg",
     description: "A modern German main battle tank, featuring advanced armor, improved firepower, and upgraded targeting systems for battlefield dominance.",
-    stats: { health: 41900, speed: 70, armor: "300mm", agility: 38 },
+    stats: { health: 0, speed: 0, armor: "0", agility: 0 },
     weapons: [
       { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 900 },
       { name: "DM12A1 HEATFS", type: "Main Gun", damage: 12000, penetration: 400 },
@@ -2096,14 +2096,13 @@ const VEHICLES_DATA = [
     image: "K2-Black-Panther.jpg",
     "description": "South Korea’s advanced main battle tank, featuring superior firepower, mobility, armor protection, and state-of-the-art battlefield technology.",
     "stats": {
-      "health": ,
-      "speed": ,
-      "reverseSpeed": ,
-      "turretRotationSpeed": ,
-      "hullRotationSpeed": ,
+      "health": 0,
+      "speed": 0,
+      "reverseSpeed": 0,
+      "turretRotationSpeed": 0,
+      "hullRotationSpeed": 0,
       "armor": 600,
-      "agility": 
-    },
+      "agility": 0 },
     "weapons": [
       { name: "XK279 APFSDS-T", type: "Main Gun", damage: 970, penetration: 195 },
       { name: "KM256 HEAT", type: "Main Gun", damage: 300, penetration: 55 },
@@ -4208,7 +4207,7 @@ const VEHICLES_DATA = [
     "tier": "III",
     image: "K21-KNIFV.jpg",
     "description": "South Korean infantry fighting vehicle, offering strong firepower, amphibious capability, protection, and advanced digital battlefield systems.",
-    "stats": { "health": 35900, "speed": , "armor": , "agility":  },
+    "stats": { "health": 35900, "speed": 0 , "armor": 0, "agility": 0 },
     "weapons": [
      { name: "XM855HE", type: "Main Gun", damage: 7560, penetration: 68 },
      { name: "XM885AP", type: "Main Gun", damage: 6160, penetration: 370 }
