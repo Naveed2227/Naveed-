@@ -2096,13 +2096,13 @@ const VEHICLES_DATA = [
     image: "K2-Black-Panther.jpg",
     "description": "South Korea’s advanced main battle tank, featuring superior firepower, mobility, armor protection, and state-of-the-art battlefield technology.",
     "stats": {
-      "health": 38600,
-      "speed": 80,
-      "reverseSpeed": 30,
-      "turretRotationSpeed": 50,
-      "hullRotationSpeed": 45,
+      "health": ,
+      "speed": ,
+      "reverseSpeed": ,
+      "turretRotationSpeed": ,
+      "hullRotationSpeed": ,
       "armor": 600,
-      "agility": 40
+      "agility": 
     },
     "weapons": [
       { name: "XK279 APFSDS-T", type: "Main Gun", damage: 970, penetration: 195 },
@@ -4208,7 +4208,7 @@ const VEHICLES_DATA = [
     "tier": "III",
     image: "K21-KNIFV.jpg",
     "description": "South Korean infantry fighting vehicle, offering strong firepower, amphibious capability, protection, and advanced digital battlefield systems.",
-    "stats": { "health": 35900, "speed": 84, "armor": "47mm", "agility": 40 },
+    "stats": { "health": 35900, "speed": , "armor": , "agility":  },
     "weapons": [
      { name: "XM855HE", type: "Main Gun", damage: 7560, penetration: 68 },
      { name: "XM885AP", type: "Main Gun", damage: 6160, penetration: 370 }
@@ -11022,11 +11022,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                          text-sm w-24
                                          sm:text-base sm:w-28
                                          md:text-lg md:w-36">{battlePass.name}</h4>
-                              <img 
-                                src={getFlagImage(battlePass.country)} 
-                                alt={`${battlePass.country} flag`} 
-                                className="w-6 h-4 object-cover rounded-sm"
-                              />
+                              
                             </div>
                             <p className="font-medium text-blue-300
                                         text-xs
