@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { vehicleCurrencyData } from './currency'
 
@@ -9225,6 +9225,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   
   // Load saved email and vehicle data from localStorage on component mount
   useEffect(() => {
@@ -10637,6 +10638,99 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
+      
+      {/* Burger Menu Button */}
+      <button
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className="absolute top-4 left-4 z-50 p-3 bg-slate-800/90 hover:bg-slate-700/90 backdrop-blur-sm rounded-xl border border-slate-600/50 transition-all duration-200 group shadow-lg"
+        aria-label="Menu"
+      >
+        <div className="flex flex-col gap-1.5">
+          <div className="w-6 h-0.5 bg-slate-300 group-hover:bg-white transition-colors duration-200 rounded-full"></div>
+          <div className="w-6 h-0.5 bg-slate-300 group-hover:bg-white transition-colors duration-200 rounded-full"></div>
+          <div className="w-6 h-0.5 bg-slate-300 group-hover:bg-white transition-colors duration-200 rounded-full"></div>
+        </div>
+      </button>
+
+      {/* Sliding Menu Panel */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+            />
+            
+            {/* Menu Panel */}
+            <motion.div
+              initial={{ x: -300 }}
+              animate={{ x: 0 }}
+              exit={{ x: -300 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed left-0 top-0 h-full w-80 bg-gradient-to-b from-slate-800 to-slate-900 border-r border-slate-600/50 z-50 shadow-2xl overflow-y-auto"
+            >
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-8">
+                  <h2 className="text-2xl font-bold text-white">Menu</h2>
+                  <button
+                    onClick={() => setIsMenuOpen(false)}
+                    className="p-2 hover:bg-slate-700/50 rounded-lg transition-colors duration-200"
+                    aria-label="Close menu"
+                  >
+                    <X className="w-6 h-6 text-slate-300 hover:text-white" />
+                  </button>
+                </div>
+                
+                <nav className="space-y-2">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setBattlePassOpen(true);
+                    }}
+                    className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                  >
+                    <Trophy className="w-5 h-5 text-yellow-400 group-hover:text-yellow-300" />
+                    <span className="text-white font-medium group-hover:text-yellow-300 transition-colors duration-200">Battle Pass</span>
+                  </motion.button>
+                  
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setShowAbout(true);
+                    }}
+                    className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                  >
+                    <Bot className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300" />
+                    <span className="text-white font-medium group-hover:text-cyan-300 transition-colors duration-200">About</span>
+                  </motion.button>
+                  
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setShowCredits(true);
+                    }}
+                    className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                  >
+                    <Calendar className="w-5 h-5 text-purple-400 group-hover:text-purple-300" />
+                    <span className="text-white font-medium group-hover:text-purple-300 transition-colors duration-200">Credits</span>
+                  </motion.button>
+                </nav>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+      
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
