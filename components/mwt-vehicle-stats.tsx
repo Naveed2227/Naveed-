@@ -212,6 +212,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "M60A3 (MZK)",
 "Rookiat MTTD",
 "BMD3",
+"K21 KNIFV",
 
 
 
@@ -252,6 +253,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Leopard 2A-RC 3.0",
 "Leopard 2A8",
 "X2 Shinshin"
+"K2 Black Panther",
 
 
 
@@ -2087,6 +2089,47 @@ const VEHICLES_DATA = [
   },
   {
     "id": 133,
+    "name": "K2 Black Panther",
+    "type": "MBT",
+    "faction": "SouthKorean",
+    "tier": "IV",
+    image: "K2-Black-Panther.jpg",
+    "description": "South Korea’s advanced main battle tank, featuring superior firepower, mobility, armor protection, and state-of-the-art battlefield technology.",
+    "stats": {
+      "health": 38600,
+      "speed": 80,
+      "reverseSpeed": 30,
+      "turretRotationSpeed": 50,
+      "hullRotationSpeed": 45,
+      "armor": 600,
+      "agility": 40
+    },
+    "weapons": [
+      { name: "XK279 APFSDS-T", type: "Main Gun", damage: 970, penetration: 195 },
+      { name: "KM256 HEAT", type: "Main Gun", damage: 300, penetration: 55 },
+      { name: "K280 HEAT-MP", type: "Main Gun", damage: 300, penetration: 55 },
+      { name: "KSTAM", type: "Missile", damage: 9830, penetration: 750, reload: 10 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "MTU MB 883 Ka-501", "bonus": "+200 km/h speed" },
+        { "name": "MTU MB 883 Ka-502", "bonus": "+400 km/h speed" },
+        { "name": "MTU MB 883 Ka-503", "bonus": "+600 km/h speed" }
+      ],
+      "armor": [
+        { "name": "Composite Armor MK1", "bonus": "+15% armor" },
+        { "name": "Composite Armor MK2", "bonus": "+25% armor" },
+        { "name": "Composite Armor MK3", "bonus": "+35% armor" }
+      ],
+      "electronics": [
+        { "name": "FCS MK1", "bonus": "+20% targeting accuracy" },
+        { "name": "FCS MK2", "bonus": "+35% targeting accuracy" },
+        { "name": "FCS MK3", "bonus": "+50% targeting accuracy" }
+      ]
+    }
+  },
+  {
+    "id": 135,
     "name": "M10 Booker",
     "type": "Light Tank",
     "faction": "American",
@@ -2128,7 +2171,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 134,
+    "id": 136,
     "name": "PL-01",
     "type": "Light Tank",
     "faction": "Polish",
@@ -2169,7 +2212,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-  "id": 135,
+  "id": 137,
   "name": "M-SHORAD",
   "type": "Anti-Air",
   "faction": "American",
@@ -2210,7 +2253,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  "id": 136,
+  "id": 138,
   "name": "TOS-1A",
   "type": "MLRS",
   "faction": "Russian",
@@ -2249,7 +2292,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-    id: 137,
+    id: 139,
     name: "M270 MLRS",
     type: "MLRS",
     faction: "American",
@@ -2283,7 +2326,7 @@ const VEHICLES_DATA = [
     },
   },
 {
-  "id": 138,
+  "id": 140,
   "name": "PLZ-05",
   "type": "SPH",
   "faction": "Chinese",
@@ -2324,7 +2367,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  "id": 139,
+  "id": 141,
   "name": "M109A6 Paladin",
   "type": "SPH",
   "faction": "American",
@@ -2364,7 +2407,7 @@ const VEHICLES_DATA = [
 },
 
 {
-  "id": 140,
+  "id": 142,
   "name": "FK 2000",
   "type": "Anti-Air",
   "faction": "Chinese",
@@ -2404,7 +2447,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-    id: 141,
+    id: 143,
     name: "Otomatic 76",
     type: "Anti-Air",
     faction: "Italian",
@@ -2436,7 +2479,7 @@ const VEHICLES_DATA = [
     },
   },
 {
-  "id": 142,
+  "id": 144,
   "name": "BM-57-2 Kochevnik",
   "type": "Tank Destroyer",
   "faction": "Russian",
@@ -2478,7 +2521,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  "id": 143,
+  "id": 145,
   "name": "ADATS",
   "type": "Missile Carrier",
   "faction": "American",
@@ -2521,7 +2564,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  "id": 144,
+  "id": 146,
   "name": "MGM-166 LOSAT",
   "type": "Missile Carrier",
   "faction": "American",
@@ -4159,6 +4202,34 @@ const VEHICLES_DATA = [
   },
   {
     "id": 431,
+    "name": "K21 KNIFV",
+    "type": "Light Tank",
+    "faction": "SouthKorean",
+    "tier": "III",
+    image: "K21-KNIFV.jpg",
+    "description": "South Korean infantry fighting vehicle, offering strong firepower, amphibious capability, protection, and advanced digital battlefield systems.",
+    "stats": { "health": 35900, "speed": 84, "armor": "47mm", "agility": 40 },
+    "weapons": [
+     { name: "XM855HE", type: "Main Gun", damage: 7560, penetration: 68 },
+     { name: "XM885AP", type: "Main Gun", damage: 6160, penetration: 370 }
+],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
+  },
+  {
+    "id": 432,
     "name": "Rookiat MTTD",
     "type": "Light Tank",
     "faction": "British",
@@ -4189,7 +4260,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 432,
+    "id": 433,
     "name": "ZBL-08",
     "type": "Light Tank",
     "faction": "Chinese",
@@ -4221,7 +4292,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 433,
+    "id": 434,
     "name": "ХM8 AGS",
     "type": "Light Tank",
     "faction": "American",
@@ -4253,7 +4324,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 434,
+    "id": 435,
     "name": "VBCI-2",
     "type": "Light Tank",
     "faction": "French",
@@ -4283,7 +4354,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 435,
+    "id": 436,
     "name": "WMA301",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -4313,7 +4384,7 @@ const VEHICLES_DATA = [
     }
   },
    {
-    "id": 436,
+    "id": 437,
     "name": "Centauro I 120",
     "type": "Tank Destroyer",
     "faction": "Italian",
@@ -4342,7 +4413,7 @@ const VEHICLES_DATA = [
     }
   },
    {
-    id: 437,
+    id: 438,
     name: "BMD3",
     type: "Light Tank",
     faction: "Russian",
@@ -4377,7 +4448,7 @@ const VEHICLES_DATA = [
       }
     },
     {
-    "id": 438,
+    "id": 439,
     "name": "M3A3 Bradley",
     "type": "Light Tank",
     "faction": "American",
@@ -9561,6 +9632,8 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
    
+      "K2 Black Panther"
+      "K21 KNIFV"
       "Leopard 2A8",
       "X2 Shinshin",
       "AMX-30 Super",
@@ -9783,8 +9856,9 @@ const missileHasTags = (missileName: string) => {
 "Mi-24 Super Hind",
 "ZBL-08",
 "XM1 (GM)",
-"Centauro I 120"
-
+"Centauro I 120",
+"K21 KNIFV",
+"K2 Black Panther",
         
 
 ]
