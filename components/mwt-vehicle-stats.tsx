@@ -252,7 +252,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Mi-24 Super Hind",
 "Leopard 2A-RC 3.0",
 "Leopard 2A8",
-"X2 Shinshin"
+"X2 Shinshin",
 "K2 Black Panther",
 
 
