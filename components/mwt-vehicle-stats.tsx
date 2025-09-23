@@ -248,7 +248,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Type 75 MLRS",
 "Mi-24 Super Hind",
 "Leopard 2A-RC 3.0",
-"Leopard 2A8"
+"Leopard 2A8",
 "X2 Shinshin"
 
 
@@ -9505,8 +9505,8 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       "Leopard 2A7+",
       "M1 Abrams CATTB",
       "XM8 AGS",
-      "Object 640"
-      "Leopard 2A8"
+      "Object 640",
+      "Leopard 2A8",
       "X2 Shinshin"
 
     ]
@@ -9516,8 +9516,8 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
    
-      "Leopard 2A8"
-      "X2 Shinshin"
+      "Leopard 2A8",
+      "X2 Shinshin",
       "AMX-30 Super",
       "Type 75 MLRS",
       "Centauro I 120",
