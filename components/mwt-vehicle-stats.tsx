@@ -10759,7 +10759,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Burger Menu Button */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="absolute top-4 left-4 z-50 p-3 bg-slate-800/90 hover:bg-slate-700/90 backdrop-blur-sm rounded-xl border border-slate-600/50 transition-all duration-200 group shadow-lg"
+        className="absolute top-4 left-4 z-50 p-2 sm:p-3 bg-slate-800/90 hover:bg-slate-700/90 backdrop-blur-sm rounded-xl border border-slate-600/50 transition-all duration-200 group shadow-lg sm:top-6 sm:left-6"
         aria-label="Menu"
       >
         <div className="flex flex-col gap-1.5">
@@ -11149,7 +11149,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         )}
       </AnimatePresence>
 
-      <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 shadow-sm">
+      <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 shadow-sm pt-16 sm:pt-0">
         <div className="max-w-7xl mx-auto p-4 sm:p-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
@@ -11296,7 +11296,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
       </header>
 
-      <main className="max-w-7xl p-4 sm:p-6 mx-auto px-4 sm:px-6 pb-24">
+      <main className="max-w-7xl pt-16 sm:pt-6 p-4 sm:p-6 mx-auto px-4 sm:px-6 pb-24">
         {/* Comparison Bottom Bar - Mobile */}
         {compare.length > 0 && (
           <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 border-t border-slate-700 shadow-lg z-50">
