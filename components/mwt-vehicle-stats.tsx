@@ -9631,8 +9631,8 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
    
-      "K2 Black Panther"
-      "K21 KNIFV"
+      "K2 Black Panther",
+      "K21 KNIFV",
       "Leopard 2A8",
       "X2 Shinshin",
       "AMX-30 Super",
