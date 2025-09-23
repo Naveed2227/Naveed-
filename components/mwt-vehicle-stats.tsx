@@ -1,9 +1,11 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { vehicleCurrencyData } from './currency'
+import { urduTranslations, getUrduTranslation } from './Urdu'
+import { englishTranslations, getEnglishTranslation } from './English'
 
 // Roman numeral conversion utility
 const toRomanNumeral = (num: number | string): string => {
@@ -9226,13 +9228,43 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('English');
+  const [translations, setTranslations] = useState(englishTranslations);
+
+  // Translation function
+  const t = (key: string) => {
+    const keys = key.split('.');
+    let value = translations;
+    
+    for (const k of keys) {
+      if (value && typeof value === 'object' && k in value) {
+        value = value[k];
+      } else {
+        return key; // Return key if translation not found
+      }
+    }
+    
+    return typeof value === 'string' ? value : key;
+  };
   
-  // Load saved email and vehicle data from localStorage on component mount
+  // Load saved email, language preference and vehicle data from localStorage on component mount
   useEffect(() => {
     const savedEmail = localStorage.getItem('mwt_user_email')
     if (savedEmail) {
       setUserEmail(savedEmail)
       setIsLoggedIn(true)
+    }
+    
+    // Load saved language preference
+    const savedLanguage = localStorage.getItem('mwt_selected_language')
+    if (savedLanguage) {
+      setSelectedLanguage(savedLanguage)
+      if (savedLanguage === 'Urdu') {
+        setTranslations(urduTranslations)
+      } else {
+        setTranslations(englishTranslations)
+      }
     }
     
     // Load saved vehicle data if it exists
@@ -10686,6 +10718,57 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
                 
                 <nav className="space-y-2">
+                  <div className="relative">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                    >
+                      <Languages className="w-5 h-5 text-green-400 group-hover:text-green-300" />
+                      <span className="text-white font-medium group-hover:text-green-300 transition-colors duration-200">{t('menu.language')}</span>
+                      <ChevronDown className={`w-4 h-4 text-green-400 group-hover:text-green-300 transition-transform duration-200 ${isLanguageDropdownOpen ? 'rotate-180' : ''}`} />
+                    </motion.button>
+                    
+                    {/* Language Dropdown */}
+                    <AnimatePresence>
+                      {isLanguageDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute top-full left-0 right-0 mt-2 bg-slate-800 border border-slate-600/50 rounded-xl shadow-lg z-10 overflow-hidden"
+                        >
+                          <button
+                            onClick={() => {
+                              setSelectedLanguage('English');
+                              setTranslations(englishTranslations);
+                              localStorage.setItem('mwt_selected_language', 'English');
+                              setIsLanguageDropdownOpen(false);
+                              setIsMenuOpen(false);
+                            }}
+                            className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${selectedLanguage === 'English' ? 'bg-slate-700/30' : ''}`}
+                          >
+                            <span className={`text-sm font-medium ${selectedLanguage === 'English' ? 'text-green-300' : 'text-slate-300 hover:text-white'}`}>English</span>
+                          </button>
+                          <button
+                            onClick={() => {
+                              setSelectedLanguage('Urdu');
+                              setTranslations(urduTranslations);
+                              localStorage.setItem('mwt_selected_language', 'Urdu');
+                              setIsLanguageDropdownOpen(false);
+                              setIsMenuOpen(false);
+                            }}
+                            className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${selectedLanguage === 'Urdu' ? 'bg-slate-700/30' : ''}`}
+                          >
+                            <span className={`text-sm font-medium ${selectedLanguage === 'Urdu' ? 'text-green-300' : 'text-slate-300 hover:text-white'}`}>Urdu</span>
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -10696,7 +10779,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
                   >
                     <Trophy className="w-5 h-5 text-yellow-400 group-hover:text-yellow-300" />
-                    <span className="text-white font-medium group-hover:text-yellow-300 transition-colors duration-200">Battle Pass</span>
+                    <span className="text-white font-medium group-hover:text-yellow-300 transition-colors duration-200">{t('menu.battlePass')}</span>
                   </motion.button>
                   
                   <motion.button
@@ -10709,7 +10792,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
                   >
                     <Bot className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300" />
-                    <span className="text-white font-medium group-hover:text-cyan-300 transition-colors duration-200">About</span>
+                    <span className="text-white font-medium group-hover:text-cyan-300 transition-colors duration-200">{t('menu.about')}</span>
                   </motion.button>
                   
                   <motion.button
@@ -10722,7 +10805,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
                   >
                     <Calendar className="w-5 h-5 text-purple-400 group-hover:text-purple-300" />
-                    <span className="text-white font-medium group-hover:text-purple-300 transition-colors duration-200">Credits</span>
+                    <span className="text-white font-medium group-hover:text-purple-300 transition-colors duration-200">{t('menu.credits')}</span>
                   </motion.button>
                 </nav>
               </div>
