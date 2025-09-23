@@ -248,6 +248,8 @@ const getVehicleRarity = (vehicleName: string) => {
 "Type 75 MLRS",
 "Mi-24 Super Hind",
 "Leopard 2A-RC 3.0",
+"Leopard 2A8"
+"X2 Shinshin"
 
 
 
@@ -908,6 +910,35 @@ const VEHICLES_DATA = [
       { "name": "RVV-MD", "type": "Medium-Range AAM", "damage": 4800, "penetration": 65, "reload": 15 },
       { "name": "RVV-SD", "type": "Medium-Range AAM", "damage": 6500, "penetration": 65, "reload": 20 },
       { "name": "Kh-23M", "type": "Air-to-Ground Missile", "damage": 12900, "penetration": 800, "reload": 38 }
+
+  ],
+  modules: {
+    engine: [
+      { name: "Izdeliye 30 MK1", bonus: "+200 km/h speed" },
+      { name: "Izdeliye 30 MK2", bonus: "+400 km/h speed" }
+    ],
+    stealth: [
+      { name: "RAM Coating MK1", bonus: "+20% stealth" },
+      { name: "RAM Coating MK2", bonus: "+35% stealth" }
+    ],
+    avionics: [
+      { name: "Sh-121 Radar MK1", bonus: "+25% detection" },
+      { name: "Sh-121 Radar MK2", bonus: "+45% detection" }
+    ]
+  }
+},
+{
+  id: 12,
+  name: "X2 Shinshin",
+  type: "Fighter Jet",
+  faction: "Japanese",
+  tier: "IV",
+  image: "X2-Shinshin.jpg",
+  description: "Japan’s stealth technology demonstrator, testing advanced avionics, radar, and maneuverability for future fighters.",
+  stats: { health: 18900, speed: 900, afterburnerSpeed: 2310, agility: 60 },
+  weapons: [
+    
+
 
   ],
   modules: {
@@ -1924,7 +1955,39 @@ const VEHICLES_DATA = [
     },
   },
   {
-    "id": 130,
+    id: 130,
+    name: "Leopard 2A8",
+    type: "Main Battle Tank",
+    faction: "German",
+    tier: "IV",
+    image: "Leopard-2A8.jpg",
+    description: "A modern German main battle tank, featuring advanced armor, improved firepower, and upgraded targeting systems for battlefield dominance.",
+    stats: { health: 41900, speed: 70, armor: "300mm", agility: 38 },
+    weapons: [
+      { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 900 },
+      { name: "DM12A1 HEATFS", type: "Main Gun", damage: 12000, penetration: 400 },
+      
+    ],
+    modules: {
+      engine: [
+        { name: "Caterpillar C7 MK1", bonus: "+15 km/h speed" },
+        { name: "Caterpillar C7 MK2", bonus: "+30 km/h speed" },
+        { name: "Caterpillar C7 MK3", bonus: "+45 km/h speed" },
+      ],
+      armor: [
+        { name: "Ceramic Armor MK1", bonus: "+70mm protection" },
+        { name: "Ceramic Armor MK2", bonus: "+140mm protection" },
+        { name: "Ceramic Armor MK3", bonus: "+210mm protection" },
+      ],
+      fireControl: [
+        { name: "Digital FCS MK1", bonus: "+18% accuracy" },
+        { name: "Digital FCS MK2", bonus: "+32% accuracy" },
+        { name: "Digital FCS MK3", bonus: "+46% accuracy" },
+      ],
+    },
+  },
+  {
+    "id": 131,
     "name": "T-20 Monolit",
     "type": "Tank Destroyer",
     "faction": "Russian",
@@ -1967,7 +2030,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 131,
+    "id": 132,
     "name": "KF31 Lynx",
     "type": "Light Tank",
     "faction": "German",
@@ -2009,7 +2072,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 132,
+    "id": 133,
     "name": "M10 Booker",
     "type": "Light Tank",
     "faction": "American",
@@ -2051,7 +2114,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 133,
+    "id": 134,
     "name": "PL-01",
     "type": "Light Tank",
     "faction": "Polish",
@@ -2092,7 +2155,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-  "id": 134,
+  "id": 135,
   "name": "M-SHORAD",
   "type": "Anti-Air",
   "faction": "American",
@@ -2133,7 +2196,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  "id": 135,
+  "id": 136,
   "name": "TOS-1A",
   "type": "MLRS",
   "faction": "Russian",
@@ -2172,7 +2235,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-    id: 136,
+    id: 137,
     name: "M270 MLRS",
     type: "MLRS",
     faction: "American",
@@ -2206,7 +2269,7 @@ const VEHICLES_DATA = [
     },
   },
 {
-  "id": 137,
+  "id": 138,
   "name": "PLZ-05",
   "type": "SPH",
   "faction": "Chinese",
@@ -2247,7 +2310,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  "id": 138,
+  "id": 139,
   "name": "M109A6 Paladin",
   "type": "SPH",
   "faction": "American",
@@ -2287,7 +2350,7 @@ const VEHICLES_DATA = [
 },
 
 {
-  "id": 139,
+  "id": 140,
   "name": "FK 2000",
   "type": "Anti-Air",
   "faction": "Chinese",
@@ -2327,7 +2390,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-    id: 140,
+    id: 141,
     name: "Otomatic 76",
     type: "Anti-Air",
     faction: "Italian",
@@ -2359,7 +2422,7 @@ const VEHICLES_DATA = [
     },
   },
 {
-  "id": 141,
+  "id": 142,
   "name": "BM-57-2 Kochevnik",
   "type": "Tank Destroyer",
   "faction": "Russian",
@@ -2401,7 +2464,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  "id": 142,
+  "id": 143,
   "name": "ADATS",
   "type": "Missile Carrier",
   "faction": "American",
@@ -2444,7 +2507,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  "id": 143,
+  "id": 144,
   "name": "MGM-166 LOSAT",
   "type": "Missile Carrier",
   "faction": "American",
@@ -9443,6 +9506,8 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       "M1 Abrams CATTB",
       "XM8 AGS",
       "Object 640"
+      "Leopard 2A8"
+      "X2 Shinshin"
 
     ]
     return marketVehicles.includes(vehicleName)
@@ -9451,8 +9516,8 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
    
-      
-     
+      "Leopard 2A8"
+      "X2 Shinshin"
       "AMX-30 Super",
       "Type 75 MLRS",
       "Centauro I 120",
