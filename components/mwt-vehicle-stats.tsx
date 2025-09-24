@@ -9965,7 +9965,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     setChatMessages((prev) => [...prev, userMessage])
     setIsLoading(true)
 
-    const getVehicleInfo = (query: string) => {
+    setTimeout(() => {
+      const response = getVehicleInfo(chatInput)
+      const botMessage = { role: "assistant", content: response }
+      setChatMessages((prev) => [...prev, botMessage])
+      setIsLoading(false)
+      setChatInput("")
+    }, 1000)
+  }
+
+  const getVehicleInfo = (query: string) => {
       const lowerQuery = query.toLowerCase().trim()
 
       // Enhanced vehicle search with better matching
@@ -10851,14 +10860,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
              `• "Tier IV vehicles" - Category listings\n\n` +
              `What would you like to analyze?`
     }
-
-    setTimeout(() => {
-      const response = getVehicleInfo(chatInput)
-      const botMessage = { role: "assistant", content: response }
-      setChatMessages((prev) => [...prev, botMessage])
-      setIsLoading(false)
-      setChatInput("")
-    }, 1000)
   }
 
   return (
