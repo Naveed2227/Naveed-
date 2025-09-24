@@ -11729,7 +11729,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         e.stopPropagation();
                         const next = prompt('Edit vehicle name', vehicle.name);
                         if (next && next.trim() && next !== vehicle.name) {
-                          saveEdit(vehicle.id, 'name', next.trim());
+                          saveEdit(displayVehicle.id, 'name', next.trim());
                         }
                       }}
                       className="text-[12px] leading-none hover:opacity-80"
@@ -11778,7 +11778,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           const raw = prompt('Edit Health (number)', String(vehicle.stats.health));
                           if (raw !== null) {
                             const val = parseInt(raw, 10);
-                            if (!isNaN(val)) saveEdit(vehicle.id, 'stats.health', val);
+                            if (!isNaN(val)) saveEdit(displayVehicle.id, 'stats.health', val);
                           }
                         }}
                         className="text-[12px] leading-none hover:opacity-80"
@@ -11804,7 +11804,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               const raw = prompt('Edit Cruise Speed (km/h)', String(vehicle.stats.speed));
                               if (raw !== null) {
                                 const val = parseInt(raw, 10);
-                                if (!isNaN(val)) saveEdit(vehicle.id, 'stats.speed', val);
+                                if (!isNaN(val)) saveEdit(displayVehicle.id, 'stats.speed', val);
                               }
                             }}
                             className="text-[12px] leading-none hover:opacity-80"
@@ -11827,7 +11827,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               const raw = prompt('Edit Afterburner Speed (km/h)', String(vehicle.stats.afterburnerSpeed));
                               if (raw !== null) {
                                 const val = parseInt(raw, 10);
-                                if (!isNaN(val)) saveEdit(vehicle.id, 'stats.afterburnerSpeed', val);
+                                if (!isNaN(val)) saveEdit(displayVehicle.id, 'stats.afterburnerSpeed', val);
                               }
                             }}
                             className="text-[12px] leading-none hover:opacity-80"
@@ -11853,7 +11853,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               const raw = prompt('Edit Cruise Speed (km/h)', String(vehicle.stats.speed));
                               if (raw !== null) {
                                 const val = parseInt(raw, 10);
-                                if (!isNaN(val)) saveEdit(vehicle.id, 'stats.speed', val);
+                                if (!isNaN(val)) saveEdit(displayVehicle.id, 'stats.speed', val);
                               }
                             }}
                             className="text-[12px] leading-none hover:opacity-80"
@@ -11876,7 +11876,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               const raw = prompt('Edit Vertical Speed (m/s)', String(vehicle.stats.verticalSpeed || '0'));
                               if (raw !== null) {
                                 const val = parseFloat(raw);
-                                if (!isNaN(val as any)) saveEdit(vehicle.id, 'stats.verticalSpeed', val);
+                                if (!isNaN(val as any)) saveEdit(displayVehicle.id, 'stats.verticalSpeed', val);
                               }
                             }}
                             className="text-[12px] leading-none hover:opacity-80"
@@ -11902,7 +11902,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               const raw = prompt('Edit Speed (km/h)', String(vehicle.stats.speed));
                               if (raw !== null) {
                                 const val = parseInt(raw, 10);
-                                if (!isNaN(val)) saveEdit(vehicle.id, 'stats.speed', val);
+                                if (!isNaN(val)) saveEdit(displayVehicle.id, 'stats.speed', val);
                               }
                             }}
                             className="text-[12px] leading-none hover:opacity-80"
@@ -11924,7 +11924,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               e.stopPropagation();
                               const next = prompt('Edit Armor (e.g., "1100mm")', String(vehicle.stats.armor || ''));
                               if (next !== null) {
-                                saveEdit(vehicle.id, 'stats.armor', next);
+                                saveEdit(displayVehicle.id, 'stats.armor', next);
                               }
                             }}
                             className="text-[12px] leading-none hover:opacity-80"
@@ -11950,7 +11950,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           const raw = prompt('Edit Agility (0-100)', String(vehicle.stats.agility));
                           if (raw !== null) {
                             const val = parseInt(raw, 10);
-                            if (!isNaN(val)) saveEdit(vehicle.id, 'stats.agility', val);
+                            if (!isNaN(val)) saveEdit(displayVehicle.id, 'stats.agility', val);
                           }
                         }}
                         className="text-[12px] leading-none hover:opacity-80"
@@ -12699,6 +12699,22 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           const vehicle = VEHICLES.find(v => v.id.toString() === vehicleDetailsOpenId);
           if (!vehicle) return null;
           
+          // Handle construction vehicles - create modified version with all stats set to 0 and no weapons
+          const displayVehicle = isConstructionVehicle(vehicle.name) ? {
+            ...vehicle,
+            stats: {
+              health: 0,
+              speed: 0,
+              armor: 0,
+              agility: 0,
+              afterburnerSpeed: 0,
+              verticalSpeed: 0,
+              damage: 0,
+              range: 0
+            },
+            weapons: []
+          } : vehicle;
+          
           return (
             <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
               <motion.div 
@@ -12791,11 +12807,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <div className="bg-slate-800/80 rounded-lg p-4">
                             <StatBar 
                               label="HEALTH" 
-                              value={getUpgradedValue(vehicle, 'health')} 
-                              baseValue={vehicle.stats.health}
+                              value={getUpgradedValue(displayVehicle, 'health')} 
+                              baseValue={displayVehicle.stats.health}
                               maxValue={2000}
-                              upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                              onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                              upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                              onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                             />
                           </div>
 
@@ -12805,22 +12821,22 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="CRUISE SPEED" 
-                                  value={getUpgradedValue(vehicle, 'speed')} 
-                                  baseValue={vehicle.stats.speed}
+                                  value={getUpgradedValue(displayVehicle, 'speed')} 
+                                  baseValue={displayVehicle.stats.speed}
                                   maxValue={3000}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="AFTERBURNER SPEED" 
-                                  value={getUpgradedValue(vehicle, 'afterburnerSpeed')} 
-                                  baseValue={vehicle.stats.afterburnerSpeed}
+                                  value={getUpgradedValue(displayVehicle, 'afterburnerSpeed')} 
+                                  baseValue={displayVehicle.stats.afterburnerSpeed}
                                   maxValue={4000}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
@@ -12833,33 +12849,33 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="CRUISE SPEED" 
-                                  value={getUpgradedValue(vehicle, 'speed')} 
-                                  baseValue={vehicle.stats.speed}
+                                  value={getUpgradedValue(displayVehicle, 'speed')} 
+                                  baseValue={displayVehicle.stats.speed}
                                   maxValue={500}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="VERTICAL SPEED" 
-                                  value={getUpgradedValue(vehicle, 'verticalSpeed')} 
-                                  baseValue={vehicle.stats.verticalSpeed}
+                                  value={getUpgradedValue(displayVehicle, 'verticalSpeed')} 
+                                  baseValue={displayVehicle.stats.verticalSpeed}
                                   maxValue={30}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">m/s</div>
                               </div>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="AGILITY" 
-                                  value={getUpgradedValue(vehicle, 'agility')} 
-                                  baseValue={vehicle.stats.agility}
+                                  value={getUpgradedValue(displayVehicle, 'agility')} 
+                                  baseValue={displayVehicle.stats.agility}
                                   maxValue={100}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                               </div>
                             </>
@@ -12871,37 +12887,37 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="SPEED" 
-                                  value={getUpgradedValue(vehicle, 'speed')} 
-                                  baseValue={vehicle.stats.speed}
+                                  value={getUpgradedValue(displayVehicle, 'speed')} 
+                                  baseValue={displayVehicle.stats.speed}
                                   maxValue={100}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="AGILITY" 
-                                  value={getUpgradedValue(vehicle, 'agility')} 
-                                  baseValue={vehicle.stats.agility || 0}
+                                  value={getUpgradedValue(displayVehicle, 'agility')} 
+                                  baseValue={displayVehicle.stats.agility || 0}
                                   maxValue={100}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                               </div>
-                              {vehicle.stats.armor && (
+                              {displayVehicle.stats.armor && (
                                 <div className="bg-slate-800/80 rounded-lg p-4">
                                   <div className="flex justify-between items-center mb-1">
                                     <span className="text-xs font-medium text-gray-300">ARMOR</span>
                                     <span className="text-sm font-bold text-white flex items-center gap-1">
-                                      {vehicle.stats.armor}
+                                      {displayVehicle.stats.armor}
                                       {isEditor && isEditMode && (
                                         <button
                                           onClick={(e) => {
                                             e.stopPropagation();
-                                            const next = prompt('Edit Armor (e.g., "1100mm")', String(vehicle.stats.armor || ''));
+                                            const next = prompt('Edit Armor (e.g., "1100mm")', String(displayVehicle.stats.armor || ''));
                                             if (next !== null) {
-                                              saveEdit(vehicle.id, 'stats.armor', next);
+                                              saveEdit(displayVehicle.id, 'stats.armor', next);
                                             }
                                           }}
                                           className="ml-1 text-[10px] leading-none hover:opacity-80"
@@ -12916,7 +12932,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                   <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
                                     <div 
                                       className="h-full bg-gray-300"
-                                      style={{ width: `${(parseInt(vehicle.stats.armor) / 500) * 100}%` }}
+                                      style={{ width: `${(parseInt(displayVehicle.stats.armor) / 500) * 100}%` }}
                                     />
                                   </div>
                                 </div>
@@ -12946,8 +12962,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       <div className="text-white">
                         <h3 className="text-lg font-bold mb-3">Weapons</h3>
                         <div className="space-y-3">
-                          {vehicle.weapons?.length > 0 ? (
-                            vehicle.weapons.map((weapon: any, idx: number) => (
+                          {isConstructionVehicle(displayVehicle.name) ? (
+                            <div className="bg-slate-800/50 rounded-lg p-6 text-center">
+                              <div className="text-lg font-semibold text-cyan-300">No weapons</div>
+                            </div>
+                          ) : displayVehicle.weapons?.length > 0 ? (
+                            displayVehicle.weapons.map((weapon: any, idx: number) => (
                               <div key={idx} className="bg-slate-800/80 rounded-lg p-3 border border-slate-700/50 group">
                                 <div className="mb-2">
                                   <h4 className="text-base font-medium text-cyan-300 flex items-center gap-2">
@@ -12958,7 +12978,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                           e.stopPropagation();
                                           const next = prompt('Edit Weapon Name', String(weapon.name || ''));
                                           if (next !== null) {
-                                            saveEdit(vehicle.id, `weapons[${idx}].name`, next.trim());
+                                            saveEdit(displayVehicle.id, `weapons[${idx}].name`, next.trim());
                                           }
                                         }}
                                         className="text-[10px] leading-none hover:opacity-80"
@@ -12982,7 +13002,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                             const raw = prompt('Edit Damage (number)', String(weapon.damage ?? '0'));
                                             if (raw !== null) {
                                               const val = parseInt(raw, 10);
-                                              if (!isNaN(val)) saveEdit(vehicle.id, `weapons[${idx}].damage`, val);
+                                              if (!isNaN(val)) saveEdit(displayVehicle.id, `weapons[${idx}].damage`, val);
                                             }
                                           }}
                                           className="ml-1 text-[10px] leading-none hover:opacity-80"
@@ -13005,7 +13025,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                             const raw = prompt('Edit Penetration (number)', String(weapon.penetration ?? '0'));
                                             if (raw !== null) {
                                               const val = parseInt(raw, 10);
-                                              if (!isNaN(val)) saveEdit(vehicle.id, `weapons[${idx}].penetration`, val);
+                                              if (!isNaN(val)) saveEdit(displayVehicle.id, `weapons[${idx}].penetration`, val);
                                             }
                                           }}
                                           className="ml-1 text-[10px] leading-none hover:opacity-80"
@@ -13028,7 +13048,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                             const raw = prompt('Edit Reload (seconds)', String(weapon.reload ?? '0'));
                                             if (raw !== null) {
                                               const val = parseFloat(raw);
-                                              if (!isNaN(val as any)) saveEdit(vehicle.id, `weapons[${idx}].reload`, val);
+                                              if (!isNaN(val as any)) saveEdit(displayVehicle.id, `weapons[${idx}].reload`, val);
                                             }
                                           }}
                                           className="ml-1 text-[10px] leading-none hover:opacity-80"
