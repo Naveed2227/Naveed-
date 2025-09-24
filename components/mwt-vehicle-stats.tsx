@@ -9867,28 +9867,44 @@ const missileHasTags = (missileName: string) => {
 
 
   const getVehicleDetailedInfo = (vehicle: any) => {
-    const weaponsList = vehicle.weapons
+    // Handle construction vehicles - create modified version for display
+    const displayVehicle = isConstructionVehicle(vehicle.name) ? {
+      ...vehicle,
+      stats: {
+        health: 0,
+        speed: 0,
+        armor: 0,
+        agility: 0,
+        afterburnerSpeed: 0,
+        verticalSpeed: 0,
+        damage: 0,
+        range: 0
+      },
+      weapons: []
+    } : vehicle;
+    
+    const weaponsList = displayVehicle.weapons
       .map((weapon: any) => weapon.name + ": " + weapon.damage + " DMG, " + weapon.penetration + " PEN, " + weapon.reload + " REL")
 
       .join("\n")
 
-    const modulesList = Object.entries(vehicle.modules || {})
+    const modulesList = Object.entries(displayVehicle.modules || {})
       .map(
         ([category, modules]: [string, any]) =>
           `${category}: ${Array.isArray(modules) ? modules.map((m: any) => m.name).join(", ") : "N/A"}`,
       )
       .join("\n")
 
-    return `🎯 ${vehicle.name} - ${vehicle.type}
+    return `🎯 ${displayVehicle.name} - ${displayVehicle.type}
   
 📊 SPECIFICATIONS:
-• Faction: ${vehicle.faction}
-• Tier: ${formatTier(vehicle.tier)}
-• Health: ${vehicle.stats.health.toLocaleString()} HP
-• Speed: ${vehicle.stats.speed} km/h
-${vehicle.stats.afterburnerSpeed ? `• Afterburner: ${vehicle.stats.afterburnerSpeed} km/h` : ""}
-${vehicle.stats.armor ? `• Armor: ${vehicle.stats.armor}` : ""}
-• Agility: ${vehicle.stats.agility}
+• Faction: ${displayVehicle.faction}
+• Tier: ${formatTier(displayVehicle.tier)}
+• Health: ${displayVehicle.stats.health.toLocaleString()} HP
+• Speed: ${displayVehicle.stats.speed} km/h
+${displayVehicle.stats.afterburnerSpeed ? `• Afterburner: ${displayVehicle.stats.afterburnerSpeed} km/h` : ""}
+${displayVehicle.stats.armor ? `• Armor: ${displayVehicle.stats.armor}` : ""}
+• Agility: ${displayVehicle.stats.agility}
 
 🎮 IN-GAME INFO:
 ${vehicle.description}
@@ -10114,10 +10130,25 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
       // Ranking function - use VEHICLES database structure
       const rankVehicle = (vehicle: any) => {
-        if (vehicle.type === "MBT") return (vehicle.stats.health || 0) + (vehicle.stats.armor || 0)
-        if (vehicle.type === "Fighter Jet") return (vehicle.stats.speed || 0) + (vehicle.stats.agility || 0)
-        if (vehicle.type === "Self-Propelled Howitzer") return (vehicle.stats.damage || vehicle.stats.health || 0) + (vehicle.stats.range || vehicle.stats.armor || 0)
-        return vehicle.stats.health || 0
+        // Handle construction vehicles - create modified version for ranking
+        const displayVehicle = isConstructionVehicle(vehicle.name) ? {
+          ...vehicle,
+          stats: {
+            health: 0,
+            speed: 0,
+            armor: 0,
+            agility: 0,
+            afterburnerSpeed: 0,
+            verticalSpeed: 0,
+            damage: 0,
+            range: 0
+          }
+        } : vehicle;
+        
+        if (displayVehicle.type === "MBT") return (displayVehicle.stats.health || 0) + (displayVehicle.stats.armor || 0)
+        if (displayVehicle.type === "Fighter Jet") return (displayVehicle.stats.speed || 0) + (displayVehicle.stats.agility || 0)
+        if (displayVehicle.type === "Self-Propelled Howitzer") return (displayVehicle.stats.damage || displayVehicle.stats.health || 0) + (displayVehicle.stats.range || displayVehicle.stats.armor || 0)
+        return displayVehicle.stats.health || 0
       }
 
       // Strict filtering with fallback - ALWAYS use full VEHICLES database
@@ -11596,7 +11627,23 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
 
         <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {paginatedVehicles.map((vehicle) => (
+          {paginatedVehicles.map((vehicle) => {
+            // Handle construction vehicles - create modified version with all stats set to 0 for display
+            const displayVehicle = isConstructionVehicle(vehicle.name) ? {
+              ...vehicle,
+              stats: {
+                health: 0,
+                speed: 0,
+                armor: 0,
+                agility: 0,
+                afterburnerSpeed: 0,
+                verticalSpeed: 0,
+                damage: 0,
+                range: 0
+              }
+            } : vehicle;
+            
+            return (
             <motion.div
               key={vehicle.id}
               initial={{ opacity: 0, y: 20 }}
@@ -11770,7 +11817,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <div className="bg-slate-800/50 rounded-lg p-3">
                   <div className="text-xs text-slate-400 mb-1">Health</div>
                   <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                    {vehicle.stats.health.toLocaleString()}
+                    {displayVehicle.stats.health.toLocaleString()}
                     {isEditor && isEditMode && (
                       <button
                         onClick={(e) => {
@@ -11796,7 +11843,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Cruise Speed</div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.speed} km/h
+                        {displayVehicle.stats.speed} km/h
                         {isEditor && isEditMode && (
                           <button
                             onClick={(e) => {
@@ -11819,7 +11866,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Afterburner Speed</div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.afterburnerSpeed} km/h
+                        {displayVehicle.stats.afterburnerSpeed} km/h
                         {isEditor && isEditMode && (
                           <button
                             onClick={(e) => {
@@ -11845,7 +11892,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Cruise Speed</div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.speed} km/h
+                        {displayVehicle.stats.speed} km/h
                         {isEditor && isEditMode && (
                           <button
                             onClick={(e) => {
@@ -11868,7 +11915,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Vertical Speed</div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.verticalSpeed || 'N/A'} m/s
+                        {displayVehicle.stats.verticalSpeed || 'N/A'} m/s
                         {isEditor && isEditMode && (
                           <button
                             onClick={(e) => {
@@ -11894,7 +11941,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Speed</div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.speed} km/h
+                        {displayVehicle.stats.speed} km/h
                         {isEditor && isEditMode && (
                           <button
                             onClick={(e) => {
@@ -11917,7 +11964,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Armor</div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.armor}
+                        {displayVehicle.stats.armor}
                         {isEditor && isEditMode && (
                           <button
                             onClick={(e) => {
@@ -11942,7 +11989,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <div className="bg-slate-800/50 rounded-lg p-3">
                   <div className="text-xs text-slate-400 mb-1">Agility</div>
                   <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                    {vehicle.stats.agility}
+                    {displayVehicle.stats.agility}
                     {isEditor && isEditMode && (
                       <button
                         onClick={(e) => {
@@ -12699,6 +12746,22 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           const vehicle = VEHICLES.find(v => v.id.toString() === vehicleDetailsOpenId);
           if (!vehicle) return null;
           
+          // Handle construction vehicles - create modified version with all stats set to 0 and no weapons
+          const displayVehicle = isConstructionVehicle(vehicle.name) ? {
+            ...vehicle,
+            stats: {
+              health: 0,
+              speed: 0,
+              armor: 0,
+              agility: 0,
+              afterburnerSpeed: 0,
+              verticalSpeed: 0,
+              damage: 0,
+              range: 0
+            },
+            weapons: []
+          } : vehicle;
+          
           return (
             <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
               <motion.div 
@@ -12713,11 +12776,18 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <div className="p-4 border-b border-slate-700 flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <img 
-                      src={getFlagImage(vehicle.faction)} 
-                      alt={vehicle.faction} 
+                      src={getFlagImage(displayVehicle.faction)} 
+                      alt={displayVehicle.faction} 
                       className="w-8 h-5 object-cover rounded-sm shadow"
                     />
-                    <h2 className="text-xl font-bold text-white">{vehicle.name}</h2>
+                    <div className="flex items-center space-x-2">
+                      <h2 className="text-xl font-bold text-white">{displayVehicle.name}</h2>
+                      {isConstructionVehicle(displayVehicle.name) && (
+                        <span className="px-2 py-1 bg-yellow-600 text-yellow-100 text-xs font-semibold rounded-full">
+                          Under Construction
+                        </span>
+                      )}
+                    </div>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="flex space-x-1">
@@ -12741,8 +12811,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/80 rounded-lg overflow-hidden">
                       <div className="relative w-full min-h-[300px] flex items-center justify-center p-4 bg-black/30">
                         <img
-                          src={vehicle.image}
-                          alt={vehicle.name}
+                          src={displayVehicle.image}
+                          alt={displayVehicle.name}
                           className="max-w-full max-h-[300px] object-contain"
                           onError={(e) => {
                             e.currentTarget.src = "/placeholder-vehicle.png"
@@ -12755,8 +12825,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               e.stopPropagation();
                               // Create a temporary link to download the image
                               const link = document.createElement('a');
-                              link.href = vehicle.image;
-                              link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
+                              link.href = displayVehicle.image;
+                              link.download = `${displayVehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
                               document.body.appendChild(link);
                               link.click();
                               document.body.removeChild(link);
@@ -12769,10 +12839,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           </button>
                         </div>
                       </div>
-                      {vehicle.description && (
+                      {displayVehicle.description && (
                         <div className="p-4">
                           <h4 className="text-base font-bold text-cyan-300 mb-2">DESCRIPTION</h4>
-                          <p className="text-slate-300 text-sm">{vehicle.description}</p>
+                          <p className="text-slate-300 text-sm">{displayVehicle.description}</p>
                         </div>
                       )}
                     </div>
@@ -12791,36 +12861,36 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <div className="bg-slate-800/80 rounded-lg p-4">
                             <StatBar 
                               label="HEALTH" 
-                              value={getUpgradedValue(vehicle, 'health')} 
-                              baseValue={vehicle.stats.health}
+                              value={getUpgradedValue(displayVehicle, 'health')} 
+                              baseValue={displayVehicle.stats.health}
                               maxValue={2000}
-                              upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                              onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                              upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                              onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                             />
                           </div>
 
                           {/* For Jets and Bombers */}
-                          {(vehicle.type === 'Fighter Jet' || vehicle.type === 'Attack Aircraft' || vehicle.type === 'Multirole Fighter' || vehicle.type === 'Bomber') && (
+                          {(displayVehicle.type === 'Fighter Jet' || displayVehicle.type === 'Attack Aircraft' || displayVehicle.type === 'Multirole Fighter' || displayVehicle.type === 'Bomber') && (
                             <>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="CRUISE SPEED" 
-                                  value={getUpgradedValue(vehicle, 'speed')} 
-                                  baseValue={vehicle.stats.speed}
+                                  value={getUpgradedValue(displayVehicle, 'speed')} 
+                                  baseValue={displayVehicle.stats.speed}
                                   maxValue={3000}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="AFTERBURNER SPEED" 
-                                  value={getUpgradedValue(vehicle, 'afterburnerSpeed')} 
-                                  baseValue={vehicle.stats.afterburnerSpeed}
+                                  value={getUpgradedValue(displayVehicle, 'afterburnerSpeed')} 
+                                  baseValue={displayVehicle.stats.afterburnerSpeed}
                                   maxValue={4000}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
@@ -12828,80 +12898,80 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           )}
 
                           {/* For Helicopters */}
-                          {(vehicle.type === 'Attack Helicopter' || vehicle.type === 'Scout Helicopter' || vehicle.type === 'Helicopter') && (
+                          {(displayVehicle.type === 'Attack Helicopter' || displayVehicle.type === 'Scout Helicopter' || displayVehicle.type === 'Helicopter') && (
                             <>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="CRUISE SPEED" 
-                                  value={getUpgradedValue(vehicle, 'speed')} 
-                                  baseValue={vehicle.stats.speed}
+                                  value={getUpgradedValue(displayVehicle, 'speed')} 
+                                  baseValue={displayVehicle.stats.speed}
                                   maxValue={500}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="VERTICAL SPEED" 
-                                  value={getUpgradedValue(vehicle, 'verticalSpeed')} 
-                                  baseValue={vehicle.stats.verticalSpeed}
+                                  value={getUpgradedValue(displayVehicle, 'verticalSpeed')} 
+                                  baseValue={displayVehicle.stats.verticalSpeed}
                                   maxValue={30}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">m/s</div>
                               </div>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="AGILITY" 
-                                  value={getUpgradedValue(vehicle, 'agility')} 
-                                  baseValue={vehicle.stats.agility}
+                                  value={getUpgradedValue(displayVehicle, 'agility')} 
+                                  baseValue={displayVehicle.stats.agility}
                                   maxValue={100}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                               </div>
                             </>
                           )}
 
                           {/* For Tanks/Other Vehicles */}
-                          {!['Fighter Jet', 'Attack Aircraft', 'Multirole Fighter', 'Bomber', 'Helicopter', 'Attack Helicopter', 'Scout Helicopter'].includes(vehicle.type) && (
+                          {!['Fighter Jet', 'Attack Aircraft', 'Multirole Fighter', 'Bomber', 'Helicopter', 'Attack Helicopter', 'Scout Helicopter'].includes(displayVehicle.type) && (
                             <>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="SPEED" 
-                                  value={getUpgradedValue(vehicle, 'speed')} 
-                                  baseValue={vehicle.stats.speed}
+                                  value={getUpgradedValue(displayVehicle, 'speed')} 
+                                  baseValue={displayVehicle.stats.speed}
                                   maxValue={100}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
                               <div className="bg-slate-800/80 rounded-lg p-4">
                                 <StatBar 
                                   label="AGILITY" 
-                                  value={getUpgradedValue(vehicle, 'agility')} 
-                                  baseValue={vehicle.stats.agility || 0}
+                                  value={getUpgradedValue(displayVehicle, 'agility')} 
+                                  baseValue={displayVehicle.stats.agility || 0}
                                   maxValue={100}
-                                  upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                                 />
                               </div>
-                              {vehicle.stats.armor && (
+                              {displayVehicle.stats.armor && (
                                 <div className="bg-slate-800/80 rounded-lg p-4">
                                   <div className="flex justify-between items-center mb-1">
                                     <span className="text-xs font-medium text-gray-300">ARMOR</span>
                                     <span className="text-sm font-bold text-white flex items-center gap-1">
-                                      {vehicle.stats.armor}
+                                      {displayVehicle.stats.armor}
                                       {isEditor && isEditMode && (
                                         <button
                                           onClick={(e) => {
                                             e.stopPropagation();
-                                            const next = prompt('Edit Armor (e.g., "1100mm")', String(vehicle.stats.armor || ''));
+                                            const next = prompt('Edit Armor (e.g., "1100mm")', String(displayVehicle.stats.armor || ''));
                                             if (next !== null) {
-                                              saveEdit(vehicle.id, 'stats.armor', next);
+                                              saveEdit(displayVehicle.id, 'stats.armor', next);
                                             }
                                           }}
                                           className="ml-1 text-[10px] leading-none hover:opacity-80"
@@ -12916,7 +12986,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                   <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
                                     <div 
                                       className="h-full bg-gray-300"
-                                      style={{ width: `${(parseInt(vehicle.stats.armor) / 500) * 100}%` }}
+                                      style={{ width: `${(parseInt(displayVehicle.stats.armor) / 500) * 100}%` }}
                                     />
                                   </div>
                                 </div>
@@ -12925,17 +12995,17 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           )}
 
                           {/* Agility - Shown for all aircraft */}
-                          {(vehicle.type === 'Fighter Jet' || vehicle.type === 'Attack Aircraft' || 
-                            vehicle.type === 'Multirole Fighter' || vehicle.type === 'Bomber' || 
-                            vehicle.type === 'Attack Helicopter' || vehicle.type === 'Scout Helicopter') && (
+                          {(displayVehicle.type === 'Fighter Jet' || displayVehicle.type === 'Attack Aircraft' || 
+                            displayVehicle.type === 'Multirole Fighter' || displayVehicle.type === 'Bomber' || 
+                            displayVehicle.type === 'Attack Helicopter' || displayVehicle.type === 'Scout Helicopter') && (
                             <div className="bg-slate-800/80 rounded-lg p-4">
                               <StatBar 
                                 label="AGILITY" 
-                                value={getUpgradedValue(vehicle, 'agility')} 
-                                baseValue={vehicle.stats.agility}
+                                value={getUpgradedValue(displayVehicle, 'agility')} 
+                                baseValue={displayVehicle.stats.agility}
                                 maxValue={100}
-                                upgradeLevel={upgradeLevels[vehicle.id] || 0}
-                                onUpgradeChange={(level: number) => handleUpgradeChange(vehicle.id, level)}
+                                upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
                               />
                             </div>
                           )}
@@ -12946,8 +13016,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       <div className="text-white">
                         <h3 className="text-lg font-bold mb-3">Weapons</h3>
                         <div className="space-y-3">
-                          {vehicle.weapons?.length > 0 ? (
-                            vehicle.weapons.map((weapon: any, idx: number) => (
+                          {isConstructionVehicle(displayVehicle.name) ? (
+                            <div className="bg-slate-800/50 rounded-lg p-6 text-center">
+                              <div className="text-lg font-semibold text-cyan-300">No weapons</div>
+                            </div>
+                          ) : displayVehicle.weapons?.length > 0 ? (
+                            displayVehicle.weapons.map((weapon: any, idx: number) => (
                               <div key={idx} className="bg-slate-800/80 rounded-lg p-3 border border-slate-700/50 group">
                                 <div className="mb-2">
                                   <h4 className="text-base font-medium text-cyan-300 flex items-center gap-2">
@@ -12958,7 +13032,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                           e.stopPropagation();
                                           const next = prompt('Edit Weapon Name', String(weapon.name || ''));
                                           if (next !== null) {
-                                            saveEdit(vehicle.id, `weapons[${idx}].name`, next.trim());
+                                            saveEdit(displayVehicle.id, `weapons[${idx}].name`, next.trim());
                                           }
                                         }}
                                         className="text-[10px] leading-none hover:opacity-80"
@@ -12982,7 +13056,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                             const raw = prompt('Edit Damage (number)', String(weapon.damage ?? '0'));
                                             if (raw !== null) {
                                               const val = parseInt(raw, 10);
-                                              if (!isNaN(val)) saveEdit(vehicle.id, `weapons[${idx}].damage`, val);
+                                              if (!isNaN(val)) saveEdit(displayVehicle.id, `weapons[${idx}].damage`, val);
                                             }
                                           }}
                                           className="ml-1 text-[10px] leading-none hover:opacity-80"
@@ -13005,7 +13079,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                             const raw = prompt('Edit Penetration (number)', String(weapon.penetration ?? '0'));
                                             if (raw !== null) {
                                               const val = parseInt(raw, 10);
-                                              if (!isNaN(val)) saveEdit(vehicle.id, `weapons[${idx}].penetration`, val);
+                                              if (!isNaN(val)) saveEdit(displayVehicle.id, `weapons[${idx}].penetration`, val);
                                             }
                                           }}
                                           className="ml-1 text-[10px] leading-none hover:opacity-80"
@@ -13028,7 +13102,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                             const raw = prompt('Edit Reload (seconds)', String(weapon.reload ?? '0'));
                                             if (raw !== null) {
                                               const val = parseFloat(raw);
-                                              if (!isNaN(val as any)) saveEdit(vehicle.id, `weapons[${idx}].reload`, val);
+                                              if (!isNaN(val as any)) saveEdit(displayVehicle.id, `weapons[${idx}].reload`, val);
                                             }
                                           }}
                                           className="ml-1 text-[10px] leading-none hover:opacity-80"
