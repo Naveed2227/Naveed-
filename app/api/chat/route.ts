@@ -36,28 +36,6 @@ const ALLOWED_EDITORS = new Set<string>([
   'ooaraikuromorimine@gmail.com',
 ])
 
-// Construction vehicles that should be filtered out for regular users
-const CONSTRUCTION_VEHICLES = new Set<string>([
-  "K2 Black Panther",
-  "K21 KNIFV",
-  "Leopard 2A8",
-  "X2 Shinshin",
-  "AMX-30 Super",
-  "Type 75 MLRS",
-  "Centauro I 120",
-  "Strf 9040 BILL"
-])
-
-// Function to filter vehicles based on user permissions
-const filterVehiclesForUser = (vehicles: any[], userEmail: string | null = null) => {
-  if (!userEmail || !ALLOWED_EDITORS.has(userEmail)) {
-    // Filter out construction vehicles for non-editors
-    return vehicles.filter(vehicle => !CONSTRUCTION_VEHICLES.has(vehicle.name))
-  }
-  // Editors can see all vehicles
-  return vehicles
-}
-
 // Listen for changes in Firebase and broadcast to all clients
 const onValueChange = onValue(VEHICLES_REF, (snapshot) => {
   const data = snapshot.val();
@@ -67,7 +45,7 @@ const onValueChange = onValue(VEHICLES_REF, (snapshot) => {
   }
 });
 
-async function broadcast(payload: any, userEmail: string | null = null) {
+async function broadcast(payload: any) {
   const data = `event: message\ndata: ${JSON.stringify(payload)}\n\n`
   const encoded = encoder.encode(data)
   for (const writer of clients) {
@@ -81,12 +59,19 @@ async function broadcast(payload: any, userEmail: string | null = null) {
   }
 }
 
-// Function to send filtered vehicles to a specific client
-async function sendFilteredVehicles(writer: WritableStreamDefaultWriter<Uint8Array>, userEmail: string | null = null) {
+export async function GET(req: Request) {
+  // Establish SSE connection
+  const { readable, writable } = new TransformStream()
+  const writer = writable.getWriter()
+  clients.add(writer)
+
+  // Initial ping to open the stream on some proxies
+  await writer.write(encoder.encode(`event: ping\ndata: connected\n\n`))
+
+  // Immediately push current vehicles if we have them in-memory
   try {
     if (latestVehicles && Array.isArray(latestVehicles)) {
-      const filteredVehicles = filterVehiclesForUser(latestVehicles, userEmail);
-      await writer.write(encoder.encode(`event: message\ndata: ${JSON.stringify({ type: 'vehicles_update', vehicles: filteredVehicles })}\n\n`))
+      await writer.write(encoder.encode(`event: message\ndata: ${JSON.stringify({ type: 'vehicles_update', vehicles: latestVehicles })}\n\n`))
     } else {
       // Try reading from Firebase if we don't have in-memory data
       if (!latestVehicles) {
@@ -95,8 +80,7 @@ async function sendFilteredVehicles(writer: WritableStreamDefaultWriter<Uint8Arr
           if (snapshot.exists()) {
             latestVehicles = snapshot.val();
             if (Array.isArray(latestVehicles)) {
-              const filteredVehicles = filterVehiclesForUser(latestVehicles, userEmail);
-              await writer.write(encoder.encode(`event: message\ndata: ${JSON.stringify({ type: 'vehicles_update', vehicles: filteredVehicles })}\n\n`));
+              await writer.write(encoder.encode(`event: message\ndata: ${JSON.stringify({ type: 'vehicles_update', vehicles: latestVehicles })}\n\n`));
             }
           }
         } catch (error) {
@@ -104,26 +88,9 @@ async function sendFilteredVehicles(writer: WritableStreamDefaultWriter<Uint8Arr
         }
       }
     }
-  } catch (error) {
-    console.error('Error sending filtered vehicles:', error);
+  } catch {
+    // ignore initial push errors
   }
-}
-
-export async function GET(req: Request) {
-  // Establish SSE connection
-  const { readable, writable } = new TransformStream()
-  const writer = writable.getWriter()
-  clients.add(writer)
-
-  // Get user email from query parameters for authorization
-  const { searchParams } = new URL(req.url)
-  const userEmail = searchParams.get('email')
-
-  // Initial ping to open the stream on some proxies
-  await writer.write(encoder.encode(`event: ping\ndata: connected\n\n`))
-
-  // Immediately push current vehicles (filtered) if we have them in-memory
-  await sendFilteredVehicles(writer, userEmail)
 
   // Heartbeat to keep connection alive
   const interval = setInterval(async () => {
