@@ -9392,6 +9392,63 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
     }
   }, [initialVehicles]);
 
+  // Setup SSE connection for real-time vehicle updates
+  useEffect(() => {
+    let eventSource: EventSource | null = null;
+    
+    const setupSSE = () => {
+      // Construct URL with user email for authorization
+      const emailParam = userEmail ? `?email=${encodeURIComponent(userEmail)}` : '';
+      const apiUrl = `/api/chat${emailParam}`;
+      
+      try {
+        eventSource = new EventSource(apiUrl);
+        
+        eventSource.onmessage = (event) => {
+          try {
+            const data = JSON.parse(event.data);
+            if (data.type === 'vehicles_update' && data.vehicles) {
+              setVEHICLES(data.vehicles);
+              // Save to localStorage for persistence
+              localStorage.setItem('mwt_vehicles_data', JSON.stringify(data.vehicles));
+              console.log('Vehicle data updated via SSE');
+            }
+          } catch (error) {
+            console.error('Error parsing SSE message:', error);
+          }
+        };
+        
+        eventSource.onerror = (error) => {
+          console.error('SSE connection error:', error);
+          // Attempt to reconnect after 5 seconds
+          setTimeout(() => {
+            if (eventSource) {
+              eventSource.close();
+            }
+            setupSSE();
+          }, 5000);
+        };
+        
+        eventSource.onopen = () => {
+          console.log('SSE connection established');
+        };
+        
+      } catch (error) {
+        console.error('Error setting up SSE connection:', error);
+      }
+    };
+    
+    setupSSE();
+    
+    // Cleanup function
+    return () => {
+      if (eventSource) {
+        eventSource.close();
+        console.log('SSE connection closed');
+      }
+    };
+  }, [userEmail]); // Reconnect when user email changes
+
   const handleLogin = (userData: { email: string }) => {
     setIsLoggedIn(true)
     setUserEmail(userData.email)
@@ -9641,6 +9698,16 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       "Strf 9040 BILL"
     ]
     return constructionVehicles.includes(vehicleName)
+  }
+
+  // Check if current user has permission to view construction vehicles
+  const hasConstructionVehicleAccess = () => {
+    const ALLOWED_EDITORS = new Set([
+      'naveed.miandad.007@gmail.com',
+      'qwemwt@gmail.com',
+      'ooaraikuromorimine@gmail.com',
+    ])
+    return isLoggedIn && ALLOWED_EDITORS.has(userEmail)
   }
 
 
@@ -9903,11 +9970,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   }
 
   const filteredVehicles = VEHICLES.filter((vehicle) => {
-    const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesType = !typeFilter || vehicle.type === typeFilter
-    const matchesTier = !tierFilter || formatTier(vehicle.tier) === tierFilter
-    const matchesCountry = !countryFilter || vehicle.faction === countryFilter
-    return matchesSearch && matchesType && matchesTier && matchesCountry
+    // Filter out construction vehicles for users without access
+    if (isConstructionVehicle(vehicle.name) && !hasConstructionVehicleAccess()) {
+      return false
+    }
+    
+    // Apply existing filters
+    const matchesSearch = searchQuery === "" || 
+      vehicle.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      vehicle.faction.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      vehicle.type.toLowerCase().includes(searchQuery.toLowerCase())
+    
+    const matchesTier = tierFilter === "" || vehicle.tier === tierFilter
+    const matchesCountry = countryFilter === "" || vehicle.faction === countryFilter
+    
+    return matchesSearch && matchesTier && matchesCountry
   })
 
   const indexOfLastVehicle = currentPage * vehiclesPerPage
@@ -11972,15 +12049,25 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       e.stopPropagation();
                       setVehicleDetailsOpenId(vehicle.id.toString());
                     }}
-                    className="flex-1 px-4 py-2 bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800 text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg text-center"
+                    disabled={isConstructionVehicle(vehicle.name)}
+                    className={`flex-1 px-4 py-2 text-sm font-semibold rounded transition-all duration-200 shadow-md text-center ${
+                      isConstructionVehicle(vehicle.name)
+                        ? "bg-gray-600 text-gray-400 cursor-not-allowed opacity-50"
+                        : "bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800 hover:shadow-lg"
+                    }`}
                   >
-                    View Details
+                    {isConstructionVehicle(vehicle.name) ? "Under Construction" : "View Details"}
                   </button>
                   
                   <button
                     onClick={() => setVehicleInfoOpen(vehicle.id.toString())}
-                    className="p-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center"
-                    title="AI Analysis"
+                    disabled={isConstructionVehicle(vehicle.name)}
+                    className={`p-2 rounded transition-all duration-200 shadow-md flex items-center justify-center ${
+                      isConstructionVehicle(vehicle.name)
+                        ? "bg-gray-600 text-gray-400 cursor-not-allowed opacity-50"
+                        : "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white hover:shadow-lg"
+                    }`}
+                    title={isConstructionVehicle(vehicle.name) ? "Under Construction" : "AI Analysis"}
                   >
                     <Bot className="w-4 h-4" />
                   </button>
@@ -11993,9 +12080,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       e.stopPropagation()
                       setWeaponsModalOpenId(vehicle.id.toString())
                     }}
-                    className="flex-1 px-4 py-2 bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800 text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg"
+                    disabled={isConstructionVehicle(vehicle.name)}
+                    className={`flex-1 px-4 py-2 text-sm font-semibold rounded transition-all duration-200 shadow-md ${
+                      isConstructionVehicle(vehicle.name)
+                        ? "bg-gray-600 text-gray-400 cursor-not-allowed opacity-50"
+                        : "bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800 hover:shadow-lg"
+                    }`}
                   >
-                    Weapons
+                    {isConstructionVehicle(vehicle.name) ? "Under Construction" : "Weapons"}
                   </button>
                   
                   <div className="relative flex-1">
@@ -12005,25 +12097,27 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           toggleCompare(vehicle.id.toString());
                         }
                       }}
-                      disabled={compare.length >= 2 && !compare.includes(vehicle.id.toString())}
+                      disabled={compare.length >= 2 && !compare.includes(vehicle.id.toString()) || isConstructionVehicle(vehicle.name)}
                       className={`w-full px-4 py-2 text-sm font-semibold rounded transition-all duration-200 shadow-md flex items-center justify-center gap-2 ${
                         compare.includes(vehicle.id.toString())
                           ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700"
                           : compare.length > 0
                             ? "bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:from-amber-600 hover:to-orange-700"
                             : "bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800"
-                      } ${compare.length >= 2 && !compare.includes(vehicle.id.toString()) ? "opacity-50 cursor-not-allowed" : ""}`}
+                      } ${compare.length >= 2 && !compare.includes(vehicle.id.toString()) || isConstructionVehicle(vehicle.name) ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
-                      {compare.includes(vehicle.id.toString()) 
-                        ? <span className="flex items-center">
-                            <span className="bg-white/20 rounded-full w-5 h-5 flex items-center justify-center mr-1">
-                              {compare.indexOf(vehicle.id.toString()) + 1}
+                      {isConstructionVehicle(vehicle.name) 
+                        ? "Under Construction"
+                        : compare.includes(vehicle.id.toString()) 
+                          ? <span className="flex items-center">
+                              <span className="bg-white/20 rounded-full w-5 h-5 flex items-center justify-center mr-1">
+                                {compare.indexOf(vehicle.id.toString()) + 1}
+                              </span>
+                              Selected
                             </span>
-                            Selected
-                          </span>
-                        : compare.length > 0 
-                          ? `Select (${compare.length}/2)`
-                          : "Compare"
+                          : compare.length > 0 
+                            ? `Select (${compare.length}/2)`
+                            : "Compare"
                       }
                     </button>
                     {compare.length > 0 && !compare.includes(vehicle.id.toString()) && (
