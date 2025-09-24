@@ -13233,7 +13233,25 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 </span>
                               </div>
                               <div className="flex items-center justify-between">
-                                <span className="text-base text-slate-300">How to Obtain</span>
+                                {(() => {
+                                  // Determine the label text based on the obtain method
+                                  let labelText = 'How to Obtain';
+                                  
+                                  // Check if vehicle is exclusive first (highest priority)
+                                  if (isExclusiveVehicle(vehicle.name)) {
+                                    labelText = 'How to Obtain';
+                                  } else {
+                                    // Then check currency data
+                                    const currencyInfo = vehicleCurrencyData.find(v => v.name === vehicle.name);
+                                    if (currencyInfo && currencyInfo.amount !== null) {
+                                      labelText = 'Price';
+                                    } else if (isMarketVehicle(vehicle.name)) {
+                                      labelText = 'How to Obtain';
+                                    }
+                                  }
+                                  
+                                  return <span className="text-base text-slate-300">{labelText}</span>;
+                                })()}
                                 <div className="flex items-center gap-2">
                                   {(() => {
                                     // Check if vehicle is exclusive first (highest priority)
