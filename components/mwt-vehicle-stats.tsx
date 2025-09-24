@@ -9416,6 +9416,11 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   };
   
   const getUpgradedValue = (vehicle: any, statType: string) => {
+    // Handle construction vehicles - always return 0 for all stats
+    if (isConstructionVehicle(vehicle.name)) {
+      return 0;
+    }
+    
     const upgradeLevel = upgradeLevels[vehicle.id] || 0;
     if (upgradeLevel === 0) return vehicle.stats[statType] || 0;
     
@@ -10293,25 +10298,54 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         if (vehicles.length === 0) return null
         
         return vehicles.reduce((best, current) => {
+          // Handle construction vehicles - create modified versions for comparison
+          const displayBest = isConstructionVehicle(best.name) ? {
+            ...best,
+            stats: {
+              health: 0,
+              speed: 0,
+              armor: 0,
+              agility: 0,
+              afterburnerSpeed: 0,
+              verticalSpeed: 0,
+              damage: 0,
+              range: 0
+            }
+          } : best;
+          
+          const displayCurrent = isConstructionVehicle(current.name) ? {
+            ...current,
+            stats: {
+              health: 0,
+              speed: 0,
+              armor: 0,
+              agility: 0,
+              afterburnerSpeed: 0,
+              verticalSpeed: 0,
+              damage: 0,
+              range: 0
+            }
+          } : current;
+          
           let bestScore = 0
           let currentScore = 0
           
           if (criteria === 'mbt_combined') {
             // MBT: Health + Armor
-            bestScore = (best.stats.health || 0) + (best.stats.armor || 0)
-            currentScore = (current.stats.health || 0) + (current.stats.armor || 0)
+            bestScore = (displayBest.stats.health || 0) + (displayBest.stats.armor || 0)
+            currentScore = (displayCurrent.stats.health || 0) + (displayCurrent.stats.armor || 0)
           } else if (criteria === 'jet_combined') {
             // Jets: Speed + Agility
-            bestScore = (best.stats.speed || 0) + (best.stats.agility || 0)
-            currentScore = (current.stats.speed || 0) + (current.stats.agility || 0)
+            bestScore = (displayBest.stats.speed || 0) + (displayBest.stats.agility || 0)
+            currentScore = (displayCurrent.stats.speed || 0) + (displayCurrent.stats.agility || 0)
           } else if (criteria === 'sph_combined') {
             // SPH: Damage + Range (fallback to health if damage/range not available)
-            bestScore = (best.stats.damage || best.stats.health || 0) + (best.stats.range || best.stats.armor || 0)
-            currentScore = (current.stats.damage || current.stats.health || 0) + (current.stats.range || current.stats.armor || 0)
+            bestScore = (displayBest.stats.damage || displayBest.stats.health || 0) + (displayBest.stats.range || displayBest.stats.armor || 0)
+            currentScore = (displayCurrent.stats.damage || displayCurrent.stats.health || 0) + (displayCurrent.stats.range || displayCurrent.stats.armor || 0)
           } else {
             // Single stat criteria
-            bestScore = best.stats[criteria] || 0
-            currentScore = current.stats[criteria] || 0
+            bestScore = displayBest.stats[criteria] || 0
+            currentScore = displayCurrent.stats[criteria] || 0
           }
           
           return currentScore > bestScore ? current : best
@@ -10327,25 +10361,40 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           }
         }
 
-        const vehicleSlug = vehicle.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-')
+        // Handle construction vehicles - create modified version for display
+        const displayVehicle = isConstructionVehicle(vehicle.name) ? {
+          ...vehicle,
+          stats: {
+            health: 0,
+            speed: 0,
+            armor: 0,
+            agility: 0,
+            afterburnerSpeed: 0,
+            verticalSpeed: 0,
+            damage: 0,
+            range: 0
+          }
+        } : vehicle;
+
+        const vehicleSlug = displayVehicle.name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-')
         
         // Create a structured message object with new emoji format
         return {
           type: 'vehicle_details',
           vehicle: {
-            name: vehicle.name,
-            image: vehicle.image,
-            type: vehicle.type,
-            faction: vehicle.faction,
-            tier: formatTier(vehicle.tier),
-            description: vehicle.description,
-            isPremium: vehicle.isPremium || false,
-            isMarket: vehicle.isMarket || false,
+            name: displayVehicle.name,
+            image: displayVehicle.image,
+            type: displayVehicle.type,
+            faction: displayVehicle.faction,
+            tier: formatTier(displayVehicle.tier),
+            description: displayVehicle.description,
+            isPremium: displayVehicle.isPremium || false,
+            isMarket: displayVehicle.isMarket || false,
             stats: {
-              health: vehicle.stats.health,
-              speed: vehicle.stats.speed,
-              armor: vehicle.stats.armor,
-              agility: vehicle.stats.agility
+              health: displayVehicle.stats.health,
+              speed: displayVehicle.stats.speed,
+              armor: displayVehicle.stats.armor,
+              agility: displayVehicle.stats.agility
             },
             url: `https://mwt-stats.com/vehicles/${vehicleSlug}`
           },
@@ -10644,6 +10693,35 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           const vehicle2 = searchVehicle(parts[1].trim())
 
           if (vehicle1 && vehicle2) {
+            // Handle construction vehicles - create modified versions for display
+            const displayVehicle1 = isConstructionVehicle(vehicle1.name) ? {
+              ...vehicle1,
+              stats: {
+                health: 0,
+                speed: 0,
+                armor: 0,
+                agility: 0,
+                afterburnerSpeed: 0,
+                verticalSpeed: 0,
+                damage: 0,
+                range: 0
+              }
+            } : vehicle1;
+            
+            const displayVehicle2 = isConstructionVehicle(vehicle2.name) ? {
+              ...vehicle2,
+              stats: {
+                health: 0,
+                speed: 0,
+                armor: 0,
+                agility: 0,
+                afterburnerSpeed: 0,
+                verticalSpeed: 0,
+                damage: 0,
+                range: 0
+              }
+            } : vehicle2;
+            
             const getCountryFlag = (faction: string) => {
               const flags: { [key: string]: string } = {
                 'American': '🇺🇸',
@@ -10663,44 +10741,44 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               type: 'vehicle_comparison',
               vehicles: [
                 {
-                  name: vehicle1.name,
-                  image: vehicle1.image,
-                  faction: vehicle1.faction,
-                  type: vehicle1.type,
-                  tier: formatTier(vehicle1.tier),
-                  flag: getCountryFlag(vehicle1.faction),
+                  name: displayVehicle1.name,
+                  image: displayVehicle1.image,
+                  faction: displayVehicle1.faction,
+                  type: displayVehicle1.type,
+                  tier: formatTier(displayVehicle1.tier),
+                  flag: getCountryFlag(displayVehicle1.faction),
                   stats: {
-                    health: vehicle1.stats.health,
-                    speed: vehicle1.stats.speed,
-                    armor: vehicle1.stats.armor,
-                    agility: vehicle1.stats.agility
+                    health: displayVehicle1.stats.health,
+                    speed: displayVehicle1.stats.speed,
+                    armor: displayVehicle1.stats.armor,
+                    agility: displayVehicle1.stats.agility
                   }
                 },
                 {
-                  name: vehicle2.name,
-                  image: vehicle2.image,
-                  faction: vehicle2.faction,
-                  type: vehicle2.type,
-                  tier: formatTier(vehicle2.tier),
-                  flag: getCountryFlag(vehicle2.faction),
+                  name: displayVehicle2.name,
+                  image: displayVehicle2.image,
+                  faction: displayVehicle2.faction,
+                  type: displayVehicle2.type,
+                  tier: formatTier(displayVehicle2.tier),
+                  flag: getCountryFlag(displayVehicle2.faction),
                   stats: {
-                    health: vehicle2.stats.health,
-                    speed: vehicle2.stats.speed,
-                    armor: vehicle2.stats.armor,
-                    agility: vehicle2.stats.agility
+                    health: displayVehicle2.stats.health,
+                    speed: displayVehicle2.stats.speed,
+                    armor: displayVehicle2.stats.armor,
+                    agility: displayVehicle2.stats.agility
                   }
                 }
               ],
               analysis: {
-                survivability: vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name,
-                survivabilityValue: Math.max(vehicle1.stats.health, vehicle2.stats.health),
-                speed: (vehicle1.stats.speed || 0) > (vehicle2.stats.speed || 0) ? vehicle1.name : vehicle2.name,
-                speedValue: Math.max(vehicle1.stats.speed || 0, vehicle2.stats.speed || 0),
-                agility: (vehicle1.stats.agility || 0) > (vehicle2.stats.agility || 0) ? vehicle1.name : vehicle2.name,
-                agilityValue: Math.max(vehicle1.stats.agility || 0, vehicle2.stats.agility || 0),
-                tier: vehicle1.tier === vehicle2.tier ? "Equal tier" : vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name
+                survivability: displayVehicle1.stats.health > displayVehicle2.stats.health ? displayVehicle1.name : displayVehicle2.name,
+                survivabilityValue: Math.max(displayVehicle1.stats.health, displayVehicle2.stats.health),
+                speed: (displayVehicle1.stats.speed || 0) > (displayVehicle2.stats.speed || 0) ? displayVehicle1.name : displayVehicle2.name,
+                speedValue: Math.max(displayVehicle1.stats.speed || 0, displayVehicle2.stats.speed || 0),
+                agility: (displayVehicle1.stats.agility || 0) > (displayVehicle2.stats.agility || 0) ? displayVehicle1.name : displayVehicle2.name,
+                agilityValue: Math.max(displayVehicle1.stats.agility || 0, displayVehicle2.stats.agility || 0),
+                tier: displayVehicle1.tier === displayVehicle2.tier ? "Equal tier" : displayVehicle1.tier > displayVehicle2.tier ? displayVehicle1.name : displayVehicle2.name
               },
-              recommendation: vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name
+              recommendation: displayVehicle1.stats.health > displayVehicle2.stats.health ? displayVehicle1.name : displayVehicle2.name
             }
           }
         }
@@ -10781,6 +10859,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       setIsLoading(false)
       setChatInput("")
     }, 1000)
+  }
   }
 
   return (
@@ -11444,11 +11523,26 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 const vehicle = VEHICLES.find((v) => v.id.toString() === id);
                 if (!vehicle) return null;
                 
+                // Handle construction vehicles - create modified version for display
+                const displayVehicle = isConstructionVehicle(vehicle.name) ? {
+                  ...vehicle,
+                  stats: {
+                    health: 0,
+                    speed: 0,
+                    armor: 0,
+                    agility: 0,
+                    afterburnerSpeed: 0,
+                    verticalSpeed: 0,
+                    damage: 0,
+                    range: 0
+                  }
+                } : vehicle;
+                
                 const currentUpgradeLevel = upgradeLevels[id] || 0;
-                const upgradedHealth = getUpgradedValue(vehicle, 'health');
-                const upgradedSpeed = getUpgradedValue(vehicle, 'speed');
-                const upgradedAgility = getUpgradedValue(vehicle, 'agility');
-                const upgradedAfterburner = getUpgradedValue(vehicle, 'afterburnerSpeed');
+                const upgradedHealth = getUpgradedValue(displayVehicle, 'health');
+                const upgradedSpeed = getUpgradedValue(displayVehicle, 'speed');
+                const upgradedAgility = getUpgradedValue(displayVehicle, 'agility');
+                const upgradedAfterburner = getUpgradedValue(displayVehicle, 'afterburnerSpeed');
                 
                 return (
                   <div key={id} className={`bg-slate-800/50 rounded-lg p-4 border ${
@@ -11457,8 +11551,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="flex flex-col items-center mb-4">
                       <div className="relative w-full min-h-[300px] max-h-[400px] mb-3 flex items-center justify-center">
                         <img
-                          src={vehicle.image}
-                          alt={vehicle.name}
+                          src={displayVehicle.image}
+                          alt={displayVehicle.name}
                           className="max-w-full max-h-full object-contain"
                           onError={(e) => {
                             e.currentTarget.src = "/placeholder-vehicle.png";
@@ -11476,10 +11570,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
                       <div className="text-center">
                         <h3 className="text-xl font-bold text-cyan-300">
-                          {vehicle.name}
+                          {displayVehicle.name}
                         </h3>
                         <div className="text-sm text-slate-400">
-                          {vehicle.type} • {vehicle.faction} • Tier {formatTier(vehicle.tier)}
+                          {displayVehicle.type} • {displayVehicle.faction} • Tier {formatTier(displayVehicle.tier)}
                         </div>
                       </div>
                     </div>
@@ -11494,7 +11588,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           {currentUpgradeLevel > 0 && (
                             <div className="text-xs mt-0.5">
                               <span className="text-green-400">
-                                +{Math.round((upgradedHealth / vehicle.stats.health - 1) * 100)}%
+                                +{Math.round((upgradedHealth / displayVehicle.stats.health - 1) * 100)}%
                               </span>
                             </div>
                           )}
@@ -11508,7 +11602,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           {currentUpgradeLevel > 0 && (
                             <div className="text-xs mt-0.5">
                               <span className="text-green-400">
-                                +{Math.round((upgradedSpeed / vehicle.stats.speed - 1) * 100)}%
+                                +{Math.round((upgradedSpeed / displayVehicle.stats.speed - 1) * 100)}%
                               </span>
                             </div>
                           )}
@@ -11523,7 +11617,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             {currentUpgradeLevel > 0 && (
                               <div className="text-xs mt-0.5">
                                 <span className="text-green-400">
-                                  +{Math.round((upgradedAfterburner / (vehicle.stats.afterburnerSpeed || upgradedAfterburner) - 1) * 100)}%
+                                  +{Math.round((upgradedAfterburner / (displayVehicle.stats.afterburnerSpeed || upgradedAfterburner) - 1) * 100)}%
                                 </span>
                               </div>
                             )}
@@ -11538,7 +11632,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           {currentUpgradeLevel > 0 && (
                             <div className="text-xs mt-0.5">
                               <span className="text-green-400">
-                                +{Math.round((upgradedAgility / (vehicle.stats.agility || upgradedAgility) - 1) * 100)}%
+                                +{Math.round((upgradedAgility / (displayVehicle.stats.agility || upgradedAgility) - 1) * 100)}%
                               </span>
                             </div>
                           )}
@@ -11822,7 +11916,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          const raw = prompt('Edit Health (number)', String(vehicle.stats.health));
+                          const raw = prompt('Edit Health (number)', String(displayVehicle.stats.health));
                           if (raw !== null) {
                             const val = parseInt(raw, 10);
                             if (!isNaN(val)) saveEdit(vehicle.id, 'stats.health', val);
@@ -11848,7 +11942,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              const raw = prompt('Edit Cruise Speed (km/h)', String(vehicle.stats.speed));
+                              const raw = prompt('Edit Cruise Speed (km/h)', String(displayVehicle.stats.speed));
                               if (raw !== null) {
                                 const val = parseInt(raw, 10);
                                 if (!isNaN(val)) saveEdit(vehicle.id, 'stats.speed', val);
@@ -11871,7 +11965,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              const raw = prompt('Edit Afterburner Speed (km/h)', String(vehicle.stats.afterburnerSpeed));
+                              const raw = prompt('Edit Afterburner Speed (km/h)', String(displayVehicle.stats.afterburnerSpeed));
                               if (raw !== null) {
                                 const val = parseInt(raw, 10);
                                 if (!isNaN(val)) saveEdit(vehicle.id, 'stats.afterburnerSpeed', val);
@@ -11897,7 +11991,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              const raw = prompt('Edit Cruise Speed (km/h)', String(vehicle.stats.speed));
+                              const raw = prompt('Edit Cruise Speed (km/h)', String(displayVehicle.stats.speed));
                               if (raw !== null) {
                                 const val = parseInt(raw, 10);
                                 if (!isNaN(val)) saveEdit(vehicle.id, 'stats.speed', val);
@@ -11920,7 +12014,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              const raw = prompt('Edit Vertical Speed (m/s)', String(vehicle.stats.verticalSpeed || '0'));
+                              const raw = prompt('Edit Vertical Speed (m/s)', String(displayVehicle.stats.verticalSpeed || '0'));
                               if (raw !== null) {
                                 const val = parseFloat(raw);
                                 if (!isNaN(val as any)) saveEdit(vehicle.id, 'stats.verticalSpeed', val);
@@ -11946,7 +12040,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              const raw = prompt('Edit Speed (km/h)', String(vehicle.stats.speed));
+                              const raw = prompt('Edit Speed (km/h)', String(displayVehicle.stats.speed));
                               if (raw !== null) {
                                 const val = parseInt(raw, 10);
                                 if (!isNaN(val)) saveEdit(vehicle.id, 'stats.speed', val);
@@ -11969,7 +12063,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              const next = prompt('Edit Armor (e.g., "1100mm")', String(vehicle.stats.armor || ''));
+                              const next = prompt('Edit Armor (e.g., "1100mm")', String(displayVehicle.stats.armor || ''));
                               if (next !== null) {
                                 saveEdit(vehicle.id, 'stats.armor', next);
                               }
@@ -11994,7 +12088,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          const raw = prompt('Edit Agility (0-100)', String(vehicle.stats.agility));
+                          const raw = prompt('Edit Agility (0-100)', String(displayVehicle.stats.agility));
                           if (raw !== null) {
                             const val = parseInt(raw, 10);
                             if (!isNaN(val)) saveEdit(vehicle.id, 'stats.agility', val);
