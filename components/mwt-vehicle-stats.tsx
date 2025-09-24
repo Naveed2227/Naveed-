@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages } from "lucide-react"
 import { useRouter } from "next/navigation"
+import Script from "next/script"
 import { vehicleCurrencyData } from './currency'
 import { urduTranslations, getUrduTranslation } from './Urdu'
 import { englishTranslations, getEnglishTranslation } from './English'
@@ -10832,6 +10833,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
+      
+      {/* Construction Protection Script */}
+      <Script 
+        src="/js/constructionProtection.min.js" 
+        strategy="afterInteractive" 
+        onLoad={() => console.log('Construction protection script loaded')}
+        onError={(e) => console.error('Failed to load construction protection script:', e)}
+      />
       
       {/* Burger Menu Button */}
       <button
