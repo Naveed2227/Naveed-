@@ -9182,7 +9182,7 @@ const getFlagImage = (faction: string): string => {
     Iranian: "/Iranian-flag.png",
     Polish: "/Poland-flag.webp",
     SouthKorean: "/SouthKorea-flag.jpg",
-    Indian: "/Indian.png",
+    Indian: "/India.png",
     Pakistani: "/Pakistan.png",
   
   
