@@ -1287,8 +1287,8 @@ const VEHICLES_DATA = [
       { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 1000 },
       { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1200 },
       { name: "LEAD1", type: "Main Gun", damage: 10800, penetration: 850 },
-      { name: "VOG-17M", type: "Missile", damage: 2400, penetration: 60, reload: 1.7 },
-      { name: "VOG-30", type: "Missile", damage: 2700, penetration: 76, reload: 1.7 }
+      { name: "VOG-17M", type: "Missile", damage: 1600, penetration: 60, reload: 1.7 },
+      { name: "VOG-30", type: "Missile", damage: 1800, penetration: 76, reload: 1.7 }
 
     ],
     modules: {
@@ -1450,10 +1450,10 @@ const VEHICLES_DATA = [
     stats: { health: 36400, speed: 60, armor: "850mm", agility: 38 },
     weapons: [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
-      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
-      { name: "M929", type: "Main Gun", damage: 550, penetration: 189 },
-      { name: "9M120 Ataka", type: "Missile", damage: 9500, penetration: 750, reload: 6 }
+      { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
+      { name: "9M120 Ataka", type: "Missile", damage: 3900, penetration: 750, reload: 6 }
 
     ],
     modules: {
@@ -1552,7 +1552,7 @@ const VEHICLES_DATA = [
     stats: { health: 32500, speed: 70, armor: "420mm", agility: 35 },
     weapons: [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
-      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
       { name: "AAM 57E6M", type: "Missile", damage: 8910, penetration: 95, reload: 18 }
     ],
@@ -1584,10 +1584,10 @@ const VEHICLES_DATA = [
     description: "Mobile gun system with rapid deployment capability and stealth features.",
     stats: { health: 28800, speed: 97, armor: "380mm", agility: 40.1 },
     weapons: [
-      { name: "M392A2", type: "Main Gun", damage: 8510, penetration: 372 },
-      { name: "M393A2", type: "Main Gun", damage: 10090, penetration: 127 },
-      { name: "M456A2", type: "Main Gun", damage: 9320, penetration: 400 },
-      { name: "M900", type: "Main Gun", damage: 8910, penetration: 522 }
+      { name: "M392A2", type: "Main Gun", damage: 9480, penetration: 372 },
+      { name: "M393A2", type: "Main Gun", damage: 10340, penetration: 127 },
+      { name: "M456A2", type: "Main Gun", damage: 10890, penetration: 400 },
+      { name: "M900", type: "Main Gun", damage: 10320, penetration: 582 }
     ],
     modules: {
       engine: [
@@ -1814,8 +1814,8 @@ const VEHICLES_DATA = [
     description: "A heavily upgraded British main battle tank with advanced armor for urban warfare.",
     stats: { health: 42700, speed: 56, armor: "1120mm", agility: 30 },
     weapons: [
-      { name: "L26", type: "Main Gun", damage: 11000, penetration: 500 },
-      { name: "L27A1", type: "Main Gun", damage: 11600, penetration: 610 },
+      { name: "L26", type: "Main Gun", damage: 11600, penetration: 494 },
+      { name: "L27A1", type: "Main Gun", damage: 11850, penetration: 610 },
       { name: "L31A7", type: "Main Gun", damage: 13800, penetration: 160 }
     ],
     modules: {
@@ -2021,11 +2021,11 @@ const VEHICLES_DATA = [
     },
     "weapons": [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
-      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
-      { name: "M929", type: "Main Gun", damage: 550, penetration: 189 },
-      { name: "VOG-17M", type: "Missile", damage: 2400, penetration: 60, reload: 1.7 },
-      { name: "VOG-30", type: "Missile", damage: 2700, penetration: 76, reload: 1.7 }
+      { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
+      { name: "VOG-17M", type: "Missile", damage: 1600, penetration: 60, reload: 1.7 },
+      { name: "VOG-30", type: "Missile", damage: 1800, penetration: 76, reload: 1.7 }
     ],
     "modules": {
       "engine": [
@@ -2219,10 +2219,10 @@ const VEHICLES_DATA = [
       "agility": 30
     },
     "weapons": [
-      { name: "M392A2", type: "Main Gun", damage: 8510, penetration: 372 },
-      { name: "M393A2", type: "Main Gun", damage: 10090, penetration: 127 },
-      { name: "M456A2", type: "Main Gun", damage: 9320, penetration: 400 },
-      { name: "M900", type: "Main Gun", damage: 8910, penetration: 522 },
+      { name: "M392A2", type: "Main Gun", damage: 9480, penetration: 372 },
+      { name: "M393A2", type: "Main Gun", damage: 10340, penetration: 127 },
+      { name: "M456A2", type: "Main Gun", damage: 10890, penetration: 400 },
+      { name: "M900", type: "Main Gun", damage: 10320, penetration: 582 },
       { name: "SwitchBlade 300", type: "Missile", damage: 5700, penetration: 190, reload: 12.4 }
     ],
     "modules": {
@@ -2570,7 +2570,7 @@ const VEHICLES_DATA = [
   },
   "weapons": [
     { name: "BR-281SP", type: "Main Gun", damage: 1560, penetration: 147 },
-    { name: "BR-281U", type: "Main Gun", damage: 1404, penetration: 156 },
+    { name: "BR-281U", type: "Main Gun", damage: 1400, penetration: 156 },
     { name: "OR-281", type: "Main Gun", damage: 2106, penetration: 83 },
     { name: "9K135 Kornet", type: "Missile", damage: 10410, penetration: 1000, reload: 8 }
 
@@ -2615,7 +2615,7 @@ const VEHICLES_DATA = [
    { name: "M791", type: "Main Gun", damage: 473, penetration: 111 },
    { name: "M792", type: "Main Gun", damage: 608, penetration: 48 },
    { name: "M919", type: "Main Gun", damage: 495, penetration: 140 },
-   { name: "MIM-146", type: "Missile", damage: 11400, penetration: 750, reload: 18 }
+   { name: "MIM-146", type: "Missile", damage: 12120, penetration: 900, reload: 18 }
 
   ],
   "modules": {
@@ -2685,7 +2685,7 @@ const VEHICLES_DATA = [
     description: "Night hunter attack helicopter with all-weather combat capability.",
     stats: { health: 25480, speed: 229, verticalSpeed: 15, agility: 46 },
     weapons: [
-      { name: "9M120 Ataka-V", type: "ATGM", damage: 17800, penetration: 1200 },
+      { name: "9M120 Ataka-V", type: "ATGM", damage: 3900, penetration: 1200 },
       { name: "S-13 Rockets", type: "Rocket Pod", damage: 9200, penetration: 420 },
       { name: "2A42 30mm", type: "Autocannon", damage: 450, penetration: 80, rateOfFire: "550 rpm" },
     ],
@@ -2782,7 +2782,7 @@ const VEHICLES_DATA = [
     description: "Stealth attack helicopter with advanced composite materials and reduced signature.",
     stats: { health: 25480, speed: 252, verticalSpeed: 17, agility: 50 },
     weapons: [
-      { name: "9M120 Ataka-V", type: "ATGM", damage: 18200, penetration: 1220 },
+      { name: "9M120 Ataka-V", type: "ATGM", damage: 3900, penetration: 1220 },
       { name: "S-25 Rockets", type: "Heavy Rocket Pod", damage: 12500, penetration: 580 },
       { name: "2A42 30mm", type: "Autocannon", damage: 480, penetration: 85, rateOfFire: "550 rpm" },
     ],
@@ -3972,7 +3972,7 @@ const VEHICLES_DATA = [
     "weapons": [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
-      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
       { name: "ZUR 9M311", type: "Missile", damage: 8100, penetration: 69, reload: 24 }
     ],
     "modules": {
@@ -4345,7 +4345,7 @@ const VEHICLES_DATA = [
       { name: "ZUBR6 APBC", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "Z0F8", type: "Main Gun", damage: 675, penetration: 50 },
       { name: "ZUBR8", type: "Main Gun", damage: 525, penetration: 165 },
-      { name: "M929", type: "Main Gun", damage: 680, penetration: 189 },
+      { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
       { name: "HJ-73B", type: "Missile", damage: 7800, penetration: 500, reload: 6 }
 
     ],
@@ -4377,7 +4377,7 @@ const VEHICLES_DATA = [
       { name: "ZUBR6 APBC", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "Z0F8", type: "Main Gun", damage: 675, penetration: 50 },
       { name: "ZUBR8", type: "Main Gun", damage: 525, penetration: 165 },
-      { name: "M929", type: "Main Gun", damage: 680, penetration: 189 },
+      { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
       { name: "HJ-73B", type: "Missile", damage: 7800, penetration: 500, reload: 6 }
 
     ],
@@ -4496,9 +4496,9 @@ const VEHICLES_DATA = [
     stats: { health: 24000, speed: 70, armor: "420mm", agility: 40 },
     weapons: [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
-      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
-      { name: "M929", type: "Main Gun", damage: 680, penetration: 189 },
+      { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
       { name: "9K135 Kornet", type: "Missile", damage: 9473, penetration: 1000, reload: 8 },
       { name: "AGS-17", type: "Missile", damage: 2640, penetration: 50, reload: 6 }
     ],
@@ -4600,7 +4600,7 @@ const VEHICLES_DATA = [
     penetration: 180, reload: 15 },
     { name: "KAB-250", type: "Missile", damage: 14900, 
     penetration: 130, reload: 25 },
-    { name: "9M120 Attack", type: "Missile", damage: 7500, 
+    { name: "9M120 Attack", type: "Missile", damage: 3900, 
     penetration: 850, reload: 25 },
     { name: "Attack ATGM", type: "Missile", damage: 7500, 
     penetration: 850, reload: 30 },
@@ -4854,7 +4854,7 @@ const VEHICLES_DATA = [
   stats: { health: 21840, speed: 222, verticalSpeed: 53, agility: 50 },
   weapons: [
     { name: "Ataka / Ataka-V ATGM", type: "ATGM", damage: 3000, penetration: 180 },
-    { name: "9M120 / Vikhr ATGM", type: "ATGM", damage: 3200, penetration: 200 },
+    { name: "9M120 / Vikhr ATGM", type: "ATGM", damage: 3900, penetration: 200 },
     { name: "30mm 2A42 Gun", type: "Autocannon", damage: 180, penetration: 25 },
     { name: "S-8 Rocket Pod", type: "Rocket Pod", damage: 800, penetration: 50 },
     { name: "S-13 Rocket Pod", type: "Rocket Pod", damage: 850, penetration: 55 }
@@ -8230,7 +8230,7 @@ const VEHICLES_DATA = [
       {
         "name": "BR-281U APHE",
         "type": "Main Gun",
-        "damage": 1080,
+        "damage": 1400,
         "penetration": 156,
         "reload": 0
       }
