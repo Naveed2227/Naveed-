@@ -13445,7 +13445,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     </div>
                   </div>
                 ))}
-                )}
+                }
               </div>
             </div>
           </div>
