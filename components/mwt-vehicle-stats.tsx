@@ -293,7 +293,7 @@ const BATTLE_PASSES = [
  {
     id: 11,
     month: "October 2025",
-    name: "",
+    name: "Falling Thunder",
     image: "2025-Oct.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
     vehicles: ["Leopard 2A8", "X2 Shinshin"], // Vehicle IDs from VEHICLES array
