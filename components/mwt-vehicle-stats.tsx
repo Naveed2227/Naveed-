@@ -9630,8 +9630,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
 
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
-    
-      "Al-Khalid"
+   
       "K2 Black Panther",
       "K21 KNIFV",
       "Leopard 2A8",
@@ -9642,6 +9641,27 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       "Strf 9040 BILL"
     ]
     return constructionVehicles.includes(vehicleName)
+  }
+
+  // Helper function to create display vehicle with consistent masking for construction vehicles
+  const createDisplayVehicle = (vehicle: any) => {
+    if (isConstructionVehicle(vehicle.name)) {
+      return {
+        ...vehicle,
+        stats: {
+          health: 0,
+          speed: 0,
+          armor: 0,
+          agility: 0,
+          afterburnerSpeed: 0,
+          verticalSpeed: 0,
+          damage: 0,
+          range: 0
+        },
+        weapons: []
+      };
+    }
+    return vehicle;
   }
 
 
@@ -11414,11 +11434,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 const vehicle = VEHICLES.find((v) => v.id.toString() === id);
                 if (!vehicle) return null;
                 
+                // Handle construction vehicles in comparison section
+                const displayVehicle = createDisplayVehicle(vehicle);
+                
                 const currentUpgradeLevel = upgradeLevels[id] || 0;
-                const upgradedHealth = getUpgradedValue(vehicle, 'health');
-                const upgradedSpeed = getUpgradedValue(vehicle, 'speed');
-                const upgradedAgility = getUpgradedValue(vehicle, 'agility');
-                const upgradedAfterburner = getUpgradedValue(vehicle, 'afterburnerSpeed');
+                const upgradedHealth = getUpgradedValue(displayVehicle, 'health');
+                const upgradedSpeed = getUpgradedValue(displayVehicle, 'speed');
+                const upgradedAgility = getUpgradedValue(displayVehicle, 'agility');
+                const upgradedAfterburner = getUpgradedValue(displayVehicle, 'afterburnerSpeed');
                 
                 return (
                   <div key={id} className={`bg-slate-800/50 rounded-lg p-4 border ${
@@ -11464,7 +11487,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           {currentUpgradeLevel > 0 && (
                             <div className="text-xs mt-0.5">
                               <span className="text-green-400">
-                                +{Math.round((upgradedHealth / vehicle.stats.health - 1) * 100)}%
+                                +{Math.round((upgradedHealth / (displayVehicle.stats.health || upgradedHealth) - 1) * 100)}%
                               </span>
                             </div>
                           )}
@@ -11478,7 +11501,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           {currentUpgradeLevel > 0 && (
                             <div className="text-xs mt-0.5">
                               <span className="text-green-400">
-                                +{Math.round((upgradedSpeed / vehicle.stats.speed - 1) * 100)}%
+                                +{Math.round((upgradedSpeed / (displayVehicle.stats.speed || upgradedSpeed) - 1) * 100)}%
                               </span>
                             </div>
                           )}
@@ -11493,7 +11516,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             {currentUpgradeLevel > 0 && (
                               <div className="text-xs mt-0.5">
                                 <span className="text-green-400">
-                                  +{Math.round((upgradedAfterburner / (vehicle.stats.afterburnerSpeed || upgradedAfterburner) - 1) * 100)}%
+                                  +{Math.round((upgradedAfterburner / (displayVehicle.stats.afterburnerSpeed || upgradedAfterburner) - 1) * 100)}%
                                 </span>
                               </div>
                             )}
@@ -11508,7 +11531,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           {currentUpgradeLevel > 0 && (
                             <div className="text-xs mt-0.5">
                               <span className="text-green-400">
-                                +{Math.round((upgradedAgility / (vehicle.stats.agility || upgradedAgility) - 1) * 100)}%
+                                +{Math.round((upgradedAgility / (displayVehicle.stats.agility || upgradedAgility) - 1) * 100)}%
                               </span>
                             </div>
                           )}
@@ -11524,44 +11547,47 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               const vehicle1 = VEHICLES.find((v) => v.id.toString() === compare[0])
               const vehicle2 = VEHICLES.find((v) => v.id.toString() === compare[1])
               if (vehicle1 && vehicle2) {
-                const generateComparisonAnalysis = (vehicle1: any, vehicle2: any): string => {
-                  const healthWinner = vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name
-                  const speedWinner = vehicle1.stats.speed > vehicle2.stats.speed ? vehicle1.name : vehicle2.name
-                  const agilityWinner = vehicle1.stats.agility > vehicle2.stats.agility ? vehicle1.name : vehicle2.name
+                // Use display vehicles for construction vehicle masking
+                const displayVehicle1 = createDisplayVehicle(vehicle1)
+                const displayVehicle2 = createDisplayVehicle(vehicle2)
+                const generateComparisonAnalysis = (displayVehicle1: any, displayVehicle2: any): string => {
+                  const healthWinner = displayVehicle1.stats.health > displayVehicle2.stats.health ? displayVehicle1.name : displayVehicle2.name
+                  const speedWinner = displayVehicle1.stats.speed > displayVehicle2.stats.speed ? displayVehicle1.name : displayVehicle2.name
+                  const agilityWinner = displayVehicle1.stats.agility > displayVehicle2.stats.agility ? displayVehicle1.name : displayVehicle2.name
 
                   let analysis = `🤖 AI TACTICAL ANALYSIS\n\n`
 
                   // Performance comparison
                   analysis += `PERFORMANCE OVERVIEW:\n`
-                  analysis += `• Survivability: ${healthWinner} dominates with ${healthWinner === vehicle1.name ? vehicle1.stats.health.toLocaleString() : vehicle2.stats.health.toLocaleString()} HP\n`
-                  analysis += `• Mobility: ${speedWinner} leads with ${speedWinner === vehicle1.name ? vehicle1.stats.speed : vehicle2.stats.speed} km/h\n`
-                  analysis += `• Maneuverability: ${agilityWinner} excels with ${agilityWinner === vehicle1.name ? vehicle1.stats.agility : vehicle2.stats.agility} agility\n\n`
+                  analysis += `• Survivability: ${healthWinner} dominates with ${healthWinner === displayVehicle1.name ? displayVehicle1.stats.health.toLocaleString() : displayVehicle2.stats.health.toLocaleString()} HP\n`
+                  analysis += `• Mobility: ${speedWinner} leads with ${speedWinner === displayVehicle1.name ? displayVehicle1.stats.speed : displayVehicle2.stats.speed} km/h\n`
+                  analysis += `• Maneuverability: ${agilityWinner} excels with ${agilityWinner === displayVehicle1.name ? displayVehicle1.stats.agility : displayVehicle2.stats.agility} agility\n\n`
 
                   // Tactical analysis
                   analysis += `TACTICAL ASSESSMENT:\n`
-                  if (vehicle1.type === vehicle2.type) {
-                    analysis += `Both are ${vehicle1.type}s, making this a direct role comparison. `
+                  if (displayVehicle1.type === displayVehicle2.type) {
+                    analysis += `Both are ${displayVehicle1.type}s, making this a direct role comparison. `
                   } else {
-                    analysis += `Cross-role comparison: ${vehicle1.type} vs ${vehicle2.type}. `
+                    analysis += `Cross-role comparison: ${displayVehicle1.type} vs ${displayVehicle2.type}. `
                   }
 
                   // Tier analysis
-                  if (vehicle1.tier === vehicle2.tier) {
-                    analysis += `Same tier (${vehicle1.tier}) vehicles with balanced matchup potential.\n`
+                  if (displayVehicle1.tier === displayVehicle2.tier) {
+                    analysis += `Same tier (${displayVehicle1.tier}) vehicles with balanced matchup potential.\n`
                   } else {
-                    const higherTier = vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name
+                    const higherTier = displayVehicle1.tier > displayVehicle2.tier ? displayVehicle1.name : displayVehicle2.name
                     analysis += `${higherTier} has tier advantage, expect superior technology and capabilities.\n`
                   }
 
                   // Weapon analysis
                   analysis += `\nWEAPON SYSTEMS:\n`
-                  analysis += `• ${vehicle1.name}: ${vehicle1.weapons.length} weapon systems\n`
-                  analysis += `• ${vehicle2.name}: ${vehicle2.weapons.length} weapon systems\n`
+                  analysis += `• ${displayVehicle1.name}: ${displayVehicle1.weapons.length} weapon systems\n`
+                  analysis += `• ${displayVehicle2.name}: ${displayVehicle2.weapons.length} weapon systems\n`
 
                   // Faction analysis
-                  if (vehicle1.faction !== vehicle2.faction) {
+                  if (displayVehicle1.faction !== displayVehicle2.faction) {
                     analysis += `\nFACTION DOCTRINE:\n`
-                    analysis += `${vehicle1.faction} vs ${vehicle2.faction} represents different military philosophies and engineering approaches.`
+                    analysis += `${displayVehicle1.faction} vs ${displayVehicle2.faction} represents different military philosophies and engineering approaches.`
                   }
 
                   return analysis
@@ -11572,7 +11598,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       🤖 AI Tactical Analysis System (AITAS)
                     </h3>
                     <div className="text-slate-300 text-sm whitespace-pre-line leading-relaxed">
-                      {generateComparisonAnalysis(vehicle1, vehicle2)}
+                      {generateComparisonAnalysis(displayVehicle1, displayVehicle2)}
                     </div>
                   </div>
                 )
@@ -11597,7 +11623,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
 
         <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {paginatedVehicles.map((vehicle) => (
+          {paginatedVehicles.map((vehicle) => {
+            // Handle construction vehicles in grid cards
+            const displayVehicle = createDisplayVehicle(vehicle);
+            return (
             <motion.div
               key={vehicle.id}
               initial={{ opacity: 0, y: 20 }}
@@ -11771,7 +11800,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <div className="bg-slate-800/50 rounded-lg p-3">
                   <div className="text-xs text-slate-400 mb-1">Health</div>
                   <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                    {vehicle.stats.health.toLocaleString()}
+                    {displayVehicle.stats.health.toLocaleString()}
                     {isEditor && isEditMode && (
                       <button
                         onClick={(e) => {
@@ -11797,7 +11826,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Cruise Speed</div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.speed} km/h
+                        {displayVehicle.stats.speed} km/h
                         {isEditor && isEditMode && (
                           <button
                             onClick={(e) => {
@@ -11820,7 +11849,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Afterburner Speed</div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.afterburnerSpeed} km/h
+                        {displayVehicle.stats.afterburnerSpeed} km/h
                         {isEditor && isEditMode && (
                           <button
                             onClick={(e) => {
@@ -11846,7 +11875,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Cruise Speed</div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.speed} km/h
+                        {displayVehicle.stats.speed} km/h
                         {isEditor && isEditMode && (
                           <button
                             onClick={(e) => {
@@ -11869,7 +11898,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Vertical Speed</div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.verticalSpeed || 'N/A'} m/s
+                        {displayVehicle.stats.verticalSpeed || 'N/A'} m/s
                         {isEditor && isEditMode && (
                           <button
                             onClick={(e) => {
@@ -11895,7 +11924,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Speed</div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.speed} km/h
+                        {displayVehicle.stats.speed} km/h
                         {isEditor && isEditMode && (
                           <button
                             onClick={(e) => {
@@ -11918,7 +11947,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <div className="bg-slate-800/50 rounded-lg p-3">
                       <div className="text-xs text-slate-400 mb-1">Armor</div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.armor}
+                        {displayVehicle.stats.armor}
                         {isEditor && isEditMode && (
                           <button
                             onClick={(e) => {
@@ -11943,7 +11972,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <div className="bg-slate-800/50 rounded-lg p-3">
                   <div className="text-xs text-slate-400 mb-1">Agility</div>
                   <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                    {vehicle.stats.agility}
+                    {displayVehicle.stats.agility}
                     {isEditor && isEditMode && (
                       <button
                         onClick={(e) => {
@@ -12087,7 +12116,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </motion.div>
               )}
             </motion.div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Pagination */}
@@ -12701,20 +12731,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           if (!vehicle) return null;
           
           // Handle construction vehicles - create modified version with all stats set to 0 and no weapons
-          const displayVehicle = isConstructionVehicle(vehicle.name) ? {
-            ...vehicle,
-            stats: {
-              health: 0,
-              speed: 0,
-              armor: 0,
-              agility: 0,
-              afterburnerSpeed: 0,
-              verticalSpeed: 0,
-              damage: 0,
-              range: 0
-            },
-            weapons: []
-          } : vehicle;
+          const displayVehicle = createDisplayVehicle(vehicle);
           
           return (
             <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
@@ -13309,12 +13326,19 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           );
         })()}
 
-        {weaponsModalOpenId && (
+        {weaponsModalOpenId && (() => {
+          const vehicle = VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId);
+          if (!vehicle) return null;
+          
+          // Handle construction vehicles in weapons modal
+          const displayVehicle = createDisplayVehicle(vehicle);
+          
+          return (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
             <div ref={vehicleDetailsModalRef} className="bg-slate-900 rounded-xl p-6 w-full max-w-6xl max-h-[90vh] overflow-y-auto border border-slate-700">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-white">
-                  {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.name} - Weapons
+                  {displayVehicle.name} - Weapons
                 </h3>
                 <button
                   onClick={() => setWeaponsModalOpenId(null)}
@@ -13325,7 +13349,13 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               </div>
 
               <div className="space-y-4">
-                {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon, index) => (
+                {displayVehicle.weapons.length === 0 ? (
+                  <div className="text-center py-8">
+                    <div className="text-slate-400 text-lg">No weapons</div>
+                    <div className="text-slate-500 text-sm mt-2">This vehicle has no weapon systems</div>
+                  </div>
+                ) : (
+                  displayVehicle.weapons.map((weapon, index) => (
                   <div key={index} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
                     <div className="flex items-center justify-between mb-2">
                       <h4 className="text-lg font-semibold text-cyan-300">{weapon.name}</h4>
@@ -13415,10 +13445,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     </div>
                   </div>
                 ))}
+                )}
               </div>
             </div>
           </div>
-        )}
+          );
+        })()}
       </main>
     </div>
   )
