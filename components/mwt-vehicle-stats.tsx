@@ -10906,14 +10906,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       }
 
       // Default response with clean formatting
-      return `**MWT AI Tactical Analysis System**\n\n` +
-             `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n` +
-             `**Try asking:**\n` +
-             `• "What's the fastest tank?" - Performance analysis\n` +
-             `• "Su-57M vs F-22" - Combat comparison\n` +
-             `• "Best Chinese vehicle" - Nation rankings\n` +
-             `• "Tier IV vehicles" - Category listings\n\n` +
-             `What would you like to analyze?`
+      else {
+        return `**MWT AI Tactical Analysis System**\n\n` +
+               `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n` +
+               `**Try asking:**\n` +
+               `• "What's the fastest tank?" - Performance analysis\n` +
+               `• "Su-57M vs F-22" - Combat comparison\n` +
+               `• "Best Chinese vehicle" - Nation rankings\n` +
+               `• "Tier IV vehicles" - Category listings\n\n` +
+               `What would you like to analyze?`
+      }
     }
 
     setTimeout(() => {
