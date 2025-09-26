@@ -11413,16 +11413,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   Sign In
                 </button>
               )}
-              <div className="pb-4 sm:pb-6 w-full">
-                <div className="flex flex-col lg:flex-row gap-3 sm:gap-4 md:gap-6 items-start lg:items-center justify-between">
-                  <div className="relative w-full lg:w-80 xl:w-96 flex-1">
-                    <Search className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-red-400 w-4 h-4 sm:w-5 sm:h-5" />
+              <div className="pb-4 w-full">
+                <div className="flex flex-col lg:flex-row gap-3 md:gap-4 items-start lg:items-center justify-between">
+                  <div className="relative w-full lg:w-64 xl:w-80 flex-1">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-400 w-4 h-4" />
                     <input
                       type="text"
                       placeholder="Search vehicles..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-9 sm:pl-10 md:pl-12 pr-10 sm:pr-12 py-2 sm:py-2.5 md:py-3 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm md:text-base touch-manipulation"
+                      className="pl-10 pr-10 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm touch-manipulation w-fulll"
                     />
                     {searchQuery && (
                       <button
@@ -11430,17 +11430,17 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           setSearchQuery("");
                           setExpandedVehicle("");
                         }}
-                        className="absolute right-2 sm:right-3 md:right-4 top-1/2 transform -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white rounded-sm flex items-center justify-center text-xs md:text-sm font-bold transition-colors w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 touch-manipulation"
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white rounded-sm flex items-center justify-center text-xs font-bold transition-colors w-6 h-6 touch-manipulation"
                       >
                         ×
                       </button>
                     )}
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full lg:w-auto">
+                  <div className="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
                     <select
                       value={typeFilter}
                       onChange={(e) => setTypeFilter(e.target.value)}
-                      className="w-full sm:w-auto md:w-48 lg:w-56 px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm md:text-base touch-manipulation"
+                      className="w-full sm:w-auto md:w-40 px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm touch-manipulation lg:w-32"
                     >
                       <option value="">All Types</option>
                       {types.map((type) => (
@@ -11452,7 +11452,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <select
                       value={tierFilter}
                       onChange={(e) => setTierFilter(e.target.value)}
-                      className="w-full sm:w-auto md:w-48 lg:w-56 px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm md:text-base touch-manipulation"
+                      className="w-full sm:w-auto md:w-40 px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm touch-manipulation lg:w-32"
                     >
                       <option value="">All Tiers</option>
                       {tiers.map((tier) => (
@@ -11464,7 +11464,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <select
                       value={countryFilter}
                       onChange={(e) => setCountryFilter(e.target.value)}
-                      className="w-full sm:w-auto md:w-48 lg:w-56 px-3 sm:px-4 py-2 sm:py-2.5 md:py-3 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm md:text-base touch-manipulation"
+                      className="w-full sm:w-auto md:w-40 lg:w-44 px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm touch-manipulation"
                     >
                       <option value="">All Countries</option>
                       {countries.map((country) => (
@@ -11773,14 +11773,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           </div>
         )}
 
-        <div className="mb-4 sm:mb-5 md:mb-6 flex items-center justify-between">
-          <p className="text-slate-400 text-sm sm:text-base mx-1.5 sm:mx-2">
+        <div className="mb-6 flex items-center justify-between">
+          <p className="text-slate-400 mx-1.5">
             Showing {indexOfFirstVehicle + 1}-{Math.min(indexOfLastVehicle, filteredVehicles.length)} of{" "}
             {filteredVehicles.length} vehicles
           </p>
         </div>
 
-        <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {paginatedVehicles.map((vehicle) => (
             <motion.div
               key={vehicle.id}
@@ -12275,13 +12275,13 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
 
         {/* Pagination */}
-        <div className="flex justify-center flex-row mx-2 sm:mx-4 mt-2 sm:mt-3 leading-9">
-          <div className="flex gap-1 sm:gap-1.5 items-center flex-wrap justify-center">
+        <div className="flex justify-center flex-row mx-2 sm:mx-4 mt-2.5 leading-9">
+          <div className="flex gap-1 items-center flex-wrap justify-center">
             {/* Previous Button */}
             <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
-              className={`px-2 sm:px-3 py-2 text-xs sm:text-sm rounded transition-colors touch-manipulation ${
+              className={`px-3 py-2 text-sm rounded transition-colors ${
                 currentPage === 1 
                   ? "bg-slate-800 text-slate-500 cursor-not-allowed" 
                   : "bg-slate-700 text-slate-300 hover:bg-slate-600"
@@ -12291,7 +12291,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             </button>
 
             {/* Compact Page Numbers - Hidden on Mobile */}
-            <div className="hidden sm:flex gap-1 sm:gap-1.5 items-center">
+            <div className="hidden md:flex gap-1 items-center">
               {(() => {
                 const totalPages = Math.ceil(filteredVehicles.length / vehiclesPerPage);
                 const current = currentPage;
@@ -12333,7 +12333,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 return pages.map((page, index) => {
                   if (page === '...') {
                     return (
-                      <span key={`ellipsis-${index}`} className="px-1.5 sm:px-2 py-1 text-slate-400 text-xs sm:text-sm">
+                      <span key={`ellipsis-${index}`} className="px-2 py-1 text-slate-400 text-sm">
                         ...
                       </span>
                     );
@@ -12342,7 +12342,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`px-2 sm:px-3 py-2 text-xs sm:text-sm rounded transition-colors mr-0.5 touch-manipulation ${
+                      className={`px-3 py-2 text-sm rounded transition-colors mr-0.5 ${
                         currentPage === page 
                           ? "bg-cyan-700 text-white" 
                           : "bg-slate-700 text-slate-300 hover:bg-slate-600"
@@ -12356,7 +12356,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             </div>
 
             {/* Current Page Indicator - Visible on Mobile */}
-            <div className="sm:hidden px-2 sm:px-3 py-2 bg-slate-800 text-slate-300 rounded text-xs sm:text-sm mx-2">
+            <div className="md:hidden px-3 py-2 bg-slate-800 text-slate-300 rounded text-sm mx-2">
               {currentPage} / {Math.ceil(filteredVehicles.length / vehiclesPerPage)}
             </div>
 
@@ -12364,7 +12364,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             <button
               onClick={() => setCurrentPage(Math.min(Math.ceil(filteredVehicles.length / vehiclesPerPage), currentPage + 1))}
               disabled={currentPage === Math.ceil(filteredVehicles.length / vehiclesPerPage)}
-              className={`px-2 sm:px-3 py-2 text-xs sm:text-sm rounded transition-colors touch-manipulation ${
+              className={`px-3 py-2 text-sm rounded transition-colors ${
                 currentPage === Math.ceil(filteredVehicles.length / vehiclesPerPage)
                   ? "bg-slate-800 text-slate-500 cursor-not-allowed" 
                   : "bg-slate-700 text-slate-300 hover:bg-slate-600"
