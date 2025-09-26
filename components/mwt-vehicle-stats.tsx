@@ -11085,11 +11085,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
-        className={`fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-purple-400 flex items-center justify-center min-h-[100px] min-w-[36px] sm:min-h-[120px] sm:min-w-[42px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r ${isMenuOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
+        className={`fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-purple-400 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r ${isMenuOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
       >
         {/* Mobile: Compact icon + text */}
-        <div className="sm:hidden flex flex-col items-center justify-center px-2 py-3 text-white font-bold text-[10px] tracking-wide">
-          <svg className="w-4 h-4 mb-1" fill="currentColor" viewBox="0 0 24 24">
+        <div className="sm:hidden flex flex-col items-center justify-center px-1 py-2 text-white font-bold text-[9px] tracking-wide">
+          <svg className="w-3 h-3 mb-1" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2L13.09 8.26L22 9L13.09 9.74L12 16L10.91 9.74L2 9L10.91 8.26L12 2Z"/>
             <path d="M12 17L13.09 23.26L22 24L13.09 24.74L12 31L10.91 24.74L2 24L10.91 23.26L12 17Z" opacity="0.6"/>
           </svg>
@@ -11099,7 +11099,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
         <div 
           className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider
-                     sm:px-2 sm:py-4 sm:text-xs sm:ml-[-8px] sm:mr-[-8px]
+                     sm:px-1 sm:py-3 sm:text-[10px] sm:ml-[-6px] sm:mr-[-6px]
                      md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px]
                      lg:px-3 lg:py-6 lg:text-base lg:ml-[-15px] lg:mr-[-12px]"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
@@ -11337,8 +11337,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6">
             <div className="flex-1 min-w-0">
               <div>
-                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 text-transparent bg-clip-text">MWT Vehicle Stats</h1>
-                <p className="text-xs sm:text-sm text-slate-400 mt-1">Comprehensive vehicle statistics and comparisons</p>
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 text-transparent bg-clip-text mx-14">MWT Vehicle Stats</h1>
+                <p className="text-xs sm:text-sm text-slate-400 mt-1 ml-14">Comprehensive vehicle statistics and comparisons</p>
               </div>
               {[
               'naveed.miandad.007@gmail.com',
@@ -12248,25 +12248,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
                     </div>
 
-                    <div>
-                      <h4 className="text-sm font-semibold text-cyan-300 mb-2">Upgrade Modules</h4>
-                      <div className="space-y-3">
-                        {Object.entries(vehicle.modules || {}).map(([category, modules]: [string, any]) => (
-                          <div key={category}>
-                            <div className="text-xs font-medium text-slate-300 mb-1 capitalize">{category}</div>
-                            <div className="space-y-1">
-                              {Array.isArray(modules) &&
-                                modules.map((module: any, idx: number) => (
-                                  <div key={idx} className="bg-slate-800/20 rounded px-2 py-1 text-xs">
-                                    <div className="font-medium text-cyan-200">{module.name}</div>
-                                    <div className="text-slate-400">{module.bonus}</div>
-                                  </div>
-                                ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
                   </div>
                 </motion.div>
               )}
