@@ -9178,7 +9178,7 @@ const getFlagImage = (faction: string): string => {
     French: "/france-flag.png",
     Italian: "/italy-flag.png",
     Ukrainian: "/ukraine-flag.png",
-    Swedish: "/Sweden.png",
+    Sweden: "/Sweden.png",
     Iranian: "/Iranian-flag.png",
     Polish: "/Poland-flag.webp",
     SouthKorean: "/SouthKorea-flag.jpg",
