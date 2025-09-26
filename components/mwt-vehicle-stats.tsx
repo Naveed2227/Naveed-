@@ -293,7 +293,7 @@ const BATTLE_PASSES = [
  {
     id: 11,
     month: "October 2025",
-    name: "",
+    name: "Falling Thunder",
     image: "2025-Oct.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
     vehicles: ["Leopard 2A8", "X2 Shinshin"], // Vehicle IDs from VEHICLES array
@@ -10053,6 +10053,13 @@ const missileHasTags = (missileName: string) => {
 
       .join("\n")
 
+    const modulesList = Object.entries(vehicle.modules || {})
+      .map(
+        ([category, modules]: [string, any]) =>
+          `${category}: ${Array.isArray(modules) ? modules.map((m: any) => m.name).join(", ") : "N/A"}`,
+      )
+      .join("\n")
+
     return `🎯 ${vehicle.name} - ${vehicle.type}
   
 📊 SPECIFICATIONS:
@@ -10069,6 +10076,9 @@ ${vehicle.description}
 
 ⚔️ WEAPONS:
 ${weaponsList}
+
+🔧 UPGRADE MODULES:
+${modulesList}
 
 ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : isConstructionVehicle(vehicle.name) ? "🚧 CONSTRUCTION VEHICLE - Under Development" : isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : "🆓 Standard Vehicle"}`
   }
@@ -10906,16 +10916,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       }
 
       // Default response with clean formatting
-      else {
-        return `**MWT AI Tactical Analysis System**\n\n` +
-               `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n` +
-               `**Try asking:**\n` +
-               `• "What's the fastest tank?" - Performance analysis\n` +
-               `• "Su-57M vs F-22" - Combat comparison\n` +
-               `• "Best Chinese vehicle" - Nation rankings\n` +
-               `• "Tier IV vehicles" - Category listings\n\n` +
-               `What would you like to analyze?`
-      }
+      return `**MWT AI Tactical Analysis System**\n\n` +
+             `I didn't recognize that query, but I can analyze our database of ${VEHICLES.length} combat vehicles.\n\n` +
+             `**Try asking:**\n` +
+             `• "What's the fastest tank?" - Performance analysis\n` +
+             `• "Su-57M vs F-22" - Combat comparison\n` +
+             `• "Best Chinese vehicle" - Nation rankings\n` +
+             `• "Tier IV vehicles" - Category listings\n\n` +
+             `What would you like to analyze?`
     }
 
     setTimeout(() => {
@@ -10928,13 +10936,13 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
       
       {/* Burger Menu Button */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="absolute top-4 left-4 z-50 p-3 sm:p-3 bg-slate-800/90 hover:bg-slate-700/90 backdrop-blur-sm rounded-xl border border-slate-600/50 transition-all duration-200 group shadow-lg sm:top-6 sm:left-6"
+        className="absolute top-4 left-4 z-50 p-2 sm:p-3 bg-slate-800/90 hover:bg-slate-700/90 backdrop-blur-sm rounded-xl border border-slate-600/50 transition-all duration-200 group shadow-lg sm:top-6 sm:left-6"
         aria-label="Menu"
       >
         <div className="flex flex-col gap-1.5">
@@ -10970,7 +10978,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <h2 className="text-2xl font-bold text-white">Menu</h2>
                   <button
                     onClick={() => setIsMenuOpen(false)}
-                    className="p-3 hover:bg-slate-700/50 rounded-lg transition-colors duration-200"
+                    className="p-2 hover:bg-slate-700/50 rounded-lg transition-colors duration-200"
                     aria-label="Close menu"
                   >
                     <X className="w-6 h-6 text-slate-300 hover:text-white" />
@@ -10983,7 +10991,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
-                      className="w-full flex items-center gap-3 p-4 sm:p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
                     >
                       <Languages className="w-5 h-5 text-green-400 group-hover:text-green-300" />
                       <span className="text-white font-medium group-hover:text-green-300 transition-colors duration-200">{t('menu.language')}</span>
@@ -11008,7 +11016,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               setIsLanguageDropdownOpen(false);
                               setIsMenuOpen(false);
                             }}
-                            className={`w-full px-4 py-4 text-left hover:bg-slate-700/50 transition-colors duration-200 ${selectedLanguage === 'English' ? 'bg-slate-700/30' : ''}`}
+                            className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${selectedLanguage === 'English' ? 'bg-slate-700/30' : ''}`}
                           >
                             <span className={`text-sm font-medium ${selectedLanguage === 'English' ? 'text-green-300' : 'text-slate-300 hover:text-white'}`}>English</span>
                           </button>
@@ -11020,7 +11028,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               setIsLanguageDropdownOpen(false);
                               setIsMenuOpen(false);
                             }}
-                            className={`w-full px-4 py-4 text-left hover:bg-slate-700/50 transition-colors duration-200 ${selectedLanguage === 'Urdu' ? 'bg-slate-700/30' : ''}`}
+                            className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${selectedLanguage === 'Urdu' ? 'bg-slate-700/30' : ''}`}
                           >
                             <span className={`text-sm font-medium ${selectedLanguage === 'Urdu' ? 'text-green-300' : 'text-slate-300 hover:text-white'}`}>Urdu</span>
                           </button>
@@ -11049,7 +11057,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       setIsMenuOpen(false);
                       setShowAbout(true);
                     }}
-                    className="w-full flex items-center gap-3 p-4 sm:p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                    className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
                   >
                     <Bot className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300" />
                     <span className="text-white font-medium group-hover:text-cyan-300 transition-colors duration-200">{t('menu.about')}</span>
@@ -11062,7 +11070,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       setIsMenuOpen(false);
                       setShowCredits(true);
                     }}
-                    className="w-full flex items-center gap-3 p-4 sm:p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                    className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
                   >
                     <Calendar className="w-5 h-5 text-purple-400 group-hover:text-purple-300" />
                     <span className="text-white font-medium group-hover:text-purple-300 transition-colors duration-200">{t('menu.credits')}</span>
@@ -11325,12 +11333,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       </AnimatePresence>
 
       <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 shadow-sm pt-16 sm:pt-0">
-        <div className="max-w-7xl xl:max-w-[90rem] mx-auto p-4 sm:p-6 lg:p-8">
+        <div className="max-w-7xl mx-auto p-4 sm:p-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <div>
-                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 text-transparent bg-clip-text">MWT Vehicle Stats</h1>
-                <p className="text-xs sm:text-sm text-slate-400 mt-1">Comprehensive vehicle statistics and comparisons</p>
+                <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 text-transparent bg-clip-text">MWT Vehicle Stats</h1>
+                <p className="text-sm text-slate-400 mt-1">Comprehensive vehicle statistics and comparisons</p>
               </div>
               {[
               'naveed.miandad.007@gmail.com',
@@ -11344,7 +11352,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setIsEditMode(!isEditMode)}
-                      className="px-3 sm:px-4 py-1.5 sm:py-2 bg-slate-800 hover:bg-slate-700 text-xs sm:text-sm font-medium rounded-full border border-slate-600 hover:border-blue-400 transition-colors duration-200 flex items-center gap-2"
+                      className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-sm font-medium rounded-full border border-slate-600 hover:border-blue-400 transition-colors duration-200 flex items-center gap-2"
                     >
                       {isEditMode ? (
                         <>
@@ -11386,13 +11394,13 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
               )}
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+            <div className="flex flex-col sm:flex-row gap-3">
               {isLoggedIn ? (
-                <div className="flex items-center gap-2 w-full sm:w-auto">
-                  <span className="text-slate-300 text-xs truncate max-w-[100px] sm:max-w-[150px] md:max-w-[200px]">{userEmail}</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-slate-300 text-xs">{userEmail}</span>
                   <button
                     onClick={handleLogout}
-                    className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-xs font-medium whitespace-nowrap"
+                    className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-xs font-medium"
                   >
                     Sign Out
                   </button>
@@ -11400,21 +11408,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               ) : (
                 <button
                   onClick={() => setShowLoginForm(true)}
-                  className="px-4 py-0.5 bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-900 hover:to-blue-800 text-white rounded-sm transition-colors text-xs font-medium h-6 flex items-center justify-center whitespace-nowrap"
+                  className="px-4 py-0.5 bg-gradient-to-r from-blue-800 to-blue-700 hover:from-blue-900 hover:to-blue-800 text-white rounded-sm transition-colors text-xs font-medium h-6 flex items-center justify-center"
                 >
                   Sign In
                 </button>
               )}
-              <div className="pb-6 w-full">
-                <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-                  <div className="relative w-full lg:w-80 xl:w-96">
+              <div className="pb-6 w-auto">
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+                  <div className="relative w-full sm:w-auto">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-400 w-4 h-4" />
                     <input
                       type="text"
                       placeholder="Search vehicles..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-12 py-2 md:py-2.5 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm md:text-base"
+                      className="w-full pl-10 pr-12 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent sm:w-56"
                     />
                     {searchQuery && (
                       <button
@@ -11422,52 +11430,48 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           setSearchQuery("");
                           setExpandedVehicle("");
                         }}
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white rounded-sm flex items-center justify-center text-xs md:text-sm font-bold transition-colors w-8 h-8 md:w-9 md:h-9"
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white rounded-sm flex items-center justify-center text-xs font-bold transition-colors w-8 h-8"
                       >
                         ×
                       </button>
                     )}
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-                    <select
-                      value={typeFilter}
-                      onChange={(e) => setTypeFilter(e.target.value)}
-                      className="w-full sm:w-auto md:w-40 lg:w-48 px-3 py-2 md:py-2.5 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm md:text-base"
-                    >
-                      <option value="">All Types</option>
-                      {types.map((type) => (
-                        <option key={type} value={type}>
-                          {type}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      value={tierFilter}
-                      onChange={(e) => setTierFilter(e.target.value)}
-                      className="w-full sm:w-auto md:w-40 lg:w-48 px-3 py-2 md:py-2.5 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm md:text-base"
-                    >
-                      <option value="">All Tiers</option>
-                      {tiers.map((tier) => (
-                        <option key={tier} value={tier}>
-                          Tier {tier}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      value={countryFilter}
-                      onChange={(e) => setCountryFilter(e.target.value)}
-                      className="w-full sm:w-auto md:w-40 lg:w-48 px-3 py-2 md:py-2.5 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm md:text-base"
-                    >
-                      <option value="">All Countries</option>
-                      {countries.map((country) => (
-                        <option key={country} value={country}>
-                          {country}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              </div>
+                  <select
+                    value={typeFilter}
+                    onChange={(e) => setTypeFilter(e.target.value)}
+                    className="w-full sm:w-auto px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
+                  >
+                    <option value="">All Types</option>
+                    {types.map((type) => (
+                      <option key={type} value={type}>
+                        {type}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    value={tierFilter}
+                    onChange={(e) => setTierFilter(e.target.value)}
+                    className="w-full sm:w-auto px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
+                  >
+                    <option value="">All Tiers</option>
+                    {tiers.map((tier) => (
+                      <option key={tier} value={tier}>
+                        Tier {tier}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    value={countryFilter}
+                    onChange={(e) => setCountryFilter(e.target.value)}
+                    className="w-full sm:w-auto px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500"
+                  >
+                    <option value="">All Countries</option>
+                    {countries.map((country) => (
+                      <option key={country} value={country}>
+                        {country}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
             </div>
@@ -11475,7 +11479,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
       </header>
 
-      <main className="max-w-7xl xl:max-w-[90rem] pt-16 sm:pt-6 p-4 sm:p-6 lg:p-8 mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+      <main className="max-w-7xl pt-16 sm:pt-6 p-4 sm:p-6 mx-auto px-4 sm:px-6 pb-24">
         {/* Comparison Bottom Bar - Mobile */}
         {compare.length > 0 && (
           <div className="fixed bottom-0 left-0 right-0 bg-slate-900/95 border-t border-slate-700 shadow-lg z-50">
@@ -11587,7 +11591,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               </div>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {compare.map((id, idx) => {
                 const vehicle = VEHICLES.find((v) => v.id.toString() === id);
                 if (!vehicle) return null;
@@ -11633,7 +11637,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     </div>
                     
                     <div className="space-y-1">
-                      <div className="grid grid-cols-2 xs:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-3">
                         <div className="bg-slate-800/70 p-2 rounded">
                           <div className="text-xs text-slate-400">Health</div>
                           <div className="text-lg font-bold text-cyan-300">
@@ -11774,7 +11778,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           </p>
         </div>
 
-        <div className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {paginatedVehicles.map((vehicle) => (
             <motion.div
               key={vehicle.id}
@@ -11900,7 +11904,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   alt={`${vehicle.faction} flag`}
                   className="w-8 h-6 object-cover rounded shadow-md"
                 />
-                <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                <h3 className="text-xl font-bold text-white flex items-center gap-2">
                   {vehicle.name}
                   {isEditor && isEditMode && (
                     <button
@@ -11943,12 +11947,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
               )}
 
-              <p className="text-slate-300 text-xs sm:text-sm mb-4 leading-relaxed">{vehicle.description}</p>
+              <p className="text-slate-300 text-sm mb-4 leading-relaxed">{vehicle.description}</p>
 
-              <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
                 <div className="bg-slate-800/50 rounded-lg p-3">
                   <div className="text-xs text-slate-400 mb-1">Health</div>
-                  <div className="text-base sm:text-lg font-bold text-cyan-300 flex items-center gap-2">
+                  <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
                     {vehicle.stats.health.toLocaleString()}
                     {isEditor && isEditMode && (
                       <button
@@ -12151,7 +12155,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       e.stopPropagation();
                       setVehicleDetailsOpenId(vehicle.id.toString());
                     }}
-                    className="flex-1 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800 text-xs sm:text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg text-center"
+                    className="flex-1 px-4 py-2 bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800 text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg text-center"
                   >
                     View Details
                   </button>
@@ -12172,7 +12176,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       e.stopPropagation()
                       setWeaponsModalOpenId(vehicle.id.toString())
                     }}
-                    className="flex-1 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800 text-xs sm:text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg"
+                    className="flex-1 px-4 py-2 bg-gradient-to-r from-slate-600 to-slate-700 text-slate-200 hover:from-slate-700 hover:to-slate-800 text-sm font-semibold rounded transition-all duration-200 shadow-md hover:shadow-lg"
                   >
                     Weapons
                   </button>
@@ -12185,7 +12189,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         }
                       }}
                       disabled={compare.length >= 2 && !compare.includes(vehicle.id.toString())}
-                      className={`w-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded transition-all duration-200 shadow-md flex items-center justify-center gap-2 ${
+                      className={`w-full px-4 py-2 text-sm font-semibold rounded transition-all duration-200 shadow-md flex items-center justify-center gap-2 ${
                         compare.includes(vehicle.id.toString())
                           ? "bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-600 hover:to-emerald-700"
                           : compare.length > 0
@@ -12242,6 +12246,25 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
                     </div>
 
+                    <div>
+                      <h4 className="text-sm font-semibold text-cyan-300 mb-2">Upgrade Modules</h4>
+                      <div className="space-y-3">
+                        {Object.entries(vehicle.modules || {}).map(([category, modules]: [string, any]) => (
+                          <div key={category}>
+                            <div className="text-xs font-medium text-slate-300 mb-1 capitalize">{category}</div>
+                            <div className="space-y-1">
+                              {Array.isArray(modules) &&
+                                modules.map((module: any, idx: number) => (
+                                  <div key={idx} className="bg-slate-800/20 rounded px-2 py-1 text-xs">
+                                    <div className="font-medium text-cyan-200">{module.name}</div>
+                                    <div className="text-slate-400">{module.bonus}</div>
+                                  </div>
+                                ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
               )}
@@ -12625,8 +12648,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
         {/* About Modal */}
         {showAbout && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
-            <div className="bg-slate-800 rounded-lg max-w-full sm:max-w-2xl w-full max-h-[85vh] sm:max-h-[80vh] overflow-y-auto">
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-slate-800 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
               <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-2xl font-bold text-cyan-400">About MWT Assistant (Unofficial) </h2>
@@ -12639,7 +12662,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     MWT Assistant is your all-in-one companion for tracking and managing MWT-related data. Access real-time statistics, detailed information, and updates for vehicles and units with ease. Whether you’re analyzing performance, monitoring progress, or staying informed about the latest developments, MWT Assistant keeps everything organized in a simple, intuitive interface.
                   </p>
                   <p>
-                    Features include vehicle statistics, weapon specifications, AI-powered tactical analysis, and advanced filtering capabilities.
+                    Features include vehicle statistics, weapon specifications, upgrade modules, AI-powered tactical analysis, and advanced filtering capabilities.
                   </p>
                   <p>
                     MWT Assistant does not collect, store, or share personal information. Data shown is provided for informational purposes and we strive to ensure its accuracy, but we cannot guarantee completeness.
@@ -12685,8 +12708,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       
 
         {showUpdates && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
-            <div className="bg-slate-800 rounded-lg max-w-full sm:max-w-2xl w-full max-h-[85vh] sm:max-h-[80vh] overflow-y-auto">
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-slate-800 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
               <div className="p-6">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-2xl font-bold text-cyan-400">Updates of MWT Assistant (Unofficial) </h2>
@@ -12722,8 +12745,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   
 
          {showCredits && (
-  <div className="fixed inset-0 flex justify-center z-50 items-center opacity-100 bg-[rgba(0,0,0,0.4655797066895858)] p-2 sm:p-4">
-    <div className="bg-slate-900 p-4 sm:p-6 rounded-lg max-w-full sm:max-w-4xl mx-4 max-h-[85vh] sm:max-h-[80vh] overflow-y-auto h-full w-full opacity-100">
+  <div className="fixed inset-0 flex justify-center z-50 items-center opacity-100 bg-[rgba(0,0,0,0.4655797066895858)]">
+    <div className="bg-slate-900 p-6 rounded-lg max-w-4xl mx-4 max-h-[80vh] overflow-y-auto h-full px-6 w-full opacity-100">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-xl font-bold text-cyan-400">Credits</h3>
         <button
@@ -12878,24 +12901,24 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           } : vehicle;
           
           return (
-            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4 md:p-6">
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
               <motion.div 
                 ref={vehicleDetailsModalRef}
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                className="bg-slate-900 rounded-xl w-full max-w-full sm:max-w-2xl md:max-w-4xl lg:max-w-6xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto border border-slate-700"
+                className="bg-slate-900 rounded-xl w-full max-w-6xl max-h-[90vh] overflow-y-auto border border-slate-700"
               >
                 {/* Header with close button and vehicle name */}
-                <div className="p-3 sm:p-4 border-b border-slate-700 flex items-center justify-between">
+                <div className="p-4 border-b border-slate-700 flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <img 
                       src={getFlagImage(vehicle.faction)} 
                       alt={vehicle.faction} 
                       className="w-8 h-5 object-cover rounded-sm shadow"
                     />
-                    <h2 className="text-lg sm:text-xl font-bold text-white">{vehicle.name}</h2>
+                    <h2 className="text-xl font-bold text-white">{vehicle.name}</h2>
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="flex space-x-1">
@@ -13471,8 +13494,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         })()}
 
         {weaponsModalOpenId && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
-            <div ref={vehicleDetailsModalRef} className="bg-slate-900 rounded-xl p-4 sm:p-6 w-full max-w-full sm:max-w-6xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto border border-slate-700">
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div ref={vehicleDetailsModalRef} className="bg-slate-900 rounded-xl p-6 w-full max-w-6xl max-h-[90vh] overflow-y-auto border border-slate-700">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-white">
                   {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.name} - Weapons
