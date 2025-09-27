@@ -7,6 +7,29 @@ import { vehicleCurrencyData } from './currency'
 import { urduTranslations, getUrduTranslation } from './Urdu'
 import { englishTranslations, getEnglishTranslation } from './English'
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBwWqkn2fY0ibA2dwib6hP2YcfdbMp1bRQ",
+  authDomain: "mwt-assistant-92593.firebaseapp.com",
+  databaseURL: "https://mwt-assistant-92593-default-rtdb.firebaseio.com",
+  projectId: "mwt-assistant-92593",
+  storageBucket: "mwt-assistant-92593.firebasestorage.app",
+  messagingSenderId: "233603868776",
+  appId: "1:233603868776:web:61a74b6ba8d715df8373dd",
+  measurementId: "G-STD2HQBK36"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 // Roman numeral conversion utility
 const toRomanNumeral = (num: number | string): string => {
   let numValue = typeof num === 'string' ? parseInt(num) : num;
@@ -9665,7 +9688,6 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [countryFilter, setCountryFilter] = useState("")
   const [compare, setCompare] = useState<string[]>([])
   const [expandedVehicle, setExpandedVehicle] = useState("")
-  const comparisonRef = useRef<HTMLDivElement>(null)
   const chatMessagesEndRef = useRef<HTMLDivElement>(null)
   const [chatOpen, setChatOpen] = useState(false)
   const [chatMessages, setChatMessages] = useState<{ role: string; content: string }[]>([])
@@ -9708,6 +9730,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [weaponsModalOpenId, vehicleDetailsOpenId])
+  
   
   // Sidebar state
   const [sidebarOpen, setSidebarOpen] = useState(false)
