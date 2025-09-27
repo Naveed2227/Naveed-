@@ -5,7 +5,6 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, set, onValue, off, get } from 'firebase/database';
 
-export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
 // Initialize Firebase
