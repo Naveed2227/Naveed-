@@ -12784,68 +12784,20 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           <p className="text-slate-400 text-sm">Lead developer and creator</p>
         </div>
         <div>
-          <h4 className="text-white font-semibold">Hoffman Derpin</h4>
-          <p className="text-slate-400 text-sm">Supporter, Writer</p>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold">Spector404</h4>
-          <p className="text-slate-400 text-sm">Supporter, Writer</p>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold">Unnamed</h4>
-          <p className="text-slate-400 text-sm">Suggester</p>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold">Hollyninja456</h4>
-          <p className="text-slate-400 text-sm">Writer, Supporter</p>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold">Flarakrad</h4>
-          <p className="text-slate-400 text-sm">Contributer</p>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold">Yeti</h4>
-          <p className="text-slate-400 text-sm">Yeti</p>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold">Yx190</h4>
-          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+          <h4 className="text-white font-semibold">Nesli27</h4>
+          <p className="text-slate-400 text-sm">Server Moderator, Supporter</p>
         </div>
         <div>
           <h4 className="text-white font-semibold">QWE</h4>
           <p className="text-slate-400 text-sm">Server Moderator, Supporter, Coordinator</p>
         </div>
         <div>
-          <h4 className="text-white font-semibold">OberstLeutnantFerid</h4>
-          <p className="text-slate-400 text-sm">Militarist Officer</p>
-        </div>
-        <div>
           <h4 className="text-white font-semibold">Top Gun</h4>
           <p className="text-slate-400 text-sm">Server Moderator, Supporter, Coordinator</p>
         </div>
         <div>
-          <h4 className="text-white font-semibold">White Windu</h4>
-          <p className="text-slate-400 text-sm">Adviser, Coordination Manager</p>
-        </div>
-        <div>
           <h4 className="text-white font-semibold">Shiroko_Chan</h4>
-          <p className="text-slate-400 text-sm">Server Moderator, Supporter, Iwak</p>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold">Eidolon X</h4>
-          <p className="text-slate-400 text-sm">Adviser, Lurks</p>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold">Nesli27</h4>
-          <p className="text-slate-400 text-sm">Supporter</p>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold">枕頭</h4>
-          <p className="text-slate-400 text-sm">Supporter</p>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold">VIPER2729</h4>
-          <p className="text-slate-400 text-sm">Supporter</p>
+          <p className="text-slate-400 text-sm">Server Moderator, Supporter</p>
         </div>
         <div>
           <h4 className="text-white font-semibold">THE DAWN</h4>
@@ -12855,6 +12807,55 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           <h4 className="text-white font-semibold">白叔</h4>
           <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
         </div>
+        <div>
+          <h4 className="text-white font-semibold">White Windu</h4>
+          <p className="text-slate-400 text-sm">Adviser, Coordination Manager</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Hoffman Derpin</h4>
+          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Spector404</h4>
+          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Hollyninja456</h4>
+          <p className="text-slate-400 text-sm">Writer, Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Yx190</h4>
+          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Unnamed</h4>
+          <p className="text-slate-400 text-sm">Suggester</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Flarakrad</h4>
+          <p className="text-slate-400 text-sm">Contributer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Yeti</h4>
+          <p className="text-slate-400 text-sm">Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">OberstLeutnantFerid</h4>
+          <p className="text-slate-400 text-sm">Militarist Officer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">Eidolon X</h4>
+          <p className="text-slate-400 text-sm">Adviser, Lurks</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">枕頭</h4>
+          <p className="text-slate-400 text-sm">Supporter</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">VIPER2729</h4>
+          <p className="text-slate-400 text-sm">Supporter</p>
+        </div>
+        
       </div>
 
       {/* Media Members Section */}
