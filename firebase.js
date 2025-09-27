@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
+import { getFunctions } from "firebase/functions";
+import { getMessaging } from "firebase/messaging";
+import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,7 +21,61 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firestore
+// Initialize all Firebase services
 const db = getFirestore(app);
+const auth = getAuth(app);
+const storage = getStorage(app);
+const functions = getFunctions(app);
+const messaging = getMessaging(app);
+const analytics = getAnalytics(app);
 
-export { app, db };
+// Export all services
+export { 
+  app, 
+  db, 
+  auth, 
+  storage, 
+  functions, 
+  messaging, 
+  analytics 
+};
+
+// Common Firebase utility functions
+export const firebaseUtils = {
+  // Authentication helpers
+  signIn: async (email, password) => {
+    import { signInWithEmailAndPassword } from "firebase/auth";
+    return await signInWithEmailAndPassword(auth, email, password);
+  },
+  
+  signOut: async () => {
+    import { signOut } from "firebase/auth";
+    return await signOut(auth);
+  },
+  
+  // Storage helpers
+  uploadFile: async (file, path) => {
+    import { ref, uploadBytes } from "firebase/storage";
+    const storageRef = ref(storage, path);
+    return await uploadBytes(storageRef, file);
+  },
+  
+  // Messaging helpers
+  getMessagingToken: async (vapidKey) => {
+    import { getToken } from "firebase/messaging";
+    return await getToken(messaging, { vapidKey });
+  },
+  
+  // Analytics helpers
+  logEvent: (eventName, eventParams) => {
+    import { logEvent } from "firebase/analytics";
+    logEvent(analytics, eventName, eventParams);
+  },
+  
+  // Functions helpers
+  callFunction: async (functionName, data) => {
+    import { httpsCallable } from "firebase/functions";
+    const callableFunction = httpsCallable(functions, functionName);
+    return await callableFunction(data);
+  }
+};
