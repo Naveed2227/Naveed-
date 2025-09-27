@@ -9,7 +9,7 @@ import { englishTranslations, getEnglishTranslation } from './English'
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, isSupported } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -26,9 +26,23 @@ const firebaseConfig = {
   measurementId: "G-STD2HQBK36"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// Initialize Firebase only on client side
+let app;
+let analytics;
+
+if (typeof window !== 'undefined') {
+  // Initialize Firebase
+  app = initializeApp(firebaseConfig);
+  
+  // Initialize Analytics only if supported
+  isSupported().then((supported) => {
+    if (supported) {
+      analytics = getAnalytics(app);
+    }
+  }).catch((error) => {
+    console.log('Analytics not supported:', error);
+  });
+}
 
 // Roman numeral conversion utility
 const toRomanNumeral = (num: number | string): string => {
