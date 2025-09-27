@@ -213,6 +213,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Rookiat MTTD",
 "BMD3",
 "K21 KNIFV",
+"Stridsvagn 105",
 
 
 
@@ -1022,7 +1023,7 @@ const VEHICLES_DATA = [
       { name: "MRM-CE", type: "Main Gun", damage: 10000, penetration: 850 },
       { name: "M830", type: "Main Gun", damage: 10930, penetration: 800 },
       { name: "Stinger Launcher", type: "Missile", damage: 6110, penetration: 35, reload: 10 },
-      { name: "SwitchBlade 300", type: "Missile", damage: 5700, penetration: 190, reload: 12.4 }
+      { name: "SwitchBlade 300", type: "Missile", damage: 6730, penetration: 390, reload: 12.4 }
     ],
     modules: {
       engine: [
@@ -1052,9 +1053,9 @@ const VEHICLES_DATA = [
     description: "Modern main battle tank optimized for Japanese terrain with advanced fire control.",
     stats: { health: 38000, speed: 71, reverseSpeed: 71, armor: "950mm", agility: 40 },
     weapons: [
-      { name: "JM33", type: "Main Gun", damage: 9900, penetration: 481 },
-      { name: "JM12A1", type: "Main Gun", damage: 10400, penetration: 480 },
-      { name: "Type 10", type: "Main Gun", damage: 10900, penetration: 615 }
+      { name: "JM33", type: "Main Gun", damage: 11330, penetration: 481 },
+      { name: "JM12A1", type: "Main Gun", damage: 12360, penetration: 480 },
+      { name: "Type 10", type: "Main Gun", damage: 2920, penetration: 650 }
     ],
     modules: {
       engine: [
@@ -1119,7 +1120,7 @@ const VEHICLES_DATA = [
     weapons: [
       { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
       { name: "DM33", type: "Main Gun", damage: 10620, penetration: 496 },
-      { name: "DM-73-1", type: "Main Gun", damage: 12100, penetration: 980 },
+      { name: "DM-73-1", type: "Main Gun", damage: 12954, penetration: 980 },
     ],
     modules: {
       engine: [
@@ -1150,9 +1151,9 @@ const VEHICLES_DATA = [
     stats: { health: 38500, speed: 65, armor: "1200mm", agility: 38 },
     weapons: [
       { name: "DM-11-1", type: "Main Gun", damage: 14850, penetration: 135 },
-      { name: "DM-12-1", type: "Main Gun", damage: 12650, penetration: 800 },
+      { name: "DM-12-1", type: "Main Gun", damage: 13640, penetration: 800 },
       { name: "DM-33-1", type: "Main Gun", damage: 11500, penetration: 596 },
-      { name: "DM-73-1", type: "Main Gun", damage: 12100, penetration: 980 },
+      { name: "DM-73-1", type: "Main Gun", damage: 12954, penetration: 980 },
       { name: "Hero 120", type: "Missile", damage: 8075, penetration: 440, reload: 13.5 }
     ],
     modules: {
@@ -1184,7 +1185,7 @@ const VEHICLES_DATA = [
     stats: { health: 42600, speed: 62,armor: "1200mm", agility: 36 },
     weapons: [
       { name: "DM63A1 APFSDS", type: "Main Gun", damage: 18500, penetration: 950, reload: 5.2 },
-      { name: "DM11", type: "Main Gun", damage: 4900, penetration: 87 },
+      { name: "DM11", type: "Main Gun", damage: 5000, penetration: 87 },
       { name: "DM12A2 HEATFS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 },
       { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 }
     ],
@@ -1449,11 +1450,11 @@ const VEHICLES_DATA = [
     image: "BMPT-Terminator-2.jpg",
     stats: { health: 36400, speed: 60, armor: "850mm", agility: 38 },
     weapons: [
-      { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
       { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
       { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
-      { name: "9M120 Ataka", type: "Missile", damage: 3900, penetration: 750, reload: 6 }
+      { name: "9M120 Ataka", type: "Missile", damage: 3900, penetration: 750, reload: 12 }
 
     ],
     modules: {
@@ -1551,7 +1552,7 @@ const VEHICLES_DATA = [
     description: "Combined gun-missile air defense system with advanced radar capabilities.",
     stats: { health: 32500, speed: 70, armor: "420mm", agility: 35 },
     weapons: [
-      { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
       { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
       { name: "AAM 57E6M", type: "Missile", damage: 8910, penetration: 95, reload: 18 }
@@ -1650,7 +1651,7 @@ const VEHICLES_DATA = [
     stats: { health: 39100, speed: 71, armor: "1100mm", agility: 37 },
     weapons: [
       { name: "BTJ1", type: "Main Gun", damage: 10200, penetration: 1000 },
-      { name: "BTA4", type: "Main Gun", damage: 9350, penetration: 700 },
+      { name: "BTA4", type: "Main Gun", damage: 11600, penetration: 700 },
       { name: "BTE2", type: "Main Gun", damage: 11475, penetration: 123 },
       { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
     ],
@@ -1682,9 +1683,9 @@ const VEHICLES_DATA = [
     description: "Advanced main battle tank with composite armor and laser warning systems.",
     stats: { health: 37500, speed: 76, armor: "1150mm", agility: 40 },
     weapons: [
-      { name: "DTB-125", type: "Main Gun", damage: 4300, penetration: 160 },
-      { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
-      { name: "DTC10-125", type: "Main Gun", damage: 8800, penetration: 680 },
+      { name: "DTB-125", type: "Main Gun", damage: 12760, penetration: 160 },
+      { name: "DTP-125", type: "Main Gun", damage: 12230, penetration: 480 },
+      { name: "DTC10-125", type: "Main Gun", damage: 11620, penetration: 680 },
       { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
     ],
     modules: {
@@ -1716,7 +1717,7 @@ const VEHICLES_DATA = [
     stats: { health: 38300, speed: 70, armor: "1200mm", agility: 32 },
     weapons: [
       { name: "BTJ1", type: "Main Gun", damage: 10200, penetration: 1000 },
-      { name: "BTA4", type: "Main Gun", damage: 9350, penetration: 700 },
+      { name: "BTA4", type: "Main Gun", damage: 11600, penetration: 700 },
       { name: "BTE2", type: "Main Gun", damage: 11475, penetration: 123 },
       { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
     ],
@@ -2020,7 +2021,7 @@ const VEHICLES_DATA = [
       "agility": 40
     },
     "weapons": [
-      { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
       { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
       { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
@@ -2223,7 +2224,7 @@ const VEHICLES_DATA = [
       { name: "M393A2", type: "Main Gun", damage: 10340, penetration: 127 },
       { name: "M456A2", type: "Main Gun", damage: 10890, penetration: 400 },
       { name: "M900", type: "Main Gun", damage: 10320, penetration: 582 },
-      { name: "SwitchBlade 300", type: "Missile", damage: 5700, penetration: 190, reload: 12.4 }
+      { name: "SwitchBlade 300", type: "Missile", damage: 6730, penetration: 390, reload: 12.4 }
     ],
     "modules": {
       "engine": [
@@ -2572,7 +2573,7 @@ const VEHICLES_DATA = [
     { name: "BR-281SP", type: "Main Gun", damage: 1560, penetration: 147 },
     { name: "BR-281U", type: "Main Gun", damage: 1400, penetration: 156 },
     { name: "OR-281", type: "Main Gun", damage: 2106, penetration: 83 },
-    { name: "9K135 Kornet", type: "Missile", damage: 10410, penetration: 1000, reload: 8 }
+    { name: "9K135 Kornet", type: "Missile", damage: 10410, penetration: 1000, reload: 12 }
 
   ],
   "modules": {
@@ -2615,7 +2616,7 @@ const VEHICLES_DATA = [
    { name: "M791", type: "Main Gun", damage: 473, penetration: 111 },
    { name: "M792", type: "Main Gun", damage: 608, penetration: 48 },
    { name: "M919", type: "Main Gun", damage: 495, penetration: 140 },
-   { name: "MIM-146", type: "Missile", damage: 12120, penetration: 900, reload: 18 }
+   { name: "MIM-146", type: "Missile", damage: 12120, penetration: 900, reload: 12 }
 
   ],
   "modules": {
@@ -3351,7 +3352,7 @@ const VEHICLES_DATA = [
     image: "Leopard-2A4.jpg",
     stats: { health: 39200, speed: 72, armor: "800mm", agility: 32 },
     weapons: [
-      { name: "DM12", type: "Main Gun", damage: 10760, penetration: 400 },
+      { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
       { name: "DM13", type: "Main Gun", damage: 9800, penetration: 393 },
       { name: "DM23", type: "Main Gun", damage: 38911, penetration: 337 }
 
@@ -3553,9 +3554,9 @@ const VEHICLES_DATA = [
     "description": "Japanese main battle tank with advanced armor and 120mm smoothbore gun.",
     "stats": { "health": 37000, "speed": 55, "armor": "720mm", "agility": 40 },
     "weapons": [
-      { name: "JM33", type: "Main Gun", damage: 9900, penetration: 481 },
-      { name: "JM12A1", type: "Main Gun", damage: 10400, penetration: 480 },
-      { name: "Type 10", type: "Main Gun", damage: 10900, penetration: 615 }
+      { name: "JM33", type: "Main Gun", damage: 11330, penetration: 481 },
+      { name: "JM12A1", type: "Main Gun", damage: 12360, penetration: 480 },
+      { name: "Type 10", type: "Main Gun", damage: 2920, penetration: 650 }
     ],
     "modules": {
       "engine": [
@@ -3970,7 +3971,7 @@ const VEHICLES_DATA = [
     "description": "Russian SPAAG with twin 30mm cannons and 9M311 SAM missiles.",
     "stats": { "health": 25000, "speed": 65, "armor": 35, "agility": 35 },
     "weapons": [
-      { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
       { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
       { name: "ZUR 9M311", type: "Missile", damage: 8100, penetration: 69, reload: 24 }
@@ -4167,11 +4168,10 @@ const VEHICLES_DATA = [
     "tier": "III",
     image: "Type-75-MLRS.jpg",
     "description": "Japanese 300mm MLRS for long-range artillery strikes.",
-    "stats": { "health": 24500, "speed": 55, "armor": "25mm", "agility": 36 },
+    "stats": { "health": 22800, "speed": 51, "armor": "30mm", "agility": 35.5 },
     "weapons": [
-      { name: "Type 81 FSBS", type: "Missile", damage: 11900, penetration: 165, reload: 20 },
-      { name: "Type 81 FFBE", type: "Missile", damage: 10600, penetration: 220, reload: 20 },
-      { name: "Type 81", type: "Missile", damage: 9350, penetration: 260, reload: 20 }
+      { name: "Type 75 HE", type: "Missile", damage: 5700, penetration: 85, reload: 30 },
+      { name: "Type 75 mod 2 HEAT", type: "Missile", damage: 10300, penetration: 350, reload: 30 },
     ],
     "modules": {
       "engine": [
@@ -4313,7 +4313,7 @@ const VEHICLES_DATA = [
     "weapons": [
     { name: "DM23", type: "Main Gun", damage: 8911, penetration: 337 },
     { name: "DM33", type: "Main Gun", damage: 10060, penetration: 508 },
-    { name: "DM12", type: "Main Gun", damage: 10760, penetration: 400 },
+    { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
     { name: "DM512", type: "Main Gun", damage: 10210, penetration: 127 }
 
 ],
@@ -4495,7 +4495,7 @@ const VEHICLES_DATA = [
     image: "BMD3.jpg",
     stats: { health: 24000, speed: 70, armor: "420mm", agility: 40 },
     weapons: [
-      { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
       { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
       { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
@@ -4522,6 +4522,38 @@ const VEHICLES_DATA = [
     },
     {
     "id": 439,
+    "name": "Strf 9040 BILL",
+    "type": "Light Tank",
+    "faction": "Sweden",
+    "tier": "III",
+    image: "Strf-9040-BILL.jpg",
+    "description": "Swedish light tank with 40 mm autocannon and ATGMs, versatile but lightly armored, fast, lethal.",
+    "stats": { "health": 26300, "speed": 80, "armor": "47mm", "agility": 36 },
+    "weapons": [
+     { name: "Rbs 56", type: "Missile", damage: 7850, penetration: 510, reload: 10 },
+     { name: "Slsgr m/90 HEI", type: "Main Gun", damage: 640, penetration: 61 },
+     { name: "Slpprj m/90 APSFSDS", type: "Main Gun", damage: 1370, penetration: 173 },
+     { name: "Slpprj m/01 APFSDS", type: "Main Gun", damage: 1380, penetration: 239 },
+
+
+],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
+  },
+    {
+    "id": 440,
     "name": "M3A3 Bradley",
     "type": "Light Tank",
     "faction": "American",
@@ -5581,6 +5613,59 @@ const VEHICLES_DATA = [
   },
   {
     "id": 706,
+    "name": "Stridsvagn 105",
+    "type": "Main Battle Tank",
+    "faction": "Sweden",
+    "tier": "II",
+    "description": "A modified Centurion with a 105mm gun, improved armor, and mobility for defense and reconnaissance missions.",
+    "image": "Stridsvagn-105.jpg",
+    "stats": {
+      "health": 36000,
+      "speed": 50,
+      "armour": 35,
+      "agility": 35
+    },
+    "weapons": [
+      { name: "slpprj m/90c APFSDS", type: "Main Gun", damage: 9800, penetration: 430 },
+      { name: "slpprj m/80 APFSDS", type: "Main Gun", damage: 9630, penetration: 337 },
+      { name: "slsgr m/61A HEI", type: "Main Gun", damage: 4400, penetration: 70 },
+      { name: "slspgr m/61 SAPHEI", type: "Main Gun", damage: 10090, penetration: 127 }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
+  },
+  {
+    "id": 707,
     "name": "XM803",
     "type": "Main Battle Tank",
     "faction": "American",
@@ -5654,7 +5739,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 707,
+    "id": 708,
     "name": "XM1 (GM)",
     "type": "Main Battle Tank",
     "faction": "American",
@@ -5728,7 +5813,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 708,
+    "id": 709,
     "name": "BMP-2",
     "type": "Light Tank",
     "faction": "Russian",
@@ -5802,7 +5887,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 709,
+    "id": 710,
     "name": "BTR-82AT",
     "type": "Light Tank",
     "faction": "Russian",
@@ -5876,7 +5961,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 710,
+    "id": 711,
     "name": "BTR-82A1",
     "type": "Light Tank",
     "faction": "Russian",
@@ -5950,7 +6035,7 @@ const VEHICLES_DATA = [
     }
   },
     {
-    id: 711,
+    id: 712,
     name: "M3 Bradley",
     type: "Multirole-IFV",
     faction: "American",
@@ -5982,7 +6067,7 @@ const VEHICLES_DATA = [
     },
   },
   {
-    "id": 712,
+    "id": 713,
     "name": "M551 Sheridan",
     "type": "Light Tank",
     "faction": "American",
@@ -6056,7 +6141,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 713,
+    "id": 714,
     "name": "Object 685",
     "type": "Light Tank",
     "faction": "Russian",
@@ -6129,8 +6214,9 @@ const VEHICLES_DATA = [
       ]
     }
   },
+  
     {
-    id: 714,
+    id: 715,
     name: "IT-1 Dragon",
     type: "Missile Carrier",
     faction: "Russian",
@@ -6161,7 +6247,7 @@ const VEHICLES_DATA = [
     },
   },
   {
-    "id": 715,
+    "id": 716,
     "name": "M163 VADS",
     "type": "Anti-Air",
     "faction": "American",
@@ -6235,7 +6321,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 716,
+    "id": 717,
     "name": "PGZ-04A",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -6309,7 +6395,7 @@ const VEHICLES_DATA = [
     }
   },
    {
-    id: 717,
+    id: 718,
     name: "ZSU-23-4M4 Shilka",
     type: "Anti-Air",
     faction: "Russian",
@@ -6341,7 +6427,7 @@ const VEHICLES_DATA = [
   },
   
   {
-    "id": 718,
+    "id": 719,
     "name": "LAV-300",
     "type": "Tank Destroyer",
     "faction": "American",
@@ -6415,7 +6501,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 719,
+    "id": 720,
     "name": "PTL-02",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -6489,7 +6575,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 720,
+    "id": 721,
     "name": "M109",
     "type": "SPH",
     "faction": "American",
@@ -6563,7 +6649,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 721,
+    "id": 722,
     "name": "PLL-05",
     "type": "SPH",
     "faction": "Chinese",
@@ -6637,7 +6723,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 722,
+    "id": 723,
     "name": "PLZ-83",
     "type": "SPH",
     "faction": "Chinese",
@@ -6711,7 +6797,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 723,
+    "id": 724,
     "name": "2S1 Gvozdika",
     "type": "SPH",
     "faction": "Russian",
@@ -6785,7 +6871,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 724,
+    "id": 725,
     "name": "2S3 Akatsiya",
     "type": "SPH",
     "faction": "Russian",
@@ -6859,7 +6945,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 725,
+    "id": 726,
     "name": "Type 74 SPH",
     "type": "SPH",
     "faction": "Japanese",
@@ -8345,56 +8431,7 @@ const VEHICLES_DATA = [
       ]
     }
   },
-  {
-    "id": 918,
-    "name": "Stridsvagn 105",
-    "type": "Main Battle Tank",
-    "faction": "Sweden",
-    "tier": 1,
-    "description": "A modified Centurion with a 105mm gun, improved armor, and mobility for defense and reconnaissance missions.",
-    "image": "Stridsvagn-105.jpg",
-    "stats": {
-      "health": 0,
-      "speed": 0,
-      "reverseSpeed": 0,
-      "agility": 0
-    },
-    "weapons": [
-      
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "Default Engine MK1",
-          "bonus": "+10% speed"
-        },
-        {
-          "name": "Default Engine MK2",
-          "bonus": "+20% speed"
-        }
-      ],
-      "stealth": [
-        {
-          "name": "Default Stealth MK1",
-          "bonus": "+10% stealth"
-        },
-        {
-          "name": "Default Stealth MK2",
-          "bonus": "+20% stealth"
-        }
-      ],
-      "avionics": [
-        {
-          "name": "Default Avionics MK1",
-          "bonus": "+20% detection"
-        },
-        {
-          "name": "Default Avionics MK2",
-          "bonus": "+40% detection"
-        }
-      ]
-    }
-  },
+  
   {
     "id": 919,
     "name": "WZ-501A",
@@ -9810,16 +9847,14 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
    
       "Al-Khalid",
       "Arjun Mk.2",
-      "Stridsvagn-105",
       "9K31 Strela-1",
       "K2 Black Panther",
       "K21 KNIFV",
       "Leopard 2A8",
       "X2 Shinshin",
       "AMX-30 Super",
-      "Type 75 MLRS",
       "Centauro I 120",
-      "Strf 9040 BILL"
+      
     ]
     return constructionVehicles.includes(vehicleName)
   }
