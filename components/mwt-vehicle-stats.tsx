@@ -11038,14 +11038,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
              `• "Tier IV vehicles" - Category listings\n\n` +
              `What would you like to analyze?`
     }
+  }
 
-    setTimeout(() => {
-      const response = getVehicleInfo(chatInput)
-      const botMessage = { role: "assistant", content: response }
-      setChatMessages((prev) => [...prev, botMessage])
-      setIsLoading(false)
-      setChatInput("")
-    }, 1000)
+  setTimeout(() => {
+    const response = getVehicleInfo(chatInput)
+    const botMessage = { role: "assistant", content: response }
+    setChatMessages((prev) => [...prev, botMessage])
+    setIsLoading(false)
+    setChatInput("")
+  }, 1000)
   }
 
   return (
