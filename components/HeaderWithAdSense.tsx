@@ -77,8 +77,7 @@ export default function HeaderWithAdSense() {
           </div>
         </div>
       </header>
-
-      {/* Google AdSense - 728x90 Leaderboard */}
+      {/* Google AdSense - 468x60 Banner */}
       <div className="flex justify-center my-4">
         <div className="w-full max-w-4xl">
           <ins
@@ -86,8 +85,8 @@ export default function HeaderWithAdSense() {
             style={{ 
               display: 'block',
               width: '100%',
-              height: '90px',
-              minHeight: '90px'
+              height: '60px',
+              minHeight: '60px'
             }}
             data-ad-client="ca-pub-3724137161724998"
             data-ad-slot="f08c47fec0942fa0"
@@ -97,18 +96,6 @@ export default function HeaderWithAdSense() {
             onError={handleAdError}
           />
           
-          {/* Fallback placeholder if ad fails to load */}
-          {adError && (
-            <div 
-              className="w-full h-24 bg-slate-800 border border-slate-600 rounded-lg flex items-center justify-center text-slate-400 text-sm"
-              aria-label="Advertisement placeholder"
-            >
-              <div className="text-center">
-                <div className="text-xs mb-1">Advertisement</div>
-                <div className="text-xs opacity-60">728×90 Leaderboard</div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </>

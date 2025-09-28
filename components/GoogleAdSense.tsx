@@ -55,8 +55,8 @@ export default function GoogleAdSense({ className = "" }: GoogleAdSenseProps) {
           style={{ 
             display: 'block',
             width: '100%',
-            height: '90px',
-            minHeight: '90px'
+            height: '40px',
+            minHeight: '40px'
           }}
           data-ad-client="ca-pub-3724137161724998"
           data-ad-slot="f08c47fec0942fa0"
