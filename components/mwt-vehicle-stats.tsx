@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { vehicleCurrencyData } from './currency'
 import { urduTranslations, getUrduTranslation } from './Urdu'
@@ -9701,6 +9701,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [typeFilter, setTypeFilter] = useState("")
   const [tierFilter, setTierFilter] = useState("")
   const [countryFilter, setCountryFilter] = useState("")
+  const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [compare, setCompare] = useState<string[]>([])
   const [expandedVehicle, setExpandedVehicle] = useState("")
   const chatMessagesEndRef = useRef<HTMLDivElement>(null)
@@ -11511,43 +11512,148 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </button>
                     )}
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-2 w-full lg:w-auto">
-                    <select
-                      value={typeFilter}
-                      onChange={(e) => setTypeFilter(e.target.value)}
-                      className="w-full sm:w-auto md:w-40 px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm touch-manipulation lg:w-32"
-                    >
-                      <option value="">All Types</option>
-                      {types.map((type) => (
-                        <option key={type} value={type}>
-                          {type}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      value={tierFilter}
-                      onChange={(e) => setTierFilter(e.target.value)}
-                      className="w-full sm:w-auto md:w-40 px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm touch-manipulation lg:w-32"
-                    >
-                      <option value="">All Tiers</option>
-                      {tiers.map((tier) => (
-                        <option key={tier} value={tier}>
-                          Tier {tier}
-                        </option>
-                      ))}
-                    </select>
-                    <select
-                      value={countryFilter}
-                      onChange={(e) => setCountryFilter(e.target.value)}
-                      className="w-full sm:w-auto md:w-40 lg:w-44 px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm touch-manipulation"
-                    >
-                      <option value="">All Countries</option>
-                      {countries.map((country) => (
-                        <option key={country} value={country}>
-                          {country}
-                        </option>
-                      ))}
-                    </select>
+                  <div className="flex items-center gap-2">
+                    {/* Filter Button */}
+                    <div className="relative">
+                      <button
+                        onClick={() => setIsFilterOpen(!isFilterOpen)}
+                        className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm touch-manipulation transition-colors ${
+                          (typeFilter || tierFilter || countryFilter) 
+                            ? "bg-cyan-600 hover:bg-cyan-700 text-white" 
+                            : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600"
+                        }`}
+                      >
+                        <Filter className="w-4 h-4" />
+                        <span>Filter</span>
+                        {(typeFilter || tierFilter || countryFilter) && (
+                          <span className="w-2 h-2 bg-white rounded-full"></span>
+                        )}
+                      </button>
+
+                      {isFilterOpen && (
+                        <>
+                          {/* Backdrop */}
+                          <div 
+                            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+                            onClick={() => setIsFilterOpen(false)}
+                          ></div>
+
+                          {/* Filter Panel */}
+                          <div className="absolute right-0 top-full mt-2 w-80 bg-slate-800 border border-slate-600 rounded-lg shadow-lg z-50">
+                            <div className="p-4">
+                              {/* Header */}
+                              <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-lg font-semibold text-white">Filters</h3>
+                                <div className="flex items-center gap-2">
+                                  {(typeFilter || tierFilter || countryFilter) && (
+                                    <button
+                                      onClick={() => {
+                                        setTypeFilter("")
+                                        setTierFilter("")
+                                        setCountryFilter("")
+                                      }}
+                                      className="text-xs text-cyan-400 hover:text-cyan-300 transition-colors"
+                                    >
+                                      Clear All
+                                    </button>
+                                  )}
+                                  <button
+                                    onClick={() => setIsFilterOpen(false)}
+                                    className="text-slate-400 hover:text-white transition-colors"
+                                  >
+                                    <X className="w-4 h-4" />
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Filter Options */}
+                              <div className="space-y-4">
+                                {/* Type Filter */}
+                                <div>
+                                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                                    Vehicle Type
+                                  </label>
+                                  <select
+                                    value={typeFilter}
+                                    onChange={(e) => setTypeFilter(e.target.value)}
+                                    className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm text-white"
+                                  >
+                                    <option value="">All Types</option>
+                                    {types.map((type) => (
+                                      <option key={type} value={type}>
+                                        {type}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+
+                                {/* Tier Filter */}
+                                <div>
+                                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                                    Tier
+                                  </label>
+                                  <select
+                                    value={tierFilter}
+                                    onChange={(e) => setTierFilter(e.target.value)}
+                                    className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm text-white"
+                                  >
+                                    <option value="">All Tiers</option>
+                                    {tiers.map((tier) => (
+                                      <option key={tier} value={tier}>
+                                        Tier {tier}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+
+                                {/* Country Filter */}
+                                <div>
+                                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                                    Country
+                                  </label>
+                                  <select
+                                    value={countryFilter}
+                                    onChange={(e) => setCountryFilter(e.target.value)}
+                                    className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm text-white"
+                                  >
+                                    <option value="">All Countries</option>
+                                    {countries.map((country) => (
+                                      <option key={country} value={country}>
+                                        {country}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+                              </div>
+
+                              {/* Active Filters Display */}
+                              {(typeFilter || tierFilter || countryFilter) && (
+                                <div className="mt-4 pt-4 border-t border-slate-600">
+                                  <h4 className="text-sm font-medium text-slate-300 mb-2">Active Filters:</h4>
+                                  <div className="flex flex-wrap gap-2">
+                                    {typeFilter && (
+                                      <span className="px-2 py-1 bg-cyan-600 text-white text-xs rounded">
+                                        Type: {typeFilter}
+                                      </span>
+                                    )}
+                                    {tierFilter && (
+                                      <span className="px-2 py-1 bg-cyan-600 text-white text-xs rounded">
+                                        Tier: {tierFilter}
+                                      </span>
+                                    )}
+                                    {countryFilter && (
+                                      <span className="px-2 py-1 bg-cyan-600 text-white text-xs rounded">
+                                        Country: {countryFilter}
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -13670,261 +13776,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   )
 }
 
-// Leaderboard Ad Component
-const LeaderboardAd = () => {
-  return (
-    <>
-      {/* Leaderboard Ad Container */}
-      <div 
-        id="leaderboard-ad-728x90" 
-        className="ad-container leaderboard-ad"
-        aria-label="Advertisement"
-        role="complementary"
-      >
-        
-        {/* Ad Iframe */}
-        <iframe 
-          id="leaderboard-ad-iframe"
-          src="https://your-ad-provider-url.com/ad-slot"
-          width="728"
-          height="90"
-          frameBorder="0"
-          marginWidth="0"
-          marginHeight="0"
-          scrolling="no"
-          sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox"
-          loading="lazy"
-          aria-hidden="true"
-          title="Advertisement"
-        />
-        
-        {/* Fallback content for when iframe doesn't load */}
-        <div className="ad-fallback" style={{ display: 'none' }}>
-          <p>Advertisement</p>
-        </div>
-      </div>
-      
-      {/* CSS Styles */}
-      <style jsx>{`
-        .ad-container {
-          display: block;
-          width: 728px;
-          height: 90px;
-          margin: 0 auto;
-          padding: 0;
-          position: relative;
-          z-index: 1;
-          background-color: #f8f9fa;
-          border: 1px solid #e9ecef;
-          overflow: hidden;
-        }
-        
-        .leaderboard-ad {
-          max-width: 100%;
-        }
-        
-        .leaderboard-ad iframe {
-          width: 100%;
-          height: 100%;
-          border: none;
-          display: block;
-        }
-        
-        .ad-fallback {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background-color: #f8f9fa;
-          color: #6c757d;
-          font-size: 14px;
-          text-align: center;
-        }
-        
-        /* Mobile Responsiveness */
-        @media screen and (max-width: 768px) {
-          .ad-container {
-            width: 100%;
-            height: auto;
-            min-height: 90px;
-          }
-          
-          .ad-container iframe {
-            min-height: 90px;
-          }
-        }
-        
-        @media screen and (max-width: 480px) {
-          .ad-container {
-            min-height: 50px;
-          }
-          
-          .ad-container iframe {
-            min-height: 50px;
-          }
-        }
-      `}</style>
-      
-      {/* JavaScript for ad loading and fallback */}
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          document.addEventListener('DOMContentLoaded', function() {
-            const adContainer = document.getElementById('leaderboard-ad-728x90');
-            const adIframe = document.getElementById('leaderboard-ad-iframe');
-            const adFallback = adContainer.querySelector('.ad-fallback');
-            
-            // Handle iframe load errors
-            adIframe.addEventListener('error', function() {
-              adIframe.style.display = 'none';
-              adFallback.style.display = 'flex';
-            });
-            
-            // Optional: Refresh ad functionality
-            function refreshAd() {
-              const currentSrc = adIframe.src;
-              adIframe.src = '';
-              setTimeout(() => {
-                adIframe.src = currentSrc;
-              }, 100);
-            }
-            
-            // Make refresh function globally accessible if needed
-            window.refreshLeaderboardAd = refreshAd;
-          });
-        `
-      }} />
-    </>
-  );
-};
-
-// HTML Ad Container Component
-const HTMLAdContainer = () => {
-  return (
-    <>
-      {/* Leaderboard Ad Container */}
-      <div 
-        id="leaderboard-ad-728x90" 
-        className="ad-container leaderboard-ad"
-        aria-label="Advertisement"
-        role="complementary"
-      >
-        
-        {/* Ad Iframe */}
-        <iframe 
-          id="leaderboard-ad-iframe"
-          src="https://your-ad-provider-url.com/ad-slot"
-          width="728"
-          height="90"
-          frameBorder="0"
-          marginWidth="0"
-          marginHeight="0"
-          scrolling="no"
-          sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox"
-          loading="lazy"
-          aria-hidden="true"
-          title="Advertisement"
-        />
-        
-        {/* Fallback content for when iframe doesn't load */}
-        <div className="ad-fallback" style={{ display: 'none' }}>
-          <p>Advertisement</p>
-        </div>
-      </div>
-      
-      {/* CSS Styles */}
-      <style jsx>{`
-        .ad-container {
-          display: block;
-          width: 728px;
-          height: 90px;
-          margin: 0 auto;
-          padding: 0;
-          position: relative;
-          z-index: 1;
-          background-color: #f8f9fa;
-          border: 1px solid #e9ecef;
-          overflow: hidden;
-        }
-        
-        .leaderboard-ad {
-          max-width: 100%;
-        }
-        
-        .leaderboard-ad iframe {
-          width: 100%;
-          height: 100%;
-          border: none;
-          display: block;
-        }
-        
-        .ad-fallback {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background-color: #f8f9fa;
-          color: #6c757d;
-          font-size: 14px;
-          text-align: center;
-        }
-        
-        /* Mobile Responsiveness */
-        @media screen and (max-width: 768px) {
-          .ad-container {
-            width: 100%;
-            height: auto;
-            min-height: 90px;
-          }
-          
-          .ad-container iframe {
-            min-height: 90px;
-          }
-        }
-        
-        @media screen and (max-width: 480px) {
-          .ad-container {
-            min-height: 50px;
-          }
-          
-          .ad-container iframe {
-            min-height: 50px;
-          }
-        }
-      `}</style>
-      
-      {/* JavaScript for ad loading and fallback */}
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          document.addEventListener('DOMContentLoaded', function() {
-            const adContainer = document.getElementById('leaderboard-ad-728x90');
-            const adIframe = document.getElementById('leaderboard-ad-iframe');
-            const adFallback = adContainer.querySelector('.ad-fallback');
-            
-            // Handle iframe load errors
-            adIframe.addEventListener('error', function() {
-              adIframe.style.display = 'none';
-              adFallback.style.display = 'flex';
-            });
-            
-            // Optional: Refresh ad functionality
-            function refreshAd() {
-              const currentSrc = adIframe.src;
-              adIframe.src = '';
-              setTimeout(() => {
-                adIframe.src = currentSrc;
-              }, 100);
-            }
-            
-            // Make refresh function globally accessible if needed
-            window.refreshLeaderboardAd = refreshAd;
-          });
-        `
-      }} />
-    </>
-  );
-};
 
 export default function Page() {
   return <MwtVehicleStats vehicles={VEHICLES_DATA} />
