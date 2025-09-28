@@ -11534,17 +11534,20 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         <>
                           {/* Backdrop */}
                           <div 
-                            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+                            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
                             onClick={() => setIsFilterOpen(false)}
                           ></div>
 
                           {/* Filter Panel */}
-                          <div className="absolute right-0 top-full mt-2 w-80 bg-slate-800 border border-slate-600 rounded-lg shadow-lg z-50">
-                            <div className="p-4">
+                          <div className="absolute right-0 top-full mt-2 w-96 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 overflow-hidden">
+                            <div className="p-6">
                               {/* Header */}
-                              <div className="flex items-center justify-between mb-4">
-                                <h3 className="text-lg font-semibold text-white">Filters</h3>
-                                <div className="flex items-center gap-2">
+                              <div className="flex items-center justify-between mb-6">
+                                <div>
+                                  <h3 className="text-xl font-bold text-white">Filters</h3>
+                                  <p className="text-sm text-slate-400 mt-1">Refine your search</p>
+                                </div>
+                                <div className="flex items-center gap-3">
                                   {(typeFilter || tierFilter || countryFilter) && (
                                     <button
                                       onClick={() => {
@@ -11552,14 +11555,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                         setTierFilter("")
                                         setCountryFilter("")
                                       }}
-                                      className="text-xs text-cyan-400 hover:text-cyan-300 transition-colors"
+                                      className="px-3 py-1.5 bg-red-600/20 border border-red-600/30 rounded-lg text-red-400 text-sm font-medium hover:bg-red-600/30 hover:text-red-300 transition-colors"
                                     >
                                       Clear All
                                     </button>
                                   )}
                                   <button
                                     onClick={() => setIsFilterOpen(false)}
-                                    className="text-slate-400 hover:text-white transition-colors"
+                                    className="p-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
                                   >
                                     <X className="w-4 h-4" />
                                   </button>
@@ -11567,20 +11570,20 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               </div>
 
                               {/* Filter Options */}
-                              <div className="space-y-4">
+                              <div className="space-y-6">
                                 {/* Type Filter */}
                                 <div>
-                                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                                  <label className="block text-sm font-semibold text-slate-200 mb-3">
                                     Vehicle Type
                                   </label>
                                   <select
                                     value={typeFilter}
                                     onChange={(e) => setTypeFilter(e.target.value)}
-                                    className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm text-white"
+                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base text-white"
                                   >
-                                    <option value="">All Types</option>
+                                    <option value="" className="bg-slate-900">All Types</option>
                                     {types.map((type) => (
-                                      <option key={type} value={type}>
+                                      <option key={type} value={type} className="bg-slate-900">
                                         {type}
                                       </option>
                                     ))}
@@ -11589,17 +11592,17 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
                                 {/* Tier Filter */}
                                 <div>
-                                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                                  <label className="block text-sm font-semibold text-slate-200 mb-3">
                                     Tier
                                   </label>
                                   <select
                                     value={tierFilter}
                                     onChange={(e) => setTierFilter(e.target.value)}
-                                    className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm text-white"
+                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base text-white"
                                   >
-                                    <option value="">All Tiers</option>
+                                    <option value="" className="bg-slate-900">All Tiers</option>
                                     {tiers.map((tier) => (
-                                      <option key={tier} value={tier}>
+                                      <option key={tier} value={tier} className="bg-slate-900">
                                         Tier {tier}
                                       </option>
                                     ))}
@@ -11608,17 +11611,17 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
                                 {/* Country Filter */}
                                 <div>
-                                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                                  <label className="block text-sm font-semibold text-slate-200 mb-3">
                                     Country
                                   </label>
                                   <select
                                     value={countryFilter}
                                     onChange={(e) => setCountryFilter(e.target.value)}
-                                    className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 text-sm text-white"
+                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base text-white"
                                   >
-                                    <option value="">All Countries</option>
+                                    <option value="" className="bg-slate-900">All Countries</option>
                                     {countries.map((country) => (
-                                      <option key={country} value={country}>
+                                      <option key={country} value={country} className="bg-slate-900">
                                         {country}
                                       </option>
                                     ))}
@@ -11628,23 +11631,28 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
                               {/* Active Filters Display */}
                               {(typeFilter || tierFilter || countryFilter) && (
-                                <div className="mt-4 pt-4 border-t border-slate-600">
-                                  <h4 className="text-sm font-medium text-slate-300 mb-2">Active Filters:</h4>
+                                <div className="mt-6 pt-6 border-t border-slate-700">
+                                  <div className="flex items-center justify-between mb-4">
+                                    <h4 className="text-sm font-semibold text-slate-200">Active Filters</h4>
+                                    <span className="text-xs text-slate-500">
+                                      {[typeFilter, tierFilter, countryFilter].filter(Boolean).length} active
+                                    </span>
+                                  </div>
                                   <div className="flex flex-wrap gap-2">
                                     {typeFilter && (
-                                      <span className="px-2 py-1 bg-cyan-600 text-white text-xs rounded">
-                                        Type: {typeFilter}
-                                      </span>
+                                      <div className="flex items-center gap-2 px-3 py-2 bg-blue-600/20 border border-blue-600/30 rounded-lg">
+                                        <span className="text-sm text-blue-300">{typeFilter}</span>
+                                      </div>
                                     )}
                                     {tierFilter && (
-                                      <span className="px-2 py-1 bg-cyan-600 text-white text-xs rounded">
-                                        Tier: {tierFilter}
-                                      </span>
+                                      <div className="flex items-center gap-2 px-3 py-2 bg-blue-600/20 border border-blue-600/30 rounded-lg">
+                                        <span className="text-sm text-blue-300">Tier {tierFilter}</span>
+                                      </div>
                                     )}
                                     {countryFilter && (
-                                      <span className="px-2 py-1 bg-cyan-600 text-white text-xs rounded">
-                                        Country: {countryFilter}
-                                      </span>
+                                      <div className="flex items-center gap-2 px-3 py-2 bg-blue-600/20 border border-blue-600/30 rounded-lg">
+                                        <span className="text-sm text-blue-300">{countryFilter}</span>
+                                      </div>
                                     )}
                                   </div>
                                 </div>

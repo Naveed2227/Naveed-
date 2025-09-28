@@ -77,19 +77,18 @@ export default function HeaderWithAdSense() {
           </div>
         </div>
       </header>
-      {/* Google AdSense - 468x60 Banner */}
-      <div className="flex justify-center my-2">
+      {/* Google AdSense - 728x90 Leaderboard */}
+      <div className="flex justify-center my-4">
         <div className="w-full max-w-4xl">
           <ins
             className="adsbygoogle block"
             style={{ 
-              display: 'block',
-              width: '100%',
-              height: '50px',
-              minHeight: '50px'
+              display: 'inline-block',
+              width: '728px',
+              height: '90px'
             }}
             data-ad-client="ca-pub-3724137161724998"
-            data-ad-slot="f08c47fec0942fa0"
+            data-ad-slot="7926158958"
             data-ad-format="auto"
             data-full-width-responsive="true"
             onLoad={handleAdLoad}
