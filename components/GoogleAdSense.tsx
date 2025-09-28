@@ -66,18 +66,7 @@ export default function GoogleAdSense({ className = "" }: GoogleAdSenseProps) {
           onError={handleAdError}
         />
         
-        {/* Fallback placeholder if ad fails to load */}
-        {adError && (
-          <div 
-            className="w-full h-24 bg-slate-800 border border-slate-600 rounded-lg flex items-center justify-center text-slate-400 text-sm"
-            aria-label="Advertisement placeholder"
-          >
-            <div className="text-center">
-              <div className="text-xs mb-1">Advertisement</div>
-              <div className="text-xs opacity-60">728×90 Leaderboard</div>
-            </div>
-          </div>
-        )}
+        
       </div>
     </div>
   );
