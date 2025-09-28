@@ -1,6 +1,11 @@
 {
+  "projects": {
+    "default": "mwt-assistant-92593"
+  },
+  "targets": {},
+  "etags": {},
   "hosting": {
-    "public": "public",
+    "public": "out",
     "ignore": [
       "firebase.json",
       "**/.*",
