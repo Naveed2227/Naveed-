@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { vehicleCurrencyData } from './currency'
 import { urduTranslations, getUrduTranslation } from './Urdu'
 import { englishTranslations, getEnglishTranslation } from './English'
+import GoogleAdSense from './GoogleAdSense'
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -11016,7 +11017,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Burger Menu Button */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="absolute top-4 left-4 z-50 p-2 sm:p-3 bg-slate-800/90 hover:bg-slate-700/90 backdrop-blur-sm rounded-xl border border-slate-600/50 transition-all duration-200 group shadow-lg sm:top-6 sm:left-6"
+        className="absolute top-4 left-4 z-50 p-2 sm:p-3 bg-slate-800/90 hover:bg-slate-700/90 backdrop-blur-sm rounded-xl border border-slate-600/50 transition-all duration-200 group shadow-lg sm:top-6 sm:left-6 mt-4"
         aria-label="Menu"
       >
         <div className="flex flex-col gap-1.5">
@@ -11159,7 +11160,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
-        className={`fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-purple-400 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r ${isMenuOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
+        className={`fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-purple-400 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r mx-0 mr-0 ml-[-4px] ${isMenuOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
       >
         {/* Mobile: Compact icon + text */}
         <div className="sm:hidden flex flex-col items-center justify-center px-1 py-2 text-white font-bold text-[9px] tracking-wide">
@@ -11407,11 +11408,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       </AnimatePresence>
 
       <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 shadow-sm pt-16 sm:pt-0">
-        <div className="max-w-7xl xl:max-w-[90rem] mx-auto p-4 sm:p-6 md:p-6 lg:p-8">
+        <div className="max-w-7xl xl:max-w-[90rem] mx-auto p-4 sm:p-6 md:p-6 lg:p-8 mb-0 mt-0">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6">
             <div className="flex-1 min-w-0">
               <div>
-                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 text-transparent bg-clip-text mx-14">MWT Vehicle Stats</h1>
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 text-transparent bg-clip-text mx-14">MWT Assistant</h1>
                 <p className="text-xs sm:text-sm text-slate-400 mt-1 ml-14">Comprehensive vehicle statistics and comparisons</p>
               </div>
               {[
@@ -11554,6 +11555,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           </div>
         </div>
       </header>
+
+      {/* Google AdSense - 728x90 Leaderboard */}
+      <GoogleAdSense />
 
       <main className="max-w-7xl xl:max-w-[90rem] pt-16 sm:pt-6 p-4 sm:p-6 md:p-6 lg:p-8 mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         {/* Comparison Bottom Bar - Mobile */}
@@ -11980,7 +11984,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   alt={`${vehicle.faction} flag`}
                   className="w-6 h-4 sm:w-8 sm:h-6 object-cover rounded shadow-md"
                 />
-                <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                <h3 className="sm:text-xl font-bold text-white flex items-center gap-1 text-base flex-row">
                   {vehicle.name}
                   {isEditor && isEditMode && (
                     <button
@@ -12009,7 +12013,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <img
                     src={vehicle.image}
                     alt={`${vehicle.name} vehicle`}
-                    className="w-full h-32 sm:h-40 md:h-48 object-cover rounded-lg mb-3 bg-slate-800/20 shadow-lg"
+                    className="w-full sm:h-40 md:h-48 object-cover rounded-lg mb-3 bg-slate-800/20 shadow-lg h-36"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
                     }}
@@ -13665,6 +13669,262 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     </div>
   )
 }
+
+// Leaderboard Ad Component
+const LeaderboardAd = () => {
+  return (
+    <>
+      {/* Leaderboard Ad Container */}
+      <div 
+        id="leaderboard-ad-728x90" 
+        className="ad-container leaderboard-ad"
+        aria-label="Advertisement"
+        role="complementary"
+      >
+        
+        {/* Ad Iframe */}
+        <iframe 
+          id="leaderboard-ad-iframe"
+          src="https://your-ad-provider-url.com/ad-slot"
+          width="728"
+          height="90"
+          frameBorder="0"
+          marginWidth="0"
+          marginHeight="0"
+          scrolling="no"
+          sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox"
+          loading="lazy"
+          aria-hidden="true"
+          title="Advertisement"
+        />
+        
+        {/* Fallback content for when iframe doesn't load */}
+        <div className="ad-fallback" style={{ display: 'none' }}>
+          <p>Advertisement</p>
+        </div>
+      </div>
+      
+      {/* CSS Styles */}
+      <style jsx>{`
+        .ad-container {
+          display: block;
+          width: 728px;
+          height: 90px;
+          margin: 0 auto;
+          padding: 0;
+          position: relative;
+          z-index: 1;
+          background-color: #f8f9fa;
+          border: 1px solid #e9ecef;
+          overflow: hidden;
+        }
+        
+        .leaderboard-ad {
+          max-width: 100%;
+        }
+        
+        .leaderboard-ad iframe {
+          width: 100%;
+          height: 100%;
+          border: none;
+          display: block;
+        }
+        
+        .ad-fallback {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #f8f9fa;
+          color: #6c757d;
+          font-size: 14px;
+          text-align: center;
+        }
+        
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 768px) {
+          .ad-container {
+            width: 100%;
+            height: auto;
+            min-height: 90px;
+          }
+          
+          .ad-container iframe {
+            min-height: 90px;
+          }
+        }
+        
+        @media screen and (max-width: 480px) {
+          .ad-container {
+            min-height: 50px;
+          }
+          
+          .ad-container iframe {
+            min-height: 50px;
+          }
+        }
+      `}</style>
+      
+      {/* JavaScript for ad loading and fallback */}
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          document.addEventListener('DOMContentLoaded', function() {
+            const adContainer = document.getElementById('leaderboard-ad-728x90');
+            const adIframe = document.getElementById('leaderboard-ad-iframe');
+            const adFallback = adContainer.querySelector('.ad-fallback');
+            
+            // Handle iframe load errors
+            adIframe.addEventListener('error', function() {
+              adIframe.style.display = 'none';
+              adFallback.style.display = 'flex';
+            });
+            
+            // Optional: Refresh ad functionality
+            function refreshAd() {
+              const currentSrc = adIframe.src;
+              adIframe.src = '';
+              setTimeout(() => {
+                adIframe.src = currentSrc;
+              }, 100);
+            }
+            
+            // Make refresh function globally accessible if needed
+            window.refreshLeaderboardAd = refreshAd;
+          });
+        `
+      }} />
+    </>
+  );
+};
+
+// HTML Ad Container Component
+const HTMLAdContainer = () => {
+  return (
+    <>
+      {/* Leaderboard Ad Container */}
+      <div 
+        id="leaderboard-ad-728x90" 
+        className="ad-container leaderboard-ad"
+        aria-label="Advertisement"
+        role="complementary"
+      >
+        
+        {/* Ad Iframe */}
+        <iframe 
+          id="leaderboard-ad-iframe"
+          src="https://your-ad-provider-url.com/ad-slot"
+          width="728"
+          height="90"
+          frameBorder="0"
+          marginWidth="0"
+          marginHeight="0"
+          scrolling="no"
+          sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox"
+          loading="lazy"
+          aria-hidden="true"
+          title="Advertisement"
+        />
+        
+        {/* Fallback content for when iframe doesn't load */}
+        <div className="ad-fallback" style={{ display: 'none' }}>
+          <p>Advertisement</p>
+        </div>
+      </div>
+      
+      {/* CSS Styles */}
+      <style jsx>{`
+        .ad-container {
+          display: block;
+          width: 728px;
+          height: 90px;
+          margin: 0 auto;
+          padding: 0;
+          position: relative;
+          z-index: 1;
+          background-color: #f8f9fa;
+          border: 1px solid #e9ecef;
+          overflow: hidden;
+        }
+        
+        .leaderboard-ad {
+          max-width: 100%;
+        }
+        
+        .leaderboard-ad iframe {
+          width: 100%;
+          height: 100%;
+          border: none;
+          display: block;
+        }
+        
+        .ad-fallback {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #f8f9fa;
+          color: #6c757d;
+          font-size: 14px;
+          text-align: center;
+        }
+        
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 768px) {
+          .ad-container {
+            width: 100%;
+            height: auto;
+            min-height: 90px;
+          }
+          
+          .ad-container iframe {
+            min-height: 90px;
+          }
+        }
+        
+        @media screen and (max-width: 480px) {
+          .ad-container {
+            min-height: 50px;
+          }
+          
+          .ad-container iframe {
+            min-height: 50px;
+          }
+        }
+      `}</style>
+      
+      {/* JavaScript for ad loading and fallback */}
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          document.addEventListener('DOMContentLoaded', function() {
+            const adContainer = document.getElementById('leaderboard-ad-728x90');
+            const adIframe = document.getElementById('leaderboard-ad-iframe');
+            const adFallback = adContainer.querySelector('.ad-fallback');
+            
+            // Handle iframe load errors
+            adIframe.addEventListener('error', function() {
+              adIframe.style.display = 'none';
+              adFallback.style.display = 'flex';
+            });
+            
+            // Optional: Refresh ad functionality
+            function refreshAd() {
+              const currentSrc = adIframe.src;
+              adIframe.src = '';
+              setTimeout(() => {
+                adIframe.src = currentSrc;
+              }, 100);
+            }
+            
+            // Make refresh function globally accessible if needed
+            window.refreshLeaderboardAd = refreshAd;
+          });
+        `
+      }} />
+    </>
+  );
+};
 
 export default function Page() {
   return <MwtVehicleStats vehicles={VEHICLES_DATA} />
