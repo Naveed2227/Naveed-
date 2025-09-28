@@ -78,15 +78,15 @@ export default function HeaderWithAdSense() {
         </div>
       </header>
       {/* Google AdSense - 468x60 Banner */}
-      <div className="flex justify-center my-4">
+      <div className="flex justify-center my-2">
         <div className="w-full max-w-4xl">
           <ins
             className="adsbygoogle block"
             style={{ 
               display: 'block',
               width: '100%',
-              height: '60px',
-              minHeight: '60px'
+              height: '50px',
+              minHeight: '50px'
             }}
             data-ad-client="ca-pub-3724137161724998"
             data-ad-slot="f08c47fec0942fa0"

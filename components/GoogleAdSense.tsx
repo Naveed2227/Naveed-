@@ -47,7 +47,7 @@ export default function GoogleAdSense({ className = "" }: GoogleAdSenseProps) {
   };
 
   return (
-    <div className={`flex justify-center my-4 ${className}`}>
+    <div className={`flex justify-center my-0 ${className}`}>
       <div className="w-full max-w-4xl">
         {/* AdSense Ins Element */}
         <ins
