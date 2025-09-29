@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { vehicleCurrencyData } from './currency'
 import { urduTranslations, getUrduTranslation } from './Urdu'
@@ -9702,6 +9702,9 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [tierFilter, setTierFilter] = useState("")
   const [countryFilter, setCountryFilter] = useState("")
   const [isFilterOpen, setIsFilterOpen] = useState(false)
+  const [isTypeDropdownOpen, setIsTypeDropdownOpen] = useState(false)
+  const [isTierDropdownOpen, setIsTierDropdownOpen] = useState(false)
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false)
   const [compare, setCompare] = useState<string[]>([])
   const [expandedVehicle, setExpandedVehicle] = useState("")
   const chatMessagesEndRef = useRef<HTMLDivElement>(null)
@@ -11028,6 +11031,43 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
       </button>
 
+      {/* Filter Button */}
+      <motion.button
+        onClick={() => setIsFilterOpen(!isFilterOpen)}
+        className={`absolute top-4 right-4 z-50 p-2 sm:p-3 backdrop-blur-sm rounded-xl border transition-all duration-200 group shadow-lg sm:top-6 sm:right-6 mt-4 flex items-center gap-2 ${
+          (typeFilter || tierFilter || countryFilter) 
+            ? "bg-cyan-600/90 hover:bg-cyan-700/90 border-cyan-500/50" 
+            : "bg-slate-800/90 hover:bg-slate-700/90 border-slate-600/50"
+        }`}
+        aria-label="Filter"
+        initial={{ x: 100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ 
+          delay: 0.1,
+          type: "spring",
+          damping: 25,
+          stiffness: 200
+        }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <motion.div
+          animate={{
+            rotate: isFilterOpen ? 180 : 0
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          <Filter className={`w-5 h-5 ${
+            (typeFilter || tierFilter || countryFilter) 
+              ? "text-white" 
+              : "text-slate-300 group-hover:text-white"
+          }`} />
+        </motion.div>
+        {(typeFilter || tierFilter || countryFilter) && (
+          <span className="w-2 h-2 bg-white rounded-full"></span>
+        )}
+      </motion.button>
+
       {/* Sliding Menu Panel */}
       <AnimatePresence>
         {isMenuOpen && (
@@ -11152,6 +11192,253 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <span className="text-white font-medium group-hover:text-purple-300 transition-colors duration-200">{t('menu.credits')}</span>
                   </motion.button>
                 </nav>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+      
+      {/* Sliding Filter Panel */}
+      <AnimatePresence>
+        {isFilterOpen && (
+          <>
+            {/* Filter Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsFilterOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+            />
+            
+            {/* Filter Panel */}
+            <motion.div
+              initial={{ x: 300 }}
+              animate={{ x: 0 }}
+              exit={{ x: 300 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed right-0 top-0 h-full w-80 bg-gradient-to-b from-slate-800 to-slate-900 border-l border-slate-600/50 z-50 shadow-2xl overflow-y-auto"
+            >
+              <div className="p-6">
+                <div className="flex justify-between items-center mb-8">
+                  <h2 className="text-2xl font-bold text-white">Filters</h2>
+                  <button
+                    onClick={() => setIsFilterOpen(false)}
+                    className="p-2 hover:bg-slate-700/50 rounded-lg transition-colors duration-200"
+                    aria-label="Close filters"
+                  >
+                    <X className="w-6 h-6 text-slate-300 hover:text-white" />
+                  </button>
+                </div>
+                
+                {/* Clear All Filters Button */}
+                {(typeFilter || tierFilter || countryFilter) && (
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      setTypeFilter("")
+                      setTierFilter("")
+                      setCountryFilter("")
+                    }}
+                    className="w-full mb-6 px-4 py-3 bg-red-600/20 border border-red-600/30 rounded-xl text-red-400 font-medium hover:bg-red-600/30 hover:text-red-300 transition-colors"
+                  >
+                    Clear All Filters
+                  </motion.button>
+                )}
+                
+                <div className="space-y-6">
+                  {/* Type Filter */}
+                  <div className="relative">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}
+                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                    >
+                      <Filter className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300" />
+                      <span className="text-white font-medium group-hover:text-cyan-300 transition-colors duration-200">
+                        {typeFilter || "Vehicle Type"}
+                      </span>
+                      <ChevronDown className={`w-4 h-4 text-cyan-400 group-hover:text-cyan-300 transition-transform duration-200 ${isTypeDropdownOpen ? 'rotate-180' : ''}`} />
+                    </motion.button>
+                    
+                    <AnimatePresence>
+                      {isTypeDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute top-full left-0 right-0 mt-2 bg-slate-800 border border-slate-600/50 rounded-xl shadow-lg z-10 overflow-hidden max-h-60 overflow-y-auto"
+                        >
+                          <motion.button
+                            whileHover={{ scale: 1.01, backgroundColor: "rgba(56, 189, 248, 0.1)" }}
+                            whileTap={{ scale: 0.99 }}
+                            onClick={() => {
+                              setTypeFilter("")
+                              setIsTypeDropdownOpen(false)
+                            }}
+                            className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${!typeFilter ? 'bg-slate-700/30' : ''}`}
+                          >
+                            <span className={`text-sm font-medium ${!typeFilter ? 'text-cyan-300' : 'text-slate-300 hover:text-white'}`}>All Types</span>
+                          </motion.button>
+                          {types.map((type) => (
+                            <motion.button
+                              key={type}
+                              whileHover={{ scale: 1.01, backgroundColor: "rgba(56, 189, 248, 0.1)" }}
+                              whileTap={{ scale: 0.99 }}
+                              onClick={() => {
+                                setTypeFilter(type)
+                                setIsTypeDropdownOpen(false)
+                              }}
+                              className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${typeFilter === type ? 'bg-slate-700/30' : ''}`}
+                            >
+                              <span className={`text-sm font-medium ${typeFilter === type ? 'text-cyan-300' : 'text-slate-300 hover:text-white'}`}>{type}</span>
+                            </motion.button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  
+                  {/* Tier Filter */}
+                  <div className="relative">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setIsTierDropdownOpen(!isTierDropdownOpen)}
+                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                    >
+                      <Star className="w-5 h-5 text-yellow-400 group-hover:text-yellow-300" />
+                      <span className="text-white font-medium group-hover:text-yellow-300 transition-colors duration-200">
+                        {tierFilter ? `Tier ${tierFilter}` : "Tier"}
+                      </span>
+                      <ChevronDown className={`w-4 h-4 text-yellow-400 group-hover:text-yellow-300 transition-transform duration-200 ${isTierDropdownOpen ? 'rotate-180' : ''}`} />
+                    </motion.button>
+                    
+                    <AnimatePresence>
+                      {isTierDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute top-full left-0 right-0 mt-2 bg-slate-800 border border-slate-600/50 rounded-xl shadow-lg z-10 overflow-hidden max-h-60 overflow-y-auto"
+                        >
+                          <motion.button
+                            whileHover={{ scale: 1.01, backgroundColor: "rgba(250, 204, 21, 0.1)" }}
+                            whileTap={{ scale: 0.99 }}
+                            onClick={() => {
+                              setTierFilter("")
+                              setIsTierDropdownOpen(false)
+                            }}
+                            className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${!tierFilter ? 'bg-slate-700/30' : ''}`}
+                          >
+                            <span className={`text-sm font-medium ${!tierFilter ? 'text-yellow-300' : 'text-slate-300 hover:text-white'}`}>All Tiers</span>
+                          </motion.button>
+                          {tiers.map((tier) => (
+                            <motion.button
+                              key={tier}
+                              whileHover={{ scale: 1.01, backgroundColor: "rgba(250, 204, 21, 0.1)" }}
+                              whileTap={{ scale: 0.99 }}
+                              onClick={() => {
+                                setTierFilter(tier)
+                                setIsTierDropdownOpen(false)
+                              }}
+                              className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${tierFilter === tier ? 'bg-slate-700/30' : ''}`}
+                            >
+                              <span className={`text-sm font-medium ${tierFilter === tier ? 'text-yellow-300' : 'text-slate-300 hover:text-white'}`}>Tier {tier}</span>
+                            </motion.button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  
+                  {/* Country Filter */}
+                  <div className="relative">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                    >
+                      <MapPin className="w-5 h-5 text-green-400 group-hover:text-green-300" />
+                      <span className="text-white font-medium group-hover:text-green-300 transition-colors duration-200">
+                        {countryFilter || "Country"}
+                      </span>
+                      <ChevronDown className={`w-4 h-4 text-green-400 group-hover:text-green-300 transition-transform duration-200 ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
+                    </motion.button>
+                    
+                    <AnimatePresence>
+                      {isCountryDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute top-full left-0 right-0 mt-2 bg-slate-800 border border-slate-600/50 rounded-xl shadow-lg z-10 overflow-hidden max-h-60 overflow-y-auto"
+                        >
+                          <motion.button
+                            whileHover={{ scale: 1.01, backgroundColor: "rgba(34, 197, 94, 0.1)" }}
+                            whileTap={{ scale: 0.99 }}
+                            onClick={() => {
+                              setCountryFilter("")
+                              setIsCountryDropdownOpen(false)
+                            }}
+                            className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${!countryFilter ? 'bg-slate-700/30' : ''}`}
+                          >
+                            <span className={`text-sm font-medium ${!countryFilter ? 'text-green-300' : 'text-slate-300 hover:text-white'}`}>All Countries</span>
+                          </motion.button>
+                          {countries.map((country) => (
+                            <motion.button
+                              key={country}
+                              whileHover={{ scale: 1.01, backgroundColor: "rgba(34, 197, 94, 0.1)" }}
+                              whileTap={{ scale: 0.99 }}
+                              onClick={() => {
+                                setCountryFilter(country)
+                                setIsCountryDropdownOpen(false)
+                              }}
+                              className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${countryFilter === country ? 'bg-slate-700/30' : ''}`}
+                            >
+                              <span className={`text-sm font-medium ${countryFilter === country ? 'text-green-300' : 'text-slate-300 hover:text-white'}`}>{country}</span>
+                            </motion.button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+                
+                {/* Active Filters Display */}
+                {(typeFilter || tierFilter || countryFilter) && (
+                  <div className="mt-8 pt-6 border-t border-slate-700">
+                    <div className="flex items-center justify-between mb-4">
+                      <h4 className="text-sm font-semibold text-slate-200">Active Filters</h4>
+                      <span className="text-xs text-slate-500">
+                        {[typeFilter, tierFilter, countryFilter].filter(Boolean).length} active
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {typeFilter && (
+                        <div className="flex items-center gap-2 px-3 py-2 bg-cyan-600/20 border border-cyan-600/30 rounded-lg">
+                          <span className="text-sm text-cyan-300">{typeFilter}</span>
+                        </div>
+                      )}
+                      {tierFilter && (
+                        <div className="flex items-center gap-2 px-3 py-2 bg-yellow-600/20 border border-yellow-600/30 rounded-lg">
+                          <span className="text-sm text-yellow-300">Tier {tierFilter}</span>
+                        </div>
+                      )}
+                      {countryFilter && (
+                        <div className="flex items-center gap-2 px-3 py-2 bg-green-600/20 border border-green-600/30 rounded-lg">
+                          <span className="text-sm text-green-300">{countryFilter}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.div>
           </>
@@ -11295,11 +11582,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                        md:text-xs md:px-2 md:py-1 md:w-[62px]">
                              Vehicles
                           </span>
-                          {selectedBattlePass === battlePass.id ? (
-                            <ChevronDown className="w-5 h-5 text-purple-400" />
-                          ) : (
-                            <ChevronRight className="w-5 h-5 text-slate-400" />
-                          )}
+                          <ChevronRight className="w-5 h-5 text-slate-400" />
                         </div>
                       </div>
                     </button>
@@ -11513,149 +11796,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     )}
                   </div>
                   <div className="flex items-center gap-2">
-                    {/* Filter Button */}
-                    <div className="relative">
-                      <button
-                        onClick={() => setIsFilterOpen(!isFilterOpen)}
-                        className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm touch-manipulation transition-colors ${
-                          (typeFilter || tierFilter || countryFilter) 
-                            ? "bg-cyan-600 hover:bg-cyan-700 text-white" 
-                            : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600"
-                        }`}
-                      >
-                        <Filter className="w-4 h-4" />
-                        <span>Filter</span>
-                        {(typeFilter || tierFilter || countryFilter) && (
-                          <span className="w-2 h-2 bg-white rounded-full"></span>
-                        )}
-                      </button>
-
-                      {isFilterOpen && (
-                        <>
-                          {/* Backdrop */}
-                          <div 
-                            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
-                            onClick={() => setIsFilterOpen(false)}
-                          ></div>
-
-                          {/* Filter Panel */}
-                          <div className="absolute right-0 top-full mt-2 w-96 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 overflow-hidden">
-                            <div className="p-6">
-                              {/* Header */}
-                              <div className="flex items-center justify-between mb-6">
-                                <div>
-                                  <h3 className="text-xl font-bold text-white">Filters</h3>
-                                  
-                                </div>
-                                <div className="flex items-center gap-3">
-                                  {(typeFilter || tierFilter || countryFilter) && (
-                                    <button
-                                      onClick={() => {
-                                        setTypeFilter("")
-                                        setTierFilter("")
-                                        setCountryFilter("")
-                                      }}
-                                      className="px-3 py-1.5 bg-red-600/20 border border-red-600/30 rounded-lg text-red-400 text-sm font-medium hover:bg-red-600/30 hover:text-red-300 transition-colors"
-                                    >
-                                      Clear All
-                                    </button>
-                                  )}
-                                  <button
-                                    onClick={() => setIsFilterOpen(false)}
-                                    className="p-2 bg-slate-800 border border-slate-600 rounded-lg text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
-                                  >
-                                    <X className="w-4 h-4" />
-                                  </button>
-                                </div>
-                              </div>
-
-                              {/* Filter Options */}
-                              <div className="space-y-6">
-                                {/* Type Filter */}
-                                <div>
-                                  
-                                  <select
-                                    value={typeFilter}
-                                    onChange={(e) => setTypeFilter(e.target.value)}
-                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base text-white"
-                                  >
-                                    <option value="" className="bg-slate-900">All Types</option>
-                                    {types.map((type) => (
-                                      <option key={type} value={type} className="bg-slate-900">
-                                        {type}
-                                      </option>
-                                    ))}
-                                  </select>
-                                </div>
-
-                                {/* Tier Filter */}
-                                <div>
-                                  
-                                  <select
-                                    value={tierFilter}
-                                    onChange={(e) => setTierFilter(e.target.value)}
-                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base text-white"
-                                  >
-                                    <option value="" className="bg-slate-900">All Tiers</option>
-                                    {tiers.map((tier) => (
-                                      <option key={tier} value={tier} className="bg-slate-900">
-                                        Tier {tier}
-                                      </option>
-                                    ))}
-                                  </select>
-                                </div>
-
-                                {/* Country Filter */}
-                                <div>
-                                  
-                                  <select
-                                    value={countryFilter}
-                                    onChange={(e) => setCountryFilter(e.target.value)}
-                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base text-white"
-                                  >
-                                    <option value="" className="bg-slate-900">All Countries</option>
-                                    {countries.map((country) => (
-                                      <option key={country} value={country} className="bg-slate-900">
-                                        {country}
-                                      </option>
-                                    ))}
-                                  </select>
-                                </div>
-                              </div>
-
-                              {/* Active Filters Display */}
-                              {(typeFilter || tierFilter || countryFilter) && (
-                                <div className="mt-6 pt-6 border-t border-slate-700">
-                                  <div className="flex items-center justify-between mb-4">
-                                    <h4 className="text-sm font-semibold text-slate-200">Active Filters</h4>
-                                    <span className="text-xs text-slate-500">
-                                      {[typeFilter, tierFilter, countryFilter].filter(Boolean).length} active
-                                    </span>
-                                  </div>
-                                  <div className="flex flex-wrap gap-2">
-                                    {typeFilter && (
-                                      <div className="flex items-center gap-2 px-3 py-2 bg-blue-600/20 border border-blue-600/30 rounded-lg">
-                                        <span className="text-sm text-blue-300">{typeFilter}</span>
-                                      </div>
-                                    )}
-                                    {tierFilter && (
-                                      <div className="flex items-center gap-2 px-3 py-2 bg-blue-600/20 border border-blue-600/30 rounded-lg">
-                                        <span className="text-sm text-blue-300">Tier {tierFilter}</span>
-                                      </div>
-                                    )}
-                                    {countryFilter && (
-                                      <div className="flex items-center gap-2 px-3 py-2 bg-blue-600/20 border border-blue-600/30 rounded-lg">
-                                        <span className="text-sm text-blue-300">{countryFilter}</span>
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </>
-                      )}
-                    </div>
                   </div>
                 </div>
               </div>
