@@ -991,9 +991,19 @@ const VEHICLES_DATA = [
   tier: "IV",
   image: "X2-Shinshin.jpg",
   description: "Japan’s stealth technology demonstrator, testing advanced avionics, radar, and maneuverability for future fighters.",
-  stats: { health: 0, speed: 0, afterburnerSpeed: 0, agility: 0 },
+  stats: { health: 21400, speed: 810, afterburnerSpeed: 2230, agility: 53 },
   weapons: [
-    
+      { "name": "AAM-3", "type": "Air-to-Ground Missile", "damage": 5900, "penetration": 45, "reload": 15 },
+      { "name": "AAM-4", "type": "BVR AAM", "damage": 7500, "penetration": 75, "reload": 30 },
+      { "name": "AAM-5", "type": "Short-Range AAM", "damage": 6100, "penetration": 60, "reload": 20 },
+      { "name": "GCS-1", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
+      { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
+      { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
+      { "name": "GBU-31", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
+      { "name": "JNAAM", "type": "Guided Bomb", "damage": 8100, "penetration": 85, "reload": 35 },
+      { "name": "Type 12 STS", "type": "Guided Bomb", "damage": 16200, "penetration": 170, "reload": 40 },
+      { "name": "JLAU-3/A", "damage": 5200, "penetration": 128, "reload": 20 },
+      
 
 
   ],
@@ -9712,6 +9722,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [compare, setCompare] = useState<string[]>([])
   const [expandedVehicle, setExpandedVehicle] = useState("")
   const chatMessagesEndRef = useRef<HTMLDivElement>(null)
+  const comparisonRef = useRef<HTMLDivElement>(null)
   const [chatOpen, setChatOpen] = useState(false)
   const [chatMessages, setChatMessages] = useState<{ role: string; content: string }[]>([])
   const [isLoading, setIsLoading] = useState(false)
@@ -9839,225 +9850,6 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   }
 
 
-  // Vehicle Rarity System
-  const getVehicleRarity = (vehicleName: string) => {
-    const legendaryVehicles = [
-      "Su-57 Felon",
-      "Su-57M",
-      "YF-23",
-      "Su-75 Checkmate",
-      "KF-51 Panther",
-      "EMBT 120",
-      "Type 90",
-      "XM2001 Crusader",
-      "Gepard 1A2",
-      "Abrams X",
-      "Merkava Mk.4",
-      "Object 640",
-      "Ka-58 Black Ghost",
-      "J-50",
-      "MiG-41M",
-      "T-20 Monolit",
-      "PL-01",
-      "M270 MLRS",
-      "BM-57-2 Kochevnik",
-      "MGM-166 LOSAT",
-      "T-104 Bastion",
-      "SR-5 GMLRS",
-      "ZTZ99-III",
-      "FV4034 Challenger 2 TES",
-      "Karrar",
-      "M1 Abrams Block 3",
-      "Altay",
-      "AMX-30 Super",
-      "Type 75 MLRS",
-      "Mi-24 Super Hind",
-      "Leopard 2A-RC 3.0",
-      "Leopard 2A8",
-      "X2 Shinshin",
-      "K2 Black Panther",
-      "TU-222",
-      "TOS-1A",
-      "FK 2000",
-      "SB-1"
-    ];
-    
-    const epicVehicles = [
-      "Type 10",
-      "Challenger 3",
-      "Leopard 2A7+",
-      "T-14 Armata (152)",
-      "KF31 Lynx",
-      "M10 Booker",
-      "M-SHORAD",
-      "M109A6 Paladin",
-      "Otomatic 76",
-      "F-16C Night Falcon",
-      "Mitsubishi F2B",
-      "KA-50",
-      "T54E1",
-      "CM25",
-      "T-55AMD",
-      "SU-152 Taran",
-      "Leopard 2A4",
-      "PT-91 Twardy",
-      "ZTZ-96A (P)",
-      "2S31 Vena",
-      "K-31 Cheonma",
-      "Type 625E SHORAD",
-      "Type 89 MLRS",
-      "AFT-09",
-      "WMA301",
-      "AFT-10",
-      "Type 16 MCV",
-      "VT-4A1",
-      "Leopard 2A7 Plus",
-      "Su-39",
-      "Su-35S",
-      "Alpha Jet",
-      "Mitsubishi F-2B",
-      "Su-24M",
-      "Ka-50 Black Shark",
-      "OH-1 Ninja",
-      "T-95M",
-      "M1 Abrams CATTB",
-      "Leclerc S2 AZUR",
-      "T-64BV",
-      "M60A3 (MZK)",
-      "Rookiat MTTD",
-      "BMD3",
-      "K21 KNIFV",
-      "Stridsvagn 105",
-      "Strf 9040 BILL"
-    ];
-    
-    const rareVehicles = [
-      "F-22 Raptor",
-      "J-35",
-      "T-14 Armata",
-      "2S19 Msta-S",
-      "BMPT Terminator 2",
-      "Mi-28NM",
-      "WZ-10",
-      "AH-1Z",
-      "Z-11WB",
-      "MI-8TV",
-      "Z-20",
-      "AH-84",
-      "F-14D Super Tomcat",
-      "J-16",
-      "Su 25UB",
-      "F-15EX Eagle II",
-      "M42A1 Duster",
-      "T114 BAT",
-      "WZ-120C",
-      "Type 74E",
-      "Type 74G/Kai",
-      "T-62 545",
-      "XM1 (GM)",
-      "M163 VADS",
-      "2S3 Akatsiya",
-      "MBT70",
-      "ZTZ96",
-      "9A52-2 Smerch",
-      "AV-8B Harrier II",
-      "Su-25UB",
-      "A-10A Thunderbolt",
-      "Mi-8TV",
-      "Z-11WB Changhe",
-      "Z-20 Harbin",
-      "AH-1Z Viper",
-      "MBT-70",
-      "PGZ-09",
-      "HSTV-L",
-      "XM8 AGS",
-      "VBCI-2",
-      "Centauro I 120"
-    ];
-    
-    const enhancedVehicles = [
-      "F-35B Lightning II",
-      "F/A-18F Super Hornet",
-      "J-20 Mighty Dragon",
-      "Mi-35P",
-      "AH-64E",
-      "Z-19E",
-      "Z-9G",
-      "MH-6",
-      "SUPER LYNX",
-      "Z-9WA",
-      "MH-60L",
-      "F-4E Phantom",
-      "J-10 Chengdu",
-      "MiG-31BM Foxhound",
-      "Q-5A Nanchang",
-      "J-15",
-      "M41 Walker Bulldog",
-      "LAV-25",
-      "LAV-150",
-      "M113A1 FMS AIP",
-      "XM800T",
-      "WZ-120",
-      "WZ-121",
-      "WZ-501",
-      "WZ-501A",
-      "WZ-211",
-      "T-55A",
-      "BMP-1",
-      "BMP-1K",
-      "BTR-80",
-      "BTR-80A",
-      "PT-76B",
-      "Type-61",
-      "ZSU-57-2",
-      "M60",
-      "T-62",
-      "BMP-2",
-      "BTR-82AT",
-      "BTR-82A1",
-      "M3 Bradley",
-      "PGZ-04A",
-      "ZSU-23-4M4 Shilka",
-      "LAV-300",
-      "PTL-02",
-      "PLZ-83",
-      "2S1 Gvozdika",
-      "M1A1 Abrams",
-      "T-72A",
-      "ZTZ85-II",
-      "PLZ-07B",
-      "2S6M1 Tunguska-M1",
-      "XM975",
-      "M113 Hellfire",
-      "LAV-600",
-      "T-90A",
-      "ZTZ99A",
-      "ADATS",
-      "Pantsir S-1",
-      "M1128 Stryker",
-      "PLZ-05",
-      "MiG-35",
-      "Su-37 Terminator",
-      "Ka-52M",
-      "Mi-35P Hind-F",
-      "AH-64E Apache",
-      "Super Lynx Mk88A",
-      "Z-9WA",
-      "MH-60L DAP",
-      "Z-9G Harbin",
-      "MH-6 Little Bird",
-      "M1 Abrams",
-      "M3A3 Bradley",
-      "ZBL-08",
-      "M110A2"
-    ];
-    
-    if (legendaryVehicles.includes(vehicleName)) return "Legendary";
-    if (epicVehicles.includes(vehicleName)) return "Epic";
-    if (rareVehicles.includes(vehicleName)) return "Rare";
-    if (enhancedVehicles.includes(vehicleName)) return "Enhanced";
-    return "Common"; // Default to Common for unlisted vehicles
-  };
 
   // Vehicle Obtain Method System
   const getVehicleObtainMethod = (vehicleName: string) => {
@@ -10957,7 +10749,6 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       "K2 Black Panther",
       "K21 KNIFV",
       "Leopard 2A8",
-      "X2 Shinshin",
       "AMX-30 Super",
       "Centauro I 120",
       
@@ -11053,7 +10844,9 @@ const longRangeMissiles = [
   "Kh-38ME",
   "Kh-38MLE",
   "S-24",
-  "KAB-250"
+  "KAB-250",
+  "JNAAM",
+  "Type 12 STS",
 ];
 
 const laserGuidedMissiles = [
@@ -11087,6 +10880,7 @@ const rocketPods = [
   "Type 90 x2",
   "JLAU-3/A",
   "C-13DF",
+  "JLAU-3/A",
 ];
 
 const missileHasTags = (missileName: string) => {
