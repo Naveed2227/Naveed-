@@ -10313,18 +10313,13 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
         return;
       }
 
-      // Set canvas dimensions (poster size)
-      canvas.width = 800;
-      canvas.height = 1000;
+      // Set canvas dimensions to match the UI card aspect ratio
+      canvas.width = 400;
+      canvas.height = 600;
 
-      // Fill white background
-      ctx.fillStyle = '#ffffff';
+      // Fill dark background like the UI
+      ctx.fillStyle = '#0f172a';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Add border
-      ctx.strokeStyle = '#e5e7eb';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
 
       // Load and draw vehicle image
       const img = new Image();
@@ -10336,149 +10331,167 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
         img.src = vehicle.image || '';
       });
 
-      // Draw vehicle image in center
-      const imageX = (canvas.width - 300) / 2;
-      const imageY = 120;
-      const imageWidth = 300;
+      // Draw vehicle image at top (like in UI)
+      const imageX = 20;
+      const imageY = 20;
+      const imageWidth = canvas.width - 40;
       const imageHeight = 200;
       
-      // Draw image background
-      ctx.fillStyle = '#f3f4f6';
-      ctx.fillRect(imageX - 5, imageY - 5, imageWidth + 10, imageHeight + 10);
-      
-      // Draw image
+      // Draw image with rounded corners effect
+      ctx.save();
+      ctx.beginPath();
+      ctx.roundRect(imageX, imageY, imageWidth, imageHeight, 8);
+      ctx.clip();
       ctx.drawImage(img, imageX, imageY, imageWidth, imageHeight);
+      ctx.restore();
 
       // Set up text styling
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-
-      // Draw title
-      ctx.fillStyle = '#1f2937';
-      ctx.font = 'bold 32px Arial';
-      ctx.fillText(vehicle.name, canvas.width / 2, 50);
-
-      // Draw subtitle
-      ctx.fillStyle = '#6b7280';
-      ctx.font = '18px Arial';
-      ctx.fillText('Vehicle Statistics', canvas.width / 2, 85);
-
-      // Draw stats section
-      const statsStartY = 360;
-      const lineHeight = 35;
-      const leftMargin = 80;
-      const rightMargin = canvas.width - 80;
-
-      // Stats section title
-      ctx.fillStyle = '#1f2937';
-      ctx.font = 'bold 24px Arial';
       ctx.textAlign = 'left';
-      ctx.fillText('Specifications', leftMargin, statsStartY);
+      ctx.textBaseline = 'top';
 
-      // Draw basic info
-      ctx.font = '16px Arial';
-      ctx.fillStyle = '#374151';
-      
-      let currentY = statsStartY + 40;
-      
-      // Type
-      ctx.fillText('Type:', leftMargin, currentY);
-      ctx.fillStyle = '#1f2937';
-      ctx.fillText(vehicle.type || 'Unknown', rightMargin, currentY);
-      currentY += lineHeight;
-      
-      // Country
-      ctx.fillStyle = '#374151';
-      ctx.fillText('Country:', leftMargin, currentY);
-      ctx.fillStyle = '#1f2937';
-      ctx.fillText(vehicle.faction || 'Unknown', rightMargin, currentY);
-      currentY += lineHeight;
-      
-      // Tier
-      ctx.fillStyle = '#374151';
-      ctx.fillText('Tier:', leftMargin, currentY);
-      ctx.fillStyle = '#1f2937';
-      ctx.fillText(formatTier(vehicle.tier) || 'Unknown', rightMargin, currentY);
-      currentY += lineHeight;
-      
-      // Rarity
-      ctx.fillStyle = '#374151';
-      ctx.fillText('Rarity:', leftMargin, currentY);
-      ctx.fillStyle = '#1f2937';
-      ctx.fillText(getVehicleRarity(vehicle.name) || 'Standard', rightMargin, currentY);
-      currentY += lineHeight;
-      
-      // Obtain Method
-      ctx.fillStyle = '#374151';
-      ctx.fillText('How to Obtain:', leftMargin, currentY);
-      ctx.fillStyle = '#1f2937';
-      ctx.fillText(getVehicleObtainMethod(vehicle.name) || 'Unknown', rightMargin, currentY);
-      currentY += lineHeight * 1.5;
+      // Draw vehicle name and flag
+      const nameY = imageY + imageHeight + 20;
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 18px Arial';
+      ctx.fillText(vehicle.name, 20, nameY);
 
-      // Draw performance stats
-      ctx.font = 'bold 20px Arial';
-      ctx.fillStyle = '#1f2937';
-      ctx.fillText('Performance Stats', leftMargin, currentY);
-      currentY += 35;
+      // Draw faction/country
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '14px Arial';
+      ctx.fillText(vehicle.faction, 20, nameY + 25);
 
-      ctx.font = '16px Arial';
-      ctx.fillStyle = '#374151';
+      // Draw rarity badge
+      const rarity = getVehicleRarity(vehicle.name) || 'Standard';
+      const rarityColors = {
+        'Common': '#6b7280',
+        'Enhanced': '#3b82f6',
+        'Rare': '#10b981',
+        'Epic': '#8b5cf6',
+        'Legendary': '#f59e0b'
+      };
       
-      // Health
-      ctx.fillText('Health:', leftMargin, currentY);
-      ctx.fillStyle = '#1f2937';
-      ctx.fillText(vehicle.stats.health.toString(), rightMargin, currentY);
-      currentY += lineHeight;
+      const badgeWidth = ctx.measureText(rarity).width + 16;
+      const badgeX = canvas.width - badgeWidth - 20;
       
-      // Speed (if applicable)
-      if (vehicle.stats.speed > 0) {
-        ctx.fillStyle = '#374151';
-        ctx.fillText('Speed:', leftMargin, currentY);
-        ctx.fillStyle = '#1f2937';
-        ctx.fillText(vehicle.stats.speed + ' km/h', rightMargin, currentY);
-        currentY += lineHeight;
-      }
+      ctx.fillStyle = rarityColors[rarity as keyof typeof rarityColors] || '#6b7280';
+      ctx.beginPath();
+      ctx.roundRect(badgeX, nameY, badgeWidth, 20, 10);
+      ctx.fill();
       
-      // Armor (optional)
-      if (vehicle.stats.armor !== undefined) {
-        ctx.fillStyle = '#374151';
-        ctx.fillText('Armor:', leftMargin, currentY);
-        ctx.fillStyle = '#1f2937';
-        ctx.fillText(vehicle.stats.armor.toString(), rightMargin, currentY);
-        currentY += lineHeight;
-      }
-      
-      // Agility
-      ctx.fillStyle = '#374151';
-      ctx.fillText('Agility:', leftMargin, currentY);
-      ctx.fillStyle = '#1f2937';
-      ctx.fillText(vehicle.stats.agility.toString(), rightMargin, currentY);
-      currentY += lineHeight;
-      
-      // Damage (optional)
-      if ('damage' in vehicle.stats && vehicle.stats.damage !== undefined) {
-        ctx.fillStyle = '#374151';
-        ctx.fillText('Damage:', leftMargin, currentY);
-        ctx.fillStyle = '#1f2937';
-        ctx.fillText(vehicle.stats.damage.toString(), rightMargin, currentY);
-        currentY += lineHeight;
-      }
-      
-      // Range (optional)
-      if ('range' in vehicle.stats && vehicle.stats.range !== undefined) {
-        ctx.fillStyle = '#374151';
-        ctx.fillText('Range:', leftMargin, currentY);
-        ctx.fillStyle = '#1f2937';
-        ctx.fillText(vehicle.stats.range.toString(), rightMargin, currentY);
-        currentY += lineHeight;
-      }
-
-      // Draw footer
-      const footerY = canvas.height - 40;
-      ctx.fillStyle = '#9ca3af';
+      ctx.fillStyle = '#ffffff';
       ctx.font = '12px Arial';
       ctx.textAlign = 'center';
-      ctx.fillText('Generated by MWT Vehicle Stats', canvas.width / 2, footerY);
+      ctx.fillText(rarity, badgeX + badgeWidth/2, nameY + 4);
+      ctx.textAlign = 'left';
+
+      // Draw description if available
+      const descY = nameY + 60;
+      if (vehicle.description) {
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '12px Arial';
+        
+        // Wrap text for description
+        const words = vehicle.description.split(' ');
+        let line = '';
+        let currentY = descY;
+        const maxWidth = canvas.width - 40;
+        const lineHeight = 16;
+        
+        for (let n = 0; n < words.length; n++) {
+          const testLine = line + words[n] + ' ';
+          const metrics = ctx.measureText(testLine);
+          const testWidth = metrics.width;
+          
+          if (testWidth > maxWidth && n > 0) {
+            ctx.fillText(line, 20, currentY);
+            line = words[n] + ' ';
+            currentY += lineHeight;
+          } else {
+            line = testLine;
+          }
+        }
+        ctx.fillText(line, 20, currentY);
+      }
+
+      // Calculate stats area position
+      const statsY = vehicle.description ? descY + 80 : nameY + 80;
+      
+      // Draw 4 stat boxes in 2x2 grid like the UI
+      const boxWidth = (canvas.width - 60) / 2;
+      const boxHeight = 60;
+      const boxSpacing = 10;
+      
+      // Health box (top-left)
+      const healthX = 20;
+      const healthY = statsY;
+      ctx.fillStyle = '#1e293b';
+      ctx.beginPath();
+      ctx.roundRect(healthX, healthY, boxWidth, boxHeight, 8);
+      ctx.fill();
+      
+      ctx.fillStyle = '#ef4444';
+      ctx.font = '12px Arial';
+      ctx.fillText('HEALTH', healthX + 10, healthY + 8);
+      
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 20px Arial';
+      ctx.fillText(vehicle.stats.health.toLocaleString(), healthX + 10, healthY + 28);
+      
+      // Speed box (top-right)
+      const speedX = healthX + boxWidth + boxSpacing;
+      const speedY = statsY;
+      ctx.fillStyle = '#1e293b';
+      ctx.beginPath();
+      ctx.roundRect(speedX, speedY, boxWidth, boxHeight, 8);
+      ctx.fill();
+      
+      ctx.fillStyle = '#3b82f6';
+      ctx.font = '12px Arial';
+      ctx.fillText('SPEED', speedX + 10, speedY + 8);
+      
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 20px Arial';
+      if (vehicle.stats.speed > 0) {
+        ctx.fillText(vehicle.stats.speed + ' km/h', speedX + 10, speedY + 28);
+      } else {
+        ctx.fillText('N/A', speedX + 10, speedY + 28);
+      }
+      
+      // Armor box (bottom-left)
+      const armorX = 20;
+      const armorY = healthY + boxHeight + boxSpacing;
+      ctx.fillStyle = '#1e293b';
+      ctx.beginPath();
+      ctx.roundRect(armorX, armorY, boxWidth, boxHeight, 8);
+      ctx.fill();
+      
+      ctx.fillStyle = '#10b981';
+      ctx.font = '12px Arial';
+      ctx.fillText('ARMOR', armorX + 10, armorY + 8);
+      
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 20px Arial';
+      if (vehicle.stats.armor !== undefined) {
+        ctx.fillText(vehicle.stats.armor.toString(), armorX + 10, armorY + 28);
+      } else {
+        ctx.fillText('N/A', armorX + 10, armorY + 28);
+      }
+      
+      // Agility box (bottom-right)
+      const agilityX = armorX + boxWidth + boxSpacing;
+      const agilityY = armorY;
+      ctx.fillStyle = '#1e293b';
+      ctx.beginPath();
+      ctx.roundRect(agilityX, agilityY, boxWidth, boxHeight, 8);
+      ctx.fill();
+      
+      ctx.fillStyle = '#f59e0b';
+      ctx.font = '12px Arial';
+      ctx.fillText('AGILITY', agilityX + 10, agilityY + 8);
+      
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 20px Arial';
+      ctx.fillText(vehicle.stats.agility.toString(), agilityX + 10, agilityY + 28);
 
       // Convert canvas to blob and download
       canvas.toBlob((blob) => {
@@ -10487,7 +10500,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_stats.png`;
+        link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}-stats.png`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
