@@ -10066,13 +10066,13 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       "F/A-18F Super Hornet",
       "J-20 Mighty Dragon",
       "Mi-35P",
-      "AH-64E",
+      "AH-64E Apache",
       "Z-19E",
-      "Z-9G",
-      "MH-6",
+      "Z-9G Harbin",
+      "MH-6 Little Bird",
       "SUPER LYNX",
-      "Z-9WA",
-      "MH-60L",
+      "Z-9WA Harbin",
+      "MH-60L DAP",
       "F-4E Phantom",
       "J-10 Chengdu",
       "MiG-31BM Foxhound",
@@ -10102,6 +10102,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       "BTR-82AT",
       "BTR-82A1",
       "M3 Bradley",
+      "M3A3 Bradley",
       "PGZ-04A",
       "ZSU-23-4M4 Shilka",
       "LAV-300",
@@ -10109,6 +10110,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       "PLZ-83",
       "2S1 Gvozdika",
       "M1A1 Abrams",
+      "M1 Abrams",
       "T-72A",
       "ZTZ85-II",
       "PLZ-07B",
@@ -10126,14 +10128,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       "Su-37 Terminator",
       "Ka-52M",
       "Mi-35P Hind-F",
-      "AH-64E Apache",
       "Super Lynx Mk88A",
-      "Z-9WA",
-      "MH-60L DAP",
-      "Z-9G Harbin",
-      "MH-6 Little Bird",
-      "M1 Abrams",
-      "M3A3 Bradley",
       "ZBL-08",
       "M110A2"
     ];
@@ -10146,14 +10141,14 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       "BMPT Terminator 2",
       "Mi-28NM",
       "WZ-10",
-      "AH-1Z",
-      "Z-11WB",
+      "AH-1Z Viper",
+      "Z-11WB Changhe",
       "MI-8TV",
-      "Z-20",
+      "Z-20 Harbin",
       "AH-84",
       "F-14D Super Tomcat",
       "J-16",
-      "Su 25UB",
+      "Su-25UB",
       "F-15EX Eagle II",
       "M42A1 Duster",
       "T114 BAT",
@@ -10164,17 +10159,11 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       "XM1 (GM)",
       "M163 VADS",
       "2S3 Akatsiya",
-      "MBT70",
+      "MBT-70",
       "ZTZ96",
       "9A52-2 Smerch",
       "AV-8B Harrier II",
-      "Su-25UB",
       "A-10A Thunderbolt",
-      "Mi-8TV",
-      "Z-11WB Changhe",
-      "Z-20 Harbin",
-      "AH-1Z Viper",
-      "MBT-70",
       "PGZ-09",
       "HSTV-L",
       "XM8 AGS",
@@ -10276,7 +10265,38 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
     if (goldVehicles.includes(vehicleName)) return "Gold";
     if (marketVehicles.includes(vehicleName)) return "Market";
     if (eventGachaVehicles.includes(vehicleName)) return "Event/Gacha";
-    return "Dollar"; // Default to Dollar for unlisted vehicles
+    
+    // Smart fallback for unlisted vehicles
+    const vehicle = VEHICLES_DATA.find(v => v.name === vehicleName);
+    if (!vehicle) return "Dollar";
+    
+    // Categorize unlisted vehicles based on characteristics
+    const tierNum = parseInt(vehicle.tier) || 0;
+    
+    // High-tier vehicles (VII+) are more likely to be Gold or Market
+    if (tierNum >= 7) {
+      // Modern/advanced vehicles tend to be Gold or Market
+      if (vehicle.name.includes("Leopard") || 
+          vehicle.name.includes("Challenger") ||
+          vehicle.name.includes("Abrams") ||
+          vehicle.name.includes("Type 10") ||
+          vehicle.name.includes("K2")) {
+        return "Gold";
+      }
+      return "Market";
+    }
+    
+    // Mid-tier vehicles (IV-VI) are typically Dollar
+    if (tierNum >= 4 && tierNum <= 6) {
+      return "Dollar";
+    }
+    
+    // Low-tier vehicles (I-III) are typically Dollar
+    if (tierNum <= 3) {
+      return "Dollar";
+    }
+    
+    return "Dollar"; // Final fallback
   };
 
   const VEHICLES_VIEW = VEHICLES;
@@ -11615,7 +11635,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Filter Button */}
       <motion.button
         onClick={() => setIsFilterOpen(!isFilterOpen)}
-        className={`absolute top-4 right-4 z-50 p-2 sm:p-3 backdrop-blur-sm rounded-xl border transition-all duration-200 group shadow-lg sm:top-6 sm:right-6 mt-4 flex items-center gap-2 ${
+        className={`absolute top-4 right-4 z-40 p-2 sm:p-3 backdrop-blur-sm rounded-xl border transition-all duration-200 group shadow-lg sm:top-6 sm:right-6 sm:mt-0 mt-4 flex items-center gap-2 ${
           (typeFilter.length > 0 || tierFilter.length > 0 || countryFilter.length > 0 || rarityFilter.length > 0 || obtainMethodFilter.length > 0) 
             ? "bg-cyan-600/90 hover:bg-cyan-700/90 border-cyan-500/50" 
             : "bg-slate-800/90 hover:bg-slate-700/90 border-slate-600/50"
@@ -12156,7 +12176,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
-        className={`fixed top-1/2 left-0 z-50 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-purple-400 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r mx-0 mr-0 ml-[-4px] ${isMenuOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
+        className={`fixed top-1/2 left-0 z-50 bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-950 hover:to-blue-900 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-blue-700 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r-2 border-blue-600 mx-0 mr-0 ml-[-4px] ${isMenuOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
       >
         {/* Mobile: Compact icon + text */}
         <div className="sm:hidden flex flex-col items-center justify-center px-1 py-2 text-white font-bold text-[9px] tracking-wide">
@@ -13957,43 +13977,174 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 <div className="p-6 bg-slate-900">
                   {/* Image and Description - Mobile First (shown before other content) */}
                   <div className="block lg:hidden mb-6">
-                    <div className="bg-slate-800/80 rounded-lg overflow-hidden">
-                      <div className="relative w-full min-h-[300px] flex items-center justify-center p-4 bg-black/30">
-                        <img
-                          src={vehicle.image}
-                          alt={vehicle.name}
-                          className="max-w-full max-h-[300px] object-contain"
-                          onError={(e) => {
-                            e.currentTarget.src = "/placeholder-vehicle.png"
-                          }}
-                          style={{ width: 'auto', height: 'auto' }}
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              // Create a temporary link to download the image
-                              const link = document.createElement('a');
-                              link.href = vehicle.image;
-                              link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
-                              document.body.appendChild(link);
-                              link.click();
-                              document.body.removeChild(link);
-                            }}
-                            className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
-                          >
-                            <img src="/U1.png" alt="U1" className="w-4 h-4" />
-                            <img src="/U2.png" alt="U2" className="w-4 h-4" />
-                            <img src="/U3.png" alt="U3" className="w-4 h-4" />
-                          </button>
+                    {/* Vehicle Image and Basic Info - Mobile First */}
+                    <div className="bg-slate-800/80 rounded-lg overflow-hidden mb-4">
+                      <div className="p-4">
+                        <div className="flex flex-wrap gap-2 justify-center mb-4">
+                          <span className="px-2 py-1 bg-slate-700/90 text-xs rounded-full text-slate-300">
+                            {vehicle.type}
+                          </span>
+                          <span className="px-2 py-1 bg-blue-900/50 text-xs rounded-full text-blue-300">
+                            Tier {formatTier(vehicle.tier)}
+                          </span>
+                          <span className={`px-2 py-1 text-xs rounded-full ${
+                            getVehicleRarity(vehicle.name) === 'Common' ? 'bg-gray-600 text-white' :
+                            getVehicleRarity(vehicle.name) === 'Enhanced' ? 'bg-green-300 text-white' :
+                            getVehicleRarity(vehicle.name) === 'Rare' ? 'bg-blue-600 text-white' :
+                            getVehicleRarity(vehicle.name) === 'Epic' ? 'bg-purple-600 text-white' :
+                            getVehicleRarity(vehicle.name) === 'Legendary' ? 'bg-yellow-600 text-white' :
+                            'bg-cyan-500 text-white'
+                          }`}>
+                            {getVehicleRarity(vehicle.name) || 'Standard'}
+                          </span>
                         </div>
+                        <div className="relative w-full pb-[56.25%] mb-2">
+                          {vehicle.image ? (
+                            <img 
+                              src={vehicle.image} 
+                              alt={vehicle.name} 
+                              className="absolute inset-0 w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="absolute inset-0 bg-slate-700 flex items-center justify-center text-slate-400">
+                              No image available
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Download button - below image for mobile */}
+                        {vehicle.image && (
+                          <div className="flex justify-center mb-4">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // Create a temporary link to download the image
+                                const link = document.createElement('a');
+                                link.href = vehicle.image;
+                                link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                              }}
+                              className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded text-xs transition-colors"
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                              </svg>
+                              <span>Download</span>
+                            </button>
+                          </div>
+                        )}
                       </div>
-                      {vehicle.description && (
+                    </div>
+                    
+                    {/* Description section - Mobile */}
+                    {vehicle.description && (
+                      <div className="bg-slate-800/80 rounded-lg overflow-hidden mb-4">
                         <div className="p-4">
                           <h4 className="text-base font-bold text-cyan-300 mb-2">DESCRIPTION</h4>
                           <p className="text-slate-300 text-sm">{vehicle.description}</p>
                         </div>
-                      )}
+                      </div>
+                    )}
+                    
+                    {/* Basic Information Section - Mobile */}
+                    <div className="bg-slate-800/80 rounded-lg overflow-hidden">
+                      <div className="p-4">
+                        <h4 className="text-lg font-bold text-cyan-300 mb-4">BASIC INFORMATION</h4>
+                        <div className="space-y-4">
+                          <div className="flex items-center justify-between">
+                            <span className="text-base text-slate-300">Type</span>
+                            <span className="text-base font-medium text-white">
+                              {vehicle.type || 'Unknown'}
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-base text-slate-300">Country</span>
+                            <span className="text-base font-medium text-white">
+                              {vehicle.faction || 'Unknown'}
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-base text-slate-300">Tier</span>
+                            <span className="text-base font-medium text-white">
+                              {formatTier(vehicle.tier) || 'Unknown'}
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-base text-slate-300">Rarity</span>
+                            <span className="text-base font-medium text-white">
+                              {getVehicleRarity(vehicle.name) || 'Standard'}
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            {(() => {
+                              // Determine the label text based on the obtain method
+                              let labelText = 'How to Obtain';
+                              
+                              // Check if vehicle is exclusive first (highest priority)
+                              if (isExclusiveVehicle(vehicle.name)) {
+                                labelText = 'How to Obtain';
+                              } else {
+                                // Then check currency data
+                                const currencyInfo = vehicleCurrencyData.find(v => v.name === vehicle.name);
+                                if (currencyInfo && currencyInfo.amount !== null) {
+                                  labelText = 'Price';
+                                } else if (isMarketVehicle(vehicle.name)) {
+                                  labelText = 'How to Obtain';
+                                }
+                              }
+                              
+                              return <span className="text-base text-slate-300">{labelText}</span>;
+                            })()}
+                            <div className="flex items-center gap-2">
+                              {(() => {
+                                // Check if vehicle is exclusive first (highest priority)
+                                if (isExclusiveVehicle(vehicle.name)) {
+                                  return <span className="text-slate-200">Event Reward or Gacha</span>;
+                                }
+                                
+                                // Then check currency data
+                                const currencyInfo = vehicleCurrencyData.find(v => v.name === vehicle.name);
+                                if (currencyInfo && currencyInfo.amount !== null) {
+                                  return (
+                                    <span className="text-slate-200">{currencyInfo.amount.toLocaleString()} {currencyInfo.currency}s</span>
+                                  );
+                                } else if (currencyInfo && currencyInfo.amount === null) {
+                                  return <span className="text-slate-200">Unavailable</span>;
+                                } else if (isMarketVehicle(vehicle.name)) {
+                                  return (
+                                    <div className="flex items-center gap-1">
+                                      <img 
+                                        src="/Market.png" 
+                                        alt="Market" 
+                                        className="w-8 h-8 object-contain"
+                                        onError={(e) => {
+                                          console.error('Failed to load Market.png:', e);
+                                          const target = e.target as HTMLImageElement;
+                                          target.style.display = 'none';
+                                          const parent = target.parentElement;
+                                          if (parent) {
+                                            const textSpan = document.createElement('span');
+                                            textSpan.className = 'text-base font-medium text-white';
+                                            textSpan.textContent = 'Market';
+                                            parent.appendChild(textSpan);
+                                          }
+                                        }}
+                                      />
+                                      <span className="text-base font-medium text-white">Market</span>
+                                    </div>
+                                  );
+                                } else {
+                                  return <span className="text-slate-200">Unavailable</span>;
+                                }
+                              })()}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -14335,8 +14486,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
                     </div>
 
-                    {/* Right column - Vehicle Image and Description */}
-                    <div className="w-full lg:w-1/2">
+                    {/* Right column - Vehicle Image and Description - Desktop Only */}
+                    <div className="hidden lg:block w-full lg:w-1/2">
                       <div className="bg-slate-800/80 rounded-lg overflow-hidden">
                         <div className="p-4">
                           <div className="flex flex-wrap gap-2 justify-center mb-4">
@@ -14357,43 +14508,45 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               {getVehicleRarity(vehicle.name) || 'Standard'}
                             </span>
                           </div>
-                          <div className="relative w-full pb-[56.25%] mb-4">
+                          <div className="relative w-full pb-[56.25%] mb-2">
                             {vehicle.image ? (
-                              <>
-                                <img 
-                                  src={vehicle.image} 
-                                  alt={vehicle.name} 
-                                  className="absolute inset-0 w-full h-full object-cover"
-                                />
-                                <div className="absolute bottom-0 left-0 right-0 p-4 flex justify-center">
-                                  <button
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      // Create a temporary link to download the image
-                                      const link = document.createElement('a');
-                                      link.href = vehicle.image;
-                                      link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
-                                      document.body.appendChild(link);
-                                      link.click();
-                                      document.body.removeChild(link);
-                                    }}
-                                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors"
-                                  >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                      <polyline points="7 10 12 15 17 10"></polyline>
-                                      <line x1="12" y1="15" x2="12" y2="3"></line>
-                                    </svg>
-                                    <span>Download Image</span>
-                                  </button>
-                                </div>
-                              </>
+                              <img 
+                                src={vehicle.image} 
+                                alt={vehicle.name} 
+                                className="absolute inset-0 w-full h-full object-cover"
+                              />
                             ) : (
                               <div className="absolute inset-0 bg-slate-700 flex items-center justify-center text-slate-400">
                                 No image available
                               </div>
                             )}
                           </div>
+                          
+                          {/* Download button - below image for desktop/tablet */}
+                          {vehicle.image && (
+                            <div className="flex justify-center mb-4">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  // Create a temporary link to download the image
+                                  const link = document.createElement('a');
+                                  link.href = vehicle.image;
+                                  link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
+                                  document.body.appendChild(link);
+                                  link.click();
+                                  document.body.removeChild(link);
+                                }}
+                                className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded text-xs transition-colors"
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                  <polyline points="7 10 12 15 17 10"></polyline>
+                                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                <span>Download</span>
+                              </button>
+                            </div>
+                          )}
                         </div>
                       </div>
                       
