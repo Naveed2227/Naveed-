@@ -9698,13 +9698,17 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
     return baseValue;
   };
   const [searchQuery, setSearchQuery] = useState("")
-  const [typeFilter, setTypeFilter] = useState("")
-  const [tierFilter, setTierFilter] = useState("")
-  const [countryFilter, setCountryFilter] = useState("")
+  const [typeFilter, setTypeFilter] = useState<string[]>([])
+  const [tierFilter, setTierFilter] = useState<string[]>([])
+  const [countryFilter, setCountryFilter] = useState<string[]>([])
+  const [rarityFilter, setRarityFilter] = useState<string[]>([])
+  const [obtainMethodFilter, setObtainMethodFilter] = useState<string[]>([])
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [isTypeDropdownOpen, setIsTypeDropdownOpen] = useState(false)
   const [isTierDropdownOpen, setIsTierDropdownOpen] = useState(false)
   const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false)
+  const [isRarityDropdownOpen, setIsRarityDropdownOpen] = useState(false)
+  const [isObtainMethodDropdownOpen, setIsObtainMethodDropdownOpen] = useState(false)
   const [compare, setCompare] = useState<string[]>([])
   const [expandedVehicle, setExpandedVehicle] = useState("")
   const chatMessagesEndRef = useRef<HTMLDivElement>(null)
@@ -9835,6 +9839,446 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   }
 
 
+  // Vehicle Rarity System
+  const getVehicleRarity = (vehicleName: string) => {
+    const legendaryVehicles = [
+      "Su-57 Felon",
+      "Su-57M",
+      "YF-23",
+      "Su-75 Checkmate",
+      "KF-51 Panther",
+      "EMBT 120",
+      "Type 90",
+      "XM2001 Crusader",
+      "Gepard 1A2",
+      "Abrams X",
+      "Merkava Mk.4",
+      "Object 640",
+      "Ka-58 Black Ghost",
+      "J-50",
+      "MiG-41M",
+      "T-20 Monolit",
+      "PL-01",
+      "M270 MLRS",
+      "BM-57-2 Kochevnik",
+      "MGM-166 LOSAT",
+      "T-104 Bastion",
+      "SR-5 GMLRS",
+      "ZTZ99-III",
+      "FV4034 Challenger 2 TES",
+      "Karrar",
+      "M1 Abrams Block 3",
+      "Altay",
+      "AMX-30 Super",
+      "Type 75 MLRS",
+      "Mi-24 Super Hind",
+      "Leopard 2A-RC 3.0",
+      "Leopard 2A8",
+      "X2 Shinshin",
+      "K2 Black Panther",
+      "TU-222",
+      "TOS-1A",
+      "FK 2000",
+      "SB-1"
+    ];
+    
+    const epicVehicles = [
+      "Type 10",
+      "Challenger 3",
+      "Leopard 2A7+",
+      "T-14 Armata (152)",
+      "KF31 Lynx",
+      "M10 Booker",
+      "M-SHORAD",
+      "M109A6 Paladin",
+      "Otomatic 76",
+      "F-16C Night Falcon",
+      "Mitsubishi F2B",
+      "KA-50",
+      "T54E1",
+      "CM25",
+      "T-55AMD",
+      "SU-152 Taran",
+      "Leopard 2A4",
+      "PT-91 Twardy",
+      "ZTZ-96A (P)",
+      "2S31 Vena",
+      "K-31 Cheonma",
+      "Type 625E SHORAD",
+      "Type 89 MLRS",
+      "AFT-09",
+      "WMA301",
+      "AFT-10",
+      "Type 16 MCV",
+      "VT-4A1",
+      "Leopard 2A7 Plus",
+      "Su-39",
+      "Su-35S",
+      "Alpha Jet",
+      "Mitsubishi F-2B",
+      "Su-24M",
+      "Ka-50 Black Shark",
+      "OH-1 Ninja",
+      "T-95M",
+      "M1 Abrams CATTB",
+      "Leclerc S2 AZUR",
+      "T-64BV",
+      "M60A3 (MZK)",
+      "Rookiat MTTD",
+      "BMD3",
+      "K21 KNIFV",
+      "Stridsvagn 105",
+      "Strf 9040 BILL"
+    ];
+    
+    const rareVehicles = [
+      "F-22 Raptor",
+      "J-35",
+      "T-14 Armata",
+      "2S19 Msta-S",
+      "BMPT Terminator 2",
+      "Mi-28NM",
+      "WZ-10",
+      "AH-1Z",
+      "Z-11WB",
+      "MI-8TV",
+      "Z-20",
+      "AH-84",
+      "F-14D Super Tomcat",
+      "J-16",
+      "Su 25UB",
+      "F-15EX Eagle II",
+      "M42A1 Duster",
+      "T114 BAT",
+      "WZ-120C",
+      "Type 74E",
+      "Type 74G/Kai",
+      "T-62 545",
+      "XM1 (GM)",
+      "M163 VADS",
+      "2S3 Akatsiya",
+      "MBT70",
+      "ZTZ96",
+      "9A52-2 Smerch",
+      "AV-8B Harrier II",
+      "Su-25UB",
+      "A-10A Thunderbolt",
+      "Mi-8TV",
+      "Z-11WB Changhe",
+      "Z-20 Harbin",
+      "AH-1Z Viper",
+      "MBT-70",
+      "PGZ-09",
+      "HSTV-L",
+      "XM8 AGS",
+      "VBCI-2",
+      "Centauro I 120"
+    ];
+    
+    const enhancedVehicles = [
+      "F-35B Lightning II",
+      "F/A-18F Super Hornet",
+      "J-20 Mighty Dragon",
+      "Mi-35P",
+      "AH-64E",
+      "Z-19E",
+      "Z-9G",
+      "MH-6",
+      "SUPER LYNX",
+      "Z-9WA",
+      "MH-60L",
+      "F-4E Phantom",
+      "J-10 Chengdu",
+      "MiG-31BM Foxhound",
+      "Q-5A Nanchang",
+      "J-15",
+      "M41 Walker Bulldog",
+      "LAV-25",
+      "LAV-150",
+      "M113A1 FMS AIP",
+      "XM800T",
+      "WZ-120",
+      "WZ-121",
+      "WZ-501",
+      "WZ-501A",
+      "WZ-211",
+      "T-55A",
+      "BMP-1",
+      "BMP-1K",
+      "BTR-80",
+      "BTR-80A",
+      "PT-76B",
+      "Type-61",
+      "ZSU-57-2",
+      "M60",
+      "T-62",
+      "BMP-2",
+      "BTR-82AT",
+      "BTR-82A1",
+      "M3 Bradley",
+      "PGZ-04A",
+      "ZSU-23-4M4 Shilka",
+      "LAV-300",
+      "PTL-02",
+      "PLZ-83",
+      "2S1 Gvozdika",
+      "M1A1 Abrams",
+      "T-72A",
+      "ZTZ85-II",
+      "PLZ-07B",
+      "2S6M1 Tunguska-M1",
+      "XM975",
+      "M113 Hellfire",
+      "LAV-600",
+      "T-90A",
+      "ZTZ99A",
+      "ADATS",
+      "Pantsir S-1",
+      "M1128 Stryker",
+      "PLZ-05",
+      "MiG-35",
+      "Su-37 Terminator",
+      "Ka-52M",
+      "Mi-35P Hind-F",
+      "AH-64E Apache",
+      "Super Lynx Mk88A",
+      "Z-9WA",
+      "MH-60L DAP",
+      "Z-9G Harbin",
+      "MH-6 Little Bird",
+      "M1 Abrams",
+      "M3A3 Bradley",
+      "ZBL-08",
+      "M110A2"
+    ];
+    
+    if (legendaryVehicles.includes(vehicleName)) return "Legendary";
+    if (epicVehicles.includes(vehicleName)) return "Epic";
+    if (rareVehicles.includes(vehicleName)) return "Rare";
+    if (enhancedVehicles.includes(vehicleName)) return "Enhanced";
+    return "Common"; // Default to Common for unlisted vehicles
+  };
+
+  // Vehicle Obtain Method System
+  const getVehicleObtainMethod = (vehicleName: string) => {
+    const dollarVehicles = [
+      "F-35B Lightning II",
+      "F/A-18F Super Hornet",
+      "J-20 Mighty Dragon",
+      "Mi-35P",
+      "AH-64E",
+      "Z-19E",
+      "Z-9G",
+      "MH-6",
+      "SUPER LYNX",
+      "Z-9WA",
+      "MH-60L",
+      "F-4E Phantom",
+      "J-10 Chengdu",
+      "MiG-31BM Foxhound",
+      "Q-5A Nanchang",
+      "J-15",
+      "M41 Walker Bulldog",
+      "LAV-25",
+      "LAV-150",
+      "M113A1 FMS AIP",
+      "XM800T",
+      "WZ-120",
+      "WZ-121",
+      "WZ-501",
+      "WZ-501A",
+      "WZ-211",
+      "T-55A",
+      "BMP-1",
+      "BMP-1K",
+      "BTR-80",
+      "BTR-80A",
+      "PT-76B",
+      "Type-61",
+      "ZSU-57-2",
+      "M60",
+      "T-62",
+      "BMP-2",
+      "BTR-82AT",
+      "BTR-82A1",
+      "M3 Bradley",
+      "PGZ-04A",
+      "ZSU-23-4M4 Shilka",
+      "LAV-300",
+      "PTL-02",
+      "PLZ-83",
+      "2S1 Gvozdika",
+      "M1A1 Abrams",
+      "T-72A",
+      "ZTZ85-II",
+      "PLZ-07B",
+      "2S6M1 Tunguska-M1",
+      "XM975",
+      "M113 Hellfire",
+      "LAV-600",
+      "T-90A",
+      "ZTZ99A",
+      "ADATS",
+      "Pantsir S-1",
+      "M1128 Stryker",
+      "PLZ-05",
+      "MiG-35",
+      "Su-37 Terminator",
+      "Ka-52M",
+      "Mi-35P Hind-F",
+      "AH-64E Apache",
+      "Super Lynx Mk88A",
+      "Z-9WA",
+      "MH-60L DAP",
+      "Z-9G Harbin",
+      "MH-6 Little Bird",
+      "M1 Abrams",
+      "M3A3 Bradley",
+      "ZBL-08",
+      "M110A2"
+    ];
+    
+    const goldVehicles = [
+      "F-22 Raptor",
+      "J-35",
+      "T-14 Armata",
+      "2S19 Msta-S",
+      "BMPT Terminator 2",
+      "Mi-28NM",
+      "WZ-10",
+      "AH-1Z",
+      "Z-11WB",
+      "MI-8TV",
+      "Z-20",
+      "AH-84",
+      "F-14D Super Tomcat",
+      "J-16",
+      "Su 25UB",
+      "F-15EX Eagle II",
+      "M42A1 Duster",
+      "T114 BAT",
+      "WZ-120C",
+      "Type 74E",
+      "Type 74G/Kai",
+      "T-62 545",
+      "XM1 (GM)",
+      "M163 VADS",
+      "2S3 Akatsiya",
+      "MBT70",
+      "ZTZ96",
+      "9A52-2 Smerch",
+      "AV-8B Harrier II",
+      "Su-25UB",
+      "A-10A Thunderbolt",
+      "Mi-8TV",
+      "Z-11WB Changhe",
+      "Z-20 Harbin",
+      "AH-1Z Viper",
+      "MBT-70",
+      "PGZ-09",
+      "HSTV-L",
+      "XM8 AGS",
+      "VBCI-2",
+      "Centauro I 120"
+    ];
+    
+    const marketVehicles = [
+      "Type 10",
+      "Challenger 3",
+      "Leopard 2A7+",
+      "T-14 Armata (152)",
+      "KF31 Lynx",
+      "M10 Booker",
+      "M-SHORAD",
+      "M109A6 Paladin",
+      "Otomatic 76",
+      "F-16C Night Falcon",
+      "Mitsubishi F2B",
+      "KA-50",
+      "T54E1",
+      "CM25",
+      "T-55AMD",
+      "SU-152 Taran",
+      "Leopard 2A4",
+      "PT-91 Twardy",
+      "ZTZ-96A (P)",
+      "2S31 Vena",
+      "K-31 Cheonma",
+      "Type 625E SHORAD",
+      "Type 89 MLRS",
+      "AFT-09",
+      "WMA301",
+      "AFT-10",
+      "Type 16 MCV",
+      "VT-4A1",
+      "Leopard 2A7 Plus",
+      "Su-39",
+      "Su-35S",
+      "Alpha Jet",
+      "Mitsubishi F-2B",
+      "Su-24M",
+      "Ka-50 Black Shark",
+      "OH-1 Ninja",
+      "T-95M",
+      "M1 Abrams CATTB",
+      "Leclerc S2 AZUR",
+      "T-64BV",
+      "M60A3 (MZK)",
+      "Rookiat MTTD",
+      "BMD3",
+      "K21 KNIFV",
+      "Stridsvagn 105",
+      "Strf 9040 BILL"
+    ];
+    
+    const eventGachaVehicles = [
+      "Su-57 Felon",
+      "Su-57M",
+      "YF-23",
+      "Su-75 Checkmate",
+      "KF-51 Panther",
+      "EMBT 120",
+      "Type 90",
+      "XM2001 Crusader",
+      "Gepard 1A2",
+      "Abrams X",
+      "Merkava Mk.4",
+      "Object 640",
+      "Ka-58 Black Ghost",
+      "J-50",
+      "MiG-41M",
+      "T-20 Monolit",
+      "PL-01",
+      "M270 MLRS",
+      "BM-57-2 Kochevnik",
+      "MGM-166 LOSAT",
+      "T-104 Bastion",
+      "SR-5 GMLRS",
+      "ZTZ99-III",
+      "FV4034 Challenger 2 TES",
+      "Karrar",
+      "M1 Abrams Block 3",
+      "Altay",
+      "AMX-30 Super",
+      "Type 75 MLRS",
+      "Mi-24 Super Hind",
+      "Leopard 2A-RC 3.0",
+      "Leopard 2A8",
+      "X2 Shinshin",
+      "K2 Black Panther",
+      "TU-222",
+      "TOS-1A",
+      "FK 2000",
+      "SB-1"
+    ];
+
+    if (dollarVehicles.includes(vehicleName)) return "Dollar";
+    if (goldVehicles.includes(vehicleName)) return "Gold";
+    if (marketVehicles.includes(vehicleName)) return "Market";
+    if (eventGachaVehicles.includes(vehicleName)) return "Event/Gacha";
+    return "Dollar"; // Default to Dollar for unlisted vehicles
+  };
+
   const VEHICLES_VIEW = VEHICLES;
 
   const types = [
@@ -9851,6 +10295,141 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   ].filter(type => new Set(VEHICLES.map(v => v.type)).has(type))
   const tiers = [...new Set(VEHICLES.map((v) => formatTier(v.tier)))].sort()
   const countries = [...new Set(VEHICLES.map((v) => v.faction))].sort()
+  const rarities = ["Common", "Enhanced", "Rare", "Epic", "Legendary"]
+  const obtainMethods = ["Dollar", "Gold", "Market", "Event/Gacha"]
+
+  const getCountryFlag = (country: string) => {
+    const flagMap: Record<string, string> = {
+      "American": "🇺🇸",
+      "Russian": "🇷🇺",
+      "Chinese": "🇨🇳",
+      "German": "🇩🇪",
+      "British": "🇬🇧",
+      "French": "🇫🇷",
+      "Israeli": "🇮🇱",
+      "Japanese": "🇯🇵",
+      "South Korean": "🇰🇷",
+      "Indian": "🇮🇳",
+      "Pakistani": "🇵🇰",
+      "Turkish": "🇹🇷",
+      "Iranian": "🇮🇷",
+      "North Korean": "🇰🇵",
+      "Brazilian": "🇧🇷",
+      "Italian": "🇮🇹",
+      "Spanish": "🇪🇸",
+      "Swedish": "🇸🇪",
+      "Polish": "🇵🇱",
+      "Ukrainian": "🇺🇦",
+      "Australian": "🇦🇺",
+      "Canadian": "🇨🇦",
+      "Dutch": "🇳🇱",
+      "Belgian": "🇧🇪",
+      "Norwegian": "🇳🇴",
+      "Danish": "🇩🇰",
+      "Finnish": "🇫🇮",
+      "Swiss": "🇨🇭",
+      "Austrian": "🇦🇹",
+      "Czech": "🇨🇿",
+      "Hungarian": "🇭🇺",
+      "Romanian": "🇷🇴",
+      "Bulgarian": "🇧🇬",
+      "Serbian": "🇷🇸",
+      "Croatian": "🇭🇷",
+      "Slovakian": "🇸🇰",
+      "Slovenian": "🇸🇮",
+      "Estonian": "🇪🇪",
+      "Latvian": "🇱🇻",
+      "Lithuanian": "🇱🇹",
+      "Greek": "🇬🇷",
+      "Portuguese": "🇵🇹",
+      "Mexican": "🇲🇽",
+      "Argentinian": "🇦🇷",
+      "Chilean": "🇨🇱",
+      "Colombian": "🇨🇴",
+      "Peruvian": "🇵🇪",
+      "Venezuelan": "🇻🇪",
+      "South African": "🇿🇦",
+      "Egyptian": "🇪🇬",
+      "Saudi Arabian": "🇸🇦",
+      "Emirati": "🇦🇪",
+      "Qatari": "🇶🇦",
+      "Kuwaiti": "🇰🇼",
+      "Bahraini": "🇧🇭",
+      "Omani": "🇴🇲",
+      "Jordanian": "🇯🇴",
+      "Lebanese": "🇱🇧",
+      "Iraqi": "🇮🇶",
+      "Syrian": "🇸🇾",
+      "Yemeni": "🇾🇪",
+      "Libyan": "🇱🇾",
+      "Tunisian": "🇹🇳",
+      "Algerian": "🇩🇿",
+      "Moroccan": "🇲🇦",
+      "Sudanese": "🇸🇩",
+      "Ethiopian": "🇪🇹",
+      "Kenyan": "🇰🇪",
+      "Nigerian": "🇳🇬",
+      "Ghanaian": "🇬🇭",
+      "Ivorian": "🇨🇮",
+      "Senegalese": "🇸🇳",
+      "Cameroonian": "🇨🇲",
+      "Angolan": "🇦🇴",
+      "Mozambican": "🇲🇿",
+      "Zambian": "🇿🇲",
+      "Zimbabwean": "🇿🇼",
+      "Botswanan": "🇧🇼",
+      "Namibian": "🇳🇦",
+      "Malawian": "🇲🇼",
+      "Ugandan": "🇺🇬",
+      "Tanzanian": "🇹🇿",
+      "Rwandan": "🇷🇼",
+      "Burundian": "🇧🇮",
+      "Malagasy": "🇲🇬",
+      "Mauritian": "🇲🇺",
+      "Seychellois": "🇸🇨",
+      "Comorian": "🇰🇲",
+      "Djiboutian": "🇩🇯",
+      "Somali": "🇸🇴",
+      "Eritrean": "🇪🇷",
+      "South Sudanese": "🇸🇸",
+      "Central African": "🇨🇫",
+      "Chadian": "🇹🇩",
+      "Nigerien": "🇳🇪",
+      "Malian": "🇲🇱",
+      "Burkinabe": "🇧🇫",
+      "Beninese": "🇧🇯",
+      "Togolese": "🇹🇬",
+      "Gambian": "🇬🇲",
+      "Guinean": "🇬🇳",
+      "Guinea-Bissauan": "🇬🇼",
+      "Sierra Leonean": "🇸🇱",
+      "Liberian": "🇱🇷",
+      "Ivorian": "🇨🇮",
+      "Ghanaian": "🇬🇭",
+      "Burkinabe": "🇧🇫",
+      "Nigerien": "🇳🇪",
+      "Nigerian": "🇳🇬",
+      "Cameroonian": "🇨🇲",
+      "Congolese": "🇨🇬",
+      "Gabonese": "🇬🇦",
+      "Equatorial Guinean": "🇬🇶",
+      "Sao Tomean": "🇸🇹",
+      "Angolan": "🇦🇴",
+      "Namibian": "🇳🇦",
+      "Botswanan": "🇧🇼",
+      "Zimbabwean": "🇿🇼",
+      "Zambian": "🇿🇲",
+      "Malawian": "🇲🇼",
+      "Mozambican": "🇲🇿",
+      "Madagascan": "🇲🇬",
+      "Mauritian": "🇲🇺",
+      "Seychellois": "🇸🇨",
+      "Comorian": "🇰🇲",
+      "Reunionese": "🇷🇪",
+      "Mayottean": "🇾🇹",
+    }
+    return flagMap[country] || "🏳️"
+  }
 
   const isMarketVehicle = (vehicleName: string) => {
     const marketVehicles = [
@@ -10164,10 +10743,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
   const filteredVehicles = VEHICLES.filter((vehicle) => {
     const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesType = !typeFilter || vehicle.type === typeFilter
-    const matchesTier = !tierFilter || formatTier(vehicle.tier) === tierFilter
-    const matchesCountry = !countryFilter || vehicle.faction === countryFilter
-    return matchesSearch && matchesType && matchesTier && matchesCountry
+    const matchesType = typeFilter.length === 0 || typeFilter.includes(vehicle.type)
+    const matchesTier = tierFilter.length === 0 || tierFilter.includes(formatTier(vehicle.tier))
+    const matchesCountry = countryFilter.length === 0 || countryFilter.includes(vehicle.faction)
+    const matchesRarity = rarityFilter.length === 0 || rarityFilter.includes(getVehicleRarity(vehicle.name))
+    const matchesObtainMethod = obtainMethodFilter.length === 0 || obtainMethodFilter.includes(getVehicleObtainMethod(vehicle.name))
+    return matchesSearch && matchesType && matchesTier && matchesCountry && matchesRarity && matchesObtainMethod
   })
 
   const indexOfLastVehicle = currentPage * vehiclesPerPage
@@ -11035,7 +11616,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       <motion.button
         onClick={() => setIsFilterOpen(!isFilterOpen)}
         className={`absolute top-4 right-4 z-50 p-2 sm:p-3 backdrop-blur-sm rounded-xl border transition-all duration-200 group shadow-lg sm:top-6 sm:right-6 mt-4 flex items-center gap-2 ${
-          (typeFilter || tierFilter || countryFilter) 
+          (typeFilter.length > 0 || tierFilter.length > 0 || countryFilter.length > 0 || rarityFilter.length > 0 || obtainMethodFilter.length > 0) 
             ? "bg-cyan-600/90 hover:bg-cyan-700/90 border-cyan-500/50" 
             : "bg-slate-800/90 hover:bg-slate-700/90 border-slate-600/50"
         }`}
@@ -11058,12 +11639,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           transition={{ duration: 0.3 }}
         >
           <Filter className={`w-5 h-5 ${
-            (typeFilter || tierFilter || countryFilter) 
+            (typeFilter.length > 0 || tierFilter.length > 0 || countryFilter.length > 0 || rarityFilter.length > 0 || obtainMethodFilter.length > 0) 
               ? "text-white" 
               : "text-slate-300 group-hover:text-white"
           }`} />
         </motion.div>
-        {(typeFilter || tierFilter || countryFilter) && (
+        {(typeFilter.length > 0 || tierFilter.length > 0 || countryFilter.length > 0 || rarityFilter.length > 0 || obtainMethodFilter.length > 0) && (
           <span className="w-2 h-2 bg-white rounded-full"></span>
         )}
       </motion.button>
@@ -11232,7 +11813,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
                 
                 {/* Clear All Filters Button */}
-                {(typeFilter || tierFilter || countryFilter) && (
+                {(typeFilter || tierFilter || countryFilter || rarityFilter || obtainMethodFilter) && (
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -11240,6 +11821,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       setTypeFilter("")
                       setTierFilter("")
                       setCountryFilter("")
+                      setRarityFilter("")
+                      setObtainMethodFilter("")
                     }}
                     className="w-full mb-6 px-4 py-3 bg-red-600/20 border border-red-600/30 rounded-xl text-red-400 font-medium hover:bg-red-600/30 hover:text-red-300 transition-colors"
                   >
@@ -11249,162 +11832,272 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 
                 <div className="space-y-6">
                   {/* Type Filter */}
-                  <div className="relative">
+                  <div className="space-y-3">
                     <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
                       onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}
-                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-cyan-500/50 transition-all duration-200 group"
                     >
                       <Filter className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300" />
-                      <span className="text-white font-medium group-hover:text-cyan-300 transition-colors duration-200">
-                        {typeFilter || "Vehicle Type"}
-                      </span>
-                      <ChevronDown className={`w-4 h-4 text-cyan-400 group-hover:text-cyan-300 transition-transform duration-200 ${isTypeDropdownOpen ? 'rotate-180' : ''}`} />
+                      <span className="text-white font-medium group-hover:text-cyan-300 transition-colors duration-200">Vehicle Type</span>
+                      <ChevronDown className={`w-4 h-4 text-cyan-400 group-hover:text-cyan-300 transition-transform duration-200 ml-auto ${isTypeDropdownOpen ? 'rotate-180' : ''}`} />
                     </motion.button>
                     
                     <AnimatePresence>
                       {isTypeDropdownOpen && (
                         <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.2 }}
-                          className="absolute top-full left-0 right-0 mt-2 bg-slate-800 border border-slate-600/50 rounded-xl shadow-lg z-10 overflow-hidden max-h-60 overflow-y-auto"
+                          className="overflow-hidden"
                         >
-                          <motion.button
-                            whileHover={{ scale: 1.01, backgroundColor: "rgba(56, 189, 248, 0.1)" }}
-                            whileTap={{ scale: 0.99 }}
-                            onClick={() => {
-                              setTypeFilter("")
-                              setIsTypeDropdownOpen(false)
-                            }}
-                            className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${!typeFilter ? 'bg-slate-700/30' : ''}`}
-                          >
-                            <span className={`text-sm font-medium ${!typeFilter ? 'text-cyan-300' : 'text-slate-300 hover:text-white'}`}>All Types</span>
-                          </motion.button>
-                          {types.map((type) => (
-                            <motion.button
-                              key={type}
-                              whileHover={{ scale: 1.01, backgroundColor: "rgba(56, 189, 248, 0.1)" }}
-                              whileTap={{ scale: 0.99 }}
-                              onClick={() => {
-                                setTypeFilter(type)
-                                setIsTypeDropdownOpen(false)
-                              }}
-                              className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${typeFilter === type ? 'bg-slate-700/30' : ''}`}
-                            >
-                              <span className={`text-sm font-medium ${typeFilter === type ? 'text-cyan-300' : 'text-slate-300 hover:text-white'}`}>{type}</span>
-                            </motion.button>
-                          ))}
+                          <div className="grid grid-cols-1 gap-2 pl-2">
+                            {types.map((type) => (
+                              <motion.label
+                                key={type}
+                                whileHover={{ scale: 1.01 }}
+                                whileTap={{ scale: 0.99 }}
+                                className="flex items-center gap-3 p-3 rounded-lg bg-slate-800/50 border border-slate-600/30 hover:border-cyan-500/50 cursor-pointer transition-all duration-200"
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={typeFilter.includes(type)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) {
+                                      setTypeFilter([...typeFilter, type])
+                                    } else {
+                                      setTypeFilter(typeFilter.filter(t => t !== type))
+                                    }
+                                  }}
+                                  className="w-4 h-4 text-blue-600 bg-slate-700 border-slate-500 rounded focus:ring-blue-500 focus:ring-2"
+                                />
+                                <span className={`text-sm font-medium ${typeFilter.includes(type) ? 'text-cyan-300' : 'text-slate-300 hover:text-white'}`}>
+                                  {type}
+                                </span>
+                              </motion.label>
+                            ))}
+                          </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
                   
                   {/* Tier Filter */}
-                  <div className="relative">
+                  <div className="space-y-3">
                     <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
                       onClick={() => setIsTierDropdownOpen(!isTierDropdownOpen)}
-                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-yellow-500/50 transition-all duration-200 group"
                     >
                       <Star className="w-5 h-5 text-yellow-400 group-hover:text-yellow-300" />
-                      <span className="text-white font-medium group-hover:text-yellow-300 transition-colors duration-200">
-                        {tierFilter ? `Tier ${tierFilter}` : "Tier"}
-                      </span>
-                      <ChevronDown className={`w-4 h-4 text-yellow-400 group-hover:text-yellow-300 transition-transform duration-200 ${isTierDropdownOpen ? 'rotate-180' : ''}`} />
+                      <span className="text-white font-medium group-hover:text-yellow-300 transition-colors duration-200">Tier</span>
+                      <ChevronDown className={`w-4 h-4 text-yellow-400 group-hover:text-yellow-300 transition-transform duration-200 ml-auto ${isTierDropdownOpen ? 'rotate-180' : ''}`} />
                     </motion.button>
                     
                     <AnimatePresence>
                       {isTierDropdownOpen && (
                         <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.2 }}
-                          className="absolute top-full left-0 right-0 mt-2 bg-slate-800 border border-slate-600/50 rounded-xl shadow-lg z-10 overflow-hidden max-h-60 overflow-y-auto"
+                          className="overflow-hidden"
                         >
-                          <motion.button
-                            whileHover={{ scale: 1.01, backgroundColor: "rgba(250, 204, 21, 0.1)" }}
-                            whileTap={{ scale: 0.99 }}
-                            onClick={() => {
-                              setTierFilter("")
-                              setIsTierDropdownOpen(false)
-                            }}
-                            className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${!tierFilter ? 'bg-slate-700/30' : ''}`}
-                          >
-                            <span className={`text-sm font-medium ${!tierFilter ? 'text-yellow-300' : 'text-slate-300 hover:text-white'}`}>All Tiers</span>
-                          </motion.button>
-                          {tiers.map((tier) => (
-                            <motion.button
-                              key={tier}
-                              whileHover={{ scale: 1.01, backgroundColor: "rgba(250, 204, 21, 0.1)" }}
-                              whileTap={{ scale: 0.99 }}
-                              onClick={() => {
-                                setTierFilter(tier)
-                                setIsTierDropdownOpen(false)
-                              }}
-                              className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${tierFilter === tier ? 'bg-slate-700/30' : ''}`}
-                            >
-                              <span className={`text-sm font-medium ${tierFilter === tier ? 'text-yellow-300' : 'text-slate-300 hover:text-white'}`}>Tier {tier}</span>
-                            </motion.button>
-                          ))}
+                          <div className="grid grid-cols-1 gap-2 pl-2">
+                            {tiers.map((tier) => (
+                              <motion.label
+                                key={tier}
+                                whileHover={{ scale: 1.01 }}
+                                whileTap={{ scale: 0.99 }}
+                                className="flex items-center gap-3 p-3 rounded-lg bg-slate-800/50 border border-slate-600/30 hover:border-yellow-500/50 cursor-pointer transition-all duration-200"
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={tierFilter.includes(tier)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) {
+                                      setTierFilter([...tierFilter, tier])
+                                    } else {
+                                      setTierFilter(tierFilter.filter(t => t !== tier))
+                                    }
+                                  }}
+                                  className="w-4 h-4 text-yellow-800 bg-slate-700 border-yellow-800 rounded focus:ring-yellow-800 focus:ring-2"
+                                />
+                                <span className={`text-sm font-medium ${tierFilter.includes(tier) ? 'text-yellow-300' : 'text-slate-300 hover:text-white'}`}>
+                                  Tier {tier}
+                                </span>
+                              </motion.label>
+                            ))}
+                          </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
                   
                   {/* Country Filter */}
-                  <div className="relative">
+                  <div className="space-y-3">
                     <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
                       onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
-                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-green-500/50 transition-all duration-200 group"
                     >
                       <MapPin className="w-5 h-5 text-green-400 group-hover:text-green-300" />
-                      <span className="text-white font-medium group-hover:text-green-300 transition-colors duration-200">
-                        {countryFilter || "Country"}
-                      </span>
-                      <ChevronDown className={`w-4 h-4 text-green-400 group-hover:text-green-300 transition-transform duration-200 ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
+                      <span className="text-white font-medium group-hover:text-green-300 transition-colors duration-200">Country</span>
+                      <ChevronDown className={`w-4 h-4 text-green-400 group-hover:text-green-300 transition-transform duration-200 ml-auto ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
                     </motion.button>
                     
                     <AnimatePresence>
                       {isCountryDropdownOpen && (
                         <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.2 }}
-                          className="absolute top-full left-0 right-0 mt-2 bg-slate-800 border border-slate-600/50 rounded-xl shadow-lg z-10 overflow-hidden max-h-60 overflow-y-auto"
+                          className="overflow-hidden"
                         >
-                          <motion.button
-                            whileHover={{ scale: 1.01, backgroundColor: "rgba(34, 197, 94, 0.1)" }}
-                            whileTap={{ scale: 0.99 }}
-                            onClick={() => {
-                              setCountryFilter("")
-                              setIsCountryDropdownOpen(false)
-                            }}
-                            className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${!countryFilter ? 'bg-slate-700/30' : ''}`}
-                          >
-                            <span className={`text-sm font-medium ${!countryFilter ? 'text-green-300' : 'text-slate-300 hover:text-white'}`}>All Countries</span>
-                          </motion.button>
-                          {countries.map((country) => (
-                            <motion.button
-                              key={country}
-                              whileHover={{ scale: 1.01, backgroundColor: "rgba(34, 197, 94, 0.1)" }}
-                              whileTap={{ scale: 0.99 }}
-                              onClick={() => {
-                                setCountryFilter(country)
-                                setIsCountryDropdownOpen(false)
-                              }}
-                              className={`w-full px-4 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 ${countryFilter === country ? 'bg-slate-700/30' : ''}`}
-                            >
-                              <span className={`text-sm font-medium ${countryFilter === country ? 'text-green-300' : 'text-slate-300 hover:text-white'}`}>{country}</span>
-                            </motion.button>
-                          ))}
+                          <div className="grid grid-cols-1 gap-2 pl-2">
+                            {countries.map((country) => (
+                              <motion.label
+                                key={country}
+                                whileHover={{ scale: 1.01 }}
+                                whileTap={{ scale: 0.99 }}
+                                className="flex items-center gap-3 p-3 rounded-lg bg-slate-800/50 border border-slate-600/30 hover:border-green-500/50 cursor-pointer transition-all duration-200"
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={countryFilter.includes(country)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) {
+                                      setCountryFilter([...countryFilter, country])
+                                    } else {
+                                      setCountryFilter(countryFilter.filter(c => c !== country))
+                                    }
+                                  }}
+                                  className="w-4 h-4 text-blue-800 bg-slate-700 border-blue-800 rounded focus:ring-blue-800 focus:ring-2"
+                                />
+                                <div className="flex items-center gap-2">
+                                  <img
+                                    src={getFlagImage(country) || "/placeholder.svg"}
+                                    alt={`${country} flag`}
+                                    className="w-5 h-3 object-cover rounded shadow-sm"
+                                  />
+                                  <span className={`text-sm font-medium ${countryFilter.includes(country) ? 'text-green-300' : 'text-slate-300 hover:text-white'}`}>
+                                    {country}
+                                  </span>
+                                </div>
+                              </motion.label>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  
+                  {/* Rarity Filter */}
+                  <div className="space-y-3">
+                    <motion.button
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
+                      onClick={() => setIsRarityDropdownOpen(!isRarityDropdownOpen)}
+                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-orange-500/50 transition-all duration-200 group"
+                    >
+                      <Star className="w-5 h-5 text-orange-400 group-hover:text-orange-300" />
+                      <span className="text-white font-medium group-hover:text-orange-300 transition-colors duration-200">Rarity</span>
+                      <ChevronDown className={`w-4 h-4 text-orange-400 group-hover:text-orange-300 transition-transform duration-200 ml-auto ${isRarityDropdownOpen ? 'rotate-180' : ''}`} />
+                    </motion.button>
+                    
+                    <AnimatePresence>
+                      {isRarityDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="grid grid-cols-1 gap-2 pl-2">
+                            {rarities.map((rarity) => (
+                              <motion.label
+                                key={rarity}
+                                whileHover={{ scale: 1.01 }}
+                                whileTap={{ scale: 0.99 }}
+                                className="flex items-center gap-3 p-3 rounded-lg bg-slate-800/50 border border-slate-600/30 hover:border-orange-500/50 cursor-pointer transition-all duration-200"
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={rarityFilter.includes(rarity)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) {
+                                      setRarityFilter([...rarityFilter, rarity])
+                                    } else {
+                                      setRarityFilter(rarityFilter.filter(r => r !== rarity))
+                                    }
+                                  }}
+                                  className="w-4 h-4 text-blue-600 bg-slate-700 border-slate-500 rounded focus:ring-blue-500 focus:ring-2"
+                                />
+                                <span className={`text-sm font-medium ${rarityFilter.includes(rarity) ? 'text-orange-300' : 'text-slate-300 hover:text-white'}`}>
+                                  {rarity}
+                                </span>
+                              </motion.label>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                
+                  {/* How to Obtain Filter */}
+                  <div className="space-y-3">
+                    <motion.button
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
+                      onClick={() => setIsObtainMethodDropdownOpen(!isObtainMethodDropdownOpen)}
+                      className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-purple-500/50 transition-all duration-200 group"
+                    >
+                      <MapPin className="w-5 h-5 text-purple-400 group-hover:text-purple-300" />
+                      <span className="text-white font-medium group-hover:text-purple-300 transition-colors duration-200">How to Obtain</span>
+                      <ChevronDown className={`w-4 h-4 text-purple-400 group-hover:text-purple-300 transition-transform duration-200 ml-auto ${isObtainMethodDropdownOpen ? 'rotate-180' : ''}`} />
+                    </motion.button>
+                    
+                    <AnimatePresence>
+                      {isObtainMethodDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="grid grid-cols-1 gap-2 pl-2">
+                            {obtainMethods.map((method) => (
+                              <motion.label
+                                key={method}
+                                whileHover={{ scale: 1.01 }}
+                                whileTap={{ scale: 0.99 }}
+                                className="flex items-center gap-3 p-3 rounded-lg bg-slate-800/50 border border-slate-600/30 hover:border-purple-500/50 cursor-pointer transition-all duration-200"
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={obtainMethodFilter.includes(method)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) {
+                                      setObtainMethodFilter([...obtainMethodFilter, method])
+                                    } else {
+                                      setObtainMethodFilter(obtainMethodFilter.filter(m => m !== method))
+                                    }
+                                  }}
+                                  className="w-4 h-4 text-blue-600 bg-slate-700 border-slate-500 rounded focus:ring-blue-500 focus:ring-2"
+                                />
+                                <span className={`text-sm font-medium ${obtainMethodFilter.includes(method) ? 'text-purple-300' : 'text-slate-300 hover:text-white'}`}>
+                                  {method}
+                                </span>
+                              </motion.label>
+                            ))}
+                          </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -11412,30 +12105,45 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 </div>
                 
                 {/* Active Filters Display */}
-                {(typeFilter || tierFilter || countryFilter) && (
+                {(typeFilter.length > 0 || tierFilter.length > 0 || countryFilter.length > 0 || rarityFilter.length > 0 || obtainMethodFilter.length > 0) && (
                   <div className="mt-8 pt-6 border-t border-slate-700">
                     <div className="flex items-center justify-between mb-4">
                       <h4 className="text-sm font-semibold text-slate-200">Active Filters</h4>
                       <span className="text-xs text-slate-500">
-                        {[typeFilter, tierFilter, countryFilter].filter(Boolean).length} active
+                        {typeFilter.length + tierFilter.length + countryFilter.length + rarityFilter.length + obtainMethodFilter.length} active
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {typeFilter && (
-                        <div className="flex items-center gap-2 px-3 py-2 bg-cyan-600/20 border border-cyan-600/30 rounded-lg">
-                          <span className="text-sm text-cyan-300">{typeFilter}</span>
+                      {typeFilter.map((type) => (
+                        <div key={type} className="flex items-center gap-2 px-3 py-2 bg-cyan-600/20 border border-cyan-600/30 rounded-lg">
+                          <span className="text-sm text-cyan-300">{type}</span>
                         </div>
-                      )}
-                      {tierFilter && (
-                        <div className="flex items-center gap-2 px-3 py-2 bg-yellow-600/20 border border-yellow-600/30 rounded-lg">
-                          <span className="text-sm text-yellow-300">Tier {tierFilter}</span>
+                      ))}
+                      {tierFilter.map((tier) => (
+                        <div key={tier} className="flex items-center gap-2 px-3 py-2 bg-yellow-600/20 border border-yellow-600/30 rounded-lg">
+                          <span className="text-sm text-yellow-300">Tier {tier}</span>
                         </div>
-                      )}
-                      {countryFilter && (
-                        <div className="flex items-center gap-2 px-3 py-2 bg-green-600/20 border border-green-600/30 rounded-lg">
-                          <span className="text-sm text-green-300">{countryFilter}</span>
+                      ))}
+                      {countryFilter.map((country) => (
+                        <div key={country} className="flex items-center gap-2 px-3 py-2 bg-green-600/20 border border-green-600/30 rounded-lg">
+                          <img
+                            src={getFlagImage(country) || "/placeholder.svg"}
+                            alt={`${country} flag`}
+                            className="w-5 h-3 object-cover rounded shadow-sm"
+                          />
+                          <span className="text-sm text-green-300">{country}</span>
                         </div>
-                      )}
+                      ))}
+                      {rarityFilter.map((rarity) => (
+                        <div key={rarity} className="flex items-center gap-2 px-3 py-2 bg-orange-600/20 border border-orange-600/30 rounded-lg">
+                          <span className="text-sm text-orange-300">{rarity}</span>
+                        </div>
+                      ))}
+                      {obtainMethodFilter.map((method) => (
+                        <div key={method} className="flex items-center gap-2 px-3 py-2 bg-purple-600/20 border border-purple-600/30 rounded-lg">
+                          <span className="text-sm text-purple-300">{method}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 )}
