@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { vehicleCurrencyData } from './currency'
 import { urduTranslations, getUrduTranslation } from './Urdu'
@@ -10299,6 +10299,207 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
     return "Dollar"; // Final fallback
   };
 
+  // Download vehicle stats as PNG using Canvas API
+  const downloadStats = async (vehicleId: string) => {
+    const vehicle = VEHICLES.find(v => v.id === vehicleId);
+    if (!vehicle) return;
+
+    try {
+      // Create a canvas element
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        console.error('Canvas context not available');
+        return;
+      }
+
+      // Set canvas dimensions (poster size)
+      canvas.width = 800;
+      canvas.height = 1000;
+
+      // Fill white background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Add border
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+
+      // Load and draw vehicle image
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      
+      await new Promise<void>((resolve, reject) => {
+        img.onload = () => resolve();
+        img.onerror = () => reject(new Error('Failed to load image'));
+        img.src = vehicle.image || '';
+      });
+
+      // Draw vehicle image in center
+      const imageX = (canvas.width - 300) / 2;
+      const imageY = 120;
+      const imageWidth = 300;
+      const imageHeight = 200;
+      
+      // Draw image background
+      ctx.fillStyle = '#f3f4f6';
+      ctx.fillRect(imageX - 5, imageY - 5, imageWidth + 10, imageHeight + 10);
+      
+      // Draw image
+      ctx.drawImage(img, imageX, imageY, imageWidth, imageHeight);
+
+      // Set up text styling
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      // Draw title
+      ctx.fillStyle = '#1f2937';
+      ctx.font = 'bold 32px Arial';
+      ctx.fillText(vehicle.name, canvas.width / 2, 50);
+
+      // Draw subtitle
+      ctx.fillStyle = '#6b7280';
+      ctx.font = '18px Arial';
+      ctx.fillText('Vehicle Statistics', canvas.width / 2, 85);
+
+      // Draw stats section
+      const statsStartY = 360;
+      const lineHeight = 35;
+      const leftMargin = 80;
+      const rightMargin = canvas.width - 80;
+
+      // Stats section title
+      ctx.fillStyle = '#1f2937';
+      ctx.font = 'bold 24px Arial';
+      ctx.textAlign = 'left';
+      ctx.fillText('Specifications', leftMargin, statsStartY);
+
+      // Draw basic info
+      ctx.font = '16px Arial';
+      ctx.fillStyle = '#374151';
+      
+      let currentY = statsStartY + 40;
+      
+      // Type
+      ctx.fillText('Type:', leftMargin, currentY);
+      ctx.fillStyle = '#1f2937';
+      ctx.fillText(vehicle.type || 'Unknown', rightMargin, currentY);
+      currentY += lineHeight;
+      
+      // Country
+      ctx.fillStyle = '#374151';
+      ctx.fillText('Country:', leftMargin, currentY);
+      ctx.fillStyle = '#1f2937';
+      ctx.fillText(vehicle.faction || 'Unknown', rightMargin, currentY);
+      currentY += lineHeight;
+      
+      // Tier
+      ctx.fillStyle = '#374151';
+      ctx.fillText('Tier:', leftMargin, currentY);
+      ctx.fillStyle = '#1f2937';
+      ctx.fillText(formatTier(vehicle.tier) || 'Unknown', rightMargin, currentY);
+      currentY += lineHeight;
+      
+      // Rarity
+      ctx.fillStyle = '#374151';
+      ctx.fillText('Rarity:', leftMargin, currentY);
+      ctx.fillStyle = '#1f2937';
+      ctx.fillText(getVehicleRarity(vehicle.name) || 'Standard', rightMargin, currentY);
+      currentY += lineHeight;
+      
+      // Obtain Method
+      ctx.fillStyle = '#374151';
+      ctx.fillText('How to Obtain:', leftMargin, currentY);
+      ctx.fillStyle = '#1f2937';
+      ctx.fillText(getVehicleObtainMethod(vehicle.name) || 'Unknown', rightMargin, currentY);
+      currentY += lineHeight * 1.5;
+
+      // Draw performance stats
+      ctx.font = 'bold 20px Arial';
+      ctx.fillStyle = '#1f2937';
+      ctx.fillText('Performance Stats', leftMargin, currentY);
+      currentY += 35;
+
+      ctx.font = '16px Arial';
+      ctx.fillStyle = '#374151';
+      
+      // Health
+      ctx.fillText('Health:', leftMargin, currentY);
+      ctx.fillStyle = '#1f2937';
+      ctx.fillText(vehicle.stats.health.toString(), rightMargin, currentY);
+      currentY += lineHeight;
+      
+      // Speed (if applicable)
+      if (vehicle.stats.speed > 0) {
+        ctx.fillStyle = '#374151';
+        ctx.fillText('Speed:', leftMargin, currentY);
+        ctx.fillStyle = '#1f2937';
+        ctx.fillText(vehicle.stats.speed + ' km/h', rightMargin, currentY);
+        currentY += lineHeight;
+      }
+      
+      // Armor (optional)
+      if (vehicle.stats.armor !== undefined) {
+        ctx.fillStyle = '#374151';
+        ctx.fillText('Armor:', leftMargin, currentY);
+        ctx.fillStyle = '#1f2937';
+        ctx.fillText(vehicle.stats.armor.toString(), rightMargin, currentY);
+        currentY += lineHeight;
+      }
+      
+      // Agility
+      ctx.fillStyle = '#374151';
+      ctx.fillText('Agility:', leftMargin, currentY);
+      ctx.fillStyle = '#1f2937';
+      ctx.fillText(vehicle.stats.agility.toString(), rightMargin, currentY);
+      currentY += lineHeight;
+      
+      // Damage (optional)
+      if ('damage' in vehicle.stats && vehicle.stats.damage !== undefined) {
+        ctx.fillStyle = '#374151';
+        ctx.fillText('Damage:', leftMargin, currentY);
+        ctx.fillStyle = '#1f2937';
+        ctx.fillText(vehicle.stats.damage.toString(), rightMargin, currentY);
+        currentY += lineHeight;
+      }
+      
+      // Range (optional)
+      if ('range' in vehicle.stats && vehicle.stats.range !== undefined) {
+        ctx.fillStyle = '#374151';
+        ctx.fillText('Range:', leftMargin, currentY);
+        ctx.fillStyle = '#1f2937';
+        ctx.fillText(vehicle.stats.range.toString(), rightMargin, currentY);
+        currentY += lineHeight;
+      }
+
+      // Draw footer
+      const footerY = canvas.height - 40;
+      ctx.fillStyle = '#9ca3af';
+      ctx.font = '12px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('Generated by MWT Vehicle Stats', canvas.width / 2, footerY);
+
+      // Convert canvas to blob and download
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${vehicle.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_stats.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }, 'image/png');
+      
+    } catch (error) {
+      console.error('Error generating stats poster:', error);
+      alert('Failed to generate stats poster. Please try again.');
+    }
+  };
+
   const VEHICLES_VIEW = VEHICLES;
 
   const types = [
@@ -14012,9 +14213,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           )}
                         </div>
                         
-                        {/* Download button - below image for mobile */}
+                        {/* Download buttons - below image for mobile */}
                         {vehicle.image && (
-                          <div className="flex justify-center mb-4">
+                          <div className="flex justify-center gap-2 mb-4">
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
@@ -14034,6 +14235,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 <line x1="12" y1="15" x2="12" y2="3"></line>
                               </svg>
                               <span>Download</span>
+                            </button>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                downloadStats(vehicle.id);
+                              }}
+                              className="flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded text-xs transition-colors"
+                            >
+                              <Camera className="w-3 h-3" />
+                              <span>Download stats</span>
                             </button>
                           </div>
                         )}
@@ -14522,9 +14733,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             )}
                           </div>
                           
-                          {/* Download button - below image for desktop/tablet */}
+                          {/* Download buttons - below image for desktop/tablet */}
                           {vehicle.image && (
-                            <div className="flex justify-center mb-4">
+                            <div className="flex justify-center gap-2 mb-4">
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
@@ -14544,6 +14755,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                   <line x1="12" y1="15" x2="12" y2="3"></line>
                                 </svg>
                                 <span>Download</span>
+                              </button>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  downloadStats(vehicle.id);
+                                }}
+                                className="flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded text-xs transition-colors"
+                              >
+                                <Camera className="w-3 h-3" />
+                                <span>Download stats</span>
                               </button>
                             </div>
                           )}
