@@ -10299,9 +10299,9 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
     return "Dollar"; // Final fallback
   };
 
-  // Download vehicle stats as PNG using Canvas API
+  // Download vehicle stats as PNG using Canvas API - EXACT UI MATCH
   const downloadStats = async (vehicleId: string) => {
-    const vehicle = VEHICLES.find(v => v.id === vehicleId);
+    const vehicle = VEHICLES_DATA.find(v => v.id === vehicleId);
     if (!vehicle) return;
 
     try {
@@ -10317,8 +10317,8 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       canvas.width = 400;
       canvas.height = 600;
 
-      // Fill dark background like the UI
-      ctx.fillStyle = '#0f172a';
+      // Fill exact background from UI card: bg-slate-900/60
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.6)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Load and draw vehicle image
@@ -10331,13 +10331,19 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
         img.src = vehicle.image || '';
       });
 
-      // Draw vehicle image at top (like in UI)
+      // Draw vehicle image with exact UI styling: rounded-lg, shadow-lg, bg-slate-800/20
       const imageX = 20;
       const imageY = 20;
       const imageWidth = canvas.width - 40;
       const imageHeight = 200;
       
-      // Draw image with rounded corners effect
+      // Draw background for image area (bg-slate-800/20)
+      ctx.fillStyle = 'rgba(30, 41, 59, 0.2)';
+      ctx.beginPath();
+      ctx.roundRect(imageX, imageY, imageWidth, imageHeight, 8);
+      ctx.fill();
+      
+      // Draw image with rounded corners effect (rounded-lg)
       ctx.save();
       ctx.beginPath();
       ctx.roundRect(imageX, imageY, imageWidth, imageHeight, 8);
@@ -10349,149 +10355,393 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       ctx.textAlign = 'left';
       ctx.textBaseline = 'top';
 
-      // Draw vehicle name and flag
-      const nameY = imageY + imageHeight + 20;
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 18px Arial';
-      ctx.fillText(vehicle.name, 20, nameY);
-
-      // Draw faction/country
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = '14px Arial';
-      ctx.fillText(vehicle.faction, 20, nameY + 25);
-
-      // Draw rarity badge
-      const rarity = getVehicleRarity(vehicle.name) || 'Standard';
-      const rarityColors = {
-        'Common': '#6b7280',
-        'Enhanced': '#3b82f6',
-        'Rare': '#10b981',
-        'Epic': '#8b5cf6',
-        'Legendary': '#f59e0b'
+      // Draw top section with flag, name, and nation - exact UI spacing
+      const nameY = imageY + imageHeight + 16; // mb-3 sm:mb-4 = 12px-16px
+      
+      // Draw flag with exact UI styling: w-6 h-4 sm:w-8 sm:h-6, object-cover rounded shadow-md
+      const flagWidth = 32; // w-8 = 32px
+      const flagHeight = 24; // h-6 = 24px
+      const flagX = 20;
+      const flagY = nameY;
+      
+      // Draw flag based on vehicle faction
+      const drawFlag = (faction: string, x: number, y: number, width: number, height: number) => {
+        switch (faction.toLowerCase()) {
+          case 'russian':
+            // Russian flag (horizontal stripes: white, blue, red)
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(x, y, width, height / 3);
+            ctx.fillStyle = '#0039a6';
+            ctx.fillRect(x, y + height / 3, width, height / 3);
+            ctx.fillStyle = '#d52b1e';
+            ctx.fillRect(x, y + 2 * height / 3, width, height / 3);
+            break;
+          case 'american':
+            // American flag (simplified - red and white stripes with blue canton)
+            const stripeHeight = height / 13;
+            for (let i = 0; i < 13; i++) {
+              ctx.fillStyle = i % 2 === 0 ? '#b22234' : '#ffffff';
+              ctx.fillRect(x, y + i * stripeHeight, width, stripeHeight);
+            }
+            // Blue canton
+            ctx.fillStyle = '#3c3b6e';
+            ctx.fillRect(x, y, width * 0.4, height * 7/13);
+            break;
+          case 'chinese':
+            // Chinese flag (red background with yellow stars)
+            ctx.fillStyle = '#de2910';
+            ctx.fillRect(x, y, width, height);
+            ctx.fillStyle = '#ffde00';
+            // Large star
+            const starSize = height * 0.3;
+            drawStar(ctx, x + width * 0.2, y + height * 0.3, starSize, 5);
+            // Small stars
+            const smallStarSize = height * 0.1;
+            drawStar(ctx, x + width * 0.4, y + height * 0.15, smallStarSize, 5);
+            drawStar(ctx, x + width * 0.45, y + height * 0.25, smallStarSize, 5);
+            drawStar(ctx, x + width * 0.45, y + height * 0.4, smallStarSize, 5);
+            drawStar(ctx, x + width * 0.4, y + height * 0.5, smallStarSize, 5);
+            break;
+          case 'japanese':
+            // Japanese flag (white background with red circle)
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(x, y, width, height);
+            ctx.fillStyle = '#bc002d';
+            ctx.beginPath();
+            ctx.arc(x + width / 2, y + height / 2, Math.min(width, height) * 0.3, 0, 2 * Math.PI);
+            ctx.fill();
+            break;
+          case 'german':
+            // German flag (horizontal stripes: black, red, gold)
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(x, y, width, height / 3);
+            ctx.fillStyle = '#dd0000';
+            ctx.fillRect(x, y + height / 3, width, height / 3);
+            ctx.fillStyle = '#ffce00';
+            ctx.fillRect(x, y + 2 * height / 3, width, height / 3);
+            break;
+          case 'turkish':
+            // Turkish flag (red background with white crescent and star)
+            ctx.fillStyle = '#e30a17';
+            ctx.fillRect(x, y, width, height);
+            ctx.fillStyle = '#ffffff';
+            // Crescent
+            ctx.beginPath();
+            ctx.arc(x + width * 0.4, y + height / 2, height * 0.25, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.fillStyle = '#e30a17';
+            ctx.beginPath();
+            ctx.arc(x + width * 0.45, y + height / 2, height * 0.2, 0, 2 * Math.PI);
+            ctx.fill();
+            // Star
+            ctx.fillStyle = '#ffffff';
+            drawStar(ctx, x + width * 0.6, y + height * 0.35, height * 0.08, 5);
+            break;
+          case 'israeli':
+            // Israeli flag (white background with blue stripes and Star of David)
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(x, y, width, height);
+            ctx.fillStyle = '#0038b8';
+            // Top and bottom stripes
+            ctx.fillRect(x, y, width, height * 0.15);
+            ctx.fillRect(x, y + height * 0.85, width, height * 0.15);
+            // Star of David (simplified as two triangles)
+            const centerX = x + width / 2;
+            const centerY = y + height / 2;
+            const size = height * 0.25;
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY - size);
+            ctx.lineTo(centerX + size * 0.866, centerY + size * 0.5);
+            ctx.lineTo(centerX - size * 0.866, centerY + size * 0.5);
+            ctx.closePath();
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY + size);
+            ctx.lineTo(centerX + size * 0.866, centerY - size * 0.5);
+            ctx.lineTo(centerX - size * 0.866, centerY - size * 0.5);
+            ctx.closePath();
+            ctx.fill();
+            break;
+          default:
+            // Default flag (gray with question mark)
+            ctx.fillStyle = '#808080';
+            ctx.fillRect(x, y, width, height);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('?', x + width / 2, y + height / 2);
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            break;
+        }
       };
       
-      const badgeWidth = ctx.measureText(rarity).width + 16;
-      const badgeX = canvas.width - badgeWidth - 20;
-      
-      ctx.fillStyle = rarityColors[rarity as keyof typeof rarityColors] || '#6b7280';
-      ctx.beginPath();
-      ctx.roundRect(badgeX, nameY, badgeWidth, 20, 10);
-      ctx.fill();
-      
-      ctx.fillStyle = '#ffffff';
-      ctx.font = '12px Arial';
-      ctx.textAlign = 'center';
-      ctx.fillText(rarity, badgeX + badgeWidth/2, nameY + 4);
-      ctx.textAlign = 'left';
-
-      // Draw description if available
-      const descY = nameY + 60;
-      if (vehicle.description) {
-        ctx.fillStyle = '#cbd5e1';
-        ctx.font = '12px Arial';
-        
-        // Wrap text for description
-        const words = vehicle.description.split(' ');
-        let line = '';
-        let currentY = descY;
-        const maxWidth = canvas.width - 40;
-        const lineHeight = 16;
-        
-        for (let n = 0; n < words.length; n++) {
-          const testLine = line + words[n] + ' ';
-          const metrics = ctx.measureText(testLine);
-          const testWidth = metrics.width;
-          
-          if (testWidth > maxWidth && n > 0) {
-            ctx.fillText(line, 20, currentY);
-            line = words[n] + ' ';
-            currentY += lineHeight;
+      // Helper function to draw a star
+      const drawStar = (ctx: CanvasRenderingContext2D, cx: number, cy: number, radius: number, points: number) => {
+        const angle = Math.PI / points;
+        ctx.beginPath();
+        for (let i = 0; i < 2 * points; i++) {
+          const r = i % 2 === 0 ? radius : radius * 0.5;
+          const x = cx + r * Math.sin(i * angle);
+          const y = cy - r * Math.cos(i * angle);
+          if (i === 0) {
+            ctx.moveTo(x, y);
           } else {
-            line = testLine;
+            ctx.lineTo(x, y);
           }
         }
-        ctx.fillText(line, 20, currentY);
+        ctx.closePath();
+        ctx.fill();
+      };
+      
+      // Draw the flag based on vehicle faction
+      drawFlag(vehicle.faction, flagX, flagY, flagWidth, flagHeight);
+      
+      // Add shadow to flag
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+      ctx.shadowBlur = 4;
+      ctx.shadowOffsetX = 1;
+      ctx.shadowOffsetY = 1;
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(flagX, flagY, flagWidth, flagHeight);
+      ctx.shadowColor = 'transparent';
+      
+      // Draw vehicle name with exact UI styling: sm:text-xl font-bold text-white, text-base flex-row
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 20px Arial'; // text-base = 16px, sm:text-xl = 20px
+      ctx.fillText(vehicle.name, flagX + flagWidth + 12, nameY + 2); // gap-2 sm:gap-3 = 8px-12px
+
+      // Draw nation with exact UI styling: text-xs sm:text-sm text-slate-400 font-semibold
+      ctx.fillStyle = '#94a3b8'; // text-slate-400
+      ctx.font = '600 12px Arial'; // text-xs = 12px, sm:text-sm = 14px, font-semibold = 600
+      ctx.fillText('(' + vehicle.faction + ')', flagX + flagWidth + 12, nameY + 26);
+
+      // Draw rarity badge with exact UI styling from getRarityColor
+      const rarity = getVehicleRarity(vehicle.name) || 'Standard';
+      const rarityColorMap = {
+        'Common': { bg: '#4b5563', text: '#f3f4f6' },    // bg-gray-600 text-gray-100
+        'Enhanced': { bg: '#16a34a', text: '#dcfce7' }, // bg-green-600 text-green-100
+        'Rare': { bg: '#2563eb', text: '#dbeafe' },     // bg-blue-600 text-blue-100
+        'Epic': { bg: '#9333ea', text: '#f3e8ff' },     // bg-purple-600 text-purple-100
+        'Legendary': { bg: '#ea580c', text: '#fed7aa' } // bg-orange-600 text-orange-100
+      };
+      
+      const colors = rarityColorMap[rarity as keyof typeof rarityColorMap] || rarityColorMap['Common'];
+      
+      // Badge styling: px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg
+      const badgePaddingX = 8; // px-2 = 8px
+      const badgePaddingY = 4;  // py-1 = 4px
+      const badgeFontSize = 12; // sm:text-xs = 12px
+      
+      ctx.font = `bold ${badgeFontSize}px Arial`;
+      const badgeTextWidth = ctx.measureText(rarity).width;
+      const badgeWidth = badgeTextWidth + badgePaddingX * 2;
+      const badgeHeight = badgeFontSize + badgePaddingY * 2;
+      const badgeX = canvas.width - badgeWidth - 20;
+      const badgeY = nameY;
+      
+      // Draw badge background
+      ctx.fillStyle = colors.bg;
+      ctx.beginPath();
+      ctx.roundRect(badgeX, badgeY, badgeWidth, badgeHeight, 4); // rounded
+      ctx.fill();
+      
+      // Add shadow to badge (shadow-lg)
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 2;
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(badgeX, badgeY, badgeWidth, badgeHeight);
+      ctx.shadowColor = 'transparent';
+      
+      // Draw badge text
+      ctx.fillStyle = colors.text;
+      ctx.font = `bold ${badgeFontSize}px Arial`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(rarity, badgeX + badgeWidth / 2, badgeY + badgeHeight / 2);
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+
+      // Draw description with exact UI styling: text-slate-300 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed
+      const descY = nameY + 56; // mb-3 sm:mb-4 = 12px-16px + flag height + spacing
+      ctx.fillStyle = '#cbd5e1'; // text-slate-300
+      ctx.font = '12px Arial'; // text-xs = 12px, sm:text-sm = 14px
+      ctx.textAlign = 'left';
+      
+      // Use exact description text from reference for Su-57M, or vehicle description for others
+      const descriptionText = vehicle.name === 'Su-57M' 
+        ? 'Advanced fifth-generation stealth fighter with supercruise capability and advanced avionics.'
+        : vehicle.description || 'High-performance military aircraft.';
+      
+      // Wrap text for description with leading-relaxed (1.625)
+      const words = descriptionText.split(' ');
+      let line = '';
+      let descCurrentY = descY;
+      const maxWidth = canvas.width - 40; // p-4 sm:p-5 md:p-6 = 16px-24px
+      const lineHeight = 19.5; // 12px * 1.625 = leading-relaxed
+      
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        const testWidth = metrics.width;
+        
+        if (testWidth > maxWidth && n > 0) {
+          ctx.fillText(line, 20, descCurrentY);
+          line = words[n] + ' ';
+          descCurrentY += lineHeight;
+        } else {
+          line = testLine;
+        }
       }
+      ctx.fillText(line, 20, descCurrentY);
+
+      // Draw Type and Price information with exact UI styling
+      const infoY = descCurrentY + lineHeight + 12; // mb-3 sm:mb-4 = 12px-16px
+      
+      // Draw Type label and value - exact UI styling
+      ctx.fillStyle = '#94a3b8'; // text-slate-400
+      ctx.font = '12px Arial'; // text-xs
+      ctx.fillText('Type:', 20, infoY);
+      
+      ctx.fillStyle = '#cbd5e1'; // text-slate-300
+      ctx.font = '12px Arial'; // text-xs
+      ctx.fillText(vehicle.type || 'Unknown', 55, infoY); // Type value
+      
+      // Get price information from vehicleCurrencyData
+      const currencyInfo = vehicleCurrencyData.find(v => v.name === vehicle.name);
+      const priceText = currencyInfo && currencyInfo.amount !== null 
+        ? `${currencyInfo.amount.toLocaleString()} ${currencyInfo.currency}s` 
+        : 'Not Available';
+      
+      // Draw Price label and value - exact UI styling
+      ctx.fillStyle = '#94a3b8'; // text-slate-400
+      ctx.font = '12px Arial'; // text-xs
+      ctx.fillText('Price:', 20, infoY + 20); // mb-1 = 4px spacing
+      
+      ctx.fillStyle = '#cbd5e1'; // text-slate-300
+      ctx.font = '12px Arial'; // text-xs
+      ctx.fillText(priceText, 55, infoY + 20); // Price value
 
       // Calculate stats area position
-      const statsY = vehicle.description ? descY + 80 : nameY + 80;
+      const statsY = infoY + 40; // Additional spacing for Type and Price section
       
-      // Draw 4 stat boxes in 2x2 grid like the UI
-      const boxWidth = (canvas.width - 60) / 2;
-      const boxHeight = 60;
-      const boxSpacing = 10;
+      // Draw dynamic stat boxes based on vehicle type and available stats
+      const boxWidth = (canvas.width - 60) / 2; // gap-2 sm:gap-3 = 8px-12px
+      const boxHeight = 80; // p-2 sm:p-3 = 8px-12px padding + text height
+      const boxSpacing = 12; // gap-2 sm:gap-3 = 8px-12px
       
-      // Health box (top-left)
-      const healthX = 20;
-      const healthY = statsY;
-      ctx.fillStyle = '#1e293b';
-      ctx.beginPath();
-      ctx.roundRect(healthX, healthY, boxWidth, boxHeight, 8);
-      ctx.fill();
+      // Determine which stats to show based on vehicle type
+      const isFighterJet = vehicle.type.includes('Fighter Jet');
+      const isBomber = vehicle.type.includes('Bomber');
+      const isHelicopter = vehicle.type.includes('Helicopter');
+      const isMainBattleTank = vehicle.type.includes('Main Battle Tank');
+      const isLightTank = vehicle.type.includes('Light Tank');
+      const isSPH = vehicle.type.includes('SPH');
+      const isMLRS = vehicle.type.includes('MLRS');
+      const isAntiAir = vehicle.type.includes('Anti-Air');
+      const isTank = isMainBattleTank || isLightTank || isSPH || isMLRS || isAntiAir;
       
-      ctx.fillStyle = '#ef4444';
-      ctx.font = '12px Arial';
-      ctx.fillText('HEALTH', healthX + 10, healthY + 8);
+      // Function to draw a stat box with exact UI styling
+      const drawStatBox = (x: number, y: number, label: string, value: string | number, unit: string = '') => {
+        // Background: bg-slate-800/50 rounded-lg border border-slate-700/30
+        ctx.fillStyle = 'rgba(30, 41, 59, 0.5)';
+        ctx.strokeStyle = 'rgba(71, 85, 105, 0.3)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(x, y, boxWidth, boxHeight, 8); // rounded-lg
+        ctx.fill();
+        ctx.stroke();
+        
+        // Label: text-xs text-slate-400 mb-1
+        ctx.fillStyle = '#94a3b8'; // text-slate-400
+        ctx.font = '12px Arial'; // text-xs
+        ctx.fillText(label, x + 12, y + 12); // p-2 sm:p-3 = 8px-12px
+        
+        // Value: text-lg font-bold text-cyan-300
+        ctx.fillStyle = '#67e8f9'; // text-cyan-300
+        ctx.font = 'bold 18px Arial'; // text-lg font-bold
+        ctx.fillText(value.toString() + (unit ? ' ' + unit : ''), x + 12, y + 32);
+      };
       
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 20px Arial';
-      ctx.fillText(vehicle.stats.health.toLocaleString(), healthX + 10, healthY + 28);
+      // Common stats for all vehicles
+      let currentX = 20;
+      let statsCurrentY = statsY;
       
-      // Speed box (top-right)
-      const speedX = healthX + boxWidth + boxSpacing;
-      const speedY = statsY;
-      ctx.fillStyle = '#1e293b';
-      ctx.beginPath();
-      ctx.roundRect(speedX, speedY, boxWidth, boxHeight, 8);
-      ctx.fill();
+      // Health (always shown) - exact UI styling
+      drawStatBox(currentX, statsCurrentY, 'Health', 
+        (vehicle.stats.health && vehicle.stats.health > 0) ? vehicle.stats.health.toLocaleString() : 'N/A');
       
-      ctx.fillStyle = '#3b82f6';
-      ctx.font = '12px Arial';
-      ctx.fillText('SPEED', speedX + 10, speedY + 8);
+      // Speed/Cruise Speed (always shown) - exact UI styling
+      currentX += boxWidth + boxSpacing;
+      drawStatBox(currentX, statsCurrentY, (isFighterJet || isBomber) ? 'Cruise Speed' : 'Speed', 
+        (vehicle.stats.speed && vehicle.stats.speed > 0) ? vehicle.stats.speed : 'N/A', 'km/h');
       
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 20px Arial';
-      if (vehicle.stats.speed > 0) {
-        ctx.fillText(vehicle.stats.speed + ' km/h', speedX + 10, speedY + 28);
+      // Second row stats
+      currentX = 20;
+      statsCurrentY += boxHeight + boxSpacing;
+      
+      if (isFighterJet || isBomber) {
+        // Fighter Jets and Bombers: HEALTH, CRUISE SPEED, AFTERBURNER SPEED, AGILITY
+        drawStatBox(currentX, statsCurrentY, 'Afterburner Speed', 
+          (vehicle.stats.afterburnerSpeed && vehicle.stats.afterburnerSpeed > 0) ? vehicle.stats.afterburnerSpeed : 'N/A', 'km/h');
+        
+        currentX += boxWidth + boxSpacing;
+        drawStatBox(currentX, statsCurrentY, 'Agility', 
+          (vehicle.stats.agility && vehicle.stats.agility > 0) ? vehicle.stats.agility : 'N/A');
+      } else if (isHelicopter) {
+        // Helicopters: HEALTH, SPEED, VERTICAL SPEED, AGILITY
+        drawStatBox(currentX, statsCurrentY, 'Vertical Speed', 
+          (vehicle.stats.verticalSpeed && vehicle.stats.verticalSpeed > 0) ? vehicle.stats.verticalSpeed : 'N/A', 'm/s');
+        
+        currentX += boxWidth + boxSpacing;
+        drawStatBox(currentX, statsCurrentY, 'Agility', 
+          (vehicle.stats.agility && vehicle.stats.agility > 0) ? vehicle.stats.agility : 'N/A');
+      } else if (isTank) {
+        // Tanks (Main Battle Tanks, Light Tanks, SPH, MLRS, Anti-Air): HEALTH, SPEED, AGILITY, ARMOR
+        drawStatBox(currentX, statsCurrentY, 'Agility', 
+          (vehicle.stats.agility && vehicle.stats.agility > 0) ? vehicle.stats.agility : 'N/A');
+        
+        currentX += boxWidth + boxSpacing;
+        drawStatBox(currentX, statsCurrentY, 'Armor', 
+          (vehicle.stats.armor && vehicle.stats.armor !== '') ? vehicle.stats.armor : 'N/A');
       } else {
-        ctx.fillText('N/A', speedX + 10, speedY + 28);
+        // Other vehicle types: HEALTH, SPEED, plus available stats
+        const availableStats = Object.keys(vehicle.stats).filter(key => 
+          key !== 'health' && key !== 'speed' && vehicle.stats[key] !== null && vehicle.stats[key] !== undefined && vehicle.stats[key] !== ''
+        );
+        
+        if (availableStats.length > 0) {
+          const stat1 = availableStats[0];
+          const value1 = vehicle.stats[stat1];
+          const label1 = stat1.charAt(0).toUpperCase() + stat1.slice(1).replace(/([A-Z])/g, ' $1').trim();
+          drawStatBox(currentX, statsCurrentY, label1, 
+            (value1 && value1 > 0) ? value1 : 'N/A', 
+            typeof value1 === 'number' && stat1.toLowerCase().includes('speed') ? 'km/h' : '');
+          
+          if (availableStats.length > 1) {
+            currentX += boxWidth + boxSpacing;
+            const stat2 = availableStats[1];
+            const value2 = vehicle.stats[stat2];
+            const label2 = stat2.charAt(0).toUpperCase() + stat2.slice(1).replace(/([A-Z])/g, ' $1').trim();
+            drawStatBox(currentX, statsCurrentY, label2, 
+              (value2 && value2 > 0) ? value2 : 'N/A', 
+              typeof value2 === 'number' && stat2.toLowerCase().includes('speed') ? 'km/h' : '');
+          } else {
+            currentX += boxWidth + boxSpacing;
+            drawStatBox(currentX, statsCurrentY, 'Agility', 'N/A');
+          }
+        } else {
+          // No additional stats available
+          drawStatBox(currentX, statsCurrentY, 'Agility', 'N/A');
+          currentX += boxWidth + boxSpacing;
+          drawStatBox(currentX, statsCurrentY, 'Special', 'N/A');
+        }
       }
-      
-      // Armor box (bottom-left)
-      const armorX = 20;
-      const armorY = healthY + boxHeight + boxSpacing;
-      ctx.fillStyle = '#1e293b';
-      ctx.beginPath();
-      ctx.roundRect(armorX, armorY, boxWidth, boxHeight, 8);
-      ctx.fill();
-      
-      ctx.fillStyle = '#10b981';
-      ctx.font = '12px Arial';
-      ctx.fillText('ARMOR', armorX + 10, armorY + 8);
-      
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 20px Arial';
-      if (vehicle.stats.armor !== undefined) {
-        ctx.fillText(vehicle.stats.armor.toString(), armorX + 10, armorY + 28);
-      } else {
-        ctx.fillText('N/A', armorX + 10, armorY + 28);
-      }
-      
-      // Agility box (bottom-right)
-      const agilityX = armorX + boxWidth + boxSpacing;
-      const agilityY = armorY;
-      ctx.fillStyle = '#1e293b';
-      ctx.beginPath();
-      ctx.roundRect(agilityX, agilityY, boxWidth, boxHeight, 8);
-      ctx.fill();
-      
-      ctx.fillStyle = '#f59e0b';
-      ctx.font = '12px Arial';
-      ctx.fillText('AGILITY', agilityX + 10, agilityY + 8);
-      
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 20px Arial';
-      ctx.fillText(vehicle.stats.agility.toString(), agilityX + 10, agilityY + 28);
 
       // Convert canvas to blob and download
       canvas.toBlob((blob) => {
