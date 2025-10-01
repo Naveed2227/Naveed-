@@ -9880,42 +9880,42 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="flex justify-center px-4 sm:px-6 lg:px-8">
-              <div className="w-full max-w-4xl sm:max-w-3xl md:max-w-4xl lg:max-w-5xl">
+            <div className="flex justify-center px-2 sm:px-4 md:px-6 lg:px-8">
+              <div className="w-full max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-5xl">
                 {/* Native app-style video card */}
-                <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-slate-700/30 overflow-hidden shadow-2xl">
+                <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl border border-slate-700/30 overflow-hidden shadow-xl sm:shadow-2xl mx-0 sm:mx-2 md:mx-4">
                   {/* Video header with vehicle name */}
-                  <div className="bg-slate-900/50 px-3 sm:px-4 py-2 sm:py-3 border-b border-slate-700/30">
+                  <div className="bg-slate-900/50 px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 border-b border-slate-700/30">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-base sm:text-lg font-bold text-cyan-300 flex items-center gap-1.5 sm:gap-2">
-                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <h3 className="text-sm sm:text-base md:text-lg font-bold text-cyan-300 flex items-center gap-1 sm:gap-1.5 md:gap-2">
+                        <svg className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v8a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z"/>
                         </svg>
-                        <span className="truncate">{activeVideo.name} Armour Demo</span>
+                        <span className="truncate text-xs sm:text-sm md:text-base">{activeVideo.name} Armour Demo</span>
                       </h3>
                       <button 
                         onClick={() => setActiveVideo(null)}
-                        className="text-slate-400 hover:text-slate-200 transition-colors p-1.5 sm:p-2 rounded-lg hover:bg-slate-700/50"
+                        className="text-slate-400 hover:text-slate-200 transition-colors p-1 sm:p-1.5 md:p-2 rounded-lg hover:bg-slate-700/50"
                       >
-                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </button>
                     </div>
                   </div>
                   
-                  {/* Video container with native styling */}
-                  <div className="relative aspect-video bg-black">
+                  {/* Video container with enhanced mobile responsiveness */}
+                  <div className="relative aspect-video bg-black w-full">
                     <div 
                       ref={videoRef}
-                      className="w-full h-full"
+                      className="absolute inset-0 w-full h-full"
                     />
                   </div>
                   
-                  {/* Video controls outside the video area */}
-                  <div className="p-3 sm:p-4 bg-slate-900/30 border-t border-slate-700/30">
-                    {/* Progress bar */}
-                    <div className="mb-3 sm:mb-4">
+                  {/* Video controls outside the video area - enhanced for mobile */}
+                  <div className="p-2 sm:p-3 md:p-4 bg-slate-900/30 border-t border-slate-700/30">
+                    {/* Progress bar - mobile optimized */}
+                    <div className="mb-2 sm:mb-3 md:mb-4">
                       <div 
                         className="w-full h-1.5 sm:h-2 bg-slate-600/50 rounded-full cursor-pointer hover:bg-slate-600/70 transition-colors relative overflow-hidden"
                         onClick={handleProgressClick}
@@ -9925,44 +9925,44 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
                           className="h-full bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-full transition-all duration-150 ease-out"
                           style={{ width: `${(currentTime / duration) * 100}%` }}
                         />
-                        {/* Progress handle */}
+                        {/* Progress handle - larger for mobile touch */}
                         <div 
-                          className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-cyan-400 rounded-full shadow-lg border-2 border-white transition-all duration-150 ease-out"
+                          className="absolute top-1/2 w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 bg-cyan-400 rounded-full shadow-lg border-2 border-white transition-all duration-150 ease-out"
                           style={{ left: `${(currentTime / duration) * 100}%`, transform: 'translate(-50%, -50%)' }}
                         />
                       </div>
                     </div>
                     
                     <div className="flex items-center justify-between text-white">
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        {/* Play/Pause button */}
+                      <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
+                        {/* Play/Pause button - larger for mobile */}
                         <button 
                           onClick={togglePlayPause}
-                          className="p-2 sm:p-2.5 rounded-full bg-cyan-500 hover:bg-cyan-400 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg"
+                          className="p-2 sm:p-2.5 md:p-2.5 rounded-full bg-cyan-500 hover:bg-cyan-400 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg"
                         >
                           {isPlaying ? (
-                            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                             </svg>
                           ) : (
-                            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                             </svg>
                           )}
                         </button>
                         
-                        {/* Fullscreen button */}
+                        {/* Fullscreen button - larger for mobile */}
                         <button 
                           onClick={toggleFullscreen}
-                          className="p-2 sm:p-2.5 rounded-full bg-slate-600 hover:bg-slate-500 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg"
+                          className="p-2 sm:p-2.5 md:p-2.5 rounded-full bg-slate-600 hover:bg-slate-500 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg"
                         >
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                           </svg>
                         </button>
                         
-                        {/* Time display */}
-                        <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
+                        {/* Time display - responsive sizing */}
+                        <div className="flex items-center gap-0.5 sm:gap-1 md:gap-2 text-xs sm:text-xs md:text-sm">
                           <span className="text-cyan-300 font-mono font-medium">
                             {formatTime(currentTime)}
                           </span>
@@ -9973,8 +9973,8 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
                         </div>
                       </div>
                       
-                      <div className="flex items-center gap-1 sm:gap-2">
-                        <span className="text-xs sm:text-sm text-cyan-300 font-medium px-2 py-1 bg-cyan-500/20 rounded-lg">
+                      <div className="flex items-center gap-0.5 sm:gap-1 md:gap-2">
+                        <span className="text-xs sm:text-xs md:text-sm text-cyan-300 font-medium px-1.5 sm:px-2 py-0.5 sm:py-1 bg-cyan-500/20 rounded-lg">
                           {activeVideo.start} - {activeVideo.end}
                         </span>
                       </div>
