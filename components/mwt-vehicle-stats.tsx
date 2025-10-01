@@ -10334,11 +10334,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [rarityFilter, setRarityFilter] = useState<string[]>([])
   const [obtainMethodFilter, setObtainMethodFilter] = useState<string[]>([])
   const [isFilterOpen, setIsFilterOpen] = useState(false)
-  const [isTypeDropdownOpen, setIsTypeDropdownOpen] = useState(false)
-  const [isTierDropdownOpen, setIsTierDropdownOpen] = useState(false)
-  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false)
-  const [isRarityDropdownOpen, setIsRarityDropdownOpen] = useState(false)
-  const [isObtainMethodDropdownOpen, setIsObtainMethodDropdownOpen] = useState(false)
+  const [activeFilter, setActiveFilter] = useState<string | null>(null)
   const [compare, setCompare] = useState<string[]>([])
   const [expandedVehicle, setExpandedVehicle] = useState("")
   const chatMessagesEndRef = useRef<HTMLDivElement>(null)
@@ -12729,54 +12725,67 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   </motion.button>
                 )}
                 
-                <div className="space-y-6">
+                <div className="space-y-6 relative">
                   {/* Type Filter */}
                   <div className="space-y-3">
                     <motion.button
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.99 }}
-                      onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}
+                      onClick={() => setActiveFilter(activeFilter === 'type' ? null : 'type')}
                       className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-cyan-500/50 transition-all duration-200 group"
                     >
                       <Filter className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300" />
                       <span className="text-white font-medium group-hover:text-cyan-300 transition-colors duration-200">Vehicle Type</span>
-                      <ChevronDown className={`w-4 h-4 text-cyan-400 group-hover:text-cyan-300 transition-transform duration-200 ml-auto ${isTypeDropdownOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 text-cyan-400 group-hover:text-cyan-300 transition-transform duration-200 ml-auto ${activeFilter === 'type' ? 'rotate-180' : ''}`} />
                     </motion.button>
                     
                     <AnimatePresence>
-                      {isTypeDropdownOpen && (
+                      {activeFilter === 'type' && (
                         <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="overflow-hidden"
+                          initial={{ x: 300, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          exit={{ x: 300, opacity: 0 }}
+                          transition={{ duration: 0.3, damping: 25, stiffness: 200 }}
+                          className="absolute top-0 right-0 w-full h-full bg-slate-800/95 backdrop-blur-sm border-l border-slate-600/50"
                         >
-                          <div className="grid grid-cols-1 gap-2 pl-2">
-                            {types.map((type) => (
-                              <motion.label
-                                key={type}
-                                whileHover={{ scale: 1.01 }}
-                                whileTap={{ scale: 0.99 }}
-                                className="flex items-center gap-3 p-3 rounded-lg bg-slate-800/50 border border-slate-600/30 hover:border-cyan-500/50 cursor-pointer transition-all duration-200"
+                          <div className="p-6">
+                            <div className="flex items-center justify-between mb-6">
+                              <h3 className="text-xl font-bold text-cyan-300">Vehicle Type</h3>
+                              <motion.button
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => setActiveFilter(null)}
+                                className="p-2 rounded-lg bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50"
                               >
-                                <input
-                                  type="checkbox"
-                                  checked={typeFilter.includes(type)}
-                                  onChange={(e) => {
-                                    if (e.target.checked) {
-                                      setTypeFilter([...typeFilter, type])
-                                    } else {
-                                      setTypeFilter(typeFilter.filter(t => t !== type))
-                                    }
-                                  }}
-                                  className="w-4 h-4 text-blue-600 bg-slate-700 border-slate-500 rounded focus:ring-blue-500 focus:ring-2"
-                                />
-                                <span className={`text-sm font-medium ${typeFilter.includes(type) ? 'text-cyan-300' : 'text-slate-300 hover:text-white'}`}>
-                                  {type}
-                                </span>
-                              </motion.label>
-                            ))}
+                                <X className="w-5 h-5 text-slate-300" />
+                              </motion.button>
+                            </div>
+                            <div className="grid grid-cols-1 gap-3">
+                              {types.map((type) => (
+                                <motion.label
+                                  key={type}
+                                  whileHover={{ scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  className="flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 border border-slate-600/30 hover:border-cyan-500/50 cursor-pointer transition-all duration-200"
+                                >
+                                  <input
+                                    type="checkbox"
+                                    checked={typeFilter.includes(type)}
+                                    onChange={(e) => {
+                                      if (e.target.checked) {
+                                        setTypeFilter([...typeFilter, type])
+                                      } else {
+                                        setTypeFilter(typeFilter.filter(t => t !== type))
+                                      }
+                                    }}
+                                    className="w-5 h-5 text-cyan-600 bg-slate-700 border-slate-500 rounded focus:ring-cyan-500 focus:ring-2"
+                                  />
+                                  <span className={`text-base font-medium ${typeFilter.includes(type) ? 'text-cyan-300' : 'text-slate-300 hover:text-white'}`}>
+                                    {type}
+                                  </span>
+                                </motion.label>
+                              ))}
+                            </div>
                           </div>
                         </motion.div>
                       )}
@@ -12788,48 +12797,61 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <motion.button
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.99 }}
-                      onClick={() => setIsTierDropdownOpen(!isTierDropdownOpen)}
+                      onClick={() => setActiveFilter(activeFilter === 'tier' ? null : 'tier')}
                       className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-yellow-500/50 transition-all duration-200 group"
                     >
                       <Star className="w-5 h-5 text-yellow-400 group-hover:text-yellow-300" />
                       <span className="text-white font-medium group-hover:text-yellow-300 transition-colors duration-200">Tier</span>
-                      <ChevronDown className={`w-4 h-4 text-yellow-400 group-hover:text-yellow-300 transition-transform duration-200 ml-auto ${isTierDropdownOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 text-yellow-400 group-hover:text-yellow-300 transition-transform duration-200 ml-auto ${activeFilter === 'tier' ? 'rotate-180' : ''}`} />
                     </motion.button>
                     
                     <AnimatePresence>
-                      {isTierDropdownOpen && (
+                      {activeFilter === 'tier' && (
                         <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="overflow-hidden"
+                          initial={{ x: 300, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          exit={{ x: 300, opacity: 0 }}
+                          transition={{ duration: 0.3, damping: 25, stiffness: 200 }}
+                          className="absolute top-0 right-0 w-full h-full bg-slate-800/95 backdrop-blur-sm border-l border-slate-600/50"
                         >
-                          <div className="grid grid-cols-1 gap-2 pl-2">
-                            {tiers.map((tier) => (
-                              <motion.label
-                                key={tier}
-                                whileHover={{ scale: 1.01 }}
-                                whileTap={{ scale: 0.99 }}
-                                className="flex items-center gap-3 p-3 rounded-lg bg-slate-800/50 border border-slate-600/30 hover:border-yellow-500/50 cursor-pointer transition-all duration-200"
+                          <div className="p-6">
+                            <div className="flex items-center justify-between mb-6">
+                              <h3 className="text-xl font-bold text-yellow-300">Tier</h3>
+                              <motion.button
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => setActiveFilter(null)}
+                                className="p-2 rounded-lg bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50"
                               >
-                                <input
-                                  type="checkbox"
-                                  checked={tierFilter.includes(tier)}
-                                  onChange={(e) => {
-                                    if (e.target.checked) {
-                                      setTierFilter([...tierFilter, tier])
-                                    } else {
-                                      setTierFilter(tierFilter.filter(t => t !== tier))
-                                    }
-                                  }}
-                                  className="w-4 h-4 text-yellow-800 bg-slate-700 border-yellow-800 rounded focus:ring-yellow-800 focus:ring-2"
-                                />
-                                <span className={`text-sm font-medium ${tierFilter.includes(tier) ? 'text-yellow-300' : 'text-slate-300 hover:text-white'}`}>
-                                  Tier {tier}
-                                </span>
-                              </motion.label>
-                            ))}
+                                <X className="w-5 h-5 text-slate-300" />
+                              </motion.button>
+                            </div>
+                            <div className="grid grid-cols-1 gap-3">
+                              {tiers.map((tier) => (
+                                <motion.label
+                                  key={tier}
+                                  whileHover={{ scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  className="flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 border border-slate-600/30 hover:border-yellow-500/50 cursor-pointer transition-all duration-200"
+                                >
+                                  <input
+                                    type="checkbox"
+                                    checked={tierFilter.includes(tier)}
+                                    onChange={(e) => {
+                                      if (e.target.checked) {
+                                        setTierFilter([...tierFilter, tier])
+                                      } else {
+                                        setTierFilter(tierFilter.filter(t => t !== tier))
+                                      }
+                                    }}
+                                    className="w-5 h-5 text-yellow-600 bg-slate-700 border-slate-500 rounded focus:ring-yellow-500 focus:ring-2"
+                                  />
+                                  <span className={`text-base font-medium ${tierFilter.includes(tier) ? 'text-yellow-300' : 'text-slate-300 hover:text-white'}`}>
+                                    Tier {tier}
+                                  </span>
+                                </motion.label>
+                              ))}
+                            </div>
                           </div>
                         </motion.div>
                       )}
@@ -12841,55 +12863,68 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <motion.button
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.99 }}
-                      onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+                      onClick={() => setActiveFilter(activeFilter === 'country' ? null : 'country')}
                       className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-green-500/50 transition-all duration-200 group"
                     >
                       <MapPin className="w-5 h-5 text-green-400 group-hover:text-green-300" />
                       <span className="text-white font-medium group-hover:text-green-300 transition-colors duration-200">Country</span>
-                      <ChevronDown className={`w-4 h-4 text-green-400 group-hover:text-green-300 transition-transform duration-200 ml-auto ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 text-green-400 group-hover:text-green-300 transition-transform duration-200 ml-auto ${activeFilter === 'country' ? 'rotate-180' : ''}`} />
                     </motion.button>
                     
                     <AnimatePresence>
-                      {isCountryDropdownOpen && (
+                      {activeFilter === 'country' && (
                         <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="overflow-hidden"
+                          initial={{ x: 300, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          exit={{ x: 300, opacity: 0 }}
+                          transition={{ duration: 0.3, damping: 25, stiffness: 200 }}
+                          className="absolute top-0 right-0 w-full h-full bg-slate-800/95 backdrop-blur-sm border-l border-slate-600/50"
                         >
-                          <div className="grid grid-cols-1 gap-2 pl-2">
-                            {countries.map((country) => (
-                              <motion.label
-                                key={country}
-                                whileHover={{ scale: 1.01 }}
-                                whileTap={{ scale: 0.99 }}
-                                className="flex items-center gap-3 p-3 rounded-lg bg-slate-800/50 border border-slate-600/30 hover:border-green-500/50 cursor-pointer transition-all duration-200"
+                          <div className="p-6">
+                            <div className="flex items-center justify-between mb-6">
+                              <h3 className="text-xl font-bold text-green-300">Country</h3>
+                              <motion.button
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => setActiveFilter(null)}
+                                className="p-2 rounded-lg bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50"
                               >
-                                <input
-                                  type="checkbox"
-                                  checked={countryFilter.includes(country)}
-                                  onChange={(e) => {
-                                    if (e.target.checked) {
-                                      setCountryFilter([...countryFilter, country])
-                                    } else {
-                                      setCountryFilter(countryFilter.filter(c => c !== country))
-                                    }
-                                  }}
-                                  className="w-4 h-4 text-blue-800 bg-slate-700 border-blue-800 rounded focus:ring-blue-800 focus:ring-2"
-                                />
-                                <div className="flex items-center gap-2">
-                                  <img
-                                    src={getFlagImage(country) || "/placeholder.svg"}
-                                    alt={`${country} flag`}
-                                    className="w-5 h-3 object-cover rounded shadow-sm"
+                                <X className="w-5 h-5 text-slate-300" />
+                              </motion.button>
+                            </div>
+                            <div className="grid grid-cols-1 gap-3">
+                              {countries.map((country) => (
+                                <motion.label
+                                  key={country}
+                                  whileHover={{ scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  className="flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 border border-slate-600/30 hover:border-green-500/50 cursor-pointer transition-all duration-200"
+                                >
+                                  <input
+                                    type="checkbox"
+                                    checked={countryFilter.includes(country)}
+                                    onChange={(e) => {
+                                      if (e.target.checked) {
+                                        setCountryFilter([...countryFilter, country])
+                                      } else {
+                                        setCountryFilter(countryFilter.filter(c => c !== country))
+                                      }
+                                    }}
+                                    className="w-5 h-5 text-green-600 bg-slate-700 border-slate-500 rounded focus:ring-green-500 focus:ring-2"
                                   />
-                                  <span className={`text-sm font-medium ${countryFilter.includes(country) ? 'text-green-300' : 'text-slate-300 hover:text-white'}`}>
-                                    {country}
-                                  </span>
-                                </div>
-                              </motion.label>
-                            ))}
+                                  <div className="flex items-center gap-3">
+                                    <img
+                                      src={getFlagImage(country) || "/placeholder.svg"}
+                                      alt={`${country} flag`}
+                                      className="w-6 h-4 object-cover rounded shadow-sm"
+                                    />
+                                    <span className={`text-base font-medium ${countryFilter.includes(country) ? 'text-green-300' : 'text-slate-300 hover:text-white'}`}>
+                                      {country}
+                                    </span>
+                                  </div>
+                                </motion.label>
+                              ))}
+                            </div>
                           </div>
                         </motion.div>
                       )}
@@ -12901,48 +12936,61 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <motion.button
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.99 }}
-                      onClick={() => setIsRarityDropdownOpen(!isRarityDropdownOpen)}
+                      onClick={() => setActiveFilter(activeFilter === 'rarity' ? null : 'rarity')}
                       className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-orange-500/50 transition-all duration-200 group"
                     >
                       <Star className="w-5 h-5 text-orange-400 group-hover:text-orange-300" />
                       <span className="text-white font-medium group-hover:text-orange-300 transition-colors duration-200">Rarity</span>
-                      <ChevronDown className={`w-4 h-4 text-orange-400 group-hover:text-orange-300 transition-transform duration-200 ml-auto ${isRarityDropdownOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 text-orange-400 group-hover:text-orange-300 transition-transform duration-200 ml-auto ${activeFilter === 'rarity' ? 'rotate-180' : ''}`} />
                     </motion.button>
                     
                     <AnimatePresence>
-                      {isRarityDropdownOpen && (
+                      {activeFilter === 'rarity' && (
                         <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="overflow-hidden"
+                          initial={{ x: 300, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          exit={{ x: 300, opacity: 0 }}
+                          transition={{ duration: 0.3, damping: 25, stiffness: 200 }}
+                          className="absolute top-0 right-0 w-full h-full bg-slate-800/95 backdrop-blur-sm border-l border-slate-600/50"
                         >
-                          <div className="grid grid-cols-1 gap-2 pl-2">
-                            {rarities.map((rarity) => (
-                              <motion.label
-                                key={rarity}
-                                whileHover={{ scale: 1.01 }}
-                                whileTap={{ scale: 0.99 }}
-                                className="flex items-center gap-3 p-3 rounded-lg bg-slate-800/50 border border-slate-600/30 hover:border-orange-500/50 cursor-pointer transition-all duration-200"
+                          <div className="p-6">
+                            <div className="flex items-center justify-between mb-6">
+                              <h3 className="text-xl font-bold text-orange-300">Rarity</h3>
+                              <motion.button
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => setActiveFilter(null)}
+                                className="p-2 rounded-lg bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50"
                               >
-                                <input
-                                  type="checkbox"
-                                  checked={rarityFilter.includes(rarity)}
-                                  onChange={(e) => {
-                                    if (e.target.checked) {
-                                      setRarityFilter([...rarityFilter, rarity])
-                                    } else {
-                                      setRarityFilter(rarityFilter.filter(r => r !== rarity))
-                                    }
-                                  }}
-                                  className="w-4 h-4 text-blue-600 bg-slate-700 border-slate-500 rounded focus:ring-blue-500 focus:ring-2"
-                                />
-                                <span className={`text-sm font-medium ${rarityFilter.includes(rarity) ? 'text-orange-300' : 'text-slate-300 hover:text-white'}`}>
-                                  {rarity}
-                                </span>
-                              </motion.label>
-                            ))}
+                                <X className="w-5 h-5 text-slate-300" />
+                              </motion.button>
+                            </div>
+                            <div className="grid grid-cols-1 gap-3">
+                              {rarities.map((rarity) => (
+                                <motion.label
+                                  key={rarity}
+                                  whileHover={{ scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  className="flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 border border-slate-600/30 hover:border-orange-500/50 cursor-pointer transition-all duration-200"
+                                >
+                                  <input
+                                    type="checkbox"
+                                    checked={rarityFilter.includes(rarity)}
+                                    onChange={(e) => {
+                                      if (e.target.checked) {
+                                        setRarityFilter([...rarityFilter, rarity])
+                                      } else {
+                                        setRarityFilter(rarityFilter.filter(r => r !== rarity))
+                                      }
+                                    }}
+                                    className="w-5 h-5 text-orange-600 bg-slate-700 border-slate-500 rounded focus:ring-orange-500 focus:ring-2"
+                                  />
+                                  <span className={`text-base font-medium ${rarityFilter.includes(rarity) ? 'text-orange-300' : 'text-slate-300 hover:text-white'}`}>
+                                    {rarity}
+                                  </span>
+                                </motion.label>
+                              ))}
+                            </div>
                           </div>
                         </motion.div>
                       )}
@@ -12954,48 +13002,61 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <motion.button
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.99 }}
-                      onClick={() => setIsObtainMethodDropdownOpen(!isObtainMethodDropdownOpen)}
+                      onClick={() => setActiveFilter(activeFilter === 'obtainMethod' ? null : 'obtainMethod')}
                       className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-purple-500/50 transition-all duration-200 group"
                     >
                       <MapPin className="w-5 h-5 text-purple-400 group-hover:text-purple-300" />
                       <span className="text-white font-medium group-hover:text-purple-300 transition-colors duration-200">How to Obtain</span>
-                      <ChevronDown className={`w-4 h-4 text-purple-400 group-hover:text-purple-300 transition-transform duration-200 ml-auto ${isObtainMethodDropdownOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 text-purple-400 group-hover:text-purple-300 transition-transform duration-200 ml-auto ${activeFilter === 'obtainMethod' ? 'rotate-180' : ''}`} />
                     </motion.button>
                     
                     <AnimatePresence>
-                      {isObtainMethodDropdownOpen && (
+                      {activeFilter === 'obtainMethod' && (
                         <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="overflow-hidden"
+                          initial={{ x: 300, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          exit={{ x: 300, opacity: 0 }}
+                          transition={{ duration: 0.3, damping: 25, stiffness: 200 }}
+                          className="absolute top-0 right-0 w-full h-full bg-slate-800/95 backdrop-blur-sm border-l border-slate-600/50"
                         >
-                          <div className="grid grid-cols-1 gap-2 pl-2">
-                            {obtainMethods.map((method) => (
-                              <motion.label
-                                key={method}
-                                whileHover={{ scale: 1.01 }}
-                                whileTap={{ scale: 0.99 }}
-                                className="flex items-center gap-3 p-3 rounded-lg bg-slate-800/50 border border-slate-600/30 hover:border-purple-500/50 cursor-pointer transition-all duration-200"
+                          <div className="p-6">
+                            <div className="flex items-center justify-between mb-6">
+                              <h3 className="text-xl font-bold text-purple-300">How to Obtain</h3>
+                              <motion.button
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={() => setActiveFilter(null)}
+                                className="p-2 rounded-lg bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50"
                               >
-                                <input
-                                  type="checkbox"
-                                  checked={obtainMethodFilter.includes(method)}
-                                  onChange={(e) => {
-                                    if (e.target.checked) {
-                                      setObtainMethodFilter([...obtainMethodFilter, method])
-                                    } else {
-                                      setObtainMethodFilter(obtainMethodFilter.filter(m => m !== method))
-                                    }
-                                  }}
-                                  className="w-4 h-4 text-blue-600 bg-slate-700 border-slate-500 rounded focus:ring-blue-500 focus:ring-2"
-                                />
-                                <span className={`text-sm font-medium ${obtainMethodFilter.includes(method) ? 'text-purple-300' : 'text-slate-300 hover:text-white'}`}>
-                                  {method}
-                                </span>
-                              </motion.label>
-                            ))}
+                                <X className="w-5 h-5 text-slate-300" />
+                              </motion.button>
+                            </div>
+                            <div className="grid grid-cols-1 gap-3">
+                              {obtainMethods.map((method) => (
+                                <motion.label
+                                  key={method}
+                                  whileHover={{ scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  className="flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 border border-slate-600/30 hover:border-purple-500/50 cursor-pointer transition-all duration-200"
+                                >
+                                  <input
+                                    type="checkbox"
+                                    checked={obtainMethodFilter.includes(method)}
+                                    onChange={(e) => {
+                                      if (e.target.checked) {
+                                        setObtainMethodFilter([...obtainMethodFilter, method])
+                                      } else {
+                                        setObtainMethodFilter(obtainMethodFilter.filter(m => m !== method))
+                                      }
+                                    }}
+                                    className="w-5 h-5 text-purple-600 bg-slate-700 border-slate-500 rounded focus:ring-purple-500 focus:ring-2"
+                                  />
+                                  <span className={`text-base font-medium ${obtainMethodFilter.includes(method) ? 'text-purple-300' : 'text-slate-300 hover:text-white'}`}>
+                                    {method}
+                                  </span>
+                                </motion.label>
+                              ))}
+                            </div>
                           </div>
                         </motion.div>
                       )}
