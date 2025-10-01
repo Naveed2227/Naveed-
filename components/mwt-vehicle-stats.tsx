@@ -7,7 +7,7 @@ import { vehicleCurrencyData } from './currency'
 import { urduTranslations, getUrduTranslation } from './Urdu'
 import { englishTranslations, getEnglishTranslation } from './English'
 import GoogleAdSense from './GoogleAdSense'
-import * as vehicleVideosData from './ArmourVideo'
+import * as vehicleVideosData from './armour-video'
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -65,6 +65,11 @@ const toRomanNumeral = (num: number | string): string => {
     }
   }
   return result || 'I';
+};
+
+// Check if vehicle has armour video
+const hasArmourVideo = (vehicleName: string): boolean => {
+  return vehicleVideosData.default.some((video: any) => video.name === vehicleName);
 };
 
 // Convert tier to Roman numeral if it's not already
@@ -9645,8 +9650,18 @@ const VehicleArmourButtons = () => {
 };
 
 // Armour Video Component
-const ArmourVideo = () => {
+const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
   const [activeVideo, setActiveVideo] = useState<any>(null);
+
+  // Auto-show video when vehicleName is provided
+  useEffect(() => {
+    if (vehicleName) {
+      const video = vehicleVideosData.default.find((v: any) => v.name === vehicleName);
+      if (video) {
+        setActiveVideo(video);
+      }
+    }
+  }, [vehicleName]);
 
   // Convert minutes:seconds to seconds
   const timeToSeconds = (timeStr: string): number => {
@@ -9662,24 +9677,6 @@ const ArmourVideo = () => {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap gap-3 justify-center">
-        {vehicleVideosData.default.map((vehicle) => (
-          <button
-            key={vehicle.name}
-            onClick={() => setActiveVideo(activeVideo?.name === vehicle.name ? null : vehicle)}
-            className={`
-              px-4 py-2 rounded-lg font-medium transition-all duration-200
-              ${activeVideo?.name === vehicle.name 
-                ? 'bg-amber-600 text-white' 
-                : 'bg-slate-800 text-white hover:bg-slate-700'
-              }
-              hover:scale-105 active:scale-95
-            `}
-          >
-            {vehicle.name} Armour
-          </button>
-        ))}
-      </div>
       
       <AnimatePresence>
         {activeVideo && (
@@ -9691,13 +9688,14 @@ const ArmourVideo = () => {
             className="overflow-hidden"
           >
             <div className="flex justify-center">
-              <div className="w-full max-w-2xl aspect-video">
+              <div className="w-full max-w-2xl aspect-video bg-black rounded-lg overflow-hidden">
                 <iframe
-                  src={`https://www.youtube.com/embed/${getVideoId(activeVideo.url)}?autoplay=1&start=${timeToSeconds(activeVideo.start)}&end=${timeToSeconds(activeVideo.end)}&rel=0&modestbranding=1`}
+                  src={`https://www.youtube.com/embed/${getVideoId(activeVideo.url)}?autoplay=1&start=${timeToSeconds(activeVideo.start)}&end=${timeToSeconds(activeVideo.end)}&rel=0&modestbranding=1&controls=1&showinfo=0`}
                   title={`${activeVideo.name} Armour Demo`}
-                  className="w-full h-full rounded-lg"
+                  className="w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
+                  style={{ border: 'none' }}
                 />
               </div>
             </div>
@@ -9877,6 +9875,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [showAbout, setShowAbout] = useState(false)
   const [showUpdates, setShowUpdates] = useState(false)
   const [showCredits, setShowCredits] = useState(false)
+  const [armourVideoVehicle, setArmourVideoVehicle] = useState<string | null>(null)
 
   const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
   const [vehicleDetailsOpenId, setVehicleDetailsOpenId] = useState<string | null>(null)
@@ -14556,6 +14555,27 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           </div>
                         </div>
                       </div>
+                      
+                      {/* Armour Button - Show only if vehicle has armour video */}
+                      {hasArmourVideo(vehicle.name) && (
+                        <div className="mt-4">
+                          <button 
+                            onClick={() => {
+                              // Set the vehicle for armour video display
+                              setArmourVideoVehicle(vehicle.name);
+                              // Find and scroll to armour video section
+                              const armourSection = document.getElementById('armour-video-section');
+                              if (armourSection) {
+                                armourSection.scrollIntoView({ behavior: 'smooth' });
+                              }
+                            }}
+                            className="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+                          >
+                            <Camera className="w-5 h-5" />
+                            Armour
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -15077,10 +15097,31 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           </div>
                         </div>
                       </div>
+                      
+                      {/* Armour Button - Show only if vehicle has armour video */}
+                      {hasArmourVideo(vehicle.name) && (
+                        <div className="mb-6">
+                          <button 
+                            onClick={() => {
+                              // Set the vehicle for armour video display
+                              setArmourVideoVehicle(vehicle.name);
+                              // Find and scroll to armour video section
+                              const armourSection = document.getElementById('armour-video-section');
+                              if (armourSection) {
+                                armourSection.scrollIntoView({ behaviour: 'smooth' });
+                              }
+                            }}
+                            className="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+                          >
+                            <Camera className="w-5 h-5" />
+                            Armour
+                          </button>
+                        </div>
+                      )}
 
                       {/* Vehicle Armour Video */}
-                      <div className="mb-6">
-                        <ArmourVideo />
+                      <div id="armour-video-section" className="mb-6">
+                        <ArmourVideo vehicleName={armourVideoVehicle} />
                       </div>
                     </div>
                   </div>
