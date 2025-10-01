@@ -1,0 +1,13 @@
+interface VehicleVideo {
+  name: string;
+  url: string;
+  start: string;
+  end: string;
+}
+
+const vehicleVideos: VehicleVideo[] = [
+  { name: "T-14 Armata", url: "https://www.youtube.com/watch?v=example1", start: "0:10", end: "0:30" },
+  { name: "M1128 Stryker", url: "https://www.youtube.com/watch?v=example2", start: "0:15", end: "0:40" }
+];
+
+export default vehicleVideos;

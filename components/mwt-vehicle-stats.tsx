@@ -7,6 +7,7 @@ import { vehicleCurrencyData } from './currency'
 import { urduTranslations, getUrduTranslation } from './Urdu'
 import { englishTranslations, getEnglishTranslation } from './English'
 import GoogleAdSense from './GoogleAdSense'
+import * as vehicleVideosData from './ArmourVideo'
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -9565,6 +9566,148 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
     </div>
   );
 };
+
+// Vehicle Armour Buttons Component
+const VehicleArmourButtons = () => {
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  
+  // Vehicle data with YouTube URLs and timestamps
+  const vehicles = [
+    { name: "PLZ-05", url: "https://www.youtube.com/watch?v=example1", start: "0:10", end: "0:30" },
+    { name: "M1128 Stryker", url: "https://www.youtube.com/watch?v=example2", start: "0:15", end: "0:40" }
+  ];
+
+  // Convert minutes:seconds to seconds
+  const timeToSeconds = (timeStr: string): number => {
+    const [minutes, seconds] = timeStr.split(':').map(Number);
+    return minutes * 60 + seconds;
+  };
+
+  // Extract video ID from YouTube URL
+  const getVideoId = (url: string): string => {
+    const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
+    return match ? match[1] : '';
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap gap-3">
+        {vehicles.map((vehicle) => (
+          <button
+            key={vehicle.name}
+            onClick={() => setActiveVideo(activeVideo === vehicle.name ? null : vehicle.name)}
+            className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 active:scale-95 ${
+              activeVideo === vehicle.name
+                ? 'bg-amber-600 text-white'
+                : 'bg-slate-800 text-white hover:bg-slate-700'
+            }`}
+          >
+            {vehicle.name} Armour
+          </button>
+        ))}
+      </div>
+      
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            {vehicles
+              .filter(vehicle => vehicle.name === activeVideo)
+              .map(vehicle => {
+                const videoId = getVideoId(vehicle.url);
+                const startSeconds = timeToSeconds(vehicle.start);
+                const endSeconds = timeToSeconds(vehicle.end);
+                
+                return (
+                  <div key={vehicle.name} className="mt-4 flex justify-center">
+                    <div className="w-full max-w-2xl aspect-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startSeconds}&end=${endSeconds}&rel=0&modestbranding=1`}
+                        title={`${vehicle.name} Armour Demo`}
+                        className="w-full h-full rounded-lg"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+// Armour Video Component
+const ArmourVideo = () => {
+  const [activeVideo, setActiveVideo] = useState<any>(null);
+
+  // Convert minutes:seconds to seconds
+  const timeToSeconds = (timeStr: string): number => {
+    const [minutes, seconds] = timeStr.split(':').map(Number);
+    return minutes * 60 + seconds;
+  };
+
+  // Extract video ID from YouTube URL
+  const getVideoId = (url: string): string => {
+    const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
+    return match ? match[1] : '';
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap gap-3 justify-center">
+        {vehicleVideosData.default.map((vehicle) => (
+          <button
+            key={vehicle.name}
+            onClick={() => setActiveVideo(activeVideo?.name === vehicle.name ? null : vehicle)}
+            className={`
+              px-4 py-2 rounded-lg font-medium transition-all duration-200
+              ${activeVideo?.name === vehicle.name 
+                ? 'bg-amber-600 text-white' 
+                : 'bg-slate-800 text-white hover:bg-slate-700'
+              }
+              hover:scale-105 active:scale-95
+            `}
+          >
+            {vehicle.name} Armour
+          </button>
+        ))}
+      </div>
+      
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="flex justify-center">
+              <div className="w-full max-w-2xl aspect-video">
+                <iframe
+                  src={`https://www.youtube.com/embed/${getVideoId(activeVideo.url)}?autoplay=1&start=${timeToSeconds(activeVideo.start)}&end=${timeToSeconds(activeVideo.end)}&rel=0&modestbranding=1`}
+                  title={`${activeVideo.name} Armour Demo`}
+                  className="w-full h-full rounded-lg"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [VEHICLES, setVEHICLES] = useState(initialVehicles);
   const router = useRouter()
@@ -14933,6 +15076,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             </div>
                           </div>
                         </div>
+                      </div>
+
+                      {/* Vehicle Armour Video */}
+                      <div className="mb-6">
+                        <ArmourVideo />
                       </div>
                     </div>
                   </div>
