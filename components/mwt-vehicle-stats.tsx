@@ -82,6 +82,20 @@ const formatTier = (tier: string | number): string => {
   return toRomanNumeral(tier);
 };
 
+// New Vehicles System
+const newVehicles = [
+  "X2 Shinshin",
+  "K2 Black Panther",
+  "Leopard 2A8",
+  "Al-Khalid",
+  "Arjun Mk.2",
+  "K21 KNIFV"
+];
+
+const isNewVehicle = (vehicleName: string): boolean => {
+  return newVehicles.includes(vehicleName);
+};
+
 
 // Vehicle Rarity System
 const getVehicleRarity = (vehicleName: string) => {
@@ -13425,6 +13439,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             <div className="absolute -top-1.5 -right-1.5 bg-cyan-500 text-white text-[10px] sm:text-xs font-bold rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
                               {index + 1}
                             </div>
+                            {/* NEW Tag for comparison bar */}
+                            {isNewVehicle(vehicle?.name) && (
+                              <div className="absolute top-0 left-0 z-10">
+                                <div className="px-1 py-0.5 rounded text-[8px] font-semibold shadow-lg bg-white text-black">
+                                  NEW
+                                </div>
+                              </div>
+                            )}
                             <button 
                               onClick={(e) => {
                                 e.stopPropagation();
@@ -13865,6 +13887,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       {getVehicleRarity(vehicle.name)}
                     </div>
                   </div>
+                  
+                  {/* NEW Tag */}
+                  {isNewVehicle(vehicle.name) && (
+                    <div className="absolute top-2 right-2 z-20">
+                      <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-white text-black">
+                        NEW
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -14865,11 +14896,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         </div>
                         <div className="relative w-full pb-[56.25%] mb-2">
                           {vehicle.image ? (
-                            <img 
-                              src={vehicle.image} 
-                              alt={vehicle.name} 
-                              className="absolute inset-0 w-full h-full object-cover"
-                            />
+                            <>
+                              <img 
+                                src={vehicle.image} 
+                                alt={vehicle.name} 
+                                className="absolute inset-0 w-full h-full object-cover"
+                              />
+                              {/* NEW Tag */}
+                              {isNewVehicle(vehicle.name) && (
+                                <div className="absolute top-2 right-2 z-20">
+                                  <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-white text-black">
+                                    NEW
+                                  </div>
+                                </div>
+                              )}
+                            </>
                           ) : (
                             <div className="absolute inset-0 bg-slate-700 flex items-center justify-center text-slate-400">
                               No image available
@@ -15411,11 +15452,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           </div>
                           <div className="relative w-full pb-[56.25%] mb-2">
                             {vehicle.image ? (
-                              <img 
-                                src={vehicle.image} 
-                                alt={vehicle.name} 
-                                className="absolute inset-0 w-full h-full object-cover"
-                              />
+                              <>
+                                <img 
+                                  src={vehicle.image} 
+                                  alt={vehicle.name} 
+                                  className="absolute inset-0 w-full h-full object-cover"
+                                />
+                                {/* NEW Tag */}
+                                {isNewVehicle(vehicle.name) && (
+                                  <div className="absolute top-2 right-2 z-20">
+                                    <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-white text-black">
+                                      NEW
+                                    </div>
+                                  </div>
+                                )}
+                              </>
                             ) : (
                               <div className="absolute inset-0 bg-slate-700 flex items-center justify-center text-slate-400">
                                 No image available
