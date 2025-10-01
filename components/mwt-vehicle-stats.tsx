@@ -9612,6 +9612,18 @@ const VehicleArmourButtons = () => {
         ))}
       </div>
       
+      {/* Show message when vehicle is selected but no video is available */}
+      {vehicleName && !activeVideo && (
+        <div className="text-center p-4 bg-slate-800/50 rounded-lg border border-slate-700/30">
+          <p className="text-slate-400 text-sm">
+            No armour video available for <span className="text-cyan-300 font-medium">{vehicleName}</span>
+          </p>
+          <p className="text-slate-500 text-xs mt-1">
+            Available vehicles: Su-57M, F-22 Raptor, J-20 Mighty Dragon, TU-222, J-35, MiG-41M, B-21 Raider, H-20, T-14 Armata, M1128 Stryker
+          </p>
+        </div>
+      )}
+      
       <AnimatePresence>
         {activeVideo && (
           <motion.div
@@ -9649,6 +9661,11 @@ const VehicleArmourButtons = () => {
   );
 };
 
+// Mobile device detection function
+const isMobileDevice = (): boolean => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
 // Armour Video Component
 const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
   const [activeVideo, setActiveVideo] = useState<any>(null);
@@ -9657,12 +9674,53 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
   const [duration, setDuration] = useState(0);
   const videoRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<any>(null);
+  
+  // Touch event handlers for mobile progress bar
+  const touchStartXRef = useRef(0);
+  const touchStartTimeRef = useRef(0);
+
+  const handleProgressTouchStart = (e: React.TouchEvent) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    touchStartXRef.current = touch.clientX;
+    touchStartTimeRef.current = Date.now();
+  };
+
+  const handleProgressTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault();
+    if (!playerRef.current || !activeVideo) return;
+    
+    const touch = e.touches[0];
+    const progressBar = e.currentTarget;
+    const rect = progressBar.getBoundingClientRect();
+    const touchX = touch.clientX - rect.left;
+    const progressWidth = rect.width;
+    const touchedTime = Math.max(0, Math.min(touchX / progressWidth, 1)) * duration;
+    
+    const startTime = timeToSeconds(activeVideo.start);
+    playerRef.current.seekTo(startTime + touchedTime, true);
+    setCurrentTime(touchedTime);
+  };
+
+  const handleProgressTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
+    // Additional touch end logic if needed
+  };
 
   // Auto-show video when vehicleName is provided
   useEffect(() => {
+    console.log('ArmourVideo: Component mounted, vehicleName:', vehicleName);
+    console.log('ArmourVideo: Available videos data:', vehicleVideosData);
+    
     if (vehicleName) {
       console.log('ArmourVideo: Looking for video with name:', vehicleName);
-      console.log('Available videos:', vehicleVideosData.default);
+      console.log('ArmourVideo: Available videos:', vehicleVideosData.default);
+      
+      if (!vehicleVideosData.default || !Array.isArray(vehicleVideosData.default)) {
+        console.error('ArmourVideo: vehicleVideosData.default is not an array:', vehicleVideosData.default);
+        return;
+      }
+      
       const video = vehicleVideosData.default.find((v: any) => v.name === vehicleName);
       if (video) {
         console.log('ArmourVideo: Found video:', video);
@@ -9670,7 +9728,8 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
         setIsPlaying(false); // Start with paused state
         setCurrentTime(0);
       } else {
-        console.log('ArmourVideo: No video found for vehicle:', vehicleName);
+        console.error('ArmourVideo: No video found for vehicle:', vehicleName);
+        console.error('ArmourVideo: Available vehicle names:', vehicleVideosData.default.map((v: any) => v.name));
       }
     }
   }, [vehicleName]);
@@ -9735,28 +9794,99 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     setDuration(videoDuration);
     setCurrentTime(0);
 
-    playerRef.current = new (window as any).YT.Player(videoRef.current, {
-      videoId: getVideoId(activeVideo.url),
-      playerVars: {
-        autoplay: 0, // Don't autoplay, let user control
-        start: startTime,
-        end: endTime,
-        rel: 0,
-        modestbranding: 1,
-        controls: 0,
-        showinfo: 0,
-        iv_load_policy: 3,
-        cc_load_policy: 0,
-        disablekb: 1,
-        fs: 1, // Enable fullscreen
-        playsinline: 1,
-        vq: 'hd1080' // High quality
+    try {
+      playerRef.current = new (window as any).YT.Player(videoRef.current, {
+        videoId: getVideoId(activeVideo.url),
+        playerVars: {
+          autoplay: 1, // Autoplay when video is revealed
+          start: startTime,
+          end: endTime,
+          rel: 0,
+          modestbranding: 1,
+          controls: 0,
+          showinfo: 0,
+          iv_load_policy: 3,
+          cc_load_policy: 0,
+          disablekb: 1,
+          fs: 1, // Enable fullscreen
+          playsinline: 1, // Critical for mobile playback
+          vq: 'small', // Use lower quality for better mobile performance
+          enablejsapi: 1,
+          origin: window.location.origin,
+          widget_referrer: window.location.href,
+          // Mobile-specific parameters
+          mobile: '1', // Optimize for mobile
+          html5: 1, // Force HTML5 player
+          // iOS-specific parameters
+          wmode: 'opaque', // Better iOS compatibility
+        allowfullscreen: 'true' // Ensure fullscreen works
       },
       events: {
         onReady: (event: any) => {
           console.log('ArmourVideo: Player is ready');
-          // Don't autoplay here, let the user control it
-          setIsPlaying(false);
+          console.log('ArmourVideo: Player iframe dimensions:', event.target.getIframe().getBoundingClientRect());
+          
+          // Enhanced mobile detection
+          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+          const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+          console.log('ArmourVideo: Mobile device detected:', isMobile);
+          console.log('ArmourVideo: iOS device detected:', isIOS);
+          
+          // Hide loading indicator
+          const loadingIndicator = document.getElementById('mobile-loading-indicator');
+          if (loadingIndicator) {
+            loadingIndicator.style.display = 'none';
+          }
+          
+          // Ensure iframe is properly sized for mobile
+          const iframe = event.target.getIframe();
+          if (iframe) {
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.position = 'absolute';
+            iframe.style.top = '0';
+            iframe.style.left = '0';
+            iframe.style.border = 'none';
+            iframe.style.borderRadius = '0';
+            
+            // Mobile-specific optimizations
+            if (isMobile) {
+              // Force reflow on mobile to ensure proper rendering
+              setTimeout(() => {
+                iframe.style.display = 'none';
+                iframe.offsetHeight; // Trigger reflow
+                iframe.style.display = 'block';
+                
+                // Additional mobile sizing adjustments
+                if (isIOS) {
+                  // iOS-specific fixes
+                  iframe.style.webkitTransform = 'translateZ(0)';
+                  iframe.style.webkitBackfaceVisibility = 'hidden';
+                }
+              }, 150);
+              
+              // Set mobile-optimized player vars
+              try {
+                event.target.setPlaybackQuality('small'); // Better performance on mobile
+              } catch (e) {
+                console.log('Could not set playback quality:', e);
+              }
+            }
+          }
+          
+          // Start playing when video is revealed
+          try {
+            event.target.playVideo();
+            setIsPlaying(true);
+            startProgressTracking();
+          } catch (error) {
+            console.log('Could not autoplay video:', error);
+            setIsPlaying(false);
+          }
+        },
+        onError: (event: any) => {
+          console.error('ArmourVideo: Player error:', event.data);
+          console.error('ArmourVideo: Error code:', event.data);
         },
         onStateChange: (event: any) => {
           console.log('ArmourVideo: Player state changed:', event.data);
@@ -9772,6 +9902,11 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
         }
       }
     });
+    } catch (error) {
+      console.error('ArmourVideo: Error initializing YouTube player:', error);
+      // Reset playerRef on error
+      playerRef.current = null;
+    }
   };
 
   const startProgressTracking = () => {
@@ -9870,6 +10005,12 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
 
   return (
     <div className="space-y-4">
+      {/* Debug info - remove in production */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="text-xs text-red-400 bg-red-900/20 p-2 rounded">
+          Debug: vehicleName={vehicleName}, activeVideo={activeVideo?.name || 'null'}
+        </div>
+      )}
       
       <AnimatePresence>
         {activeVideo && (
@@ -9881,9 +10022,15 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
             className="overflow-hidden"
           >
             <div className="flex justify-center px-2 sm:px-4 md:px-6 lg:px-8">
-              <div className="w-full max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-5xl">
-                {/* Native app-style video card */}
-                <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl border border-slate-700/30 overflow-hidden shadow-xl sm:shadow-2xl mx-0 sm:mx-2 md:mx-4">
+              <div className="w-full max-w-4xl md:max-w-5xl lg:max-w-6xl">
+                {/* Responsive video card with proper scaling */}
+                <div className="bg-slate-800/70 backdrop-blur-sm rounded-xl md:rounded-2xl border border-slate-700/40 overflow-hidden shadow-xl md:shadow-2xl mx-0 my-3 md:my-4" style={{
+                  transform: isMobileDevice() ? 'translateZ(0)' : 'none',
+                  backfaceVisibility: isMobileDevice() ? 'hidden' : 'visible',
+                  willChange: isMobileDevice() ? 'transform' : 'auto',
+                  maxWidth: '100%',
+                  width: '100%'
+                }}>
                   {/* Video header with vehicle name */}
                   <div className="bg-slate-900/50 px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 border-b border-slate-700/30">
                     <div className="flex items-center justify-between">
@@ -9904,21 +10051,49 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
                     </div>
                   </div>
                   
-                  {/* Video container with enhanced mobile responsiveness */}
-                  <div className="relative aspect-video bg-black w-full">
+                  {/* Video container - fully responsive with proper aspect ratio */}
+                  <div className="relative w-full bg-black rounded-lg overflow-hidden shadow-lg" style={{ 
+                    aspectRatio: '16/9', // Maintain 16:9 aspect ratio
+                    minHeight: isMobileDevice() ? '180px' : '240px',
+                    maxHeight: isMobileDevice() ? '300px' : '480px',
+                    touchAction: 'none', // Prevent unwanted touch scrolling
+                    zIndex: 10, // Ensure video is above other content
+                    margin: '0 auto' // Center the video container
+                  }}>
                     <div 
                       ref={videoRef}
                       className="absolute inset-0 w-full h-full"
+                      id={`youtube-player-${activeVideo.name.replace(/\s+/g, '-').toLowerCase()}`}
+                      style={{
+                        borderRadius: '0',
+                        overflow: 'hidden'
+                      }}
                     />
+                    {/* Loading indicator - only show when player is not ready */}
+                    {!playerRef.current && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                        <div className="text-white text-sm flex flex-col items-center gap-2">
+                          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                          <span>Loading video...</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                   
-                  {/* Video controls outside the video area - enhanced for mobile */}
-                  <div className="p-2 sm:p-3 md:p-4 bg-slate-900/30 border-t border-slate-700/30">
-                    {/* Progress bar - mobile optimized */}
-                    <div className="mb-2 sm:mb-3 md:mb-4">
+                  {/* Video controls - matching stat display design */}
+                  <div className="p-3 sm:p-4 bg-slate-800/50 border-t border-slate-700/40" style={{
+                    paddingBottom: isMobileDevice() ? 'env(safe-area-inset-bottom, 20px)' : '20px'
+                  }}>
+                    {/* Progress bar - matching stat display design */}
+                    <div className="mb-3 sm:mb-4">
+                      <div className="text-xs text-slate-400 mb-1">Progress</div>
                       <div 
-                        className="w-full h-1.5 sm:h-2 bg-slate-600/50 rounded-full cursor-pointer hover:bg-slate-600/70 transition-colors relative overflow-hidden"
+                        className="w-full h-2.5 sm:h-3 bg-slate-600/60 rounded-full cursor-pointer hover:bg-slate-600/80 transition-colors relative overflow-hidden touch-none"
                         onClick={handleProgressClick}
+                        onTouchStart={handleProgressTouchStart}
+                        onTouchMove={handleProgressTouchMove}
+                        onTouchEnd={handleProgressTouchEnd}
+                        style={{ minHeight: isMobileDevice() ? '12px' : '8px' }}
                       >
                         {/* Progress fill */}
                         <div 
@@ -9927,56 +10102,62 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
                         />
                         {/* Progress handle - larger for mobile touch */}
                         <div 
-                          className="absolute top-1/2 w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 bg-cyan-400 rounded-full shadow-lg border-2 border-white transition-all duration-150 ease-out"
+                          className="absolute top-1/2 w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 bg-cyan-400 rounded-full shadow-lg border-2 border-white transition-all duration-150 ease-out"
                           style={{ left: `${(currentTime / duration) * 100}%`, transform: 'translate(-50%, -50%)' }}
                         />
                       </div>
                     </div>
                     
-                    <div className="flex items-center justify-between text-white">
-                      <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3">
-                        {/* Play/Pause button - larger for mobile */}
-                        <button 
-                          onClick={togglePlayPause}
-                          className="p-2 sm:p-2.5 md:p-2.5 rounded-full bg-cyan-500 hover:bg-cyan-400 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg"
-                        >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        {/* Play/Pause button - stat display style */}
+                        <div className="bg-slate-800/50 rounded-lg p-3">
+                          <button 
+                            onClick={togglePlayPause}
+                            className="text-cyan-300 hover:text-cyan-200 transition-colors"
+                            title={isPlaying ? "Pause" : "Play"}
+                          >
                           {isPlaying ? (
-                            <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                             </svg>
                           ) : (
-                            <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <svg className="w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                             </svg>
                           )}
                         </button>
+                        </div>
                         
-                        {/* Fullscreen button - larger for mobile */}
-                        <button 
-                          onClick={toggleFullscreen}
-                          className="p-2 sm:p-2.5 md:p-2.5 rounded-full bg-slate-600 hover:bg-slate-500 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg"
-                        >
-                          <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        {/* Fullscreen button - stat display style */}
+                        <div className="bg-slate-800/50 rounded-lg p-3">
+                          <button 
+                            onClick={toggleFullscreen}
+                            className="text-slate-300 hover:text-slate-200 transition-colors"
+                            title="Fullscreen"
+                          >
+                          <svg className="w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                           </svg>
                         </button>
+                        </div>
                         
-                        {/* Time display - responsive sizing */}
-                        <div className="flex items-center gap-0.5 sm:gap-1 md:gap-2 text-xs sm:text-xs md:text-sm">
-                          <span className="text-cyan-300 font-mono font-medium">
-                            {formatTime(currentTime)}
-                          </span>
-                          <span className="text-slate-400">/</span>
-                          <span className="text-slate-400 font-mono">
-                            {formatTime(duration)}
-                          </span>
+                        {/* Time display - stat display style */}
+                        <div className="bg-slate-800/50 rounded-lg p-3">
+                          <div className="text-xs text-slate-400 mb-1">Time</div>
+                          <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                            <span className="font-mono">{formatTime(currentTime)}</span>
+                            <span className="text-slate-400 text-base">/</span>
+                            <span className="text-slate-400 font-mono text-base">{formatTime(duration)}</span>
+                          </div>
                         </div>
                       </div>
                       
-                      <div className="flex items-center gap-0.5 sm:gap-1 md:gap-2">
-                        <span className="text-xs sm:text-xs md:text-sm text-cyan-300 font-medium px-1.5 sm:px-2 py-0.5 sm:py-1 bg-cyan-500/20 rounded-lg">
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <div className="text-xs text-slate-400 mb-1">Duration</div>
+                        <div className="text-lg font-bold text-cyan-300">
                           {activeVideo.start} - {activeVideo.end}
-                        </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -14863,6 +15044,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     </div>
                   </div>
 
+                  {/* Vehicle Armour Video - Mobile Only */}
+                  <div className="block lg:hidden">
+                    <ArmourVideo vehicleName={armourVideoVehicle} />
+                  </div>
+
                   <div className="flex flex-col lg:flex-row gap-6">
                     {/* Left column - Stats and Weapons */}
                     <div className="w-full lg:w-1/2">
@@ -15403,8 +15589,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         </div>
                       )}
 
-                      {/* Vehicle Armour Video */}
-                      <div id="armour-video-section" className="mb-6">
+                      {/* Vehicle Armour Video - Enhanced for mobile visibility */}
+                      <div id="armour-video-section" className="mb-6 scroll-mt-4" style={{
+                        scrollMarginTop: isMobileDevice() ? '80px' : '100px',
+                        overflowY: isMobileDevice() ? 'scroll' : 'auto'
+                      }}>
                         <ArmourVideo vehicleName={armourVideoVehicle} />
                       </div>
                     </div>
