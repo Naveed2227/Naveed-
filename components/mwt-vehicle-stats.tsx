@@ -9661,43 +9661,76 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
   // Auto-show video when vehicleName is provided
   useEffect(() => {
     if (vehicleName) {
+      console.log('ArmourVideo: Looking for video with name:', vehicleName);
+      console.log('Available videos:', vehicleVideosData.default);
       const video = vehicleVideosData.default.find((v: any) => v.name === vehicleName);
       if (video) {
+        console.log('ArmourVideo: Found video:', video);
         setActiveVideo(video);
-        setIsPlaying(true);
+        setIsPlaying(false); // Start with paused state
         setCurrentTime(0);
+      } else {
+        console.log('ArmourVideo: No video found for vehicle:', vehicleName);
       }
     }
   }, [vehicleName]);
 
   // Initialize YouTube API
   useEffect(() => {
-    // Load YouTube IFrame API
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+    // Load YouTube IFrame API if not already loaded
+    if (!(window as any).YT) {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+    }
 
     // Initialize player when API is ready
-    (window as any).onYouTubeIframeAPIReady = () => {
+    const onYouTubeIframeAPIReady = () => {
+      console.log('ArmourVideo: YouTube API is ready');
+      console.log('ArmourVideo: activeVideo:', activeVideo);
+      console.log('ArmourVideo: videoRef.current:', videoRef.current);
+      
       if (activeVideo && videoRef.current) {
+        console.log('ArmourVideo: Calling initializePlayer');
         initializePlayer();
+      } else {
+        console.log('ArmourVideo: Cannot initialize player - missing activeVideo or videoRef');
       }
     };
+
+    // Set up the callback
+    if ((window as any).YT) {
+      // API is already ready
+      onYouTubeIframeAPIReady();
+    } else {
+      // API is not ready yet, set up callback
+      (window as any).onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+    }
 
     return () => {
       if (playerRef.current) {
         playerRef.current.destroy();
+        playerRef.current = null;
       }
     };
   }, [activeVideo]);
 
   const initializePlayer = () => {
-    if (!activeVideo) return;
+    console.log('ArmourVideo: initializePlayer called');
+    console.log('ArmourVideo: activeVideo:', activeVideo);
+    console.log('ArmourVideo: videoRef.current:', videoRef.current);
+    
+    if (!activeVideo) {
+      console.log('ArmourVideo: No active video, returning');
+      return;
+    }
 
     const startTime = timeToSeconds(activeVideo.start);
     const endTime = timeToSeconds(activeVideo.end);
     const videoDuration = endTime - startTime;
+
+    console.log('ArmourVideo: Initializing player with videoId:', getVideoId(activeVideo.url));
 
     setDuration(videoDuration);
     setCurrentTime(0);
@@ -9705,7 +9738,7 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     playerRef.current = new (window as any).YT.Player(videoRef.current, {
       videoId: getVideoId(activeVideo.url),
       playerVars: {
-        autoplay: 1,
+        autoplay: 0, // Don't autoplay, let user control
         start: startTime,
         end: endTime,
         rel: 0,
@@ -9715,15 +9748,18 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
         iv_load_policy: 3,
         cc_load_policy: 0,
         disablekb: 1,
-        fs: 0,
-        playsinline: 1
+        fs: 1, // Enable fullscreen
+        playsinline: 1,
+        vq: 'hd1080' // High quality
       },
       events: {
         onReady: (event: any) => {
-          event.target.playVideo();
-          setIsPlaying(true);
+          console.log('ArmourVideo: Player is ready');
+          // Don't autoplay here, let the user control it
+          setIsPlaying(false);
         },
         onStateChange: (event: any) => {
+          console.log('ArmourVideo: Player state changed:', event.data);
           if (event.data === (window as any).YT.PlayerState.PLAYING) {
             setIsPlaying(true);
             startProgressTracking();
@@ -9766,6 +9802,36 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
         playerRef.current.pauseVideo();
       } else {
         playerRef.current.playVideo();
+      }
+    }
+  };
+
+  const toggleFullscreen = () => {
+    if (playerRef.current) {
+      try {
+        // Use YouTube player's fullscreen method
+        const player = playerRef.current;
+        if (player.getFullscreen) {
+          if (player.getFullscreen()) {
+            player.exitFullscreen();
+          } else {
+            player.requestFullscreen();
+          }
+        } else {
+          // Fallback: try to fullscreen the iframe container
+          const container = videoRef.current?.parentElement;
+          if (container) {
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            } else {
+              container.requestFullscreen().catch(err => {
+                console.error('Error attempting to enable fullscreen:', err);
+              });
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Fullscreen error:', error);
       }
     }
   };
@@ -9844,63 +9910,73 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
                       ref={videoRef}
                       className="w-full h-full"
                     />
-                    
-                    {/* Custom video controls overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 sm:p-4">
-                      {/* Progress bar */}
-                      <div className="mb-3 sm:mb-4">
+                  </div>
+                  
+                  {/* Video controls outside the video area */}
+                  <div className="p-3 sm:p-4 bg-slate-900/30 border-t border-slate-700/30">
+                    {/* Progress bar */}
+                    <div className="mb-3 sm:mb-4">
+                      <div 
+                        className="w-full h-1.5 sm:h-2 bg-slate-600/50 rounded-full cursor-pointer hover:bg-slate-600/70 transition-colors relative overflow-hidden"
+                        onClick={handleProgressClick}
+                      >
+                        {/* Progress fill */}
                         <div 
-                          className="w-full h-1.5 sm:h-2 bg-slate-600/50 rounded-full cursor-pointer hover:bg-slate-600/70 transition-colors relative overflow-hidden"
-                          onClick={handleProgressClick}
+                          className="h-full bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-full transition-all duration-150 ease-out"
+                          style={{ width: `${(currentTime / duration) * 100}%` }}
+                        />
+                        {/* Progress handle */}
+                        <div 
+                          className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-cyan-400 rounded-full shadow-lg border-2 border-white transition-all duration-150 ease-out"
+                          style={{ left: `${(currentTime / duration) * 100}%`, transform: 'translate(-50%, -50%)' }}
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-between text-white">
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        {/* Play/Pause button */}
+                        <button 
+                          onClick={togglePlayPause}
+                          className="p-2 sm:p-2.5 rounded-full bg-cyan-500 hover:bg-cyan-400 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg"
                         >
-                          {/* Progress fill */}
-                          <div 
-                            className="h-full bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-full transition-all duration-150 ease-out"
-                            style={{ width: `${(currentTime / duration) * 100}%` }}
-                          />
-                          {/* Progress handle */}
-                          <div 
-                            className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-cyan-400 rounded-full shadow-lg border-2 border-white transition-all duration-150 ease-out"
-                            style={{ left: `${(currentTime / duration) * 100}%`, transform: 'translate(-50%, -50%)' }}
-                          />
+                          {isPlaying ? (
+                            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                            </svg>
+                          ) : (
+                            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                            </svg>
+                          )}
+                        </button>
+                        
+                        {/* Fullscreen button */}
+                        <button 
+                          onClick={toggleFullscreen}
+                          className="p-2 sm:p-2.5 rounded-full bg-slate-600 hover:bg-slate-500 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg"
+                        >
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                          </svg>
+                        </button>
+                        
+                        {/* Time display */}
+                        <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
+                          <span className="text-cyan-300 font-mono font-medium">
+                            {formatTime(currentTime)}
+                          </span>
+                          <span className="text-slate-400">/</span>
+                          <span className="text-slate-400 font-mono">
+                            {formatTime(duration)}
+                          </span>
                         </div>
                       </div>
                       
-                      <div className="flex items-center justify-between text-white">
-                        <div className="flex items-center gap-2 sm:gap-3">
-                          {/* Play/Pause button */}
-                          <button 
-                            onClick={togglePlayPause}
-                            className="p-2 sm:p-2.5 rounded-full bg-cyan-500 hover:bg-cyan-400 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg"
-                          >
-                            {isPlaying ? (
-                              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                              </svg>
-                            ) : (
-                              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-                              </svg>
-                            )}
-                          </button>
-                          
-                          {/* Time display */}
-                          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
-                            <span className="text-cyan-300 font-mono font-medium">
-                              {formatTime(currentTime)}
-                            </span>
-                            <span className="text-slate-400">/</span>
-                            <span className="text-slate-400 font-mono">
-                              {formatTime(duration)}
-                            </span>
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center gap-1 sm:gap-2">
-                          <span className="text-xs sm:text-sm text-cyan-300 font-medium px-2 py-1 bg-cyan-500/20 rounded-lg">
-                            {activeVideo.start} - {activeVideo.end}
-                          </span>
-                        </div>
+                      <div className="flex items-center gap-1 sm:gap-2">
+                        <span className="text-xs sm:text-sm text-cyan-300 font-medium px-2 py-1 bg-cyan-500/20 rounded-lg">
+                          {activeVideo.start} - {activeVideo.end}
+                        </span>
                       </div>
                     </div>
                   </div>
