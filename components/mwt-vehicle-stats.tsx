@@ -9652,6 +9652,11 @@ const VehicleArmourButtons = () => {
 // Armour Video Component
 const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
   const [activeVideo, setActiveVideo] = useState<any>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const videoRef = useRef<HTMLIFrameElement>(null);
+  const playerRef = useRef<any>(null);
 
   // Auto-show video when vehicleName is provided
   useEffect(() => {
@@ -9659,9 +9664,131 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
       const video = vehicleVideosData.default.find((v: any) => v.name === vehicleName);
       if (video) {
         setActiveVideo(video);
+        setIsPlaying(true);
+        setCurrentTime(0);
       }
     }
   }, [vehicleName]);
+
+  // Initialize YouTube API
+  useEffect(() => {
+    // Load YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+
+    // Initialize player when API is ready
+    (window as any).onYouTubeIframeAPIReady = () => {
+      if (activeVideo && videoRef.current) {
+        initializePlayer();
+      }
+    };
+
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.destroy();
+      }
+    };
+  }, [activeVideo]);
+
+  const initializePlayer = () => {
+    if (!activeVideo) return;
+
+    const startTime = timeToSeconds(activeVideo.start);
+    const endTime = timeToSeconds(activeVideo.end);
+    const videoDuration = endTime - startTime;
+
+    setDuration(videoDuration);
+    setCurrentTime(0);
+
+    playerRef.current = new (window as any).YT.Player(videoRef.current, {
+      videoId: getVideoId(activeVideo.url),
+      playerVars: {
+        autoplay: 1,
+        start: startTime,
+        end: endTime,
+        rel: 0,
+        modestbranding: 1,
+        controls: 0,
+        showinfo: 0,
+        iv_load_policy: 3,
+        cc_load_policy: 0,
+        disablekb: 1,
+        fs: 0,
+        playsinline: 1
+      },
+      events: {
+        onReady: (event: any) => {
+          event.target.playVideo();
+          setIsPlaying(true);
+        },
+        onStateChange: (event: any) => {
+          if (event.data === (window as any).YT.PlayerState.PLAYING) {
+            setIsPlaying(true);
+            startProgressTracking();
+          } else if (event.data === (window as any).YT.PlayerState.PAUSED) {
+            setIsPlaying(false);
+          } else if (event.data === (window as any).YT.PlayerState.ENDED) {
+            setIsPlaying(false);
+            setCurrentTime(duration);
+          }
+        }
+      }
+    });
+  };
+
+  const startProgressTracking = () => {
+    const interval = setInterval(() => {
+      if (playerRef.current && isPlaying) {
+        const currentTime = playerRef.current.getCurrentTime();
+        const startTime = timeToSeconds(activeVideo.start);
+        const adjustedTime = Math.min(currentTime - startTime, duration);
+        
+        setCurrentTime(adjustedTime);
+        
+        // Stop at end timestamp
+        if (adjustedTime >= duration) {
+          playerRef.current.pauseVideo();
+          setIsPlaying(false);
+          setCurrentTime(duration);
+          clearInterval(interval);
+        }
+      } else {
+        clearInterval(interval);
+      }
+    }, 100);
+  };
+
+  const togglePlayPause = () => {
+    if (playerRef.current) {
+      if (isPlaying) {
+        playerRef.current.pauseVideo();
+      } else {
+        playerRef.current.playVideo();
+      }
+    }
+  };
+
+  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!playerRef.current || !activeVideo) return;
+    
+    const progressBar = e.currentTarget;
+    const rect = progressBar.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const progressWidth = rect.width;
+    const clickedTime = (clickX / progressWidth) * duration;
+    
+    const startTime = timeToSeconds(activeVideo.start);
+    playerRef.current.seekTo(startTime + clickedTime, true);
+    setCurrentTime(clickedTime);
+  };
+
+  const formatTime = (seconds: number): string => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
 
   // Convert minutes:seconds to seconds
   const timeToSeconds = (timeStr: string): number => {
@@ -9687,16 +9814,97 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="flex justify-center">
-              <div className="w-full max-w-2xl aspect-video bg-black rounded-lg overflow-hidden">
-                <iframe
-                  src={`https://www.youtube.com/embed/${getVideoId(activeVideo.url)}?autoplay=1&start=${timeToSeconds(activeVideo.start)}&end=${timeToSeconds(activeVideo.end)}&rel=0&modestbranding=1&controls=1&showinfo=0`}
-                  title={`${activeVideo.name} Armour Demo`}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  style={{ border: 'none' }}
-                />
+            <div className="flex justify-center px-4 sm:px-6 lg:px-8">
+              <div className="w-full max-w-4xl sm:max-w-3xl md:max-w-4xl lg:max-w-5xl">
+                {/* Native app-style video card */}
+                <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-slate-700/30 overflow-hidden shadow-2xl">
+                  {/* Video header with vehicle name */}
+                  <div className="bg-slate-900/50 px-3 sm:px-4 py-2 sm:py-3 border-b border-slate-700/30">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-base sm:text-lg font-bold text-cyan-300 flex items-center gap-1.5 sm:gap-2">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v8a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z"/>
+                        </svg>
+                        <span className="truncate">{activeVideo.name} Armour Demo</span>
+                      </h3>
+                      <button 
+                        onClick={() => setActiveVideo(null)}
+                        className="text-slate-400 hover:text-slate-200 transition-colors p-1.5 sm:p-2 rounded-lg hover:bg-slate-700/50"
+                      >
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  
+                  {/* Video container with native styling */}
+                  <div className="relative aspect-video bg-black">
+                    <div 
+                      ref={videoRef}
+                      className="w-full h-full"
+                    />
+                    
+                    {/* Custom video controls overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 sm:p-4">
+                      {/* Progress bar */}
+                      <div className="mb-3 sm:mb-4">
+                        <div 
+                          className="w-full h-1.5 sm:h-2 bg-slate-600/50 rounded-full cursor-pointer hover:bg-slate-600/70 transition-colors relative overflow-hidden"
+                          onClick={handleProgressClick}
+                        >
+                          {/* Progress fill */}
+                          <div 
+                            className="h-full bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-full transition-all duration-150 ease-out"
+                            style={{ width: `${(currentTime / duration) * 100}%` }}
+                          />
+                          {/* Progress handle */}
+                          <div 
+                            className="absolute top-1/2 transform -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-cyan-400 rounded-full shadow-lg border-2 border-white transition-all duration-150 ease-out"
+                            style={{ left: `${(currentTime / duration) * 100}%`, transform: 'translate(-50%, -50%)' }}
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center justify-between text-white">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          {/* Play/Pause button */}
+                          <button 
+                            onClick={togglePlayPause}
+                            className="p-2 sm:p-2.5 rounded-full bg-cyan-500 hover:bg-cyan-400 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg"
+                          >
+                            {isPlaying ? (
+                              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                              </svg>
+                            ) : (
+                              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                              </svg>
+                            )}
+                          </button>
+                          
+                          {/* Time display */}
+                          <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
+                            <span className="text-cyan-300 font-mono font-medium">
+                              {formatTime(currentTime)}
+                            </span>
+                            <span className="text-slate-400">/</span>
+                            <span className="text-slate-400 font-mono">
+                              {formatTime(duration)}
+                            </span>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center gap-1 sm:gap-2">
+                          <span className="text-xs sm:text-sm text-cyan-300 font-medium px-2 py-1 bg-cyan-500/20 rounded-lg">
+                            {activeVideo.start} - {activeVideo.end}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
