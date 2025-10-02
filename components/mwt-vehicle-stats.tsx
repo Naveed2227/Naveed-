@@ -9431,15 +9431,19 @@ const StatBar: React.FC<StatBarProps> = ({
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
-              U{level}
+              <img 
+                src={`/U${level}.png`} 
+                alt={`U${level}`} 
+                className="w-6 h-6" 
+              />
             </button>
           ))}
         </div>
         {upgradeLevel > 0 && (
           <span className={`text-xs ${upgradeColors[upgradeLevel].textColor} font-medium`}>
-            {label.toLowerCase() === 'agility' 
-              ? `+${(upgradeLevel * 3.33).toFixed(1)}%`
-              : `+${upgradeLevel * 10}%`
+            {label.toLowerCase() === 'health' 
+              ? `+${upgradeLevel * 10}%`
+              : `+${(upgradeLevel * 3.33).toFixed(1)}%`
             }
           </span>
         )}
@@ -9467,6 +9471,24 @@ const ComparisonStatBar = ({
 
   const percentage1 = Math.min(100, (value1 / maxValue) * 100);
   const percentage2 = Math.min(100, (value2 / maxValue) * 100);
+  
+  // Calculate upgraded values for proper percentage display
+  const getUpgradedValue = (baseVal: number, level: number, isHealth: boolean) => {
+    if (level === 0) return baseVal;
+    if (isHealth) {
+      // Health: 10%, 20%, 30% increases
+      return baseVal * (1 + (level * 0.1));
+    } else {
+      // Other stats: 3.33%, 6.66%, 10% increases
+      return baseVal * (1 + (level * 0.0333));
+    }
+  };
+  
+  const upgradedValue1 = getUpgradedValue(value1, upgradeLevel1, label.toLowerCase() === 'health');
+  const upgradedValue2 = getUpgradedValue(value2, upgradeLevel2, label.toLowerCase() === 'health');
+  const upgradedPercentage1 = Math.min(100, (upgradedValue1 / maxValue) * 100);
+  const upgradedPercentage2 = Math.min(100, (upgradedValue2 / maxValue) * 100);
+  
   const color1 = upgradeColors[upgradeLevel1] || upgradeColors[0];
   const color2 = upgradeColors[upgradeLevel2] || upgradeColors[0];
 
@@ -9492,15 +9514,43 @@ const ComparisonStatBar = ({
       </div>
       
       <div className="flex items-center h-4 w-full bg-gray-800 rounded-full overflow-hidden">
-        <div 
-          className={`h-full ${color1.color} transition-all duration-300`}
-          style={{ width: `${percentage1}%` }}
-        />
+        {/* Vehicle 1 bars */}
+        <div className="relative flex-1 h-full">
+          <div 
+            className="h-full bg-gray-600 absolute top-0 left-0 transition-all duration-300"
+            style={{ width: `${percentage1}%` }}
+          />
+          {upgradeLevel1 > 0 && (
+            <div 
+              className={`h-full absolute top-0 left-0 transition-all duration-300 ${color1.color}`}
+              style={{ 
+                width: `${upgradedPercentage1}%`,
+                left: 0,
+                opacity: 0.8
+              }}
+            />
+          )}
+        </div>
+        
         <div className="flex-1 h-full bg-transparent" />
-        <div 
-          className={`h-full ${color2.color} transition-all duration-300`}
-          style={{ width: `${percentage2}%` }}
-        />
+        
+        {/* Vehicle 2 bars */}
+        <div className="relative flex-1 h-full">
+          <div 
+            className="h-full bg-gray-600 absolute top-0 left-0 transition-all duration-300"
+            style={{ width: `${percentage2}%` }}
+          />
+          {upgradeLevel2 > 0 && (
+            <div 
+              className={`h-full absolute top-0 left-0 transition-all duration-300 ${color2.color}`}
+              style={{ 
+                width: `${upgradedPercentage2}%`,
+                left: 0,
+                opacity: 0.8
+              }}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -10308,16 +10358,23 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
     
     let boostMultiplier = 1;
     
-    if (statTypeLower === 'agility') {
-      // Special handling for agility
+    if (statTypeLower === 'health') {
+      // Health: 10%, 20%, 30% increases
+      boostMultiplier = 1 + (upgradeLevel * 0.1); // 1.1, 1.2, or 1.3
+    } else if (statTypeLower === 'agility') {
+      // Agility: 3.33%, 6.66%, 10% increases
       switch(upgradeLevel) {
         case 1: boostMultiplier = 1.0333; break; // 3.33%
         case 2: boostMultiplier = 1.0666; break; // 6.66%
         case 3: boostMultiplier = 1.1;    break; // 10%
       }
     } else {
-      // Standard boost for other stats
-      boostMultiplier = 1 + (upgradeLevel * 0.1); // 1.1, 1.2, or 1.3
+      // Other stats (speed, afterburnerSpeed, verticalSpeed): 3.33%, 6.66%, 10% increases
+      switch(upgradeLevel) {
+        case 1: boostMultiplier = 1.0333; break; // 3.33%
+        case 2: boostMultiplier = 1.0666; break; // 6.66%
+        case 3: boostMultiplier = 1.1;    break; // 10%
+      }
     }
     
     const boostableStats = ['health', 'speed', 'agility', 'afterburnerspeed', 'verticalspeed', 'damage'];
@@ -14916,11 +14973,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <h2 className="text-xl font-bold text-white">{vehicle.name}</h2>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <div className="flex space-x-1">
-                      <img src="/U1.png" alt="U1" className="w-6 h-6" />
-                      <img src="/U2.png" alt="U2" className="w-6 h-6" />
-                      <img src="/U3.png" alt="U3" className="w-6 h-6" />
-                    </div>
+                    
                     <button
                       onClick={() => setVehicleDetailsOpenId(null)}
                       className="p-1.5 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
