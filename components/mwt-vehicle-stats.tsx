@@ -15885,6 +15885,152 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 }
 
 
+// ArmourVideo Component
+const ArmourVideo: React.FC<{ vehicleName: string | null }> = ({ vehicleName }) => {
+  const [currentTime, setCurrentTime] = useState(0)
+  const [duration, setDuration] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const videoRef = useRef<HTMLIFrameElement>(null)
+  const progressInterval = useRef<NodeJS.Timeout | null>(null)
+
+  const vehicleVideos = vehicleVideosData.default || []
+  const currentVehicle = vehicleVideos.find(v => v.name === vehicleName)
+
+  const timeToSeconds = (time: string): number => {
+    const [minutes, seconds] = time.split(':').map(Number)
+    return minutes * 60 + seconds
+  }
+
+  const getVideoId = (url: string): string => {
+    const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/)
+    return match ? match[1] : ''
+  }
+
+  const startTime = currentVehicle ? timeToSeconds(currentVehicle.start) : 0
+  const endTime = currentVehicle ? timeToSeconds(currentVehicle.end) : 0
+  const videoDuration = endTime - startTime
+
+  useEffect(() => {
+    if (currentVehicle) {
+      setCurrentTime(0)
+      setDuration(videoDuration)
+      setIsPlaying(true)
+    }
+
+    return () => {
+      if (progressInterval.current) {
+        clearInterval(progressInterval.current)
+      }
+    }
+  }, [currentVehicle, videoDuration])
+
+  useEffect(() => {
+    if (isPlaying && currentVehicle) {
+      progressInterval.current = setInterval(() => {
+        setCurrentTime(prev => {
+          const newTime = prev + 1
+          if (newTime >= videoDuration) {
+            setIsPlaying(false)
+            return videoDuration
+          }
+          return newTime
+        })
+      }, 1000)
+    } else if (progressInterval.current) {
+      clearInterval(progressInterval.current)
+    }
+
+    return () => {
+      if (progressInterval.current) {
+        clearInterval(progressInterval.current)
+      }
+    }
+  }, [isPlaying, currentVehicle, videoDuration])
+
+  const formatTime = (seconds: number): string => {
+    const mins = Math.floor(seconds / 60)
+    const secs = Math.floor(seconds % 60)
+    return `${mins}:${secs.toString().padStart(2, '0')}`
+  }
+
+  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!currentVehicle) return
+    
+    const progressBar = e.currentTarget
+    const rect = progressBar.getBoundingClientRect()
+    const clickX = e.clientX - rect.left
+    const progressWidth = rect.width
+    const progressPercentage = clickX / progressWidth
+    const newTime = progressPercentage * videoDuration
+    
+    setCurrentTime(newTime)
+    setIsPlaying(true)
+  }
+
+  if (!currentVehicle) {
+    return null
+  }
+
+  const videoId = getVideoId(currentVehicle.url)
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&start=${startTime}&end=${endTime}&controls=0&rel=0&modestbranding=1`
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        className="w-full max-w-2xl mx-auto"
+      >
+        <div className="bg-slate-800 rounded-lg p-4 shadow-lg">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-lg font-bold text-cyan-300">Armour Demonstration: {currentVehicle.name}</h3>
+          </div>
+          
+          <div className="relative aspect-video rounded-lg overflow-hidden mb-3">
+            <iframe
+              ref={videoRef}
+              src={embedUrl}
+              className="w-full h-full"
+              title={`Armour demonstration for ${currentVehicle.name}`}
+              allowFullScreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            />
+          </div>
+
+          {/* Progress Bar */}
+          <div className="space-y-2">
+            <div 
+              className="w-full h-2 bg-slate-700 rounded-full cursor-pointer relative overflow-hidden"
+              onClick={handleProgressClick}
+            >
+              <div 
+                className="h-full bg-cyan-500 rounded-full transition-all duration-1000 ease-linear"
+                style={{ 
+                  width: `${(currentTime / videoDuration) * 100}%` 
+                }}
+              />
+            </div>
+            
+            <div className="flex justify-between text-xs text-slate-400">
+              <span>{formatTime(currentTime)}</span>
+              <span>{formatTime(videoDuration)}</span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between mt-3 text-sm text-slate-400">
+            <span>Segment: {currentVehicle.start} - {currentVehicle.end}</span>
+            <div className="flex items-center gap-2">
+              <span>{isPlaying ? 'Playing' : 'Paused'}</span>
+              <div className={`w-2 h-2 rounded-full ${isPlaying ? 'bg-green-500' : 'bg-red-500'}`} />
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
+  )
+}
+
 export default function Page() {
   return <MwtVehicleStats vehicles={VEHICLES_DATA} />
 }
