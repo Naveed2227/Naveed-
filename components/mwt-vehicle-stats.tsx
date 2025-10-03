@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
-import { VEHICLES_DATA } from "@/lib/VehicleDB";
+import { VEHICLES_DATA } from "../lib/VehicleDB";
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera } from "lucide-react"
 import { useRouter } from "next/navigation"
