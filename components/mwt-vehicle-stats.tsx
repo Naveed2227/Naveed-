@@ -1146,69 +1146,72 @@ const VEHICLES_DATA = [
   },
   {
     id: 103,
-    name: "M1 Abrams Block 3",
+    name: "Altay",
     type: "Main Battle Tank",
-    faction: "American",
+    faction: "Turkish",
     tier: "IV",
-    image: "M1-Abrams-Block-3.jpg",
-    description: "An Experimental prototype tank intended as a successor to the Abrams MBT family",
-    stats: { health: 39600, speed: 80, reverseSpeed: 50, maneuverability: 40, armor: "1150mm", agility: 40 },
+    image: "Altay.jpg",
+    description: "Turkey’s modern main battle tank, emphasizing firepower, protection, mobility, and advanced technology.",
+    stats: { health: 42600, speed: 62,armor: "1200mm", agility: 36 },
     weapons: [
-      { name: "M830A1", type: "Main Gun", damage: 12100, penetration: 850 },
-      { name: "M829A3", type: "Main Gun", damage: 10450, penetration: 670 },
-      { name: "MRM-CE", type: "Main Gun", damage: 10000, penetration: 850 },
-      { name: "MRM-KE", type: "Main Gun", damage: 9150, penetration: 980 }
+      { name: "DM63A1 APFSDS", type: "Main Gun", damage: 18500, penetration: 950, reload: 5.2 },
+      { name: "DM11", type: "Main Gun", damage: 5000, penetration: 87 },
+      { name: "DM12A2 HEATFS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 },
+      { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 }
     ],
     modules: {
       engine: [
-        { name: "AGT1500 MK1", bonus: "+10 km/h speed" },
-        { name: "AGT1500 MK2", bonus: "+20 km/h speed" },
-        { name: "AGT1500 MK3", bonus: "+30 km/h speed" },
+        { name: "RD-33MK MK1", bonus: "+120 km/h speed" },
+        { name: "RD-33MK MK2", bonus: "+240 km/h speed" },
+        { name: "RD-33MK MK3", bonus: "+360 km/h speed" },
       ],
-      armor: [
-        { name: "DU Armor MK1", bonus: "+220mm protection" },
-        { name: "DU Armor MK2", bonus: "+440mm protection" },
-        { name: "DU Armor MK3", bonus: "+660mm protection" },
+      stealth: [
+        { name: "ECM Suite MK1", bonus: "+8% stealth" },
+        { name: "ECM Suite MK2", bonus: "+16% stealth" },
+        { name: "ECM Suite MK3", bonus: "+24% stealth" },
       ],
-      fireControl: [
-        { name: "FBCB2 MK1", bonus: "+20% accuracy" },
-        { name: "FBCB2 MK2", bonus: "+35% accuracy" },
-        { name: "FBCB2 MK3", bonus: "+50% accuracy" },
+      avionics: [
+        { name: "Zhuk-AE AESA MK1", bonus: "+18% detection" },
+        { name: "Zhuk-AE AESA MK2", bonus: "+32% detection" },
+        { name: "Zhuk-AE AESA MK3", bonus: "+46% detection" },
       ],
     },
   },
+  
   {
     id: 104,
-    name: "Leopard 2A7+",
+    name: "T-90A",
     type: "Main Battle Tank",
-    faction: "German",
+    faction: "Russian",
     tier: "IV",
-    image: "Leopard-2A7V.jpg",
-    description: "Most advanced Leopard variant with urban warfare modifications and enhanced protection.",
-    stats: { health: 36200, speed: 68, armor: "1080mm", agility: 70 },
+    image: "T-90A.jpg",
+    description: "Modernized main battle tank with improved armor and advanced fire control.",
+    stats: { health: 39400, speed: 65, reverseSpeed: 30, maneuverability: 44, armor: "1050mm", agility: 44 },
     weapons: [
-      { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
-      { name: "DM33", type: "Main Gun", damage: 10620, penetration: 496 },
-      { name: "DM-73-1", type: "Main Gun", damage: 12954, penetration: 980 },
+      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "9M112", type: "Main Gun", damage: 10070, penetration: 700 },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 }
     ],
     modules: {
       engine: [
-        { name: "MTU MB 873 Ka-501 MK1", bonus: "+10 km/h speed" },
-        { name: "MTU MB 873 Ka-501 MK2", bonus: "+20 km/h speed" },
-        { name: "MTU MB 873 Ka-501 MK3", bonus: "+30 km/h speed" },
+        { name: "V-92S2F MK1", bonus: "+10 km/h speed" },
+        { name: "V-92S2F MK2", bonus: "+20 km/h speed" },
+        { name: "V-92S2F MK3", bonus: "+30 km/h speed" },
       ],
       armor: [
-        { name: "Modular Armor MK1", bonus: "+200mm protection" },
-        { name: "Modular Armor MK2", bonus: "+400mm protection" },
-        { name: "Modular Armor MK3", bonus: "+600mm protection" },
+        { name: "Kontakt-5 ERA MK1", bonus: "+200mm protection" },
+        { name: "Kontakt-5 ERA MK2", bonus: "+400mm protection" },
+        { name: "Kontakt-5 ERA MK3", bonus: "+600mm protection" },
       ],
       fireControl: [
-        { name: "PERI-R17A3 MK1", bonus: "+18% accuracy" },
-        { name: "PERI-R17A3 MK2", bonus: "+32% accuracy" },
-        { name: "PERI-R17A3 MK3", bonus: "+46% accuracy" },
+        { name: "1A45T Irtysh MK1", bonus: "+18% accuracy" },
+        { name: "1A45T Irtysh MK2", bonus: "+32% accuracy" },
+        { name: "1A45T Irtysh MK3", bonus: "+46% accuracy" },
       ],
     },
   },
+
   {
     id: 105,
     name: "KF-51 Panther",
@@ -1243,42 +1246,75 @@ const VEHICLES_DATA = [
       ],
     },
   },
+
   {
     id: 106,
-    name: "Altay",
+    name: "M1 Abrams Block 3",
     type: "Main Battle Tank",
-    faction: "Turkish",
+    faction: "American",
     tier: "IV",
-    image: "Altay.jpg",
-    description: "Turkey’s modern main battle tank, emphasizing firepower, protection, mobility, and advanced technology.",
-    stats: { health: 42600, speed: 62,armor: "1200mm", agility: 36 },
+    image: "M1-Abrams-Block-3.jpg",
+    description: "An Experimental prototype tank intended as a successor to the Abrams MBT family",
+    stats: { health: 39600, speed: 80, reverseSpeed: 50, maneuverability: 40, armor: "1150mm", agility: 40 },
     weapons: [
-      { name: "DM63A1 APFSDS", type: "Main Gun", damage: 18500, penetration: 950, reload: 5.2 },
-      { name: "DM11", type: "Main Gun", damage: 5000, penetration: 87 },
-      { name: "DM12A2 HEATFS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 },
-      { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 }
+      { name: "M830A1", type: "Main Gun", damage: 12100, penetration: 850 },
+      { name: "M829A3", type: "Main Gun", damage: 10450, penetration: 670 },
+      { name: "MRM-CE", type: "Main Gun", damage: 10000, penetration: 850 },
+      { name: "MRM-KE", type: "Main Gun", damage: 9150, penetration: 980 }
     ],
     modules: {
       engine: [
-        { name: "RD-33MK MK1", bonus: "+120 km/h speed" },
-        { name: "RD-33MK MK2", bonus: "+240 km/h speed" },
-        { name: "RD-33MK MK3", bonus: "+360 km/h speed" },
+        { name: "AGT1500 MK1", bonus: "+10 km/h speed" },
+        { name: "AGT1500 MK2", bonus: "+20 km/h speed" },
+        { name: "AGT1500 MK3", bonus: "+30 km/h speed" },
       ],
-      stealth: [
-        { name: "ECM Suite MK1", bonus: "+8% stealth" },
-        { name: "ECM Suite MK2", bonus: "+16% stealth" },
-        { name: "ECM Suite MK3", bonus: "+24% stealth" },
+      armor: [
+        { name: "DU Armor MK1", bonus: "+220mm protection" },
+        { name: "DU Armor MK2", bonus: "+440mm protection" },
+        { name: "DU Armor MK3", bonus: "+660mm protection" },
       ],
-      avionics: [
-        { name: "Zhuk-AE AESA MK1", bonus: "+18% detection" },
-        { name: "Zhuk-AE AESA MK2", bonus: "+32% detection" },
-        { name: "Zhuk-AE AESA MK3", bonus: "+46% detection" },
+      fireControl: [
+        { name: "FBCB2 MK1", bonus: "+20% accuracy" },
+        { name: "FBCB2 MK2", bonus: "+35% accuracy" },
+        { name: "FBCB2 MK3", bonus: "+50% accuracy" },
+      ],
+    },
+  },
+  {
+    id: 107,
+    name: "Leopard 2A7+",
+    type: "Main Battle Tank",
+    faction: "German",
+    tier: "IV",
+    image: "Leopard-2A7V.jpg",
+    description: "Most advanced Leopard variant with urban warfare modifications and enhanced protection.",
+    stats: { health: 36200, speed: 68, armor: "1080mm", agility: 70 },
+    weapons: [
+      { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
+      { name: "DM33", type: "Main Gun", damage: 10620, penetration: 496 },
+      { name: "DM-73-1", type: "Main Gun", damage: 12954, penetration: 980 },
+    ],
+    modules: {
+      engine: [
+        { name: "MTU MB 873 Ka-501 MK1", bonus: "+10 km/h speed" },
+        { name: "MTU MB 873 Ka-501 MK2", bonus: "+20 km/h speed" },
+        { name: "MTU MB 873 Ka-501 MK3", bonus: "+30 km/h speed" },
+      ],
+      armor: [
+        { name: "Modular Armor MK1", bonus: "+200mm protection" },
+        { name: "Modular Armor MK2", bonus: "+400mm protection" },
+        { name: "Modular Armor MK3", bonus: "+600mm protection" },
+      ],
+      fireControl: [
+        { name: "PERI-R17A3 MK1", bonus: "+18% accuracy" },
+        { name: "PERI-R17A3 MK2", bonus: "+32% accuracy" },
+        { name: "PERI-R17A3 MK3", bonus: "+46% accuracy" },
       ],
     },
   },
   
    {
-    id: 107,
+    id: 108,
     name: "T-25 Pamir",
     type: "Main Battle Tank",
     faction: "Russian",
@@ -1311,39 +1347,7 @@ const VEHICLES_DATA = [
       ],
     },
   },
-  {
-    id: 108,
-    name: "T-90A",
-    type: "Main Battle Tank",
-    faction: "Russian",
-    tier: "IV",
-    image: "T-90A.jpg",
-    description: "Modernized main battle tank with improved armor and advanced fire control.",
-    stats: { health: 39400, speed: 65, reverseSpeed: 30, maneuverability: 44, armor: "1050mm", agility: 44 },
-    weapons: [
-      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
-      { name: "9M112", type: "Main Gun", damage: 10070, penetration: 700 },
-      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
-      { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 }
-    ],
-    modules: {
-      engine: [
-        { name: "V-92S2F MK1", bonus: "+10 km/h speed" },
-        { name: "V-92S2F MK2", bonus: "+20 km/h speed" },
-        { name: "V-92S2F MK3", bonus: "+30 km/h speed" },
-      ],
-      armor: [
-        { name: "Kontakt-5 ERA MK1", bonus: "+200mm protection" },
-        { name: "Kontakt-5 ERA MK2", bonus: "+400mm protection" },
-        { name: "Kontakt-5 ERA MK3", bonus: "+600mm protection" },
-      ],
-      fireControl: [
-        { name: "1A45T Irtysh MK1", bonus: "+18% accuracy" },
-        { name: "1A45T Irtysh MK2", bonus: "+32% accuracy" },
-        { name: "1A45T Irtysh MK3", bonus: "+46% accuracy" },
-      ],
-    },
-  },
+  
   {
     id: 109,
     name: "T-95M",
