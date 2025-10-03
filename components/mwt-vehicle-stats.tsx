@@ -1369,7 +1369,7 @@ const VEHICLES_DATA = [
       engine: [
         { name: "A-85-3A MK1", bonus: "+8 km/h speed" },
         { name: "A-85-3A MK2", bonus: "+16 km/h speed" },
-        { name: "A-85-3A MK3", bonus: "+24 km/h speed" },
+        { name: "-85-3A MK3", bonus: "+24 km/h speed" },
       ],
       armor: [
         { name: "Malachit ERA MK1", bonus: "+280mm protection" },
