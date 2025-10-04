@@ -10293,6 +10293,50 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
 };
 
 const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
+  // Add Google AdSense script to document head
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Only add the script if it doesn't exist
+      if (!document.querySelector('script[src*="pagead2.googlesyndication"]')) {
+        const script = document.createElement('script');
+        script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998';
+        script.async = true;
+        script.crossOrigin = 'anonymous';
+        document.head.appendChild(script);
+      }
+
+      // Initialize ads
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.error('Error initializing ads:', e);
+      }
+    }
+  }, []);
+
+  // Add banner ad component
+  const BannerAd = () => (
+    <div className="w-full bg-slate-800 py-2 px-4 flex justify-center items-center border-b border-slate-700 sticky top-0 z-50">
+      <div className="w-full max-w-7xl mx-auto">
+        <ins 
+          className="adsbygoogle block"
+          style={{
+            display: 'block',
+            width: '100%',
+            height: '90px',
+            margin: '0 auto'
+          }}
+          data-ad-client="ca-pub-3724137161724998"
+          data-ad-slot="YOUR_AD_SLOT"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+        <script>
+          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+        </script>
+      </div>
+    </div>
+  );
   const [VEHICLES, setVEHICLES] = useState(initialVehicles);
   const router = useRouter()
   const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
