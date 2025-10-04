@@ -14334,7 +14334,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           <div className="flex gap-1 items-center flex-wrap justify-center">
             {/* Previous Button */}
             <button
-              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setCurrentPage(Math.max(1, currentPage - 1));
+              }}
               disabled={currentPage === 1}
               className={`px-3 py-2 text-sm rounded transition-colors ${
                 currentPage === 1 
@@ -14396,7 +14400,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   return (
                     <button
                       key={page}
-                      onClick={() => setCurrentPage(page)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setCurrentPage(page);
+                      }}
                       className={`px-3 py-2 text-sm rounded transition-colors mr-0.5 ${
                         currentPage === page 
                           ? "bg-cyan-700 text-white" 
@@ -14417,7 +14425,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
             {/* Next Button */}
             <button
-              onClick={() => setCurrentPage(Math.min(Math.ceil(filteredVehicles.length / vehiclesPerPage), currentPage + 1))}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setCurrentPage(Math.min(Math.ceil(filteredVehicles.length / vehiclesPerPage), currentPage + 1));
+              }}
               disabled={currentPage === Math.ceil(filteredVehicles.length / vehiclesPerPage)}
               className={`px-3 py-2 text-sm rounded transition-colors ${
                 currentPage === Math.ceil(filteredVehicles.length / vehiclesPerPage)
