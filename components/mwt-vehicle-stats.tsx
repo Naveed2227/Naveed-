@@ -13639,8 +13639,26 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
       </header>
 
-      {/* Google AdSense - 728x90 Leaderboard */}
-      <GoogleAdSense />
+      {/* Google AdSense Banner - 728x90 Leaderboard */}
+      <div className="w-full bg-slate-800/50 border-b border-slate-700">
+        <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-2">
+          <div key="banner-ad" className="w-full">
+            <ins
+              className="adsbygoogle"
+              style={{
+                display: 'block',
+                width: '100%',
+                height: '90px',
+                margin: '0 auto'
+              }}
+              data-ad-client="ca-pub-3724137161724998"
+              data-ad-slot="6518875801"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            />
+          </div>
+        </div>
+      </div>
 
       <main className="max-w-7xl xl:max-w-[90rem] pt-16 sm:pt-6 p-4 sm:p-6 md:p-6 lg:p-8 mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         {/* Comparison Bottom Bar - Mobile */}
