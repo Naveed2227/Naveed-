@@ -9820,9 +9820,18 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
       console.log('ArmourVideo: activeVideo:', activeVideo);
       console.log('ArmourVideo: videoRef.current:', videoRef.current);
       
-      if (activeVideo && videoRef.current) {
+      // Only initialize if we don't already have a player instance
+      if (activeVideo && videoRef.current && !playerRef.current) {
         console.log('ArmourVideo: Calling initializePlayer');
         initializePlayer();
+      } else if (playerRef.current) {
+        console.log('ArmourVideo: Player already initialized');
+        // Stop any existing playback to prevent duplicate playback and echo
+        try {
+          playerRef.current.stopVideo();
+        } catch (e) {
+          console.error('Error stopping existing player:', e);
+        }
       } else {
         console.log('ArmourVideo: Cannot initialize player - missing activeVideo or videoRef');
       }
@@ -9832,6 +9841,7 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     if ((window as any).YT) {
       // API is already ready
       onYouTubeIframeAPIReady();
+{{ ... }}
     } else {
       // API is not ready yet, set up callback
       (window as any).onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
@@ -9839,9 +9849,16 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
 
     return () => {
       if (playerRef.current) {
-        playerRef.current.destroy();
+        try {
+          playerRef.current.stopVideo();
+          playerRef.current.destroy();
+        } catch (e) {
+          console.error('Error cleaning up YouTube player:', e);
+        }
         playerRef.current = null;
       }
+      // Clean up global callback to prevent memory leaks
+      (window as any).onYouTubeIframeAPIReady = null;
     };
   }, [activeVideo]);
 
@@ -9865,10 +9882,20 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     setCurrentTime(0);
 
     try {
+      // Clean up any existing player first
+      if (playerRef.current) {
+        try {
+          playerRef.current.destroy();
+        } catch (e) {
+          console.error('Error destroying existing player:', e);
+        }
+        playerRef.current = null;
+      }
+
       playerRef.current = new (window as any).YT.Player(videoRef.current, {
         videoId: getVideoId(activeVideo.url),
         playerVars: {
-          autoplay: 1, // Autoplay when video is revealed
+          autoplay: 0, // Disable autoplay initially - we'll start it manually
           start: startTime,
           end: endTime,
           rel: 0,
@@ -9884,12 +9911,10 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
           enablejsapi: 1,
           origin: window.location.origin,
           widget_referrer: window.location.href,
-          // Mobile-specific parameters
           mobile: '1', // Optimize for mobile
           html5: 1, // Force HTML5 player
-          // iOS-specific parameters
           wmode: 'opaque', // Better iOS compatibility
-        allowfullscreen: 'true' // Ensure fullscreen works
+          allowfullscreen: 'true', // Ensure fullscreen works
       },
       events: {
         onReady: (event: any) => {
@@ -9944,15 +9969,21 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
             }
           }
           
-          // Start playing when video is revealed
-          try {
-            event.target.playVideo();
-            setIsPlaying(true);
-            startProgressTracking();
-          } catch (error) {
-            console.log('Could not autoplay video:', error);
-            setIsPlaying(false);
-          }
+          // Start playing when video is ready
+          // Use a small timeout to ensure everything is properly initialized
+          setTimeout(() => {
+            try {
+              // Only play if not already playing and we have a valid player
+              if (event.target.getPlayerState() !== (window as any).YT.PlayerState.PLAYING) {
+                event.target.playVideo();
+              }
+              setIsPlaying(true);
+              startProgressTracking();
+            } catch (error) {
+              console.log('Could not autoplay video:', error);
+              setIsPlaying(false);
+            }
+          }, 100);
         },
         onError: (event: any) => {
           console.error('ArmourVideo: Player error:', event.data);
@@ -9960,14 +9991,40 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
         },
         onStateChange: (event: any) => {
           console.log('ArmourVideo: Player state changed:', event.data);
-          if (event.data === (window as any).YT.PlayerState.PLAYING) {
-            setIsPlaying(true);
-            startProgressTracking();
-          } else if (event.data === (window as any).YT.PlayerState.PAUSED) {
-            setIsPlaying(false);
-          } else if (event.data === (window as any).YT.PlayerState.ENDED) {
-            setIsPlaying(false);
-            setCurrentTime(duration);
+          const YT = (window as any).YT;
+          
+          switch (event.data) {
+            case YT.PlayerState.PLAYING:
+              // Only update state if we're not already playing to prevent unnecessary re-renders
+              if (!isPlaying) {
+                setIsPlaying(true);
+                startProgressTracking();
+              }
+              break;
+              
+            case YT.PlayerState.PAUSED:
+              // Only update if we're not already paused
+              if (isPlaying) {
+                setIsPlaying(false);
+              }
+              break;
+              
+            case YT.PlayerState.ENDED:
+              setIsPlaying(false);
+              setCurrentTime(duration);
+              // Reset to start time when video ends
+              if (activeVideo) {
+                const startTime = timeToSeconds(activeVideo.start);
+                event.target.seekTo(startTime, true);
+              }
+              break;
+              
+            case YT.PlayerState.BUFFERING:
+              // Handle buffering state if needed
+              break;
+              
+            default:
+              break;
           }
         }
       }
@@ -13130,43 +13187,45 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 {/* Active Filters Display */}
                 {(typeFilter.length > 0 || tierFilter.length > 0 || countryFilter.length > 0 || rarityFilter.length > 0 || obtainMethodFilter.length > 0) && (
                   <div className="mt-8 pt-6 border-t border-slate-700">
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between mb-4 px-4">
                       <h4 className="text-sm font-semibold text-slate-200">Active Filters</h4>
-                      <span className="text-xs text-slate-500">
+                      <span className="text-xs text-slate-400">
                         {typeFilter.length + tierFilter.length + countryFilter.length + rarityFilter.length + obtainMethodFilter.length} active
                       </span>
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      {typeFilter.map((type) => (
-                        <div key={type} className="flex items-center gap-2 px-3 py-2 bg-cyan-600/20 border border-cyan-600/30 rounded-lg">
-                          <span className="text-sm text-cyan-300">{type}</span>
-                        </div>
-                      ))}
-                      {tierFilter.map((tier) => (
-                        <div key={tier} className="flex items-center gap-2 px-3 py-2 bg-yellow-600/20 border border-yellow-600/30 rounded-lg">
-                          <span className="text-sm text-yellow-300">Tier {tier}</span>
-                        </div>
-                      ))}
-                      {countryFilter.map((country) => (
-                        <div key={country} className="flex items-center gap-2 px-3 py-2 bg-green-600/20 border border-green-600/30 rounded-lg">
-                          <img
-                            src={getFlagImage(country) || "/placeholder.svg"}
-                            alt={`${country} flag`}
-                            className="w-5 h-3 object-cover rounded shadow-sm"
-                          />
-                          <span className="text-sm text-green-300">{country}</span>
-                        </div>
-                      ))}
-                      {rarityFilter.map((rarity) => (
-                        <div key={rarity} className="flex items-center gap-2 px-3 py-2 bg-orange-600/20 border border-orange-600/30 rounded-lg">
-                          <span className="text-sm text-orange-300">{rarity}</span>
-                        </div>
-                      ))}
-                      {obtainMethodFilter.map((method) => (
-                        <div key={method} className="flex items-center gap-2 px-3 py-2 bg-purple-600/20 border border-purple-600/30 rounded-lg">
-                          <span className="text-sm text-purple-300">{method}</span>
-                        </div>
-                      ))}
+                    <div className="max-h-40 overflow-y-auto px-4 pb-2 -mx-4">
+                      <div className="flex flex-wrap gap-2 pr-4">
+                        {typeFilter.map((type) => (
+                          <div key={type} className="flex-shrink-0 flex items-center gap-2 px-3 py-2 bg-cyan-600/20 border border-cyan-600/30 rounded-lg">
+                            <span className="text-sm text-cyan-300">{type}</span>
+                          </div>
+                        ))}
+                        {tierFilter.map((tier) => (
+                          <div key={tier} className="flex-shrink-0 flex items-center gap-2 px-3 py-2 bg-yellow-600/20 border border-yellow-600/30 rounded-lg">
+                            <span className="text-sm text-yellow-300">Tier {tier}</span>
+                          </div>
+                        ))}
+                        {countryFilter.map((country) => (
+                          <div key={country} className="flex-shrink-0 flex items-center gap-2 px-3 py-2 bg-green-600/20 border border-green-600/30 rounded-lg">
+                            <img
+                              src={getFlagImage(country) || "/placeholder.svg"}
+                              alt={`${country} flag`}
+                              className="w-5 h-3 object-cover rounded shadow-sm flex-shrink-0"
+                            />
+                            <span className="text-sm text-green-300">{country}</span>
+                          </div>
+                        ))}
+                        {rarityFilter.map((rarity) => (
+                          <div key={rarity} className="flex-shrink-0 flex items-center gap-2 px-3 py-2 bg-orange-600/20 border border-orange-600/30 rounded-lg">
+                            <span className="text-sm text-orange-300">{rarity}</span>
+                          </div>
+                        ))}
+                        {obtainMethodFilter.map((method) => (
+                          <div key={method} className="flex-shrink-0 flex items-center gap-2 px-3 py-2 bg-purple-600/20 border border-purple-600/30 rounded-lg">
+                            <span className="text-sm text-purple-300">{method}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
