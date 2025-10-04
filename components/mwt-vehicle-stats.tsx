@@ -14882,13 +14882,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     Contact:
                   </p>
                   <p className="text-sm text-slate-400"> 
-                    Email: naveed.miandad.007@gmail.com
+                    Email: mwtassistantteam@gmail.com
                   </p>
                   <p className="text-sm text-slate-400"> 
-                    Discord: naveed27
-                  </p>
-                  <p className="text-sm text-slate-400"> 
-                    Inst: @naveed_2227
+                    Inst: @mwt_assistant
                   </p>
                 </div>
               </div>

@@ -48,13 +48,13 @@ const vehicleVideos: VehicleVideo[] = [
   { name: "M-SHORAD", url: "https://youtu.be/sa72brrCgos", start: "1:43", end: "2:12" },
   { name: "TOS-1A", url: "https://youtu.be/NT9qAhahZk0", start: "1:35", end: "1:56" },
   { name: "M270 MLRS", url: "https://youtu.be/VfbGwpeY5Bg", start: "0:25", end: "0:39" },
-  { name: "PLZ-05", url: null, start: "", end: "" },
-  { name: "M109A6 Paladin", url: null, start: "", end: "" },
-  { name: "FK 2000", url: null, start: "", end: "" },
-  { name: "Otomatic 76", url: null, start: "", end: "" },
-  { name: "BM-57-2 Kochevnik", url: null, start: "", end: "" },
-  { name: "ADATS", url: null, start: "", end: "" },
-  { name: "MGM-166 LOSAT", url: null, start: "", end: "" },
+  { name: "PLZ-05", url: "https://youtu.be/ZpVdKIagEz0?si=mK4nxmwQV61qQ-rG", start: "1:18", end: "1:43" },
+  { name: "M109A6 Paladin", url: "https://youtu.be/_U3c6ifyE4M?si=F96vRwiNVCR1Xl9S", start: "1:24", end: "2:10" },
+  { name: "FK 2000", url: "https://youtu.be/eRv6VhP-RN8?si=RoaWK7J2nhdY5kG1", start: "1:35", end: "2:12" },
+  { name: "Otomatic 76", url: "https://youtu.be/82p_7_XmxeI?si=Y6NA46TNDvPAM3be", start: "1:14", end: "1:54" },
+  { name: "BM-57-2 Kochevnik", url: "https://youtu.be/e2gYaosFftg?si=uFjqcAi7yNJlh7fm", start: "0:57", end: "1:11" },
+  { name: "ADATS", url: "https://youtu.be/39WF8j01eNc?si=GZqvbdLLZSvJbljj", start: "3:27", end: "3:43" },
+  { name: "MGM-166 LOSAT", url: "https://youtu.be/WyxgmKTIplg?si=jiYWpAGGV-GQ0ikg", start: "1:12", end: "2:03" },
 ];
 
 // Export filtered videos
