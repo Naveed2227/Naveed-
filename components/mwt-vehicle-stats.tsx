@@ -9841,7 +9841,6 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     if ((window as any).YT) {
       // API is already ready
       onYouTubeIframeAPIReady();
-{{ ... }}
     } else {
       // API is not ready yet, set up callback
       (window as any).onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
