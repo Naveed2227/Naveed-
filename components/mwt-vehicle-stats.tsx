@@ -10314,29 +10314,36 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
     }
   }, []);
 
-  // Add banner ad component
-  const BannerAd = () => (
-    <div className="w-full bg-slate-800 py-2 px-4 flex justify-center items-center border-b border-slate-700 sticky top-0 z-50">
-      <div className="w-full max-w-7xl mx-auto">
-        <ins 
-          className="adsbygoogle block"
-          style={{
-            display: 'block',
-            width: '100%',
-            height: '90px',
-            margin: '0 auto'
-          }}
-          data-ad-client="ca-pub-3724137161724998"
-          data-ad-slot="YOUR_AD_SLOT"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-        <script>
-          {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-        </script>
+  // Add banner ad component with proper initialization
+  const BannerAd = () => {
+    useEffect(() => {
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.error('Error initializing ad:', e);
+      }
+    }, []);
+
+    return (
+      <div className="w-full bg-slate-800 py-2 px-4 flex justify-center items-center border-b border-slate-700 sticky top-0 z-50">
+        <div className="w-full max-w-7xl mx-auto">
+          <ins 
+            className="adsbygoogle"
+            style={{
+              display: 'block',
+              width: '100%',
+              height: '90px',
+              margin: '0 auto'
+            }}
+            data-ad-client="ca-pub-3724137161724998"
+            data-ad-slot="YOUR_AD_SLOT"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
   const [VEHICLES, setVEHICLES] = useState(initialVehicles);
   const router = useRouter()
   const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
@@ -12650,6 +12657,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      <BannerAd />
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
       
       {/* Burger Menu Button */}
