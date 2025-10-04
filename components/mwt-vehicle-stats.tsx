@@ -89,7 +89,8 @@ const newVehicles = [
   "Leopard 2A8",
   "Al-Khalid",
   "Arjun Mk.2",
-  "K21 KNIFV"
+  "K21 KNIFV",
+  "9K31 Strela-1",
 ];
 
 const isNewVehicle = (vehicleName: string): boolean => {
@@ -324,6 +325,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "TOS-1A",
 "FK 2000",
 "SB-1",
+ "T-25 Pamir",
 ];
 
   if (commonVehicles.includes(vehicleName)) return "Common";
@@ -2164,7 +2166,7 @@ const VEHICLES_DATA = [
   {
     "id": 133,
     "name": "K2 Black Panther",
-    "type": "MBT",
+    "type": "Main Battle Tank",
     "faction": "SouthKorean",
     "tier": "IV",
     image: "K2-Black-Panther.jpg",
@@ -2204,7 +2206,7 @@ const VEHICLES_DATA = [
   {
     "id": 134,
     "name": "Al-Khalid",
-    "type": "MBT",
+    "type": "Main Battle Tank",
     "faction": "Pakistani",
     "tier": "IV",
     image: "Al-Khalid.jpg",
@@ -2241,7 +2243,7 @@ const VEHICLES_DATA = [
   {
     "id": 135,
     "name": "Arjun Mk.2",
-    "type": "MBT",
+    "type": "Main Battle Tank",
     "faction": "Indian",
     "tier": "IV",
     image: "Arjun-Mk.2.jpg",
@@ -8949,7 +8951,7 @@ const VEHICLES_DATA = [
     "faction": "Indian",
     "tier": 1,
     "description": "A short-range, mobile surface-to-air missile system with upgraded targeting, mounted on a tracked chassis for air defense.",
-    "image": "9K31-Strela-1.jpg",
+    "image": "9K31-Strela-1.png",
     "stats": {
       "health": 0,
       "speed": 0,
