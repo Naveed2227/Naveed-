@@ -4537,11 +4537,11 @@ const VEHICLES_DATA = [
     "tier": "III",
     image: "Centauro-I-120.jpg",
     "description": "Italian wheeled tank destroyer, 120mm gun, fast and mobile, light armor, strong firepower, ideal for hit-and-run and reconnaissance.",
-    "stats": { "health": 28200, "speed": 110, "armor": "40mm", "agility": 35 },
+    "stats": { "health": 26800, "speed": 110, "armor": "40mm", "agility": 41.8 },
     "weapons": [
-      { name: "DM33 APFSDS", type: "Main Gun", damage: 9940, penetration: 508 },
-      { name: "DM12A1 HEATFS", type: "Main Gun", damage: 9900, penetration: 400 },
-      { name: "CL3143 APFSDS", type: "Main Gun", damage: 11500, penetration: 690 }
+      { name: "DM33 APFSDS", type: "Main Gun", damage: 11120, penetration: 550 },
+      { name: "DM12A1 HEATFS", type: "Main Gun", damage: 12100, penetration: 480 },
+      { name: "CL3143 APFSDS", type: "Main Gun", damage: 11520, penetration: 690 }
     ],
     "modules": {
       "engine": [
@@ -11428,7 +11428,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
       "K21 KNIFV",
       "Leopard 2A8",
       "AMX-30 Super",
-      "Centauro I 120",
+      
       
     ]
     return constructionVehicles.includes(vehicleName)
