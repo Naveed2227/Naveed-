@@ -9804,8 +9804,16 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     }
   }, [vehicleName]);
 
+  // Track if we've initialized the YouTube API
+  const apiInitialized = useRef(false);
+  const apiReadyCallback = useRef<(() => void) | null>(null);
+
   // Initialize YouTube API
   useEffect(() => {
+    // Only initialize once
+    if (apiInitialized.current) return;
+    apiInitialized.current = true;
+
     // Load YouTube IFrame API if not already loaded
     if (!(window as any).YT) {
       const tag = document.createElement('script');
@@ -9814,61 +9822,82 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
       firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
     }
 
-    // Initialize player when API is ready
-    const onYouTubeIframeAPIReady = () => {
-      console.log('ArmourVideo: YouTube API is ready');
-      console.log('ArmourVideo: activeVideo:', activeVideo);
-      console.log('ArmourVideo: videoRef.current:', videoRef.current);
-      
-      // Only initialize if we don't already have a player instance
-      if (activeVideo && videoRef.current && !playerRef.current) {
-        console.log('ArmourVideo: Calling initializePlayer');
-        initializePlayer();
-      } else if (playerRef.current) {
-        console.log('ArmourVideo: Player already initialized');
-        // Stop any existing playback to prevent duplicate playback and echo
-        try {
-          playerRef.current.stopVideo();
-        } catch (e) {
-          console.error('Error stopping existing player:', e);
-        }
-      } else {
-        console.log('ArmourVideo: Cannot initialize player - missing activeVideo or videoRef');
+    // Set up the global callback
+    (window as any).onYouTubeIframeAPIReady = () => {
+      console.log('YouTube API is ready');
+      if (apiReadyCallback.current) {
+        apiReadyCallback.current();
       }
     };
 
-    // Set up the callback
+    return () => {
+      // Clean up global callback
+      (window as any).onYouTubeIframeAPIReady = null;
+    };
+  }, []);
+
+  // Handle player initialization when activeVideo changes
+  useEffect(() => {
+    if (!activeVideo || !videoRef.current) return;
+
+    const initializePlayerIfNeeded = () => {
+      // Only initialize if we don't have a player instance
+      if (!playerRef.current) {
+        console.log('Initializing YouTube player for:', activeVideo.name);
+        initializePlayer();
+      } else {
+        console.log('Reusing existing YouTube player');
+        // Update the existing player with new video
+        const startTime = timeToSeconds(activeVideo.start);
+        playerRef.current.loadVideoById({
+          videoId: getVideoId(activeVideo.url),
+          startSeconds: startTime,
+          endSeconds: timeToSeconds(activeVideo.end)
+        });
+        setCurrentTime(0);
+      }
+    };
+
+    // Set up the API ready callback
+    apiReadyCallback.current = () => {
+      if ((window as any).YT) {
+        initializePlayerIfNeeded();
+      }
+    };
+
+    // If YT is already loaded, initialize immediately
     if ((window as any).YT) {
-      // API is already ready
-      onYouTubeIframeAPIReady();
-    } else {
-      // API is not ready yet, set up callback
-      (window as any).onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+      initializePlayerIfNeeded();
     }
 
+    // Cleanup function
     return () => {
       if (playerRef.current) {
         try {
           playerRef.current.stopVideo();
-          playerRef.current.destroy();
         } catch (e) {
-          console.error('Error cleaning up YouTube player:', e);
+          console.error('Error stopping player:', e);
         }
-        playerRef.current = null;
       }
-      // Clean up global callback to prevent memory leaks
-      (window as any).onYouTubeIframeAPIReady = null;
     };
   }, [activeVideo]);
 
   const initializePlayer = () => {
-    console.log('ArmourVideo: initializePlayer called');
-    console.log('ArmourVideo: activeVideo:', activeVideo);
-    console.log('ArmourVideo: videoRef.current:', videoRef.current);
+    console.log('Initializing YouTube player');
     
-    if (!activeVideo) {
-      console.log('ArmourVideo: No active video, returning');
+    if (!activeVideo || !videoRef.current) {
+      console.log('No active video or video ref, cannot initialize');
       return;
+    }
+
+    // Clean up existing player if it exists
+    if (playerRef.current) {
+      try {
+        playerRef.current.destroy();
+      } catch (e) {
+        console.error('Error destroying existing player:', e);
+      }
+      playerRef.current = null;
     }
 
     const startTime = timeToSeconds(activeVideo.start);
@@ -9917,22 +9946,13 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
       },
       events: {
         onReady: (event: any) => {
-          console.log('ArmourVideo: Player is ready');
-          console.log('ArmourVideo: Player iframe dimensions:', event.target.getIframe().getBoundingClientRect());
+          console.log('YouTube player is ready');
           
-          // Enhanced mobile detection
+          // Mobile detection
           const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
           const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-          console.log('ArmourVideo: Mobile device detected:', isMobile);
-          console.log('ArmourVideo: iOS device detected:', isIOS);
           
-          // Hide loading indicator
-          const loadingIndicator = document.getElementById('mobile-loading-indicator');
-          if (loadingIndicator) {
-            loadingIndicator.style.display = 'none';
-          }
-          
-          // Ensure iframe is properly sized for mobile
+          // Configure iframe
           const iframe = event.target.getIframe();
           if (iframe) {
             iframe.style.width = '100%';
@@ -9942,38 +9962,13 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
             iframe.style.left = '0';
             iframe.style.border = 'none';
             iframe.style.borderRadius = '0';
-            
-            // Mobile-specific optimizations
-            if (isMobile) {
-              // Force reflow on mobile to ensure proper rendering
-              setTimeout(() => {
-                iframe.style.display = 'none';
-                iframe.offsetHeight; // Trigger reflow
-                iframe.style.display = 'block';
-                
-                // Additional mobile sizing adjustments
-                if (isIOS) {
-                  // iOS-specific fixes
-                  iframe.style.webkitTransform = 'translateZ(0)';
-                  iframe.style.webkitBackfaceVisibility = 'hidden';
-                }
-              }, 150);
-              
-              // Set mobile-optimized player vars
-              try {
-                event.target.setPlaybackQuality('small'); // Better performance on mobile
-              } catch (e) {
-                console.log('Could not set playback quality:', e);
-              }
-            }
           }
           
-          // Start playing when video is ready
-          // Use a small timeout to ensure everything is properly initialized
+          // Start playing the video
           setTimeout(() => {
             try {
-              // Only play if not already playing and we have a valid player
-              if (event.target.getPlayerState() !== (window as any).YT.PlayerState.PLAYING) {
+              const currentState = event.target.getPlayerState();
+              if (currentState !== (window as any).YT.PlayerState.PLAYING) {
                 event.target.playVideo();
               }
               setIsPlaying(true);
