@@ -1124,7 +1124,7 @@ const VEHICLES_DATA = [
     weapons: [
       { name: "JM33", type: "Main Gun", damage: 11330, penetration: 481 },
       { name: "JM12A1", type: "Main Gun", damage: 12360, penetration: 480 },
-      { name: "Type 10", type: "Main Gun", damage: 2920, penetration: 650 }
+      { name: "Type 10", type: "Main Gun", damage: 10900, penetration: 615 }
     ],
     modules: {
       engine: [
