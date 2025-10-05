@@ -16394,7 +16394,7 @@ function CookieConsentBanner() {
                     </h3>
                     <div className="mt-4">
                       <p className="text-sm text-gray-500 dark:text-gray-300 mb-4">
-                        We use cookies to enhance your experience. Select the types of cookies you'd like to allow.
+                        We use cookies to enhance your experience in MWT Assistant.
                       </p>
                       
                       <div className="space-y-4">
