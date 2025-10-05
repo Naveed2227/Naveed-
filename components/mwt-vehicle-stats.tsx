@@ -16272,19 +16272,48 @@ function CookieConsentBanner() {
 
   if (!showBanner) return null;
 
+  const handleReject = () => {
+    // Add any rejection logic here if needed
+    setShowBanner(false);
+  };
+
+  const handlePreferences = () => {
+    // Add preferences logic here
+    console.log('Opening cookie preferences');
+  };
+
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-        <div className="p-4">
-          <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
-            We use cookies to improve your experience.
-          </p>
-          <button
-            onClick={acceptCookies}
-            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-2 px-4 rounded-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            Accept All Cookies
-          </button>
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-800 shadow-lg border-t border-gray-200 dark:border-slate-700 rounded-t-xl">
+      <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex-1">
+            <h3 className="text-base font-semibold text-blue-900 dark:text-blue-100 mb-1">
+              Our website uses cookies
+            </h3>
+            <p className="text-sm text-blue-700 dark:text-blue-300">
+              We use cookies to improve your experience and analyze site traffic. You can manage your preferences at any time.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={acceptCookies}
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors duration-200 whitespace-nowrap"
+            >
+              Accept All
+            </button>
+            <button
+              onClick={handleReject}
+              className="px-4 py-2 border border-blue-400 text-blue-600 hover:bg-blue-50 dark:text-blue-300 dark:border-blue-500 dark:hover:bg-blue-900/30 font-medium rounded-md transition-colors duration-200"
+            >
+              Reject All
+            </button>
+            <button
+              onClick={handlePreferences}
+              className="px-4 py-2 text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 underline font-medium text-sm transition-colors duration-200 text-left sm:text-center"
+            >
+              Cookie Preferences
+            </button>
+          </div>
         </div>
       </div>
     </div>
