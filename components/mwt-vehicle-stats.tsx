@@ -16258,93 +16258,41 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
 function CookieConsentBanner() {
   const [showBanner, setShowBanner] = React.useState(false);
-  const [showDetails, setShowDetails] = React.useState(false);
 
   useEffect(() => {
     // Check if cookiesAccepted cookie exists
-    setShowBanner(!document.cookie.includes('cookiesAccepted='));
+    setShowBanner(!document.cookie.includes('cookiesAccepted=true'));
   }, []);
 
-  const setCookie = (value: string, days = 365) => {
-    const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    document.cookie = `cookiesAccepted=${value};expires=${date.toUTCString()};path=/`;
-  };
-
   const acceptCookies = () => {
-    setCookie('all');
-    setShowBanner(false);
-  };
-
-  const rejectCookies = () => {
-    setCookie('none');
-    setShowBanner(false);
-  };
-
-  const savePreferences = () => {
-    // Add your preference saving logic here
-    setCookie('custom');
+    // Set cookie to expire in 1 year
+    document.cookie = "cookiesAccepted=true; max-age=" + 60 * 60 * 24 * 365 + "; path=/";
     setShowBanner(false);
   };
 
   if (!showBanner) return null;
 
+  const handleReject = () => {
+    // Add any rejection logic here if needed
+    setShowBanner(false);
+  };
+
+  const handlePreferences = () => {
+    // Add preferences logic here
+    console.log('Opening cookie preferences');
+  };
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-blue-700 shadow-2xl">
-      <div className="max-w-7xl mx-auto px-4 py-5 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div className="flex-1 text-blue-50">
-            <h3 className="text-lg font-bold mb-1">We Value Your Privacy</h3>
-            <p className="text-blue-100 text-sm mb-3">
-              We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-800 shadow-lg border-t border-gray-200 dark:border-slate-700 rounded-t-xl">
+      <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex-1">
+            <h3 className="text-base font-semibold text-blue-900 dark:text-blue-100 mb-1">
+              Our website uses cookies
+            </h3>
+            <p className="text-sm text-blue-700 dark:text-blue-300">
+              We use cookies to improve your experience and analyze site traffic. You can manage your preferences at any time.
             </p>
-            
-            {showDetails && (
-              <div className="mt-2 p-3 bg-blue-700/50 rounded-lg mb-3">
-                <p className="text-sm font-medium mb-2">We use the following types of cookies:</p>
-                <ul className="text-xs space-y-1 text-blue-100">
-                  <li>• <strong>Essential</strong> - Necessary for the website to function</li>
-                  <li>• <strong>Analytics</strong> - Help us understand how visitors interact</li>
-                  <li>• <strong>Preferences</strong> - Remember your settings and preferences</li>
-                </ul>
-              </div>
-            )}
-            
-            <button 
-              onClick={() => setShowDetails(!showDetails)}
-              className="text-blue-200 hover:text-white text-xs font-medium transition-colors flex items-center"
-            >
-              {showDetails ? 'Show less' : 'Learn more about cookies'}
-              <svg 
-                className={`w-4 h-4 ml-1 transition-transform ${showDetails ? 'rotate-180' : ''}`} 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-          </div>
-          
-          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-            <button
-              onClick={savePreferences}
-              className="px-4 py-2 text-blue-100 hover:text-white font-medium text-sm transition-colors whitespace-nowrap hover:bg-blue-500/20 rounded-md"
-            >
-              Customize
-            </button>
-            <button
-              onClick={rejectCookies}
-              className="px-4 py-2 bg-transparent border-2 border-blue-400 text-white hover:bg-blue-500/30 font-medium rounded-md transition-colors whitespace-nowrap"
-            >
-              Reject All
-            </button>
-            <button
-              onClick={acceptCookies}
-              className="px-6 py-2 bg-white text-blue-700 hover:bg-blue-50 font-medium rounded-md shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 whitespace-nowrap"
-            >
-              Accept All
-            </button>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
             <button
