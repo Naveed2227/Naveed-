@@ -2761,9 +2761,16 @@ const VEHICLES_DATA = [
     description: "Night hunter attack helicopter with all-weather combat capability.",
     stats: { health: 25480, speed: 229, verticalSpeed: 15, agility: 46 },
     weapons: [
-      { name: "9M120 Ataka-V", type: "ATGM", damage: 3900, penetration: 1200 },
-      { name: "S-13 Rockets", type: "Rocket Pod", damage: 9200, penetration: 420 },
-      { name: "2A42 30mm", type: "Autocannon", damage: 450, penetration: 80, rateOfFire: "550 rpm" },
+      { name: "9K38 IGLA-V", type: "Short-Range AAM", damage: 2800, penetration: 110, reload: 5000 },
+      { name: "9M120 Ataka-V", type: "Anti-Tank Missile", damage: 13500, penetration: 1000, reload: 17000 },
+      { name: "9M123 Khrizantema", type: "Anti-Tank Missile", damage: 13800, penetration: 1020, reload: 17200 },
+      { name: "9K121 Vikhr", type: "Anti-Tank Missile", damage: 13500, penetration: 980, reload: 17000 },
+      { name: "9-A-5013", type: "Air-to-Ground Missile", damage: 11000, penetration: 890, reload: 14600 },
+      { name: "B8V20", type: "Air-to-Ground Missile", damage: 9500, penetration: 820, reload: 13500 },
+      { name: "B-13L", type: "Air-to-Ground Missile", damage: 9800, penetration: 840, reload: 13800 },
+      { name: "Kh-29T", type: "Air-to-Ground Missile", damage: 14000, penetration: 1000, reload: 18000 },
+      { name: "2A42(30mm)", type: "Autocannon", damage: 90, penetration: 85, reload: 300 },
+      { name: "UPK-23-250(23mm)", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 }
     ],
     modules: {
       engine: [
@@ -2793,9 +2800,16 @@ const VEHICLES_DATA = [
     description: "Dedicated attack helicopter with tandem-seat configuration and advanced sensors.",
     stats: { health: 18200, speed: 221, verticalSpeed: 55, agility: 46 },
     weapons: [
-      { name: "HJ-10", type: "ATGM", damage: 16500, penetration: 1100 },
-      { name: "TY-90 AAM", type: "Air-to-Air Missile", damage: 8800, penetration: 440 },
-      { name: "Type 23-2K 23mm", type: "Autocannon", damage: 380, penetration: 68, rateOfFire: "800 rpm" },
+      { name: "Type 57-1", type: "Rocket Pod", damage: 250, penetration: 50, reload: 1000 },
+      { name: "HJ-10", type: "Anti-Tank Missile", damage: 15000, penetration: 1000, reload: 16500 },
+      { name: "TG-250", type: "Air-to-Ground Missile", damage: 10800, penetration: 875, reload: 14400 },
+      { name: "FS-70", type: "Rocket Pod", damage: 300, penetration: 60, reload: 1200 },
+      { name: "TY-90", type: "Short-Range AAM", damage: 3000, penetration: 120, reload: 5200 },
+      { name: "AKD-9", type: "Air-to-Ground Missile", damage: 10000, penetration: 850, reload: 14000 },
+      { name: "BA-21", type: "Air-to-Ground Missile", damage: 11200, penetration: 890, reload: 14700 },
+      { name: "CM501XA", type: "Air-to-Ground Missile", damage: 11500, penetration: 900, reload: 14800 },
+      { name: "CM-502KG", type: "Air-to-Ground Missile", damage: 11200, penetration: 890, reload: 14700 },
+      { name: "Type 23 L(23mm)", type: "Autocannon", damage: 80, penetration: 70, reload: 180 }
     ],
     modules: {
       engine: [
@@ -2825,9 +2839,15 @@ const VEHICLES_DATA = [
     description: "Light attack and reconnaissance helicopter with stealth characteristics.",
     stats: { health: 17290, speed: 214, verticalSpeed: 15, agility: 42 },
     weapons: [
-      { name: "HJ-10", type: "ATGM", damage: 15800, penetration: 1050 },
-      { name: "TY-90 AAM", type: "Air-to-Air Missile", damage: 8500, penetration: 420 },
-      { name: "Type 23-2K 23mm", type: "Autocannon", damage: 360, penetration: 65, rateOfFire: "800 rpm" },
+      { name: "TY-90", type: "Short-Range AAM", damage: 3000, penetration: 120, reload: 5200 },
+      { name: "AKD-9", type: "Air-to-Ground Missile", damage: 10000, penetration: 850, reload: 14000 },
+      { name: "HJ-10", type: "Anti-Tank Missile", damage: 15000, penetration: 1000, reload: 18000 },
+      { name: "TL-12", type: "Air-to-Ground Missile", damage: 10500, penetration: 870, reload: 14200 },
+      { name: "BA-21", type: "Air-to-Ground Missile", damage: 11200, penetration: 890, reload: 14700 },
+      { name: "AKD-10", type: "Air-to-Ground Missile", damage: 12000, penetration: 900, reload: 15000 },
+      { name: "FS-70", type: "Rocket Pod", damage: 300, penetration: 60, reload: 1200 },
+      { name: "CM-502KG", type: "Air-to-Ground Missile", damage: 11200, penetration: 890, reload: 14700 },
+      { name: "QJK99(12.7mm)", type: "Heavy MG", damage: 50, penetration: 40, reload: 100 }
     ],
     modules: {
       engine: [
@@ -4669,11 +4689,15 @@ const VEHICLES_DATA = [
   description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
   stats: { health: 21840, speed: 221, verticalSpeed: 13, agility: 46 },
   weapons: [
-    { name: "9K121 Vikhr / 9K121 Vikhr-1", type: "ATGM", damage: 3200, penetration: 200 },
-    { name: "Ataka (where available)", type: "ATGM", damage: 3000, penetration: 180 },
-    { name: "Igla-V", type: "AAM (MANPADS)", damage: 1800, penetration: 90 },
-    { name: "S-8 / S-13 Rockets", type: "Rocket Pod", damage: 850, penetration: 55 },
-    { name: "23mm / 30mm Gun Pod", type: "Autocannon", damage: 180, penetration: 25 }
+    { name: "9K38 IGLA-V", type: "Short-Range AAM", damage: 2800, penetration: 110, reload: 5000 },
+    { name: "9K121 Vikhr", type: "Anti-Tank Missile", damage: 13500, penetration: 980, reload: 17000 },
+    { name: "Attack ATGM", type: "Anti-Tank Missile", damage: 13000, penetration: 960, reload: 16500 },
+    { name: "9-A 5013", type: "Air-to-Ground Missile", damage: 11000, penetration: 890, reload: 14600 },
+    { name: "B8V20", type: "Air-to-Ground Missile", damage: 9500, penetration: 820, reload: 13500 },
+    { name: "B-13L", type: "Air-to-Ground Missile", damage: 9800, penetration: 840, reload: 13800 },
+    { name: "Kh-29T", type: "Air-to-Ground Missile", damage: 14000, penetration: 1000, reload: 18000 },
+    { name: "GSh-23L(23mm)", type: "Autocannon", damage: 60, penetration: 70, reload: 250 },
+    { name: "UPK-23-250(23mm)", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 }
   ],
   modules: {
     engine: [
@@ -4741,9 +4765,15 @@ const VEHICLES_DATA = [
     description: "Advanced attack helicopter with multi-role capabilities and proven combat record.",
     stats: { health: 19800, speed: 260, verticalSpeed: 65, agility: 56 },
     weapons: [
-      { name: "AGM-114 Hellfire", type: "Anti-Tank Missile", damage: 16500, penetration: 1100 },
-      { name: "Hydra 70 Rockets", type: "Rocket Pod", damage: 8200, penetration: 380 },
-      { name: "M230 30mm Chain Gun", type: "Autocannon", damage: 420, penetration: 75, rateOfFire: "625 rpm" },
+      { name: "ADS Starstreak", type: "Air-to-Ground Missile", damage: 11000, penetration: 890, reload: 14600 },
+      { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 2800, penetration: 110, reload: 5000 },
+      { name: "AIM-92", type: "Short-Range AAM", damage: 2500, penetration: 100, reload: 5000 },
+      { name: "AGM-114 Hellfire", type: "Air-to-Ground Missile", damage: 13000, penetration: 950, reload: 15500 },
+      { name: "AGR-20 BLR", type: "Rocket Pod", damage: 280, penetration: 60, reload: 1100 },
+      { name: "Brimstone", type: "Air-to-Ground Missile", damage: 11200, penetration: 900, reload: 14800 },
+      { name: "LAU-61", type: "Rocket Pod", damage: 290, penetration: 65, reload: 1150 },
+      { name: "LAU-10", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 },
+      { name: "M230(30mm)", type: "Autocannon", damage: 90, penetration: 85, reload: 300 },
     ],
     modules: {
       engine: [
@@ -4773,9 +4803,14 @@ const VEHICLES_DATA = [
     description: "Agile Japanese attack/recon helicopter—fast and nimble with light AAMs in MWT.",
     stats: { health: 16289, speed: 227, verticalSpeed: 24, agility: 53 },
     weapons: [
-      { name: "AIM-9 Sidewinder", type: "AAM", damage: 1600, penetration: 100 },
-      { name: "AGM-65 Maverick", type: "ATGM", damage: 2800, penetration: 180 },
-      { name: "LAU-68 Rocket Pods", type: "Rocket Pod", damage: 800, penetration: 50 }
+      { name: "LAU-68", type: "Rocket Pod", damage: 260, penetration: 55, reload: 1050 },
+      { name: "AGR-20-BLR", type: "Rocket Pod", damage: 280, penetration: 60, reload: 1100 },
+      { name: "FASGWL", type: "Air-to-Ground Missile", damage: 10800, penetration: 880, reload: 14500 },
+      { name: "LAU-150", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 },
+      { name: "Brimstone", type: "Air-to-Ground Missile", damage: 11200, penetration: 900, reload: 14800 },
+      { name: "Toshiba Type-91", type: "Air-to-Ground Missile", damage: 11500, penetration: 910, reload: 14900 },
+      { name: "AGM-114 Hellfire", type: "Air-to-Ground Missile", damage: 13000, penetration: 950, reload: 15500 },
+      { name: "ADS Starstreak", type: "Air-to-Ground Missile", damage: 11000, penetration: 890, reload: 14600 }
     ],
     modules: {
       engine: [
@@ -4802,8 +4837,14 @@ const VEHICLES_DATA = [
   description: "British naval helicopter adapted for anti-ship and light attack roles (small weapon capacity in MWT).",
   stats: { health: 20020, speed: 229, verticalSpeed: 13, agility: 31 },
   weapons: [
-    { name: "Sea Skua", type: "Anti-Ship Missile", damage: 4200, penetration: 250 },
-    { name: "20mm Cannon", type: "Autocannon", damage: 150, penetration: 20, rateOfFire: "variable" }
+    { name: "Storm Shadow", type: "Cruise Missile", damage: 25000, penetration: 1200, reload: 30000 },
+    { name: "APKWS", type: "Guided Rocket", damage: 280, penetration: 60, reload: 1100 },
+    { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 2800, penetration: 110, reload: 5000 },
+    { name: "FASGWL", type: "Air-to-Ground Missile", damage: 10800, penetration: 880, reload: 14500 },
+    { name: "FASGW-ANL", type: "Air-to-Ground Missile", damage: 11000, penetration: 890, reload: 14600 },
+    { name: "Brimstone", type: "Air-to-Ground Missile", damage: 11200, penetration: 900, reload: 14800 },
+    { name: "AIM-92", type: "Short-Range AAM", damage: 2500, penetration: 100, reload: 5000 },
+    { name: "MBDA Meteor", type: "BVR AAM", damage: 3500, penetration: 130, reload: 8000 }
   ],
   modules: {
     engine: [
@@ -4829,14 +4870,13 @@ const VEHICLES_DATA = [
   description: "Heavily armed Z-9 variant with multi-mount capability (x4 mounts for some missiles in MWT).",
   stats: { health: 16198, speed: 244, verticalSpeed: 17, agility: 46 },
   weapons: [
-    { name: "Type 57-1", type: "Rocket Pod", damage: 800, penetration: 50 },
-    { name: "TY-90", type: "Air-to-Air Missile", damage: 1800, penetration: 90 },
-    { name: "QJK99", type: "ATGM", damage: 2500, penetration: 170 },
-    { name: "AKD-9 (x4 mount option)", type: "ATGM", damage: 2200, penetration: 150 },
-    { name: "HJ-8E (x4 mount option)", type: "ATGM", damage: 2500, penetration: 170 },
-    { name: "AKD-10 (x4 mount option)", type: "ATGM", damage: 2800, penetration: 180 },
-    { name: "FS-70", type: "Rocket Pod", damage: 780, penetration: 50 },
-    { name: "Type 90", type: "Rocket Pod", damage: 800, penetration: 55 }
+    { name: "HJ-8E", type: "Anti-Tank Missile", damage: 14000, penetration: 950, reload: 16000 },
+    { name: "TYPE 57-1", type: "Rocket Pod", damage: 250, penetration: 50, reload: 1000 },
+    { name: "TY-90", type: "Short-Range AAM", damage: 3000, penetration: 120, reload: 5200 },
+    { name: "FS-70", type: "Rocket Pod", damage: 300, penetration: 60, reload: 1200 },
+    { name: "TYPE-90", type: "Air-to-Ground Missile", damage: 10500, penetration: 870, reload: 14200 },
+    { name: "AKD-9", type: "Air-to-Ground Missile", damage: 10000, penetration: 850, reload: 14000 },
+    { name: "QJK99(12.7mm)", type: "Heavy MG", damage: 50, penetration: 40, reload: 100 }
   ],
   modules: {
     engine: [
@@ -4863,11 +4903,15 @@ const VEHICLES_DATA = [
   description: "Modern multi-role Chinese helicopter with stub wings; carries Chinese ATGMs and rockets in MWT.",
   stats: { health: 16774, speed: 214, verticalSpeed: 46, agility: 42 },
   weapons: [
-    { name: "AKD-9", type: "ATGM", damage: 2200, penetration: 150 },
-    { name: "AKD-10", type: "ATGM", damage: 2800, penetration: 180 },
-    { name: "HJ-10 / HJ-series", type: "ATGM", damage: 2500, penetration: 170 },
-    { name: "23mm Cannon Pod", type: "Autocannon", damage: 150, penetration: 20 },
-    { name: "Rocket Pods (Type series)", type: "Rocket Pod", damage: 800, penetration: 50 }
+    { name: "HJ-10", type: "Anti-Tank Missile", damage: 15000, penetration: 1000, reload: 18000 },
+    { name: "TYPE 57-1", type: "Rocket Pod", damage: 250, penetration: 50, reload: 1000 },
+    { name: "TY-90", type: "Short-Range AAM", damage: 3000, penetration: 120, reload: 5200 },
+    { name: "TYPE 90", type: "Air-to-Ground Missile", damage: 10500, penetration: 870, reload: 14200 },
+    { name: "FT-9", type: "Air-to-Ground Missile", damage: 11000, penetration: 890, reload: 14600 },
+    { name: "HJ-8E", type: "Anti-Tank Missile", damage: 14000, penetration: 950, reload: 16000 },
+    { name: "AG-300/M", type: "Air-to-Ground Missile", damage: 10000, penetration: 850, reload: 14000 },
+    { name: "CM-502KG", type: "Air-to-Ground Missile", damage: 11200, penetration: 890, reload: 14700 },
+    { name: "CS-LM12(7.62mm)", type: "MG", damage: 25, penetration: 20, reload: 80 }
   ],
   modules: {
     engine: [
@@ -4893,14 +4937,16 @@ const VEHICLES_DATA = [
   description: "Armed MH-60 variant (DAP) with a flexible loadout for rockets, ATGMs and air-to-air missiles.",
   stats: { health: 20020, speed: 209, verticalSpeed: 12, agility: 34 },
   weapons: [
-    { name: "LAU-61", type: "Rocket Pod", damage: 800, penetration: 50 },
-    { name: "AGR-20 BLR", type: "Rocket Pod", damage: 850, penetration: 55 },
-    { name: "AGM-114 Hellfire", type: "ATGM", damage: 3200, penetration: 200 },
-    { name: "AGM-179 JAGM", type: "ATGM", damage: 3500, penetration: 220 },
-    { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 1800, penetration: 90 },
-    { name: "AIM-92 (Stinger)", type: "AAM", damage: 1800, penetration: 90 },
-    { name: "ADS Starstreak", type: "AAM", damage: 1900, penetration: 100 },
-    { name: "M230 30mm", type: "Autocannon", damage: 180, penetration: 25 }
+    { name: "AGM 169-JAGM", type: "Air-to-Ground Missile", damage: 12000, penetration: 900, reload: 15000 },
+    { name: "LAU-61", type: "Rocket Pod", damage: 290, penetration: 65, reload: 1150 },
+    { name: "AGR-20 BLR", type: "Rocket Pod", damage: 280, penetration: 60, reload: 1100 },
+    { name: "LAU-68", type: "Rocket Pod", damage: 260, penetration: 55, reload: 1050 },
+    { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 2800, penetration: 110, reload: 5000 },
+    { name: "AGM-114 Hellfire", type: "Air-to-Ground Missile", damage: 13000, penetration: 950, reload: 15500 },
+    { name: "AIM-92", type: "Short-Range AAM", damage: 2500, penetration: 100, reload: 5000 },
+    { name: "ADS Starstreak", type: "Air-to-Ground Missile", damage: 11000, penetration: 890, reload: 14600 },
+    { name: "M230(30mm)", type: "Autocannon", damage: 90, penetration: 85, reload: 300 },
+    { name: "M134 minigun(7.62mm)", type: "Rotary Gun", damage: 25, penetration: 20, reload: 80 }
   ],
   modules: {
     engine: [
@@ -4927,12 +4973,15 @@ const VEHICLES_DATA = [
   description: "Upgraded Cobra with improved sensors, weapons flexibility and survivability.",
   stats: { health: 17472, speed: 219, verticalSpeed: 14, agility: 46 },
   weapons: [
-    { name: "AGM-114 Hellfire", type: "ATGM", damage: 3200, penetration: 200 },
-    { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 2800, penetration: 180 },
-    { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 1800, penetration: 90 },
-    { name: "AIM-92 (Stinger)", type: "AAM", damage: 1800, penetration: 90 },
-    { name: "LAU-61 (Hydra-70 Pods)", type: "Rocket Pod", damage: 850, penetration: 55 },
-    { name: "M197 20mm (or turret gun)", type: "Autocannon", damage: 150, penetration: 20 }
+    { name: "AIM-92", type: "Short-Range AAM", damage: 2500, penetration: 100, reload: 5000 },
+    { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 2800, penetration: 110, reload: 5000 },
+    { name: "AGM-169 JAGM", type: "Air-to-Ground Missile", damage: 12000, penetration: 900, reload: 15000 },
+    { name: "AGM-114 Hellfire", type: "Air-to-Ground Missile", damage: 13000, penetration: 950, reload: 15500 },
+    { name: "LAU-68", type: "Rocket Pod", damage: 260, penetration: 55, reload: 1050 },
+    { name: "AIM-92", type: "Short-Range AAM", damage: 2500, penetration: 100, reload: 5000 },
+    { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 13000, penetration: 950, reload: 15500 },
+    { name: "LAU-10", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 },
+    { name: "M197(20mm)", type: "Autocannon", damage: 60, penetration: 50, reload: 200 }
   ],
   modules: {
     engine: [
@@ -4960,11 +5009,16 @@ const VEHICLES_DATA = [
   description: "Single-seat heavy attack helicopter with heavy ATGMs and cannon armament in MWT.",
   stats: { health: 21840, speed: 222, verticalSpeed: 53, agility: 50 },
   weapons: [
-    { name: "Ataka / Ataka-V ATGM", type: "ATGM", damage: 3000, penetration: 180 },
-    { name: "9M120 / Vikhr ATGM", type: "ATGM", damage: 3900, penetration: 200 },
-    { name: "30mm 2A42 Gun", type: "Autocannon", damage: 180, penetration: 25 },
-    { name: "S-8 Rocket Pod", type: "Rocket Pod", damage: 800, penetration: 50 },
-    { name: "S-13 Rocket Pod", type: "Rocket Pod", damage: 850, penetration: 55 }
+    { name: "B8V20", type: "Air-to-Ground Missile", damage: 9500, penetration: 820, reload: 13500 },
+    { name: "9-A-5013", type: "Air-to-Ground Missile", damage: 11000, penetration: 890, reload: 14600 },
+    { name: "B-13L", type: "Air-to-Ground Missile", damage: 9800, penetration: 840, reload: 13800 },
+    { name: "Attack ATGM", type: "Anti-Tank Missile", damage: 13000, penetration: 960, reload: 16500 },
+    { name: "9k38 IGLA V", type: "Short-Range AAM", damage: 2800, penetration: 110, reload: 5000 },
+    { name: "PZRK Verba", type: "Short-Range AAM", damage: 3000, penetration: 120, reload: 5200 },
+    { name: "9K121 Vikhr", type: "Anti-Tank Missile", damage: 13500, penetration: 980, reload: 17000 },
+    { name: "X-29T", type: "Air-to-Ground Missile", damage: 14000, penetration: 1000, reload: 18000 },
+    { name: "UPK-23-250(23mm)", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 },
+    { name: "2A42(30mm)", type: "Autocannon", damage: 90, penetration: 85, reload: 300 }
   ],
   modules: {
     engine: [
@@ -7104,10 +7158,12 @@ const VEHICLES_DATA = [
   description: "Multi-role Chinese helicopter equipped with light rockets, cannons, and ATGMs in MWT.",
   stats: { health: 16900, speed: 305, verticalSpeed: 22, agility: 60 },
   weapons: [
-    { name: "TY-90", type: "Air-to-Air Missile", damage: 1800, penetration: 90 },
-    { name: "QJK-88", type: "ATGM", damage: 2400, penetration: 160 },
-    { name: "Type 57-1 Rocket Pod", type: "Rocket Pod", damage: 750, penetration: 50 },
-    { name: "23mm Gun Pod", type: "Autocannon", damage: 140, penetration: 20 }
+    { name: "Type 57-1", type: "Rocket Pod", damage: 250, penetration: 50, reload: 1000 },
+    { name: "FS-70", type: "Rocket Pod", damage: 300, penetration: 60, reload: 1200 },
+    { name: "AKD-10", type: "Air-to-Ground Missile", damage: 12000, penetration: 900, reload: 15000 },
+    { name: "AKD-9", type: "Air-to-Ground Missile", damage: 10000, penetration: 850, reload: 14000 },
+    { name: "HJ-8E", type: "Anti-Tank Missile", damage: 14000, penetration: 950, reload: 16000 },
+    { name: "QJK99(12.7mm)", type: "Heavy MG", damage: 50, penetration: 40, reload: 100 }
   ],
   modules: {
     engine: [
@@ -7134,9 +7190,15 @@ const VEHICLES_DATA = [
     image: "Mi-8TV.jpg",
     stats: { health: 16616, speed: 200, verticalSpeed: 46, agility: 52 },
     weapons: [
-      { name: "S-8 Rockets", type: "Rocket Pod", damage: 5800, penetration: 280 },
-      { name: "PKT 7.62mm", type: "Machine Gun", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
-      { name: "9M17 Falanga", type: "ATGM", damage: 12500, penetration: 650 },
+      { name: "UPK-23-250", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 },
+      { name: "UB-16-57UM", type: "Rocket Pod", damage: 280, penetration: 65, reload: 1100 },
+      { name: "UB-32-57", type: "Rocket Pod", damage: 290, penetration: 68, reload: 1150 },
+      { name: "B8V20", type: "Air-to-Ground Missile", damage: 9500, penetration: 820, reload: 13500 },
+      { name: "B-13L", type: "Air-to-Ground Missile", damage: 9800, penetration: 840, reload: 13800 },
+      { name: "9K38 IGLA-V", type: "Short-Range AAM", damage: 2800, penetration: 110, reload: 5000 },
+      { name: "Attack ATGM", type: "Anti-Tank Missile", damage: 13000, penetration: 960, reload: 16500 },
+      { name: "9M17 Falanga", type: "Anti-Tank Missile", damage: 12500, penetration: 940, reload: 16000 },
+      { name: "Afanasev A 12.7(12.7mm)", type: "Heavy MG", damage: 45, penetration: 42, reload: 100 },
     ],
     modules: {
       engine: [
@@ -7166,9 +7228,13 @@ const VEHICLES_DATA = [
   description: "Ultra-light scout/assault helicopter used for special operations; light armament but excellent maneuverability.",
   stats: { health: 15000, speed: 282, verticalSpeed: 26, agility: 75 },
   weapons: [
-    { name: "M134 Minigun", type: "Autocannon", damage: 120, penetration: 15, rateOfFire: "variable" },
-    { name: "LAU-61 / Hydra-70 Rocket Pod", type: "Rocket Pod", damage: 800, penetration: 50 },
-    { name: "7.62mm Door Gun", type: "Machine Gun", damage: 45, penetration: 10 }
+    { name: "AGM 169-JAGM", type: "Air-to-Ground Missile", damage: 12000, penetration: 900, reload: 15000 },
+    { name: "AGM-114K X2", type: "Air-to-Ground Missile", damage: 11000, penetration: 880, reload: 14500 },
+    { name: "AGR-20 BLR", type: "Rocket Pod", damage: 280, penetration: 60, reload: 1100 },
+    { name: "LAU-68", type: "Rocket Pod", damage: 260, penetration: 55, reload: 1050 },
+    { name: "AIM-92", type: "Short-Range AAM", damage: 2500, penetration: 100, reload: 5000 },
+    { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 13000, penetration: 950, reload: 15500 },
+    { name: "GAU-19 MH-6 (12.7mm)", type: "Heavy MG", damage: 45, penetration: 42, reload: 90 }
   ],
   modules: {
     engine: [
@@ -7195,14 +7261,12 @@ const VEHICLES_DATA = [
   description: "Light Chinese helicopter (Changhe Z-11WB) with multiple light ATGM/rocket options.",
   stats: { health: 18421, speed: 170, verticalSpeed: 44, agility: 40 },
   weapons: [
-    { name: "AKD-9", type: "ATGM", damage: 2200, penetration: 150 },
-    { name: "AKD-10", type: "ATGM", damage: 2800, penetration: 180 },
-    { name: "TY-90", type: "Air-to-Air Missile", damage: 1800, penetration: 90 },
-    { name: "HJ-8E", type: "ATGM", damage: 2500, penetration: 170 },
-    { name: "Type 57-1", type: "Rocket Pod", damage: 750, penetration: 50 },
-    { name: "Type 90", type: "Rocket Pod", damage: 800, penetration: 55 },
-    { name: "TL-6", type: "Light Anti-Ship Missile", damage: 3200, penetration: 200 },
-    { name: "FS-70", type: "Rocket Pod", damage: 780, penetration: 50 }
+    { name: "HJ-8E", type: "Anti-Tank Missile", damage: 14000, penetration: 950, reload: 16000 },
+    { name: "TYPE 57-1", type: "Rocket Pod", damage: 250, penetration: 50, reload: 1000 },
+    { name: "TY-90", type: "Short-Range AAM", damage: 3000, penetration: 120, reload: 5200 },
+    { name: "AKD-9", type: "Air-to-Ground Missile", damage: 10000, penetration: 850, reload: 14000 },
+    { name: "SW6-Drone", type: "Loitering Munition", damage: 8000, penetration: 800, reload: 20000 },
+    { name: "CS-LM12(7.62mm)", type: "MG", damage: 25, penetration: 20, reload: 80 }
   ],
   modules: {
     engine: [
