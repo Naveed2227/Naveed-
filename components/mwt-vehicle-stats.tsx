@@ -16355,7 +16355,7 @@ function CookieConsentBanner() {
                   Our website uses cookies
                 </h3>
                 <p className="text-sm text-blue-700 dark:text-blue-300">
-                  We use cookies to improve your experience and analyze site traffic. You can manage your preferences at any time.
+                  We use cookies to enhance your experience in MWT Assistant.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3">
