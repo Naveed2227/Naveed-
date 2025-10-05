@@ -10384,7 +10384,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
 
   // Load favorites from IndexedDB on component mount
   useEffect(() => {
-    if (typeof window !== 'undefined' !dbInitialized) {
+    if (typeof window !== 'undefined' && !dbInitialized) {
       getFavorites().then(favs => {
         setFavorites(favs);
         setDbInitialized(true);
