@@ -10292,34 +10292,124 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
   );
 };
 
+// Initialize IndexedDB
+const initDB = () => {
+  if (!('indexedDB' in window)) {
+    console.warn('IndexedDB not supported');
+    return Promise.resolve(null);
+  }
+
+  return new Promise<IDBDatabase>((resolve, reject) => {
+    const request = indexedDB.open('MWTVehicleFavoritesDB', 1);
+
+    request.onerror = () => {
+      console.error('Error opening database');
+      reject('Error opening database');
+    };
+
+    request.onsuccess = () => {
+      resolve(request.result);
+    };
+
+    request.onupgradeneeded = (event) => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains('favorites')) {
+        db.createObjectStore('favorites', { keyPath: 'id' });
+      }
+    };
+  });
+};
+
+// Get favorites from IndexedDB
+const getFavorites = async (): Promise<Set<string>> => {
+  if (!('indexedDB' in window)) return new Set<string>();
+  
+  try {
+    const db = await initDB();
+    if (!db) return new Set<string>();
+    
+    return new Promise((resolve) => {
+      const transaction = db.transaction(['favorites'], 'readonly');
+      const store = transaction.objectStore('favorites');
+      const request = store.getAll();
+      
+      request.onsuccess = () => {
+        const favorites = new Set<string>(request.result.map(item => item.id));
+        resolve(favorites);
+      };
+      
+      request.onerror = () => {
+        console.error('Error getting favorites');
+        resolve(new Set<string>());
+      };
+    });
+  } catch (error) {
+    console.error('Error accessing IndexedDB:', error);
+    return new Set<string>();
+  }
+};
+
+// Toggle favorite in IndexedDB
+const toggleFavoriteInDB = async (vehicleId: string, isFavorite: boolean): Promise<boolean> => {
+  if (!('indexedDB' in window)) return false;
+  
+  try {
+    const db = await initDB();
+    if (!db) return false;
+    
+    return new Promise((resolve) => {
+      const transaction = db.transaction(['favorites'], 'readwrite');
+      const store = transaction.objectStore('favorites');
+      
+      if (isFavorite) {
+        const request = store.delete(vehicleId);
+        request.onsuccess = () => resolve(true);
+        request.onerror = () => resolve(false);
+      } else {
+        const request = store.add({ id: vehicleId, timestamp: Date.now() });
+        request.onsuccess = () => resolve(true);
+        request.onerror = () => resolve(false);
+      }
+    });
+  } catch (error) {
+    console.error('Error toggling favorite:', error);
+    return false;
+  }
+};
+
 const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   // State for favorite vehicles
-  const [favorites, setFavorites] = useState<Set<string>>(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('favoriteVehicles');
-      return new Set(saved ? JSON.parse(saved) : []);
-    }
-    return new Set<string>();
-  });
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [dbInitialized, setDbInitialized] = useState(false);
 
-  // Save favorites to localStorage when they change
+  // Load favorites from IndexedDB on component mount
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('favoriteVehicles', JSON.stringify(Array.from(favorites)));
+    if (typeof window !== 'undefined' !dbInitialized) {
+      getFavorites().then(favs => {
+        setFavorites(favs);
+        setDbInitialized(true);
+      });
     }
-  }, [favorites]);
+  }, [dbInitialized]);
 
   // Toggle favorite status for a vehicle
-  const toggleFavorite = (vehicleId: string) => {
-    setFavorites(prev => {
-      const newFavorites = new Set(prev);
-      if (newFavorites.has(vehicleId)) {
-        newFavorites.delete(vehicleId);
-      } else {
-        newFavorites.add(vehicleId);
-      }
-      return newFavorites;
-    });
+  const toggleFavorite = async (vehicleId: string) => {
+    const isCurrentlyFavorite = favorites.has(vehicleId);
+    const success = await toggleFavoriteInDB(vehicleId, isCurrentlyFavorite);
+    
+    if (success) {
+      setFavorites(prev => {
+        const newFavorites = new Set(prev);
+        if (isCurrentlyFavorite) {
+          newFavorites.delete(vehicleId);
+        } else {
+          newFavorites.add(vehicleId);
+        }
+        return newFavorites;
+      });
+    } else {
+      console.error('Failed to update favorite status');
+    }
   };
 
   // Add Google AdSense script to document head
