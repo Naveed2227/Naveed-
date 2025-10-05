@@ -14,6 +14,16 @@ export const metadata: Metadata = {
   generator: "v0.dev",
 }
 
+// This is a Client Component
+'use client';
+
+import dynamic from 'next/dynamic';
+
+// Dynamically import CookieBanner with SSR disabled
+const CookieBanner = dynamic(() => import('../components/CookieBanner'), {
+  ssr: false,
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,7 +39,12 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} min-h-screen flex flex-col`}>
+        <main className="flex-1">
+          {children}
+        </main>
+        <CookieBanner />
+      </body>
     </html>
   )
 }
