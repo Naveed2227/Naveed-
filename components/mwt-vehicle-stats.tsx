@@ -10292,7 +10292,59 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
   );
 };
 
-const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
+// Chat message type
+type ChatMessage = {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string | {
+    type: string;
+    [key: string]: any;
+  };
+  timestamp: Date;
+};
+
+// Vehicle type
+type Vehicle = {
+  id: string;
+  name: string;
+  type: string;
+  tier: string | number;
+  faction: string;
+  stats: {
+    health?: number;
+    speed?: number;
+    armor?: number;
+    agility?: number;
+    [key: string]: any;
+  };
+  isPremium?: boolean;
+  isMarket?: boolean;
+  description?: string;
+  image?: string;
+  [key: string]: any;
+};
+
+interface Vehicle {
+  id: string;
+  name: string;
+  type: string;
+  tier: string | number;
+  faction: string;
+  stats: {
+    health?: number;
+    speed?: number;
+    armor?: number;
+    agility?: number;
+    [key: string]: any;
+  };
+  isPremium?: boolean;
+  isMarket?: boolean;
+  description?: string;
+  image?: string;
+  [key: string]: any;
+}
+
+const MwtVehicleStats = ({ vehicles: initialVehicles }: { vehicles: Vehicle[] }) => {
   // Add Google AdSense script to document head
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -10354,6 +10406,241 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('English');
   const [translations, setTranslations] = useState(englishTranslations);
+  
+  // Chat state - moved to the top of the component to avoid redeclaration
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+    {
+      id: '1',
+      role: 'assistant',
+      content: 'Hello! I\'m your MW:RTI assistant. I can help you with vehicle information, comparisons, and recommendations. What would you like to know?',
+      timestamp: new Date()
+    }
+  ]);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+  
+  // Scroll to bottom of chat when messages change
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages]);
+  
+  // Handle best vehicle queries (e.g., "best american tank")
+  const handleBestVehicleQuery = async (message: string): Promise<ChatMessage['content'] | null> => {
+    // Skip if not a best vehicle query
+    if (!message.toLowerCase().startsWith('best ')) return null;
+    const bestMatch = message.match(/best\s+(\w+)(?:\s+(tank|jet|helicopter|ifv|spaa|artillery|vehicle))?/i);
+    if (!bestMatch) return null;
+
+    let [, country, vehicleType] = bestMatch;
+    if (!vehicleType) vehicleType = 'vehicle'; // Default to all vehicle types if not specified
+    const normalizedCountry = country.toLowerCase();
+    const normalizedType = vehicleType.toLowerCase();
+
+    // Map vehicle types to match your data structure
+    const typeMap: Record<string, string[]> = {
+      'tank': ['main battle tank', 'light tank', 'medium tank', 'heavy tank'],
+      'jet': ['fighter', 'attacker', 'bomber'],
+      'helicopter': ['attack helicopter', 'scout helicopter'],
+      'ifv': ['ifv', 'infantry fighting vehicle'],
+      'spaa': ['spaa', 'self-propelled anti-aircraft'],
+      'artillery': ['self-propelled artillery'],
+      'vehicle': [] // All types
+    };
+
+    // Get valid types to search for
+    const searchTypes = typeMap[normalizedType] || [];
+    
+    // Find matching vehicles
+    const matchingVehicles = VEHICLES.filter(vehicle => {
+      const matchesCountry = vehicle.faction.toLowerCase().includes(normalizedCountry);
+      const matchesType = searchTypes.length === 0 
+        ? true 
+        : searchTypes.some(type => vehicle.type.toLowerCase().includes(type));
+      
+      return matchesCountry && matchesType;
+    });
+
+    if (matchingVehicles.length === 0) {
+      return `I couldn't find any ${vehicleType}s for ${country}. Try another country or vehicle type.`;
+    }
+
+    // Sort by tier (descending) and then by health (descending)
+    const sortedVehicles = [...matchingVehicles].sort((a, b) => {
+      // Convert tier to number for comparison (handle Roman numerals if needed)
+      const tierA = typeof a.tier === 'string' ? parseInt(a.tier.replace(/[^0-9]/g, '')) || 0 : a.tier || 0;
+      const tierB = typeof b.tier === 'string' ? parseInt(b.tier.replace(/[^0-9]/g, '')) || 0 : b.tier || 0;
+      
+      if (tierB !== tierA) return tierB - tierA; // Higher tier first
+      return (b.stats.health || 0) - (a.stats.health || 0); // Then by health
+    });
+
+    const topVehicles = sortedVehicles.slice(0, 3); // Get top 3
+
+    return {
+      type: 'vehicle_list',
+      title: `Best ${country} ${vehicleType}s`,
+      vehicles: topVehicles,
+      message: `Here are the top ${topVehicles.length} ${country} ${vehicleType}s based on tier and stats:`,
+      showMore: sortedVehicles.length > 3
+    };
+  };
+
+  // Process user message and generate response
+  const processMessage = async (message: string): Promise<ChatMessage['content']> => {
+    const lowerMessage = message.toLowerCase();
+    
+    // Handle best vehicle queries first
+    const bestVehicleResponse = await handleBestVehicleQuery(message);
+    if (bestVehicleResponse) return bestVehicleResponse;
+    
+    // Handle greetings
+    if (/(hi|hello|hey|greetings|howdy)/i.test(message)) {
+      return "Hello! How can I assist you with MW:RTI vehicles today?";
+    }
+    
+    // Handle thanks
+    if (/(thanks|thank you|appreciate|thx)/i.test(message)) {
+      return ["You're welcome!", "Happy to help!", "Anytime!"][Math.floor(Math.random() * 3)];
+    }
+    
+    // Handle vehicle information requests
+    const vehicleInfoMatch = message.match(/(?:tell me about|info on|what is(?: the)?|show me)\s+([\w\s]+)/i);
+    if (vehicleInfoMatch) {
+      const vehicleName = vehicleInfoMatch[1].trim();
+      const vehicle = VEHICLES.find(v => 
+        v.name.toLowerCase().includes(vehicleName.toLowerCase())
+      );
+      
+      if (vehicle) {
+        return {
+          type: 'vehicle_details',
+          vehicle: {
+            ...vehicle,
+            // Format tier if needed
+            tier: formatTier(vehicle.tier)
+          },
+          context: `Here's what I found about the ${vehicle.name}:`
+        };
+      }
+      return `I couldn't find a vehicle named "${vehicleName}". Could you try a different name?`;
+    }
+    
+    // Handle comparison queries
+    if (lowerMessage.includes('compare') || lowerMessage.includes('vs') || lowerMessage.includes('versus')) {
+      const vehicles = message
+        .split(/(?:vs\.?|versus|compare)/i)
+        .map(s => s.trim())
+        .filter(Boolean);
+      
+      if (vehicles.length >= 2) {
+        const vehicle1 = VEHICLES.find(v => 
+          v.name.toLowerCase().includes(vehicles[0].toLowerCase())
+        );
+        const vehicle2 = VEHICLES.find(v => 
+          v.name.toLowerCase().includes(vehicles[1].toLowerCase())
+        );
+        
+        if (vehicle1 && vehicle2) {
+          return {
+            type: 'vehicle_comparison',
+            vehicles: [
+              { ...vehicle1, flag: getFlagImage(vehicle1.faction) },
+              { ...vehicle2, flag: getFlagImage(vehicle2.faction) }
+            ],
+            analysis: {
+              survivability: vehicle1.stats.health > vehicle2.stats.health ? vehicle1.name : vehicle2.name,
+              survivabilityValue: Math.max(vehicle1.stats.health || 0, vehicle2.stats.health || 0),
+              speed: (vehicle1.stats.speed || 0) > (vehicle2.stats.speed || 0) ? vehicle1.name : vehicle2.name,
+              speedValue: Math.max(vehicle1.stats.speed || 0, vehicle2.stats.speed || 0),
+              agility: (vehicle1.stats.agility || 0) > (vehicle2.stats.agility || 0) ? vehicle1.name : vehicle2.name,
+              agilityValue: Math.max(vehicle1.stats.agility || 0, vehicle2.stats.agility || 0),
+              tier: vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name
+            },
+            recommendation: vehicle1.tier > vehicle2.tier ? vehicle1.name : vehicle2.name
+          };
+        }
+        return "I couldn't find one of the vehicles you mentioned. Please check the names and try again.";
+      }
+    }
+    
+    // Handle list queries
+    if (lowerMessage.includes('list') || lowerMessage.includes('show me') || lowerMessage.includes('what are')) {
+      // List premium vehicles
+      if (lowerMessage.includes('premium') || lowerMessage.includes('market')) {
+        const isPremium = lowerMessage.includes('premium');
+        const vehicles = VEHICLES.filter(v => isPremium ? v.isPremium : v.isMarket);
+        
+        if (vehicles.length > 0) {
+          return {
+            type: 'vehicle_list',
+            title: `${isPremium ? 'Premium' : 'Market'} Vehicles`,
+            vehicles: vehicles.slice(0, 5), // Show first 5
+            message: `Here are some ${isPremium ? 'premium' : 'market'} vehicles:`,
+            showMore: vehicles.length > 5
+          };
+        }
+        return `I couldn't find any ${isPremium ? 'premium' : 'market'} vehicles.`;
+      }
+    }
+    
+    // Default response for unclear queries
+    return "I'm not sure I understand. Could you rephrase your question? I can help with vehicle stats, comparisons, and recommendations.";
+  };
+  
+  // Handle sending a message
+  const handleSendMessage = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    const message = chatInput.trim();
+    if (!message) return;
+    
+    // Add user message to chat
+    const userMessage: ChatMessage = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: message,
+      timestamp: new Date()
+    };
+    
+    setChatMessages(prev => [...prev, userMessage]);
+    setChatInput('');
+    setIsTyping(true);
+    
+    try {
+      // Process the message and get response
+      const response = await processMessage(message);
+      
+      // Add assistant's response to chat
+      const assistantMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: response,
+        timestamp: new Date()
+      };
+      
+      setChatMessages(prev => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error('Error processing message:', error);
+      const errorMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: 'Sorry, I encountered an error processing your request. Please try again.',
+        timestamp: new Date()
+      };
+      setChatMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
+  
+  // Handle pressing Enter to send message
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
 
   // Translation function
   const t = (key: string) => {
@@ -16072,10 +16359,201 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           </div>
         </div>
       </div>
+
+      {/* Chat Interface */}
+      <div className="fixed bottom-0 right-0 z-50 flex flex-col items-end mb-4 mr-4">
+        {/* Chat Toggle Button */}
+        <button
+          onClick={() => setChatOpen(!chatOpen)}
+          className="bg-cyan-600 hover:bg-cyan-700 text-white rounded-full p-3 shadow-lg transition-all duration-200 flex items-center justify-center"
+          aria-label={chatOpen ? 'Close chat' : 'Open chat'}
+        >
+          {chatOpen ? <X size={24} /> : <BotMessageSquareIcon size={24} />}
+        </button>
+
+        {/* Chat Container */}
+        <AnimatePresence>
+          {chatOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              transition={{ duration: 0.2, ease: 'easeInOut' }}
+              className="w-80 h-[500px] bg-slate-800 rounded-lg shadow-xl flex flex-col mt-2 overflow-hidden border border-slate-700"
+            >
+              {/* Chat Header */}
+              <div className="bg-slate-800 p-3 border-b border-slate-700 flex justify-between items-center">
+                <div className="flex items-center">
+                  <BotMessageSquareIcon className="text-cyan-400 mr-2" />
+                  <h3 className="font-medium text-white">MW:RTI Assistant</h3>
+                </div>
+                <button
+                  onClick={() => setChatOpen(false)}
+                  className="text-slate-400 hover:text-white p-1 rounded-full hover:bg-slate-700"
+                  aria-label="Close chat"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Messages Container */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                {chatMessages.map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div
+                      className={`max-w-[80%] rounded-lg p-3 ${
+                        msg.role === 'user'
+                          ? 'bg-cyan-600 text-white rounded-tr-none'
+                          : 'bg-slate-700 text-slate-200 rounded-tl-none'
+                      }`}
+                    >
+                      {renderMessageContent(msg.content)}
+                      <div className="text-xs mt-1 opacity-60 text-right">
+                        {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {isTyping && (
+                  <div className="flex items-center space-x-1 p-2">
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                  </div>
+                )}
+                <div ref={chatEndRef} />
+              </div>
+
+              {/* Input Area */}
+              <div className="p-3 border-t border-slate-700">
+                <form onSubmit={handleSendMessage} className="flex space-x-2">
+                  <input
+                    type="text"
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Ask me about vehicles..."
+                    className="flex-1 bg-slate-700 text-white rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                    disabled={isTyping}
+                  />
+                  <button
+                    type="submit"
+                    className="bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg p-2 disabled:opacity-50"
+                    disabled={!chatInput.trim() || isTyping}
+                  >
+                    <Send size={20} />
+                  </button>
+                </form>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   )
 }
 
+// Render different message types
+function renderMessageContent(content: ChatMessage['content']) {
+  if (typeof content === 'string') {
+    return <p className="whitespace-pre-wrap">{content}</p>;
+  }
+
+  switch (content.type) {
+    case 'vehicle_details':
+      return (
+        <div className="space-y-2">
+          <h4 className="font-bold text-cyan-300">{content.vehicle.name}</h4>
+          <div className="grid grid-cols-2 gap-2 text-sm">
+            <div>Type: <span className="font-medium">{content.vehicle.type}</span></div>
+            <div>Faction: <span className="font-medium">{content.vehicle.faction}</span></div>
+            <div>Tier: <span className="font-medium">{content.vehicle.tier}</span></div>
+            {content.vehicle.stats.health && (
+              <div>Health: <span className="font-medium">{content.vehicle.stats.health}</span></div>
+            )}
+            {content.vehicle.stats.speed && (
+              <div>Speed: <span className="font-medium">{content.vehicle.stats.speed}</span></div>
+            )}
+            {content.vehicle.stats.armor && (
+              <div>Armor: <span className="font-medium">{content.vehicle.stats.armor}</span></div>
+            )}
+          </div>
+          {content.vehicle.description && (
+            <p className="text-sm mt-2">{content.vehicle.description}</p>
+          )}
+        </div>
+      );
+
+    case 'vehicle_list':
+      return (
+        <div className="space-y-2">
+          <h4 className="font-bold text-cyan-300">{content.title}</h4>
+          <p className="text-sm">{content.message}</p>
+          <div className="space-y-3 mt-2">
+            {content.vehicles.map((vehicle, index) => (
+              <div key={index} className="bg-slate-700/50 p-2 rounded-lg">
+                <div className="font-medium">{vehicle.name}</div>
+                <div className="text-xs text-slate-300">
+                  {vehicle.type} • {vehicle.faction} • {formatTier(vehicle.tier)}
+                </div>
+                <div className="text-xs mt-1">
+                  {vehicle.stats.health && `HP: ${vehicle.stats.health} `}
+                  {vehicle.stats.speed && `• Speed: ${vehicle.stats.speed} `}
+                  {vehicle.stats.armor && `• Armor: ${vehicle.stats.armor}`}
+                </div>
+              </div>
+            ))}
+          </div>
+          {content.showMore && (
+            <p className="text-xs text-slate-400 mt-2">And {content.vehicles.length - 3} more... Be more specific to see all results.</p>
+          )}
+        </div>
+      );
+
+    case 'vehicle_comparison':
+      const [v1, v2] = content.vehicles;
+      return (
+        <div className="space-y-3">
+          <h4 className="font-bold text-cyan-300">Comparison</h4>
+          <div className="grid grid-cols-2 gap-2 text-sm">
+            <div className="text-center font-medium">{v1.name}</div>
+            <div className="text-center font-medium">{v2.name}</div>
+            
+            <div className="text-right">Tier:</div>
+            <div className="text-center">{v1.tier}</div>
+            <div className="text-center">{v2.tier}</div>
+            
+            <div className="text-right">Health:</div>
+            <div className="text-center">{v1.stats.health || 'N/A'}</div>
+            <div className="text-center">{v2.stats.health || 'N/A'}</div>
+            
+            <div className="text-right">Speed:</div>
+            <div className="text-center">{v1.stats.speed || 'N/A'}</div>
+            <div className="text-center">{v2.stats.speed || 'N/A'}</div>
+            
+            <div className="text-right">Armor:</div>
+            <div className="text-center">{v1.stats.armor || 'N/A'}</div>
+            <div className="text-center">{v2.stats.armor || 'N/A'}</div>
+          </div>
+          <div className="mt-2 p-2 bg-slate-700/50 rounded text-sm">
+            <p className="font-medium">Analysis:</p>
+            <ul className="list-disc pl-5 mt-1 space-y-1">
+              <li>Higher survivability: {content.analysis.survivability} ({content.analysis.survivabilityValue} HP)</li>
+              <li>Faster: {content.analysis.speed} ({content.analysis.speedValue})</li>
+              <li>Higher tier: {content.analysis.tier}</li>
+            </ul>
+            <p className="mt-2 font-medium">Recommendation: {content.recommendation}</p>
+          </div>
+        </div>
+      );
+
+    default:
+      return <p className="text-red-400">[Unsupported message format]</p>;
+  }
+}
 
 export default function Page() {
   return <MwtVehicleStats vehicles={VEHICLES_DATA} />
