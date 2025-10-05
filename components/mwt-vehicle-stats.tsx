@@ -16295,14 +16295,14 @@ function CookieConsentBanner() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex-1 text-blue-50">
             <h3 className="text-lg font-bold mb-1">We Value Your Privacy</h3>
-            <p className="text-blue-100 text-sm">
+            <p className="text-blue-100 text-sm mb-3">
               We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
             </p>
             
             {showDetails && (
-              <div className="mt-3 p-3 bg-blue-700/50 rounded-lg">
-                <p className="text-sm mb-2">We use the following types of cookies:</p>
-                <ul className="text-xs space-y-1">
+              <div className="mt-2 p-3 bg-blue-700/50 rounded-lg mb-3">
+                <p className="text-sm font-medium mb-2">We use the following types of cookies:</p>
+                <ul className="text-xs space-y-1 text-blue-100">
                   <li>• <strong>Essential</strong> - Necessary for the website to function</li>
                   <li>• <strong>Analytics</strong> - Help us understand how visitors interact</li>
                   <li>• <strong>Preferences</strong> - Remember your settings and preferences</li>
@@ -16312,9 +16312,9 @@ function CookieConsentBanner() {
             
             <button 
               onClick={() => setShowDetails(!showDetails)}
-              className="mt-2 text-blue-200 hover:text-white text-xs font-medium transition-colors flex items-center"
+              className="text-blue-200 hover:text-white text-xs font-medium transition-colors flex items-center"
             >
-              {showDetails ? 'Show less' : 'Cookie preferences'}
+              {showDetails ? 'Show less' : 'Learn more about cookies'}
               <svg 
                 className={`w-4 h-4 ml-1 transition-transform ${showDetails ? 'rotate-180' : ''}`} 
                 fill="none" 
@@ -16326,35 +16326,25 @@ function CookieConsentBanner() {
             </button>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <button
               onClick={savePreferences}
-              className="px-4 py-2 text-blue-100 hover:text-white font-medium text-sm transition-colors whitespace-nowrap"
+              className="px-4 py-2 text-blue-100 hover:text-white font-medium text-sm transition-colors whitespace-nowrap hover:bg-blue-500/20 rounded-md"
             >
               Customize
             </button>
             <button
               onClick={rejectCookies}
-              className="px-4 py-2 bg-transparent border-2 border-blue-300 text-blue-100 hover:bg-blue-500/20 font-medium rounded-md transition-colors whitespace-nowrap"
+              className="px-4 py-2 bg-transparent border-2 border-blue-400 text-white hover:bg-blue-500/30 font-medium rounded-md transition-colors whitespace-nowrap"
             >
               Reject All
             </button>
             <button
               onClick={acceptCookies}
-              className="px-6 py-2 bg-blue-500 hover:bg-blue-400 text-white font-medium rounded-md shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 whitespace-nowrap"
+              className="px-6 py-2 bg-white text-blue-700 hover:bg-blue-50 font-medium rounded-md shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5 whitespace-nowrap"
             >
               Accept All
             </button>
-          </div>
-      <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex-1">
-            <h3 className="text-base font-semibold text-blue-900 dark:text-blue-100 mb-1">
-              Our website uses cookies
-            </h3>
-            <p className="text-sm text-blue-700 dark:text-blue-300">
-              We use cookies to improve your experience and analyze site traffic. You can manage your preferences at any time.
-            </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
             <button
