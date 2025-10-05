@@ -1,8 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera } from "lucide-react"
-import FavouriteButton from "./FavouriteButton"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { vehicleCurrencyData } from './currency'
 import { urduTranslations, getUrduTranslation } from './Urdu'
@@ -14299,11 +14298,32 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
               <div className="flex items-start justify-between gap-3 mb-3 sm:mb-4">
                 <p className="text-slate-300 text-xs sm:text-sm leading-relaxed flex-1">{vehicle.description}</p>
-                <FavouriteButton
-                  isFavourite={favorites.has(vehicle.id)}
-                  onClick={() => toggleFavorite(vehicle.id)}
-                  className="-mt-1 -mr-1"
-                />
+                <motion.button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleFavorite(vehicle.id);
+                  }}
+                  className="p-1.5 -mt-1 -mr-1 rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 flex-shrink-0"
+                  aria-label={favorites.has(vehicle.id) ? 'Remove from favorites' : 'Add to favorites'}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      scale: favorites.has(vehicle.id) ? [1, 1.2, 1] : 1,
+                    }}
+                    transition={{
+                      scale: { duration: 0.3, type: 'spring', stiffness: 500, damping: 15 },
+                    }}
+                  >
+                    <Heart
+                      className={`w-6 h-6 transition-colors duration-300 ${
+                        favorites.has(vehicle.id) ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"
+                      }`}
+                    />
+                  </motion.div>
+                </motion.button>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-3 sm:mb-4">
