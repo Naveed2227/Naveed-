@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera } from "lucide-react"
+import FavouriteButton from "./FavouriteButton"
 import { useRouter } from "next/navigation"
 import { vehicleCurrencyData } from './currency'
 import { urduTranslations, getUrduTranslation } from './Urdu'
@@ -10381,6 +10382,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   // State for favorite vehicles
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [dbInitialized, setDbInitialized] = useState(false);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
   // Load favorites from IndexedDB on component mount
   useEffect(() => {
@@ -11927,7 +11929,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     const matchesCountry = countryFilter.length === 0 || countryFilter.includes(vehicle.faction)
     const matchesRarity = rarityFilter.length === 0 || rarityFilter.includes(getVehicleRarity(vehicle.name))
     const matchesObtainMethod = obtainMethodFilter.length === 0 || obtainMethodFilter.includes(getVehicleObtainMethod(vehicle.name))
-    return matchesSearch && matchesType && matchesTier && matchesCountry && matchesRarity && matchesObtainMethod
+    const matchesFavorites = !showFavoritesOnly || favorites.has(vehicle.id)
+    return matchesSearch && matchesType && matchesTier && matchesCountry && matchesRarity && matchesObtainMethod && matchesFavorites
   })
 
   const indexOfLastVehicle = currentPage * vehiclesPerPage
@@ -13010,6 +13013,37 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 )}
                 
                 <div className="space-y-6 relative">
+                  {/* Favorites Toggle */}
+                  <div className="mb-4">
+                    <motion.label
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
+                      className={`flex items-center gap-3 p-4 rounded-xl ${favorites.size > 0 ? 'bg-pink-700/50 hover:bg-pink-700/80 border-pink-600/50' : 'bg-slate-700/50 hover:bg-slate-700/80 border-slate-600/50'} border transition-all duration-200 cursor-pointer`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={showFavoritesOnly}
+                        onChange={() => setShowFavoritesOnly(!showFavoritesOnly)}
+                        className="hidden"
+                      />
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center ${showFavoritesOnly ? 'bg-pink-500' : 'bg-slate-600'}`}>
+                        {showFavoritesOnly && (
+                          <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        )}
+                      </div>
+                      <span className={`text-base font-medium ${showFavoritesOnly ? 'text-pink-300' : 'text-slate-300'}`}>
+                        Show Favorites Only
+                      </span>
+                      {favorites.size > 0 && (
+                        <span className="ml-auto bg-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                          {favorites.size}
+                        </span>
+                      )}
+                    </motion.label>
+                  </div>
+                  
                   {/* Type Filter */}
                   <div className="space-y-3">
                     <motion.button
@@ -14265,31 +14299,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
               <div className="flex items-start justify-between gap-3 mb-3 sm:mb-4">
                 <p className="text-slate-300 text-xs sm:text-sm leading-relaxed flex-1">{vehicle.description}</p>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleFavorite(vehicle.id);
-                  }}
-                  className="p-1.5 -mt-1 -mr-1 rounded-full hover:bg-slate-700/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 flex-shrink-0"
-                  aria-label={favorites.has(vehicle.id) ? 'Remove from favorites' : 'Add to favorites'}
-                >
-                  <motion.svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill={favorites.has(vehicle.id) ? 'currentColor' : 'none'}
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className={`w-5 h-5 ${favorites.has(vehicle.id) ? 'text-red-500' : 'text-slate-400 hover:text-red-500'}`}
-                    initial={false}
-                    animate={{ scale: favorites.has(vehicle.id) ? [1, 1.2, 1] : 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                  </motion.svg>
-                </button>
+                <FavouriteButton
+                  isFavourite={favorites.has(vehicle.id)}
+                  onClick={() => toggleFavorite(vehicle.id)}
+                  className="-mt-1 -mr-1"
+                />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-3 sm:mb-4">
