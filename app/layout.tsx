@@ -1,70 +1,35 @@
-'use client'
-
-import { useEffect } from 'react'
-import dynamic from 'next/dynamic'
+import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from 'next/font/google'
+import { Inter, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
+const v0FontGeist = V0_Font_Geist({ subsets: ["latin"], weight: ["100","200","300","400","500","600","700","800","900"], preload: false })
+const v0FontGeistMono = V0_Font_Geist_Mono({ subsets: ["latin"], weight: ["100","200","300","400","500","600","700","800","900"], preload: false })
+const v0FontSourceSerif4 = V0_Font_Source_Serif_4({ subsets: ["latin"], weight: ["200","300","400","500","600","700","800","900"], preload: false })
 
-const CookieBanner = dynamic(() => import('../components/CookieBanner'), {
-  ssr: false,
-})
-
-// Client Layout Component
-function ClientLayout({ children }: { children: React.ReactNode }) {
-  // Initialize ads safely
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        // @ts-ignore
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      } catch (err) {
-        console.error('Failed to initialize ads:', err);
-      }
-    }
-  }, [])
-
-  return (
-    <>
-      <main className="flex-1">
-        {children}
-      </main>
-      <CookieBanner />
-    </>
-  )
-}
-
-// This is a Server Component with client components inside
 export const metadata: Metadata = {
   title: "v0 App",
   description: "Created with v0",
-  generator: "v0.app",
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
     <html lang="en">
       <head>
-        {/* Google AdSense Script - Only load once */}
-        <script 
-          async 
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR-PUBLISHER-ID" 
+        {/* Google AdSense Script */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
           crossOrigin="anonymous"
-          data-ad-client="ca-pub-YOUR-PUBLISHER-ID"
-          data-check-loaded="true"
         />
       </head>
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
-        <ClientLayout>
-          {children}
-        </ClientLayout>
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }
