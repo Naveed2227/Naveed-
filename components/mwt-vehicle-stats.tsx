@@ -16256,6 +16256,46 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 }
 
 
+function CookieConsentBanner() {
+  const [showBanner, setShowBanner] = React.useState(false);
+
+  useEffect(() => {
+    // Check if cookiesAccepted cookie exists
+    setShowBanner(!document.cookie.includes('cookiesAccepted=true'));
+  }, []);
+
+  const acceptCookies = () => {
+    // Set cookie to expire in 1 year
+    document.cookie = "cookiesAccepted=true; max-age=" + 60 * 60 * 24 * 365 + "; path=/";
+    setShowBanner(false);
+  };
+
+  if (!showBanner) return null;
+
+  return (
+    <div className="fixed bottom-4 right-4 z-50">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div className="p-4">
+          <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+            We use cookies to improve your experience.
+          </p>
+          <button
+            onClick={acceptCookies}
+            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-2 px-4 rounded-md transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            Accept All Cookies
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Page() {
-  return <MwtVehicleStats vehicles={VEHICLES_DATA} />
+  return (
+    <>
+      <MwtVehicleStats vehicles={VEHICLES_DATA} />
+      <CookieConsentBanner />
+    </>
+  )
 }
