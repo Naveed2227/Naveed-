@@ -13598,7 +13598,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                          lg:w-[450px] lg:max-w-[450px]"
             >
               {/* Header */}
-              <div className="p-6 bg-gradient-to-r from-lime-400 to-blue-600 border-b border-purple-400/30">
+              <div className="p-6 bg-gradient-to-r from-blue-700 to-blue-500 border-b border-purple-400/30">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <Trophy className="w-8 h-8 text-yellow-400" />
