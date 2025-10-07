@@ -1,7 +1,8 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays } from "lucide-react"
+import { EventComponent } from './Event'
 import { useRouter } from "next/navigation"
 import { vehicleCurrencyData } from './currency'
 import { urduTranslations, getUrduTranslation } from './Urdu'
@@ -10562,6 +10563,8 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const [userEmail, setUserEmail] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
+  const [eventOpen, setEventOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<number | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState('English');
   const [translations, setTranslations] = useState(englishTranslations);
 
@@ -13040,6 +13043,19 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <Trophy className="w-5 h-5 text-yellow-400 group-hover:text-yellow-300" />
                     <span className="text-white font-medium group-hover:text-yellow-300 transition-colors duration-200">{t('menu.battlePass')}</span>
                   </motion.button>
+
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setEventOpen(true);
+                    }}
+                    className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                  >
+                    <Gift className="w-5 h-5 text-pink-400 group-hover:text-pink-300" />
+                    <span className="text-white font-medium group-hover:text-pink-300 transition-colors duration-200">Event</span>
+                  </motion.button>
                   
                   <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -13545,6 +13561,44 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         )}
       </AnimatePresence>
       
+      {/* Event Panel */}
+      <AnimatePresence>
+        {eventOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setEventOpen(false)}
+              className="fixed inset-0 bg-black/50 z-40"
+            />
+            
+            {/* Event Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              className="fixed top-0 right-0 bottom-0 w-full max-w-lg bg-slate-800/95 backdrop-blur-sm z-50 shadow-2xl border-l border-slate-700/50 overflow-y-auto"
+            >
+              <EventComponent 
+                onClose={() => setEventOpen(false)}
+                onVehicleSelect={(vehicleName) => {
+                  setSearchQuery(vehicleName);
+                  setEventOpen(false);
+                  // Find the vehicle in the VEHICLES array and expand it
+                  const vehicle = VEHICLES.find(v => v.name === vehicleName);
+                  if (vehicle) {
+                    setExpandedVehicle(vehicle.id.toString());
+                  }
+                }}
+              />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
@@ -13571,6 +13625,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           <span className="hidden md:block">BATTLE PASS</span>
         </div>
       </button>
+
 
       {/* Battle Pass Panel */}
       <AnimatePresence>
