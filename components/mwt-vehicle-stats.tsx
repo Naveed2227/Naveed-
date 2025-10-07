@@ -2,7 +2,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays } from "lucide-react"
-import { EventComponent } from './Event'
+import dynamic from 'next/dynamic';
+
+// Import EventComponent with SSR disabled to access window object
+const EventComponent = dynamic(() => import('./Event'), { ssr: false });
 import { useRouter } from "next/navigation"
 import { vehicleCurrencyData } from './currency'
 import { urduTranslations, getUrduTranslation } from './Urdu'
@@ -13576,11 +13579,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             
             {/* Event Panel */}
             <motion.div
-              initial={{ x: '100%' }}
+              initial={{ x: '-100%' }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
+              exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed top-0 right-0 bottom-0 w-full max-w-lg bg-slate-800/95 backdrop-blur-sm z-50 shadow-2xl border-l border-slate-700/50 overflow-y-auto"
+              className="fixed top-0 left-0 bottom-0 w-full max-w-lg bg-slate-800/95 backdrop-blur-sm z-50 shadow-2xl border-r border-slate-700/50 overflow-y-auto"
             >
               <EventComponent 
                 onClose={() => setEventOpen(false)}
