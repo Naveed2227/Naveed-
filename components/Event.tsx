@@ -102,15 +102,13 @@ export const EventComponent: React.FC<EventComponentProps> = ({ onClose, onVehic
       <div className="relative w-full max-w-md h-full bg-slate-800 border-r border-slate-600/50 shadow-2xl overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 z-10 bg-slate-800/90 backdrop-blur-sm p-4 border-b border-slate-700/50 flex justify-between items-center">
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl font-bold text-white">Special Events</h2>
-            <button
-              onClick={onClose}
-              className="text-white hover:text-purple-200 transition-colors p-2 hover:bg-white/10 rounded-lg"
-            >
-              <X className="w-6 h-6" />
-            </button>
-          </div>
+          <h2 className="text-xl font-bold text-white">Special Events</h2>
+          <button
+            onClick={onClose}
+            className="text-white hover:text-purple-200 transition-colors p-2 hover:bg-white/10 rounded-lg"
+          >
+            <X className="w-6 h-6" />
+          </button>
         </div>
 
         <div className="h-full overflow-y-auto p-4 bg-gradient-to-b from-slate-800 to-slate-900">
