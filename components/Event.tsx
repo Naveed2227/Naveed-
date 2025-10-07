@@ -88,7 +88,7 @@ interface EventComponentProps {
   onVehicleSelect: (vehicleName: string) => void;
 }
 
-export const EventComponent: React.FC<EventComponentProps> = ({ onClose, onVehicleSelect }) => {
+const EventComponent: React.FC<EventComponentProps> = ({ onClose, onVehicleSelect }) => {
   const [expandedEvent, setExpandedEvent] = useState<number | null>(null);
   const router = useRouter();
 
@@ -151,6 +151,7 @@ export const EventComponent: React.FC<EventComponentProps> = ({ onClose, onVehic
                       className={`w-4 h-4 ml-2 text-slate-400 transition-transform duration-300 ${expandedEvent === event.id ? 'rotate-90' : ''}`} 
                     />
                   </div>
+                </div>
                 
                 {/* Vehicles List - Animated */}
                 <AnimatePresence>
