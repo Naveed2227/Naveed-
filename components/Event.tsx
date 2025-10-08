@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
 // Lazy load components that might cause issues on the server
@@ -54,7 +55,7 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const router = typeof window !== 'undefined' ? require('next/router').useRouter() : null;
+  const router = useRouter();
 
   // Load vehicles data safely
   useEffect(() => {
@@ -130,8 +131,6 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
       thumbnail: `/vehicles/thumbnails/${imageName}.jpg`
     };
   }, [vehiclesData]);
-
-  const router = useRouter();
 
   const toggleExpand = (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
