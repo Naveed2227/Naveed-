@@ -44,18 +44,18 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // This effect runs only on the client
+    setIsClient(true);
+
     try {
-      // Set client-side flag
-      setIsClient(true);
-      
-      // Safely access VEHICLES if it exists
+      // Safely access VEHICLES, which is expected to be on the window object
       if (typeof window !== 'undefined' && (window as any).VEHICLES) {
-        setVehiclesData(Array.isArray((window as any).VEHICLES) ? (window as any).VEHICLES : []);
-      } else if (typeof VEHICLES !== 'undefined') {
-        // Fallback for direct VEHICLES reference if it exists
-        setVehiclesData(Array.isArray(VEHICLES) ? VEHICLES : []);
+        const vehicles = (window as any).VEHICLES;
+        setVehiclesData(Array.isArray(vehicles) ? vehicles : []);
+      } else {
+        // Data is not available, which might be expected during SSR or if the script failed
+        setVehiclesData([]);
       }
-      
       setError(null);
     } catch (err) {
       console.error('Error initializing vehicle data:', err);
@@ -108,6 +108,10 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
   };
 
   const formatDate = (dateString: string) => {
+    // Return raw date string during SSR to prevent hydration mismatch
+    if (!isClient) {
+      return dateString;
+    }
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
@@ -178,7 +182,7 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
 
                 return (
                   <div 
-                    key={`${event.id}-${i}`}
+                    key={vehicle.id || vehicle.name} // Use unique ID or fallback to name
                     className={`p-2 sm:p-3 rounded-lg border ${typeStyles.border} ${typeStyles.bg} hover:border-purple-500/50 transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-purple-500/10`}
                     onClick={(e) => handleVehicleClick(vehicle.name, e)}
                     role="button"
@@ -489,33 +493,34 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
 
   // Safely enrich vehicles with images, only on client-side
   const enrichedEvents = React.useMemo(() => {
-    if (!isClient || isLoading) return [];
-    
-    try {
-      return events.map(event => ({
-        ...event,
-        vehicles: event.vehicles.map(vehicle => {
-          try {
-            return {
-              ...vehicle,
-              ...getVehicleInfo(vehicle.name)
-            };
-          } catch (err) {
-            console.error(`Error processing vehicle ${vehicle.name}:`, err);
-            return {
-              ...vehicle,
-              image: '',
-              thumbnail: ''
-            };
-          }
-        })
-      }));
-    } catch (err) {
-      console.error('Error enriching events:', err);
-      setError('Failed to load events. Please try again later.');
-      return [];
-    }
-  }, [isClient, isLoading, events, vehiclesData]);
+    // Do not run on server or before client is ready
+    if (!isClient) return events.map(e => ({ ...e, vehicles: e.vehicles.map(v => ({...v, image: '', thumbnail: ''})) }));
+
+    return events.map(event => ({
+      ...event,
+      vehicles: event.vehicles.map(vehicle => {
+        try {
+          // getVehicleInfo is now safe to call on the client
+          const vehicleInfo = getVehicleInfo(vehicle.name);
+          return {
+            ...vehicle,
+            ...vehicleInfo,
+            // Ensure a unique ID for keys, fallback to name
+            id: vehicle.id || vehicle.name,
+          };
+        } catch (err) {
+          console.error(`Error processing vehicle ${vehicle.name}:`, err);
+          // Provide a safe fallback
+          return {
+            ...vehicle,
+            id: vehicle.id || vehicle.name,
+            image: '',
+            thumbnail: '',
+          };
+        }
+      })
+    }));
+  }, [isClient, events, vehiclesData]);
 
   // Render loading state
   if (isLoading) {
