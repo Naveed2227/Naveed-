@@ -21,21 +21,48 @@ interface Event {
   vehicles: Vehicle[];
 }
 
-// VEHICLES may come from an external source
-declare const VEHICLES: any[];
+// VEHICLES will be loaded client-side
+interface VehicleData {
+  id: number;
+  name: string;
+  type?: string;
+  faction?: string;
+  tier?: string | number;
+  role?: string;
+}
 
 interface EventListProps {
   onVehicleSelect?: (vehicleName: string) => void;
 }
 
 const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
-  const [vehiclesData, setVehiclesData] = useState<any[]>([]);
+  const [vehiclesData, setVehiclesData] = useState<VehicleData[]>([]);
   const [imageError, setImageError] = useState<Record<number, boolean>>({});
   const [expandedEvent, setExpandedEvent] = useState<number | null>(null);
+  const [isClient, setIsClient] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (typeof VEHICLES !== 'undefined') {
-      setVehiclesData(VEHICLES);
+    try {
+      // Set client-side flag
+      setIsClient(true);
+      
+      // Safely access VEHICLES if it exists
+      if (typeof window !== 'undefined' && (window as any).VEHICLES) {
+        setVehiclesData(Array.isArray((window as any).VEHICLES) ? (window as any).VEHICLES : []);
+      } else if (typeof VEHICLES !== 'undefined') {
+        // Fallback for direct VEHICLES reference if it exists
+        setVehiclesData(Array.isArray(VEHICLES) ? VEHICLES : []);
+      }
+      
+      setError(null);
+    } catch (err) {
+      console.error('Error initializing vehicle data:', err);
+      setError('Failed to load vehicle data. Please try refreshing the page.');
+      setVehiclesData([]);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -460,17 +487,80 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
   },
   ];
 
-  // Enrich vehicles with images
-  const enrichedEvents = events.map(event => ({
-    ...event,
-    vehicles: event.vehicles.map(vehicle => getVehicleInfo(vehicle.name))
-  }));
+  // Safely enrich vehicles with images, only on client-side
+  const enrichedEvents = React.useMemo(() => {
+    if (!isClient || isLoading) return [];
+    
+    try {
+      return events.map(event => ({
+        ...event,
+        vehicles: event.vehicles.map(vehicle => {
+          try {
+            return {
+              ...vehicle,
+              ...getVehicleInfo(vehicle.name)
+            };
+          } catch (err) {
+            console.error(`Error processing vehicle ${vehicle.name}:`, err);
+            return {
+              ...vehicle,
+              image: '',
+              thumbnail: ''
+            };
+          }
+        })
+      }));
+    } catch (err) {
+      console.error('Error enriching events:', err);
+      setError('Failed to load events. Please try again later.');
+      return [];
+    }
+  }, [isClient, isLoading, events, vehiclesData]);
+
+  // Render loading state
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[50vh] p-4">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500 mb-4"></div>
+        <p className="text-slate-300">Loading events...</p>
+      </div>
+    );
+  }
+
+  // Render error state
+  if (error) {
+    return (
+      <div className="bg-red-900/30 border border-red-700/50 rounded-lg p-6 max-w-2xl mx-auto my-8">
+        <h3 className="text-xl font-bold text-red-400 mb-2">Error Loading Events</h3>
+        <p className="text-slate-300 mb-4">{error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors"
+        >
+          Try Again
+        </button>
+      </div>
+    );
+  }
+
+  // Render empty state
+  if (enrichedEvents.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[50vh] p-4">
+        <p className="text-slate-400">No events available at the moment.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto p-4">
       <h2 className="text-3xl font-bold text-white mb-6 text-center">Events</h2>
       <div className="space-y-8">
-        {enrichedEvents.map((event) => renderEventCard(event))}
+        {enrichedEvents.map((event) => (
+          <React.Fragment key={event.id}>
+            {renderEventCard(event)}
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
