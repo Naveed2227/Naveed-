@@ -21,7 +21,7 @@ interface Event {
   vehicles: Vehicle[];
 }
 
-// Import vehicle data from mwt-vehicle-stats
+// VEHICLES may come from an external source
 declare const VEHICLES: any[];
 
 interface EventListProps {
@@ -30,74 +30,206 @@ interface EventListProps {
 
 const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
   const [vehiclesData, setVehiclesData] = useState<any[]>([]);
-  
+  const [imageError, setImageError] = useState<Record<number, boolean>>({});
+  const [expandedEvent, setExpandedEvent] = useState<number | null>(null);
+
   useEffect(() => {
-    // This will be populated by the parent component
     if (typeof VEHICLES !== 'undefined') {
       setVehiclesData(VEHICLES);
     }
   }, []);
-  
+
   const getVehicleInfo = (vehicleName: string) => {
-    // First try to find the exact match in vehiclesData
-    let vehicle = vehiclesData.find(v => v.name === vehicleName);
-    
-    // If not found, try case-insensitive search
-    if (!vehicle) {
-      vehicle = vehiclesData.find(v => 
-        v.name.toLowerCase() === vehicleName.toLowerCase()
-      );
-    }
-    
-    // Generate image name in format K21-KNIFV.jpg
+    let vehicle = vehiclesData.find(v => v.name === vehicleName) ||
+                  vehiclesData.find(v => v.name.toLowerCase() === vehicleName.toLowerCase());
+
     const generateImageName = (name: string) => {
-      // First, handle special cases and replacements
-      let processedName = name
+      return name
         .replace(/[^\w\s-]/g, '')  // Remove special characters
-        .replace(/\s+/g, '-')       // Replace spaces with hyphens
-        .replace(/-+/g, '-')        // Replace multiple hyphens with single
-        .replace(/^-+|-+$/g, '')    // Remove leading/trailing hyphens
-        .toUpperCase();             // Convert to uppercase
-      
-      console.log(`Generated image name for "${name}":`, processedName);
-      return processedName;
+        .replace(/\s+/g, '-')      // Spaces → hyphens
+        .replace(/-+/g, '-')       // Multiple hyphens → single
+        .replace(/^-+|-+$/g, '')   // Trim leading/trailing hyphens
+        .toUpperCase();
     };
-    
+
     const imageName = generateImageName(vehicleName);
-    // Paths are relative to the public directory
     const imagePath = `/vehicles/${imageName}.jpg`;
     const thumbnailPath = `/vehicles/thumbnails/${imageName}.jpg`;
-    
-    console.log(`Looking for vehicle images at:`, { imagePath, thumbnailPath });
-    
-    // If vehicle not found, return with generated image path
-    if (!vehicle) {
-      console.warn(`Vehicle not found: ${vehicleName}`);
-      return { 
-        name: vehicleName,
-        image: imagePath,
-        thumbnail: imagePath
-      };
-    }
-    
-    console.log(`Vehicle: ${vehicleName}`, {
-      image: imagePath,
-      thumbnail: thumbnailPath,
-      found: !!vehicle
-    });
-    
+
     return {
       ...vehicle,
-      name: vehicle.name || vehicleName, // Ensure we always have a name
+      name: vehicle?.name || vehicleName,
       image: imagePath,
       thumbnail: thumbnailPath
     };
   };
-  const [expandedEvent, setExpandedEvent] = useState<number | null>(null);
-  
-  // Event data with actual vehicle references
+
+  const router = useRouter();
+
+  const toggleExpand = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setExpandedEvent(expandedEvent === id ? null : id);
+  };
+
+  const handleVehicleClick = (vehicleName: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onVehicleSelect) {
+      onVehicleSelect(vehicleName);
+    } else if (typeof window !== 'undefined') {
+      window.location.href = `/?search=${encodeURIComponent(vehicleName)}`;
+    }
+  };
+
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const toggleVehicleImageError = (vehicleId: number) => {
+    setImageError(prev => ({ ...prev, [vehicleId]: true }));
+  };
+
+  const renderEventCard = (event: Event) => (
+    <div key={event.id} className="space-y-2">
+      <div
+        className="relative overflow-hidden rounded-lg cursor-pointer transition-all duration-300 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600/50 shadow-lg"
+        onClick={(e) => toggleExpand(event.id, e)}
+      >
+        <div className="relative w-full h-48 overflow-hidden">
+          <img 
+            src={event.image} 
+            alt={event.name}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              const target = e.currentTarget as HTMLImageElement;
+              target.onerror = null;
+              target.src = 'https://via.placeholder.com/800x300/1e293b/64748b?text=Event';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 right-0 p-4">
+            <h3 className="text-2xl font-bold text-white mb-1">{event.name}</h3>
+            <div className="text-sm text-slate-200">
+              <p>{formatDate(event.startDate)} - {formatDate(event.endDate)}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-center py-2 bg-slate-800/50 hover:bg-slate-700/50 transition-colors">
+          <ChevronDown 
+            className={`w-5 h-5 text-slate-300 transition-transform duration-300 ${expandedEvent === event.id ? 'rotate-180' : ''}`}
+          />
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {expandedEvent === event.id && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="mt-4 space-y-3">
+              <h5 className="text-sm font-semibold text-purple-300 mb-3">Featured Vehicles:</h5>
+              {event.vehicles.map((vehicle, i) => {
+                const vehicleData = getVehicleInfo(vehicle.name);
+                const typeStyles = {
+                  free: { text: 'text-green-400', bg: 'bg-green-900/20', border: 'border-green-500/30' },
+                  main: { text: 'text-orange-400', bg: 'bg-orange-900/20', border: 'border-orange-500/30' },
+                  gacha: { text: 'text-purple-400', bg: 'bg-purple-900/20', border: 'border-purple-500/30' }
+                }[vehicle.type] || {};
+
+                const vehicleImageName = vehicle.name
+                  .toUpperCase()
+                  .replace(/[^A-Z0-9\s]/g, '')
+                  .replace(/\s+/g, '-');
+
+                const imagePath = `/vehicles/${vehicleImageName}.jpg`;
+                const hasError = imageError[vehicle.id];
+
+                return (
+                  <div 
+                    key={`${event.id}-${i}`}
+                    className={`p-2 sm:p-3 rounded-lg border ${typeStyles.border} ${typeStyles.bg} hover:border-purple-500/50 transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-purple-500/10`}
+                    onClick={(e) => handleVehicleClick(vehicle.name, e)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleVehicleClick(vehicle.name, e);
+                      }
+                    }}
+                  >
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div 
+                        className="flex-shrink-0 w-14 h-10 xs:w-16 xs:h-12 sm:w-20 sm:h-16 rounded-md overflow-hidden border border-slate-600/50 bg-slate-800/50"
+                        aria-label={`${vehicle.name} image`}
+                      >
+                        <div className="relative w-full h-full">
+                          {!hasError ? (
+                            <img
+                              src={imagePath}
+                              alt={`${vehicle.name}`}
+                              className="w-full h-full object-cover"
+                              onError={() => toggleVehicleImageError(vehicle.id)}
+                              loading="lazy"
+                            />
+                          ) : (
+                            <div className="absolute inset-0 flex items-center justify-center bg-slate-800/80 text-[10px] xs:text-xs text-slate-300">
+                              {vehicle.name.split(' ').map(word => word[0]).join('').toUpperCase()}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-1">
+                          <span className={`font-medium ${typeStyles.text}`}>
+                            {vehicle.name}
+                          </span>
+                          {vehicle.faction && (
+                            <span className="text-xs px-1.5 py-0.5 rounded bg-slate-700/50 text-slate-300">
+                              {vehicle.faction}
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center justify-between mt-1">
+                          <span className="text-xs text-slate-400">
+                            {vehicle.type.charAt(0).toUpperCase() + vehicle.type.slice(1)} Vehicle
+                          </span>
+                          {vehicle.tier && (
+                            <div className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                              vehicle.tier === 'IV' ? 'bg-purple-600 text-white' :
+                              vehicle.tier === 'III' ? 'bg-blue-600 text-white' :
+                              vehicle.tier === 'II' ? 'bg-green-600 text-white' :
+                              'bg-gray-600 text-white'
+                            }`}>
+                              Tier {vehicle.tier}
+                            </div>
+                          )}
+                        </div>
+                        {vehicle.role && (
+                          <div className="mt-1 text-xs text-slate-400">
+                            Role: {vehicle.role}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+
+  // All events in chronological order
   const events: Event[] = [
-  {
+    {
     id: 22,
     name: "Great Middle of Autumn",
     image: "/Events/Great-Middle-of-Autumn.jpg",
@@ -220,7 +352,7 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
   {
     id: 11,
     name: "Eagle's Vigil",
-    image: "/Events/Eagle's-Vigil.jpg",
+    image: "/Events/Eagle’s-Vigil.jpg",
     startDate: "2025-05-15",
     endDate: "2025-05-29",
     vehicles: [
@@ -327,225 +459,18 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
     ],
   },
   ];
-  
-  // Enrich event vehicles with data from VEHICLES
+
+  // Enrich vehicles with images
   const enrichedEvents = events.map(event => ({
     ...event,
-    vehicles: event.vehicles.map(vehicle => ({
-      ...vehicle,
-      ...getVehicleInfo(vehicle.name)
-    }))
+    vehicles: event.vehicles.map(vehicle => getVehicleInfo(vehicle.name))
   }));
-
-  const router = useRouter();
-
-  const toggleExpand = (id: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setExpandedEvent(expandedEvent === id ? null : id);
-  };
-
-  const handleVehicleClick = (vehicleName: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (onVehicleSelect) {
-      onVehicleSelect(vehicleName);
-    } else if (typeof window !== 'undefined') {
-      // Fallback in case onVehicleSelect is not provided
-      window.location.href = `/?search=${encodeURIComponent(vehicleName)}`;
-    }
-  };
-
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
-
-  const renderEventCard = (event: Event) => (
-    <div key={event.id} className="space-y-2">
-      <div
-        className="relative overflow-hidden rounded-lg cursor-pointer transition-all duration-300 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600/50 shadow-lg"
-        onClick={(e) => toggleExpand(event.id, e)}
-      >
-        {/* Large Event Image */}
-        <div className="relative w-full h-48 overflow-hidden">
-          <img 
-            src={event.image} 
-            alt={event.name}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              const target = e.currentTarget as HTMLImageElement;
-              target.onerror = null;
-              target.src = 'https://via.placeholder.com/800x300/1e293b/64748b?text=Event';
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 right-0 p-4">
-            <h3 className="text-2xl font-bold text-white mb-1">{event.name}</h3>
-            <div className="text-sm text-slate-200">
-              <p>{formatDate(event.startDate)} - {formatDate(event.endDate)}</p>
-            </div>
-          </div>
-        </div>
-        
-        {/* Expand/Collapse Indicator */}
-        <div className="flex items-center justify-center py-2 bg-slate-800/50 hover:bg-slate-700/50 transition-colors">
-          <ChevronDown 
-            className={`w-5 h-5 text-slate-300 transition-transform duration-300 ${expandedEvent === event.id ? 'rotate-180' : ''}`}
-          />
-        </div>
-      </div>
-      
-      {/* Expanded Content */}
-      <AnimatePresence>
-        {expandedEvent === event.id && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
-          >
-            <div className="mt-4 space-y-3">
-              <h5 className="text-sm font-semibold text-purple-300 mb-3">Featured Vehicles:</h5>
-              {event.vehicles.map((vehicle, i) => {
-                const vehicleData = getVehicleInfo(vehicle.name);
-                const typeStyles = {
-                  free: {
-                    text: 'text-green-400',
-                    bg: 'bg-green-900/20',
-                    border: 'border-green-500/30'
-                  },
-                  main: {
-                    text: 'text-orange-400',
-                    bg: 'bg-orange-900/20',
-                    border: 'border-orange-500/30'
-                  },
-                  gacha: {
-                    text: 'text-purple-400',
-                    bg: 'bg-purple-900/20',
-                    border: 'border-purple-500/30'
-                  }
-                }[vehicle.type] || {};
-
-                // Format the vehicle name for the image path
-                const vehicleImageName = vehicle.name
-                  .toUpperCase()
-                  .replace(/[^A-Z0-9\s]/g, '')  // Remove special characters
-                  .replace(/\s+/g, '-');         // Replace spaces with hyphens
-                
-                const imagePath = `/vehicles/${vehicleImageName}.jpg`;
-                const hasError = imageError[vehicle.id];
-                
-                return (
-                  <div 
-                    key={`${event.id}-${i}`}
-                    className={`p-2 sm:p-3 rounded-lg border ${typeStyles.border} ${typeStyles.bg} hover:border-purple-500/50 transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-purple-500/10`}
-                    onClick={(e) => handleVehicleClick(vehicle.name, e)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        handleVehicleClick(vehicle.name, e);
-                      }
-                    }}
-                  >
-                    <div className="flex items-center gap-2 sm:gap-3">
-                      {/* Vehicle Image */}
-                      <div 
-                        className="flex-shrink-0 w-14 h-10 xs:w-16 xs:h-12 sm:w-20 sm:h-16 rounded-md overflow-hidden border border-slate-600/50 bg-slate-800/50"
-                        aria-label={`${vehicle.name} image`}
-                      >
-                        <div className="relative w-full h-full">
-                          {!hasError ? (
-                            <img
-                              src={imagePath}
-                              alt={`${vehicle.name}`}
-                              className="w-full h-full object-cover"
-                              onError={() => setImageError(prev => ({ ...prev, [vehicle.id]: true }))}
-                              loading="lazy"
-                            />
-                          ) : (
-                            <div className="absolute inset-0 flex items-center justify-center bg-slate-800/80 text-[10px] xs:text-xs text-slate-300">
-                              {vehicle.name
-                                .split(' ')
-                                .map(word => word[0])
-                                .join('')
-                                .toUpperCase()}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      
-                      {/* Vehicle Info */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex flex-wrap items-center gap-1">
-                          <span className={`font-medium ${typeStyles.text}`}>
-                            {vehicle.name}
-                          </span>
-                          {vehicle.faction && (
-                            <span className="text-xs px-1.5 py-0.5 rounded bg-slate-700/50 text-slate-300">
-                              {vehicle.faction}
-                            </span>
-                          )}
-                        </div>
-                        
-                        <div className="flex items-center justify-between mt-1">
-                          <span className="text-xs text-slate-400">
-                            {vehicle.type.charAt(0).toUpperCase() + vehicle.type.slice(1)} Vehicle
-                          </span>
-                          
-                          {vehicle.tier && (
-                            <div className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                              vehicle.tier === 'IV' ? 'bg-purple-600 text-white' :
-                              vehicle.tier === 'III' ? 'bg-blue-600 text-white' :
-                              vehicle.tier === 'II' ? 'bg-green-600 text-white' :
-                              'bg-gray-600 text-white'
-                            }`}>
-                              Tier {vehicle.tier}
-                            </div>
-                          )}
-                        </div>
-                        
-                        {vehicle.role && (
-                          <div className="mt-1 text-xs text-slate-400">
-                            Role: {vehicle.role}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-
-  // Get current date to check active events
-  const currentDate = new Date();
-  
-  // Show all events as current
-  const filteredEvents = [...enrichedEvents];
-  
-  // If no current events, show a message
-  if (filteredEvents.length === 0) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh] text-center p-6">
-        <div className="bg-slate-800/80 rounded-lg p-8 max-w-2xl w-full">
-          <h2 className="text-2xl font-bold text-white mb-4">No Active Events</h2>
-          <p className="text-slate-300 mb-6">There are currently no active events. Please check back later for upcoming events!</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto p-4">
       <h2 className="text-3xl font-bold text-white mb-6 text-center">Events</h2>
       <div className="space-y-8">
-        {filteredEvents.map((event) => renderEventCard(event))}
+        {enrichedEvents.map((event) => renderEventCard(event))}
       </div>
     </div>
   );
