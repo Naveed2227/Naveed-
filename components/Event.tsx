@@ -1,31 +1,27 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect } from "react";
+import { ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
 
-// Lazy load components that might cause issues on the server
-const ChevronDown = dynamic(() => import('lucide-react').then(mod => mod.ChevronDown), { ssr: false });
-const AnimatePresence = dynamic(() => import('framer-motion').then(mod => mod.AnimatePresence), { ssr: false });
-const motion = {
-  div: dynamic(() => import('framer-motion').then(mod => mod.motion.div), { ssr: false })
-};
-
-type VehicleType = 'free' | 'main' | 'gacha';
-
-interface Vehicle extends VehicleData {
-  type: VehicleType;
-  image?: string;
-  thumbnail?: string;
+interface Vehicle {
+  id: number;
+  name: string;
+  type: 'free' | 'main' | 'gacha';
+  faction?: string;
+  tier?: string | number;
+  role?: string;
 }
 
 interface Event {
   id: number;
   name: string;
   image: string;
-  startDate: string; // Expected format: YYYY-MM-DD
-  endDate: string;   // Expected format: YYYY-MM-DD
+  startDate: string;
+  endDate: string;
   vehicles: Vehicle[];
 }
 
+// VEHICLES will be loaded client-side
 interface VehicleData {
   id: number;
   name: string;
@@ -39,98 +35,63 @@ interface EventListProps {
   onVehicleSelect?: (vehicleName: string) => void;
 }
 
-// Default vehicle data in case VEHICLES is not available
-declare global {
-  interface Window {
-    VEHICLES?: VehicleData[];
-  }
-}
-
-const DEFAULT_VEHICLES: VehicleData[] = [];
-
 const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
-  const [vehiclesData, setVehiclesData] = useState<VehicleData[]>(DEFAULT_VEHICLES);
+  const [vehiclesData, setVehiclesData] = useState<VehicleData[]>([]);
   const [imageError, setImageError] = useState<Record<number, boolean>>({});
   const [expandedEvent, setExpandedEvent] = useState<number | null>(null);
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
 
-  // Load vehicles data safely
   useEffect(() => {
     try {
+      // Set client-side flag
       setIsClient(true);
       
-      const loadVehicles = () => {
-        try {
-          // Try to get vehicles from window object (client-side)
-          if (typeof window !== 'undefined' && window.VEHICLES) {
-            return Array.isArray(window.VEHICLES) ? window.VEHICLES : [];
-          }
-          // Fallback to module-scoped VEHICLES if available
-          if (typeof VEHICLES !== 'undefined') {
-            return Array.isArray(VEHICLES) ? VEHICLES : [];
-          }
-          return [];
-        } catch (e) {
-          console.warn('Error loading vehicle data:', e);
-          return [];
-        }
-      };
+      // Safely access VEHICLES if it exists
+      if (typeof window !== 'undefined' && (window as any).VEHICLES) {
+        setVehiclesData(Array.isArray((window as any).VEHICLES) ? (window as any).VEHICLES : []);
+      } else if (typeof VEHICLES !== 'undefined') {
+        // Fallback for direct VEHICLES reference if it exists
+        setVehiclesData(Array.isArray(VEHICLES) ? VEHICLES : []);
+      }
       
-      setVehiclesData(loadVehicles());
       setError(null);
     } catch (err) {
-      console.error('Error in vehicle data initialization:', err);
-      setError('Failed to load vehicle data. Some features may be limited.');
+      console.error('Error initializing vehicle data:', err);
+      setError('Failed to load vehicle data. Please try refreshing the page.');
       setVehiclesData([]);
     } finally {
       setIsLoading(false);
     }
   }, []);
 
-  // Memoize the vehicle info getter
-  const getVehicleInfo = useCallback((vehicleName: string): Vehicle => {
-    if (!vehicleName) {
-      return {
-        id: 0,
-        name: 'Unknown Vehicle',
-        type: 'free',
-        image: '/vehicles/placeholder.jpg',
-        thumbnail: '/vehicles/thumbnails/placeholder.jpg'
-      };
-    }
+  const getVehicleInfo = (vehicleName: string) => {
+    let vehicle = vehiclesData.find(v => v.name === vehicleName) ||
+                  vehiclesData.find(v => v.name.toLowerCase() === vehicleName.toLowerCase());
 
-    // Find vehicle by name (case insensitive)
-    const vehicle = vehiclesData.find(v => 
-      v.name?.toLowerCase() === vehicleName.toLowerCase()
-    );
-
-    // Generate safe image paths
-    const generateImageName = (name: string): string => {
-      if (!name) return 'placeholder';
+    const generateImageName = (name: string) => {
       return name
-        .replace(/[^\w\s-]/g, '')
-        .replace(/\s+/g, '-')
-        .replace(/-+/g, '-')
-        .replace(/^-+|-+$/g, '')
+        .replace(/[^\w\s-]/g, '')  // Remove special characters
+        .replace(/\s+/g, '-')      // Spaces → hyphens
+        .replace(/-+/g, '-')       // Multiple hyphens → single
+        .replace(/^-+|-+$/g, '')   // Trim leading/trailing hyphens
         .toUpperCase();
     };
 
     const imageName = generateImageName(vehicleName);
-    
+    const imagePath = `/vehicles/${imageName}.jpg`;
+    const thumbnailPath = `/vehicles/thumbnails/${imageName}.jpg`;
+
     return {
-      id: vehicle?.id || 0,
+      ...vehicle,
       name: vehicle?.name || vehicleName,
-      type: (vehicle?.type as VehicleType) || 'free',
-      faction: vehicle?.faction,
-      tier: vehicle?.tier,
-      role: vehicle?.role,
-      image: `/vehicles/${imageName}.jpg`,
-      thumbnail: `/vehicles/thumbnails/${imageName}.jpg`
+      image: imagePath,
+      thumbnail: thumbnailPath
     };
-  }, [vehiclesData]);
+  };
+
+  const router = useRouter();
 
   const toggleExpand = (id: number, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -293,8 +254,8 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
     </div>
   );
 
-  // All events in chronological order
-  const events: Event[] = [
+  // Memoize events to prevent unnecessary re-renders
+  const events = useMemo<Event[]>(() => [
     {
     id: 22,
     name: "Great Middle of Autumn",
@@ -526,237 +487,81 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
   },
   ];
 
-  // Format date to YYYY-MM-DD without time
-  const formatDate = useCallback((dateString: string): string => {
-    try {
-      if (!dateString) return 'Date not available';
-      
-      // Handle both YYYY-MM-DD and other formats
-      const date = new Date(dateString);
-      if (isNaN(date.getTime())) return dateString; // Return original if invalid
-      
-      return date.toISOString().split('T')[0]; // Returns YYYY-MM-DD
-    } catch (e) {
-      console.warn('Error formatting date:', e);
-      return dateString || 'Invalid date';
-    }
-  }, []);
-
-  // Toggle event expansion
-  const toggleExpand = useCallback((id: number, e: React.MouseEvent) => {
-    e?.stopPropagation();
-    setExpandedEvent(prev => prev === id ? null : id);
-  }, []);
-
-  // Handle vehicle click
-  const handleVehicleClick = useCallback((vehicleName: string, e: React.MouseEvent) => {
-    e?.stopPropagation();
-    
-    if (onVehicleSelect) {
-      onVehicleSelect(vehicleName);
-      return;
-    }
-    
-    // Fallback to URL-based navigation
-    if (typeof window !== 'undefined') {
-      const searchParams = new URLSearchParams(window.location.search);
-      searchParams.set('search', vehicleName);
-      window.history.pushState({}, '', `?${searchParams.toString()}`);
-    }
-  }, [onVehicleSelect]);
-
-  // Safely enrich events with vehicle data
-  const enrichedEvents = useMemo(() => {
+  // Safely enrich vehicles with images, only on client-side
+  const enrichedEvents = React.useMemo(() => {
     if (!isClient || isLoading) return [];
     
     try {
       return events.map(event => ({
         ...event,
-        startDate: formatDate(event.startDate),
-        endDate: formatDate(event.endDate),
-        vehicles: event.vehicles.map(vehicle => ({
-          ...getVehicleInfo(vehicle.name),
-          ...vehicle // Allow event-specific overrides
-        }))
+        vehicles: event.vehicles.map(vehicle => {
+          try {
+            return {
+              ...vehicle,
+              ...getVehicleInfo(vehicle.name)
+            };
+          } catch (err) {
+            console.error(`Error processing vehicle ${vehicle.name}:`, err);
+            return {
+              ...vehicle,
+              image: '',
+              thumbnail: ''
+            };
+          }
+        })
       }));
     } catch (err) {
       console.error('Error enriching events:', err);
-      setError('Failed to load events. Some data may be incomplete.');
+      setError('Failed to load events. Please try again later.');
       return [];
     }
-  }, [isClient, isLoading, events, vehiclesData, getVehicleInfo, formatDate]);
+  }, [isClient, isLoading, events, vehiclesData]);
 
-  // Render event card with error boundaries
-  const renderEventCard = (event: Event) => {
-    const isExpanded = expandedEvent === event.id;
-    
+  // Render loading state
+  if (isLoading) {
     return (
-      <div key={event.id} className="space-y-2">
-        <div
-          className="relative overflow-hidden rounded-lg cursor-pointer transition-all duration-300 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600/50 shadow-lg"
-          onClick={(e) => toggleExpand(event.id, e)}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && toggleExpand(event.id, e as any)}
-        >
-          {/* Event Header */}
-          <div className="relative w-full h-48 overflow-hidden">
-            <img 
-              src={event.image} 
-              alt={event.name}
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.onerror = null;
-                target.src = '/images/event-placeholder.jpg';
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-            <div className="absolute bottom-0 left-0 right-0 p-4">
-              <h3 className="text-2xl font-bold text-white mb-1">{event.name}</h3>
-              <div className="text-sm text-slate-200">
-                <p>{event.startDate} - {event.endDate}</p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Expand/Collapse Indicator */}
-          <div className="flex items-center justify-center py-2 bg-slate-800/50 hover:bg-slate-700/50 transition-colors">
-            <ChevronDown 
-              className={`w-5 h-5 text-slate-300 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
-              aria-hidden="true"
-            />
-          </div>
-        </div>
-
-        {/* Event Content */}
-        <AnimatePresence>
-          {isExpanded && (
-            <motion.div 
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="overflow-hidden"
-            >
-              <div className="mt-4 space-y-3">
-                <h5 className="text-sm font-semibold text-purple-300 mb-3">Featured Vehicles:</h5>
-                {event.vehicles.map((vehicle, i) => {
-                  const hasImageError = imageError[vehicle.id];
-                  const typeStyles = {
-                    free: { text: 'text-green-400', bg: 'bg-green-900/20', border: 'border-green-500/30' },
-                    main: { text: 'text-orange-400', bg: 'bg-orange-900/20', border: 'border-orange-500/30' },
-                    gacha: { text: 'text-purple-400', bg: 'bg-purple-900/20', border: 'border-purple-500/30' }
-                  }[vehicle.type] || {};
-
-                  return (
-                    <div 
-                      key={`${event.id}-${i}`}
-                      className={`p-3 rounded-lg border ${typeStyles.border} ${typeStyles.bg} hover:border-purple-500/50 transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-purple-500/10`}
-                      onClick={(e) => handleVehicleClick(vehicle.name, e)}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleVehicleClick(vehicle.name, e as any)}
-                    >
-                      <div className="flex items-center gap-3">
-                        {/* Vehicle Image */}
-                        <div className="flex-shrink-0 w-16 h-12 sm:w-20 sm:h-16 rounded-md overflow-hidden border border-slate-600/50 bg-slate-800/50">
-                          <div className="relative w-full h-full">
-                            {!hasImageError ? (
-                              <img
-                                src={vehicle.image}
-                                alt={vehicle.name}
-                                className="w-full h-full object-cover"
-                                onError={() => setImageError(prev => ({ ...prev, [vehicle.id]: true }))}
-                                loading="lazy"
-                              />
-                            ) : (
-                              <div className="absolute inset-0 flex items-center justify-center bg-slate-800/80 text-xs text-slate-300">
-                                {vehicle.name.split(' ').map(w => w[0]).join('').toUpperCase()}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                        
-                        {/* Vehicle Info */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex flex-wrap items-center gap-1">
-                            <span className={`font-medium ${typeStyles.text}`}>
-                              {vehicle.name}
-                            </span>
-                            {vehicle.faction && (
-                              <span className="text-xs px-1.5 py-0.5 rounded bg-slate-700/50 text-slate-300">
-                                {vehicle.faction}
-                              </span>
-                            )}
-                          </div>
-                          <div className="flex items-center justify-between mt-1">
-                            <span className="text-xs text-slate-400">
-                              {vehicle.type.charAt(0).toUpperCase() + vehicle.type.slice(1)} Vehicle
-                            </span>
-                            {vehicle.tier && (
-                              <div className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                                vehicle.tier === 'IV' ? 'bg-purple-600 text-white' :
-                                vehicle.tier === 'III' ? 'bg-blue-600 text-white' :
-                                vehicle.tier === 'II' ? 'bg-green-600 text-white' :
-                                'bg-gray-600 text-white'
-                              }`}>
-                                Tier {vehicle.tier}
-                              </div>
-                            )}
-                          </div>
-                          {vehicle.role && (
-                            <div className="mt-1 text-xs text-slate-400">
-                              Role: {vehicle.role}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      <div className="flex flex-col items-center justify-center min-h-[50vh] p-4">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500 mb-4"></div>
+        <p className="text-slate-300">Loading events...</p>
       </div>
     );
-  };
+  }
 
-  // Main component render
+  // Render error state
+  if (error) {
+    return (
+      <div className="bg-red-900/30 border border-red-700/50 rounded-lg p-6 max-w-2xl mx-auto my-8">
+        <h3 className="text-xl font-bold text-red-400 mb-2">Error Loading Events</h3>
+        <p className="text-slate-300 mb-4">{error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors"
+        >
+          Try Again
+        </button>
+      </div>
+    );
+  }
+
+  // Render empty state
+  if (enrichedEvents.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[50vh] p-4">
+        <p className="text-slate-400">No events available at the moment.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6 max-w-5xl mx-auto p-4">
       <h2 className="text-3xl font-bold text-white mb-6 text-center">Events</h2>
-      
-      {isLoading ? (
-        <div className="flex flex-col items-center justify-center min-h-[50vh] p-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500 mb-4"></div>
-          <p className="text-slate-300">Loading events...</p>
-        </div>
-      ) : error ? (
-        <div className="bg-red-900/30 border border-red-700/50 rounded-lg p-6 max-w-2xl mx-auto my-8">
-          <h3 className="text-xl font-bold text-red-400 mb-2">Error Loading Events</h3>
-          <p className="text-slate-300 mb-4">{error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors"
-          >
-            Try Again
-          </button>
-        </div>
-      ) : enrichedEvents.length === 0 ? (
-        <div className="flex flex-col items-center justify-center min-h-[50vh] p-4">
-          <p className="text-slate-400">No events available at the moment.</p>
-        </div>
-      ) : (
-        <div className="space-y-8">
-          {enrichedEvents.map(event => (
-            <React.Fragment key={event.id}>
-              {renderEventCard(event)}
-            </React.Fragment>
-          ))}
-        </div>
-      )}
+      <div className="space-y-8">
+        {enrichedEvents.map((event) => (
+          <React.Fragment key={event.id}>
+            {renderEventCard(event)}
+          </React.Fragment>
+        ))}
+      </div>
     </div>
   );
 };
