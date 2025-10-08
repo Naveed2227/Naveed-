@@ -39,7 +39,7 @@ const events: Event[] = [
     endDate: "2025-09-30",
     vehicles: [
       { id: 3, name: "Strf 9040 BILL", type: "free" },
-      { id: 4, name: "Leopard 2 A-RC 3.0", type: "main" },
+      { id: 4, name: "Leopard 2A-RC 3.0", type: "main" },
     ],
   },
   {
@@ -60,7 +60,7 @@ const events: Event[] = [
     startDate: "2025-08-29",
     endDate: "2025-09-04",
     vehicles: [
-      { id: 7, name: "M60A3 MZK", type: "free" },
+      { id: 7, name: "M60A3 (MZK)", type: "free" },
       { id: 8, name: "Altay", type: "main" },
     ],
   },
@@ -71,7 +71,7 @@ const events: Event[] = [
     startDate: "2025-08-14",
     endDate: "2025-08-28",
     vehicles: [
-      { id: 9, name: "PT-91", type: "free" },
+      { id: 9, name: "PT-91 Twardy", type: "free" },
       { id: 10, name: "PL-01", type: "main" },
     ],
   },
@@ -93,7 +93,7 @@ const events: Event[] = [
     endDate: "2025-08-13",
     vehicles: [
       { id: 12, name: "WMA301", type: "free" },
-      { id: 13, name: "FK-2000", type: "main" },
+      { id: 13, name: "FK 2000", type: "main" },
     ],
   },
   {
@@ -103,7 +103,7 @@ const events: Event[] = [
     startDate: "2025-07-14",
     endDate: "2025-07-30",
     vehicles: [
-      { id: 14, name: "VCBI-2", type: "free" },
+      { id: 14, name: "VBCI-2", type: "free" },
       { id: 15, name: "Leclerc S2 AZUR", type: "main" },
     ],
   },
@@ -171,7 +171,7 @@ const events: Event[] = [
     endDate: "2025-05-07",
     vehicles: [
       { id: 27, name: "K-31 Cheonma", type: "free" },
-      { id: 28, name: "J-50 Trident", type: "main" },
+      { id: 28, name: "J-50", type: "main" },
       { id: 29, name: "Type 90", type: "gacha" },
     ],
   },
@@ -194,7 +194,7 @@ const events: Event[] = [
     endDate: "2025-04-10",
     vehicles: [
       { id: 32, name: "AFT-09", type: "free" },
-      { id: 33, name: "T-20 Monolith", type: "main" },
+      { id: 33, name: "T-20 Monolit", type: "main" },
     ],
   },
   {
@@ -228,10 +228,10 @@ const events: Event[] = [
     vehicles: [
       { id: 38, name: "Type 89 MLRS", type: "free" },
       { id: 39, name: "J-50", type: "main" },
-      { id: 40, name: "F-4E", type: "gacha" },
-      { id: 41, name: "Mig-35", type: "gacha" },
-      { id: 42, name: "J-10", type: "gacha" },
-      { id: 43, name: "AV88 Harrier", type: "gacha" },
+      { id: 40, name: "F-4E Phantom", type: "gacha" },
+      { id: 41, name: "MiG-35", type: "gacha" },
+      { id: 42, name: "J-10 Chengdu", type: "gacha" },
+      { id: 43, name: "AV-88 Harrier", type: "gacha" },
     ],
   },
   {
@@ -244,7 +244,7 @@ const events: Event[] = [
       { id: 47, name: "Type 74E", type: "free" },
       { id: 48, name: "BM-57-2 Kochevnik", type: "main" },
       { id: 49, name: "ZSU-57-2", type: "gacha" },
-      { id: 50, name: "M113A1 FMS AIFV", type: "gacha" },
+      { id: 50, name: "M113A1 FMS AIP", type: "gacha" },
       { id: 51, name: "BTR-80", type: "gacha" },
       { id: 52, name: "LAV-25", type: "gacha" },
     ],
