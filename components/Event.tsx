@@ -436,25 +436,22 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
                       {/* Vehicle Image */}
                       <div className="flex-shrink-0 w-16 h-12 sm:w-20 sm:h-16 rounded-md overflow-hidden border border-slate-600/50 bg-slate-800/50">
                         <div className="relative w-full h-full">
-                          <img
-                            src={`/vehicles/${vehicle.name.replace(/\s+/g, '-').toUpperCase()}.jpg`}
-                            alt={vehicle.name}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              const target = e.currentTarget as HTMLImageElement;
-                              target.onerror = null;
-                              // Show vehicle initials as fallback
-                              target.style.display = 'none';
-                              const fallback = document.createElement('div');
-                              fallback.className = 'absolute inset-0 flex items-center justify-center bg-slate-800/80 text-xs text-slate-300';
-                              fallback.textContent = vehicle.name
+                          {!imageError[vehicle.id] ? (
+                            <img
+                              src={`/vehicles/${formatVehicleImageName(vehicle.name)}.jpg`}
+                              alt={vehicle.name}
+                              className="w-full h-full object-cover"
+                              onError={() => setImageError(prev => ({ ...prev, [vehicle.id]: true }))}
+                            />
+                          ) : (
+                            <div className="absolute inset-0 flex items-center justify-center bg-slate-800/80 text-xs text-slate-300">
+                              {vehicle.name
                                 .split(' ')
                                 .map(word => word[0])
                                 .join('')
-                                .toUpperCase();
-                              target.parentNode?.appendChild(fallback);
-                            }}
-                          />
+                                .toUpperCase()}
+                            </div>
+                          )}
                         </div>
                       </div>
                       
