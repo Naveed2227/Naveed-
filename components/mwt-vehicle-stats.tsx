@@ -13593,7 +13593,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
-        className={`fixed top-1/2 left-0 z-50 bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-950 hover:to-blue-900 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-blue-700 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r-2 border-blue-600 mx-0 mr-0 ml-[-4px] ${isMenuOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
+        className={`fixed top-1/2 left-0 z-50 bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-950 hover:to-blue-900 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-blue-700 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r-2 border-blue-600 mx-0 mr-0 ml-[-4px] ${isMenuOpen || eventOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
       >
         {/* Mobile: Compact icon + text */}
         <div className="sm:hidden flex flex-col items-center justify-center px-1 py-2 text-white font-bold text-[9px] tracking-wide">

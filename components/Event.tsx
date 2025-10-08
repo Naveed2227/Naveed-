@@ -143,7 +143,7 @@ const events: Event[] = [
   {
     id: 11,
     name: "Eagle's Vigil",
-    image: "/Events/Eagle’s-Vigil.jpg",
+    image: "/Events/Eagles-Vigil.jpg",
     startDate: "2025-05-15",
     endDate: "2025-05-29",
     vehicles: [
@@ -251,70 +251,45 @@ const events: Event[] = [
   },
 ];
 
-const Event = ({ eventId }: { eventId: number }) => {
+const EventCard = ({ event, onVehicleSelect }: { event: Event, onVehicleSelect: (vehicleName: string) => void }) => {
   const [expanded, setExpanded] = useState(false);
-  const [imageError, setImageError] = useState(false);
-
-  const event = events.find(e => e.id === eventId);
-
-  if (!event) {
-    return <div>Event not found</div>;
-  }
-
-  const handleImageError = () => {
-    setImageError(true);
-  };
 
   const getVehicleTypeColor = (type: string) => {
     switch (type) {
-      case 'free':
-        return 'text-green-400';
-      case 'main':
-        return 'text-orange-400';
-      case 'gacha':
-        return 'text-purple-400';
-      default:
-        return 'text-gray-400';
+      case 'free': return 'text-green-400';
+      case 'main': return 'text-orange-400';
+      case 'gacha': return 'text-purple-400';
+      default: return 'text-gray-400';
     }
   };
 
   const getVehicleImage = (vehicleName: string) => {
     const imageName = vehicleName.replace(/ /g, '-') + '.jpg';
-    return `/vehicles/${imageName}`;
+    return `/${imageName}`;
   }
 
   return (
-    <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden hover:border-purple-500/50 transition-all duration-300">
+    <motion.div 
+      className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden hover:border-purple-500/50 transition-all duration-300"
+      whileHover={{ scale: 1.02 }}
+    >
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full text-left p-4 bg-slate-900/50 hover:bg-slate-800/70 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        className="w-full text-left relative h-48 bg-cover bg-center group"
+        style={{ backgroundImage: `url(${event.image})` }}
       >
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            {!imageError ? (
-              <img
-                src={event.image}
-                alt={event.name}
-                className="w-16 h-16 rounded-lg object-cover mr-4 border-2 border-slate-700 shadow-lg"
-                onError={handleImageError}
-              />
-            ) : (
-              <div className="w-16 h-16 rounded-lg bg-slate-700 flex items-center justify-center mr-4">
-                <Camera className="w-8 h-8 text-slate-500" />
-              </div>
-            )}
-            <div>
-              <h4 className="text-xl font-bold text-white tracking-wide">{event.name}</h4>
-              <p className="text-sm text-slate-400">{new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}</p>
-            </div>
-          </div>
-          <motion.div
-            animate={{ rotate: expanded ? 90 : 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <ChevronRight className="w-6 h-6 text-slate-400" />
-          </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 p-4">
+          <h4 className="text-2xl font-bold text-white tracking-wide group-hover:text-purple-300 transition-colors">{event.name}</h4>
+          <p className="text-sm text-slate-300">{new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}</p>
         </div>
+        <motion.div
+          className="absolute top-4 right-4"
+          animate={{ rotate: expanded ? 90 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ChevronRight className="w-6 h-6 text-white" />
+        </motion.div>
       </button>
 
       <AnimatePresence>
@@ -327,37 +302,57 @@ const Event = ({ eventId }: { eventId: number }) => {
             className="overflow-hidden"
           >
             <div className="p-4 border-t border-slate-700/50">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {event.vehicles.map(vehicle => {
-                  return (
-                    <div key={vehicle.id} className="bg-slate-900/70 rounded-lg p-3 border border-slate-800 hover:border-purple-600/60 transition-all duration-300 shadow-lg relative">
-                      <div className="relative">
-                        <img
-                          src={getVehicleImage(vehicle.name)}
-                          alt={vehicle.name}
-                          className="w-full h-32 object-cover rounded-md mb-2 border-2 border-slate-700"
-                          onError={(e) => (e.currentTarget.src = '/placeholder.png')}
-                        />
-                        {(vehicle.type === 'main' || vehicle.type === 'gacha') && (
-                          <div className="absolute top-1 right-1 bg-gradient-to-br from-yellow-400 to-orange-500 text-white p-1 rounded-full shadow-md">
-                            <Star className="w-4 h-4" />
-                          </div>
-                        )}
-                      </div>
-                      <h5 className="text-md font-semibold text-white truncate">{vehicle.name}</h5>
-                      <div className="flex items-center justify-between text-xs text-slate-400 mt-1">
-                        <span className={`${getVehicleTypeColor(vehicle.type)} capitalize`}>{vehicle.type}</span>
-                      </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {event.vehicles.map(vehicle => (
+                  <div 
+                    key={vehicle.id} 
+                    onClick={() => onVehicleSelect(vehicle.name)}
+                    className="bg-slate-900/70 rounded-lg p-3 border border-slate-800 hover:border-purple-600/60 transition-all duration-300 shadow-lg relative cursor-pointer"
+                  >
+                    <div className="relative">
+                      <img
+                        src={getVehicleImage(vehicle.name)}
+                        alt={vehicle.name}
+                        className="w-full h-32 object-cover rounded-md mb-2 border-2 border-slate-700"
+                        onError={(e) => (e.currentTarget.src = '/placeholder.png')}
+                      />
+                      {(vehicle.type === 'main' || vehicle.type === 'gacha') && (
+                        <div className="absolute top-1 right-1 bg-gradient-to-br from-yellow-400 to-orange-500 text-white p-1 rounded-full shadow-md">
+                          <Star className="w-4 h-4" />
+                        </div>
+                      )}
                     </div>
-                  );
-                })}
+                    <h5 className="text-md font-semibold text-white truncate">{vehicle.name}</h5>
+                    <div className="flex items-center justify-between text-xs text-slate-400 mt-1">
+                      <span className={`${getVehicleTypeColor(vehicle.type)} capitalize`}>{vehicle.type}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 
-export default Event;
+const EventList = ({ onClose, onVehicleSelect }: { onClose: () => void, onVehicleSelect: (vehicleName: string) => void }) => {
+  return (
+    <div className="p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold text-white">Events</h2>
+        <button onClick={onClose} className="p-2 hover:bg-slate-700/50 rounded-lg transition-colors">
+          <X className="w-6 h-6 text-slate-300" />
+        </button>
+      </div>
+      <div className="space-y-4">
+        {events.map(event => (
+          <EventCard key={event.id} event={event} onVehicleSelect={onVehicleSelect} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default EventList;
