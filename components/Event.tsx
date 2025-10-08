@@ -426,25 +426,46 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
                   }
                 }[vehicle.type] || {};
 
+                // Format the vehicle name for the image path
+                const vehicleImageName = vehicle.name
+                  .toUpperCase()
+                  .replace(/[^A-Z0-9\s]/g, '')  // Remove special characters
+                  .replace(/\s+/g, '-');         // Replace spaces with hyphens
+                
+                const imagePath = `/vehicles/${vehicleImageName}.jpg`;
+                const hasError = imageError[vehicle.id];
+                
                 return (
                   <div 
                     key={`${event.id}-${i}`}
-                    className={`p-3 rounded-lg border ${typeStyles.border} ${typeStyles.bg} hover:border-purple-500/50 transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-purple-500/10`}
+                    className={`p-2 sm:p-3 rounded-lg border ${typeStyles.border} ${typeStyles.bg} hover:border-purple-500/50 transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-purple-500/10`}
                     onClick={(e) => handleVehicleClick(vehicle.name, e)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleVehicleClick(vehicle.name, e);
+                      }
+                    }}
                   >
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       {/* Vehicle Image */}
-                      <div className="flex-shrink-0 w-16 h-12 sm:w-20 sm:h-16 rounded-md overflow-hidden border border-slate-600/50 bg-slate-800/50">
+                      <div 
+                        className="flex-shrink-0 w-14 h-10 xs:w-16 xs:h-12 sm:w-20 sm:h-16 rounded-md overflow-hidden border border-slate-600/50 bg-slate-800/50"
+                        aria-label={`${vehicle.name} image`}
+                      >
                         <div className="relative w-full h-full">
-                          {!imageError[vehicle.id] ? (
+                          {!hasError ? (
                             <img
-                              src={`/vehicles/${formatVehicleImageName(vehicle.name)}.jpg`}
-                              alt={vehicle.name}
+                              src={imagePath}
+                              alt={`${vehicle.name}`}
                               className="w-full h-full object-cover"
                               onError={() => setImageError(prev => ({ ...prev, [vehicle.id]: true }))}
+                              loading="lazy"
                             />
                           ) : (
-                            <div className="absolute inset-0 flex items-center justify-center bg-slate-800/80 text-xs text-slate-300">
+                            <div className="absolute inset-0 flex items-center justify-center bg-slate-800/80 text-[10px] xs:text-xs text-slate-300">
                               {vehicle.name
                                 .split(' ')
                                 .map(word => word[0])
