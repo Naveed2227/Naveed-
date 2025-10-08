@@ -254,8 +254,8 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
     </div>
   );
 
-  // Memoize events to prevent unnecessary re-renders
-  const events = useMemo<Event[]>(() => [
+  // All events in chronological order
+  const events: Event[] = [
     {
     id: 22,
     name: "Great Middle of Autumn",
