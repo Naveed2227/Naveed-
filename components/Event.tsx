@@ -1,956 +1,520 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, X, Gift, Info } from 'lucide-react';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 interface Vehicle {
   id: number;
   name: string;
-  type: string;
-  faction: string;
-  tier: string;
-  image?: string;
-  description?: string;
-  [key: string]: any;
+  type: 'free' | 'main' | 'gacha';
+  faction?: string;
+  tier?: string | number;
+  role?: string;
 }
 
-interface EventData {
+interface Event {
   id: number;
-  title: string;
-  month: string;
+  name: string;
   image: string;
-  vehicles: (string | Vehicle)[];
-  rewards: {
-    premium: string[];
-    free: string[];
-  };
-  description: string;
   startDate: string;
   endDate: string;
+  vehicles: Vehicle[];
 }
 
-const EVENTS: EventData[] = [
-  {
-    id: 1,
-    title: "Frozen Frontlines",
-    month: "January 2025",
-    image: "/events/frozen-frontlines.jpg",
-    description: "Brave the frozen wasteland with these elite winter warfare vehicles!",
-    startDate: "2025-01-01",
-    endDate: "2025-01-31",
-    vehicles: [
-      "BM-57-2 Kochevnik",
-      "T-14 Armata",
-      "M1A3 Abrams",
-      "Leopard 2A8"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 2,
-    title: "Lunar Dawn",
-    month: "January 2025",
-    image: "/events/lunar-dawn.jpg",
-    description: "Celebrate the Lunar New Year with special themed vehicles and decorations!",
-    startDate: "2025-01-22",
-    endDate: "2025-02-05",
-    vehicles: [
-      "Type 99A",
-      "K2 Black Panther",
-      "T-90MS",
-      "Leclerc XLR"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 3,
-    title: "Carnival of Fire",
-    month: "February 2025",
-    image: "/events/carnival-of-fire.jpg",
-    description: "Feel the heat with these fiery combat machines!",
-    startDate: "2025-02-10",
-    endDate: "2025-02-24",
-    vehicles: [
-      "TOS-1A",
-      "M109A7 Paladin",
-      "PzH 2000",
-      "2S35 Koalitsiya-SV"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 4,
-    title: "Lucky Strike",
-    month: "March 2025",
-    image: "/events/lucky-strike.jpg",
-    description: "Try your luck with these rare and powerful vehicles!",
-    startDate: "2025-03-01",
-    endDate: "2025-03-15",
-    vehicles: [
-      "T-14 Armata (Upgraded)",
-      "M1A3 Abrams (Upgraded)",
-      "Leopard 2A7+",
-      "Type 10"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 5,
-    title: "Battle Spirit",
-    month: "March 2025",
-    image: "/events/battle-spirit.jpg",
-    description: "Unleash your fighting spirit with these battle-hardened machines!",
-    startDate: "2025-03-20",
-    endDate: "2025-04-03",
-    vehicles: [
-      "T-90MS (Upgraded)",
-      "Challenger 3",
-      "Leclerc XLR",
-      "Type 10 (Upgraded)"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  }
-];
+// Import vehicle data from mwt-vehicle-stats
+declare const VEHICLES: any[];
 
-interface EventComponentProps {
-  onClose: () => void;
+interface EventListProps {
+  onVehicleSelect?: (vehicleName: string) => void;
 }
 
-const EventComponent: React.FC<EventComponentProps> = ({ onClose }) => {
-  const [expandedEvent, setExpandedEvent] = useState<number | null>(null);
-  const [processedEvents, setProcessedEvents] = useState<EventData[]>(EVENTS);
-  const router = useRouter();
-
-  const toggleEvent = (id: number) => {
-    setExpandedEvent(expandedEvent === id ? null : id);
-  };
-
-  const findVehicleByName = (name: string): Vehicle | null => {
-    if (typeof window === 'undefined') return null;
-    const vehicles = (window as any).VEHICLES || [];
-    if (!Array.isArray(vehicles)) return null;
-    return vehicles.find((v: any) => v?.name?.toLowerCase() === name.toLowerCase()) || null;
-  };
-
+const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
+  const [vehiclesData, setVehiclesData] = useState<any[]>([]);
+  
   useEffect(() => {
-    const updateEvents = async () => {
-      const updatedEvents = await Promise.all(EVENTS.map(async (event) => {
-        const vehicles = await Promise.all(
-          event.vehicles.map(async (vehicle) => {
-            if (typeof vehicle === 'string') {
-              return findVehicleByName(vehicle) || vehicle;
-            }
-            return vehicle;
-          })
-        );
-        return { ...event, vehicles };
-      }));
-      setProcessedEvents(updatedEvents);
-    };
-
-    updateEvents();
+    // This will be populated by the parent component
+    if (typeof VEHICLES !== 'undefined') {
+      setVehiclesData(VEHICLES);
+    }
   }, []);
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-start justify-start p-0 bg-black/50 backdrop-blur-sm">
-      <div className="relative flex flex-col w-full max-w-md h-full bg-slate-800 border-r border-slate-600/50 shadow-2xl">
-        <div className="sticky top-0 z-10 bg-slate-800/90 backdrop-blur-sm p-4 border-b border-slate-700/50 flex justify-between items-center">
-          <h2 className="text-xl font-bold text-white">Special Events</h2>
-          <button
-            onClick={onClose}
-            className="text-white hover:text-purple-200 transition-colors p-2 hover:bg-white/10 rounded-lg"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-
-        <div className="flex-1 overflow-hidden bg-gradient-to-b from-slate-800 to-slate-900">
-          <div className="h-full overflow-y-auto p-4">
-            <div className="space-y-4">
-              {processedEvents.map((event) => (
-                <div key={event.id} className="group">
-                  <div 
-                    className="relative overflow-hidden rounded-lg cursor-pointer transition-all duration-300 bg-slate-700/50 hover:bg-slate-700/70 border border-slate-600/50 group"
-                    onClick={() => toggleEvent(event.id)}
-                  >
-                    <div className="relative w-full h-32 overflow-hidden">
-                      <img 
-                        src={event.image.startsWith('http') ? event.image : `https://via.placeholder.com/1200x300/1e293b/64748b?text=${encodeURIComponent(event.title)}`}
-                        alt={event.title}
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                        onError={(e) => {
-                          const target = e.currentTarget as HTMLImageElement;
-                          target.onerror = null;
-                          target.src = `https://via.placeholder.com/1200x300/1e293b/64748b?text=${encodeURIComponent(event.title)}`;
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-4">
-                        <h3 className="text-lg font-bold text-white drop-shadow-lg">{event.title}</h3>
-                        <p className="text-xs text-slate-300">
-                          {new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}
-                        </p>
-                      </div>
-                      <ChevronRight 
-                        className={`absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-white/80 transition-transform duration-300 ${
-                          expandedEvent === event.id ? 'rotate-90' : 'group-hover:translate-x-1'
-                        }`} 
-                      />
-                    </div>
-                    
-                    <div className="p-4">
-                  {expandedEvent === event.id && (
-                    <div className="mt-4 pt-4 border-t border-slate-700/50">
-                      <p className="text-sm text-slate-300 mb-4">{event.description}</p>
-                      
-                      <div className="mb-6">
-                        <h4 className="text-sm font-medium text-white mb-3">Event Rewards</h4>
-                            <div className="grid grid-cols-2 gap-4">
-                              {event.rewards.premium[0] && (
-                                <div className="bg-gradient-to-br from-yellow-900/30 to-yellow-900/10 border border-yellow-800/50 rounded-lg p-3">
-                                  <div className="flex items-center justify-center mb-2">
-                                    <Gift className="w-8 h-8 text-yellow-400" />
-                                  </div>
-                                  <div className="text-center">
-                                    <span className="text-xs font-medium text-yellow-400">MAIN REWARD</span>
-                                    <p className="text-sm text-yellow-300 font-medium mt-1">
-                                      {event.rewards.premium[0].split(':')[0]}
-                                    </p>
-                                  </div>
-                                </div>
-                              )}
-                              
-                              {event.rewards.free[0] && (
-                                <div className="bg-gradient-to-br from-green-900/30 to-green-900/10 border border-green-800/50 rounded-lg p-3">
-                                  <div className="flex items-center justify-center mb-2">
-                                    <Gift className="w-8 h-8 text-green-400" />
-                                  </div>
-                                  <div className="text-center">
-                                    <span className="text-xs font-medium text-green-400">FREE REWARD</span>
-                                    <p className="text-sm text-green-300 font-medium mt-1">
-                                      {event.rewards.free[0].split(':')[0]}
-                                    </p>
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                          
-                          <div>
-                            <h4 className="text-sm font-medium text-white mb-3">Featured Vehicles ({event.vehicles.length})</h4>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                              {event.vehicles.map((vehicle, idx) => {
-                                const vehicleData = typeof vehicle === 'object' ? vehicle : null;
-                                const vehicleName = vehicleData?.name || String(vehicle);
-                                const vehicleImage = vehicleData?.image || `https://via.placeholder.com/80/1e293b/64748b?text=${encodeURIComponent(vehicleName.split(' ')[0])}`;
-                                const country = vehicleData?.faction || 'Unknown';
-                                
-                                return (
-                                  <div key={idx} className="bg-slate-800/50 rounded-lg p-2 hover:bg-slate-700/70 transition-colors">
-                                    <div className="relative aspect-[4/3] rounded-md overflow-hidden bg-slate-700/50 mb-2">
-                                      <img
-                                        src={vehicleImage}
-                                        alt={vehicleName}
-                                        className="w-full h-full object-cover"
-                                        onError={(e) => {
-                                          const target = e.currentTarget as HTMLImageElement;
-                                          target.onerror = null;
-                                          target.src = `https://via.placeholder.com/80/1e293b/64748b?text=${encodeURIComponent(vehicleName.split(' ')[0])}`;
-                                        }}
-                                      />
-                                    </div>
-                                    <div>
-                                      <p className="text-xs font-medium text-white truncate" title={vehicleName}>
-                                        {vehicleName}
-                                      </p>
-                                      <p className="text-[10px] text-slate-400">
-                                        {country}
-                                      </p>
-                                    </div>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <AnimatePresence>
-                    {expandedEvent === event.id && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        className="overflow-hidden"
-                      >
-                        <div className="pl-4 pr-2 py-2 space-y-2 border-t border-slate-700/50">
-                          {event.vehicles.map((vehicle, index) => (
-                            <div 
-                              key={index}
-                              className="flex items-center p-3 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-colors cursor-pointer group"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                const vehicleName = typeof vehicle === 'string' ? vehicle : vehicle.name;
-                                onVehicleSelect(vehicleName);
-                                onClose();
-                              }}
-                            >
-                              <div className="flex-1 min-w-0">
-                                <h4 className="font-medium text-white text-sm">
-                                  {typeof vehicle === 'string' ? vehicle : vehicle.name}
-                                </h4>
-                              </div>
-                              <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-purple-400 transition-colors flex-shrink-0" />
-                            </div>
-                          ))}
-                          
-                          <div className="mt-2 pt-2 border-t border-slate-700/50">
-                            <div className="flex items-center text-[11px] text-slate-400 mb-1.5">
-                              <span>Event Rewards</span>
-                            </div>
-                            <div className="flex flex-wrap gap-1">
-                              {[...event.rewards.premium.slice(0, 2), ...event.rewards.free.slice(0, 1)].map((reward, i) => (
-                                <span 
-                                  key={i} 
-                                  className={`text-[10px] px-1.5 py-0.5 rounded ${
-                                    i < 2 
-                                      ? 'bg-yellow-600/20 text-yellow-300 border border-yellow-600/30' 
-                                      : 'bg-slate-600/30 text-slate-300 border border-slate-600/50'
-                                  }`}
-                                >
-                                  {reward.split(':')[0]}
-                                </span>
-                              ))}
-                              {event.rewards.premium.length + event.rewards.free.length > 3 && (
-                                <span className="text-[10px] text-slate-500 ml-0.5">
-                                  +{event.rewards.premium.length + event.rewards.free.length - 3}
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default EventComponent;
-    month: "January 2025",
-    image: "/events/lunar-dawn.jpg",
-    description: "Celebrate the Lunar New Year with special themed vehicles and decorations!",
-    startDate: "2025-01-22",
-    endDate: "2025-02-05",
-    vehicles: [
-      "Type 99A",
-      "K2 Black Panther",
-      "T-90MS",
-      "Leclerc XLR"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
+  
+  const getVehicleInfo = (vehicleName: string) => {
+    // First try to find the exact match in vehiclesData
+    let vehicle = vehiclesData.find(v => v.name === vehicleName);
+    
+    // If not found, try case-insensitive search
+    if (!vehicle) {
+      vehicle = vehiclesData.find(v => 
+        v.name.toLowerCase() === vehicleName.toLowerCase()
+      );
     }
-  },
-  {
-    id: 3,
-    title: "Carnival of Fire",
-    month: "February 2025",
-    image: "/events/carnival-of-fire.jpg",
-    description: "Feel the heat with these fiery combat machines!",
-    startDate: "2025-02-10",
-    endDate: "2025-02-24",
-    vehicles: [
-      "TOS-1A",
-      "M109A7 Paladin",
-      "PzH 2000",
-      "2S35 Koalitsiya-SV"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
+    
+    // Generate image name in format K21-KNIFV.jpg
+    const generateImageName = (name: string) => {
+      // First, handle special cases and replacements
+      let processedName = name
+        .replace(/[^\w\s-]/g, '')  // Remove special characters
+        .replace(/\s+/g, '-')       // Replace spaces with hyphens
+        .replace(/-+/g, '-')        // Replace multiple hyphens with single
+        .replace(/^-+|-+$/g, '')    // Remove leading/trailing hyphens
+        .toUpperCase();             // Convert to uppercase
+      
+      console.log(`Generated image name for "${name}":`, processedName);
+      return processedName;
+    };
+    
+    const imageName = generateImageName(vehicleName);
+    // Paths are relative to the public directory
+    const imagePath = `/vehicles/${imageName}.jpg`;
+    const thumbnailPath = `/vehicles/thumbnails/${imageName}.jpg`;
+    
+    console.log(`Looking for vehicle images at:`, { imagePath, thumbnailPath });
+    
+    // If vehicle not found, return with generated image path
+    if (!vehicle) {
+      console.warn(`Vehicle not found: ${vehicleName}`);
+      return { 
+        name: vehicleName,
+        image: imagePath,
+        thumbnail: imagePath
+      };
     }
-  },
+    
+    console.log(`Vehicle: ${vehicleName}`, {
+      image: imagePath,
+      thumbnail: thumbnailPath,
+      found: !!vehicle
+    });
+    
+    return {
+      ...vehicle,
+      name: vehicle.name || vehicleName, // Ensure we always have a name
+      image: imagePath,
+      thumbnail: thumbnailPath
+    };
+  };
+  const [expandedEvent, setExpandedEvent] = useState<number | null>(null);
+  
+  // Event data with actual vehicle references
+  const events: Event[] = [
   {
-    id: 4,
-    title: "Lucky Strike",
-    month: "March 2025",
-    image: "/events/lucky-strike.jpg",
-    description: "Try your luck with these rare and powerful vehicles!",
-    startDate: "2025-03-01",
-    endDate: "2025-03-15",
-    vehicles: [
-      "T-14 Armata (Upgraded)",
-      "M1A3 Abrams (Upgraded)",
-      "Leopard 2A7+",
-      "Type 10"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-  },
-  {
-    id: 5,
-    title: "Battle Spirit",
-    month: "March 2025",
-    image: "/events/battle-spirit.jpg",
-    description: "Spring into action with these fresh combat vehicles!",
-    startDate: "2025-03-20",
-    endDate: "2025-04-03",
-    vehicles: [
-      "T-90MS (Upgraded)",
-      "Challenger 3",
-      "Leclerc XLR",
-      "Type 10 (Upgraded)"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 7,
-    title: "Golden Week",
-    month: "April 2025",
-    image: "/events/golden-week.jpg",
-    description: "Celebrate with these special golden vehicles!",
-    startDate: "2025-04-29",
-    endDate: "2025-05-06",
-    vehicles: [
-      "Type 99A (Golden)",
-      "ZTZ-99A",
-      "VT-4",
-      "Type 15"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 8,
-    title: "Victory Day",
-    month: "May 2025",
-    image: "/events/victory-day.jpg",
-    description: "Honor the past with these legendary war machines!",
-    startDate: "2025-05-01",
-    endDate: "2025-05-15",
-    vehicles: [
-      "T-34-85",
-      "IS-3",
-      "M4 Sherman",
-      "Tiger I"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 9,
-    title: "Eagle's Vigil",
-    month: "May 2025",
-    image: "/events/eagles-vigil.jpg",
-    description: "Soar to new heights with these aerial predators!",
-    startDate: "2025-05-20",
-    endDate: "2025-06-03",
-    vehicles: [
-      "F-35 Lightning II",
-      "Su-57",
-      "J-20",
-      "Eurofighter Typhoon"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 10,
-    title: "Rise of the Dragon",
-    month: "June 2025",
-    image: "/events/rise-of-dragon.jpg",
-    description: "Unleash the dragon's might with these powerful vehicles!",
-    startDate: "2025-06-10",
-    endDate: "2025-06-24",
-    vehicles: [
-      "Type 99A (Dragon)",
-      "ZTQ-15",
-      "VT-5",
-      "Type 96B"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 11,
-    title: "Summer's Heyday",
-    month: "July 2025",
-    image: "/events/summers-heyday.jpg",
-    description: "Heat up the battlefield with these summer specials!",
-    startDate: "2025-07-01",
-    endDate: "2025-07-15",
-    vehicles: [
-      "T-90M (Summer)",
-      "M1A2 (Desert)",
-      "Leopard 2A6 (Tropical)",
-      "Challenger 2 (Desert)"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 12,
-    title: "Thunder of Freedom",
-    month: "July 2025",
-    image: "/events/thunder-of-freedom.jpg",
-    description: "Celebrate freedom with these mighty machines!",
-    startDate: "2025-07-20",
-    endDate: "2025-08-03",
-    vehicles: [
-      "M1A2 SEPv3 (Freedom)",
-      "M1128 MGS",
-      "M109A6 Paladin",
-      "M2A3 Bradley"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 13,
-    title: "Time of Change",
-    month: "August 2025",
-    image: "/events/time-of-change.jpg",
-    description: "Witness the evolution of armored warfare!",
-    startDate: "2025-08-10",
-    endDate: "2025-08-24",
-    vehicles: [
-      "T-14 Armata (Modern)",
-      "T-90M Proryv-3 (Upgraded)",
-      "T-80BVM (2025)",
-      "T-72B3M"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 14,
-    title: "Long March",
-    month: "September 2025",
-    image: "/events/long-march.jpg",
-    description: "Embark on an epic journey with these resilient machines!",
-    startDate: "2025-09-01",
-    endDate: "2025-09-15",
-    vehicles: [
-      "ZTZ-99A (March)",
-      "Type 15 (Light)",
-      "VT-4 (Export)",
-      "Type 96B (Modern)"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 15,
-    title: "Hunting for the Legend",
-    month: "September 2025",
-    image: "/events/hunting-legend.jpg",
-    description: "Pursue legendary status with these exceptional vehicles!",
-    startDate: "2025-09-20",
-    endDate: "2025-10-04",
-    vehicles: [
-      "Leopard 2A7+ (Legendary)",
-      "M1A2 SEPv4",
-      "Challenger 3 (Black Night)",
-      "Leclerc XLR (Upgraded)"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 16,
-    title: "Winged March",
-    month: "October 2025",
-    image: "/events/winged-march.jpg",
-    description: "Take to the skies with these aerial dominators!",
-    startDate: "2025-10-10",
-    endDate: "2025-10-24",
-    vehicles: [
-      "F-22 Raptor",
-      "Su-35",
-      "J-16",
-      "Rafale"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 17,
-    title: "Operation Zafer",
-    month: "November 2025",
-    image: "/events/operation-zafer.jpg",
-    description: "Execute precise operations with these specialized vehicles!",
-    startDate: "2025-11-01",
-    endDate: "2025-11-15",
-    vehicles: [
-      "Altay",
-      "K2PL",
-      "T-129 ATAK",
-      "FNSS Kaplan"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 18,
-    title: "Grape Symphony",
-    month: "November 2025",
-    image: "/events/grape-symphony.jpg",
-    description: "A harmonious blend of power and precision!",
-    startDate: "2025-11-20",
-    endDate: "2025-12-04",
-    vehicles: [
-      "Leclerc T4 (Special)",
-      "AMX-56 Leclerc",
-      "VBCI",
-      "Jaguar EBRC"
-    ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
-  },
-  {
-    id: 19,
-    title: "Octoberfest",
-    month: "October 2025",
-    image: "/events/octoberfest.jpg",
-    description: "Celebrate with these German engineering marvels!",
+    id: 22,
+    name: "Great Middle of Autumn",
+    image: "/Events/Great-Middle-of-Autumn.jpg",
     startDate: "2025-10-01",
-    endDate: "2025-10-15",
+    endDate: "2025-10-12",
     vehicles: [
-      "Leopard 2A7+ (Oktoberfest)",
-      "Puma IFV",
-      "PzH 2000 (Special)",
-      "Boxer CRV"
+      { id: 1, name: "K21 KNIFV", type: "free" },
+      { id: 2, name: "K2 Black Panther", type: "main" },
     ],
-    rewards: {
-      premium: ["Premium Reward 1", "Premium Reward 2"],
-      free: ["Free Reward 1", "Free Reward 2"]
-    }
+  },
+  {
+    id: 21,
+    name: "Octoberfest",
+    image: "/Events/Octoberfest.jpg",
+    startDate: "2025-09-18",
+    endDate: "2025-09-30",
+    vehicles: [
+      { id: 3, name: "Strf 9040 BILL", type: "free" },
+      { id: 4, name: "Leopard 2 A-RC 3.0", type: "main" },
+    ],
   },
   {
     id: 20,
-    title: "Great Middle of Autumn",
-    month: "September 2025",
-    image: "/events/mid-autumn.jpg",
-    description: "Celebrate the harvest with these bountiful vehicles!",
-    startDate: "2025-09-15",
-    endDate: "2025-09-30",
+    name: "Grape Symphony",
+    image: "/Events/Grape-Symphony.jpg",
+    startDate: "2025-09-05",
+    endDate: "2025-09-17",
     vehicles: [
-      "Type 99A (Autumn)",
-      "Type 15 (Harvest)",
-      "VT-4 (Festive)",
-      "ZBD-04A"
-    ]
-  }
+      { id: 5, name: "Centauro I 120", type: "free" },
+      { id: 6, name: "Challenger 3", type: "main" },
+    ],
   },
-  // Add more events as needed
-  ...Array(19).fill(0).map((_, i) => ({
-    id: i + 2,
-    title: `Special Event ${i + 1}`,
-    month: new Date(2025, (i % 12) + 1).toLocaleString('default', { month: 'long' }),
-    image: "https://via.placeholder.com/400x200/1e293b/64748b?text=Event",
-    description: `Limited time event with exclusive rewards and vehicles!`,
-    startDate: new Date(2025, (i % 12), 1).toISOString().split('T')[0],
-    endDate: new Date(2025, (i % 12) + 1, 0).toISOString().split('T')[0],
-    vehicles: Array(6).fill(0).map((_, j) => `Event ${i+1} Vehicle ${j+1}`),
-    rewards: {
-      premium: [
-        `Premium Reward 1`,
-        `Premium Reward 2`,
-        `Premium Reward 3`
-      ],
-      free: [
-        `Free Reward 1`,
-        `Free Reward 2`,
-        `Free Reward 3`
-      ]
-    }
-  }))
-];
+  {
+    id: 19,
+    name: "Operation Zafer",
+    image: "/Events/Operation-Zafer.jpg",
+    startDate: "2025-08-29",
+    endDate: "2025-09-04",
+    vehicles: [
+      { id: 7, name: "M60A3 MZK", type: "free" },
+      { id: 8, name: "Altay", type: "main" },
+    ],
+  },
+  {
+    id: 18,
+    name: "Winged March",
+    image: "/Events/Winged-March.jpg",
+    startDate: "2025-08-14",
+    endDate: "2025-08-28",
+    vehicles: [
+      { id: 9, name: "PT-91", type: "free" },
+      { id: 10, name: "PL-01", type: "main" },
+    ],
+  },
+  {
+    id: 17,
+    name: "Hunting for the Legend",
+    image: "/Events/Hunting-for-the-Legend.jpg",
+    startDate: "2025-08-09",
+    endDate: "2025-08-24",
+    vehicles: [
+      { id: 11, name: "T-72A", type: "free" },
+    ],
+  },
+  {
+    id: 16,
+    name: "Long March",
+    image: "/Events/Long-March.jpg",
+    startDate: "2025-07-31",
+    endDate: "2025-08-13",
+    vehicles: [
+      { id: 12, name: "WMA301", type: "free" },
+      { id: 13, name: "FK-2000", type: "main" },
+    ],
+  },
+  {
+    id: 15,
+    name: "Time of Change",
+    image: "/Events/Time-of-Change.jpg",
+    startDate: "2025-07-14",
+    endDate: "2025-07-30",
+    vehicles: [
+      { id: 14, name: "VCBI-2", type: "free" },
+      { id: 15, name: "Leclerc S2 AZUR", type: "main" },
+    ],
+  },
+  {
+    id: 14,
+    name: "Thunder of Freedom",
+    image: "/Events/Thunder-of-Freedom.jpg",
+    startDate: "2025-06-30",
+    endDate: "2025-07-13",
+    vehicles: [
+      { id: 16, name: "M109A6 Paladin", type: "free" },
+      { id: 17, name: "MGM-166 LOSAT", type: "main" },
+    ],
+  },
+  {
+    id: 13,
+    name: "Summer's Heyday",
+    image: "/Events/Summer-Heyday.jpg",
+    startDate: "2025-06-12",
+    endDate: "2025-06-29",
+    vehicles: [
+      { id: 18, name: "Rooikat MTTD", type: "free" },
+      { id: 19, name: "Challenger 3", type: "main" },
+    ],
+  },
+  {
+    id: 12,
+    name: "Rise of the Dragon",
+    image: "/Events/Rise-of-the-Dragon.jpg",
+    startDate: "2025-05-30",
+    endDate: "2025-06-12",
+    vehicles: [
+      { id: 20, name: "ZTZ96A (P)", type: "free" },
+      { id: 21, name: "SR-5 GMLRS", type: "main" },
+    ],
+  },
+  {
+    id: 11,
+    name: "Eagle's Vigil",
+    image: "/Events/Eagle's-Vigil.jpg",
+    startDate: "2025-05-15",
+    endDate: "2025-05-29",
+    vehicles: [
+      { id: 22, name: "XM2001 Crusader", type: "free" },
+      { id: 23, name: "M270 MLRS", type: "main" },
+    ],
+  },
+  {
+    id: 10,
+    name: "Victory Day",
+    image: "/Events/Victory-Day.jpg",
+    startDate: "2025-05-08",
+    endDate: "2025-05-14",
+    vehicles: [
+      { id: 24, name: "T-90A", type: "free" },
+      { id: 25, name: "M1A1 Abrams", type: "free" },
+      { id: 26, name: "FV4034 Challenger 2", type: "main" },
+    ],
+  },
+  {
+    id: 9,
+    name: "Golden Week",
+    image: "/Events/Golden-Week.jpg",
+    startDate: "2025-04-28",
+    endDate: "2025-05-07",
+    vehicles: [
+      { id: 27, name: "K-31 Cheonma", type: "free" },
+      { id: 28, name: "J-50 Trident", type: "main" },
+      { id: 29, name: "Type 90", type: "gacha" },
+    ],
+  },
+  {
+    id: 8,
+    name: "Spring Surge",
+    image: "/Events/Spring-Surge.jpg",
+    startDate: "2025-04-11",
+    endDate: "2025-04-27",
+    vehicles: [
+      { id: 30, name: "Leopard 2A4", type: "free" },
+      { id: 31, name: "T-104 Bastion", type: "main" },
+    ],
+  },
+  {
+    id: 7,
+    name: "Battle Spirit",
+    image: "/Events/Battle-Spirit.jpg",
+    startDate: "2025-04-01",
+    endDate: "2025-04-10",
+    vehicles: [
+      { id: 32, name: "AFT-09", type: "free" },
+      { id: 33, name: "T-20 Monolith", type: "main" },
+    ],
+  },
+  {
+    id: 6,
+    name: "Lucky Strike",
+    image: "/Events/Lucky-Strike.jpg",
+    startDate: "2025-03-14",
+    endDate: "2025-03-30",
+    vehicles: [
+      { id: 34, name: "AFT-10", type: "free" },
+      { id: 35, name: "FV4034 Challenger 2", type: "main" },
+    ],
+  },
+  {
+    id: 5,
+    name: "Carnival of Fire",
+    image: "/Events/Carnival-of-Fire.jpg",
+    startDate: "2025-02-28",
+    endDate: "2025-03-13",
+    vehicles: [
+      { id: 36, name: "M113 Hellfire", type: "free" },
+      { id: 37, name: "PL-01", type: "main" },
+    ],
+  },
+  {
+    id: 4,
+    name: "Lunar Dawn",
+    image: "/Events/Lunar-Dawn.jpg",
+    startDate: "2026-01-24",
+    endDate: "2026-02-13",
+    vehicles: [
+      { id: 38, name: "Type 89 MLRS", type: "free" },
+      { id: 39, name: "J-50", type: "main" },
+      { id: 40, name: "F-4E", type: "gacha" },
+      { id: 41, name: "Mig-35", type: "gacha" },
+      { id: 42, name: "J-10", type: "gacha" },
+      { id: 43, name: "AV88 Harrier", type: "gacha" },
+    ],
+  },
+  {
+    id: 2,
+    name: "Frozen Frontlines",
+    image: "/Events/Frozen-Frontlines.jpg",
+    startDate: "2025-12-13",
+    endDate: "2026-01-06",
+    vehicles: [
+      { id: 47, name: "Type 74E", type: "free" },
+      { id: 48, name: "BM-57-2 Kochevnik", type: "main" },
+      { id: 49, name: "ZSU-57-2", type: "gacha" },
+      { id: 50, name: "M113A1 FMS AIFV", type: "gacha" },
+      { id: 51, name: "BTR-80", type: "gacha" },
+      { id: 52, name: "LAV-25", type: "gacha" },
+    ],
+  },
+  ];
+  
+  // Enrich event vehicles with data from VEHICLES
+  const enrichedEvents = events.map(event => ({
+    ...event,
+    vehicles: event.vehicles.map(vehicle => ({
+      ...vehicle,
+      ...getVehicleInfo(vehicle.name)
+    }))
+  }));
 
+  const router = useRouter();
 
-
-  // Helper function to find vehicle by name
-  const findVehicleByName = (name: string): Vehicle | null => {
-    if (typeof window === 'undefined') return null;
-    const vehicles = (window as any).VEHICLES || [];
-    if (!Array.isArray(vehicles)) return null;
-    return vehicles.find((v: any) => v?.name?.toLowerCase() === name.toLowerCase()) || null;
+  const toggleExpand = (id: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setExpandedEvent(expandedEvent === id ? null : id);
   };
 
-  // Process events with vehicle data
-  const [processedEvents, setProcessedEvents] = useState<EventData[]>(EVENTS);
+  const handleVehicleClick = (vehicleName: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onVehicleSelect) {
+      onVehicleSelect(vehicleName);
+    } else if (typeof window !== 'undefined') {
+      // Fallback in case onVehicleSelect is not provided
+      window.location.href = `/?search=${encodeURIComponent(vehicleName)}`;
+    }
+  };
 
-  useEffect(() => {
-    const updateEvents = async () => {
-      const updatedEvents = await Promise.all(EVENTS.map(async (event) => {
-        const vehicles = await Promise.all(
-          event.vehicles.map(async (vehicle) => {
-            if (typeof vehicle === 'string') {
-              return findVehicleByName(vehicle) || vehicle;
-            }
-            return vehicle;
-          })
-        );
-        return { ...event, vehicles };
-      }));
-      setProcessedEvents(updatedEvents);
-    };
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
 
-    updateEvents();
-  }, []);
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-start justify-start p-0 bg-black/50 backdrop-blur-sm">
-      <div className="relative flex flex-col w-full max-w-md h-full bg-slate-800 border-r border-slate-600/50 shadow-2xl">
-        <div className="sticky top-0 z-10 bg-slate-800/90 backdrop-blur-sm p-4 border-b border-slate-700/50 flex justify-between items-center">
-          <h2 className="text-xl font-bold text-white">Special Events</h2>
-          <button
-            onClick={onClose}
-            className="text-white hover:text-purple-200 transition-colors p-2 hover:bg-white/10 rounded-lg"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-
-        <div className="flex-1 overflow-hidden bg-gradient-to-b from-slate-800 to-slate-900">
-          <div className="h-full overflow-y-auto p-4">
-            <div className="space-y-4">
-            {processedEvents.map((event) => (
-              <div key={event.id} className="group">
-                {/* Event Card */}
-                <div 
-                  className="relative overflow-hidden rounded-lg cursor-pointer transition-all duration-300 bg-slate-700/50 hover:bg-slate-700/70 border border-slate-600/50 group"
-                  onClick={() => toggleEvent(event.id)}
-                >
-                  {/* Full-width Event Banner */}
-                  <div className="relative w-full h-32 overflow-hidden">
-                    <img 
-                      src={event.image.startsWith('http') ? event.image : `https://via.placeholder.com/1200x300/1e293b/64748b?text=${encodeURIComponent(event.title)}`}
-                      alt={event.title}
-                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                      onError={(e) => {
-                        const target = e.currentTarget as HTMLImageElement;
-                        target.onerror = null;
-                        target.src = `https://via.placeholder.com/1200x300/1e293b/64748b?text=${encodeURIComponent(event.title)}`;
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h3 className="text-lg font-bold text-white drop-shadow-lg">{event.title}</h3>
-                      <p className="text-xs text-slate-300">
-                        {new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}
-                      </p>
-                    </div>
-                    <ChevronRight 
-                      className={`absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-white/80 transition-transform duration-300 ${
-                        expandedEvent === event.id ? 'rotate-90' : 'group-hover:translate-x-1'
-                      }`} 
-                    />
-                  </div>
-                  
-                  <div className="p-4">
-                      
-                    </div>
-                    
-                    {expandedEvent === event.id && (
-                      <div className="mt-4 pt-4 border-t border-slate-700/50">
-                        <p className="text-sm text-slate-300 mb-4">{event.description}</p>
-                        
-                        <div className="mb-6">
-                          <h4 className="text-sm font-medium text-white mb-3">Event Rewards</h4>
-                          <div className="grid grid-cols-2 gap-4">
-                            {/* Premium Reward */}
-                            {event.rewards.premium[0] && (
-                              <div className="bg-gradient-to-br from-yellow-900/30 to-yellow-900/10 border border-yellow-800/50 rounded-lg p-3">
-                                <div className="flex items-center justify-center mb-2">
-                                  <Gift className="w-8 h-8 text-yellow-400" />
-                                </div>
-                                <div className="text-center">
-                                  <span className="text-xs font-medium text-yellow-400">MAIN REWARD</span>
-                                  <p className="text-sm text-yellow-300 font-medium mt-1">
-                                    {event.rewards.premium[0].split(':')[0]}
-                                  </p>
-                                </div>
-                              </div>
-                            )}
-                            
-                            {/* Free Reward */}
-                            {event.rewards.free[0] && (
-                              <div className="bg-gradient-to-br from-green-900/30 to-green-900/10 border border-green-800/50 rounded-lg p-3">
-                                <div className="flex items-center justify-center mb-2">
-                                  <Gift className="w-8 h-8 text-green-400" />
-                                </div>
-                                <div className="text-center">
-                                  <span className="text-xs font-medium text-green-400">FREE REWARD</span>
-                                  <p className="text-sm text-green-300 font-medium mt-1">
-                                    {event.rewards.free[0].split(':')[0]}
-                                  </p>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                        
-                        {/* Vehicles */}
-                        <div>
-                          <h4 className="text-sm font-medium text-white mb-3">Featured Vehicles ({event.vehicles.length})</h4>
-                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                            {event.vehicles.map((vehicle, idx) => {
-                              const vehicleData = typeof vehicle === 'object' ? vehicle : null;
-                              const vehicleName = vehicleData?.name || String(vehicle);
-                              const vehicleImage = vehicleData?.image || `https://via.placeholder.com/80/1e293b/64748b?text=${encodeURIComponent(vehicleName.split(' ')[0])}`;
-                              const country = vehicleData?.faction || 'Unknown';
-                              
-                              return (
-                                <div key={idx} className="bg-slate-800/50 rounded-lg p-2 hover:bg-slate-700/70 transition-colors">
-                                  <div className="relative aspect-[4/3] rounded-md overflow-hidden bg-slate-700/50 mb-2">
-                                    <img
-                                      src={vehicleImage}
-                                      alt={vehicleName}
-                                      className="w-full h-full object-cover"
-                                      onError={(e) => {
-                                        const target = e.currentTarget as HTMLImageElement;
-                                        target.onerror = null;
-                                        target.src = `https://via.placeholder.com/80/1e293b/64748b?text=${encodeURIComponent(vehicleName.split(' ')[0])}`;
-                                      }}
-                                    />
-                                  </div>
-                                  <div>
-                                    <p className="text-xs font-medium text-white truncate" title={vehicleName}>
-                                      {vehicleName}
-                                    </p>
-                                    <p className="text-[10px] text-slate-400">
-                                      {country}
-                                    </p>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                
-                {/* Vehicles List - Animated */}
-                <AnimatePresence>
-                  {expandedEvent === event.id && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
-                      className="overflow-hidden"
-                    >
-                      <div className="pl-4 pr-2 py-2 space-y-2 border-t border-slate-700/50">
-                        {event.vehicles.map((vehicle, index) => (
-                            <div 
-                              key={index}
-                              className="flex items-center p-3 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-colors cursor-pointer group"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                const vehicleName = typeof vehicle === 'string' ? vehicle : vehicle.name;
-                                onVehicleSelect(vehicleName);
-                                onClose();
-                              }}
-                            >
-                              <div className="flex-1 min-w-0">
-                                <h4 className="font-medium text-white text-sm">
-                                  {typeof vehicle === 'string' ? vehicle : vehicle.name}
-                                </h4>
-                              </div>
-                              <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-purple-400 transition-colors flex-shrink-0" />
-                            </div>
-                        ))}
-                        
-                        {/* Rewards Preview */}
-                        <div className="mt-2 pt-2 border-t border-slate-700/50">
-                          <div className="flex items-center text-[11px] text-slate-400 mb-1.5">
-                            <span>Event Rewards</span>
-                          </div>
-                          <div className="flex flex-wrap gap-1">
-                            {[...event.rewards.premium.slice(0, 2), ...event.rewards.free.slice(0, 1)].map((reward, i) => (
-                              <span 
-                                key={i} 
-                                className={`text-[10px] px-1.5 py-0.5 rounded ${
-                                  i < 2 
-                                    ? 'bg-yellow-600/20 text-yellow-300 border border-yellow-600/30' 
-                                    : 'bg-slate-600/30 text-slate-300 border border-slate-600/50'
-                                }`}
-                              >
-                                {reward.split(':')[0]}
-                              </span>
-                            ))}
-                            {event.rewards.premium.length + event.rewards.free.length > 3 && (
-                              <span className="text-[10px] text-slate-500 ml-0.5">
-                                +{event.rewards.premium.length + event.rewards.free.length - 3}
-                              </span>
-                            )}
-                          </div>
-                    </motion.div>
-                  )
-                </AnimatePresence>
-              </div>
-            ))}
+  const renderEventCard = (event: Event) => (
+    <div key={event.id} className="space-y-2">
+      <div
+        className="relative overflow-hidden rounded-lg cursor-pointer transition-all duration-300 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600/50 shadow-lg"
+        onClick={(e) => toggleExpand(event.id, e)}
+      >
+        {/* Large Event Image */}
+        <div className="relative w-full h-48 overflow-hidden">
+          <img 
+            src={event.image} 
+            alt={event.name}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              const target = e.currentTarget as HTMLImageElement;
+              target.onerror = null;
+              target.src = 'https://via.placeholder.com/800x300/1e293b/64748b?text=Event';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 right-0 p-4">
+            <h3 className="text-2xl font-bold text-white mb-1">{event.name}</h3>
+            <div className="text-sm text-slate-200">
+              <p>{formatDate(event.startDate)} - {formatDate(event.endDate)}</p>
+            </div>
           </div>
         </div>
+        
+        {/* Expand/Collapse Indicator */}
+        <div className="flex items-center justify-center py-2 bg-slate-800/50 hover:bg-slate-700/50 transition-colors">
+          <ChevronDown 
+            className={`w-5 h-5 text-slate-300 transition-transform duration-300 ${expandedEvent === event.id ? 'rotate-180' : ''}`}
+          />
+        </div>
+      </div>
+      
+      {/* Expanded Content */}
+      <AnimatePresence>
+        {expandedEvent === event.id && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="mt-4 space-y-3">
+              <h5 className="text-sm font-semibold text-purple-300 mb-3">Featured Vehicles:</h5>
+              {event.vehicles.map((vehicle, i) => {
+                const vehicleData = getVehicleInfo(vehicle.name);
+                const typeStyles = {
+                  free: {
+                    text: 'text-green-400',
+                    bg: 'bg-green-900/20',
+                    border: 'border-green-500/30'
+                  },
+                  main: {
+                    text: 'text-orange-400',
+                    bg: 'bg-orange-900/20',
+                    border: 'border-orange-500/30'
+                  },
+                  gacha: {
+                    text: 'text-purple-400',
+                    bg: 'bg-purple-900/20',
+                    border: 'border-purple-500/30'
+                  }
+                }[vehicle.type] || {};
+
+                return (
+                  <div 
+                    key={`${event.id}-${i}`}
+                    className={`p-3 rounded-lg border ${typeStyles.border} ${typeStyles.bg} hover:border-purple-500/50 transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-purple-500/10`}
+                    onClick={(e) => handleVehicleClick(vehicle.name, e)}
+                  >
+                    <div className="flex items-start gap-3">
+                      {/* Vehicle Image */}
+                      <div className="flex-shrink-0 w-20 h-16 rounded-md overflow-hidden border border-slate-600/50 bg-slate-800/50">
+                        <div className="relative w-full h-full">
+                          
+                          {/* Fallback if image fails to load */}
+                          
+                        </div>
+                      </div>
+                      
+                      {/* Vehicle Info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-1">
+                          <span className={`font-medium ${typeStyles.text}`}>
+                            {vehicle.name}
+                          </span>
+                          {vehicle.faction && (
+                            <span className="text-xs px-1.5 py-0.5 rounded bg-slate-700/50 text-slate-300">
+                              {vehicle.faction}
+                            </span>
+                          )}
+                        </div>
+                        
+                        <div className="flex items-center justify-between mt-1">
+                          <span className="text-xs text-slate-400">
+                            {vehicle.type.charAt(0).toUpperCase() + vehicle.type.slice(1)} Vehicle
+                          </span>
+                          
+                          {vehicle.tier && (
+                            <div className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                              vehicle.tier === 'IV' ? 'bg-purple-600 text-white' :
+                              vehicle.tier === 'III' ? 'bg-blue-600 text-white' :
+                              vehicle.tier === 'II' ? 'bg-green-600 text-white' :
+                              'bg-gray-600 text-white'
+                            }`}>
+                              Tier {vehicle.tier}
+                            </div>
+                          )}
+                        </div>
+                        
+                        {vehicle.role && (
+                          <div className="mt-1 text-xs text-slate-400">
+                            Role: {vehicle.role}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+
+  // Get current date to check active events
+  const currentDate = new Date();
+  
+  // Show all events as current
+  const filteredEvents = [...enrichedEvents];
+  
+  // If no current events, show a message
+  if (filteredEvents.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[50vh] text-center p-6">
+        <div className="bg-slate-800/80 rounded-lg p-8 max-w-2xl w-full">
+          <h2 className="text-2xl font-bold text-white mb-4">No Active Events</h2>
+          <p className="text-slate-300 mb-6">There are currently no active events. Please check back later for upcoming events!</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6 max-w-5xl mx-auto p-4">
+      <h2 className="text-3xl font-bold text-white mb-6 text-center">Events</h2>
+      <div className="space-y-8">
+        {filteredEvents.map((event) => renderEventCard(event))}
       </div>
     </div>
   );
 };
 
-export default EventComponent;
+export default EventList;
