@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useRouter } from 'next/router';
+"use client"
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays } from "lucide-react"
 
 interface Vehicle {
   id: number;
   name: string;
-  type: 'free' | 'main' | 'gacha';
-  faction?: string;
-  tier?: string | number;
-  role?: string;
+  type: "free" | "main" | "gacha";
 }
 
 interface Event {
@@ -21,242 +18,9 @@ interface Event {
   vehicles: Vehicle[];
 }
 
-// VEHICLES will be loaded client-side
-interface VehicleData {
-  id: number;
-  name: string;
-  type?: string;
-  faction?: string;
-  tier?: string | number;
-  role?: string;
-}
-
-interface EventListProps {
-  onVehicleSelect?: (vehicleName: string) => void;
-}
-
-const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
-  const [vehiclesData, setVehiclesData] = useState<VehicleData[]>([]);
-  const [imageError, setImageError] = useState<Record<number, boolean>>({});
-  const [expandedEvent, setExpandedEvent] = useState<number | null>(null);
-  const [isClient, setIsClient] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    try {
-      // Set client-side flag
-      setIsClient(true);
-      
-      // Safely access VEHICLES if it exists
-      if (typeof window !== 'undefined' && (window as any).VEHICLES) {
-        setVehiclesData(Array.isArray((window as any).VEHICLES) ? (window as any).VEHICLES : []);
-      } else if (typeof VEHICLES !== 'undefined') {
-        // Fallback for direct VEHICLES reference if it exists
-        setVehiclesData(Array.isArray(VEHICLES) ? VEHICLES : []);
-      }
-      
-      setError(null);
-    } catch (err) {
-      console.error('Error initializing vehicle data:', err);
-      setError('Failed to load vehicle data. Please try refreshing the page.');
-      setVehiclesData([]);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  const getVehicleInfo = (vehicleName: string) => {
-    let vehicle = vehiclesData.find(v => v.name === vehicleName) ||
-                  vehiclesData.find(v => v.name.toLowerCase() === vehicleName.toLowerCase());
-
-    const generateImageName = (name: string) => {
-      return name
-        .replace(/[^\w\s-]/g, '')  // Remove special characters
-        .replace(/\s+/g, '-')      // Spaces → hyphens
-        .replace(/-+/g, '-')       // Multiple hyphens → single
-        .replace(/^-+|-+$/g, '')   // Trim leading/trailing hyphens
-        .toUpperCase();
-    };
-
-    const imageName = generateImageName(vehicleName);
-    const imagePath = `/vehicles/${imageName}.jpg`;
-    const thumbnailPath = `/vehicles/thumbnails/${imageName}.jpg`;
-
-    return {
-      ...vehicle,
-      name: vehicle?.name || vehicleName,
-      image: imagePath,
-      thumbnail: thumbnailPath
-    };
-  };
-
-  const router = useRouter();
-
-  const toggleExpand = (id: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setExpandedEvent(expandedEvent === id ? null : id);
-  };
-
-  const handleVehicleClick = (vehicleName: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (onVehicleSelect) {
-      onVehicleSelect(vehicleName);
-    } else if (typeof window !== 'undefined') {
-      window.location.href = `/?search=${encodeURIComponent(vehicleName)}`;
-    }
-  };
-
-  const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
-  };
-
-  const toggleVehicleImageError = (vehicleId: number) => {
-    setImageError(prev => ({ ...prev, [vehicleId]: true }));
-  };
-
-  const renderEventCard = (event: Event) => (
-    <div key={event.id} className="space-y-2">
-      <div
-        className="relative overflow-hidden rounded-lg cursor-pointer transition-all duration-300 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600/50 shadow-lg"
-        onClick={(e) => toggleExpand(event.id, e)}
-      >
-        <div className="relative w-full h-48 overflow-hidden">
-          <img 
-            src={event.image} 
-            alt={event.name}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              const target = e.currentTarget as HTMLImageElement;
-              target.onerror = null;
-              target.src = 'https://via.placeholder.com/800x300/1e293b/64748b?text=Event';
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 right-0 p-4">
-            <h3 className="text-2xl font-bold text-white mb-1">{event.name}</h3>
-            <div className="text-sm text-slate-200">
-              <p>{formatDate(event.startDate)} - {formatDate(event.endDate)}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-center py-2 bg-slate-800/50 hover:bg-slate-700/50 transition-colors">
-          <ChevronDown 
-            className={`w-5 h-5 text-slate-300 transition-transform duration-300 ${expandedEvent === event.id ? 'rotate-180' : ''}`}
-          />
-        </div>
-      </div>
-
-      <AnimatePresence>
-        {expandedEvent === event.id && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
-          >
-            <div className="mt-4 space-y-3">
-              <h5 className="text-sm font-semibold text-purple-300 mb-3">Featured Vehicles:</h5>
-              {event.vehicles.map((vehicle, i) => {
-                const vehicleData = getVehicleInfo(vehicle.name);
-                const typeStyles = {
-                  free: { text: 'text-green-400', bg: 'bg-green-900/20', border: 'border-green-500/30' },
-                  main: { text: 'text-orange-400', bg: 'bg-orange-900/20', border: 'border-orange-500/30' },
-                  gacha: { text: 'text-purple-400', bg: 'bg-purple-900/20', border: 'border-purple-500/30' }
-                }[vehicle.type] || {};
-
-                const vehicleImageName = vehicle.name
-                  .toUpperCase()
-                  .replace(/[^A-Z0-9\s]/g, '')
-                  .replace(/\s+/g, '-');
-
-                const imagePath = `/vehicles/${vehicleImageName}.jpg`;
-                const hasError = imageError[vehicle.id];
-
-                return (
-                  <div 
-                    key={`${event.id}-${i}`}
-                    className={`p-2 sm:p-3 rounded-lg border ${typeStyles.border} ${typeStyles.bg} hover:border-purple-500/50 transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-purple-500/10`}
-                    onClick={(e) => handleVehicleClick(vehicle.name, e)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        handleVehicleClick(vehicle.name, e);
-                      }
-                    }}
-                  >
-                    <div className="flex items-center gap-2 sm:gap-3">
-                      <div 
-                        className="flex-shrink-0 w-14 h-10 xs:w-16 xs:h-12 sm:w-20 sm:h-16 rounded-md overflow-hidden border border-slate-600/50 bg-slate-800/50"
-                        aria-label={`${vehicle.name} image`}
-                      >
-                        <div className="relative w-full h-full">
-                          {!hasError ? (
-                            <img
-                              src={imagePath}
-                              alt={`${vehicle.name}`}
-                              className="w-full h-full object-cover"
-                              onError={() => toggleVehicleImageError(vehicle.id)}
-                              loading="lazy"
-                            />
-                          ) : (
-                            <div className="absolute inset-0 flex items-center justify-center bg-slate-800/80 text-[10px] xs:text-xs text-slate-300">
-                              {vehicle.name.split(' ').map(word => word[0]).join('').toUpperCase()}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex flex-wrap items-center gap-1">
-                          <span className={`font-medium ${typeStyles.text}`}>
-                            {vehicle.name}
-                          </span>
-                          {vehicle.faction && (
-                            <span className="text-xs px-1.5 py-0.5 rounded bg-slate-700/50 text-slate-300">
-                              {vehicle.faction}
-                            </span>
-                          )}
-                        </div>
-                        <div className="flex items-center justify-between mt-1">
-                          <span className="text-xs text-slate-400">
-                            {vehicle.type.charAt(0).toUpperCase() + vehicle.type.slice(1)} Vehicle
-                          </span>
-                          {vehicle.tier && (
-                            <div className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                              vehicle.tier === 'IV' ? 'bg-purple-600 text-white' :
-                              vehicle.tier === 'III' ? 'bg-blue-600 text-white' :
-                              vehicle.tier === 'II' ? 'bg-green-600 text-white' :
-                              'bg-gray-600 text-white'
-                            }`}>
-                              Tier {vehicle.tier}
-                            </div>
-                          )}
-                        </div>
-                        {vehicle.role && (
-                          <div className="mt-1 text-xs text-slate-400">
-                            Role: {vehicle.role}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-
-  // All events in chronological order
-  const events: Event[] = [
-    {
+// All events in chronological order
+const events: Event[] = [
+  {
     id: 22,
     name: "Great Middle of Autumn",
     image: "/Events/Great-Middle-of-Autumn.jpg",
@@ -485,85 +249,115 @@ const EventList: React.FC<EventListProps> = ({ onVehicleSelect }) => {
       { id: 52, name: "LAV-25", type: "gacha" },
     ],
   },
-  ];
+];
 
-  // Safely enrich vehicles with images, only on client-side
-  const enrichedEvents = React.useMemo(() => {
-    if (!isClient || isLoading) return [];
-    
-    try {
-      return events.map(event => ({
-        ...event,
-        vehicles: event.vehicles.map(vehicle => {
-          try {
-            return {
-              ...vehicle,
-              ...getVehicleInfo(vehicle.name)
-            };
-          } catch (err) {
-            console.error(`Error processing vehicle ${vehicle.name}:`, err);
-            return {
-              ...vehicle,
-              image: '',
-              thumbnail: ''
-            };
-          }
-        })
-      }));
-    } catch (err) {
-      console.error('Error enriching events:', err);
-      setError('Failed to load events. Please try again later.');
-      return [];
+const Event = ({ eventId }: { eventId: number }) => {
+  const [expanded, setExpanded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  const event = events.find(e => e.id === eventId);
+
+  if (!event) {
+    return <div>Event not found</div>;
+  }
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
+  const getVehicleTypeColor = (type: string) => {
+    switch (type) {
+      case 'free':
+        return 'text-green-400';
+      case 'main':
+        return 'text-orange-400';
+      case 'gacha':
+        return 'text-purple-400';
+      default:
+        return 'text-gray-400';
     }
-  }, [isClient, isLoading, events, vehiclesData]);
+  };
 
-  // Render loading state
-  if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh] p-4">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500 mb-4"></div>
-        <p className="text-slate-300">Loading events...</p>
-      </div>
-    );
-  }
-
-  // Render error state
-  if (error) {
-    return (
-      <div className="bg-red-900/30 border border-red-700/50 rounded-lg p-6 max-w-2xl mx-auto my-8">
-        <h3 className="text-xl font-bold text-red-400 mb-2">Error Loading Events</h3>
-        <p className="text-slate-300 mb-4">{error}</p>
-        <button
-          onClick={() => window.location.reload()}
-          className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md transition-colors"
-        >
-          Try Again
-        </button>
-      </div>
-    );
-  }
-
-  // Render empty state
-  if (enrichedEvents.length === 0) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh] p-4">
-        <p className="text-slate-400">No events available at the moment.</p>
-      </div>
-    );
+  const getVehicleImage = (vehicleName: string) => {
+    const imageName = vehicleName.replace(/ /g, '-') + '.jpg';
+    return `/vehicles/${imageName}`;
   }
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto p-4">
-      <h2 className="text-3xl font-bold text-white mb-6 text-center">Events</h2>
-      <div className="space-y-8">
-        {enrichedEvents.map((event) => (
-          <React.Fragment key={event.id}>
-            {renderEventCard(event)}
-          </React.Fragment>
-        ))}
-      </div>
+    <div className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden hover:border-purple-500/50 transition-all duration-300">
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="w-full text-left p-4 bg-slate-900/50 hover:bg-slate-800/70 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            {!imageError ? (
+              <img
+                src={event.image}
+                alt={event.name}
+                className="w-16 h-16 rounded-lg object-cover mr-4 border-2 border-slate-700 shadow-lg"
+                onError={handleImageError}
+              />
+            ) : (
+              <div className="w-16 h-16 rounded-lg bg-slate-700 flex items-center justify-center mr-4">
+                <Camera className="w-8 h-8 text-slate-500" />
+              </div>
+            )}
+            <div>
+              <h4 className="text-xl font-bold text-white tracking-wide">{event.name}</h4>
+              <p className="text-sm text-slate-400">{new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}</p>
+            </div>
+          </div>
+          <motion.div
+            animate={{ rotate: expanded ? 90 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <ChevronRight className="w-6 h-6 text-slate-400" />
+          </motion.div>
+        </div>
+      </button>
+
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="p-4 border-t border-slate-700/50">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {event.vehicles.map(vehicle => {
+                  return (
+                    <div key={vehicle.id} className="bg-slate-900/70 rounded-lg p-3 border border-slate-800 hover:border-purple-600/60 transition-all duration-300 shadow-lg relative">
+                      <div className="relative">
+                        <img
+                          src={getVehicleImage(vehicle.name)}
+                          alt={vehicle.name}
+                          className="w-full h-32 object-cover rounded-md mb-2 border-2 border-slate-700"
+                          onError={(e) => (e.currentTarget.src = '/placeholder.png')}
+                        />
+                        {(vehicle.type === 'main' || vehicle.type === 'gacha') && (
+                          <div className="absolute top-1 right-1 bg-gradient-to-br from-yellow-400 to-orange-500 text-white p-1 rounded-full shadow-md">
+                            <Star className="w-4 h-4" />
+                          </div>
+                        )}
+                      </div>
+                      <h5 className="text-md font-semibold text-white truncate">{vehicle.name}</h5>
+                      <div className="flex items-center justify-between text-xs text-slate-400 mt-1">
+                        <span className={`${getVehicleTypeColor(vehicle.type)} capitalize`}>{vehicle.type}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
 
-export default EventList;
+export default Event;
