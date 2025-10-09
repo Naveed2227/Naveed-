@@ -60,7 +60,7 @@ const events: Event[] = [
     startDate: "2025-08-29",
     endDate: "2025-09-04",
     vehicles: [
-      { id: 7, name: "M60A3 (MZK)", type: "free" },
+      { id: 7, name: "M60A3 MZK", type: "free" },
       { id: 8, name: "Altay", type: "main" },
     ],
   },
@@ -71,7 +71,7 @@ const events: Event[] = [
     startDate: "2025-08-14",
     endDate: "2025-08-28",
     vehicles: [
-      { id: 9, name: "PT-91 Twardy", type: "free" },
+      { id: 9, name: "PT-91", type: "free" },
       { id: 10, name: "PL-01", type: "main" },
     ],
   },
@@ -93,7 +93,7 @@ const events: Event[] = [
     endDate: "2025-08-13",
     vehicles: [
       { id: 12, name: "WMA301", type: "free" },
-      { id: 13, name: "FK 2000", type: "main" },
+      { id: 13, name: "FK-2000", type: "main" },
     ],
   },
   {
@@ -171,7 +171,7 @@ const events: Event[] = [
     endDate: "2025-05-07",
     vehicles: [
       { id: 27, name: "K-31 Cheonma", type: "free" },
-      { id: 28, name: "J-50", type: "main" },
+      { id: 28, name: "J-50 Trident", type: "main" },
       { id: 29, name: "Type 90", type: "gacha" },
     ],
   },
@@ -194,7 +194,7 @@ const events: Event[] = [
     endDate: "2025-04-10",
     vehicles: [
       { id: 32, name: "AFT-09", type: "free" },
-      { id: 33, name: "T-20 Monolit", type: "main" },
+      { id: 33, name: "T-20 Monolith", type: "main" },
     ],
   },
   {
@@ -208,7 +208,7 @@ const events: Event[] = [
       { id: 35, name: "FV4034 Challenger 2", type: "main" },
     ],
   },
-  {
+   {
     id: 5,
     name: "Carnival of Fire",
     image: "/Events/Carnival-of-Fire.jpg",
@@ -223,8 +223,8 @@ const events: Event[] = [
     id: 4,
     name: "Lunar Dawn",
     image: "/Events/Lunar-Dawn.jpg",
-    startDate: "2026-01-24",
-    endDate: "2026-02-13",
+    startDate: "2025-01-24",
+    endDate: "2025-02-13",
     vehicles: [
       { id: 38, name: "Type 89 MLRS", type: "free" },
       { id: 39, name: "J-50", type: "main" },
@@ -235,18 +235,18 @@ const events: Event[] = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     name: "Frozen Frontlines",
     image: "/Events/Frozen-Frontlines.jpg",
-    startDate: "2025-12-13",
-    endDate: "2026-01-06",
+    startDate: "2024-12-13",
+    endDate: "2025-01-06",
     vehicles: [
-      { id: 47, name: "Type 74E", type: "free" },
-      { id: 48, name: "BM-57-2 Kochevnik", type: "main" },
-      { id: 49, name: "ZSU-57-2", type: "gacha" },
-      { id: 50, name: "M113A1 FMS AIP", type: "gacha" },
-      { id: 51, name: "BTR-80", type: "gacha" },
-      { id: 52, name: "LAV-25", type: "gacha" },
+      { id: 44, name: "Type 74E", type: "free" },
+      { id: 45, name: "BM-57-2 Kochevnik", type: "main" },
+      { id: 46, name: "ZSU-57-2", type: "gacha" },
+      { id: 47, name: "M113A1 FMS AIP", type: "gacha" },
+      { id: 48, name: "BTR-80", type: "gacha" },
+      { id: 49, name: "LAV-25", type: "gacha" },
     ],
   },
 ];
