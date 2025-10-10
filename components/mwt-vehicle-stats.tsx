@@ -2224,7 +2224,10 @@ const VEHICLES_DATA = [
       "armor": 0,
       "agility": 0 },
     "weapons": [
-      
+      { name: "DTB-125 HE", type: "Main Gun", damage: 12760, penetration: 160 },
+      { name: "DTP-125 HEAT", type: "Main Gun", damage: 12230, penetration: 480 },
+      { name: "DTC10-125", type: "Main Gun", damage: 11620, penetration: 680 },
+      { name: "TYPE 1985-I", type: "Main Gun", damage: 11120, penetration: 466 },
     ],
     "modules": {
       "engine": [
