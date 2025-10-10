@@ -1,33 +1,19 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Geist_Sans as Geist, Geist_Mono, Source_Serif_4 } from 'next/font/google';
+import { Inter, Source_Serif_4 } from 'next/font/google';
 import "./globals.css";
 
 // Font loading with optimization
 const inter = Inter({ 
   subsets: ["latin"],
   display: 'swap',
-  variable: '--font-inter',
-  preload: true
-});
-
-const geist = Geist({
-  subsets: ["latin"],
-  display: 'swap',
-  variable: '--font-geist',
-  preload: true
-});
-
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  display: 'swap',
-  variable: '--font-geist-mono',
+  variable: '--font-sans',
   preload: true
 });
 
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
   display: 'swap',
-  variable: '--font-source-serif',
+  variable: '--font-serif',
   weight: ['400', '500', '600', '700'],
   preload: true
 });
@@ -167,7 +153,7 @@ export default function RootLayout({
   return (
     <html 
       lang="en" 
-      className={`${inter.variable} ${geist.variable} ${geistMono.variable} ${sourceSerif.variable}`}
+      className={`${inter.variable} ${sourceSerif.variable}`}
       suppressHydrationWarning
     >
       <head>

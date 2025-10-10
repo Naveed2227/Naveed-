@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
   images: {
     domains: [
       'www.mwtassistant.com',
@@ -17,12 +15,12 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   experimental: {
-    appDir: true,
-    serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs'],
-    serverActions: true,
+    serverExternalPackages: ['@prisma/client', 'bcryptjs'],
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
+    removeConsole: process.env.NODE_ENV === 'production' ? { 
+      exclude: ['error'] 
+    } : false,
   },
   headers: async () => [
     {
