@@ -20,8 +20,19 @@ interface Event {
 
 // All events in chronological order
 const events: Event[] = [
+ {
+    id: 21,
+    name: "Brightest Light",
+    image: "/Events/Brightest-Light.jpg",
+    startDate: "2025-10-13",
+    endDate: "2025-10-22",
+    vehicles: [
+      { id: 1, name: "9K31 Strela-1", type: "free" },
+      { id: 2, name: "Arjun Mk.2", type: "main" },
+    ],
+  },
   {
-    id: 22,
+    id: 20,
     name: "Great Middle of Autumn",
     image: "/Events/Great-Middle-of-Autumn.jpg",
     startDate: "2025-10-01",
@@ -32,7 +43,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 21,
+    id: 19,
     name: "Octoberfest",
     image: "/Events/Octoberfest.jpg",
     startDate: "2025-09-18",
@@ -43,7 +54,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 20,
+    id: 18,
     name: "Grape Symphony",
     image: "/Events/Grape-Symphony.jpg",
     startDate: "2025-09-05",
@@ -54,7 +65,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 19,
+    id: 17,
     name: "Operation Zafer",
     image: "/Events/Operation-Zafer.jpg",
     startDate: "2025-08-29",
@@ -65,7 +76,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 18,
+    id: 16,
     name: "Winged March",
     image: "/Events/Winged-March.jpg",
     startDate: "2025-08-14",
@@ -76,7 +87,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 17,
+    id: 15,
     name: "Hunting for the Legend",
     image: "/Events/Hunting-for-the-Legend.jpg",
     startDate: "2025-08-09",
@@ -86,7 +97,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 16,
+    id: 14,
     name: "Long March",
     image: "/Events/Long-March.jpg",
     startDate: "2025-07-31",
@@ -97,7 +108,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 15,
+    id: 13,
     name: "Time of Change",
     image: "/Events/Time-of-Change.jpg",
     startDate: "2025-07-14",
@@ -108,7 +119,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 14,
+    id: 12,
     name: "Thunder of Freedom",
     image: "/Events/Thunder-of-Freedom.jpg",
     startDate: "2025-06-30",
@@ -119,7 +130,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 13,
+    id: 11,
     name: "Summer's Heyday",
     image: "/Events/Summer-Heyday.jpg",
     startDate: "2025-06-12",
@@ -130,7 +141,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 12,
+    id: 10,
     name: "Rise of the Dragon",
     image: "/Events/Rise-of-the-Dragon.jpg",
     startDate: "2025-05-30",
@@ -141,7 +152,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 11,
+    id: 9,
     name: "Eagle's Vigil",
     image: "/Events/Eagles-Vigil.jpg",
     startDate: "2025-05-15",
@@ -152,7 +163,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 10,
+    id: 8,
     name: "Victory Day",
     image: "/Events/Victory-Day.jpg",
     startDate: "2025-05-08",
@@ -164,7 +175,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 9,
+    id: 7,
     name: "Golden Week",
     image: "/Events/Golden-Week.jpg",
     startDate: "2025-04-28",
@@ -176,7 +187,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 8,
+    id: 6,
     name: "Spring Surge",
     image: "/Events/Spring-Surge.jpg",
     startDate: "2025-04-11",
@@ -187,7 +198,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 7,
+    id: 5,
     name: "Battle Spirit",
     image: "/Events/Battle-Spirit.jpg",
     startDate: "2025-04-01",
@@ -198,7 +209,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 6,
+    id: 4,
     name: "Lucky Strike",
     image: "/Events/Lucky-Strike.jpg",
     startDate: "2025-03-14",
@@ -209,7 +220,7 @@ const events: Event[] = [
     ],
   },
    {
-    id: 5,
+    id: 3,
     name: "Carnival of Fire",
     image: "/Events/Carnival-of-Fire.jpg",
     startDate: "2025-02-28",
@@ -220,7 +231,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 4,
+    id: 2,
     name: "Lunar Dawn",
     image: "/Events/Lunar-Dawn.jpg",
     startDate: "2025-01-24",
@@ -235,7 +246,7 @@ const events: Event[] = [
     ],
   },
   {
-    id: 3,
+    id: 1,
     name: "Frozen Frontlines",
     image: "/Events/Frozen-Frontlines.jpg",
     startDate: "2024-12-13",
