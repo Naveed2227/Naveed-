@@ -319,7 +319,6 @@ const getVehicleRarity = (vehicleName: string) => {
 "Leopard 2A8",
 "X2 Shinshin",
 "K2 Black Panther",
-"Al-Khalid",
 
 
 
@@ -2217,18 +2216,15 @@ const VEHICLES_DATA = [
     image: "Al-Khalid.jpg",
     "description": "Pakistani main battle tank, jointly developed with China, featuring advanced firepower, mobility, and protection, serving as Pakistan Army’s backbone.",
     "stats": {
-      "health": 40800,
-      "speed": 70,
+      "health": 0,
+      "speed": 0,
       "reverseSpeed": 0,
       "turretRotationSpeed": 0,
       "hullRotationSpeed": 0,
-      "armor": 810,
-      "agility": 38,
+      "armor": 0,
+      "agility": 0 },
     "weapons": [
-      { name: "DTB-125 HE", type: "Main Gun", damage: 12760, penetration: 160 },
-      { name: "DTP-125 HEAT", type: "Main Gun", damage: 12230, penetration: 480 },
-      { name: "DTC10-125", type: "Main Gun", damage: 11620, penetration: 680 },
-      { name: "TYPE 1985-I", type: "Main Gun", damage: 11120, penetration: 466 },
+      
     ],
     "modules": {
       "engine": [
@@ -11812,6 +11808,7 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
    
+      "Al-Khalid",
       "Arjun Mk.2",
       "9K31 Strela-1",
       "K2 Black Panther",
