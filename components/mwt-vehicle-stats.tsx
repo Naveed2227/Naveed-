@@ -2249,41 +2249,40 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 135,
-    "name": "Arjun Mk.2",
-    "type": "Main Battle Tank",
-    "faction": "Indian",
-    "tier": "IV",
-    image: "Arjun-Mk.2.jpg",
-    "description": "India’s upgraded battle tank with stronger armor, 120mm missile-firing gun, advanced systems, and better mobility for modern combat.",
-    "stats": {
-      "health": 0,
-      "speed": 0,
-      "reverseSpeed": 0,
-      "turretRotationSpeed": 0,
-      "hullRotationSpeed": 0,
-      "armor": 0,
-      "agility": 0 },
-    "weapons": [
-      
+  "id": 135,
+  "name": "Arjun Mk.2",
+  "type": "Main Battle Tank",
+  "faction": "Indian",
+  "tier": "IV",
+  "image": "Arjun-Mk.2.jpg", // <-- added quotes
+  "description": "India’s upgraded battle tank with stronger armor, 120mm missile-firing gun, advanced systems, and better mobility for modern combat.",
+  "stats": {
+    "health": 0,
+    "speed": 0,
+    "reverseSpeed": 0,
+    "turretRotationSpeed": 0,
+    "hullRotationSpeed": 0,
+    "armor": 0,
+    "agility": 0
+  },
+  "weapons": [],
+  "modules": {
+    "engine": [
+      { "name": "MTU MB 883 Ka-501", "bonus": "+200 km/h speed" },
+      { "name": "MTU MB 883 Ka-502", "bonus": "+400 km/h speed" },
+      { "name": "MTU MB 883 Ka-503", "bonus": "+600 km/h speed" }
     ],
-    "modules": {
-      "engine": [
-        { "name": "MTU MB 883 Ka-501", "bonus": "+200 km/h speed" },
-        { "name": "MTU MB 883 Ka-502", "bonus": "+400 km/h speed" },
-        { "name": "MTU MB 883 Ka-503", "bonus": "+600 km/h speed" }
-      ],
-      "armor": [
-        { "name": "Composite Armor MK1", "bonus": "+15% armor" },
-        { "name": "Composite Armor MK2", "bonus": "+25% armor" },
-        { "name": "Composite Armor MK3", "bonus": "+35% armor" }
-      ],
-      "electronics": [
-        { "name": "FCS MK1", "bonus": "+20% targeting accuracy" },
-        { "name": "FCS MK2", "bonus": "+35% targeting accuracy" },
-        { "name": "FCS MK3", "bonus": "+50% targeting accuracy" }
-      ]
-    }
+    "armor": [
+      { "name": "Composite Armor MK1", "bonus": "+15% armor" },
+      { "name": "Composite Armor MK2", "bonus": "+25% armor" },
+      { "name": "Composite Armor MK3", "bonus": "+35% armor" }
+    ],
+    "electronics": [
+      { "name": "FCS MK1", "bonus": "+20% targeting accuracy" },
+      { "name": "FCS MK2", "bonus": "+35% targeting accuracy" },
+      { "name": "FCS MK3", "bonus": "+50% targeting accuracy" }
+    ]
+  }
   },
   {
     "id": 136,
