@@ -1127,11 +1127,11 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Type-10.jpg",
     description: "Modern main battle tank optimized for Japanese terrain with advanced fire control.",
-    stats: { health: 38000, speed: 71, reverseSpeed: 71, armor: "950mm", agility: 40 },
+    stats: { health: 38000, speed: 71, reverseSpeed: 71, armor: "850mm", agility: 40 },
     weapons: [
-      { name: "JM33", type: "Main Gun", damage: 11330, penetration: 481 },
-      { name: "JM12A1", type: "Main Gun", damage: 12360, penetration: 480 },
-      { name: "Type 10", type: "Main Gun", damage: 10900, penetration: 615 }
+      { name: "JM33 APFSDS", type: "Main Gun", damage: 11330, penetration: 481 },
+      { name: "JM12A1 HEAT", type: "Main Gun", damage: 12360, penetration: 480 },
+      { name: "Type 10 APFSDS", type: "Main Gun", damage: 11680, penetration: 650 }
     ],
     modules: {
       engine: [
@@ -2059,10 +2059,12 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Leopard-2A8.jpg",
     description: "A modern German main battle tank, featuring advanced armor, improved firepower, and upgraded targeting systems for battlefield dominance.",
-    stats: { health: 0, speed: 0, armor: "0", agility: 0 },
+    stats: { health: 45900, speed: 72, armor: "710", agility: 38 },
     weapons: [
-      { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 900 },
-      { name: "DM12A1 HEATFS", type: "Main Gun", damage: 12000, penetration: 400 },
+      { name: "DM53 APFSDS", type: "Main Gun", damage: 11440, penetration: 650 },
+      { name: "DM11 HEI", type: "Main Gun", damage: 5000, penetration: 85 },
+      { name: "DM73 APFSDS", type: "Main Gun", damage: 11940, penetration: 900 },
+      { name: "DM12A1 HEATFS", type: "Main Gun", damage: 12140, penetration: 500 },
       
     ],
     modules: {
@@ -2139,7 +2141,7 @@ const VEHICLES_DATA = [
       "speed": 80,
       "reverseSpeed": 30,
       "turretRotationSpeed": 50,
-      "hullRotationSpeed": 45,
+      "hullRotationSpeed": 40,
       "armor": 300,
       "agility": 40
     },
@@ -2177,18 +2179,18 @@ const VEHICLES_DATA = [
     image: "K2-Black-Panther.jpg",
     "description": "South Korea’s advanced main battle tank, featuring superior firepower, mobility, armor protection, and state-of-the-art battlefield technology.",
     "stats": {
-      "health": 0,
-      "speed": 0,
+      "health": 42800,
+      "speed": 75,
       "reverseSpeed": 0,
       "turretRotationSpeed": 0,
-      "hullRotationSpeed": 0,
+      "hullRotationSpeed": 40,
       "armor": 600,
       "agility": 0 },
     "weapons": [
-      { name: "XK279 APFSDS-T", type: "Main Gun", damage: 970, penetration: 195 },
-      { name: "KM256 HEAT", type: "Main Gun", damage: 300, penetration: 55 },
-      { name: "K280 HEAT-MP", type: "Main Gun", damage: 300, penetration: 55 },
-      { name: "KSTAM", type: "Missile", damage: 9830, penetration: 750, reload: 10 }
+      { name: "K276 APFSDS", type: "Main Gun", damage: 11500, penetration: 600 },
+      { name: "K279 APFSDS", type: "Main Gun", damage: 11830, penetration: 740 },
+      { name: "K280 HEAT-MP", type: "Main Gun", damage: 12450, penetration: 680 },
+      { name: "KSTAM", type: "Missile", damage: 9560, penetration: 850, reload: 4.1}
     ],
     "modules": {
       "engine": [
@@ -11850,9 +11852,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
    
       "Arjun Mk.2",
       "9K31 Strela-1",
-      "K2 Black Panther",
-      "K21 KNIFV",
-      "Leopard 2A8",
       "AMX-30 Super",
       
       
