@@ -41,7 +41,7 @@ const vehicleVideos: VehicleVideo[] = [
   { name: "T-20 Monolit", url: "https://youtu.be/BNhziM0nt98", start: "1:20", end: "1:48" },
   { name: "KF31 Lynx", url: "https://youtu.be/dVaYSIFvP5w", start: "1:45", end: "2:24" },
   { name: "K2 Black Panther", url: "https://youtu.be/cJC2Nx9PPyY", start: "1:21", end: "1:59" },
-  { name: "Al-Khalid", url: null, start: "", end: "" },
+  { name: "Al-Khalid", url: "https://youtu.be/1RuL7_zMyUs?si=RNVINx4abZG8WOgH", start: "0:28", end: "0:54" },
   { name: "Arjun Mk.2", url: null, start: "", end: "" },
   { name: "M10 Booker", url: "https://youtu.be/Zq77zO3I3Ho", start: "1:39", end: "2:35" },
   { name: "PL-01", url: "https://youtu.be/OjNb3Er2eQg", start: "1:09", end: "1:39" },
