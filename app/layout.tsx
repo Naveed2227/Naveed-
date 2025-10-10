@@ -6,8 +6,11 @@ import dynamic from 'next/dynamic'
 
 // Dynamically import SplashScreen with SSR disabled
 const SplashScreen = dynamic(
-  () => import('../components/SplashScreen'),
-  { ssr: false }
+  () => import('../components/SplashScreen').then(mod => mod.default),
+  { 
+    ssr: false,
+    loading: () => null
+  }
 )
 
 const inter = Inter({ subsets: ["latin"] })
