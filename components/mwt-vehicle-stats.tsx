@@ -319,6 +319,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Leopard 2A8",
 "X2 Shinshin",
 "K2 Black Panther",
+"Al-Khalid",
 
 
 
@@ -2216,15 +2217,18 @@ const VEHICLES_DATA = [
     image: "Al-Khalid.jpg",
     "description": "Pakistani main battle tank, jointly developed with China, featuring advanced firepower, mobility, and protection, serving as Pakistan Army’s backbone.",
     "stats": {
-      "health": 0,
-      "speed": 0,
+      "health": 40800,
+      "speed": 70,
       "reverseSpeed": 0,
       "turretRotationSpeed": 0,
       "hullRotationSpeed": 0,
-      "armor": 0,
-      "agility": 0 },
+      "armor": 810,
+      "agility": 38,
     "weapons": [
-      
+      { name: "DTB-125 HE", type: "Main Gun", damage: 12760, penetration: 160 },
+      { name: "DTP-125 HEAT", type: "Main Gun", damage: 12230, penetration: 480 },
+      { name: "DTC10-125", type: "Main Gun", damage: 11620, penetration: 680 },
+      { name: "TYPE 1985-I", type: "Main Gun", damage: 11120, penetration: 466 },
     ],
     "modules": {
       "engine": [
@@ -10550,77 +10554,7 @@ const toggleFavoriteInDB = async (vehicleId: string, isFavorite: boolean): Promi
   }
 };
 
-const SplashScreen = () => {
-  return (
-    <motion.div
-      className="fixed inset-0 flex items-center justify-center z-50 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
-      initial={{ opacity: 1 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.5 } }}
-    >
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ 
-          scale: 1, 
-          opacity: 1,
-          transition: { 
-            duration: 0.8,
-            ease: [0.6, -0.05, 0.01, 0.99]
-          }
-        }}
-        className="flex flex-col items-center justify-center p-8 rounded-2xl"
-      >
-        <motion.img 
-          src="/icon-512.png" 
-          alt="MWT Logo"
-          className="w-48 h-48 md:w-64 md:h-64"
-          initial={{ y: 20 }}
-          animate={{ 
-            y: 0,
-            transition: {
-              y: {
-                repeat: Infinity,
-                repeatType: "reverse",
-                duration: 2,
-                ease: "easeInOut"
-              }
-            }
-          }}
-        />
-        <motion.h1 
-          className="mt-6 text-2xl md:text-3xl font-bold text-white text-center"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ 
-            y: 0, 
-            opacity: 1,
-            transition: { 
-              delay: 0.3,
-              duration: 0.8 
-            }
-          }}
-        >
-          Modern War Tanks
-        </motion.h1>
-      </motion.div>
-    </motion.div>
-  );
-};
-
 const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
-  const [showSplash, setShowSplash] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-    const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, 2500);
-
-    return () => {
-      clearTimeout(timer);
-      setIsMounted(false);
-    };
-  }, []);
   // State for favorite vehicles
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [dbInitialized, setDbInitialized] = useState(false);
@@ -11878,7 +11812,6 @@ const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
    
-      "Al-Khalid",
       "Arjun Mk.2",
       "9K31 Strela-1",
       "K2 Black Panther",
@@ -13043,14 +12976,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     }, 1000)
   }
 
-  if (!isMounted) return null;
-
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      <AnimatePresence>
-        {showSplash && <SplashScreen />}
-      </AnimatePresence>
-      <div className={`transition-opacity duration-500 ${showSplash ? 'opacity-0' : 'opacity-100'}`}>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
       
       {/* Burger Menu Button */}
