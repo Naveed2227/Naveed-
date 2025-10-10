@@ -10554,7 +10554,43 @@ const toggleFavoriteInDB = async (vehicleId: string, isFavorite: boolean): Promi
   }
 };
 
-const MwtVehicleStats = ({ vehicles: initialVehicles }) => {
+interface Vehicle {
+  id: number | string;
+  name: string;
+  type: string;
+  faction: string;
+  tier: string;
+  description: string;
+  image: string;
+  stats: {
+    health: number;
+    speed: number;
+    [key: string]: any;
+  };
+  weapons: Array<{
+    name: string;
+    type: string;
+    damage: number;
+    penetration: number;
+    reload?: number;
+  }>;
+  modules: {
+    [key: string]: Array<{
+      name: string;
+      bonus: string;
+    }>;
+  };
+  [key: string]: any;
+}
+
+interface MwtVehicleStatsProps {
+  vehicles: Vehicle[] | undefined;
+}
+
+const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehicles = [] }) => {
+  // Ensure vehicles is always an array
+  const vehicles = Array.isArray(initialVehicles) ? initialVehicles : [];
+  
   // State for favorite vehicles
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [dbInitialized, setDbInitialized] = useState(false);
