@@ -58,6 +58,11 @@ const events: Event[] = [
     vehicles: [
       { id: 3, name: "Strf 9040 BILL", type: "free" },
       { id: 4, name: "Leopard 2A-RC 3.0", type: "main" },
+      { id: 41, name: "M113A1 FMS AIFV", type: "gacha" },
+      { id: 42, name: "BRM-IK", type: "gacha" },
+      { id: 40, name: "T54E1", type: "gacha" },
+      { id: 41, name: "BTR-60", type: "gacha" },
+      { id: 41, name: "XM1 [GM]", type: "gacha" },
     ],
   },
   {
@@ -69,6 +74,10 @@ const events: Event[] = [
     vehicles: [
       { id: 5, name: "Centauro I 120", type: "free" },
       { id: 6, name: "Challenger 3", type: "main" },
+      { id: 41, name: "M60", type: "gacha" },
+      { id: 42, name: "LAV-25", type: "gacha" },
+      { id: 40, name: "LAV-150", type: "gacha" },
+      { id: 41, name: "M153 VADS", type: "gacha" },
     ],
   },
   {
@@ -80,6 +89,10 @@ const events: Event[] = [
     vehicles: [
       { id: 7, name: "M60A3 MZK", type: "free" },
       { id: 8, name: "Altay", type: "main" },
+      { id: 41, name: "T-62545", type: "gacha" },
+      { id: 42, name: "BTR-82AT", type: "gacha" },
+      { id: 40, name: "253 AKATSIYA", type: "gacha" },
+      { id: 41, name: "PLL-05", type: "gacha" },
     ],
   },
   {
