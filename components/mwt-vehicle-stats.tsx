@@ -13013,30 +13013,36 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
-      
-      {/* Burger Menu Button */}
-      <button
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="absolute top-4 left-4 z-50 p-2 sm:p-3 bg-slate-800/90 hover:bg-slate-700/90 backdrop-blur-sm rounded-xl border border-slate-600/50 transition-all duration-200 group shadow-lg sm:top-6 sm:left-6 mt-4"
-        aria-label="Menu"
-      >
-        <div className="flex flex-col gap-1.5">
-          <div className="w-6 h-0.5 bg-slate-300 group-hover:bg-white transition-colors duration-200 rounded-full"></div>
-          <div className="w-6 h-0.5 bg-slate-300 group-hover:bg-white transition-colors duration-200 rounded-full"></div>
-          <div className="w-6 h-0.5 bg-slate-300 group-hover:bg-white transition-colors duration-200 rounded-full"></div>
-        </div>
-      </button>
+      {/* Fixed container for header buttons */}
+      <div className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+        {/* Burger Menu Button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="fixed top-4 left-4 p-2 sm:p-3 bg-slate-800/90 hover:bg-slate-700/90 backdrop-blur-sm rounded-xl border border-slate-600/50 transition-all duration-200 group shadow-lg sm:top-6 sm:left-6 pointer-events-auto z-[1000]"
+          aria-label="Menu"
+          style={{
+            position: 'fixed',
+            top: '1rem',
+            left: '1rem',
+            zIndex: 1000
+          }}
+        >
+          <div className="flex flex-col gap-1.5">
+            <div className="w-6 h-0.5 bg-slate-300 group-hover:bg-white transition-colors duration-200 rounded-full"></div>
+            <div className="w-6 h-0.5 bg-slate-300 group-hover:bg-white transition-colors duration-200 rounded-full"></div>
+            <div className="w-6 h-0.5 bg-slate-300 group-hover:bg-white transition-colors duration-200 rounded-full"></div>
+          </div>
+        </button>
 
-      {/* Filter Button */}
-      <motion.button
-        onClick={() => setIsFilterOpen(!isFilterOpen)}
-        className={`absolute top-4 right-4 z-40 p-2 sm:p-3 backdrop-blur-sm rounded-xl border transition-all duration-200 group shadow-lg sm:top-6 sm:right-6 sm:mt-0 mt-4 flex items-center gap-2 ${
-          (typeFilter.length > 0 || tierFilter.length > 0 || countryFilter.length > 0 || rarityFilter.length > 0 || obtainMethodFilter.length > 0) 
-            ? "bg-cyan-600/90 hover:bg-cyan-700/90 border-cyan-500/50" 
-            : "bg-slate-800/90 hover:bg-slate-700/90 border-slate-600/50"
-        }`}
-        aria-label="Filter"
+        {/* Filter Button */}
+        <motion.button
+          onClick={() => setIsFilterOpen(!isFilterOpen)}
+          className={`fixed top-4 right-4 p-2 sm:p-3 backdrop-blur-sm rounded-xl border transition-all duration-200 group shadow-lg sm:top-6 sm:right-6 pointer-events-auto z-[1000] ${
+            (typeFilter.length > 0 || tierFilter.length > 0 || countryFilter.length > 0 || rarityFilter.length > 0 || obtainMethodFilter.length > 0) 
+              ? "bg-cyan-600/90 hover:bg-cyan-700/90 border-cyan-500/50" 
+              : "bg-slate-800/90 hover:bg-slate-700/90 border-slate-600/50"
+          }`}
+          aria-label="Filter"
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ 
