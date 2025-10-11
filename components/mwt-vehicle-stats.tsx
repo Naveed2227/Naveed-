@@ -748,7 +748,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Next-generation interceptor with hypersonic capabilities and advanced radar systems.",
     image: "MiG-41M.jpg",
-    stats: { health: 21200, speed: 880, afterburnerSpeed: 4050, agility: 43 },
+    stats: { health: 26600, speed: 860, afterburnerSpeed: 2500, agility: 56 },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
@@ -787,7 +787,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Fifth-generation stealth fighter with advanced maneuverability and sensor fusion.",
     image: "SU-57-Felon.jpg",
-    stats: { health: 23200, speed: 1100, afterburnerSpeed: 2100, agility: 90 },
+    stats: { health: 21900, speed: 850, afterburnerSpeed: 2400, agility: 54 },
     weapons: [
      { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "FAB-250-M62", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
