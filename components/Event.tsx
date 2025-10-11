@@ -43,10 +43,8 @@ const events: Event[] = [
       { id: 41, name: "F-4E Phantom", type: "gacha" },
       { id: 42, name: "CM25", type: "gacha" },
       { id: 40, name: "WZ-121", type: "gacha" },
-      { id: 41, name: "M109", type: "gacha" },
-      { id: 41, name: "M42A1", type: "gacha" },
-      
-      
+      { id: 44, name: "M109A6 Paladin", type: "gacha" },
+      { id: 47, name: "M42A1 Duster", type: "gacha" },
     ],
   },
   {
@@ -58,11 +56,11 @@ const events: Event[] = [
     vehicles: [
       { id: 3, name: "Strf 9040 BILL", type: "free" },
       { id: 4, name: "Leopard 2A-RC 3.0", type: "main" },
-      { id: 41, name: "M113A1 FMS AIFV", type: "gacha" },
+      { id: 41, name: "M113A1 FMS AIP", type: "gacha" },
       { id: 42, name: "BRM-IK", type: "gacha" },
       { id: 40, name: "T54E1", type: "gacha" },
-      { id: 41, name: "BTR-60", type: "gacha" },
-      { id: 41, name: "XM1 [GM]", type: "gacha" },
+      { id: 41, name: "BTR-80", type: "gacha" },
+      { id: 41, name: "XM1 (GM)", type: "gacha" },
     ],
   },
   {
@@ -87,11 +85,11 @@ const events: Event[] = [
     startDate: "2025-08-29",
     endDate: "2025-09-04",
     vehicles: [
-      { id: 7, name: "M60A3 MZK", type: "free" },
+      { id: 7, name: "M60A3 (MZK)", type: "free" },
       { id: 8, name: "Altay", type: "main" },
-      { id: 41, name: "T-62545", type: "gacha" },
+      { id: 41, name: "T-62", type: "gacha" },
       { id: 42, name: "BTR-82AT", type: "gacha" },
-      { id: 40, name: "253 AKATSIYA", type: "gacha" },
+      { id: 40, name: "2S1 Gvozdika", type: "gacha" },
       { id: 41, name: "PLL-05", type: "gacha" },
     ],
   },
@@ -102,7 +100,7 @@ const events: Event[] = [
     startDate: "2025-08-14",
     endDate: "2025-08-28",
     vehicles: [
-      { id: 9, name: "PT-91", type: "free" },
+      { id: 9, name: "PT-91 Twardy", type: "free" },
       { id: 10, name: "PL-01", type: "main" },
     ],
   },
@@ -167,7 +165,7 @@ const events: Event[] = [
     startDate: "2025-05-30",
     endDate: "2025-06-12",
     vehicles: [
-      { id: 20, name: "ZTZ96A (P)", type: "free" },
+      { id: 20, name: "ZTZ-96A (P)", type: "free" },
       { id: 21, name: "SR-5 GMLRS", type: "main" },
     ],
   },
@@ -180,13 +178,11 @@ const events: Event[] = [
     vehicles: [
       { id: 22, name: "XM2001 Crusader", type: "free" },
       { id: 23, name: "M270 MLRS", type: "main" },
-      { id: 40, name: "AV-8B HARRIER II", type: "gacha" },
+      { id: 40, name: "AV-8B Harrier II", type: "gacha" },
       { id: 41, name: "T54E1", type: "gacha" },
       { id: 42, name: "MBT-70", type: "gacha" },
-      { id: 40, name: "T114 [BAT]", type: "gacha" },
-      { id: 41, name: "M3 BRADLEY", type: "gacha" },
-      
-
+      { id: 40, name: "T114 BAT", type: "gacha" },
+      { id: 41, name: "M3 Bradley", type: "gacha" },
     ],
   },
   {
@@ -211,10 +207,9 @@ const events: Event[] = [
       { id: 27, name: "K-31 Cheonma", type: "free" },
       { id: 28, name: "J-50 Trident", type: "main" },
       { id: 29, name: "Type 90", type: "gacha" },
-      { id: 40, name: " 9A52-2 SMERCH", type: "gacha" },
-      { id: 41, name: "MBT70", type: "gacha" },
+      { id: 40, name: "9A52-2 Smerch", type: "gacha" },
+      { id: 41, name: "MBT-70", type: "gacha" },
       { id: 42, name: "ZTZ96", type: "gacha" },
-      
     ],
   },
   {
@@ -230,7 +225,7 @@ const events: Event[] = [
       { id: 41, name: "STR-82A1", type: "gacha" },
       { id: 42, name: "PLZ-83", type: "gacha" },
       { id: 43, name: "PGZ-04A", type: "gacha" },
-      { id: 43, name: "ZSU-23-4M4 SHILKA", type: "gacha" },
+      { id: 43, name: "ZSU-23-4M4 Shilka", type: "gacha" },
     ],
   },
   {
@@ -242,7 +237,6 @@ const events: Event[] = [
     vehicles: [
       { id: 32, name: "AFT-09", type: "free" },
       { id: 33, name: "T-20 Monolith", type: "main" },
-      
     ],
   },
   {
@@ -257,10 +251,10 @@ const events: Event[] = [
       { id: 40, name: "T-62 545", type: "gacha" },
       { id: 41, name: "PLL-05", type: "gacha" },
       { id: 42, name: "BTR-82AT", type: "gacha" },
-      { id: 43, name: "253 AKATSIYA", type: "gacha" },
+      { id: 43, name: "2S3 Akatsiya", type: "gacha" },
     ],
   },
-   {
+  {
     id: 3,
     name: "Carnival of Fire",
     image: "/Events/Carnival-of-Fire.jpg",
