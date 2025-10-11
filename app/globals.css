@@ -155,20 +155,24 @@
     overflow-x: hidden;
   }
 
-  /* Baseline Zoom */
-  body {
-    zoom: 0.75;
+  /* Apply 75% zoom only on desktop screens */
+  @media (min-width: 768px) {
+    body {
+      zoom: 0.75;
+    }
   }
 
   /* Fallback for browsers without zoom support */
   @supports not (zoom:1) {
-    #__scale_wrap {
-      transform-origin: top center;
-      transform: scale(0.75);
-      width: 133.3333%;
-      margin: 0 auto;
-      min-height: calc(100vh / 0.75);
-      display: block;
+    @media (min-width: 768px) {
+      #__scale_wrap {
+        transform-origin: top center;
+        transform: scale(0.75);
+        width: 133.3333%;
+        margin: 0 auto;
+        min-height: calc(100vh / 0.75);
+        display: block;
+      }
     }
   }
 }

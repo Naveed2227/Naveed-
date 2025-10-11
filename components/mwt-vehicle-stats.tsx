@@ -501,7 +501,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Advanced fifth-generation stealth fighter with supercruise capability and advanced avionics.",
     image: "Su-57M.jpg",
-    stats: { health: 24500, speed: 762, afterburnerSpeed: 2100, agility: 85 },
+    stats: { health: 24500, speed: 880, afterburnerSpeed: 2520, agility: 55 },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
@@ -748,7 +748,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Next-generation interceptor with hypersonic capabilities and advanced radar systems.",
     image: "MiG-41M.jpg",
-    stats: { health: 23800, speed: 1800, afterburnerSpeed: 4320, agility: 75 },
+    stats: { health: 21200, speed: 880, afterburnerSpeed: 4050, agility: 43 },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
@@ -826,7 +826,7 @@ const VEHICLES_DATA = [
   tier: "IV",
   image: "YF-23.jpg",
   description: "Experimental stealth fighter designed for air superiority, rival to the F-22.",
-  stats: { health: 23800, speed: 770, afterburnerSpeed: 2200, agility: 84 },
+  stats: { health: 23800, speed: 790, afterburnerSpeed: 2070, agility: 35 },
   weapons: [
     { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
       { "name": "GBU-39", "type": "Guided Bomb", "damage": 14700, "penetration": 120, "reload": 28 },
