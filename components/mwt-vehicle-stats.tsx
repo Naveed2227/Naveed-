@@ -16821,25 +16821,9 @@ function CookieConsentBanner() {
 
 export default function Page() {
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100vw',
-      height: '100vh',
-      overflow: 'hidden'
-    }}>
-      <div style={{
-        transform: 'scale(0.75)',
-        transformOrigin: 'top left',
-        width: '133.33vw',
-        height: '133.33vh',
-        overflow: 'auto',
-        position: 'relative'
-      }}>
-        <MwtVehicleStats vehicles={VEHICLES_DATA} />
-        <CookieConsentBanner />
-      </div>
-    </div>
+    <>
+      <MwtVehicleStats vehicles={VEHICLES_DATA} />
+      <CookieConsentBanner />
+    </>
   )
 }
