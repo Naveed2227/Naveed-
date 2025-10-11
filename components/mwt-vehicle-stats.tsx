@@ -619,7 +619,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "TU-222.jpg",
     description: "Next-generation supersonic strategic bomber with hypersonic missile capability.",
-    stats: { health: 15500, speed: 186, afterburnerSpeed: 209, agility: 50 },
+    stats: { health: 32800, speed: 870, afterburnerSpeed: 2850, agility: 30 },
     weapons: [
       {
         "name": "KAB-250",
