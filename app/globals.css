@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-/* Revolutionary Filter Animations */
+/* --- Gradient Animation --- */
 @keyframes gradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -13,8 +13,10 @@
   animation: gradient 3s ease infinite;
 }
 
+/* --- Dark mode variant --- */
 @custom-variant dark (&:is(.dark *));
 
+/* --- Color Variables (Light Mode) --- */
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -60,6 +62,7 @@
   --shadow-color: #000000;
 }
 
+/* --- Dark Mode Overrides --- */
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -101,6 +104,7 @@
   --shadow-color: #000000;
 }
 
+/* --- Theme Aliases for Tailwind --- */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -121,11 +125,6 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -138,26 +137,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-sans: 'Geist', 'Geist Fallback';
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
-  --font-serif: 'Source Serif 4', 'Source Serif 4 Fallback';
-  /* computed shadow variables below - do not modify */
-  --shadow-2xs: var(--shadow-x) var(--shadow-y) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
-  --shadow-xs: var(--shadow-x) var(--shadow-y) var(--shadow-blur) var(--shadow-spread) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent), var(--shadow-x) var(--shadow-y) var(--shadow-blur) calc(var(--shadow-spread) - 1px) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
-  --shadow-sm: var(--shadow-x) var(--shadow-y) calc(var(--shadow-blur) * 1.5) var(--shadow-spread) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent), var(--shadow-x) var(--shadow-y) var(--shadow-blur) calc(max(0px, var(--shadow-spread) - 1px)) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
-  --shadow-md: calc(var(--shadow-x) * 2) calc(var(--shadow-y) * 2) calc(var(--shadow-blur) * 3) calc(var(--shadow-spread) - 1px) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent), var(--shadow-x) var(--shadow-y) calc(max(0px, var(--shadow-blur) * 2 - 2px)) calc(var(--shadow-spread) - 2px) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
-  --shadow-lg: calc(var(--shadow-x) * 4) calc(var(--shadow-y) * 4) calc(var(--shadow-blur) * 5) calc(var(--shadow-spread) - 3px) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent), calc(var(--shadow-x) * 2) calc(var(--shadow-y) * 2) calc(max(0px, var(--shadow-blur) * 3 - 4px)) calc(var(--shadow-spread) - 4px) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
-  --shadow-xl: calc(var(--shadow-x) * 6) calc(var(--shadow-y) * 6) calc(var(--shadow-blur) * 7) calc(var(--shadow-spread) - 5px) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent), calc(var(--shadow-x) * 4) calc(var(--shadow-y) * 4) calc(max(0px, var(--shadow-blur) * 5 - 6px)) calc(var(--shadow-spread) - 6px) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent);
-  --shadow-2xl: calc(var(--shadow-x) * 8) calc(var(--shadow-y) * 8) calc(max(0px, var(--shadow-blur) * 9 - 8px)) calc(var(--shadow-spread) - 12px) color-mix(in srgb, var(--shadow-color) calc(var(--shadow-opacity) * 250%), transparent);
-  --shadow: var(--shadow-md);
-  --color-shadow-color: var(--shadow-color);
-  --shadow-opacity: var(--shadow-opacity);
-  --shadow-spread: var(--shadow-spread);
-  --shadow-blur: var(--shadow-blur);
-  --shadow-y: var(--shadow-y);
-  --shadow-x: var(--shadow-x);
 }
 
+/* --- Base Layer --- */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -166,33 +148,31 @@
     @apply bg-background text-foreground;
   }
 
-  /* Page zoom support & responsive baseline for multiple devices */
   html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* prevent horizontal scroll from width compensation */
+    overflow-x: hidden;
   }
 
-  /* Baseline: use zoom in browsers that support it (Chrome/Edge) */
-  body {
-    zoom: 0.75; /* baseline for desktop; will be overridden by JS for responsiveness */
-  }
-
-  /* Fallback for browsers that don't support zoom (Firefox) */
-  @supports not (zoom:1) {
-    html, body {
-      overflow-x: hidden;
+  /* Apply 75% zoom only on desktop screens */
+  @media (min-width: 768px) {
+    body {
+      zoom: 0.75;
     }
+  }
 
-    /* If JS wrapper is present, these styles will center & scale it cleanly */
-    #__scale_wrap {
-      transform-origin: top center;
-      transform: scale(0.75);
-      width: 133.3333%;    /* 100% / 0.75 */
-      margin: 0 auto;      /* center the widened wrapper */
-      min-height: calc(100vh / 0.75); /* avoid white gap below */
-      display: block;
+  /* Fallback for browsers without zoom support */
+  @supports not (zoom:1) {
+    @media (min-width: 768px) {
+      #__scale_wrap {
+        transform-origin: top center;
+        transform: scale(0.75);
+        width: 133.3333%;
+        margin: 0 auto;
+        min-height: calc(100vh / 0.75);
+        display: block;
+      }
     }
   }
 }
