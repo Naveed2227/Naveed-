@@ -13012,7 +13012,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white" style={{ transform: 'scale(0.75)', transformOrigin: 'top left', width: '133.33%', height: '133.33%' }}>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
       
       {/* Burger Menu Button */}
@@ -16821,9 +16821,25 @@ function CookieConsentBanner() {
 
 export default function Page() {
   return (
-    <>
-      <MwtVehicleStats vehicles={VEHICLES_DATA} />
-      <CookieConsentBanner />
-    </>
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100vw',
+      height: '100vh',
+      overflow: 'hidden'
+    }}>
+      <div style={{
+        transform: 'scale(0.75)',
+        transformOrigin: 'top left',
+        width: '133.33vw',
+        height: '133.33vh',
+        overflow: 'auto',
+        position: 'relative'
+      }}>
+        <MwtVehicleStats vehicles={VEHICLES_DATA} />
+        <CookieConsentBanner />
+      </div>
+    </div>
   )
 }
