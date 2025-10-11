@@ -193,6 +193,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Mi-28NM",
 "WZ-10",
 "AH-1Z",
+"Mi-171SH",
 "Z-11WB",
 "MI-8TV",
 "Z-20",

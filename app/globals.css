@@ -155,25 +155,23 @@
     overflow-x: hidden;
   }
 
-  /* Apply 75% zoom only on mobile devices (screens smaller than 768px) */
-  @media (max-width: 767px) {
+  /* Apply 75% zoom only on desktop screens */
+  @media (min-width: 768px) {
     body {
-      transform-origin: 0 0;
-      transform: scale(0.75);
-      width: 133.3333%;
-      height: 133.3333%;
-      overflow-x: hidden;
-      position: absolute;
-      top: 0;
-      left: 0;
+      zoom: 0.75;
     }
   }
 
-  /* Fallback for browsers without transform support */
-  @supports not (transform: scale(0.75)) {
-    @media (max-width: 767px) {
-      body {
-        zoom: 0.75;
+  /* Fallback for browsers without zoom support */
+  @supports not (zoom:1) {
+    @media (min-width: 768px) {
+      #__scale_wrap {
+        transform-origin: top center;
+        transform: scale(0.75);
+        width: 133.3333%;
+        margin: 0 auto;
+        min-height: calc(100vh / 0.75);
+        display: block;
       }
     }
   }
