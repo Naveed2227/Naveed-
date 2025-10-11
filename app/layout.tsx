@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
      title: "Su-57M Stats & Info",
   description:
-    "Explore detailed stats for the Su-57M in MWT: health 24,500, cruise speed 762 km/h, afterburner speed 1,200 km/h, and advanced stealth capabilities."
+    "Explore detailed stats for the Su-57M in MWT: health 24,500, cruise speed 762 km/h, afterburner speed 1,200 km/h, and advanced stealth capabilities.",
 
     url: "https://www.mwtassistant.com",
     siteName: "MWT Assistant",
