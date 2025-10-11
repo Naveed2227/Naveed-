@@ -501,7 +501,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Advanced fifth-generation stealth fighter with supercruise capability and advanced avionics.",
     image: "Su-57M.jpg",
-    stats: { health: 24500, speed: 880, afterburnerSpeed: 2520, agility: 55 },
+    stats: { health: 24500, speed: 762, afterburnerSpeed: 2100, agility: 85 },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
@@ -619,7 +619,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "TU-222.jpg",
     description: "Next-generation supersonic strategic bomber with hypersonic missile capability.",
-    stats: { health: 32800, speed: 870, afterburnerSpeed: 2850, agility: 30 },
+    stats: { health: 15500, speed: 186, afterburnerSpeed: 209, agility: 50 },
     weapons: [
       {
         "name": "KAB-250",
@@ -748,7 +748,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Next-generation interceptor with hypersonic capabilities and advanced radar systems.",
     image: "MiG-41M.jpg",
-    stats: { health: 26600, speed: 860, afterburnerSpeed: 2500, agility: 56 },
+    stats: { health: 23800, speed: 1800, afterburnerSpeed: 4320, agility: 75 },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
@@ -787,7 +787,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Fifth-generation stealth fighter with advanced maneuverability and sensor fusion.",
     image: "SU-57-Felon.jpg",
-    stats: { health: 21900, speed: 850, afterburnerSpeed: 2400, agility: 54 },
+    stats: { health: 23200, speed: 1100, afterburnerSpeed: 2100, agility: 90 },
     weapons: [
      { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "FAB-250-M62", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
@@ -826,7 +826,7 @@ const VEHICLES_DATA = [
   tier: "IV",
   image: "YF-23.jpg",
   description: "Experimental stealth fighter designed for air superiority, rival to the F-22.",
-  stats: { health: 23800, speed: 790, afterburnerSpeed: 2070, agility: 35 },
+  stats: { health: 23800, speed: 770, afterburnerSpeed: 2200, agility: 84 },
   weapons: [
     { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
       { "name": "GBU-39", "type": "Guided Bomb", "damage": 14700, "penetration": 120, "reload": 28 },
@@ -15398,11 +15398,13 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   
 
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version 1.0.00   (11/Oct/2025)</span>
+                          <span className="font-medium text-cyan-300">Version 1.0.00   (16/9/2025)</span>
                           <span className="text-sm text-slate-400">Initial</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
-                          <li>• Initial release of MWT Assistant Web version</li>
+                          <li>• Initial release with comprehensive vehicle database</li>
+                          <li>• AI-powered chat assistant for tactical analysis</li>
+                          <li>• Vehicle comparison and filtering system</li>
                         </ul>
                       </div>
                     

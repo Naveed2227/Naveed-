@@ -40,13 +40,6 @@ const events: Event[] = [
     vehicles: [
       { id: 1, name: "K21 KNIFV", type: "free" },
       { id: 2, name: "K2 Black Panther", type: "main" },
-      { id: 41, name: "F-4E PHANTOM", type: "gacha" },
-      { id: 42, name: "CM25", type: "gacha" },
-      { id: 40, name: "WZ-121", type: "gacha" },
-      { id: 41, name: "M109", type: "gacha" },
-      { id: 41, name: "M42A1", type: "gacha" },
-      
-      
     ],
   },
   {
@@ -167,13 +160,6 @@ const events: Event[] = [
     vehicles: [
       { id: 22, name: "XM2001 Crusader", type: "free" },
       { id: 23, name: "M270 MLRS", type: "main" },
-      { id: 40, name: "AV-8B HARRIER II", type: "gacha" },
-      { id: 41, name: "T54E1", type: "gacha" },
-      { id: 42, name: "MBT-70", type: "gacha" },
-      { id: 40, name: "T114 [BAT]", type: "gacha" },
-      { id: 41, name: "M3 BRADLEY", type: "gacha" },
-      
-
     ],
   },
   {
@@ -198,10 +184,6 @@ const events: Event[] = [
       { id: 27, name: "K-31 Cheonma", type: "free" },
       { id: 28, name: "J-50 Trident", type: "main" },
       { id: 29, name: "Type 90", type: "gacha" },
-      { id: 40, name: " 9A52-2 SMERCH", type: "gacha" },
-      { id: 41, name: "MBT70", type: "gacha" },
-      { id: 42, name: "ZTZ96", type: "gacha" },
-      
     ],
   },
   {
@@ -213,11 +195,6 @@ const events: Event[] = [
     vehicles: [
       { id: 30, name: "Leopard 2A4", type: "free" },
       { id: 31, name: "T-104 Bastion", type: "main" },
-      { id: 40, name: "LAV-300", type: "gacha" },
-      { id: 41, name: "STR-82A1", type: "gacha" },
-      { id: 42, name: "PLZ-83", type: "gacha" },
-      { id: 43, name: "PGZ-04A", type: "gacha" },
-      { id: 43, name: "ZSU-23-4M4 SHILKA", type: "gacha" },
     ],
   },
   {
@@ -229,7 +206,6 @@ const events: Event[] = [
     vehicles: [
       { id: 32, name: "AFT-09", type: "free" },
       { id: 33, name: "T-20 Monolith", type: "main" },
-      
     ],
   },
   {
@@ -241,10 +217,6 @@ const events: Event[] = [
     vehicles: [
       { id: 34, name: "AFT-10", type: "free" },
       { id: 35, name: "FV4034 Challenger 2", type: "main" },
-      { id: 40, name: "T-62 545", type: "gacha" },
-      { id: 41, name: "PLL-05", type: "gacha" },
-      { id: 42, name: "BTR-82AT", type: "gacha" },
-      { id: 43, name: "253 AKATSIYA", type: "gacha" },
     ],
   },
    {
