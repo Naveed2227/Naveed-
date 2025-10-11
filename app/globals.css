@@ -166,7 +166,7 @@
     @apply bg-background text-foreground;
   }
 
-  /* Page zoom support: 75% */
+  /* Page zoom support & responsive baseline for multiple devices */
   html, body {
     height: 100%;
     margin: 0;
@@ -174,9 +174,9 @@
     overflow-x: hidden; /* prevent horizontal scroll from width compensation */
   }
 
-  /* Preferred: use zoom in browsers that support it (Chrome/Edge) */
+  /* Baseline: use zoom in browsers that support it (Chrome/Edge) */
   body {
-    zoom: 0.75;
+    zoom: 0.75; /* baseline for desktop; will be overridden by JS for responsiveness */
   }
 
   /* Fallback for browsers that don't support zoom (Firefox) */
@@ -184,13 +184,15 @@
     html, body {
       overflow-x: hidden;
     }
-    /* If you run the JS wrapper (provided below), this will center and scale it cleanly */
+
+    /* If JS wrapper is present, these styles will center & scale it cleanly */
     #__scale_wrap {
       transform-origin: top center;
       transform: scale(0.75);
       width: 133.3333%;    /* 100% / 0.75 */
       margin: 0 auto;      /* center the widened wrapper */
       min-height: calc(100vh / 0.75); /* avoid white gap below */
+      display: block;
     }
   }
 }
