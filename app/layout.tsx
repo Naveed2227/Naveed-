@@ -26,22 +26,19 @@ const v0FontSourceSerif4 = V0_Font_Source_Serif_4({
 })
 
 export const metadata: Metadata = {
-  title: "MWT Assistant: Ships, Maps & Vehicle Stats",
+  title: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
   description:
-    "View and compare all ships and vehicles in Modern Warships, including FS Super Alsace, INS S5, and FS Forbin — only on MWT Assistant.",
+    "View and compare all vehicles in MWT, including Su-57M, Abram X, Mi-35, F-22 Raptor — only on MWT Assistant.",
   keywords: [
-    "Modern Warships",
-    "MW Stats",
-    "ships",
     "vehicles",
     "stats",
-    "maps",
     "MWT Assistant"
   ],
   openGraph: {
-    title: "MWT Assistant: Ships, Maps & Vehicle Stats",
-    description:
-      "Compare all ships, aircraft, and vehicles in Modern Warships — full stats and data on MWT Assistant.",
+     title: "Su-57M Stats & Info",
+  description:
+    "Explore detailed stats for the Su-57M in MWT: health 24,500, cruise speed 762 km/h, afterburner speed 1,200 km/h, and advanced stealth capabilities."
+
     url: "https://www.mwtassistant.com",
     siteName: "MWT Assistant",
     images: [
@@ -98,8 +95,8 @@ export default function RootLayout({
               url: "https://www.mwtassistant.com",
               logo: "https://www.mwtassistant.com/icon-512.png",
               sameAs: [
-                "https://www.facebook.com/mwtassistant",
-                "https://www.instagram.com/mwtassistant"
+                "https://www.facebook.com/profile.php?id=61581489612967",
+                "https://www.instagram.com/mwt_assistant/"
               ]
             })
           }}
