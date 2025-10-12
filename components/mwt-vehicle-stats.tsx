@@ -13133,7 +13133,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Filter Button */}
       <motion.button
         onClick={() => setIsFilterOpen(!isFilterOpen)}
-        className={`absolute top-4 right-4 z-40 p-2 sm:p-3 backdrop-blur-sm rounded-xl border transition-all duration-200 group shadow-lg sm:top-6 sm:right-6 sm:mt-0 mt-4 flex items-center gap-2 ${
+        className={`absolute top-4 right-16 z-40 p-2 sm:p-3 backdrop-blur-sm rounded-xl border transition-all duration-200 group shadow-lg sm:top-6 sm:right-20 sm:mt-0 mt-4 flex items-center gap-2 ${
           (typeFilter.length > 0 || tierFilter.length > 0 || countryFilter.length > 0 || rarityFilter.length > 0 || obtainMethodFilter.length > 0) 
             ? "bg-cyan-600/90 hover:bg-cyan-700/90 border-cyan-500/50" 
             : "bg-slate-800/90 hover:bg-slate-700/90 border-slate-600/50"
@@ -16618,41 +16618,60 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       </main>
       
       {/* Social Media Contact Section */}
-      <div className="mt-8 py-4 border-t border-slate-700">
-        <div className="flex flex-col items-center space-y-3">
-          <h3 className="text-sm font-medium text-slate-400 mb-2">Contact/Support:</h3>
-          <div className="flex items-center justify-center space-x-6">
+      <div className="mt-8 py-6 border-t border-slate-700">
+        <div className="flex flex-col items-center space-y-4">
+          <h3 className="text-base font-medium text-slate-300 mb-3">Contact/Support:</h3>
+          <div className="flex items-center justify-center space-x-8">
             {/* Patreon */}
             <a 
               href="https://www.patreon.com/c/mwtassistant" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-[#FF424D] hover:opacity-80 transition-opacity"
-              style={{ minWidth: '24px' }}
+              className="text-[#FF424D] hover:opacity-80 transition-transform hover:scale-110"
+              style={{ minWidth: '32px' }}
+              aria-label="Support us on Patreon"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M0 .5h4.5v23H0z" />
                 <path d="M15.1.5c-4.1 0-7.5 3.4-7.5 7.5 0 4.1 3.4 7.5 7.5 7.5 4.1 0 7.5-3.4 7.5-7.5s-3.4-7.5-7.5-7.5z" />
               </svg>
             </a>
             
             {/* Instagram */}
-            <a href="https://www.instagram.com/mwt_assistant" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <a 
+              href="https://www.instagram.com/mwt_assistant" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-slate-400 hover:text-white transition-transform hover:scale-110"
+              aria-label="Follow us on Instagram"
+            >
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12.001 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
               </svg>
             </a>
 
             {/* Facebook */}
-            <a href="https://www.facebook.com/profile.php?id=61581718139293" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <a 
+              href="https://www.facebook.com/profile.php?id=61581718139293" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-slate-400 hover:text-white transition-transform hover:scale-110"
+              aria-label="Follow us on Facebook"
+            >
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z"/>
               </svg>
             </a>
             
             {/* Discord */}
-            <a href="https://discord.gg/zj6f4w3JED" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <a 
+              href="https://discord.gg/zj6f4w3JED" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-slate-400 hover:text-white transition-transform hover:scale-110"
+              aria-label="Join our Discord server"
+            >
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.105 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.078-.01c3.928 1.8 8.18 1.8 12.062 0a.074.074 0 01.079.01c.12.098.246.198.373.292a.077.077 0 01-.006.128 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.105c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.086-2.157-2.419 0-1.332.956-2.419 2.158-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.332-.956 2.418-2.158 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.332.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.332-.956 2.418-2.157 2.418z"/>
               </svg>
             </a>
