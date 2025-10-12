@@ -9136,7 +9136,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 924,
+    "id": 925,
     "name": "9K31 Strela-1",
     "type": "Anti-Air",
     "faction": "Indian",
@@ -9188,7 +9188,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 925,
+    "id": 926,
     "name": "M42A1",
     "type": "Anti-Air",
     "faction": "American",
@@ -9256,7 +9256,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 926,
+    "id": 927,
     "name": "ZSU-57-2",
     "type": "Anti-Air",
     "faction": "Russian",
