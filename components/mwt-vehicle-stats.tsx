@@ -1,6 +1,6 @@
 "use client"
-import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion"
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays } from "lucide-react"
 import dynamic from 'next/dynamic';
 
@@ -9963,32 +9963,73 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     // Additional touch end logic if needed
   };
 
-  // Auto-show video when vehicleName is provided
-  useEffect(() => {
-    console.log('ArmourVideo: Component mounted, vehicleName:', vehicleName);
-    console.log('ArmourVideo: Available videos data:', vehicleVideosData);
-    
-    if (vehicleName) {
-      console.log('ArmourVideo: Looking for video with name:', vehicleName);
-      console.log('ArmourVideo: Available videos:', vehicleVideosData.default);
-      
-      if (!vehicleVideosData.default || !Array.isArray(vehicleVideosData.default)) {
-        console.error('ArmourVideo: vehicleVideosData.default is not an array:', vehicleVideosData.default);
-        return;
-      }
-      
-      const video = vehicleVideosData.default.find((v: any) => v.name === vehicleName);
-      if (video) {
-        console.log('ArmourVideo: Found video:', video);
-        setActiveVideo(video);
-        setIsPlaying(false); // Start with paused state
-        setCurrentTime(0);
-      } else {
-        console.error('ArmourVideo: No video found for vehicle:', vehicleName);
-        console.error('ArmourVideo: Available vehicle names:', vehicleVideosData.default.map((v: any) => v.name));
+  // Cleanup function for the player
+  const cleanupPlayer = useCallback(() => {
+    if (playerRef.current) {
+      try {
+        // Stop the video
+        try {
+          playerRef.current.stopVideo();
+        } catch (e) {
+          console.error('Error stopping video during cleanup:', e);
+        }
+        
+        // Destroy the player
+        try {
+          playerRef.current.destroy();
+        } catch (e) {
+          console.error('Error destroying player during cleanup:', e);
+        }
+        
+        // Clear the ref
+        playerRef.current = null;
+      } catch (e) {
+        console.error('Error during player cleanup:', e);
       }
     }
-  }, [vehicleName]);
+    
+    // Reset state
+    setIsPlaying(false);
+    setCurrentTime(0);
+    setDuration(0);
+  }, []);
+
+  // Auto-show video when vehicleName is provided
+  useEffect(() => {
+    console.log('ArmourVideo: Component updated, vehicleName:', vehicleName);
+    
+    // Clean up any existing player first
+    cleanupPlayer();
+    
+    if (!vehicleName) {
+      setActiveVideo(null);
+      return;
+    }
+    
+    console.log('ArmourVideo: Looking for video with name:', vehicleName);
+    
+    if (!vehicleVideosData.default || !Array.isArray(vehicleVideosData.default)) {
+      console.error('ArmourVideo: vehicleVideosData.default is not an array');
+      return;
+    }
+    
+    const video = vehicleVideosData.default.find((v: any) => v.name === vehicleName);
+    if (video) {
+      console.log('ArmourVideo: Found video:', video);
+      // Set the new video directly
+      setActiveVideo(video);
+      setIsPlaying(false);
+      setCurrentTime(0);
+    } else {
+      console.error('ArmourVideo: No video found for vehicle:', vehicleName);
+      setActiveVideo(null);
+    }
+    
+    // Cleanup on unmount or when vehicleName changes
+    return () => {
+      cleanupPlayer();
+    };
+  }, [vehicleName, cleanupPlayer]);
 
   // Track if we've initialized the YouTube API
   const apiInitialized = useRef(false);
@@ -9998,6 +10039,8 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
   useEffect(() => {
     // Only initialize once
     if (apiInitialized.current) return;
+    
+    console.log('Initializing YouTube API');
     apiInitialized.current = true;
 
     // Load YouTube IFrame API if not already loaded
@@ -10008,19 +10051,36 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
       firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
     }
 
-    // Set up the global callback
+    // Store the original callback if it exists
+    const originalCallback = (window as any).onYouTubeIframeAPIReady;
+
+    // Set up our callback
     (window as any).onYouTubeIframeAPIReady = () => {
       console.log('YouTube API is ready');
+      // Call the original callback if it exists
+      if (typeof originalCallback === 'function') {
+        originalCallback();
+      }
+      // Call our callback if it exists
       if (apiReadyCallback.current) {
         apiReadyCallback.current();
       }
     };
 
+    // Cleanup function
     return () => {
-      // Clean up global callback
-      (window as any).onYouTubeIframeAPIReady = null;
+      console.log('Cleaning up YouTube API');
+      // Restore original callback if it existed
+      if (originalCallback) {
+        (window as any).onYouTubeIframeAPIReady = originalCallback;
+      } else {
+        delete (window as any).onYouTubeIframeAPIReady;
+      }
+      
+      // Clean up any remaining players
+      cleanupPlayer();
     };
-  }, []);
+  }, [cleanupPlayer]);
 
   // Handle player initialization when activeVideo changes
   useEffect(() => {
@@ -10033,6 +10093,13 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
         initializePlayer();
       } else {
         console.log('Reusing existing YouTube player');
+        // Stop any currently playing video first
+        try {
+          playerRef.current.stopVideo();
+        } catch (e) {
+          console.error('Error stopping previous video:', e);
+        }
+        
         // Update the existing player with new video
         const startTime = timeToSeconds(activeVideo.start);
         playerRef.current.loadVideoById({
@@ -10041,6 +10108,7 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
           endSeconds: timeToSeconds(activeVideo.end)
         });
         setCurrentTime(0);
+        setIsPlaying(false);
       }
     };
 
@@ -10060,11 +10128,31 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     return () => {
       if (playerRef.current) {
         try {
-          playerRef.current.stopVideo();
+          // Stop the video first
+          try {
+            playerRef.current.stopVideo();
+          } catch (e) {
+            console.error('Error stopping video:', e);
+          }
+          
+          // Then destroy the player
+          try {
+            playerRef.current.destroy();
+          } catch (e) {
+            console.error('Error destroying player:', e);
+          }
+          
+          // Clear the ref
+          playerRef.current = null;
         } catch (e) {
-          console.error('Error stopping player:', e);
+          console.error('Error during cleanup:', e);
         }
       }
+      
+      // Reset state
+      setIsPlaying(false);
+      setCurrentTime(0);
+      setDuration(0);
     };
   }, [activeVideo]);
 
@@ -10854,6 +10942,19 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [showUpdates, setShowUpdates] = useState(false)
   const [showCredits, setShowCredits] = useState(false)
   const [armourVideoVehicle, setArmourVideoVehicle] = useState<string | null>(null)
+  const [showArmourTooltip, setShowArmourTooltip] = useState(false)
+  const [currentVehicle, setCurrentVehicle] = useState<string | null>(null)
+
+  // Show tooltip when viewing vehicle details
+  const handleViewDetails = (vehicleName: string) => {
+    setCurrentVehicle(vehicleName)
+    setShowArmourTooltip(true)
+    
+    // Hide after 3 seconds
+    setTimeout(() => {
+      setShowArmourTooltip(false)
+    }, 3000)
+  }
 
   const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
   const [vehicleDetailsOpenId, setVehicleDetailsOpenId] = useState<string | null>(null)
@@ -15799,12 +15900,25 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       
                       {/* Armour Button - Show only if vehicle has armour video */}
                       {hasArmourVideo(vehicle.name) && (
-                        <div className="mt-4">
+                        <div className="mt-4 relative">
+                          <AnimatePresence>
+                            {showArmourTooltip && currentVehicle === vehicle.name && (
+                              <motion.div
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 10 }}
+                                transition={{ duration: 0.2 }}
+                                className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-gray-800 text-white text-xs px-3 py-1.5 rounded whitespace-nowrap z-10"
+                              >
+                                Click to view current tank armour
+                                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-gray-800 rotate-45"></div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
                           <button 
                             onClick={() => {
-                              // Set the vehicle for armour video display
                               setArmourVideoVehicle(vehicle.name);
-                              // Find and scroll to armour video section
+                              setShowArmourTooltip(false);
                               const armourSection = document.getElementById('armour-video-section');
                               if (armourSection) {
                                 armourSection.scrollIntoView({ behavior: 'smooth' });
@@ -16364,7 +16478,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               // Find and scroll to armour video section
                               const armourSection = document.getElementById('armour-video-section');
                               if (armourSection) {
-                                armourSection.scrollIntoView({ behaviour: 'smooth' });
+                                armourSection.scrollIntoView({ behavior: 'smooth' });
                               }
                             }}
                             className="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
