@@ -187,6 +187,12 @@ const events: Event[] = [
     vehicles: [
       { id: 20, name: "ZTZ-96A (P)", type: "free" },
       { id: 21, name: "SR-5 GMLRS", type: "main" },
+      { id: 40, name: "WZ-501A", type: "gacha" },
+      { id: 41, name: "WZ-501", type: "gacha" },
+      { id: 42, name: "WZ-121", type: "gacha" },
+      { id: 42, name: "WZ-120", type: "gacha" },
+      { id: 40, name: "PLZ-076", type: "gacha" },
+      
     ],
   },
   {
@@ -290,6 +296,10 @@ const events: Event[] = [
     vehicles: [
       { id: 36, name: "M113 Hellfire", type: "free" },
       { id: 37, name: "PL-01", type: "main" },
+      { id: 40, name: "M163 VADS", type: "gacha" },
+      { id: 41, name: "M60 Patton", type: "gacha" },
+      { id: 42, name: "XM-800T", type: "gacha" },
+      { id: 43, name: "M3 Bradley", type: "gacha" },
     ],
   },
   {
