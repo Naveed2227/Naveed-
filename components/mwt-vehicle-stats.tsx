@@ -279,6 +279,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "K21 KNIFV",
 "Stridsvagn 105",
 "Strf 9040 BILL",
+"9K31 Strela-1",
 
 
 
@@ -321,6 +322,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "X2 Shinshin",
 "K2 Black Panther",
 "Al-Khalid",
+"Arjun Mk.2",
 
 
 
@@ -331,7 +333,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "TOS-1A",
 "FK 2000",
 "SB-1",
- "T-25 Pamir",
+"T-25 Pamir",
 ];
 
   if (commonVehicles.includes(vehicleName)) return "Common";
@@ -9142,13 +9144,14 @@ const VEHICLES_DATA = [
     "description": "A short-range, mobile surface-to-air missile system with upgraded targeting, mounted on a tracked chassis for air defense.",
     "image": "9K31-Strela-1.png",
     "stats": {
-      "health": 0,
-      "speed": 0,
+      "health": 21200,
+      "speed": 127,
       "reverseSpeed": 0,
-      "agility": 0
+      "agility": 37
     },
     "weapons": [
-     
+        { name: "9M31M HEI", type: "Missile", damage: 5870, penetration: 60, reload: 9 },
+        { name: "9M31 HEI", type: "Missile", damage: 4530, penetration: 60, reload: 9 },
    
     ],
     "modules": {
@@ -11955,8 +11958,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
    
-      "Arjun Mk.2",
-      "9K31 Strela-1",
+    
       "AMX-30 Super",
       
       
