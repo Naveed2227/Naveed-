@@ -15934,11 +15934,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     </div>
                   </div>
 
-                  {/* Vehicle Armour Video - Mobile Only */}
-                  <div className="block lg:hidden">
-                    <ArmourVideo vehicleName={armourVideoVehicle} />
-                  </div>
-
                   <div className="flex flex-col lg:flex-row gap-6">
                     {/* Left column - Stats and Weapons */}
                     <div className="w-full lg:w-1/2">
@@ -16490,10 +16485,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       )}
 
                       {/* Vehicle Armour Video - Enhanced for mobile visibility */}
-                      <div id="armour-video-section" className="mb-6 scroll-mt-4" style={{
-                        scrollMarginTop: isMobileDevice() ? '80px' : '100px',
-                        overflowY: isMobileDevice() ? 'scroll' : 'auto'
-                      }}>
+                      {/* Single instance of ArmourVideo with responsive styling */}
+                      <div 
+                        id="armour-video-section" 
+                        className="mb-6 scroll-mt-4" 
+                        style={{
+                          scrollMarginTop: isMobileDevice() ? '80px' : '100px',
+                          overflowY: 'auto',
+                          display: armourVideoVehicle ? 'block' : 'none'
+                        }}
+                      >
                         <ArmourVideo vehicleName={armourVideoVehicle} />
                       </div>
                     </div>
