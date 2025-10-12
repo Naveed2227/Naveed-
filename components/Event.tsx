@@ -56,11 +56,11 @@ const events: Event[] = [
     vehicles: [
       { id: 3, name: "Strf 9040 BILL", type: "free" },
       { id: 4, name: "Leopard 2A-RC 3.0", type: "main" },
-      { id: 41, name: "M113A1 FMS AIP", type: "gacha" },
-      { id: 42, name: "BRM-IK", type: "gacha" },
-      { id: 40, name: "T54E1", type: "gacha" },
-      { id: 41, name: "BTR-80", type: "gacha" },
-      { id: 41, name: "XM1 (GM)", type: "gacha" },
+      { id: 41, name: "BMP-2", type: "gacha" },
+      { id: 42, name: "ZSU-23-4M4 Shilka", type: "gacha" },
+      { id: 40, name: "WZ-120", type: "gacha" },
+      { id: 41, name: "ZTZ85-II", type: "gacha" },
+      { id: 41, name: "MH-6 Little Bird", type: "gacha" },
     ],
   },
   {
@@ -75,7 +75,7 @@ const events: Event[] = [
       { id: 41, name: "M60", type: "gacha" },
       { id: 42, name: "LAV-25", type: "gacha" },
       { id: 40, name: "LAV-150", type: "gacha" },
-      { id: 41, name: "M153 VADS", type: "gacha" },
+      { id: 41, name: "M163 VADS", type: "gacha" },
     ],
   },
   {
@@ -102,6 +102,11 @@ const events: Event[] = [
     vehicles: [
       { id: 9, name: "PT-91 Twardy", type: "free" },
       { id: 10, name: "PL-01", type: "main" },
+      { id: 41, name: "M113A1 FMS AIP", type: "gacha" },
+      { id: 42, name: "BRM-1K", type: "gacha" },
+      { id: 40, name: "T-54E1", type: "gacha" },
+      { id: 41, name: "BTR-80", type: "gacha" },
+      { id: 41, name: "XM1 (GM)", type: "gacha" },
     ],
   },
   {
@@ -122,7 +127,12 @@ const events: Event[] = [
     endDate: "2025-08-13",
     vehicles: [
       { id: 12, name: "WMA301", type: "free" },
-      { id: 13, name: "FK-2000", type: "main" },
+      { id: 13, name: "FK 2000", type: "main" },
+      { id: 46, name: "BMP-2", type: "gacha" },
+      { id: 47, name: "MH-6 Little Bird", type: "gacha" },
+      { id: 48, name: "ZSU-23-4M4 Shilka", type: "gacha" },
+      { id: 49, name: "WZ-120", type: "gacha" },
+      { id: 50, name: "ZTZ85-II", type: "gacha" },
     ],
   },
   {
@@ -145,6 +155,11 @@ const events: Event[] = [
     vehicles: [
       { id: 16, name: "M109A6 Paladin", type: "free" },
       { id: 17, name: "MGM-166 LOSAT", type: "main" },
+      { id: 51, name: "M163 VADS", type: "gacha" },
+      { id: 52, name: "LAV-150", type: "gacha" },
+      { id: 53, name: "T-62 545", type: "gacha" },
+      { id: 54, name: "M113 Hellfire", type: "gacha" },
+      { id: 55, name: "BRM-1K", type: "gacha" },
     ],
   },
   {
@@ -154,8 +169,13 @@ const events: Event[] = [
     startDate: "2025-06-12",
     endDate: "2025-06-29",
     vehicles: [
-      { id: 18, name: "Rooikat MTTD", type: "free" },
+      { id: 18, name: "Rookiat MTTD", type: "free" },
       { id: 19, name: "Challenger 3", type: "main" },
+      { id: 56, name: "ZSU-23-4M4 Shilka", type: "gacha" },
+      { id: 57, name: "BMP-2", type: "gacha" },
+      { id: 58, name: "BTR-82A1", type: "gacha" },
+      { id: 59, name: "MH-6 Little Bird", type: "gacha" },
+      { id: 60, name: "Type-61", type: "gacha" },
     ],
   },
   {
@@ -179,7 +199,7 @@ const events: Event[] = [
       { id: 22, name: "XM2001 Crusader", type: "free" },
       { id: 23, name: "M270 MLRS", type: "main" },
       { id: 40, name: "AV-8B Harrier II", type: "gacha" },
-      { id: 41, name: "T54E1", type: "gacha" },
+      { id: 41, name: "T-54E1", type: "gacha" },
       { id: 42, name: "MBT-70", type: "gacha" },
       { id: 40, name: "T114 BAT", type: "gacha" },
       { id: 41, name: "M3 Bradley", type: "gacha" },
@@ -193,8 +213,11 @@ const events: Event[] = [
     endDate: "2025-05-14",
     vehicles: [
       { id: 24, name: "T-90A", type: "free" },
-      { id: 25, name: "M1A1 Abrams", type: "free" },
+      { id: 25, name: "M1A1 Abrams", type: "main" },
       { id: 26, name: "FV4034 Challenger 2", type: "main" },
+      { id: 29, name: "PLL-05", type: "gacha" },
+      { id: 40, name: "2S3 Akatsiya", type: "gacha" },
+      { id: 41, name: "BTR-82AT", type: "gacha" },
     ],
   },
   {
@@ -205,7 +228,7 @@ const events: Event[] = [
     endDate: "2025-05-07",
     vehicles: [
       { id: 27, name: "K-31 Cheonma", type: "free" },
-      { id: 28, name: "J-50 Trident", type: "main" },
+      { id: 28, name: "J-50", type: "main" },
       { id: 29, name: "Type 90", type: "gacha" },
       { id: 40, name: "9A52-2 Smerch", type: "gacha" },
       { id: 41, name: "MBT-70", type: "gacha" },
@@ -222,10 +245,10 @@ const events: Event[] = [
       { id: 30, name: "Leopard 2A4", type: "free" },
       { id: 31, name: "T-104 Bastion", type: "main" },
       { id: 40, name: "LAV-300", type: "gacha" },
-      { id: 41, name: "STR-82A1", type: "gacha" },
+      { id: 41, name: "BTR-82A1", type: "gacha" },
       { id: 42, name: "PLZ-83", type: "gacha" },
       { id: 43, name: "PGZ-04A", type: "gacha" },
-      { id: 43, name: "ZSU-23-4M4 Shilka", type: "gacha" },
+      { id: 44, name: "ZSU-23-4M4 Shilka", type: "gacha" },
     ],
   },
   {
@@ -236,7 +259,11 @@ const events: Event[] = [
     endDate: "2025-04-10",
     vehicles: [
       { id: 32, name: "AFT-09", type: "free" },
-      { id: 33, name: "T-20 Monolith", type: "main" },
+      { id: 33, name: "T-20 Monolit", type: "main" },
+      { id: 40, name: "T-62 545", type: "gacha" },
+      { id: 41, name: "PLL-05", type: "gacha" },
+      { id: 42, name: "BTR-82AT", type: "gacha" },
+      { id: 43, name: "2S3 Akatsiya", type: "gacha" },
     ],
   },
   {
@@ -277,7 +304,7 @@ const events: Event[] = [
       { id: 40, name: "F-4E Phantom", type: "gacha" },
       { id: 41, name: "MiG-35", type: "gacha" },
       { id: 42, name: "J-10 Chengdu", type: "gacha" },
-      { id: 43, name: "AV-88 Harrier", type: "gacha" },
+      { id: 43, name: "AV-8B Harrier II", type: "gacha" },
     ],
   },
   {

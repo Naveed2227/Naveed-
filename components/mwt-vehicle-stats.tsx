@@ -4435,10 +4435,13 @@ const VEHICLES_DATA = [
     "tier": "III",
     image: "K21-KNIFV.jpg",
     "description": "South Korean infantry fighting vehicle, offering strong firepower, amphibious capability, protection, and advanced digital battlefield systems.",
-    "stats": { "health": 35900, "speed": 0 , "armor": 0, "agility": 0 },
+    "stats": { "health": 35900, "speed": 76 , "armor": 50, "agility": 42 },
     "weapons": [
-     { name: "XM855HE", type: "Main Gun", damage: 7560, penetration: 68 },
-     { name: "XM885AP", type: "Main Gun", damage: 6160, penetration: 370 }
+     { name: "K237 APFSDS", type: "Main Gun", damage: 1490, penetration: 200 },
+     { name: "K236 HEI", type: "Main Gun", damage: 770, penetration: 74 },
+     { name: "K219 AP", type: "Main Gun", damage: 1340, penetration: 147 },
+     { name: "K216 HEI", type: "Main Gun", damage: 690, penetration: 68 },
+     { name: "Spike-LR2", type: "Missile", damage: 10090, penetration: 900, reload: 10 },
 ],
     "modules": {
       "engine": [
@@ -10896,28 +10899,35 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     const statTypeLower = statType.toLowerCase();
     const baseValue = vehicle.stats[statType] || 0;
     
+    // Define the boost multipliers for each upgrade level
+    const healthMultipliers = [1, 1.1, 1.2, 1.3];  // 0%, 10%, 20%, 30%
+    const speedMultipliers = [1, 1.03, 1.06, 1.09]; // 0%, 3%, 6%, 9%
+    
     let boostMultiplier = 1;
     
     if (statTypeLower === 'health') {
-      // Health: 10%, 20%, 30% increases
-      boostMultiplier = 1 + (upgradeLevel * 0.1); // 1.1, 1.2, or 1.3
-    } else if (statTypeLower === 'agility') {
-      // Agility: 3.33%, 6.66%, 10% increases
-      switch(upgradeLevel) {
-        case 1: boostMultiplier = 1.0333; break; // 3.33%
-        case 2: boostMultiplier = 1.0666; break; // 6.66%
-        case 3: boostMultiplier = 1.1;    break; // 10%
-      }
-    } else {
-      // Other stats (speed, afterburnerSpeed, verticalSpeed): 3.33%, 6.66%, 10% increases
-      switch(upgradeLevel) {
-        case 1: boostMultiplier = 1.0333; break; // 3.33%
-        case 2: boostMultiplier = 1.0666; break; // 6.66%
-        case 3: boostMultiplier = 1.1;    break; // 10%
-      }
+      // Health: 10%, 20%, 30% increases for MK1, MK2, MK3
+      boostMultiplier = healthMultipliers[upgradeLevel];
+    } else if (
+      statTypeLower === 'speed' || 
+      statTypeLower === 'agility' || 
+      statTypeLower === 'afterburnerspeed' ||
+      statTypeLower === 'cruisespeed' ||
+      statTypeLower === 'verticalspeed'
+    ) {
+      // Speed, Agility, Afterburner Speed, Cruise Speed, Vertical Speed: 3%, 6%, 9% increases
+      boostMultiplier = speedMultipliers[upgradeLevel];
     }
     
-    const boostableStats = ['health', 'speed', 'agility', 'afterburnerspeed', 'verticalspeed', 'damage'];
+    const boostableStats = [
+      'health', 
+      'speed', 
+      'agility', 
+      'afterburnerspeed', 
+      'verticalspeed',
+      'cruisespeed',
+      'damage'
+    ];
     
     if (boostableStats.includes(statTypeLower)) {
       return Math.round(baseValue * boostMultiplier);
