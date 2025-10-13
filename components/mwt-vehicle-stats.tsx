@@ -622,7 +622,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "TU-222.jpg",
     description: "Next-generation supersonic strategic bomber with hypersonic missile capability.",
-    stats: { health: 32800, speed: 870, afterburnerSpeed: 2850, agility: 30 },
+    stats: { health: 32800, speed: 870, afterburnerSpeed: 2880, agility: 29 },
     weapons: [
       {
         "name": "KAB-250",
@@ -751,7 +751,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Next-generation interceptor with hypersonic capabilities and advanced radar systems.",
     image: "MiG-41M.jpg",
-    stats: { health: 26600, speed: 860, afterburnerSpeed: 2500, agility: 56 },
+    stats: { health: 21200, speed: 880, afterburnerSpeed: 4050, agility: 43 },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
@@ -790,7 +790,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Fifth-generation stealth fighter with advanced maneuverability and sensor fusion.",
     image: "SU-57-Felon.jpg",
-    stats: { health: 21900, speed: 850, afterburnerSpeed: 2400, agility: 54 },
+    stats: { health: 21900, speed: 860, afterburnerSpeed: 2340, agility: 53 },
     weapons: [
      { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "FAB-250-M62", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
@@ -898,7 +898,7 @@ const VEHICLES_DATA = [
   tier: "IV",
   image: "J-50.jpg",
   description: "Advanced stealth air superiority fighter concept with heavy armament.",
-  stats: { health: 24000, speed: 760, afterburnerSpeed: 2150, agility: 83 },
+  stats: { health: 26600, speed: 840, afterburnerSpeed: 2480, agility: 55 },
   weapons: [
     {
         "name": "FT-3",
@@ -2775,7 +2775,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Mi-28NM.jpg",
     description: "Night hunter attack helicopter with all-weather combat capability.",
-    stats: { health: 25480, speed: 229, verticalSpeed: 15, agility: 46 },
+    stats: { health: 28000, speed: 300, verticalSpeed: 19.2, agility: 60 },
     weapons: [
       { name: "B8V20", type: "Air-to-Ground Missile", damage: 5100, penetration: 420, reload: 20 },
       { name: "Attack ATGM", type: "Anti-Tank Missile", damage: 7500, penetration: 850, reload: 30 },
@@ -2817,7 +2817,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "WZ-10.jpg",
     description: "Dedicated attack helicopter with tandem-seat configuration and advanced sensors.",
-    stats: { health: 18200, speed: 221, verticalSpeed: 55, agility: 46 },
+    stats: { health: 20000, speed: 290, verticalSpeed: 20, agility: 60 },
     weapons: [
       { name: "Type 57-1", type: "Rocket Pod", damage: 3700, penetration: 200, reload: 15 },
       { name: "HJ-10", type: "Anti-Tank Missile", damage: 13800, penetration: 1400, reload: 30 },
@@ -2858,7 +2858,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Z-19E.png",
     description: "Light attack and reconnaissance helicopter with stealth characteristics.",
-    stats: { health: 17290, speed: 214, verticalSpeed: 15, agility: 42 },
+    stats: { health: 19000, speed: 280, verticalSpeed: 19.4, agility: 55 },
     weapons: [
       { name: "TY-90", type: "Short-Range AAM", damage: 4600, penetration: 30, reload: 10 },
       { name: "AKD-9", type: "Air-to-Ground Missile", damage: 8000, penetration: 800, reload: 15 },
@@ -2898,7 +2898,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Ka-58-Black-Ghost.jpg",
     description: "Stealth attack helicopter with advanced composite materials and reduced signature.",
-    stats: { health: 25480, speed: 252, verticalSpeed: 17, agility: 50 },
+    stats: { health: 28000, speed: 330, verticalSpeed: 21.7, agility: 65 },
     weapons: [
       { name: "B-13L", type: "Air-to-Ground Missile", damage: 9200, penetration: 160, reload: 40 },
       { name: "Izdeliye 305", type: "Air-to-Ground Missile", damage: 11900, penetration: 250, reload: 16 },
@@ -2940,7 +2940,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "SB-1.jpg",
     description: "High-speed American compound helicopter with heavy firepower including Storm Shadow missiles in MWT.",
-    stats: { health: 23660, speed: 382, verticalSpeed: 69, agility: 57 },
+    stats: { health: 26000, speed: 500, verticalSpeed: 25, agility: 75 },
     weapons: [
       { name: "Storm Shadow", type: "Cruise Missile", damage: 20000, penetration: 370, reload: 40 },
       { name: "AGM-114 Hellfire", type: "Air-to-Ground Missile", damage: 9000, penetration: 950, reload: 30 },
@@ -2978,7 +2978,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Ka-52M.jpg",
     description: "Advanced reconnaissance and attack helicopter with coaxial rotor design.",
-    stats: { health: 23660, speed: 229, verticalSpeed: 16, agility: 50 },
+    stats: { health: 26000, speed: 300, verticalSpeed: 20.6, agility: 65 },
     weapons: [
       { name: "9K38 IGLA-V", type: "Short-Range AAM", damage: 4100, penetration: 30, reload: 15 },
       { name: "9K121 Vikhr", type: "Anti-Tank Missile", damage: 7800, penetration: 1000, reload: 30 },
@@ -3020,7 +3020,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "AH-84.jpg",
     description: "Next-generation attack helicopter with stealth features and advanced weapons.",
-    stats: { health: 16380, speed: 244, verticalSpeed: 61, agility: 50 },
+    stats: { health: 18000, speed: 320, verticalSpeed: 22.2, agility: 65 },
     weapons: [
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
       { name: "LAU-10", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 30 },
@@ -3062,7 +3062,7 @@ const VEHICLES_DATA = [
   tier: "III",
   image: "Mitsubishi-F-2B.jpg",
   description: "Multirole fighter developed from the F-16, optimized for anti-ship and air-to-air roles.",
-  stats: { health: 19200, speed: 750, afterburnerSpeed: 1900, agility: 80 },
+  stats: { health: 20400, speed: 550, afterburnerSpeed: 2210, agility: 49 },
   weapons: [
     { "name": "GCS-1", "type": "Autocannon", "damage": 14300, "penetration": 120, "reload": 25 },
       { "name": "JLAU-3/A", "type": "Rocket Pod", "damage": 5200, "penetration": 128, "reload": 20 },
@@ -3098,7 +3098,7 @@ const VEHICLES_DATA = [
     tier: "III",
     description: "Multi-role fighter with advanced night vision and precision strike capabilities.",
     image: "F-16C-Night-Falcon.jpg",
-    stats: { health: 18500, speed: 1320, afterburnerSpeed: 2124, agility: 92 },
+    stats: { health: 17500, speed: 790, afterburnerSpeed: 2178, agility: 48 },
     weapons: [
        { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
     { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
@@ -3173,7 +3173,7 @@ const VEHICLES_DATA = [
   tier: "III",
   image: "J16.jpg",
   description: "Chinese twin-seat multirole fighter derived from Su-30, capable of carrying heavy weapons payload.",
-  stats: { health: 21300, speed: 790, afterburnerSpeed: 2050, agility: 43 },
+  stats: { health: 21300, speed: 780, afterburnerSpeed: 2030, agility: 43 },
   weapons: [
     { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
       { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
@@ -3248,7 +3248,7 @@ const VEHICLES_DATA = [
   tier: "III",
   image: "Su-25UB.jpg",
   description: "Twin-seat variant of the Su-25, specialized for ground attack with heavy armor.",
-  stats: { health: 20300, speed: 750, afterburnerSpeed: 860, agility: 32 },
+  stats: { health: 21000, speed: 750, afterburnerSpeed: 860, agility: 43 },
   weapons: [
     { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
       { "name": "FAB-250", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
@@ -3283,7 +3283,7 @@ const VEHICLES_DATA = [
   tier: "III",
   image: "Su-39.jpg",
   description: "Upgraded variant of Su-25 with improved avionics and guided weapons.",
-  stats: { health: 25200, speed: 730, afterburnerSpeed: 1700, agility: 30 },
+  stats: { health: 24400, speed: 880, afterburnerSpeed: 2250, agility: 49 },
   weapons: [
     { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
@@ -3317,7 +3317,7 @@ const VEHICLES_DATA = [
   tier: "III",
   image: "J-15.jpg",
   description: "Chinese carrier-based fighter based on Su-33 design, versatile in both air and ground roles.",
-  stats: { health: 20100, speed: 765, afterburnerSpeed: 2000, agility: 45 },
+  stats: { health: 23500, speed: 860, afterburnerSpeed: 2070, agility: 49 },
   weapons: [
     { "name": "Type 1", "type": "Guided Bomb", "damage": 15100, "penetration": 120, "reload": 32 },
       { "name": "Type 90 x2", "type": "Air-to-Ground Missile", "damage": 6400, "penetration": 320, "reload": 40 },
@@ -3422,7 +3422,7 @@ const VEHICLES_DATA = [
   tier: "III",
   image: "Su-35S.png",
   description: "Highly maneuverable 4++ generation multirole fighter with thrust vectoring engines and powerful radar.",
-  stats: { health: 23300, speed: 870, afterburnerSpeed: 2200, agility: 67 },
+  stats: { health: 24400, speed: 880, afterburnerSpeed: 2250, agility: 49 },
   weapons: [
     { name: "R-73", type: "Short-Range AAM", damage: 4900, penetration: 60, reload: 15 },
     { name: "R-27", type: "Medium-Range AAM", damage: 8100, penetration: 65, reload: 20},
@@ -15430,21 +15430,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   </button>
                 </div>
                 <div className="space-y-4 text-slate-300">
-                  <p>
-                    MWT Assistant is your all-in-one companion for tracking and managing MWT-related data. Access real-time statistics, detailed information, and updates for vehicles and units with ease. Whether you’re analyzing performance, monitoring progress, or staying informed about the latest developments, MWT Assistant keeps everything organized in a simple, intuitive interface.
-                  </p>
-                  <p>
-                    Features include vehicle statistics, weapon specifications, upgrade modules, AI-powered tactical analysis, and advanced filtering capabilities.
-                  </p>
-                  <p>
-                    MWT Assistant does not collect, store, or share personal information. Data shown is provided for informational purposes and we strive to ensure its accuracy, but we cannot guarantee completeness.
-                  </p>
-                  <p>
-                     Anonymous crash and performance data may be collected automatically by Google Play Services.
-                  </p>
-                  <p>
-                     Ads shown in the app may use cookies or similar technologies under their own policies.
-                  </p>
+                 <p>
+  MWT Assistant is your all-in-one tool for tracking MWT data with real-time stats, detailed vehicle info, and AI-powered analysis.
+</p>
+<p>
+  The app doesn’t collect personal data. Anonymous performance data may be gathered by Google Play Services, and ads may use cookies under their own policies.
+</p>
+<p>
+  MWT Assistant is an independent project, not affiliated with Artstorm or Cube Software. “MWT” and related names or images are trademarks of their respective owners.
+</p>
 <p>
   <a 
     href="https://sites.google.com/view/mwtassistantpppolicy/home" 
@@ -15547,7 +15541,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10">
         <div>
           <h4 className="text-white font-semibold">Naveed2227</h4>
-          <p className="text-slate-400 text-sm">Lead developer and creator</p>
+          <p className="text-slate-400 text-sm">Lead developer and creator, 
+          PRESS-Acc</p>
         </div>
         <div>
           <h4 className="text-white font-semibold">Nesli27</h4>
