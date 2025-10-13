@@ -3,6 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+// Import the vehicles data from the public directory
+const vehiclesData = require('../../public/vehicles.json');
 
 // Dynamically import the MwtVehicleStats component with SSR disabled
 const MwtVehicleStats = dynamic(
@@ -48,16 +50,10 @@ export default function VehicleDetailsPage({ params }: { params: { vehicleName: 
     // Decode the vehicle name from URL (replacing hyphens with spaces)
     const decodedName = decodeURIComponent(params.vehicleName).replace(/-/g, ' ');
     
-    // Load vehicles data
-    const loadVehicle = async () => {
+    // Find the vehicle from the preloaded data
+    const findVehicle = () => {
       try {
-        const response = await fetch('/vehicles.json');
-        if (!response.ok) {
-          throw new Error('Failed to load vehicle data');
-        }
-        const allVehicles = await response.json();
-        
-        const foundVehicle = allVehicles.find((v: Vehicle) => 
+        const foundVehicle = vehiclesData.find((v: Vehicle) => 
           v.name.toLowerCase() === decodedName.toLowerCase() ||
           v.name.toLowerCase().replace(/[^a-z0-9]/g, '') === decodedName.toLowerCase().replace(/[^a-z0-9]/g, '')
         );
@@ -69,13 +65,13 @@ export default function VehicleDetailsPage({ params }: { params: { vehicleName: 
         setVehicle(foundVehicle);
         setLoading(false);
       } catch (err) {
-        console.error('Error loading vehicle data:', err);
+        console.error('Error finding vehicle:', err);
         setError(err instanceof Error ? err.message : 'An unknown error occurred');
         setLoading(false);
       }
     };
 
-    loadVehicle();
+    findVehicle();
   }, [params.vehicleName]);
 
   if (loading) {
@@ -143,4 +139,12 @@ export default function VehicleDetailsPage({ params }: { params: { vehicleName: 
       </div>
     </div>
   );
+}
+
+// This function gets called at build time
+export async function generateStaticParams() {
+  // Pre-render all vehicle pages at build time
+  return vehiclesData.map((vehicle: Vehicle) => ({
+    vehicleName: vehicle.name.toLowerCase().replace(/\s+/g, '-')
+  }));
 }
