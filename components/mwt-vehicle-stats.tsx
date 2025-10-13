@@ -11541,6 +11541,23 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       ctx.fillStyle = '#ffffff';
       ctx.font = 'bold 20px Arial'; // text-base = 16px, sm:text-xl = 20px
       ctx.fillText(vehicle.name, flagX + flagWidth + 12, nameY + 2); // gap-2 sm:gap-3 = 8px-12px
+      
+      // Add click handler for view details
+      const vehicleNameForUrl = vehicle.name.toLowerCase().replace(/\s+/g, '-');
+      canvas.addEventListener('click', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Check if click is on the vehicle name/flag area
+        if (x >= flagX && x <= flagX + 300 && y >= nameY - 20 && y <= nameY + 30) {
+          window.location.href = `/${vehicleNameForUrl}`;
+        }
+      });
+      
+      // Change cursor to pointer when hovering over vehicle name
+      canvas.style.cursor = 'pointer';
+      canvas.title = `View details for ${vehicle.name}`;
 
       // Draw nation with exact UI styling: text-xs sm:text-sm text-slate-400 font-semibold
       ctx.fillStyle = '#94a3b8'; // text-slate-400
