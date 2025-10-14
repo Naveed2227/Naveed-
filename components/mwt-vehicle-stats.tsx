@@ -3869,13 +3869,14 @@ const VEHICLES_DATA = [
     "faction": "French",
     "tier": "III",
     image: "AMX-30-Super.jpg",
-    "description": "Improved export variant of ZTZ96 with enhanced protection and gun systems.",
-    "stats": { "health": 36900, "speed": 24, "armor": "770mm", "agility": 34 },
+    "description": "French Main Battle Tank featuring improved armor, a powerfull 105mm gun and control system",
+    "stats": { "health": 36000, "speed": 65, "armor": "770mm", "agility": 42 },
     "weapons": [
-      { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
-      { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
-      { name: "Type1985 I", type: "Main Gun", damage: 10220, penetration: 466 },
-      { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
+      { name: "OF 105 F1 APFSDS", type: "Main Gun", damage: 9910, penetration: 361 },
+      { name: "OE 105 F1 HEI", type: "Main Gun", damage: 4500, penetration: 55 },
+      { name: "OCC 105 F1 HEAT", type: "Main Gun", damage: 10790, penetration: 350 },
+      { name: "OF 105 F2 APFSDS", type: "Main Gun", damage: 10090, penetration: 459 },
+     
     ],
     "modules": {
       "engine": [
@@ -11986,7 +11987,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     const constructionVehicles = [
    
     
-      "AMX-30 Super",
+      "",
       
       
     ]
