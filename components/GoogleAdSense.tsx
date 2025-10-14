@@ -39,6 +39,7 @@ export default function GoogleAdSense({
     script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998';
     script.async = true;
     script.crossOrigin = 'anonymous';
+    script.setAttribute('crossorigin', 'anonymous');
     
     script.onload = initializeAdSense;
     script.onerror = handleScriptError;
@@ -105,6 +106,5 @@ export default function GoogleAdSense({
         </div>
       )}
     </div>
-  );
   );
 }
