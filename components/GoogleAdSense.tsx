@@ -55,7 +55,11 @@ export default function GoogleAdSense({
 
   const initializeAdSense = () => {
     try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      (window.adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3724137161724998",
+        enable_page_level_ads: true,
+        publisher_id: "pub-3724137161724998"
+      });
       setAdLoaded(true);
       setAdError(false);
     } catch (error) {
