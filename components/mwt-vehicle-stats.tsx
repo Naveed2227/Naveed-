@@ -14213,21 +14213,30 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
       {/* Google AdSense Banner - 728x90 Leaderboard */}
       <div className="w-full bg-slate-800/50 border-b border-slate-700">
-        <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-2">
-          <div key="banner-ad" className="w-full">
-            <ins
-              className="adsbygoogle"
+        <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-6">
+          <div className="w-full flex justify-center">
+            <div 
+              className="w-full max-w-[780px] h-[90px] bg-gray-200 flex items-center justify-center"
               style={{
-                display: 'block',
+                maxWidth: '100%',
                 width: '100%',
-                height: '90px',
-                margin: '0 auto'
+                height: 'auto',
+                aspectRatio: '780/90',
+                minHeight: '90px',
+                margin: '0 auto',
+                backgroundColor: '#e5e7eb',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '16px',
+                fontWeight: 500,
+                borderRadius: '4px',
+                overflow: 'hidden'
               }}
-              data-ad-client="ca-pub-3724137161724998"
-              data-ad-slot="6518875801"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            />
+            >
+              780 × 90 Ad Placeholder
+            </div>
           </div>
         </div>
       </div>
