@@ -279,6 +279,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "K21 KNIFV",
 "Stridsvagn 105",
 "Strf 9040 BILL",
+"Merkava Mk.3",
 
 
 
@@ -12066,6 +12067,7 @@ const missileHasTags = (missileName: string) => {
 "K21 KNIFV",
 "K2 Black Panther",
 "Strf 9040 BILL",
+"Merkava Mk.3",
         
 
 ]
