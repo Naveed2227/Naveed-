@@ -1,6 +1,6 @@
 "use client"
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays } from "lucide-react"
 import dynamic from 'next/dynamic';
 
@@ -193,7 +193,6 @@ const getVehicleRarity = (vehicleName: string) => {
 "Mi-28NM",
 "WZ-10",
 "AH-1Z",
-"Mi-171SH",
 "Z-11WB",
 "MI-8TV",
 "Z-20",
@@ -279,7 +278,6 @@ const getVehicleRarity = (vehicleName: string) => {
 "K21 KNIFV",
 "Stridsvagn 105",
 "Strf 9040 BILL",
-"9K31 Strela-1",
 
 
 
@@ -322,7 +320,6 @@ const getVehicleRarity = (vehicleName: string) => {
 "X2 Shinshin",
 "K2 Black Panther",
 "Al-Khalid",
-"Arjun Mk.2",
 
 
 
@@ -333,7 +330,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "TOS-1A",
 "FK 2000",
 "SB-1",
-"T-25 Pamir",
+ "T-25 Pamir",
 ];
 
   if (commonVehicles.includes(vehicleName)) return "Common";
@@ -9330,6 +9327,7 @@ const VEHICLES_DATA = [
           "bonus": "+40% detection"
         }
       ]
+
     }
   }
 ];
@@ -9838,95 +9836,6 @@ const LoginForm = ({ onClose, onLogin }: { onClose: () => void; onLogin: (userDa
   );
 };
 
-// Vehicle Armour Buttons Component
-const VehicleArmourButtons = () => {
-  const [activeVideo, setActiveVideo] = useState<string | null>(null);
-  
-  // Vehicle data with YouTube URLs and timestamps
-  const vehicles = [
-    { name: "PLZ-05", url: "https://www.youtube.com/watch?v=example1", start: "0:10", end: "0:30" },
-    { name: "M1128 Stryker", url: "https://www.youtube.com/watch?v=example2", start: "0:15", end: "0:40" }
-  ];
-
-  // Convert minutes:seconds to seconds
-  const timeToSeconds = (timeStr: string): number => {
-    const [minutes, seconds] = timeStr.split(':').map(Number);
-    return minutes * 60 + seconds;
-  };
-
-  // Extract video ID from YouTube URL
-  const getVideoId = (url: string): string => {
-    const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
-    return match ? match[1] : '';
-  };
-
-  return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap gap-3">
-        {vehicles.map((vehicle) => (
-          <button
-            key={vehicle.name}
-            onClick={() => setActiveVideo(activeVideo === vehicle.name ? null : vehicle.name)}
-            className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 active:scale-95 ${
-              activeVideo === vehicle.name
-                ? 'bg-amber-600 text-white'
-                : 'bg-slate-800 text-white hover:bg-slate-700'
-            }`}
-          >
-            {vehicle.name} Armour
-          </button>
-        ))}
-      </div>
-      
-      {/* Show message when vehicle is selected but no video is available */}
-      {vehicleName && !activeVideo && (
-        <div className="text-center p-4 bg-slate-800/50 rounded-lg border border-slate-700/30">
-          <p className="text-slate-400 text-sm">
-            No armour video available for <span className="text-cyan-300 font-medium">{vehicleName}</span>
-          </p>
-          <p className="text-slate-500 text-xs mt-1">
-            Available vehicles: Su-57M, F-22 Raptor, J-20 Mighty Dragon, TU-222, J-35, MiG-41M, B-21 Raider, H-20, T-14 Armata, M1128 Stryker
-          </p>
-        </div>
-      )}
-      
-      <AnimatePresence>
-        {activeVideo && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden"
-          >
-            {vehicles
-              .filter(vehicle => vehicle.name === activeVideo)
-              .map(vehicle => {
-                const videoId = getVideoId(vehicle.url);
-                const startSeconds = timeToSeconds(vehicle.start);
-                const endSeconds = timeToSeconds(vehicle.end);
-                
-                return (
-                  <div key={vehicle.name} className="mt-4 flex justify-center">
-                    <div className="w-full max-w-2xl aspect-video">
-                      <iframe
-                        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&start=${startSeconds}&end=${endSeconds}&rel=0&modestbranding=1`}
-                        title={`${vehicle.name} Armour Demo`}
-                        className="w-full h-full rounded-lg"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
-                  </div>
-                );
-              })}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-};
-
 // Mobile device detection function
 const isMobileDevice = (): boolean => {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -9973,73 +9882,32 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     // Additional touch end logic if needed
   };
 
-  // Cleanup function for the player
-  const cleanupPlayer = useCallback(() => {
-    if (playerRef.current) {
-      try {
-        // Stop the video
-        try {
-          playerRef.current.stopVideo();
-        } catch (e) {
-          console.error('Error stopping video during cleanup:', e);
-        }
-        
-        // Destroy the player
-        try {
-          playerRef.current.destroy();
-        } catch (e) {
-          console.error('Error destroying player during cleanup:', e);
-        }
-        
-        // Clear the ref
-        playerRef.current = null;
-      } catch (e) {
-        console.error('Error during player cleanup:', e);
-      }
-    }
-    
-    // Reset state
-    setIsPlaying(false);
-    setCurrentTime(0);
-    setDuration(0);
-  }, []);
-
   // Auto-show video when vehicleName is provided
   useEffect(() => {
-    console.log('ArmourVideo: Component updated, vehicleName:', vehicleName);
+    console.log('ArmourVideo: Component mounted, vehicleName:', vehicleName);
+    console.log('ArmourVideo: Available videos data:', vehicleVideosData);
     
-    // Clean up any existing player first
-    cleanupPlayer();
-    
-    if (!vehicleName) {
-      setActiveVideo(null);
-      return;
+    if (vehicleName) {
+      console.log('ArmourVideo: Looking for video with name:', vehicleName);
+      console.log('ArmourVideo: Available videos:', vehicleVideosData.default);
+      
+      if (!vehicleVideosData.default || !Array.isArray(vehicleVideosData.default)) {
+        console.error('ArmourVideo: vehicleVideosData.default is not an array:', vehicleVideosData.default);
+        return;
+      }
+      
+      const video = vehicleVideosData.default.find((v: any) => v.name === vehicleName);
+      if (video) {
+        console.log('ArmourVideo: Found video:', video);
+        setActiveVideo(video);
+        setIsPlaying(false); // Start with paused state
+        setCurrentTime(0);
+      } else {
+        console.error('ArmourVideo: No video found for vehicle:', vehicleName);
+        console.error('ArmourVideo: Available vehicle names:', vehicleVideosData.default.map((v: any) => v.name));
+      }
     }
-    
-    console.log('ArmourVideo: Looking for video with name:', vehicleName);
-    
-    if (!vehicleVideosData.default || !Array.isArray(vehicleVideosData.default)) {
-      console.error('ArmourVideo: vehicleVideosData.default is not an array');
-      return;
-    }
-    
-    const video = vehicleVideosData.default.find((v: any) => v.name === vehicleName);
-    if (video) {
-      console.log('ArmourVideo: Found video:', video);
-      // Set the new video directly
-      setActiveVideo(video);
-      setIsPlaying(false);
-      setCurrentTime(0);
-    } else {
-      console.error('ArmourVideo: No video found for vehicle:', vehicleName);
-      setActiveVideo(null);
-    }
-    
-    // Cleanup on unmount or when vehicleName changes
-    return () => {
-      cleanupPlayer();
-    };
-  }, [vehicleName, cleanupPlayer]);
+  }, [vehicleName]);
 
   // Track if we've initialized the YouTube API
   const apiInitialized = useRef(false);
@@ -10049,8 +9917,6 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
   useEffect(() => {
     // Only initialize once
     if (apiInitialized.current) return;
-    
-    console.log('Initializing YouTube API');
     apiInitialized.current = true;
 
     // Load YouTube IFrame API if not already loaded
@@ -10061,36 +9927,19 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
       firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
     }
 
-    // Store the original callback if it exists
-    const originalCallback = (window as any).onYouTubeIframeAPIReady;
-
-    // Set up our callback
+    // Set up the global callback
     (window as any).onYouTubeIframeAPIReady = () => {
       console.log('YouTube API is ready');
-      // Call the original callback if it exists
-      if (typeof originalCallback === 'function') {
-        originalCallback();
-      }
-      // Call our callback if it exists
       if (apiReadyCallback.current) {
         apiReadyCallback.current();
       }
     };
 
-    // Cleanup function
     return () => {
-      console.log('Cleaning up YouTube API');
-      // Restore original callback if it existed
-      if (originalCallback) {
-        (window as any).onYouTubeIframeAPIReady = originalCallback;
-      } else {
-        delete (window as any).onYouTubeIframeAPIReady;
-      }
-      
-      // Clean up any remaining players
-      cleanupPlayer();
+      // Clean up global callback
+      (window as any).onYouTubeIframeAPIReady = null;
     };
-  }, [cleanupPlayer]);
+  }, []);
 
   // Handle player initialization when activeVideo changes
   useEffect(() => {
@@ -10103,13 +9952,6 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
         initializePlayer();
       } else {
         console.log('Reusing existing YouTube player');
-        // Stop any currently playing video first
-        try {
-          playerRef.current.stopVideo();
-        } catch (e) {
-          console.error('Error stopping previous video:', e);
-        }
-        
         // Update the existing player with new video
         const startTime = timeToSeconds(activeVideo.start);
         playerRef.current.loadVideoById({
@@ -10118,7 +9960,6 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
           endSeconds: timeToSeconds(activeVideo.end)
         });
         setCurrentTime(0);
-        setIsPlaying(false);
       }
     };
 
@@ -10138,31 +9979,11 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     return () => {
       if (playerRef.current) {
         try {
-          // Stop the video first
-          try {
-            playerRef.current.stopVideo();
-          } catch (e) {
-            console.error('Error stopping video:', e);
-          }
-          
-          // Then destroy the player
-          try {
-            playerRef.current.destroy();
-          } catch (e) {
-            console.error('Error destroying player:', e);
-          }
-          
-          // Clear the ref
-          playerRef.current = null;
+          playerRef.current.stopVideo();
         } catch (e) {
-          console.error('Error during cleanup:', e);
+          console.error('Error stopping player:', e);
         }
       }
-      
-      // Reset state
-      setIsPlaying(false);
-      setCurrentTime(0);
-      setDuration(0);
     };
   }, [activeVideo]);
 
@@ -10900,35 +10721,28 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     const statTypeLower = statType.toLowerCase();
     const baseValue = vehicle.stats[statType] || 0;
     
-    // Define the boost multipliers for each upgrade level
-    const healthMultipliers = [1, 1.1, 1.2, 1.3];  // 0%, 10%, 20%, 30%
-    const speedMultipliers = [1, 1.03, 1.06, 1.09]; // 0%, 3%, 6%, 9%
-    
     let boostMultiplier = 1;
     
     if (statTypeLower === 'health') {
-      // Health: 10%, 20%, 30% increases for MK1, MK2, MK3
-      boostMultiplier = healthMultipliers[upgradeLevel];
-    } else if (
-      statTypeLower === 'speed' || 
-      statTypeLower === 'agility' || 
-      statTypeLower === 'afterburnerspeed' ||
-      statTypeLower === 'cruisespeed' ||
-      statTypeLower === 'verticalspeed'
-    ) {
-      // Speed, Agility, Afterburner Speed, Cruise Speed, Vertical Speed: 3%, 6%, 9% increases
-      boostMultiplier = speedMultipliers[upgradeLevel];
+      // Health: 10%, 20%, 30% increases
+      boostMultiplier = 1 + (upgradeLevel * 0.1); // 1.1, 1.2, or 1.3
+    } else if (statTypeLower === 'agility') {
+      // Agility: 3.33%, 6.66%, 10% increases
+      switch(upgradeLevel) {
+        case 1: boostMultiplier = 1.0333; break; // 3.33%
+        case 2: boostMultiplier = 1.0666; break; // 6.66%
+        case 3: boostMultiplier = 1.1;    break; // 10%
+      }
+    } else {
+      // Other stats (speed, afterburnerSpeed, verticalSpeed): 3.33%, 6.66%, 10% increases
+      switch(upgradeLevel) {
+        case 1: boostMultiplier = 1.0333; break; // 3.33%
+        case 2: boostMultiplier = 1.0666; break; // 6.66%
+        case 3: boostMultiplier = 1.1;    break; // 10%
+      }
     }
     
-    const boostableStats = [
-      'health', 
-      'speed', 
-      'agility', 
-      'afterburnerspeed', 
-      'verticalspeed',
-      'cruisespeed',
-      'damage'
-    ];
+    const boostableStats = ['health', 'speed', 'agility', 'afterburnerspeed', 'verticalspeed', 'damage'];
     
     if (boostableStats.includes(statTypeLower)) {
       return Math.round(baseValue * boostMultiplier);
@@ -10959,19 +10773,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [showUpdates, setShowUpdates] = useState(false)
   const [showCredits, setShowCredits] = useState(false)
   const [armourVideoVehicle, setArmourVideoVehicle] = useState<string | null>(null)
-  const [showArmourTooltip, setShowArmourTooltip] = useState(false)
-  const [currentVehicle, setCurrentVehicle] = useState<string | null>(null)
-
-  // Show tooltip when viewing vehicle details
-  const handleViewDetails = (vehicleName: string) => {
-    setCurrentVehicle(vehicleName)
-    setShowArmourTooltip(true)
-    
-    // Hide after 3 seconds
-    setTimeout(() => {
-      setShowArmourTooltip(false)
-    }, 3000)
-  }
 
   const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
   const [vehicleDetailsOpenId, setVehicleDetailsOpenId] = useState<string | null>(null)
@@ -11542,23 +11343,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       ctx.fillStyle = '#ffffff';
       ctx.font = 'bold 20px Arial'; // text-base = 16px, sm:text-xl = 20px
       ctx.fillText(vehicle.name, flagX + flagWidth + 12, nameY + 2); // gap-2 sm:gap-3 = 8px-12px
-      
-      // Add click handler for view details
-      const vehicleNameForUrl = vehicle.name.toLowerCase().replace(/\s+/g, '-');
-      canvas.addEventListener('click', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        // Check if click is on the vehicle name/flag area
-        if (x >= flagX && x <= flagX + 300 && y >= nameY - 20 && y <= nameY + 30) {
-          window.location.href = `/${vehicleNameForUrl}`;
-        }
-      });
-      
-      // Change cursor to pointer when hovering over vehicle name
-      canvas.style.cursor = 'pointer';
-      canvas.title = `View details for ${vehicle.name}`;
 
       // Draw nation with exact UI styling: text-xs sm:text-sm text-slate-400 font-semibold
       ctx.fillStyle = '#94a3b8'; // text-slate-400
@@ -11986,8 +11770,8 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
    
-    
       "",
+      
       
       
     ]
@@ -12005,12 +11789,14 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   "Red Arrow",
   "R-77",
   "R-37",
+  "PL-15",
   "AIM-54",
   "R-40TD",
   "R-93M",
   "Storm Shadow",
   "YJ-1000",
-  "KD-88",,
+  "KD-88",
+  "CM-102A",
   "AGM-84H/K",
   "9K38 Igla-V",
   "R-60",
@@ -13164,7 +12950,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Filter Button */}
       <motion.button
         onClick={() => setIsFilterOpen(!isFilterOpen)}
-        className={`absolute top-4 right-16 z-40 p-2 sm:p-3 backdrop-blur-sm rounded-xl border transition-all duration-200 group shadow-lg sm:top-6 sm:right-20 sm:mt-0 mt-4 flex items-center gap-2 ${
+        className={`absolute top-4 right-4 z-40 p-2 sm:p-3 backdrop-blur-sm rounded-xl border transition-all duration-200 group shadow-lg sm:top-6 sm:right-6 sm:mt-0 mt-4 flex items-center gap-2 ${
           (typeFilter.length > 0 || tierFilter.length > 0 || countryFilter.length > 0 || rarityFilter.length > 0 || obtainMethodFilter.length > 0) 
             ? "bg-cyan-600/90 hover:bg-cyan-700/90 border-cyan-500/50" 
             : "bg-slate-800/90 hover:bg-slate-700/90 border-slate-600/50"
@@ -14213,30 +13999,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
       {/* Google AdSense Banner - 728x90 Leaderboard */}
       <div className="w-full bg-slate-800/50 border-b border-slate-700">
-        <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-6">
-          <div className="w-full flex justify-center">
-            <div 
-              className="w-full max-w-[780px] h-[90px] bg-gray-200 flex items-center justify-center"
+        <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-2">
+          <div key="banner-ad" className="w-full">
+            <ins
+              className="adsbygoogle"
               style={{
-                maxWidth: '100%',
+                display: 'block',
                 width: '100%',
-                height: 'auto',
-                aspectRatio: '780/90',
-                minHeight: '90px',
-                margin: '0 auto',
-                backgroundColor: '#e5e7eb',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#6b7280',
-                fontSize: '16px',
-                fontWeight: 500,
-                borderRadius: '4px',
-                overflow: 'hidden'
+                height: '90px',
+                margin: '0 auto'
               }}
-            >
-              780 × 90 Ad Placeholder
-            </div>
+              data-ad-client="ca-pub-3724137161724998"
+              data-ad-slot="6518875801"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            />
           </div>
         </div>
       </div>
@@ -15457,7 +15234,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   </button>
                 </div>
                 <div className="space-y-4 text-slate-300">
-                 <p>
+                  <p>
   MWT Assistant is your all-in-one tool for tracking MWT data with real-time stats, detailed vehicle info, and AI-powered analysis.
 </p>
 <p>
@@ -15568,8 +15345,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10">
         <div>
           <h4 className="text-white font-semibold">Naveed2227</h4>
-          <p className="text-slate-400 text-sm">Lead developer and creator, 
-          PRESS-Acc</p>
+          <p className="text-slate-400 text-sm">Lead developer and creator</p>
         </div>
         <div>
           <h4 className="text-white font-semibold">Nesli27</h4>
@@ -15935,25 +15711,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       
                       {/* Armour Button - Show only if vehicle has armour video */}
                       {hasArmourVideo(vehicle.name) && (
-                        <div className="mt-4 relative">
-                          <AnimatePresence>
-                            {showArmourTooltip && currentVehicle === vehicle.name && (
-                              <motion.div
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: 10 }}
-                                transition={{ duration: 0.2 }}
-                                className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-gray-800 text-white text-xs px-3 py-1.5 rounded whitespace-nowrap z-10"
-                              >
-                                Click to view current tank armour
-                                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-gray-800 rotate-45"></div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
+                        <div className="mt-4">
                           <button 
                             onClick={() => {
+                              // Set the vehicle for armour video display
                               setArmourVideoVehicle(vehicle.name);
-                              setShowArmourTooltip(false);
+                              // Find and scroll to armour video section
                               const armourSection = document.getElementById('armour-video-section');
                               if (armourSection) {
                                 armourSection.scrollIntoView({ behavior: 'smooth' });
@@ -15962,11 +15725,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             className="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
                           >
                             <Camera className="w-5 h-5" />
-                            Armour (Click to see current tank video)
+                            Armour
                           </button>
                         </div>
                       )}
                     </div>
+                  </div>
+
+                  {/* Vehicle Armour Video - Mobile Only */}
+                  <div className="block lg:hidden">
+                    <ArmourVideo vehicleName={armourVideoVehicle} />
                   </div>
 
                   <div className="flex flex-col lg:flex-row gap-6">
@@ -16508,28 +16276,22 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                               // Find and scroll to armour video section
                               const armourSection = document.getElementById('armour-video-section');
                               if (armourSection) {
-                                armourSection.scrollIntoView({ behavior: 'smooth' });
+                                armourSection.scrollIntoView({ behaviour: 'smooth' });
                               }
                             }}
                             className="w-full bg-amber-600 hover:bg-amber-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
                           >
                             <Camera className="w-5 h-5" />
-                            Armour (Click to see current tank video)
+                            Armour
                           </button>
                         </div>
                       )}
 
                       {/* Vehicle Armour Video - Enhanced for mobile visibility */}
-                      {/* Single instance of ArmourVideo with responsive styling */}
-                      <div 
-                        id="armour-video-section" 
-                        className="mb-6 scroll-mt-4" 
-                        style={{
-                          scrollMarginTop: isMobileDevice() ? '80px' : '100px',
-                          overflowY: 'auto',
-                          display: armourVideoVehicle ? 'block' : 'none'
-                        }}
-                      >
+                      <div id="armour-video-section" className="mb-6 scroll-mt-4" style={{
+                        scrollMarginTop: isMobileDevice() ? '80px' : '100px',
+                        overflowY: isMobileDevice() ? 'scroll' : 'auto'
+                      }}>
                         <ArmourVideo vehicleName={armourVideoVehicle} />
                       </div>
                     </div>
@@ -16653,60 +16415,41 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       </main>
       
       {/* Social Media Contact Section */}
-      <div className="mt-8 py-6 border-t border-slate-700">
-        <div className="flex flex-col items-center space-y-4">
-          <h3 className="text-base font-medium text-slate-300 mb-3">Contact/Support:</h3>
-          <div className="flex items-center justify-center space-x-8">
+      <div className="mt-8 py-4 border-t border-slate-700">
+        <div className="flex flex-col items-center space-y-3">
+          <h3 className="text-sm font-medium text-slate-400 mb-2">Contact/Support:</h3>
+          <div className="flex items-center justify-center space-x-6">
             {/* Patreon */}
             <a 
-              href="https://www.patreon.com/c/mwtassistant" 
+              href="https://www.patreon.com/cw/Naveed2227" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-[#FF424D] hover:opacity-80 transition-transform hover:scale-110"
-              style={{ minWidth: '32px' }}
-              aria-label="Support us on Patreon"
+              className="text-[#FF424D] hover:opacity-80 transition-opacity"
+              style={{ minWidth: '24px' }}
             >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M0 .5h4.5v23H0z" />
                 <path d="M15.1.5c-4.1 0-7.5 3.4-7.5 7.5 0 4.1 3.4 7.5 7.5 7.5 4.1 0 7.5-3.4 7.5-7.5s-3.4-7.5-7.5-7.5z" />
               </svg>
             </a>
             
             {/* Instagram */}
-            <a 
-              href="https://www.instagram.com/mwt_assistant" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-slate-400 hover:text-white transition-transform hover:scale-110"
-              aria-label="Follow us on Instagram"
-            >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+            <a href="https://www.instagram.com/mwt_assistant" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12.001 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
               </svg>
             </a>
 
             {/* Facebook */}
-            <a 
-              href="https://www.facebook.com/profile.php?id=61581718139293" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-slate-400 hover:text-white transition-transform hover:scale-110"
-              aria-label="Follow us on Facebook"
-            >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+            <a href="https://www.facebook.com/profile.php?id=61581718139293" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z"/>
               </svg>
             </a>
             
             {/* Discord */}
-            <a 
-              href="https://discord.gg/zj6f4w3JED" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-slate-400 hover:text-white transition-transform hover:scale-110"
-              aria-label="Join our Discord server"
-            >
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+            <a href="https://discord.gg/zj6f4w3JED" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.105 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.078-.01c3.928 1.8 8.18 1.8 12.062 0a.074.074 0 01.079.01c.12.098.246.198.373.292a.077.077 0 01-.006.128 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.105c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.086-2.157-2.419 0-1.332.956-2.419 2.158-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.332-.956 2.418-2.158 2.418zm7.975 0c-1.183 0-2.157-1.086-2.157-2.419 0-1.332.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.332-.956 2.418-2.157 2.418z"/>
               </svg>
             </a>
