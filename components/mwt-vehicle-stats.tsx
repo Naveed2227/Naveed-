@@ -95,6 +95,7 @@ const newVehicles = [
   "Arjun Mk.2",
   "K21 KNIFV",
   "9K31 Strela-1",
+  "Merkava Mk.3",
 ];
 
 const isNewVehicle = (vehicleName: string): boolean => {
@@ -3892,6 +3893,40 @@ const VEHICLES_DATA = [
         { "name": "FCS ZTZ-96A MK3", "bonus": "+26% accuracy" }
       ]
     }
+  },
+  {
+    id: 412,
+    name: "Merkava Mk.3",
+    type: "Main Battle Tank",
+    faction: "Israeli",
+    tier: "III",
+    description: "An Israeli MBT featuring modular armor, advanced fire control, 120mm gun, and rear troop compartment.",
+    image: "Merkava-Mk.3.jpg",
+    stats: { health: 0, speed: 0, armor: "0", agility: 0 },
+    weapons: [
+      { name: "3BM22", type: "Main Gun", damage: 11100, penetration: 425 },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "9M119", type: "Main Gun", damage: 10160, penetration: 750 },
+      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "3BK12M", type: "Main Gun", damage: 12140, penetration: 440 }
+    ],
+    modules: {
+      engine: [
+        { name: "V-46-6 MK1", bonus: "+8 km/h speed" },
+        { name: "V-46-6 MK2", bonus: "+16 km/h speed" },
+        { name: "V-46-6 MK3", bonus: "+24 km/h speed" },
+      ],
+      armor: [
+        { name: "Composite Armor MK1", bonus: "+140mm protection" },
+        { name: "Composite Armor MK2", bonus: "+280mm protection" },
+        { name: "Composite Armor MK3", bonus: "+420mm protection" },
+      ],
+      fireControl: [
+        { name: "TPD-K1 MK1", bonus: "+12% accuracy" },
+        { name: "TPD-K1 MK2", bonus: "+22% accuracy" },
+        { name: "TPD-K1 MK3", bonus: "+32% accuracy" },
+      ],
+    },
   },
   {
     "id": 412,
@@ -11770,7 +11805,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
    
-      "",
+      "Merkava Mk.3",
       
       
       
