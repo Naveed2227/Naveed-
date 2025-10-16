@@ -1367,8 +1367,8 @@ const VEHICLES_DATA = [
     description: "Experimental heavy tank with revolutionary armor design and 152mm gun.",
     stats: { health: 38100, speed: 75, armor: "1400mm", agility: 30 },
     weapons: [
-      { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 1000 },
-      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1200 },
+      { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 850 },
+      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1100 },
       { name: "LEAD1", type: "Main Gun", damage: 10800, penetration: 850 },
       { name: "VOG-17M", type: "Missile", damage: 1600, penetration: 60, reload: 1.7 },
       { name: "VOG-30", type: "Missile", damage: 1800, penetration: 76, reload: 1.7 }
@@ -1403,8 +1403,8 @@ const VEHICLES_DATA = [
     description: "A Russian heavy main battle tank, featuring strong armor, AI-assisted and protection systems.",
     stats: { health: 42200, speed: 60, armor: "1320mm", agility: 45 },
     weapons: [
-      { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 1000 },
-      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1200 },
+      { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 850 },
+      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1100 },
       { name: "GRIFFEL 3", type: "Main Gun", damage: 16100, penetration: 900 },
       { name: "30F38", type: "Main Gun", damage: 10600, penetration: 480 }
     ],
@@ -1469,8 +1469,8 @@ const VEHICLES_DATA = [
   description: "Next-generation Russian MBT prototype equipped with a powerful 152mm smoothbore gun and advanced armor.",
   stats: { health: 39700, speed: 73, armor: "1000mm", agility: 34 },
   weapons: [
-      { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 1000 },
-      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1200 },
+      { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 850 },
+      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1100 },
       { name: "GRIFFEL 3", type: "Main Gun", damage: 16100, penetration: 900 },
       { name: "30F38", type: "Main Gun", damage: 10600, penetration: 480 }
   ],
@@ -2745,7 +2745,7 @@ const VEHICLES_DATA = [
     "agility": 41
   },
   "weapons": [
-   { name: "LOSAT MGM", type: "Missile", damage: 16562, penetration: 764, reload: 20 }
+   { name: "LOSAT MGM", type: "Missile", damage: 12740, penetration: 764, reload: 20 }
 
   ],
   "modules": {
@@ -4857,7 +4857,7 @@ const VEHICLES_DATA = [
     tier: "III",
     image: "AH-64E-Apache.jpg",
     description: "Advanced attack helicopter with multi-role capabilities and proven combat record.",
-    stats: { health: 19800, speed: 260, verticalSpeed: 65, agility: 56 },
+    stats: { health: 20000, speed: 280, verticalSpeed: 19.4, agility: 60 },
     weapons: [
       { name: "ADS Starstreak", type: "Air-to-Ground Missile", damage: 7300, penetration: 50, reload: 15 },
       { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 5700, penetration: 45, reload: 15 },
@@ -4898,7 +4898,7 @@ const VEHICLES_DATA = [
     tier: "III",
     image: "OH-1-Ninja.jpg",
     description: "Agile Japanese attack/recon helicopter—fast and nimble with light AAMs in MWT.",
-    stats: { health: 16289, speed: 227, verticalSpeed: 24, agility: 53 },
+    stats: { health: 17900, speed: 297, verticalSpeed: 32, agility: 70 },
     weapons: [
       { name: "LAU-68", type: "Rocket Pod", damage: 4300, penetration: 290, reload: 20 },
       { name: "AGR-20-BLR", type: "Rocket Pod", damage: 5200, penetration: 128, reload: 20 },
@@ -4933,7 +4933,7 @@ const VEHICLES_DATA = [
     tier: "III",
     image: "Super-Lynx-Mk88A.jpg",
     description: "British naval helicopter adapted for anti-ship and light attack roles (small weapon capacity in MWT).",
-    stats: { health: 20020, speed: 229, verticalSpeed: 13, agility: 31 },
+    stats: { health: 22000, speed: 300, verticalSpeed: 16.7, agility: 40 },
     weapons: [
       { name: "Storm Shadow", type: "Cruise Missile", damage: 20000, penetration: 370, reload: 40 },
       { name: "APKWS", type: "Guided Rocket", damage: 5400, penetration: 140, reload: 20 },
@@ -4967,7 +4967,7 @@ const VEHICLES_DATA = [
     tier: "III",
     image: "Z-9WA-Harbin.jpg",
     description: "Heavily armed Z-9 variant with multi-mount capability (x4 mounts for some missiles in MWT).",
-    stats: { health: 16198, speed: 244, verticalSpeed: 17, agility: 46 },
+    stats: { health: 17800, speed: 320, verticalSpeed: 22.2, agility: 60 },
     weapons: [
       { name: "HJ-8E", type: "Anti-Tank Missile", damage: 9890, penetration: 480, reload: 15 },
       { name: "TYPE 57-1", type: "Rocket Pod", damage: 3700, penetration: 200, reload: 15 },
@@ -5004,7 +5004,7 @@ const VEHICLES_DATA = [
     tier: "III",
     image: "Z-20-Harbin.jpg",
     description: "Modern multi-role Chinese helicopter with stub wings; carries Chinese ATGMs and rockets in MWT.",
-    stats: { health: 16774, speed: 214, verticalSpeed: 46, agility: 42 },
+    stats: { health: 18400, speed: 280, verticalSpeed: 16.7, agility: 55 },
     weapons: [
       { name: "HJ-10", type: "Anti-Tank Missile", damage: 13800, penetration: 1400, reload: 30 },
       { name: "TYPE 57-1", type: "Rocket Pod", damage: 3700, penetration: 200, reload: 15 },
