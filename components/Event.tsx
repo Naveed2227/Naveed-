@@ -20,6 +20,17 @@ interface Event {
 
 // All events in chronological order
 const events: Event[] = [
+{
+    id: 22,
+    name: "Halloween",
+    image: "/Events/Halloween.jpg",
+    startDate: "2025-10-16",
+    endDate: "2025-11-10",
+    vehicles: [
+      { id: 1, name: "Leopard 2A4", type: "free" },
+      { id: 2, name: "MGM-166 LOSAT", type: "main" },
+    ],
+  },
  {
     id: 21,
     name: "Brightest Light",
