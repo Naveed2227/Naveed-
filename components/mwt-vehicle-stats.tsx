@@ -14036,23 +14036,74 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
 
       {/* Google AdSense Banner - 728x90 Leaderboard */}
       <div className="w-full bg-slate-800/50 border-b border-slate-700">
-        <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-2">
-          <div key="banner-ad" className="w-full">
-            <ins
-              className="adsbygoogle"
-              style={{
-                display: 'block',
-                width: '100%',
-                height: '90px',
-                margin: '0 auto'
-              }}
-              data-ad-client="ca-pub-3724137161724998"
-              data-ad-slot="6518875801"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            />
-          </div>
+        <div className="max-w-3xl mx-auto px-2 py-1">
+        <div key="banner-ad" className="w-full flex justify-center">
+          <ins
+            className="adsbygoogle"
+            style={{
+              display: 'block',
+              width: '320px',
+              height: '50px',
+              margin: '0 auto',
+              backgroundColor: '#f3f4f6'
+            }}
+            data-ad-client="ca-pub-3724137161724998"
+            data-ad-slot="6518875801"
+            data-ad-format="horizontal"
+            data-full-width-responsive="false"
+          >
+            <div style={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              background: '#f8f9fa',
+              border: '1px solid #e5e7eb',
+              borderRadius: '4px',
+              overflow: 'hidden',
+              fontFamily: 'Arial, sans-serif',
+              position: 'relative',
+              boxSizing: 'border-box'
+            }}>
+              <div style={{
+                width: '60px',
+                height: '100%',
+                background: '#e5e7eb',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#6b7280',
+                fontSize: '24px',
+                flexShrink: 0
+              }}>
+                <div style={{ transform: 'rotate(-45deg)' }}>Ad</div>
+              </div>
+              <div style={{
+                padding: '4px 12px',
+                flexGrow: 1,
+                textAlign: 'left',
+                color: '#1f2937',
+                fontSize: '12px',
+                lineHeight: '1.2'
+              }}>
+                <div style={{ fontWeight: 'bold', marginBottom: '2px' }}>Advertisement</div>
+                <div style={{ color: '#6b7280' }}>Ad content will be displayed here</div>
+              </div>
+              <div style={{
+                position: 'absolute',
+                bottom: '2px',
+                right: '4px',
+                color: '#9ca3af',
+                fontSize: '9px',
+                fontStyle: 'italic'
+              }}>
+                320×50
+              </div>
+            </div>
+          </ins>
         </div>
+      </div>
       </div>
 
       <main className="max-w-7xl xl:max-w-[90rem] pt-16 sm:pt-6 p-4 sm:p-6 md:p-6 lg:p-8 mx-auto px-4 sm:px-6 lg:px-8 pb-24">
@@ -15382,7 +15433,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10">
         <div>
           <h4 className="text-white font-semibold">Naveed2227</h4>
-          <p className="text-slate-400 text-sm">Lead developer and creator</p>
+          <p className="text-slate-400 text-sm">Lead developer and creator, PRESS-Acc</p>
         </div>
         <div>
           <h4 className="text-white font-semibold">Nesli27</h4>
@@ -15405,6 +15456,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
         </div>
         <div>
+          <h4 className="text-white font-semibold">后羿的太阳</h4>
+          <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
+        </div>
+        <div>
           <h4 className="text-white font-semibold">白叔</h4>
           <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
         </div>
@@ -15418,6 +15473,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </div>
         <div>
           <h4 className="text-white font-semibold">Spector404</h4>
+          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        </div>
+        <div>
+          <h4 className="text-white font-semibold">🇺🇸 Error fan</h4>
           <p className="text-slate-400 text-sm">Supporter, Writer</p>
         </div>
         <div>
@@ -16771,6 +16830,48 @@ export default function Page() {
   return (
     <>
       <MwtVehicleStats vehicles={VEHICLES_DATA} />
+      <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-2">
+        <div key="banner-ad" className="w-full" style={{ width: '780px', margin: '0 auto' }}>
+          <ins
+            className="adsbygoogle"
+            style={{
+              display: 'block',
+              width: '780px',
+              height: '90px',
+              margin: '0 auto',
+              backgroundColor: '#f3f4f6' // Light gray background as placeholder
+            }}
+            data-ad-client="ca-pub-3724137161724998"
+            data-ad-slot="6518875801"
+            data-ad-format="horizontal"
+            data-full-width-responsive="false"
+          >
+            <div style={{
+              width: '728px',
+              height: '90px',
+              margin: '0 auto',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+              color: '#94a3b8',
+              fontSize: '14px',
+              fontWeight: '500',
+              border: '1px solid #334155',
+              borderRadius: '4px',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            }}>
+              <div style={{ 
+                textAlign: 'center',
+                padding: '1rem'
+              }}>
+                <div style={{ fontSize: '16px', marginBottom: '4px', color: '#e2e8f0' }}>Advertisement</div>
+                <div>Banner Ad (728×90)</div>
+              </div>
+            </div>
+          </ins>
+        </div>
+      </div>
       <CookieConsentBanner />
     </>
   )
