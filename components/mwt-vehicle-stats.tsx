@@ -14057,48 +14057,21 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               height: '100%',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between',
-              background: '#f8f9fa',
-              border: '1px solid #e5e7eb',
+              justifyContent: 'center',
+              background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+              color: '#94a3b8',
+              fontSize: '12px',
+              fontWeight: '500',
+              border: '1px solid #334155',
               borderRadius: '4px',
-              overflow: 'hidden',
-              fontFamily: 'Arial, sans-serif',
-              position: 'relative',
-              boxSizing: 'border-box'
+              boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
             }}>
-              <div style={{
-                width: '60px',
-                height: '100%',
-                background: '#e5e7eb',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#6b7280',
-                fontSize: '24px',
-                flexShrink: 0
+              <div style={{ 
+                textAlign: 'center',
+                padding: '0.5rem'
               }}>
-                <div style={{ transform: 'rotate(-45deg)' }}>Ad</div>
-              </div>
-              <div style={{
-                padding: '4px 12px',
-                flexGrow: 1,
-                textAlign: 'left',
-                color: '#1f2937',
-                fontSize: '12px',
-                lineHeight: '1.2'
-              }}>
-                <div style={{ fontWeight: 'bold', marginBottom: '2px' }}>Advertisement</div>
-                <div style={{ color: '#6b7280' }}>Ad content will be displayed here</div>
-              </div>
-              <div style={{
-                position: 'absolute',
-                bottom: '2px',
-                right: '4px',
-                color: '#9ca3af',
-                fontSize: '9px',
-                fontStyle: 'italic'
-              }}>
-                320×50
+                <div style={{ fontSize: '12px', marginBottom: '2px', color: '#e2e8f0' }}>Advertisement</div>
+                <div style={{ fontSize: '10px' }}>Mobile Banner (320×50)</div>
               </div>
             </div>
           </ins>
