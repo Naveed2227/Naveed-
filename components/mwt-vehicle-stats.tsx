@@ -11872,7 +11872,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     const constructionVehicles = [
    
       "Merkava Mk.3",
-      
+      "B-Type",
       
       
       
@@ -11904,7 +11904,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   "R-60",
   "9K38 IGLA-V",
   "R-93M",
-  "KD-21"
+  "KD-21",
   "Storm Shadow",
 ];
 
@@ -15627,8 +15627,8 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         <h3 className="text-xl font-bold text-cyan-400 mb-4">Media supporters</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {[
-            { name: 'Mr.Hasori', discord: 'mrhasori', role: 'YouTube Content Creator' },
-            { name: 'QWE', discord: 'qwe', role: 'Promotional Designer' },
+            { name: 'Mr.Hasori', discord: 'mr.hasori', role: 'YouTube Content Creator' },
+            { name: 'QWE', discord: 'qwe._.mwt', role: 'Promotional Designer' },
           ].map((person, index) => (
             <div key={`media-${index}`} className="bg-slate-800 p-4 rounded-lg">
               <h4 className="text-white font-semibold">{person.name}</h4>
