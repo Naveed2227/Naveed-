@@ -1,7 +1,32 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Copy } from "lucide-react"
+
+// CopyToClipboard component for copying text to clipboard
+const CopyToClipboard = ({ text, className = "" }: { text: string; className?: string }) => {
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
+
+  return (
+    <button 
+      onClick={copyToClipboard} 
+      className={`inline-flex items-center text-gray-400 hover:text-white transition-colors ${className}`}
+      title={copied ? "Copied!" : "Copy to clipboard"}
+    >
+      <Copy size={12} className="ml-1" />
+    </button>
+  );
+};
 import dynamic from 'next/dynamic';
 
 // Import EventComponent with SSR disabled to access window object
@@ -96,6 +121,7 @@ const newVehicles = [
   "K21 KNIFV",
   "9K31 Strela-1",
   "Merkava Mk.3",
+  "B-Type",
 ];
 
 const isNewVehicle = (vehicleName: string): boolean => {
@@ -322,6 +348,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "X2 Shinshin",
 "K2 Black Panther",
 "Al-Khalid",
+"B-Type",
 
 
 
@@ -821,7 +848,42 @@ const VEHICLES_DATA = [
     },
   },
   {
-  id: 8,
+    id: 8,
+    name: "B-Type",
+    type: "Fighter Jet",
+    faction: "Chinese",
+    tier: "IV",
+    image: "B-Type.jpg",
+    description: "The B-Type is a futuristic Chinese stealth jet with extreme speed, agility, and firepower, capable of near-space and atmospheric dominance.",
+    stats: { health: 0, speed: 0, afterburnerSpeed: 3675, agility: 0 },
+    weapons: [
+      { "name": "KD-21", "type": "Ballistic Missile", "damage": 40000, "penetration": 0, "reload": 0 },
+      { "name": "PL-17", "type": "Air-to-Air Missile", "damage": 0, "penetration": 0, "reload": 0 },
+      { "name": "HD-1A", "type": "Air-to-Ground Missile", "damage": 25000, "penetration": 0, "reload": 0 },
+      { "name": "LS-6/250", "type": "Guided Bomb", "damage": 0, "penetration": 0, "reload": 0 }
+      
+
+    ],
+    modules: {
+      engine: [
+        { name: "WS-19 MK1", bonus: "+180 km/h speed" },
+        { name: "WS-19 MK2", bonus: "+360 km/h speed" },
+        { name: "WS-19 MK3", bonus: "+540 km/h speed" },
+      ],
+      stealth: [
+        { name: "RAM Coating MK1", bonus: "+12% stealth" },
+        { name: "RAM Coating MK2", bonus: "+22% stealth" },
+        { name: "RAM Coating MK3", bonus: "+32% stealth" },
+      ],
+      avionics: [
+        { name: "AESA Radar MK1", bonus: "+18% detection" },
+        { name: "AESA Radar MK2", bonus: "+30% detection" },
+        { name: "AESA Radar MK3", bonus: "+42% detection" },
+      ],
+    },
+  },
+  {
+  id: 9,
   name: "YF-23",
   type: "Fighter Jet",
   faction: "American",
@@ -856,7 +918,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  id: 9,
+  id: 10,
   name: "F-35B Lightning II",
   type: "Fighter Jet",
   faction: "American",
@@ -890,7 +952,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  id: 10,
+  id: 11,
   name: "J-50",
   type: "Fighter Jet",
   faction: "Chinese",
@@ -977,7 +1039,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  id: 11,
+  id: 12,
   name: "Su-75 Checkmate",
   type: "Fighter Jet",
   faction: "Russian",
@@ -1013,7 +1075,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  id: 12,
+  id: 13,
   name: "X2 Shinshin",
   type: "Fighter Jet",
   faction: "Japanese",
@@ -9379,6 +9441,8 @@ const getAircraftRole = (vehicle: any) => {
   if (vehicle.name.includes("J-50")) return "stealth"
   if (vehicle.name.includes("J-35")) return "stealth"
   if (vehicle.name.includes("MiG-41M")) return "stealth"
+  if (vehicle.name.includes("X2 Shinshin")) return "stealth"
+  if (vehicle.name.includes("B-Type")) return "stealth"
   if (vehicle.name.includes("F-16C Night Falcon")) return "multi-role"
   if (vehicle.name.includes("TU-222")) return "bomber"
   if (vehicle.name.includes("MiG-35")) return "interceptor"
@@ -11084,7 +11148,8 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "BMD3",
       "K21 KNIFV",
       "Stridsvagn 105",
-      "Strf 9040 BILL"
+      "Strf 9040 BILL",
+      "B-Type",
     ];
     
     const eventGachaVehicles = [
@@ -11810,6 +11875,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       
       
       
+      
     ]
     return constructionVehicles.includes(vehicleName)
   }
@@ -11838,6 +11904,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   "R-60",
   "9K38 IGLA-V",
   "R-93M",
+  "KD-21"
   "Storm Shadow",
 ];
 
@@ -11890,6 +11957,7 @@ const antiWarningMissiles = [
   "9K38 IGLA-V",
   "9M120 Attack",
   "R-93M",
+  "KD-21"
 ];
 
 const longRangeMissiles = [
@@ -11914,6 +11982,7 @@ const longRangeMissiles = [
   "Type 12 STS",
   "Storm Shadow",
   "KAB-250",
+  "KD-21"
 
 ];
 
@@ -11944,7 +12013,8 @@ const laserGuidedMissiles = [
   "BA-21",
   "Izdeliye 305",
   "LAU-150",
-  "S-24"
+  "S-24",
+  "KD-21"
 
 
 ];
@@ -15402,109 +15472,173 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         </button>
       </div>
 
-      {/* Original Credits Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10">
-        <div>
-          <h4 className="text-white font-semibold">Naveed2227</h4>
-          <p className="text-slate-400 text-sm">Lead developer and creator, PRESS-Acc</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Naveed2227</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: naveed2227
+            <CopyToClipboard text="naveed2227" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Lead developer and creator, PRESS-Acc</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">Nesli27</h4>
-          <p className="text-slate-400 text-sm">Server Moderator, Supporter</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Nesli27</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: nesli27
+            <CopyToClipboard text="nesli27" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Server Moderator, Supporter</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">QWE</h4>
-          <p className="text-slate-400 text-sm">Server Moderator, Supporter, Coordinator</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">QWE</h4>
+          <p className="text-white text-[10px] mb-0.5">Discord: qwe._.mwt</p>
+          <p className="text-white text-xs">Server Moderator, Supporter, Coordinator</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">Top Gun</h4>
-          <p className="text-slate-400 text-sm">Server Moderator, Supporter, Coordinator</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Strider 1</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: topgun7169
+            <CopyToClipboard text="topgun7169" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Server Moderator, Supporter, Coordinator</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">Shiroko_Chan</h4>
-          <p className="text-slate-400 text-sm">Server Moderator, Supporter</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Shiroko_Chan</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: shibuya_i
+            <CopyToClipboard text="shibuya_i" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Server Moderator, Supporter</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">THE DAWN</h4>
-          <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">THE DAWN</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: apexmwt
+            <CopyToClipboard text="apexmwt" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">PRESS-Acc, Writer, Supporter</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">后羿的太阳</h4>
-          <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">后羿的太阳</h4>
+          <p className="text-white text-[10px] mb-0.5">Discord:  houyidetaiyang</p>
+          <p className="text-white text-xs">PRESS-Acc, Writer, Supporter</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">白叔</h4>
-          <p className="text-slate-400 text-sm">PRESS-Acc, Writer, Supporter</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">白叔</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: baishu_dream
+            <CopyToClipboard text="baishu_dream" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">PRESS-Acc, Writer, Supporter</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">White Windu</h4>
-          <p className="text-slate-400 text-sm">Adviser, Coordination Manager</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">White Windu</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: white_windu
+            <CopyToClipboard text="white_windu" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Adviser, Coordination Manager</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">Hoffman Derpin</h4>
-          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Hoffman Derpin</h4>
+          <p className="text-white text-[10px] mb-0.5">Discord: sir205947 </p>
+          <p className="text-white text-xs">Supporter, Writer</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">Spector404</h4>
-          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Spector404</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: spector404
+            <CopyToClipboard text="spector404" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Supporter, Writer</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">🇺🇸 Error fan</h4>
-          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">🇺🇸 Error fan</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: error0414
+            <CopyToClipboard text="error0414" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Supporter, Writer</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">Hollyninja456</h4>
-          <p className="text-slate-400 text-sm">Writer, Supporter</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Hollyninja456</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: hollyninja456
+            <CopyToClipboard text="hollyninja456" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Writer, Supporter</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">Yx190</h4>
-          <p className="text-slate-400 text-sm">Supporter, Writer</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Yx190_44440</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: yx190_44440
+            <CopyToClipboard text="yx190_44440" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Supporter, Writer</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">Unnamed</h4>
-          <p className="text-slate-400 text-sm">Suggester</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Unnamed</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: unnamed07922
+            <CopyToClipboard text="unnamed07922" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Suggester</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">Flarakrad</h4>
-          <p className="text-slate-400 text-sm">Contributer</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Flarakrad</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: flarakrad
+            <CopyToClipboard text="flarakrad" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Contributor</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">Yeti</h4>
-          <p className="text-slate-400 text-sm">Supporter</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Yeti</h4>
+          <p className="text-white text-[10px] mb-0.5">Discord: notyeti6969</p>
+          <p className="text-white text-xs">Supporter</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">OberstLeutnantFerid</h4>
-          <p className="text-slate-400 text-sm">Militarist Officer</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">OberstLeutnantFerid</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: ferid8309
+            <CopyToClipboard text="ferid8309" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Militarist Officer</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">Eidolon X</h4>
-          <p className="text-slate-400 text-sm">Adviser, Lurks</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Янѫ. Pгапа Ж</h4>
+          <p className="text-white text-[10px] mb-0.5">Discord: yunru.x</p>
+          <p className="text-white text-xs">Adviser, Lurks</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">枕頭</h4>
-          <p className="text-slate-400 text-sm">Supporter</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">枕頭</h4>
+          <p className="text-white text-[10px] mb-0.5">Discord: </p>
+          <p className="text-white text-xs">Supporter</p>
         </div>
-        <div>
-          <h4 className="text-white font-semibold">VIPER2729</h4>
-          <p className="text-slate-400 text-sm">Supporter</p>
+        <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">VIPER2729</h4>
+          <p className="text-white text-[10px] mb-0.5">Discord: </p>
+          <p className="text-white text-xs">Supporter</p>
         </div>
-        
       </div>
 
       {/* Media Members Section */}
       <div className="mb-6">
         <h3 className="text-xl font-bold text-cyan-400 mb-4">Media supporters</h3>
-
-        <h4 className="text-lg font-bold text-cyan-200 mb-2"></h4>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          <div>
-            <h4 className="text-white font-semibold">Mr.Hasori</h4>
-            <p className="text-slate-400 text-sm">YouTube Content Creator</p>
-          </div>
-          <div>
-            <h4 className="text-white font-semibold">QWE</h4>
-            <p className="text-slate-400 text-sm">Promotional Designer</p>
-          </div>
+          {[
+            { name: 'Mr.Hasori', discord: 'mrhasori', role: 'YouTube Content Creator' },
+            { name: 'QWE', discord: 'qwe', role: 'Promotional Designer' },
+          ].map((person, index) => (
+            <div key={`media-${index}`} className="bg-slate-800 p-4 rounded-lg">
+              <h4 className="text-white font-semibold">{person.name}</h4>
+              <p className="text-slate-300 text-xs mb-1 flex items-center">
+                Discord: {person.discord}
+                <CopyToClipboard text={person.discord} className="ml-1" />
+              </p>
+              <p className="text-cyan-300 text-sm">{person.role}</p>
+            </div>
+          ))}
         </div>
       </div>
 
