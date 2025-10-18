@@ -15476,10 +15476,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
         <div className="p-2">
           <h4 className="text-cyan-300 font-semibold text-base">Naveed2227</h4>
           <p className="text-white text-[10px] mb-0.5 flex items-center">
-            Discord: naveed2227
+            Discord: naveed27
             <CopyToClipboard text="naveed2227" className="ml-1" />
           </p>
-          <p className="text-white text-xs">Lead developer and creator, PRESS-Acc</p>
+          <p className="text-white text-xs">Lead developer and Creator, PRESS-Acc</p>
         </div>
         <div className="p-2">
           <h4 className="text-cyan-300 font-semibold text-base">Nesli27</h4>
