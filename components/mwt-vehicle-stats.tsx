@@ -5517,7 +5517,7 @@ const VEHICLES_DATA = [
     tier: "II",
     image: "M60-Patton.jpg",
     description: "Cold War era main battle tank with proven reliability and combat effectiveness.",
-    stats: { health: 32000, speed: 50, armor: "650mm", agility: 36 },
+    stats: { health: 32000, speed: 50, armor: "93mm", agility: 36 },
     weapons: [
       { name: "M68 105mm L52", type: "Main Gun", damage: 11800, penetration: 620 },
       { name: "M85 12.7mm", type: "Machine Gun", damage: 180, penetration: 28, rateOfFire: "450 rpm" },
@@ -5550,10 +5550,10 @@ const VEHICLES_DATA = [
     "image": "Object-122-TM.jpg",
     "description": "Soviet prototype main battle tank, based on the Type 59, mounting a 120 mm gun.",
     "stats": {
-      "health": 30500,
-      "speed": 46,
-      "armor": "620mm",
-      "agility": 31
+      "health": 29300,
+      "speed": 55,
+      "armor": "100mm",
+      "agility": 33
     },
     "weapons": [
       {
@@ -5624,9 +5624,9 @@ const VEHICLES_DATA = [
     "image": "Type-74E.jpg",
     "description": "Japanese main battle tank, upgraded from the Type 74 series, featuring improved fire control systems.",
     "stats": {
-      "health": 31000,
-      "speed": 47,
-      "armor": "640mm",
+      "health": 30000,
+      "speed": 54,
+      "armor": "80mm",
       "agility": 32
     },
     "weapons": [
@@ -5698,10 +5698,10 @@ const VEHICLES_DATA = [
     "image": "Type-74G-Kai.jpg",
     "description": "An upgraded Japanese MBT variant, featuring enhanced armor, improved fire control, and modernized night-fighting capability.",
     "stats": {
-      "health": 31500,
-      "speed": 48,
-      "armor": "660mm",
-      "agility": 33
+      "health": 31000,
+      "speed": 54,
+      "armor": "80mm",
+      "agility": 32
     },
     "weapons": [
       {
@@ -5713,7 +5713,7 @@ const VEHICLES_DATA = [
       {
         "name": "Type 74G/Kai Secondary MG",
         "type": "Machine Gun",
-        "damage": 180,
+        "damage": 100,
         "penetration": 23,
         "rateOfFire": "603 rpm"
       }
@@ -5772,10 +5772,10 @@ const VEHICLES_DATA = [
     "image": "T-62.jpg",
     "description": "Soviet main battle tank, armed with a 115 mm smoothbore gun and improved armor protection.",
     "stats": {
-      "health": 32000,
-      "speed": 49,
-      "armor": "680mm",
-      "agility": 34
+      "health": 29000,
+      "speed": 51,
+      "armor": "100mm",
+      "agility": 44
     },
     "weapons": [
       {
@@ -5846,10 +5846,10 @@ const VEHICLES_DATA = [
     "image": "T-62-545.jpg",
     "description": "Soviet T-62 variant, equipped with the 545 hp V-55 engine and improved reliability.",
     "stats": {
-      "health": 32500,
-      "speed": 50,
-      "armor": "600mm",
-      "agility": 35
+      "health": 31000,
+      "speed": 51,
+      "armor": "200mm",
+      "agility": 44
     },
     "weapons": [
       {
@@ -5922,7 +5922,7 @@ const VEHICLES_DATA = [
     "stats": {
       "health": 36000,
       "speed": 50,
-      "armour": 35,
+      "armour": 76,
       "agility": 35
     },
     "weapons": [
@@ -5973,10 +5973,10 @@ const VEHICLES_DATA = [
     "image": "XM803.jpg",
     "description": "American prototype main battle tank, developed from the MBT-70 project, featuring advanced firepower and mobility.",
     "stats": {
-      "health": 33000,
-      "speed": 51,
-      "armor": "620mm",
-      "agility": 36
+      "health": 35000,
+      "speed": 60,
+      "armor": "150mm",
+      "agility": 30
     },
     "weapons": [
       {
@@ -6047,10 +6047,10 @@ const VEHICLES_DATA = [
     "image": "XM1-GM.jpg",
     "description": "U.S. prototype main battle tank by General Motors, competing against Chrysler’s design for the Abrams.",
     "stats": {
-      "health": 33500,
-      "speed": 52,
-      "armor": "640mm",
-      "agility": 37
+      "health": 33600,
+      "speed": 83,
+      "armor": "100mm",
+      "agility": 40
     },
     "weapons": [
       {
@@ -6121,10 +6121,10 @@ const VEHICLES_DATA = [
     "image": "BMP-2.jpg",
     "description": "Soviet infantry fighting vehicle, armed with a 30 mm autocannon and anti-tank guided missiles, supporting mechanized troops.",
     "stats": {
-      "health": 34000,
-      "speed": 53,
-      "armor": "660mm",
-      "agility": 38
+      "health": 23000,
+      "speed": 68,
+      "armor": "36mm",
+      "agility": 36
     },
     "weapons": [
       {
@@ -6195,10 +6195,10 @@ const VEHICLES_DATA = [
     "image": "BTR-82AT.jpg",
     "description": "Russian armored personnel carrier, upgraded with a 30 mm autocannon, improved armor, and anti-tank missile capability.",
     "stats": {
-      "health": 34500,
-      "speed": 54,
-      "armor": "680mm",
-      "agility": 39
+      "health": 22800,
+      "speed": 87,
+      "armor": "10mm",
+      "agility": 45
     },
     "weapons": [
       {
@@ -6269,10 +6269,10 @@ const VEHICLES_DATA = [
     "image": "BTR-82A1.jpg",
     "description": "Modern Russian armored personnel carrier, featuring a 30 mm autocannon, enhanced armor, and improved mobility for troops.",
     "stats": {
-      "health": 35000,
-      "speed": 45,
-      "armor": "600mm",
-      "agility": 30
+      "health": 22000,
+      "speed": 87,
+      "armor": "10mm",
+      "agility": 40
     },
     "weapons": [
       {
@@ -6342,7 +6342,7 @@ const VEHICLES_DATA = [
     tier: "II",
     description: "Infantry fighting vehicle with TOW missile system and troop transport capability.",
     image: "M3-Bradley.jpg",
-    stats: { health: 25000, speed: 62, armor: "380mm", agility: 35 },
+    stats: { health: 25000, speed: 62, armor: "38mm", agility: 35 },
     weapons: [
       { name: "TOW-2 ATGM", type: "Anti-Tank Missile", damage: 14800, penetration: 780 },
       { name: "M242 25mm", type: "Autocannon", damage: 320, penetration: 58, rateOfFire: "200 rpm" },
@@ -6375,10 +6375,10 @@ const VEHICLES_DATA = [
     "image": "M551-Sheridan.jpg",
     "description": "The M551 Sheridan is a lightweight U.S. airborne tank with a 152mm gun-launcher, amphibious capability, and limited armor protection.",
     "stats": {
-      "health": 36000,
-      "speed": 47,
-      "armor": "640mm",
-      "agility": 32
+      "health": 24000,
+      "speed": 70,
+      "armor": "32mm",
+      "agility": 40
     },
     "weapons": [
       {
@@ -6449,10 +6449,10 @@ const VEHICLES_DATA = [
     "image": "Object-685.jpg",
     "description": "Soviet experimental amphibious light tank, designed for reconnaissance and river-crossing operations with light armor and armament.",
     "stats": {
-      "health": 36500,
-      "speed": 48,
+      "health": 24500,
+      "speed": 70
       "armor": "660mm",
-      "agility": 33
+      "agility": 39
     },
     "weapons": [
       {
@@ -6523,7 +6523,7 @@ const VEHICLES_DATA = [
     tier: "II",
     description: "Experimental missile tank destroyer with unique guided missile system.",
     image: "IT-1-Dragon.jpg",
-    stats: { health: 22800, speed: 50, armor: "520mm", agility: 55 },
+    stats: { health: 22800, speed: 50, armor: "35mm", agility: 55 },
     weapons: [
       { name: "3M7 Drakon ATGM", type: "Anti-Tank Missile", damage: 15200, penetration: 500 },
       { name: "PKT 7.62mm", type: "Machine Gun", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
@@ -6555,9 +6555,9 @@ const VEHICLES_DATA = [
     "image": "M163-VADS.jpg",
     "description": "U.S. self-propelled anti-aircraft system, mounting a 20 mm Vulcan cannon on an M113 chassis.",
     "stats": {
-      "health": 37500,
-      "speed": 50,
-      "armor": "600mm",
+      "health": 20000,
+      "speed": 65,
+      "armor": "30mm",
       "agility": 35
     },
     "weapons": [
@@ -6629,10 +6629,10 @@ const VEHICLES_DATA = [
     "image": "PGZ-04A.jpg",
     "description": "Chinese self-propelled anti-aircraft system, equipped with twin 35 mm cannons and radar for short-range air defense.",
     "stats": {
-      "health": 38000,
-      "speed": 51,
-      "armor": "620mm",
-      "agility": 36
+      "health": 22000,
+      "speed": 62,
+      "armor": "12mm",
+      "agility": 30
     },
     "weapons": [
       {
@@ -11999,7 +11999,6 @@ const laserGuidedMissiles = [
   "AGM-169",
   "9M120 Ataka",
   "Denel ZT3 Ingwe",
-  "KAB-250",
   "AGM-169 JAGM",
   "TL-12",
   "9M120 Attack",
