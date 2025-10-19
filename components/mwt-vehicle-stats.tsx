@@ -227,7 +227,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "F-14D Super Tomcat",
 "J-16",
 "Su 25UB",
-"F-15EX Eagle II",
+"F-15SE Silent Eagle",
 "M42A1 Duster",
 "T114 BAT",
 "WZ-120C",
@@ -3445,12 +3445,12 @@ const VEHICLES_DATA = [
 
 {
   id: 309,
-  name: "F-15EX Eagle II",
+  name: "F-15SE Silent Eagle",
   type: "Fighter Jet",
   faction: "American",
   tier: "III",
   image: "F-15EX-Eagle-II.jpg",
-  description: "Latest advanced variant of the F-15 with modern avionics and expanded weapons payload.",
+  description: "advanced variant of the F-15 Strike Eagle with modern avionics and stealth characteristics.",
   stats: { health: 19800, speed: 780, afterburnerSpeed: 2390, agility: 43 },
   weapons: [
     { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
@@ -11080,7 +11080,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "F-14D Super Tomcat",
       "J-16",
       "Su-25UB",
-      "F-15EX Eagle II",
+      "F-15SE Silent Eagle",
       "M42A1 Duster",
       "T114 BAT",
       "WZ-120C",
