@@ -6450,8 +6450,8 @@ const VEHICLES_DATA = [
     "description": "Soviet experimental amphibious light tank, designed for reconnaissance and river-crossing operations with light armor and armament.",
     "stats": {
       "health": 24500,
-      "speed": 70
-      "armor": "660mm",
+      "speed": 70,
+      "armor": "60mm",
       "agility": 39
     },
     "weapons": [
