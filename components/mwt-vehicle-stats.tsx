@@ -17158,4 +17158,3 @@ const MainPage = () => {
 export default function Page() {
   return <MainPage />;
 }
-}
