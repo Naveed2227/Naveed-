@@ -7802,9 +7802,9 @@ const VEHICLES_DATA = [
     "id": 902,
     "name": "T-55AMD-1",
     "type": "Main Battle Tank",
-    "faction": "Russian",
+    "faction": "Chinese",
     "tier": 1,
-    "description": "Soviet tank destroyer, lightly armored, equipped with 100mm gun, excels at ambushes and long-range engagements.",
+    "description": "Chinese tank destroyer, lightly armored, equipped with 100mm gun, excels at ambushes and long-range engagements.",
     "image": "T-55AMD-1.jpg",
     "stats": {
       "health": 29000,
