@@ -1,7 +1,142 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Copy } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Copy, Info, Mail, Shield } from "lucide-react"
+
+// Pages component
+const Pages = ({ activePage, onPageChange }: { activePage: string, onPageChange: (page: string) => void }) => {
+  return (
+    <div className="flex space-x-4 mb-6 border-b border-gray-700 pb-2">
+      <button
+        onClick={() => onPageChange('home')}
+        className={`px-4 py-2 rounded-t-lg transition-colors ${
+          activePage === 'home' 
+            ? 'text-blue-400 border-b-2 border-blue-400' 
+            : 'text-gray-400 hover:text-white'
+        }`}
+      >
+        Home
+      </button>
+      <button
+        onClick={() => onPageChange('about')}
+        className={`px-4 py-2 rounded-t-lg transition-colors ${
+          activePage === 'about' 
+            ? 'text-blue-400 border-b-2 border-blue-400' 
+            : 'text-gray-400 hover:text-white'
+        }`}
+      >
+        About
+      </button>
+      <button
+        onClick={() => onPageChange('contact')}
+        className={`px-4 py-2 rounded-t-lg transition-colors ${
+          activePage === 'contact' 
+            ? 'text-blue-400 border-b-2 border-blue-400' 
+            : 'text-gray-400 hover:text-white'
+        }`}
+      >
+        Contact
+      </button>
+      <button
+        onClick={() => onPageChange('privacy')}
+        className={`px-4 py-2 rounded-t-lg transition-colors ${
+          activePage === 'privacy' 
+            ? 'text-blue-400 border-b-2 border-blue-400' 
+            : 'text-gray-400 hover:text-white'
+        }`}
+      >
+        Privacy Policy
+      </button>
+    </div>
+  );
+};
+
+// About Page Component
+const AboutPage = () => (
+  <div className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-4xl mx-auto mt-8">
+    <div className="flex items-center mb-6">
+      <Info className="text-blue-400 mr-2" size={24} />
+      <h2 className="text-2xl font-bold text-white">About MWT Assistant</h2>
+    </div>
+    <div className="prose prose-invert text-gray-300">
+      <p className="mb-4">
+  MWT Assistant is your all-in-one tool for tracking MWT data with real-time stats, detailed vehicle info, and AI-powered analysis. Whether you're a seasoned commander or just starting out, it provides everything you need to understand vehicles, compare stats, and plan your strategies.
+</p>
+<p className="mb-4">
+  The app doesn’t collect personal data. Anonymous performance data may be gathered by Google Play Services, and ads may use cookies under their own policies. We handle all information responsibly and prioritize your privacy.
+</p>
+<p className="mb-4">
+  MWT Assistant is an independent project, not affiliated with Artstorm or Cube Software. “MWT” and related names or images are trademarks of their respective owners. Our goal is to bring accurate, accessible data to the community.
+</p>
+<p>
+  Join thousands of commanders who rely on MWT Assistant to track data and improve gameplay. We regularly update our tools and expand features based on community feedback.
+</p>
+    </div>
+  </div>
+);
+
+// Contact Page Component
+const ContactPage = () => (
+  <div className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-2xl mx-auto mt-8">
+    <div className="flex items-center mb-6">
+      <Mail className="text-blue-400 mr-2" size={24} />
+      <h2 className="text-2xl font-bold text-white">Contact Us</h2>
+    </div>
+    <div className="prose prose-invert text-gray-300">
+      <p className="mb-4">
+        We'd love to hear from you! Whether you have questions about our data, suggestions for improvement, or just want to share your thoughts about MWT Assistant, our team is here to help.
+      </p>
+      <p className="mb-6">
+        For general inquiries, please email us at:
+        <a href="mailto:mwtassistantteam@gmail.com" className="text-blue-400 hover:text-blue-300 ml-2">
+          mwtassistantteam@gmail.com
+        </a>
+      </p>
+      <p className="text-sm text-gray-400">
+        We strive to respond to all messages within 24-48 hours. For technical support, please include any relevant details about your device and the issue you're experiencing.
+      </p>
+    </div>
+  </div>
+);
+
+// Privacy Policy Page Component
+const PrivacyPolicyPage = () => (
+  <div className="bg-gray-800 p-6 rounded-lg shadow-lg max-w-4xl mx-auto mt-8">
+    <div className="flex items-center mb-6">
+      <Shield className="text-blue-400 mr-2" size={24} />
+      <h2 className="text-2xl font-bold text-white">Privacy Policy</h2>
+    </div>
+    <div className="prose prose-invert text-gray-300">
+      <p className="mb-4">
+        At MWT Assistant, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your information when you use our website and services.
+      </p>
+      
+      <h3 className="text-xl font-semibold text-white mt-6 mb-2">Information We Collect</h3>
+      <p className="mb-4">
+        We collect non-personal information such as browser type, device information, and usage data to improve our services. This includes anonymous analytics to understand how visitors interact with our site.
+      </p>
+      
+      <h3 className="text-xl font-semibold text-white mt-6 mb-2">Cookies</h3>
+      <p className="mb-4">
+        Our website uses cookies to enhance your experience. These small text files help us remember your preferences and understand how you use our site. You can disable cookies in your browser settings, but some features may not function properly.
+      </p>
+      
+      <h3 className="text-xl font-semibold text-white mt-6 mb-2">Third-Party Links</h3>
+      <p className="mb-4">
+        Our site may contain links to third-party websites. We are not responsible for the privacy practices or content of these external sites. We encourage you to review their privacy policies before providing any personal information.
+      </p>
+      
+      <h3 className="text-xl font-semibold text-white mt-6 mb-2">Data Security</h3>
+      <p>
+        We implement appropriate security measures to protect your information. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.
+      </p>
+      
+      <p className="text-sm text-gray-400 mt-8">
+        Last updated: October 20, 2025
+      </p>
+    </div>
+  </div>
+);
 
 // CopyToClipboard component for copying text to clipboard
 const CopyToClipboard = ({ text, className = "" }: { text: string; className?: string }) => {
@@ -13034,6 +13169,23 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     }, 1000)
   }
 
+  const Page = () => {
+    const [activePage, setActivePage] = useState('home');
+
+    return (
+      <div className="min-h-screen bg-gray-900 text-white p-4">
+        <div className="max-w-7xl mx-auto">
+          <Pages activePage={activePage} onPageChange={setActivePage} />
+          
+          {activePage === 'home' && <MwtVehicleStats />}
+          {activePage === 'about' && <AboutPage />}
+          {activePage === 'contact' && <ContactPage />}
+          {activePage === 'privacy' && <PrivacyPolicyPage />}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
@@ -13041,7 +13193,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Burger Menu Button */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="absolute top-4 left-4 z-50 p-2 sm:p-3 bg-slate-800/90 hover:bg-slate-700/90 backdrop-blur-sm rounded-xl border border-slate-600/50 transition-all duration-200 group shadow-lg sm:top-6 sm:left-6 mt-4"
+        className="absolute top-6 left-4 z-50 p-2 sm:p-3 bg-slate-800/90 hover:bg-slate-700/90 backdrop-blur-sm rounded-xl border border-slate-600/50 transition-all duration-200 group shadow-lg sm:top-6 sm:left-6"
         aria-label="Menu"
       >
         <div className="flex flex-col gap-1.5">
@@ -13054,7 +13206,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       {/* Filter Button */}
       <motion.button
         onClick={() => setIsFilterOpen(!isFilterOpen)}
-        className={`absolute top-4 right-4 z-40 p-2 sm:p-3 backdrop-blur-sm rounded-xl border transition-all duration-200 group shadow-lg sm:top-6 sm:right-6 sm:mt-0 mt-4 flex items-center gap-2 ${
+        className={`absolute top-6 right-4 z-40 p-2 sm:p-3 backdrop-blur-sm rounded-xl border transition-all duration-200 group shadow-lg sm:top-6 sm:right-6 flex items-center gap-2 ${
           (typeFilter.length > 0 || tierFilter.length > 0 || countryFilter.length > 0 || rarityFilter.length > 0 || obtainMethodFilter.length > 0) 
             ? "bg-cyan-600/90 hover:bg-cyan-700/90 border-cyan-500/50" 
             : "bg-slate-800/90 hover:bg-slate-700/90 border-slate-600/50"
@@ -15362,14 +15514,17 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   </button>
                 </div>
                 <div className="space-y-4 text-slate-300">
-                  <p>
-  MWT Assistant is your all-in-one tool for tracking MWT data with real-time stats, detailed vehicle info, and AI-powered analysis.
+                  <p className="mb-4">
+  MWT Assistant is your all-in-one tool for tracking MWT data with real-time stats, detailed vehicle info, and AI-powered analysis. Whether you're a seasoned commander or just starting out, it provides everything you need to understand vehicles, compare stats, and plan your strategies.
+</p>
+<p className="mb-4">
+  The app doesn’t collect personal data. Anonymous performance data may be gathered by Google Play Services, and ads may use cookies under their own policies. We handle all information responsibly and prioritize your privacy.
+</p>
+<p className="mb-4">
+  MWT Assistant is an independent project, not affiliated with Artstorm or Cube Software. “MWT” and related names or images are trademarks of their respective owners. Our goal is to bring accurate, accessible data to the community.
 </p>
 <p>
-  The app doesn’t collect personal data. Anonymous performance data may be gathered by Google Play Services, and ads may use cookies under their own policies.
-</p>
-<p>
-  MWT Assistant is an independent project, not affiliated with Artstorm or Cube Software. “MWT” and related names or images are trademarks of their respective owners.
+  Join thousands of commanders who rely on MWT Assistant to track data and improve gameplay. We regularly update our tools and expand features based on community feedback.
 </p>
 <p>
   <a 
@@ -16935,10 +17090,24 @@ function CookieConsentBanner() {
   );
 }
 
-export default function Page() {
+const MainPage = () => {
+  const [activePage, setActivePage] = useState('home');
+  
   return (
-    <>
-      <MwtVehicleStats vehicles={VEHICLES_DATA} />
+    <div className="min-h-screen bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4 sm:pt-4">
+        <div className="sm:pt-0">
+          <Pages activePage={activePage} onPageChange={setActivePage} />
+        </div>
+        
+        <div className="mt-4">
+          {activePage === 'home' && <MwtVehicleStats vehicles={VEHICLES_DATA} />}
+          {activePage === 'about' && <AboutPage />}
+          {activePage === 'contact' && <ContactPage />}
+          {activePage === 'privacy' && <PrivacyPolicyPage />}
+        </div>
+      </div>
+
       <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-2">
         <div key="banner-ad" className="w-full" style={{ width: '780px', margin: '0 auto' }}>
           <ins
@@ -16982,6 +17151,11 @@ export default function Page() {
         </div>
       </div>
       <CookieConsentBanner />
-    </>
-  )
+    </div>
+  );
+};
+
+export default function Page() {
+  return <MainPage />;
+}
 }
