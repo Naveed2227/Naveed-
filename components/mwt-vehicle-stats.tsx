@@ -12024,9 +12024,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   "AIM-120",
   "Naval Spike ER",
   "Red Arrow",
-  "R-77",
-  "PL-15",
-  "AIM-54",
   "R-40TD",
   "R-93M",
   "Storm Shadow",
@@ -12146,7 +12143,8 @@ const laserGuidedMissiles = [
   "Izdeliye 305",
   "LAU-150",
   "S-24",
-  "KD-21"
+  "KD-21",
+  "KAB-500L",
 
 
 ];
