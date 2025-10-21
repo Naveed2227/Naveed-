@@ -5680,10 +5680,10 @@ const VEHICLES_DATA = [
     "id": 701,
     "name": "Object 122 TM",
     "type": "Main Battle Tank",
-    "faction": "Russian",
+    "faction": "Chinese",
     "tier": "II",
     "image": "Object-122-TM.jpg",
-    "description": "Soviet prototype main battle tank, based on the Type 59, mounting a 120 mm gun.",
+    "description": "Chinese prototype main battle tank, based on the Type 59, mounting a 120 mm gun.",
     "stats": {
       "health": 29300,
       "speed": 55,
@@ -15692,6 +15692,14 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           <p className="text-white text-xs">Adviser, Coordination Manager</p>
         </div>
         <div className="p-2">
+          <h4 className="text-cyan-300 font-semibold text-base">Joe</h4>
+          <p className="text-white text-[10px] mb-0.5 flex items-center">
+            Discord: joeegy1
+            <CopyToClipboard text="joeegy1" className="ml-1" />
+          </p>
+          <p className="text-white text-xs">Social Media Manager</p>
+        </div>
+        <div className="p-2">
           <h4 className="text-cyan-300 font-semibold text-base">Hoffman Derpin</h4>
           <p className="text-white text-[10px] mb-0.5">Discord: sir205947 </p>
           <p className="text-white text-xs">Supporter, Writer</p>
@@ -15786,6 +15794,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           {[
             { name: 'Mr.Hasori', discord: 'mr.hasori', role: 'YouTube Content Creator' },
             { name: 'QWE', discord: 'qwe._.mwt', role: 'Promotional Designer' },
+            { name: 'Joe', discord: 'joeegy1', role: 'Social Media Manager' },
           ].map((person, index) => (
             <div key={`media-${index}`} className="bg-slate-800 p-4 rounded-lg">
               <h4 className="text-white font-semibold">{person.name}</h4>
