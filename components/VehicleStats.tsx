@@ -722,7 +722,7 @@ const vehicles = [
     faction: "Russian",
     tier: "IV",
     image: "Object-640.jpg",
-    description: "The Object 640 "Black Eagle" is a Russian prototype main battle tank with modular armor.",
+    description: "The Object 640 \"Black Eagle\" is a Russian prototype main battle tank with modular armor.",
     stats: { health: 42400, speed: 80, armor: "1200mm", agility: 38 },
     weapons: [
       { name: "3BM22", type: "Main Gun", damage: 11100, penetration: 425 },
