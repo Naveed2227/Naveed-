@@ -656,8 +656,10 @@ const BATTLE_PASSES = [
 
 ];
 
-import { VEHICLES_DATA } from './VehicleStats';
+import vehicles from './VehicleStats';
 
+// Using the imported vehicles array as VEHICLES_DATA for backward compatibility
+const VEHICLES_DATA = vehicles;
 
 
 const getAircraftRole = (vehicle: any) => {
