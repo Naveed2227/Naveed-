@@ -4776,7 +4776,7 @@ const vehicles = [
         "penetration": 480
       }
     ]
-  }
+  },
   // ... (rest of the vehicles data)
 ];
 
