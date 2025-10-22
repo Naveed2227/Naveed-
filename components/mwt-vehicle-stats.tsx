@@ -5397,45 +5397,48 @@ const VEHICLES_DATA = [
   {
     "id": 927,
     "name": "ZSU-57-2",
-    "type": "Anti-Air",
-    "faction": "Russian",
-    "tier": 1,
-    "description": "Soviet self-propelled anti-aircraft vehicle, lightly armored, armed with twin 57mm autocannons, effective against low-flying aircraft.",
-    "image": "ZSU-57-2.jpg",
-    "stats": {
-      "health": 19500,
-      "speed": 47,
-      "reverseSpeed": 12,
-      "agility": 36
+// Vehicle data should be properly integrated into the VEHICLES array
+const additionalVehicle = {
+  id: 'zsu-57-2',
+  name: 'ZSU-57-2',
+  type: 'Anti-Air',
+  faction: 'Russian',
+  tier: 1,
+  description: 'Soviet self-propelled anti-aircraft vehicle, lightly armored, armed with twin 57mm autocannons, effective against low-flying aircraft.',
+  image: 'ZSU-57-2.jpg',
+  stats: {
+    health: 19500,
+    speed: 47,
+    reverseSpeed: 12,
+    agility: 36
+  },
+  weapons: [
+    {
+      name: 'BR-540 APHE',
+      type: 'Main Gun',
+      damage: 9900,
+      penetration: 243
     },
-    "weapons": [
-      {
-        "name": "BR-540 APHE",
-        "type": "Main Gun",
-        "damage": 9900,
-        "penetration": 243
-      },
-      {
-        "name": "OF-540 HE",
-        "type": "Main Gun",
-        "damage": 14850,
-        "penetration": 139
-      },
-      {
-        "name": "M69 APFSDS ",
-        "type": "Main Gun",
-        "damage": 11100,
-        "penetration": 400
-      },
-      {
-        "name": "BP-540 HEAT",
-        "type": "Main Gun",
-        "damage": 12650,
-        "penetration": 480
-      }
-    ]
-  }
-];
+    {
+      name: 'OF-540 HE',
+      type: 'Main Gun',
+      damage: 14850,
+      penetration: 139
+    },
+    {
+      name: 'M69 APFSDS',
+      type: 'Main Gun',
+      damage: 11100,
+      penetration: 400
+    },
+    {
+      name: 'BP-540 HEAT',
+      type: 'Main Gun',
+      damage: 12650,
+      penetration: 480
+    }
+  ]
+};
 
 const getAircraftRole = (vehicle: any) => {
   if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== "Helicopter") return null
