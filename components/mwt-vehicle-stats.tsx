@@ -647,10 +647,10 @@ const BATTLE_PASSES = [
     name: "Season Two",
     image: "2024-Dec.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: ["VT-4A1", "KF-51 Panther"], // Vehicle IDs from VEHICLES array
+    vehicles: [], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["kF-51"],
-      free: ["VT-4A1"]
+      premium: [],
+      free: []
     }
   }
 
@@ -661,9 +661,6 @@ import { VEHICLES_DATA } from './VehicleStats';
 
 
 const getAircraftRole = (vehicle: any) => {
-  if (vehicle.type !== "Fighter Jet" && vehicle.type !== "Bomber" && vehicle.type !== "Helicopter") return null
-
-  // Check for helicopters first
   if (vehicle.type === "Helicopter") return "helicopter"
 
   // Specific aircraft role assignments
