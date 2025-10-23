@@ -4779,4 +4779,9 @@ const vehicles = [
   }
 ];
 
+
+// Export as default
 export default vehicles;
+
+// Also export as VEHICLES_DATA for compatibility
+export const VEHICLES_DATA = vehicles;
