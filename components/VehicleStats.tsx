@@ -1,3 +1,4 @@
+// Define the vehicle data
 const vehicles = [
   {
     id: 1,
@@ -4776,9 +4777,8 @@ const vehicles = [
         "penetration": 480
       }
     ]
-  }
+  },
 ];
-
 
 // Export as default
 export default vehicles;
