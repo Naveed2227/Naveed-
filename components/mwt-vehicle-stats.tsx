@@ -249,14 +249,13 @@ const formatTier = (tier: string | number): string => {
 // New Vehicles System
 const newVehicles = [
   "X2 Shinshin",
-  "K2 Black Panther",
   "Leopard 2A8",
   "Al-Khalid",
   "Arjun Mk.2",
-  "K21 KNIFV",
   "9K31 Strela-1",
   "Merkava Mk.3",
   "B-Type",
+  "T-90M"
 ];
 
 const isNewVehicle = (vehicleName: string): boolean => {
@@ -484,6 +483,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "K2 Black Panther",
 "Al-Khalid",
 "B-Type",
+"T-90M"
 
 
 
@@ -2329,6 +2329,48 @@ const VEHICLES_DATA = [
   },
   {
     "id": 132,
+    "name": "T-90M",
+    "type": "Main Battle Tank",
+    "faction": "Russian",
+    "tier": "IV",
+    image: "T-90M.jpg",
+    "description": "A modernized Russian MBT featuring advanced armor, digital fire controls, autoloader, improved mobility, and powerful 125 mm weaponry.",
+    "stats": {
+      "health": 0,
+      "speed": 70,
+      "reverseSpeed": 0,
+      "turretRotationSpeed": 0,
+      "hullRotationSpeed": 0,
+      "armor": 0,
+      "agility": 0 },
+    "weapons": [
+      { name: "3BM46 APFSDS", type: "Main Gun", damage: 0, penetration: 690 },
+      { name: "3OF26 HE", type: "Main Gun", damage: 0, penetration: 0 },
+      { name: "3BK18 HEATFS", type: "Main Gun", damage: 0, penetration: 0 },
+      { name: "3BM70 APFSDS", type: "Main Gun", damage: 15000, penetration: 870 },
+      { name: "9M119 HEATFS", type: "Main Gun", damage: 10160, penetration: 750 }
+      
+    ],
+    "modules": {
+      "engine": [
+        { "name": "MTU MB 883 Ka-501", "bonus": "+200 km/h speed" },
+        { "name": "MTU MB 883 Ka-502", "bonus": "+400 km/h speed" },
+        { "name": "MTU MB 883 Ka-503", "bonus": "+600 km/h speed" }
+      ],
+      "armor": [
+        { "name": "Composite Armor MK1", "bonus": "+15% armor" },
+        { "name": "Composite Armor MK2", "bonus": "+25% armor" },
+        { "name": "Composite Armor MK3", "bonus": "+35% armor" }
+      ],
+      "electronics": [
+        { "name": "FCS MK1", "bonus": "+20% targeting accuracy" },
+        { "name": "FCS MK2", "bonus": "+35% targeting accuracy" },
+        { "name": "FCS MK3", "bonus": "+50% targeting accuracy" }
+      ]
+    }
+  },
+  {
+    "id": 133,
     "name": "KF31 Lynx",
     "type": "Light Tank",
     "faction": "German",
@@ -2370,7 +2412,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 133,
+    "id": 134,
     "name": "K2 Black Panther",
     "type": "Main Battle Tank",
     "faction": "SouthKorean",
@@ -2410,7 +2452,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 134,
+    "id": 135,
     "name": "Al-Khalid",
     "type": "Main Battle Tank",
     "faction": "Pakistani",
@@ -2450,7 +2492,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 135,
+    "id": 136,
     "name": "Arjun Mk.2",
     "type": "Main Battle Tank",
     "faction": "Indian",
@@ -2490,7 +2532,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 136,
+    "id": 137,
     "name": "M10 Booker",
     "type": "Light Tank",
     "faction": "American",
@@ -2532,7 +2574,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-    "id": 137,
+    "id": 138,
     "name": "PL-01",
     "type": "Light Tank",
     "faction": "Polish",
@@ -2573,7 +2615,7 @@ const VEHICLES_DATA = [
     }
   },
   {
-  "id": 138,
+  "id": 139,
   "name": "M-SHORAD",
   "type": "Anti-Air",
   "faction": "American",
@@ -2614,7 +2656,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  "id": 139,
+  "id": 140,
   "name": "TOS-1A",
   "type": "MLRS",
   "faction": "Russian",
@@ -2653,7 +2695,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-    id: 140,
+    id: 141,
     name: "M270 MLRS",
     type: "MLRS",
     faction: "American",
@@ -2687,7 +2729,7 @@ const VEHICLES_DATA = [
     },
   },
 {
-  "id": 141,
+  "id": 142,
   "name": "PLZ-05",
   "type": "SPH",
   "faction": "Chinese",
@@ -2728,7 +2770,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  "id": 142,
+  "id": 143,
   "name": "M109A6 Paladin",
   "type": "SPH",
   "faction": "American",
@@ -2768,7 +2810,7 @@ const VEHICLES_DATA = [
 },
 
 {
-  "id": 143,
+  "id": 144,
   "name": "FK 2000",
   "type": "Anti-Air",
   "faction": "Chinese",
@@ -2808,7 +2850,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-    id: 144,
+    id: 145,
     name: "Otomatic 76",
     type: "Anti-Air",
     faction: "Italian",
@@ -2840,7 +2882,7 @@ const VEHICLES_DATA = [
     },
   },
 {
-  "id": 145,
+  "id": 146,
   "name": "BM-57-2 Kochevnik",
   "type": "Tank Destroyer",
   "faction": "Russian",
@@ -2882,7 +2924,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  "id": 146,
+  "id": 147,
   "name": "ADATS",
   "type": "Missile Carrier",
   "faction": "American",
@@ -2925,7 +2967,7 @@ const VEHICLES_DATA = [
   }
 },
 {
-  "id": 147,
+  "id": 148,
   "name": "MGM-166 LOSAT",
   "type": "Missile Carrier",
   "faction": "American",
@@ -11285,6 +11327,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "Stridsvagn 105",
       "Strf 9040 BILL",
       "B-Type",
+      "T-90M",
     ];
     
     const eventGachaVehicles = [
@@ -12008,6 +12051,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
    
       "Merkava Mk.3",
       "B-Type",
+      "T-90M",
       
       
       
