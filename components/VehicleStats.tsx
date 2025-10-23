@@ -4777,7 +4777,7 @@ const vehicles = [
         "penetration": 480
       }
     ]
-  },
+  }
 ];
 
 // Export as default
