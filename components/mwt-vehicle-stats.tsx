@@ -2036,11 +2036,12 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     localStorage.removeItem('mwt_user_email')
   };
   
-  const handleUpgradeChange = (vehicleId: string, level: number) => {
+  const handleUpgradeChange = (vehicleId: string | number, level: number) => {
+    const id = vehicleId.toString(); // Ensure ID is always a string
     setUpgradeLevels(prev => {
       const newLevels = { ...prev };
       // If clicking the same level, reset to 0 (base), otherwise set to the new level
-      newLevels[vehicleId] = prev[vehicleId] === level ? 0 : level;
+      newLevels[id] = prev[id] === level ? 0 : level;
       return newLevels;
     });
   };
