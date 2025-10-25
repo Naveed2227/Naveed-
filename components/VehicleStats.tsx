@@ -9042,7 +9042,7 @@ export const VEHICLES_DATA: Vehicle[] = [
         {
           "name": "Default Avionics MK2",
           "bonus": "+40% detection"
-         }
+        }
     ]
   }
   // Add more vehicles here as needed
