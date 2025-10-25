@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Copy, Info, Mail, Shield } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Copy, Info, Mail, Shield, FileText } from "lucide-react"
 
 // Pages component
 const Pages = ({ activePage, onPageChange }: { activePage: string, onPageChange: (page: string) => void }) => {
@@ -46,6 +46,16 @@ const Pages = ({ activePage, onPageChange }: { activePage: string, onPageChange:
         }`}
       >
         Privacy Policy
+      </button>
+      <button
+        onClick={() => onPageChange('terms')}
+        className={`px-4 py-2 rounded-t-lg transition-colors ${
+          activePage === 'terms' 
+            ? 'text-blue-400 border-b-2 border-blue-400' 
+            : 'text-gray-400 hover:text-white'
+        }`}
+      >
+        Terms of Service
       </button>
     </div>
   );
@@ -108,7 +118,7 @@ const PrivacyPolicyPage = () => (
     </div>
     <div className="prose prose-invert text-gray-300">
       <p className="mb-4">
-        At MWT Assistant, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your information when you use our website and services.
+        At MWT Assistant, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your information when you use our app.
       </p>
       
       <h3 className="text-xl font-semibold text-white mt-6 mb-2">Information We Collect</h3>
@@ -163,6 +173,7 @@ const CopyToClipboard = ({ text, className = "" }: { text: string; className?: s
   );
 };
 import dynamic from 'next/dynamic';
+import TermsOfService from './TermsOfService';
 
 // Import EventComponent with SSR disabled to access window object
 const EventComponent = dynamic(() => import('./Event'), { ssr: false });
