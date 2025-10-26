@@ -309,7 +309,7 @@ const vehicles = [
     tier: "IV",
     image: "Type-10.jpg",
     description: "Modern main battle tank optimized for Japanese terrain with advanced fire control.",
-    stats: { health: 38000, speed: 71, reverseSpeed: 71, armor: "850mm", agility: 40 },
+    stats: { health: 39800, speed: 72, reverseSpeed: 72, armor: "850mm", agility: 45 },
     weapons: [
       { name: "JM33 APFSDS", type: "Main Gun", damage: 11330, penetration: 481 },
       { name: "JM12A1 HEAT", type: "Main Gun", damage: 12360, penetration: 480 },
@@ -340,12 +340,13 @@ const vehicles = [
     tier: "IV",
     image: "T-90A.jpg",
     description: "Modernized main battle tank with improved armor and advanced fire control.",
-    stats: { health: 39400, speed: 65, reverseSpeed: 30, maneuverability: 44, armor: "1050mm", agility: 44 },
+    stats: { health: 40000, speed: 65, reverseSpeed: 30, maneuverability: 44, armor: "1050mm", agility: 44 },
     weapons: [
-      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
-      { name: "9M112", type: "Main Gun", damage: 10070, penetration: 700 },
+      { name: "3BM42", type: "Main Gun", damage: 11390, penetration: 565 },
       { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
-      { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 }
+      { name: "3BM50 Lead-1", type: "Main Gun", damage: 11170, penetration: 755 },
+      { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 },
+      { name: "9M119", type: "Main Gun", damage: 10160, penetration: 750 },
     ]
   },
   {
@@ -356,13 +357,13 @@ const vehicles = [
     tier: "IV",
     image: "KF-51-Panther.jpg",
     description: "Next-generation main battle tank with 130mm gun and advanced digital systems.",
-    stats: { health: 38500, speed: 65, armor: "1200mm", agility: 38 },
+    stats: { health: 44000, speed: 74, armor: "1200mm", agility: 39 },
     weapons: [
-      { name: "DM-11-1", type: "Main Gun", damage: 14850, penetration: 135 },
-      { name: "DM-12-1", type: "Main Gun", damage: 13640, penetration: 800 },
-      { name: "DM-33-1", type: "Main Gun", damage: 11500, penetration: 596 },
-      { name: "DM-73-1", type: "Main Gun", damage: 12954, penetration: 980 },
-      { name: "Hero 120", type: "Missile", damage: 8075, penetration: 440, reload: 13.5 }
+      { name: "DM11-1", type: "Main Gun", damage: 5300, penetration: 117 },
+      { name: "DM12-1", type: "Main Gun", damage: 13640, penetration: 800 },
+      { name: "DM33-1", type: "Main Gun", damage: 12060, penetration: 596 },
+      { name: "DM73-1", type: "Main Gun", damage: 12954, penetration: 980 },
+      { name: "Hero 120", type: "Missile", damage: 8910, penetration: 520, reload: 13.5 }
     ]
   },
   {
@@ -389,11 +390,12 @@ const vehicles = [
     tier: "IV",
     image: "Leopard-2A7V.jpg",
     description: "Most advanced Leopard variant with urban warfare modifications and enhanced protection.",
-    stats: { health: 36200, speed: 68, armor: "1080mm", agility: 70 },
+    stats: { health: 42100, speed: 64, armor: "1080mm", agility: 37 },
     weapons: [
+      { name: "DM11", type: "Main Gun", damage: 5000, penetration: 85 },
       { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
-      { name: "DM33", type: "Main Gun", damage: 10620, penetration: 496 },
-      { name: "DM-73-1", type: "Main Gun", damage: 12954, penetration: 980 }
+      { name: "DM33", type: "Main Gun", damage: 11230, penetration: 550 },
+      { name: "DM73", type: "Main Gun", damage: 11940, penetration: 900 }
     ]
   },
   {
@@ -406,7 +408,7 @@ const vehicles = [
     description: "Advanced main battle tank with next-generation armor and fire control systems.",
     stats: { health: 40000, speed: 65, armor: "1250mm", agility: 30 },
     weapons: [
-      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "3BM50 Lead-1", type: "Main Gun", damage: 11170, penetration: 755 },
       { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
       { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 },
       { name: "3BK21", type: "Main Gun", damage: 10250, penetration: 800 }
@@ -422,11 +424,12 @@ const vehicles = [
     description: "Experimental heavy tank with revolutionary armor design and 152mm gun.",
     stats: { health: 38100, speed: 75, armor: "1400mm", agility: 30 },
     weapons: [
-      { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 850 },
-      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1100 },
-      { name: "LEAD1", type: "Main Gun", damage: 10800, penetration: 850 },
-      { name: "VOG-17M", type: "Missile", damage: 1600, penetration: 60, reload: 1.7 },
-      { name: "VOG-30", type: "Missile", damage: 1800, penetration: 76, reload: 1.7 }
+      { name: "Grifel-1", type: "Main Gun", damage: 15440, penetration: 850 },
+      { name: "Grifel-2", type: "Main Gun", damage: 16100, penetration: 1100 },
+      { name: "Grifel-3", type: "Main Gun", damage: 16990, penetration: 900 },
+      { name: "Lead-1", type: "Main Gun", damage: 10800, penetration: 760 },
+      { name: "VOG-17A", type: "Missile", damage: 2640, penetration: 50, reload: 6 },
+      { name: "VOG-30", type: "Missile", damage: 2970, penetration: 65, reload: 6 }
     ]
   },
   {
@@ -439,10 +442,10 @@ const vehicles = [
     description: "A Russian heavy main battle tank, featuring strong armor, AI-assisted and protection systems.",
     stats: { health: 42200, speed: 60, armor: "1320mm", agility: 45 },
     weapons: [
-      { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 850 },
-      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1100 },
-      { name: "GRIFFEL 3", type: "Main Gun", damage: 16100, penetration: 900 },
-      { name: "30F38", type: "Main Gun", damage: 10600, penetration: 480 }
+      { name: "Grifel-1", type: "Main Gun", damage: 15440, penetration: 850 },
+      { name: "Grifel-2", type: "Main Gun", damage: 16100, penetration: 1100 },
+      { name: "Grifel-3", type: "Main Gun", damage: 16990, penetration: 900 },
+      { name: "30F39 Krasnopol", type: "Main Gun", damage: 11040, penetration: 480 }
     ]
   },
   {
@@ -455,7 +458,7 @@ const vehicles = [
     description: "Mobile Combat Vehicle with excellent mobility and firepower for rapid deployment.",
     stats: { health: 33000, speed: 100, armor: "420mm", agility: 42 },
     weapons: [
-      { name: "M735", type: "Main Gun", damage: 9940, penetration: 318 },
+      { name: "M735", type: "Main Gun", damage: 9630, penetration: 340 },
       { name: "Type 75", type: "Main Gun", damage: 10460, penetration: 127 },
       { name: "Type 91", type: "Main Gun", damage: 11070, penetration: 425 },
       { name: "Type 93(B)", type: "Main Gun", damage: 10380, penetration: 550 }
@@ -471,10 +474,10 @@ const vehicles = [
     description: "Next-generation Russian MBT prototype equipped with a powerful 152mm smoothbore gun and advanced armor.",
     stats: { health: 39700, speed: 73, armor: "1000mm", agility: 34 },
     weapons: [
-      { name: "GRIFFEL 1", type: "Main Gun", damage: 15580, penetration: 850 },
-      { name: "GRIFFEL 2", type: "Main Gun", damage: 16710, penetration: 1100 },
-      { name: "GRIFFEL 3", type: "Main Gun", damage: 16100, penetration: 900 },
-      { name: "30F38", type: "Main Gun", damage: 10600, penetration: 480 }
+      { name: "Grifel-1", type: "Main Gun", damage: 15440, penetration: 850 },
+      { name: "Grifel-2", type: "Main Gun", damage: 16100, penetration: 1100 },
+      { name: "Grifel-3", type: "Main Gun", damage: 16990, penetration: 900 },
+      { name: "30F38", type: "Main Gun", damage: 10780, penetration: 480 }
     ]
   },
   {
@@ -501,13 +504,13 @@ const vehicles = [
     tier: "IV",
     description: "Tank support fighting vehicle designed for urban combat and infantry support.",
     image: "BMPT-Terminator-2.jpg",
-    stats: { health: 36400, speed: 60, armor: "850mm", agility: 38 },
+    stats: { health: 40600, speed: 65, armor: "850mm", agility: 44 },
     weapons: [
       { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
       { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
       { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
-      { name: "9M120 Ataka", type: "Missile", damage: 3900, penetration: 750, reload: 12 }
+      { name: "9M120 Ataka", type: "Missile", damage: 13220, penetration: 800, reload: 12 }
     ]
   },
   {
@@ -520,11 +523,9 @@ const vehicles = [
     description: "Guided multiple launch rocket system with precision strike capability.",
     stats: { health: 29900, speed: 85, armor: "380mm", agility: 18 },
     weapons: [
-      { name: "BRE1 HE", type: "Missile", damage: 9400, penetration: 120, reload: 12 },
-      { name: "BRE7 HESH", type: "Missile", damage: 10100, penetration: 280, reload: 12 },
-      { name: "GR70 HE", type: "Missile", damage: 11100, penetration: 140, reload: 20 },
-      { name: "GR1 HESH", type: "Missile", damage: 13000, penetration: 200, reload: 20 },
-      { name: "Dragon Drone", type: "Missile", damage: 12350, penetration: 800, reload: 20 }
+      { name: "BRE1 HE", type: "Missile", damage: 9400, penetration: 120, reload: 10 },
+      { name: "BRE7 HESH", type: "Missile", damage: 11100, penetration: 140, reload: 15 },
+      
     ]
   },
   {
@@ -540,7 +541,7 @@ const vehicles = [
       { name: "30F25", type: "Main Gun", damage: 15000, penetration: 160 },
       { name: "30F45", type: "Main Gun", damage: 16200, penetration: 180 },
       { name: "Z023", type: "Main Gun", damage: 13800, penetration: 400 },
-      { name: "30F39", type: "Main Gun", damage: 8800, penetration: 480 }
+      { name: "30F39 Krasnopol", type: "Main Gun", damage: 8800, penetration: 480 }
     ]
   },
   {
@@ -553,9 +554,9 @@ const vehicles = [
     description: "Combined gun-missile air defense system with advanced radar capabilities.",
     stats: { health: 32500, speed: 70, armor: "420mm", agility: 35 },
     weapons: [
-      { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
-      { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
-      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
+      { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "30F8", type: "Main Gun", damage: 290, penetration: 48 },
       { name: "AAM 57E6M", type: "Missile", damage: 8910, penetration: 95, reload: 18 }
     ]
   },
@@ -597,12 +598,12 @@ const vehicles = [
     tier: "IV",
     image: "VT-4A1.jpg",
     description: "Export variant main battle tank with advanced fire control and modular protection.",
-    stats: { health: 39100, speed: 71, armor: "1100mm", agility: 37 },
+    stats: { health: 43200, speed: 71, armor: "1100mm", agility: 37 },
     weapons: [
-      { name: "BTJ1", type: "Main Gun", damage: 10200, penetration: 1000 },
-      { name: "BTA4", type: "Main Gun", damage: 11600, penetration: 700 },
-      { name: "BTE2", type: "Main Gun", damage: 11475, penetration: 123 },
-      { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
+      { name: "BTA4", type: "Main Gun", damage: 11660, penetration: 7000 },
+      { name: "DTB12-125", type: "Main Gun", damage: 5000, penetration: 83 },
+      { name: "BTS8 PELE", type: "Main Gun", damage: 13320, penetration: 1000 },
+      { name: "GP125", type: "Main Gun", damage: 10190, penetration: 800 }
     ]
   },
   {
@@ -613,12 +614,12 @@ const vehicles = [
     tier: "IV",
     image: "ZTZ99A.jpg",
     description: "Advanced main battle tank with composite armor and laser warning systems.",
-    stats: { health: 37500, speed: 76, armor: "1150mm", agility: 40 },
+    stats: { health: 42400, speed: 76, armor: "1150mm", agility: 40 },
     weapons: [
-      { name: "DTB-125", type: "Main Gun", damage: 12760, penetration: 160 },
-      { name: "DTP-125", type: "Main Gun", damage: 12230, penetration: 480 },
+      { name: "DTB-125 HE", type: "Main Gun", damage: 4980, penetration: 183 },
+      { name: "DTP-125 HEAT", type: "Main Gun", damage: 12230, penetration: 480 },
       { name: "DTC10-125", type: "Main Gun", damage: 11620, penetration: 680 },
-      { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
+      { name: "GP125", type: "Main Gun", damage: 10190, penetration: 800 }
     ]
   },
   {
@@ -629,12 +630,12 @@ const vehicles = [
     tier: "IV",
     image: "ZTZ99-III.jpg",
     description: "Latest variant with enhanced armor package and improved battlefield management systems.",
-    stats: { health: 38300, speed: 70, armor: "1200mm", agility: 32 },
+    stats: { health: 41700, speed: 65, armor: "1200mm", agility: 34 },
     weapons: [
-      { name: "BTJ1", type: "Main Gun", damage: 10200, penetration: 1000 },
+      { name: "DTB-125 HEI", type: "Main Gun", damage: 4980, penetration: 83 },
       { name: "BTA4", type: "Main Gun", damage: 11600, penetration: 700 },
-      { name: "BTE2", type: "Main Gun", damage: 11475, penetration: 123 },
-      { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
+      { name: "BTS8 PELE", type: "Main Gun", damage: 10200, penetration: 1000 },
+      { name: "GP125", type: "Main Gun", damage: 10190, penetration: 800 }
     ]
   },
   {
@@ -645,11 +646,11 @@ const vehicles = [
     tier: "IV",
     image: "Challenger-3.jpg",
     description: "Next-generation British main battle tank with smoothbore gun and digital turret.",
-    stats: { health: 43000, speed: 70, armor: "1180mm", agility: 32 },
+    stats: { health: 46200, speed: 70, armor: "1180mm", agility: 32 },
     weapons: [
+      { name: "DM11", type: "Main Gun", damage: 5000, penetration: 85 },
       { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
-      { name: "DM23", type: "Main Gun", damage: 8911, penetration: 337 },
-      { name: "DM33", type: "Main Gun", damage: 10620, penetration: 496 },
+      { name: "DM33", type: "Main Gun", damage: 11230, penetration: 550 },
       { name: "DM63", type: "Main Gun", damage: 11760, penetration: 810 }
     ]
   },
@@ -679,9 +680,11 @@ const vehicles = [
     description: "A heavily upgraded British main battle tank with advanced armor for urban warfare.",
     stats: { health: 42700, speed: 56, armor: "1120mm", agility: 30 },
     weapons: [
-      { name: "L26", type: "Main Gun", damage: 11600, penetration: 494 },
+      
       { name: "L27A1", type: "Main Gun", damage: 11850, penetration: 610 },
-      { name: "L31A7", type: "Main Gun", damage: 13800, penetration: 160 }
+      { name: "L23A1", type: "Main Gun", damage: 11400, penetration: 397 },
+      { name: "L31A7", type: "Main Gun", damage: 11870, penetration: 152 },
+      { name: "L26", type: "Main Gun", damage: 11600, penetration: 494 },
     ]
   },
   {
@@ -694,9 +697,10 @@ const vehicles = [
     description: "An Iranian main battle tank, featuring upgraded armor, firepower, and technology from T-72 design.",
     stats: { health: 39800, speed: 70, armor: "980mm", agility: 35 },
     weapons: [
-      { name: "3BK29", type: "Main Gun", damage: 12630, penetration: 660 },
       { name: "3OF19", type: "Main Gun", damage: 5000, penetration: 82 },
-      { name: "3BM29", type: "Main Gun", damage: 11150, penetration: 450 },
+      { name: "3BK29", type: "Main Gun", damage: 12630, penetration: 660 },
+      { name: "3BM29 Nadfil", type: "Main Gun", damage: 11250, penetration: 500 },
+      { name: "3BM50 Lead-1", type: "Main Gun", damage: 11170, penetration: 755 },
       { name: "Tondar", type: "Main Gun", damage: 10160, penetration: 750 }
     ]
   },
@@ -708,12 +712,13 @@ const vehicles = [
     tier: "IV",
     image: "Leclerc-S2-AZUR.jpg",
     description: "Upgraded French main battle tank with urban warfare package and improved armor.",
-    stats: { health: 42400, speed: 80, armor: "1080mm", agility: 38 },
+    stats: { health: 42400, speed: 72, armor: "1080mm", agility: 41 },
     weapons: [
-      { name: "OCC120G1", type: "Main Gun", damage: 11840, penetration: 480 },
-      { name: "OE120F1", type: "Main Gun", damage: 4800, penetration: 85 },
-      { name: "OFL120F1", type: "Main Gun", damage: 11040, penetration: 575 },
-      { name: "OR-281", type: "Main Gun", damage: 2106, penetration: 83 }
+      { name: "OFL 120 G1 APFSDS", type: "Main Gun", damage: 11240, penetration: 495 },
+      { name: "OE 120 F1 HEI", type: "Main Gun", damage: 5000, penetration: 85 },
+      { name: "OCC 120 G1 HEAT", type: "Main Gun", damage: 12230, penetration: 480 },
+      { name: "OFL 120 F1 APFSDS", type: "Main Gun", damage: 11610, penetration: 675 },
+      
     ]
   },
   {
@@ -726,10 +731,9 @@ const vehicles = [
     description: "The Object 640 \"Black Eagle\" is a Russian prototype main battle tank with modular armor.",
     stats: { health: 42400, speed: 80, armor: "1200mm", agility: 38 },
     weapons: [
-      { name: "3BM22", type: "Main Gun", damage: 11100, penetration: 425 },
-      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
-      { name: "3BK12M", type: "Main Gun", damage: 12140, penetration: 440 },
-      { name: "3OF39", type: "Main Gun", damage: 11040, penetration: 480 },
+      { name: "3BM60 Lead-2", type: "Main Gun", damage: 11830, penetration: 780 },
+      { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 },
+      { name: "3OF26", type: "Main Gun", damage: 5000, penetration: 92 },
       { name: "9M119", type: "Main Gun", damage: 10160, penetration: 750 }
     ]
   },
@@ -746,7 +750,7 @@ const vehicles = [
       { name: "XM1401E APFSDS", type: "Main Gun", damage: 13090, penetration: 950 },
       { name: "XME140 HEI", type: "Main Gun", damage: 13780, penetration: 103 },
       { name: "XMH140 HEAT", type: "Main Gun", damage: 14080, penetration: 866 },
-      { name: "SpikeNLOS", type: "Missile", damage: 14250, penetration: 1000, reload: 3.6 }
+      { name: "SpikeNLOS", type: "Missile", damage: 14250, penetration: 1000, reload: 4 }
     ]
   },
   {
@@ -762,7 +766,7 @@ const vehicles = [
       { name: "DM53 APFSDS", type: "Main Gun", damage: 11440, penetration: 650 },
       { name: "DM11 HEI", type: "Main Gun", damage: 5000, penetration: 85 },
       { name: "DM73 APFSDS", type: "Main Gun", damage: 11940, penetration: 900 },
-      { name: "DM12A1 HEATFS", type: "Main Gun", damage: 12140, penetration: 500 }
+      { name: "DM12A1 HEAT", type: "Main Gun", damage: 12140, penetration: 500 }
     ]
   },
   {
@@ -774,13 +778,13 @@ const vehicles = [
     image: "T-20-Monolit.jpg",
     description: "Advanced Russian main battle tank equipped with a 2A42 autocannon, Kornet ATGMs, and a 30mm AGS-30 grenade launcher. Known for its formidable firepower and versatility on the battlefield.",
     stats: {
-      health: 39400,
+      health: 42300,
       speed: 70,
       reverseSpeed: 50,
       turretRotationSpeed: 49.8,
       hullRotationSpeed: 40,
       armor: 400,
-      agility: 40
+      agility: 45
     },
     weapons: [
       { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
@@ -788,7 +792,8 @@ const vehicles = [
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
       { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
       { name: "VOG-17M", type: "Missile", damage: 1600, penetration: 60, reload: 1.7 },
-      { name: "VOG-30", type: "Missile", damage: 1800, penetration: 76, reload: 1.7 }
+      { name: "VOG-30", type: "Missile", damage: 1800, penetration: 76, reload: 1.7 },
+      { name: "9K135 Kornet", type: "Missile", damage: 14820, penetration: 1000, reload: 12 },
     ]
   },
   {
@@ -809,11 +814,11 @@ const vehicles = [
       agility: 40
     },
     weapons: [
-      { name: "PMC287", type: "Main Gun", damage: 970, penetration: 195 },
-      { name: "PMC308", type: "Main Gun", damage: 300, penetration: 55 },
-      { name: "MK246", type: "Main Gun", damage: 870, penetration: 117 },
-      { name: "MK266", type: "Main Gun", damage: 500, penetration: 55 },
-      { name: "SPIKE-LR II", type: "Missile", damage: 9830, penetration: 750, reload: 10 }
+      { name: "PMC287", type: "Main Gun", damage: 570, penetration: 195 },
+      { name: "PMC308", type: "Main Gun", damage: 300, penetration: 80 },
+      { name: "MK246", type: "Main Gun", damage: 510, penetration: 87 },
+      { name: "MK266", type: "Main Gun", damage: 270, penetration: 55 },
+      { name: "SPIKE-LR II", type: "Missile", damage: 10090, penetration: 900, reload: 10 }
     ]
   },
   {
@@ -837,7 +842,7 @@ const vehicles = [
       { name: "K276 APFSDS", type: "Main Gun", damage: 11500, penetration: 600 },
       { name: "K279 APFSDS", type: "Main Gun", damage: 11830, penetration: 740 },
       { name: "K280 HEAT-MP", type: "Main Gun", damage: 12450, penetration: 680 },
-      { name: "KSTAM", type: "Missile", damage: 9560, penetration: 850, reload: 4.1 }
+      { name: "KSTAM-II", type: "Missile", damage: 9560, penetration: 850}
     ]
   },
   {
@@ -898,19 +903,19 @@ const vehicles = [
     description: "A mobile assault gun designed to neutralize fortified positions and light armor, featuring a 105mm M35 gun.",
     stats: {
       health: 39300,
-      speed: 72,
+      speed: 75,
       reverseSpeed: 30,
       turretRotationSpeed: 30,
       hullRotationSpeed: 35,
       armor: 350,
-      agility: 30
+      agility: 38
     },
     weapons: [
       { name: "M392A2", type: "Main Gun", damage: 9480, penetration: 372 },
       { name: "M393A2", type: "Main Gun", damage: 10340, penetration: 127 },
       { name: "M456A2", type: "Main Gun", damage: 10890, penetration: 400 },
       { name: "M900", type: "Main Gun", damage: 10320, penetration: 582 },
-      { name: "SwitchBlade 300", type: "Missile", damage: 6730, penetration: 390, reload: 12.4 }
+      { name: "SwitchBlade 300", type: "Missile", damage: 6730, penetration: 390, reload: 15}
     ]
   },
   {
@@ -955,9 +960,8 @@ const vehicles = [
       agility: 55
     },
     weapons: [
-      { name: "M789", type: "Main Gun", damage: 633, penetration: 120 },
-      { name: "M799", type: "Main Gun", damage: 743, penetration: 60 },
-      { name: "Stinger Launcher", type: "Missile", damage: 6110, penetration: 35, reload: 10 },
+      { name: "XM914", type: "Main Gun", damage: 633, penetration: 120 },
+      { name: "Stinger Launcher", type: "Missile", damage: 4700, penetration: 35, reload: 10 },
       { name: "AGM-114 Hellfire", type: "Missile", damage: 11700, penetration: 950, reload: 10 }
     ]
   },
@@ -979,8 +983,8 @@ const vehicles = [
       agility: 44
     },
     weapons: [
-      { name: "M0.1.01.04 TBC", type: "Missile", damage: 4500, penetration: 260, reload: 24 },
-      { name: "M0.1.01.04M INC", type: "Missile", damage: 10500, penetration: 85, reload: 24 }
+      { name: "M0.1.01.04 TBC", type: "Missile", damage: 4500, penetration: 160, reload: 35 },
+      { name: "M0.1.01.04M INC", type: "Missile", damage: 12600, penetration: 85, reload: 35 }
     ]
   },
   {
@@ -991,7 +995,7 @@ const vehicles = [
     tier: "IV",
     image: "M270-MLRS.jpg",
     description: "Multiple Launch Rocket System capable of delivering devastating area bombardment.",
-    stats: { health: 31400, speed: 72, armor: "450mm", agility: 26 },
+    stats: { health: 31400, speed: 65, armor: "450mm", agility: 26 },
     weapons: [
       { name: "M31", type: "Guided Rocket", damage: 18225, penetration: 165, reload: 15.7 },
       { name: "M31", type: "Guided Rocket", damage: 15525, penetration: 400, reload: 15.7 },
@@ -1042,7 +1046,10 @@ const vehicles = [
       agility: 28
     },
     weapons: [
-      { name: "M107", type: "Main Gun", damage: 7200, penetration: 112 }
+      { name: "M107", type: "Main Gun", damage: 7200, penetration: 112 },
+      { name: "M549A1", type: "Main Gun", damage: 14940, penetration: 187 },
+      { name: "M48A1", type: "Main Gun", damage: 6820, penetration: 115 },
+      { name: "M712 Copperhead", type: "Main Gun", damage: 4900, penetration: 431 },
     ]
   },
   {
@@ -1076,11 +1083,11 @@ const vehicles = [
     tier: "IV",
     image: "Otomatic-76.jpg",
     description: "Self-propelled anti-aircraft gun with rapid-fire 76mm cannon.",
-    stats: { health: 33700, speed: 62, armor: "380mm", agility: 36 },
+    stats: { health: 39100, speed: 65, armor: "380mm", agility: 36 },
     weapons: [
-      { name: "76-62 APFSDS", type: "Main Gun", damage: 2340, penetration: 310 },
-      { name: "76-62 HE MOM", type: "Main Gun", damage: 1079.230769, penetration: 80 },
-      { name: "76-62 SAPOM", type: "Main Gun", damage: 1860, penetration: 160 }
+      { name: "76/62 APFSDS", type: "Main Gun", damage: 3570, penetration: 413 },
+      { name: "76/62 HE-VT MOM", type: "Main Gun", damage: 1610, penetration: 89 },
+      { name: "76/62 SAPOM", type: "Main Gun", damage: 2750, penetration: 100 }
     ]
   },
   {
@@ -1092,7 +1099,7 @@ const vehicles = [
     image: "BM-57-2-Kochevnik.jpg",
     description: "A modern Russian heavy tank armed with a 125mm smoothbore cannon and multiple defensive systems, built for frontline dominance.",
     stats: {
-      health: 36200,
+      health: 42800,
       speed: 75,
       reverseSpeed: 28,
       turretRotationSpeed: 45,
@@ -1101,10 +1108,10 @@ const vehicles = [
       agility: 40
     },
     weapons: [
-      { name: "BR-281SP", type: "Main Gun", damage: 1560, penetration: 147 },
-      { name: "BR-281U", type: "Main Gun", damage: 1400, penetration: 156 },
-      { name: "OR-281", type: "Main Gun", damage: 2106, penetration: 83 },
-      { name: "9K135 Kornet", type: "Missile", damage: 10410, penetration: 1000, reload: 12 }
+      { name: "BR-281SP", type: "Main Gun", damage: 1540, penetration: 147 },
+      { name: "BR-281U", type: "Main Gun", damage: 1400, penetration: 181 },
+      { name: "OR-281", type: "Main Gun", damage: 800, penetration: 73 },
+      { name: "9K135 Kornet", type: "Missile", damage: 14820, penetration: 1000, reload: 12 }
     ]
   },
   {
@@ -1116,20 +1123,21 @@ const vehicles = [
     image: "ADATS.jpg",
     description: "A mobile air-defense system with radar-guided missiles, protecting forces from aerial threats.",
     stats: {
-      health: 25500,
+      health: 32300,
       speed: 66,
       reverseSpeed: 21,
       turretRotationSpeed: 45,
       hullRotationSpeed: 35,
       armor: 500,
-      agility: 25
+      agility: 35
     },
     weapons: [
-      { name: "PGU-32U/T", type: "Main Gun", damage: 405, penetration: 115 },
-      { name: "M791", type: "Main Gun", damage: 473, penetration: 111 },
-      { name: "M792", type: "Main Gun", damage: 608, penetration: 48 },
-      { name: "M919", type: "Main Gun", damage: 495, penetration: 140 },
-      { name: "MIM-146", type: "Missile", damage: 12120, penetration: 900, reload: 12 }
+      { name: "PGU-32U/T", type: "Main Gun", damage: 410, penetration: 104 },
+      { name: "M791", type: "Main Gun", damage: 480, penetration: 120 },
+      { name: "M792", type: "Main Gun", damage: 240, penetration: 52 },
+      { name: "M919", type: "Main Gun", damage: 510, penetration: 171 },
+      { name: "MIM-146", type: "Missile", damage: 12120, penetration: 900, reload: 12 },
+      { name: "MIM-146", type: "Missile", damage: 7780, penetration: 290, reload: 9 },
     ]
   },
   {
