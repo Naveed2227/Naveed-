@@ -29,13 +29,19 @@ export const metadata: Metadata = {
   title: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
   description:
     "View and compare all vehicles in MWT, including Su-57M, Abram X, Mi-35, F-22 Raptor — only on MWT Assistant.",
-  keywords: ["vehicles", "stats", "MWT Assistant"],
+  keywords: ["MWT", "vehicle stats", "tank comparison", "war thunder mobile", "military vehicles", "battle pass", "game guide", "tank specs", "aircraft stats"],
+  metadataBase: new URL('https://www.mwtassistant.com'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: "Su-57M Stats & Info",
+    title: "MWT Assistant - Vehicle Stats & Comparison Tool",
     description:
-      "Explore detailed stats for the Su-57M in MWT: health 24,500, cruise speed 762 km/h, afterburner speed 1,200 km/h, and advanced stealth capabilities.",
+      "Comprehensive stats and comparison tool for all vehicles in Modern War Thunder. Compare tanks, aircraft, and more with detailed specifications and performance data.",
     url: "https://www.mwtassistant.com",
     siteName: "MWT Assistant",
+    locale: 'en_US',
+    type: 'website',
     images: [
       {
         url: "https://www.mwtassistant.com/icon-512.png",
@@ -44,15 +50,22 @@ export const metadata: Metadata = {
         alt: "MWT Assistant Logo",
       },
     ],
-    type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'MWT Assistant - Vehicle Stats & Comparison Tool',
+    description: 'Compare and analyze all vehicles in Modern War Thunder with detailed stats and specifications.',
+    images: ['https://www.mwtassistant.com/icon-512.png'],
+  },
+  verification: {
+    google: 'YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE',
   },
   icons: {
     icon: "/icon-512.png",
     apple: "/icon-512.png",
     shortcut: "/icon-512.png",
   },
-  metadataBase: new URL("https://www.mwtassistant.com"),
-    generator: 'v0.app'
+  generator: 'v0.app'
 };
 
 export default function RootLayout({
