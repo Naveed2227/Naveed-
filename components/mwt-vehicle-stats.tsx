@@ -173,6 +173,7 @@ const CopyToClipboard = ({ text, className = "" }: { text: string; className?: s
   );
 };
 import dynamic from 'next/dynamic';
+import TermsOfService from './TermsOfService';
 
 // Import EventComponent with SSR disabled to access window object
 const EventComponent = dynamic(() => import('./Event'), { ssr: false });
