@@ -5970,6 +5970,7 @@ const getFlagImage = (faction: string): string => {
     SouthKorean: "/SouthKorea-flag.jpg",
     Indian: "/India.png",
     Pakistani: "/Pakistan.png",
+    Mexican: "/Mexico.png",
   
   
   }
@@ -8255,8 +8256,10 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "Merkava Mk.3",
       "B-Type",
       "T-90M",
-      "F-5E Tiger II",
       "ERC-90 F4 Sagaie",
+      "F-5E Tiger II",
+      
+      
       
       
       
