@@ -259,18 +259,31 @@ const formatTier = (tier: string | number): string => {
 
 // New Vehicles System
 const newVehicles = [
+  "X2 Shinshin",
+  "Leopard 2A8",
+  "Al-Khalid",
+  "Arjun Mk.2",
+  "9K31 Strela-1",
   
+];
+
+// Upcoming Vehicles System
+const upcomingVehicles = [
   "Merkava Mk.3",
   "B-Type",
   "T-90M",
   "F-5E Tiger II",
   "ERC-90 F4 Sagaie",
+  // Add upcoming vehicle names here
 ];
 
 const isNewVehicle = (vehicleName: string): boolean => {
   return newVehicles.includes(vehicleName);
 };
 
+const isUpcomingVehicle = (vehicleName: string): boolean => {
+  return upcomingVehicles.includes(vehicleName);
+};
 
 // Vehicle Rarity System
 const getVehicleRarity = (vehicleName: string) => {
@@ -10569,14 +10582,19 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                             <div className="absolute -top-1.5 -right-1.5 bg-cyan-500 text-white text-[10px] sm:text-xs font-bold rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
                               {index + 1}
                             </div>
-                            {/* NEW Tag for comparison bar */}
-                            {isNewVehicle(vehicle?.name) && (
-                              <div className="absolute top-0 left-0 z-10">
+                            {/* Vehicle Tags for comparison bar */}
+                            <div className="absolute top-0 left-0 z-10 flex gap-1">
+                              {isNewVehicle(vehicle?.name) && (
                                 <div className="px-1 py-0.5 rounded text-[8px] font-semibold shadow-lg bg-white text-black">
                                   NEW
                                 </div>
-                              </div>
-                            )}
+                              )}
+                              {isUpcomingVehicle(vehicle?.name) && (
+                                <div className="px-1 py-0.5 rounded text-[8px] font-semibold shadow-lg bg-red-600 text-white">
+                                  UPCOMING
+                                </div>
+                              )}
+                            </div>
                             <button 
                               onClick={(e) => {
                                 e.stopPropagation();
@@ -11017,14 +11035,19 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     </div>
                   </div>
                   
-                  {/* NEW Tag */}
-                  {isNewVehicle(vehicle.name) && (
-                    <div className="absolute top-2 right-2 z-20">
+                  {/* Vehicle Tags */}
+                  <div className="absolute top-2 right-2 z-20 flex flex-col gap-1">
+                    {isNewVehicle(vehicle.name) && (
                       <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-white text-black">
                         NEW
                       </div>
-                    </div>
-                  )}
+                    )}
+                    {isUpcomingVehicle(vehicle.name) && (
+                      <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-red-600 text-white">
+                        UPCOMING
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
 
@@ -12164,14 +12187,19 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 alt={vehicle.name} 
                                 className="absolute inset-0 w-full h-full object-cover"
                               />
-                              {/* NEW Tag */}
-                              {isNewVehicle(vehicle.name) && (
-                                <div className="absolute top-2 right-2 z-20">
+                              {/* Vehicle Tags */}
+                              <div className="absolute top-2 right-2 z-20 flex flex-col gap-1">
+                                {isNewVehicle(vehicle.name) && (
                                   <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-white text-black">
                                     NEW
                                   </div>
-                                </div>
-                              )}
+                                )}
+                                {isUpcomingVehicle(vehicle.name) && (
+                                  <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-red-600 text-white">
+                                    UPCOMING
+                                  </div>
+                                )}
+                              </div>
                             </>
                           ) : (
                             <div className="absolute inset-0 bg-slate-700 flex items-center justify-center text-slate-400">
@@ -12720,14 +12748,19 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                   alt={vehicle.name} 
                                   className="absolute inset-0 w-full h-full object-cover"
                                 />
-                                {/* NEW Tag */}
-                                {isNewVehicle(vehicle.name) && (
-                                  <div className="absolute top-2 right-2 z-20">
+                                {/* Vehicle Tags */}
+                                <div className="absolute top-2 right-2 z-20 flex flex-col gap-1">
+                                  {isNewVehicle(vehicle.name) && (
                                     <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-white text-black">
                                       NEW
                                     </div>
-                                  </div>
-                                )}
+                                  )}
+                                  {isUpcomingVehicle(vehicle.name) && (
+                                    <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-red-600 text-white">
+                                      UPCOMING
+                                    </div>
+                                  )}
+                                </div>
                               </>
                             ) : (
                               <div className="absolute inset-0 bg-slate-700 flex items-center justify-center text-slate-400">
