@@ -3676,7 +3676,7 @@ const VEHICLES_DATA = [
       { "name": "Type 74 SPH Main Gun", "type": "Main Gun", "damage": 10000, "penetration": 650 },
       { "name": "Type 74 SPH Secondary MG", "type": "Machine Gun", "damage": 150, "penetration": 20, "rateOfFire": "625 rpm" }
     ]
-  }
+  },
 
 {
     id: 800,
