@@ -2726,7 +2726,6 @@ const vehicles = [
     ]
     
   },
-  [
   {
     "id": 708,
     "name": "XM1 (GM)",
@@ -2735,26 +2734,10 @@ const vehicles = [
     "tier": "II",
     "image": "XM1-GM.jpg",
     "description": "U.S. prototype main battle tank by General Motors, competing against Chrysler's design for the Abrams.",
-    "stats": {
-      "health": 33600,
-      "speed": 83,
-      "armor": "100mm",
-      "agility": 40
-    },
+    "stats": { "health": 33600, "speed": 83, "armor": "100mm", "agility": 40 },
     "weapons": [
-      {
-        "name": "XM1 (GM) Main Gun",
-        "type": "Main Gun",
-        "damage": 11000,
-        "penetration": 670
-      },
-      {
-        "name": "XM1 (GM) Secondary MG",
-        "type": "Machine Gun",
-        "damage": 170,
-        "penetration": 22,
-        "rateOfFire": "607 rpm"
-      }
+      { "name": "XM1 (GM) Main Gun", "type": "Main Gun", "damage": 11000, "penetration": 670 },
+      { "name": "XM1 (GM) Secondary MG", "type": "Machine Gun", "damage": 170, "penetration": 22, "rateOfFire": "607 rpm" }
     ]
   },
   {
@@ -2765,26 +2748,10 @@ const vehicles = [
     "tier": "II",
     "image": "BMP-2.jpg",
     "description": "Soviet infantry fighting vehicle, armed with a 30 mm autocannon and anti-tank guided missiles, supporting mechanized troops.",
-    "stats": {
-      "health": 23000,
-      "speed": 68,
-      "armor": "36mm",
-      "agility": 36
-    },
+    "stats": { "health": 23000, "speed": 68, "armor": "36mm", "agility": 36 },
     "weapons": [
-      {
-        "name": "BMP-2 Main Gun",
-        "type": "Main Gun",
-        "damage": 11500,
-        "penetration": 680
-      },
-      {
-        "name": "BMP-2 Secondary MG",
-        "type": "Machine Gun",
-        "damage": 180,
-        "penetration": 23,
-        "rateOfFire": "608 rpm"
-      }
+      { "name": "BMP-2 Main Gun", "type": "Main Gun", "damage": 11500, "penetration": 680 },
+      { "name": "BMP-2 Secondary MG", "type": "Machine Gun", "damage": 180, "penetration": 23, "rateOfFire": "608 rpm" }
     ]
   },
   {
@@ -2795,26 +2762,10 @@ const vehicles = [
     "tier": "II",
     "image": "BTR-82AT.jpg",
     "description": "Russian armored personnel carrier, upgraded with a 30 mm autocannon, improved armor, and anti-tank missile capability.",
-    "stats": {
-      "health": 22800,
-      "speed": 87,
-      "armor": "10mm",
-      "agility": 45
-    },
+    "stats": { "health": 22800, "speed": 87, "armor": "10mm", "agility": 45 },
     "weapons": [
-      {
-        "name": "BTR-82AT Main Gun",
-        "type": "Main Gun",
-        "damage": 12000,
-        "penetration": 690
-      },
-      {
-        "name": "BTR-82AT Secondary MG",
-        "type": "Machine Gun",
-        "damage": 190,
-        "penetration": 24,
-        "rateOfFire": "609 rpm"
-      }
+      { "name": "BTR-82AT Main Gun", "type": "Main Gun", "damage": 12000, "penetration": 690 },
+      { "name": "BTR-82AT Secondary MG", "type": "Machine Gun", "damage": 190, "penetration": 24, "rateOfFire": "609 rpm" }
     ]
   },
   {
@@ -2825,26 +2776,10 @@ const vehicles = [
     "tier": "II",
     "image": "BTR-82A1.jpg",
     "description": "Modern Russian armored personnel carrier, featuring a 30 mm autocannon, enhanced armor, and improved mobility for troops.",
-    "stats": {
-      "health": 22000,
-      "speed": 87,
-      "armor": "10mm",
-      "agility": 40
-    },
+    "stats": { "health": 22000, "speed": 87, "armor": "10mm", "agility": 40 },
     "weapons": [
-      {
-        "name": "BTR-82A1 Main Gun",
-        "type": "Main Gun",
-        "damage": 10000,
-        "penetration": 600
-      },
-      {
-        "name": "BTR-82A1 Secondary MG",
-        "type": "Machine Gun",
-        "damage": 150,
-        "penetration": 20,
-        "rateOfFire": "610 rpm"
-      }
+      { "name": "BTR-82A1 Main Gun", "type": "Main Gun", "damage": 10000, "penetration": 600 },
+      { "name": "BTR-82A1 Secondary MG", "type": "Machine Gun", "damage": 150, "penetration": 20, "rateOfFire": "610 rpm" }
     ]
   },
   {
@@ -2853,35 +2788,13 @@ const vehicles = [
     "type": "Multirole-IFV",
     "faction": "American",
     "tier": "II",
-    "description": "Infantry fighting vehicle with TOW missile system and troop transport capability.",
     "image": "M3-Bradley.jpg",
-    "stats": {
-      "health": 25000,
-      "speed": 62,
-      "armor": "38mm",
-      "agility": 35
-    },
+    "description": "Infantry fighting vehicle with TOW missile system and troop transport capability.",
+    "stats": { "health": 25000, "speed": 62, "armor": "38mm", "agility": 35 },
     "weapons": [
-      {
-        "name": "TOW-2 ATGM",
-        "type": "Anti-Tank Missile",
-        "damage": 14800,
-        "penetration": 780
-      },
-      {
-        "name": "M242 25mm",
-        "type": "Autocannon",
-        "damage": 320,
-        "penetration": 58,
-        "rateOfFire": "200 rpm"
-      },
-      {
-        "name": "M240C 7.62mm",
-        "type": "Coaxial MG",
-        "damage": 110,
-        "penetration": 14,
-        "rateOfFire": "750 rpm"
-      }
+      { "name": "TOW-2 ATGM", "type": "Anti-Tank Missile", "damage": 14800, "penetration": 780 },
+      { "name": "M242 25mm", "type": "Autocannon", "damage": 320, "penetration": 58, "rateOfFire": "200 rpm" },
+      { "name": "M240C 7.62mm", "type": "Coaxial MG", "damage": 110, "penetration": 14, "rateOfFire": "750 rpm" }
     ]
   },
   {
@@ -2891,27 +2804,11 @@ const vehicles = [
     "faction": "American",
     "tier": "II",
     "image": "M551-Sheridan.jpg",
-    "description": "The M551 Sheridan is a lightweight U.S. airborne tank with a 152mm gun-launcher, amphibious capability, and limited armor protection.",
-    "stats": {
-      "health": 24000,
-      "speed": 70,
-      "armor": "32mm",
-      "agility": 40
-    },
+    "description": "Lightweight U.S. airborne tank with a 152mm gun-launcher, amphibious capability, and limited armor protection.",
+    "stats": { "health": 24000, "speed": 70, "armor": "32mm", "agility": 40 },
     "weapons": [
-      {
-        "name": "M551 Sheridan Main Gun",
-        "type": "Main Gun",
-        "damage": 11000,
-        "penetration": 620
-      },
-      {
-        "name": "M551 Sheridan Secondary MG",
-        "type": "Machine Gun",
-        "damage": 170,
-        "penetration": 22,
-        "rateOfFire": "612 rpm"
-      }
+      { "name": "M551 Sheridan Main Gun", "type": "Main Gun", "damage": 11000, "penetration": 620 },
+      { "name": "M551 Sheridan Secondary MG", "type": "Machine Gun", "damage": 170, "penetration": 22, "rateOfFire": "612 rpm" }
     ]
   },
   {
@@ -2922,26 +2819,10 @@ const vehicles = [
     "tier": "II",
     "image": "Object-685.jpg",
     "description": "Soviet experimental amphibious light tank, designed for reconnaissance and river-crossing operations with light armor and armament.",
-    "stats": {
-      "health": 24500,
-      "speed": 70,
-      "armor": "60mm",
-      "agility": 39
-    },
+    "stats": { "health": 24500, "speed": 70, "armor": "60mm", "agility": 39 },
     "weapons": [
-      {
-        "name": "Object 685 Main Gun",
-        "type": "Main Gun",
-        "damage": 11500,
-        "penetration": 630
-      },
-      {
-        "name": "Object 685 Secondary MG",
-        "type": "Machine Gun",
-        "damage": 180,
-        "penetration": 23,
-        "rateOfFire": "613 rpm"
-      }
+      { "name": "Object 685 Main Gun", "type": "Main Gun", "damage": 11500, "penetration": 630 },
+      { "name": "Object 685 Secondary MG", "type": "Machine Gun", "damage": 180, "penetration": 23, "rateOfFire": "613 rpm" }
     ]
   },
   {
@@ -2950,28 +2831,12 @@ const vehicles = [
     "type": "Missile Carrier",
     "faction": "Russian",
     "tier": "II",
-    "description": "Experimental missile tank destroyer with unique guided missile system.",
     "image": "IT-1-Dragon.jpg",
-    "stats": {
-      "health": 22800,
-      "speed": 50,
-      "armor": "35mm",
-      "agility": 55
-    },
+    "description": "Experimental missile tank destroyer with unique guided missile system.",
+    "stats": { "health": 22800, "speed": 50, "armor": "35mm", "agility": 55 },
     "weapons": [
-      {
-        "name": "3M7 Drakon ATGM",
-        "type": "Anti-Tank Missile",
-        "damage": 15200,
-        "penetration": 500
-      },
-      {
-        "name": "PKT 7.62mm",
-        "type": "Machine Gun",
-        "damage": 95,
-        "penetration": 12,
-        "rateOfFire": "800 rpm"
-      }
+      { "name": "3M7 Drakon ATGM", "type": "Anti-Tank Missile", "damage": 15200, "penetration": 500 },
+      { "name": "PKT 7.62mm", "type": "Machine Gun", "damage": 95, "penetration": 12, "rateOfFire": "800 rpm" }
     ]
   },
   {
@@ -2982,26 +2847,10 @@ const vehicles = [
     "tier": "II",
     "image": "M163-VADS.jpg",
     "description": "U.S. self-propelled anti-aircraft system, mounting a 20 mm Vulcan cannon on an M113 chassis.",
-    "stats": {
-      "health": 20000,
-      "speed": 65,
-      "armor": "30mm",
-      "agility": 35
-    },
+    "stats": { "health": 20000, "speed": 65, "armor": "30mm", "agility": 35 },
     "weapons": [
-      {
-        "name": "M163 VADS Main Gun",
-        "type": "Main Gun",
-        "damage": 10000,
-        "penetration": 650
-      },
-      {
-        "name": "M163 VADS Secondary MG",
-        "type": "Machine Gun",
-        "damage": 150,
-        "penetration": 20,
-        "rateOfFire": "615 rpm"
-      }
+      { "name": "M163 VADS Main Gun", "type": "Main Gun", "damage": 10000, "penetration": 650 },
+      { "name": "M163 VADS Secondary MG", "type": "Machine Gun", "damage": 150, "penetration": 20, "rateOfFire": "615 rpm" }
     ]
   },
   {
@@ -3012,26 +2861,10 @@ const vehicles = [
     "tier": "II",
     "image": "PGZ-04A.jpg",
     "description": "Chinese self-propelled anti-aircraft system, equipped with twin 35 mm cannons and radar for short-range air defense.",
-    "stats": {
-      "health": 22000,
-      "speed": 62,
-      "armor": "12mm",
-      "agility": 30
-    },
+    "stats": { "health": 22000, "speed": 62, "armor": "12mm", "agility": 30 },
     "weapons": [
-      {
-        "name": "PGZ-04A Main Gun",
-        "type": "Main Gun",
-        "damage": 10500,
-        "penetration": 660
-      },
-      {
-        "name": "PGZ-04A Secondary MG",
-        "type": "Machine Gun",
-        "damage": 160,
-        "penetration": 21,
-        "rateOfFire": "616 rpm"
-      }
+      { "name": "PGZ-04A Main Gun", "type": "Main Gun", "damage": 10500, "penetration": 660 },
+      { "name": "PGZ-04A Secondary MG", "type": "Machine Gun", "damage": 160, "penetration": 21, "rateOfFire": "616 rpm" }
     ]
   },
   {
@@ -3040,28 +2873,12 @@ const vehicles = [
     "type": "Anti-Air",
     "faction": "Russian",
     "tier": "II",
-    "description": "Modernized Soviet/Russian self-propelled anti-aircraft system, armed with four 23 mm autocannons and radar targeting.",
     "image": "ZSU-23-4M4-Shilka.jpg",
-    "stats": {
-      "health": 21000,
-      "speed": 68,
-      "armor": "280mm",
-      "agility": 32
-    },
+    "description": "Modernized Soviet/Russian self-propelled anti-aircraft system, armed with four 23 mm autocannons and radar targeting.",
+    "stats": { "health": 21000, "speed": 68, "armor": "30mm", "agility": 32 },
     "weapons": [
-      {
-        "name": "AZP-23 23mm Quad",
-        "type": "Anti-Aircraft Gun",
-        "damage": 1800,
-        "penetration": 95,
-        "rateOfFire": "3400 rpm"
-      },
-      {
-        "name": "9M311 Sosna",
-        "type": "SAM",
-        "damage": 7500,
-        "penetration": 380
-      }
+      { "name": "AZP-23 23mm Quad", "type": "Anti-Aircraft Gun", "damage": 1800, "penetration": 95, "rateOfFire": "3400 rpm" },
+      { "name": "9M311 Sosna", "type": "SAM", "damage": 7500, "penetration": 380 }
     ]
   },
   {
@@ -3072,26 +2889,10 @@ const vehicles = [
     "tier": "II",
     "image": "LAV-300.jpg",
     "description": "U.S. wheeled armored vehicle, designed for reconnaissance and troop transport, armed with a turret-mounted autocannon.",
-    "stats": {
-      "health": 39000,
-      "speed": 53,
-      "armor": "660mm",
-      "agility": 38
-    },
+    "stats": { "health": 39000, "speed": 53, "armor": "50mm", "agility": 38 },
     "weapons": [
-      {
-        "name": "LAV-300 Main Gun",
-        "type": "Main Gun",
-        "damage": 11500,
-        "penetration": 680
-      },
-      {
-        "name": "LAV-300 Secondary MG",
-        "type": "Machine Gun",
-        "damage": 180,
-        "penetration": 23,
-        "rateOfFire": "618 rpm"
-      }
+      { "name": "LAV-300 Main Gun", "type": "Main Gun", "damage": 11500, "penetration": 680 },
+      { "name": "LAV-300 Secondary MG", "type": "Machine Gun", "damage": 180, "penetration": 23, "rateOfFire": "618 rpm" }
     ]
   },
   {
@@ -3102,26 +2903,10 @@ const vehicles = [
     "tier": "II",
     "image": "PTL-02.jpg",
     "description": "Chinese wheeled self-propelled anti-tank vehicle, armed with a 100 mm gun capable of firing guided missiles.",
-    "stats": {
-      "health": 39500,
-      "speed": 54,
-      "armor": "680mm",
-      "agility": 39
-    },
+    "stats": { "health": 39500, "speed": 54, "armor": "50mm", "agility": 39 },
     "weapons": [
-      {
-        "name": "PTL-02 Main Gun",
-        "type": "Main Gun",
-        "damage": 12000,
-        "penetration": 690
-      },
-      {
-        "name": "PTL-02 Secondary MG",
-        "type": "Machine Gun",
-        "damage": 190,
-        "penetration": 24,
-        "rateOfFire": "619 rpm"
-      }
+      { "name": "PTL-02 Main Gun", "type": "Main Gun", "damage": 12000, "penetration": 690 },
+      { "name": "PTL-02 Secondary MG", "type": "Machine Gun", "damage": 190, "penetration": 24, "rateOfFire": "619 rpm" }
     ]
   },
   {
@@ -3132,26 +2917,10 @@ const vehicles = [
     "tier": "II",
     "image": "M109.jpg",
     "description": "U.S. self-propelled howitzer, mounting a 155 mm gun for long-range artillery support on a tracked chassis.",
-    "stats": {
-      "health": 40000,
-      "speed": 45,
-      "armor": "600mm",
-      "agility": 30
-    },
+    "stats": { "health": 40000, "speed": 45, "armor": "50mm", "agility": 30 },
     "weapons": [
-      {
-        "name": "M109 Main Gun",
-        "type": "Main Gun",
-        "damage": 10000,
-        "penetration": 600
-      },
-      {
-        "name": "M109 Secondary MG",
-        "type": "Machine Gun",
-        "damage": 150,
-        "penetration": 20,
-        "rateOfFire": "620 rpm"
-      }
+      { "name": "M109 Main Gun", "type": "Main Gun", "damage": 10000, "penetration": 600 },
+      { "name": "M109 Secondary MG", "type": "Machine Gun", "damage": 150, "penetration": 20, "rateOfFire": "620 rpm" }
     ]
   },
   {
@@ -3162,26 +2931,10 @@ const vehicles = [
     "tier": "II",
     "image": "PLL-05.jpg",
     "description": "Chinese wheeled self-propelled howitzer, armed with a 120 mm gun-mortar capable of both direct and indirect fire.",
-    "stats": {
-      "health": 40500,
-      "speed": 46,
-      "armor": "620mm",
-      "agility": 31
-    },
+    "stats": { "health": 40500, "speed": 46, "armor": "50mm", "agility": 31 },
     "weapons": [
-      {
-        "name": "PLL-05 Main Gun",
-        "type": "Main Gun",
-        "damage": 10500,
-        "penetration": 610
-      },
-      {
-        "name": "PLL-05 Secondary MG",
-        "type": "Machine Gun",
-        "damage": 160,
-        "penetration": 21,
-        "rateOfFire": "621 rpm"
-      }
+      { "name": "PLL-05 Main Gun", "type": "Main Gun", "damage": 10500, "penetration": 610 },
+      { "name": "PLL-05 Secondary MG", "type": "Machine Gun", "damage": 160, "penetration": 21, "rateOfFire": "621 rpm" }
     ]
   },
   {
@@ -3192,26 +2945,10 @@ const vehicles = [
     "tier": "II",
     "image": "PLZ-83.jpg",
     "description": "Chinese tracked self-propelled howitzer, equipped with a 152 mm gun for long-range artillery support.",
-    "stats": {
-      "health": 41000,
-      "speed": 47,
-      "armor": "640mm",
-      "agility": 32
-    },
+    "stats": { "health": 41000, "speed": 47, "armor": "50mm", "agility": 32 },
     "weapons": [
-      {
-        "name": "PLZ-83 Main Gun",
-        "type": "Main Gun",
-        "damage": 11000,
-        "penetration": 620
-      },
-      {
-        "name": "PLZ-83 Secondary MG",
-        "type": "Machine Gun",
-        "damage": 170,
-        "penetration": 22,
-        "rateOfFire": "622 rpm"
-      }
+      { "name": "PLZ-83 Main Gun", "type": "Main Gun", "damage": 11000, "penetration": 620 },
+      { "name": "PLZ-83 Secondary MG", "type": "Machine Gun", "damage": 170, "penetration": 22, "rateOfFire": "622 rpm" }
     ]
   },
   {
@@ -3222,26 +2959,10 @@ const vehicles = [
     "tier": "II",
     "image": "2S1-Gvozdika.jpg",
     "description": "Soviet self-propelled 122 mm howitzer, fully tracked, providing mobile artillery support for mechanized units.",
-    "stats": {
-      "health": 41500,
-      "speed": 48,
-      "armor": "660mm",
-      "agility": 33
-    },
+    "stats": { "health": 41500, "speed": 48, "armor": "50mm", "agility": 33 },
     "weapons": [
-      {
-        "name": "2S1 Gvozdika Main Gun",
-        "type": "Main Gun",
-        "damage": 11500,
-        "penetration": 630
-      },
-      {
-        "name": "2S1 Gvozdika Secondary MG",
-        "type": "Machine Gun",
-        "damage": 180,
-        "penetration": 23,
-        "rateOfFire": "623 rpm"
-      }
+      { "name": "2S1 Gvozdika Main Gun", "type": "Main Gun", "damage": 11500, "penetration": 630 },
+      { "name": "2S1 Gvozdika Secondary MG", "type": "Machine Gun", "damage": 180, "penetration": 23, "rateOfFire": "623 rpm" }
     ]
   },
   {
@@ -3252,26 +2973,10 @@ const vehicles = [
     "tier": "II",
     "image": "2S3-Akatsiya.jpg",
     "description": "Soviet self-propelled 152 mm howitzer, tracked, providing long-range artillery support with high mobility.",
-    "stats": {
-      "health": 42000,
-      "speed": 49,
-      "armor": "680mm",
-      "agility": 34
-    },
+    "stats": { "health": 42000, "speed": 49, "armor": "50mm", "agility": 34 },
     "weapons": [
-      {
-        "name": "2S3 Akatsiya Main Gun",
-        "type": "Main Gun",
-        "damage": 12000,
-        "penetration": 640
-      },
-      {
-        "name": "2S3 Akatsiya Secondary MG",
-        "type": "Machine Gun",
-        "damage": 190,
-        "penetration": 24,
-        "rateOfFire": "624 rpm"
-      }
+      { "name": "2S3 Akatsiya Main Gun", "type": "Main Gun", "damage": 12000, "penetration": 640 },
+      { "name": "2S3 Akatsiya Secondary MG", "type": "Machine Gun", "damage": 190, "penetration": 24, "rateOfFire": "624 rpm" }
     ]
   },
   {
@@ -3282,28 +2987,12 @@ const vehicles = [
     "tier": "II",
     "image": "Type-74-SPH.jpg",
     "description": "Japanese self-propelled 105 mm howitzer, mounted on a tracked chassis for mobile artillery support.",
-    "stats": {
-      "health": 42500,
-      "speed": 50,
-      "armor": "600mm",
-      "agility": 35
-    },
+    "stats": { "health": 42500, "speed": 50, "armor": "50mm", "agility": 35 },
     "weapons": [
-      {
-        "name": "Type 74 SPH Main Gun",
-        "type": "Main Gun",
-        "damage": 10000,
-        "penetration": 650
-      },
-      {
-        "name": "Type 74 SPH Secondary MG",
-        "type": "Machine Gun",
-        "damage": 150,
-        "penetration": 20,
-        "rateOfFire": "625 rpm"
-      }
+      { "name": "Type 74 SPH Main Gun", "type": "Main Gun", "damage": 10000, "penetration": 650 },
+      { "name": "Type 74 SPH Secondary MG", "type": "Machine Gun", "damage": 150, "penetration": 20, "rateOfFire": "625 rpm" }
     ]
-  },
+  }
   {
     "id": 800,
     "name": "Z-9G Harbin",
