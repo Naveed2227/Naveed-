@@ -671,6 +671,25 @@ const BATTLE_PASSES = [
 
 const VEHICLES_DATA = [
   {
+    id: 0,
+    name: "F-5E Tiger II",
+    type: "Fighter Jet",
+    faction: "American",
+    tier: "III",
+    description: "Lightweight, highly maneuverable multirole fighter known for its agility and versatility in both air-to-air and ground attack roles.",
+    image: "F-5E-Tiger-II.jpg",
+    stats: { health: 18500, speed: 920, afterburnerSpeed: 1750, agility: 65 },
+    weapons: [
+      { "name": "AIM-9P Sidewinder", "type": "Short-Range AAM", "damage": 5800, "penetration": 55, "reload": 12 },
+      { "name": "AIM-9L Sidewinder", "type": "Short-Range AAM", "damage": 6200, "penetration": 60, "reload": 14 },
+      { "name": "AGM-65B Maverick", "type": "Air-to-Ground Missile", "damage": 12500, "penetration": 750, "reload": 25 },
+      { "name": "Mk.82 Snakeye", "type": "Unguided Bomb", "damage": 13800, "penetration": 250, "reload": 30 },
+      { "name": "Mk.84", "type": "Unguided Bomb", "damage": 19800, "penetration": 400, "reload": 45 },
+      { "name": "LAU-3 Rocket Pod", "type": "Rocket Pod", "damage": 4500, "penetration": 300, "reload": 8 },
+      { "name": "M39 20mm Cannon", "type": "Cannon", "damage": 2800, "penetration": 45, "reload": 0.2 }
+    ]
+  },
+  {
     id: 1,
     name: "Su-57M",
     type: "Fighter Jet",
@@ -3190,7 +3209,11 @@ const VEHICLES_DATA = [
     "image": "F-5E-Tiger-II.jpg",
     "stats": { "health": 0, "speed": 0, "afterburnerSpeed": 0, "agility": 0 },
     "weapons": [
-      
+      { "name": "M117 Cone 45", "damage": 25000, "penetration": 0, "reload": 0 },
+      { "name": "Mk-83", "damage": 0, "penetration": 0, "reload": 0 },
+      { "name": "LAU-51", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
+      { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+      { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 5700, penetration: 45, reload: 15 },
     ]
   },
   {
@@ -3581,6 +3604,22 @@ const VEHICLES_DATA = [
   },
   {
     "id": 720,
+    "name": "ERC-90 F4 Sagaie",
+    "type": "Tank Destroyer",
+    "faction": "Mexican",
+    "tier": "II",
+    "image": "ERC-90-F4-Sagaie.jpg",
+    "description": "A fast French-Designed reconnaissance vehicle with a 90 mm gun, light armor, and high mobility for Tier II combat.",
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "weapons": [
+      { "name": "F1 HEATFS", "type": "Main Gun", "damage": 0, "penetration": 0 },
+      { "name": "CTS-90 HESH", "type": "Main Gun", "damage": 0, "penetration": 0 },
+      { "name": "OFL 90 F1 APFSDS", "type": "Machine Gun", "damage": 0, "penetration": 380 },
+      
+    ]
+  },
+  {
+    "id": 721,
     "name": "PTL-02",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -3594,7 +3633,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 721,
+    "id": 722,
     "name": "M109",
     "type": "SPH",
     "faction": "American",
@@ -3608,7 +3647,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 722,
+    "id": 723,
     "name": "PLL-05",
     "type": "SPH",
     "faction": "Chinese",
@@ -3622,7 +3661,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 723,
+    "id": 724,
     "name": "PLZ-83",
     "type": "SPH",
     "faction": "Chinese",
@@ -3636,7 +3675,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 724,
+    "id": 725,
     "name": "2S1 Gvozdika",
     "type": "SPH",
     "faction": "Russian",
@@ -3650,7 +3689,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 725,
+    "id": 726,
     "name": "2S3 Akatsiya",
     "type": "SPH",
     "faction": "Russian",
@@ -3664,7 +3703,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 726,
+    "id": 727,
     "name": "Type 74 SPH",
     "type": "SPH",
     "faction": "Japanese",
