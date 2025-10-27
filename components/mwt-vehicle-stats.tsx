@@ -6643,6 +6643,9 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [dbInitialized, setDbInitialized] = useState(false);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  
+  // State for vehicle comparison
+  const [compare, setCompare] = useState<string[]>([]);
 
   // Load favorites from IndexedDB on component mount
   useEffect(() => {
