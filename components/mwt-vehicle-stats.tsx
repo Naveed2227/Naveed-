@@ -1852,7 +1852,24 @@ const VEHICLES_DATA = [
     guns: [
       { name: "UPK-23-250(23mm)", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 },
       { name: "2A42(30mm)", type: "Autocannon", damage: 90, penetration: 85, reload: 300 }
-    ]
+    ],
+    modules: {
+      engine: [
+        { name: "VK-2500P MK1", bonus: "+22 km/h speed" },
+        { name: "VK-2500P MK2", bonus: "+44 km/h speed" },
+        { name: "VK-2500P MK3", bonus: "+66 km/h speed" }
+      ],
+      survivability: [
+        { name: "Armor Plating MK1", bonus: "+12% protection" },
+        { name: "Armor Plating MK2", bonus: "+24% protection" },
+        { name: "Armor Plating MK3", bonus: "+36% protection" }
+      ],
+      avionics: [
+        { name: "N025 Radar MK1", bonus: "+18% detection" },
+        { name: "N025 Radar MK2", bonus: "+32% detection" },
+        { name: "N025 Radar MK3", bonus: "+46% detection" }
+      ]
+    }
   },
   {
     id: 201,
@@ -1876,7 +1893,24 @@ const VEHICLES_DATA = [
     ],
     guns: [
       { name: "Type 23 L(23mm)", type: "Autocannon", damage: 80, penetration: 70, reload: 180 }
-    ]
+    ],
+    modules: {
+      engine: [
+        { name: "WZ-9 Turboshaft MK1", bonus: "+20 km/h speed" },
+        { name: "WZ-9 Turboshaft MK2", bonus: "+40 km/h speed" },
+        { name: "WZ-9 Turboshaft MK3", bonus: "+60 km/h speed" }
+      ],
+      survivability: [
+        { name: "Composite Armor MK1", bonus: "+10% protection" },
+        { name: "Composite Armor MK2", bonus: "+20% protection" },
+        { name: "Composite Armor MK3", bonus: "+30% protection" }
+      ],
+      avionics: [
+        { name: "Millimeter Wave Radar MK1", bonus: "+16% detection" },
+        { name: "Millimeter Wave Radar MK2", bonus: "+28% detection" },
+        { name: "Millimeter Wave Radar MK3", bonus: "+40% detection" }
+      ]
+    }
   },
   {
     id: 202,
@@ -1899,7 +1933,24 @@ const VEHICLES_DATA = [
     ],
     guns: [
       { name: "QJK99(12.7mm)", type: "Heavy MG", damage: 50, penetration: 40, reload: 100 }
-    ]
+    ],
+    modules: {
+      engine: [
+        { name: "WZ-8C Turboshaft MK1", bonus: "+18 km/h speed" },
+        { name: "WZ-8C Turboshaft MK2", bonus: "+36 km/h speed" },
+        { name: "WZ-8C Turboshaft MK3", bonus: "+54 km/h speed" }
+      ],
+      survivability: [
+        { name: "Stealth Features MK1", bonus: "+12% evasion" },
+        { name: "Stealth Features MK2", bonus: "+22% evasion" },
+        { name: "Stealth Features MK3", bonus: "+32% evasion" }
+      ],
+      avionics: [
+        { name: "EO/IR System MK1", bonus: "+14% detection" },
+        { name: "EO/IR System MK2", bonus: "+26% detection" },
+        { name: "EO/IR System MK3", bonus: "+38% detection" }
+      ]
+    }
   },
   {
     id: 203,
@@ -1924,7 +1975,24 @@ const VEHICLES_DATA = [
     guns: [
       { name: "UPK-23-250(23mm)", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 },
       { name: "GSh-30-2(30mm)", type: "Autocannon", damage: 95, penetration: 90, reload: 280 }
-    ]
+    ],
+    modules: {
+      engine: [
+        { name: "VK-2500M MK1", bonus: "+28 km/h speed" },
+        { name: "VK-2500M MK2", bonus: "+56 km/h speed" },
+        { name: "VK-2500M MK3", bonus: "+84 km/h speed" }
+      ],
+      survivability: [
+        { name: "Stealth Coating MK1", bonus: "+18% evasion" },
+        { name: "Stealth Coating MK2", bonus: "+32% evasion" },
+        { name: "Stealth Coating MK3", bonus: "+46% evasion" }
+      ],
+      avionics: [
+        { name: "Advanced Radar MK1", bonus: "+22% detection" },
+        { name: "Advanced Radar MK2", bonus: "+38% detection" },
+        { name: "Advanced Radar MK3", bonus: "+54% detection" }
+      ]
+    }
   },
   {
     id: 204,
@@ -1948,7 +2016,21 @@ const VEHICLES_DATA = [
     ],
     guns: [
       { name: "M230(30mm)", type: "Autocannon", damage: 90, penetration: 85, reload: 300 }
-    ]
+    ],
+    modules: {
+      engine: [
+        { name: "Compound Rotary Jet MK1", bonus: "+10% speed" },
+        { name: "Compound Rotary Jet MK2", bonus: "+20% speed" }
+      ],
+      avionics: [
+        { name: "Advanced Avionics Suite MK1", bonus: "+25% detection & targeting" },
+        { name: "Advanced Avionics Suite MK2", bonus: "+50% detection & targeting" }
+      ],
+      defense: [
+        { name: "DIRCM MK1", bonus: "+25% countermeasures" },
+        { name: "DIRCM MK2", bonus: "+45% countermeasures" }
+      ]
+    }
   },
   {
     id: 205,
@@ -1973,7 +2055,24 @@ const VEHICLES_DATA = [
     guns: [
       { name: "2A42(30mm)", type: "Autocannon", damage: 90, penetration: 85, reload: 300 },
       { name: "UPK-23-250(23mm)", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 }
-    ]
+    ],
+    modules: {
+      engine: [
+        { name: "VK-2500 MK1", bonus: "+25 km/h speed" },
+        { name: "VK-2500 MK2", bonus: "+50 km/h speed" },
+        { name: "VK-2500 MK3", bonus: "+75 km/h speed" }
+      ],
+      survivability: [
+        { name: "Chaff/Flare MK1", bonus: "+12% evasion" },
+        { name: "Chaff/Flare MK2", bonus: "+24% evasion" },
+        { name: "Chaff/Flare MK3", bonus: "+36% evasion" }
+      ],
+      avionics: [
+        { name: "Arbalet Radar MK1", bonus: "+18% detection" },
+        { name: "Arbalet Radar MK2", bonus: "+32% detection" },
+        { name: "Arbalet Radar MK3", bonus: "+46% detection" }
+      ]
+    }
   },
   {
     id: 206,
@@ -1998,19 +2097,36 @@ const VEHICLES_DATA = [
     ],
     guns: [
       { name: "XM915(20mm)", type: "Autocannon", damage: 70, penetration: 60, reload: 220 }
-    ]
+    ],
+    modules: {
+      engine: [
+        { name: "T901 Turboshaft MK1", bonus: "+25 km/h speed" },
+        { name: "T901 Turboshaft MK2", bonus: "+50 km/h speed" },
+        { name: "T901 Turboshaft MK3", bonus: "+75 km/h speed" }
+      ],
+      survivability: [
+        { name: "Stealth Coating MK1", bonus: "+15% evasion" },
+        { name: "Stealth Coating MK2", bonus: "+28% evasion" },
+        { name: "Stealth Coating MK3", bonus: "+40% evasion" }
+      ],
+      avionics: [
+        { name: "MTADS/PNVS MK1", bonus: "+20% detection" },
+        { name: "MTADS/PNVS MK2", bonus: "+35% detection" },
+        { name: "MTADS/PNVS MK3", bonus: "+50% detection" }
+      ]
+    }
   },
   {
-    id: 300,
-    name: "Mitsubishi F-2B",
-    type: "Fighter Jet",
-    faction: "Japanese",
-    tier: "III",
-    image: "Mitsubishi-F-2B.jpg",
-    description: "Multirole fighter developed from the F-16, optimized for anti-ship and air-to-air roles.",
-    stats: { health: 20400, speed: 550, afterburnerSpeed: 2210, agility: 49 },
-    weapons: [
-      { "name": "GCS-1", "type": "Autocannon", "damage": 14300, "penetration": 120, "reload": 25 },
+  id: 300,
+  name: "Mitsubishi F-2B",
+  type: "Fighter Jet",
+  faction: "Japanese",
+  tier: "III",
+  image: "Mitsubishi-F-2B.jpg",
+  description: "Multirole fighter developed from the F-16, optimized for anti-ship and air-to-air roles.",
+  stats: { health: 20400, speed: 550, afterburnerSpeed: 2210, agility: 49 },
+  weapons: [
+    { "name": "GCS-1", "type": "Autocannon", "damage": 14300, "penetration": 120, "reload": 25 },
       { "name": "JLAU-3/A", "type": "Rocket Pod", "damage": 5200, "penetration": 128, "reload": 20 },
       { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
       { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
@@ -2020,8 +2136,22 @@ const VEHICLES_DATA = [
       { "name": "AAM-4", "type": "BVR AAM", "damage": 7500, "penetration": 75, "reload": 30 },
       { "name": "AAM-6", "type": "BVR AAM", "damage": 8100, "penetration": 85, "reload": 35 },
       { "name": "ASM-3", "type": "Anti-Ship Missile", "damage": 19400, "penetration": 240, "reload": 38 }
+
+  ],
+  modules: {
+    engine: [
+      { name: "IHI XF5-1 MK1", bonus: "+200 km/h speed" },
+      { name: "IHI XF5-1 MK2", bonus: "+400 km/h speed" }
+    ],
+    avionics: [
+      { name: "J/APG-2 Radar MK1", bonus: "+20% detection" },
+      { name: "J/APG-2 Radar MK2", bonus: "+40% detection" }
+    ],
+    stealth: [
+      { name: "RAM Coating MK1", bonus: "+15% stealth" }
     ]
-  },
+  }
+},
   {
     id: 301,
     name: "F-16C Night Falcon",
@@ -2032,27 +2162,45 @@ const VEHICLES_DATA = [
     image: "F-16C-Night-Falcon.jpg",
     stats: { health: 17500, speed: 790, afterburnerSpeed: 2178, agility: 48 },
     weapons: [
-      { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
-      { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
-      { name: "GBU-39", type: "Guided Bomb", damage: 14700, penetration: 120, reload: 28 },
-      { name: "GBU-31", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
-      { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
-      { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
-      { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
-      { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 },
-      { name: "AGM-84H/K", type: "Anti-Ship Missile", damage: 18900, penetration: 310, reload: 35 }
-    ]
+       { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
+    { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "GBU-39", type: "Guided Bomb", damage: 14700, penetration: 120, reload: 28 },
+    { name: "GBU-31", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
+    { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
+    { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 },
+    { name: "AGM-84H/K", type: "Anti-Ship Missile", damage: 18900, penetration: 310, reload: 35 }
+
+    ],
+    modules: {
+      engine: [
+        { name: "F100-PW-229 MK1", bonus: "+110 km/h speed" },
+        { name: "F100-PW-229 MK2", bonus: "+220 km/h speed" },
+        { name: "F100-PW-229 MK3", bonus: "+330 km/h speed" },
+      ],
+      stealth: [
+        { name: "ECM Suite MK1", bonus: "+10% stealth" },
+        { name: "ECM Suite MK2", bonus: "+20% stealth" },
+        { name: "ECM Suite MK3", bonus: "+30% stealth" },
+      ],
+      avionics: [
+        { name: "AN/APG-68 MK1", bonus: "+16% detection" },
+        { name: "AN/APG-68 MK2", bonus: "+28% detection" },
+        { name: "AN/APG-68 MK3", bonus: "+40% detection" },
+      ],
+    },
   },
   {
-    id: 302,
-    name: "F/A-18F Super Hornet",
-    type: "Fighter Jet",
-    faction: "American",
-    tier: "III",
-    image: "FA-18F-Super-Hornet.jpg",
-    description: "Twin-engine carrier-based multirole fighter with excellent versatility for both air-to-air and air-to-ground combat.",
-    stats: { health: 18100, speed: 810, afterburnerSpeed: 1730, agility: 41 },
-    weapons: [
+  id: 302,
+  name: "F/A-18F Super Hornet",
+  type: "Fighter Jet",
+  faction: "American",
+  tier: "III",
+  image: "FA-18F-Super-Hornet.jpg",
+  description: "Twin-engine carrier-based multirole fighter with excellent versatility for both air-to-air and air-to-ground combat.",
+  stats: { health: 18100, speed: 810, afterburnerSpeed: 1730, agility: 41 },
+  weapons: [
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
       { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
       { "name": "GBU-12", "type": "Guided Bomb", "damage": 18590, "penetration": 120, "reload": 30 },
@@ -2060,38 +2208,73 @@ const VEHICLES_DATA = [
       { "name": "AGM-65", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
       { "name": "AIM-132", "type": "Short-Range Air-to-Air Missile", "damage": 5200, "penetration": 65, "reload": 15 },
       { "name": "AIM-120", "type": "Beyond Visual Range Air-to-Air Missile", "damage": 11300, "penetration": 60, "reload": 20 }
-    ]
+  ],
+  modules: {
+    engine: [
+      { name: "F414-GE-400 MK1", bonus: "+150 km/h speed" },
+      { name: "F414-GE-400 MK2", bonus: "+300 km/h speed" },
+      { name: "F414-GE-400 MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "APG-79 AESA Radar MK1", bonus: "+20% detection" },
+      { name: "APG-79 AESA Radar MK2", bonus: "+35% detection" },
+      { name: "APG-79 AESA Radar MK3", bonus: "+50% detection" }
+    ],
+    survivability: [
+      { name: "ALE-55 Towed Decoy MK1", bonus: "+15% evasion" },
+      { name: "ALE-55 Towed Decoy MK2", bonus: "+30% evasion" },
+      { name: "ALE-55 Towed Decoy MK3", bonus: "+45% evasion" }
+    ],
   },
-  {
-    id: 303,
-    name: "J-16",
-    type: "Fighter Jet",
-    faction: "Chinese",
-    tier: "III",
-    image: "J16.jpg",
-    description: "Chinese twin-seat multirole fighter derived from Su-30, capable of carrying heavy weapons payload.",
-    stats: { health: 21300, speed: 780, afterburnerSpeed: 2030, agility: 43 },
-    weapons: [
-      { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
+},
+{
+  id: 303,
+  name: "J-16",
+  type: "Fighter Jet",
+  faction: "Chinese",
+  tier: "III",
+  image: "J16.jpg",
+  description: "Chinese twin-seat multirole fighter derived from Su-30, capable of carrying heavy weapons payload.",
+  stats: { health: 21300, speed: 780, afterburnerSpeed: 2030, agility: 43 },
+  weapons: [
+    { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
       { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
       { "name": "KD-88", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
       { "name": "PL-10", "type": "Short-Range Air-to-Air Missile", "damage": 7400, "penetration": 60, "reload": 20 },
       { "name": "PL-12", "type": "BVR AAM", "damage": 7600, "penetration": 56, "reload": 30 },
       { "name": "PL-15", "type": "Beyond Visual Range Air-to-Air Missile", "damage": 7800, "penetration": 70, "reload": 30 },
       { "name": "AKF-98A", "type": "Air-to-Ground Missile", "damage": 20500, "penetration": 410, "reload": 40 }
-    ]
+
+  ],
+  modules: {
+    engine: [
+      { name: "WS-10A MK1", bonus: "+150 km/h speed" },
+      { name: "WS-10A MK2", bonus: "+300 km/h speed" },
+      { name: "WS-10A MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "KLJ-7A Radar MK1", bonus: "+20% detection" },
+      { name: "KLJ-7A Radar MK2", bonus: "+35% detection" },
+      { name: "KLJ-7A Radar MK3", bonus: "+50% detection" }
+    ],
+    survivability: [
+      { name: "ECM Suite MK1", bonus: "+15% evasion" },
+      { name: "ECM Suite MK2", bonus: "+30% evasion" },
+      { name: "ECM Suite MK3", bonus: "+45% evasion" }
+    ],
   },
-  {
-    id: 304,
-    name: "Su-37 Terminator",
-    type: "Fighter Jet",
-    faction: "Russian",
-    tier: "III",
-    image: "Su-37-Terminator.jpg",
-    description: "Experimental Russian fighter with thrust-vectoring for extreme maneuverability.",
-    stats: { health: 21700, speed: 800, afterburnerSpeed: 2250, agility: 48 },
-    weapons: [
-      { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
+},
+{
+  id: 304,
+  name: "Su-37 Terminator",
+  type: "Fighter Jet",
+  faction: "Russian",
+  tier: "III",
+  image: "Su-37-Terminator.jpg",
+  description: "Experimental Russian fighter with thrust-vectoring for extreme maneuverability.",
+  stats: { health: 21700, speed: 800, afterburnerSpeed: 2250, agility: 48 },
+  weapons: [
+    { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
       { "name": "FAB-250", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
       { "name": "Kh-MD-E", "type": "Air-to-Ground Missile", "damage": 12400, "penetration": 250, "reload": 20 },
       { "name": "R-73", "type": "Short-Range Air-to-Air Missile", "damage": 4800, "penetration": 56, "reload": 15 },
@@ -2099,19 +2282,37 @@ const VEHICLES_DATA = [
       { "name": "R-27", "type": "Medium-Range Air-to-Air Missile", "damage": 8100, "penetration": 80, "reload": 20 },
       { "name": "Kh-59M", "type": "Air-to-Ground Missile", "damage": 18400, "penetration": 280, "reload": 50 },
       { "name": "Kh-31", "type": "Air-to-Ground Missile", "damage": 14900, "penetration": 130, "reload": 46 }
-    ]
+
+  ],
+  modules: {
+    engine: [
+      { name: "AL-37FU MK1", bonus: "+150 km/h speed" },
+      { name: "AL-37FU MK2", bonus: "+300 km/h speed" },
+      { name: "AL-37FU MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "N011M Radar MK1", bonus: "+20% detection" },
+      { name: "N011M Radar MK2", bonus: "+35% detection" },
+      { name: "N011M Radar MK3", bonus: "+50% detection" }
+    ],
+    agility: [
+      { name: "Thrust Vectoring MK1", bonus: "+10% agility" },
+      { name: "Thrust Vectoring MK2", bonus: "+20% agility" },
+      { name: "Thrust Vectoring MK3", bonus: "+30% agility" }
+    ],
   },
-  {
-    id: 305,
-    name: "Su-25UB",
-    type: "Fighter Jet",
-    faction: "Russian",
-    tier: "III",
-    image: "Su-25UB.jpg",
-    description: "Twin-seat variant of the Su-25, specialized for ground attack with heavy armor.",
-    stats: { health: 21000, speed: 750, afterburnerSpeed: 860, agility: 43 },
-    weapons: [
-      { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
+},
+{
+  id: 305,
+  name: "Su-25UB",
+  type: "Fighter Jet",
+  faction: "Russian",
+  tier: "III",
+  image: "Su-25UB.jpg",
+  description: "Twin-seat variant of the Su-25, specialized for ground attack with heavy armor.",
+  stats: { health: 21000, speed: 750, afterburnerSpeed: 860, agility: 43 },
+  weapons: [
+    { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
       { "name": "FAB-250", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
       { "name": "SPPU-22-1", "type": "Autocannon", "damage": 400, "penetration": 71, "reload": 25 },
       { "name": "B-13L", "type": "Autocannon", "damage": 9200, "penetration": 160, "reload": 40 },
@@ -2121,19 +2322,32 @@ const VEHICLES_DATA = [
       { "name": "Kh-25MLE", "type": "Air-to-Ground Missile", "damage": 16000, "penetration": 160, "reload": 35 },
       { "name": "9K121 Vikhr", "type": "Anti-Tank Guided Missile", "damage": 7800, "penetration": 1000, "reload": 30 },
       { "name": "Kh-29T", "type": "Air-to-Ground Missile", "damage": 17800, "penetration": 280, "reload": 38 }
-    ]
+
+  ],
+  modules: {
+    armor: [
+      { name: "Cockpit Armor MK1", bonus: "+10% survivability" },
+      { name: "Cockpit Armor MK2", bonus: "+20% survivability" },
+      { name: "Cockpit Armor MK3", bonus: "+30% survivability" }
+    ],
+    engine: [
+      { name: "R-195 Engine MK1", bonus: "+100 km/h speed" },
+      { name: "R-195 Engine MK2", bonus: "+200 km/h speed" },
+      { name: "R-195 Engine MK3", bonus: "+300 km/h speed" }
+    ],
   },
-  {
-    id: 306,
-    name: "Su-39",
-    type: "Fighter Jet",
-    faction: "Russian",
-    tier: "III",
-    image: "Su-39.jpg",
-    description: "Upgraded variant of Su-25 with improved avionics and guided weapons.",
-    stats: { health: 24400, speed: 880, afterburnerSpeed: 2250, agility: 49 },
-    weapons: [
-      { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
+},
+{
+  id: 306,
+  name: "Su-39",
+  type: "Fighter Jet",
+  faction: "Russian",
+  tier: "III",
+  image: "Su-39.jpg",
+  description: "Upgraded variant of Su-25 with improved avionics and guided weapons.",
+  stats: { health: 24400, speed: 880, afterburnerSpeed: 2250, agility: 49 },
+  weapons: [
+    { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "S-24", "type": "Unguided Rocket", "damage": 14600, "penetration": 180, "reload": 15 },
       { "name": "B-13L", "type": "Autocannon", "damage": 9200, "penetration": 160, "reload": 40 },
@@ -2143,19 +2357,31 @@ const VEHICLES_DATA = [
       { "name": "R-27", "type": "Medium-Range Air-to-Air Missile", "damage": 8100, "penetration": 80, "reload": 20 },
       { "name": "Kh-25MLE", "type": "Air-to-Ground Missile", "damage": 16000, "penetration": 160, "reload": 35 },
       { "name": "Kh-38ME", "type": "Air-to-Ground Missile", "damage": 17300, "penetration": 230, "reload": 40 }
-    ]
+  ],
+  modules: {
+    engine: [
+      { name: "R-195M MK1", bonus: "+100 km/h speed" },
+      { name: "R-195M MK2", bonus: "+200 km/h speed" },
+      { name: "R-195M MK3", bonus: "+300 km/h speed" }
+    ],
+    avionics: [
+      { name: "Targeting Pod MK1", bonus: "+20% accuracy" },
+      { name: "Targeting Pod MK2", bonus: "+35% accuracy" },
+      { name: "Targeting Pod MK3", bonus: "+50% accuracy" }
+    ],
   },
-  {
-    id: 307,
-    name: "J-15",
-    type: "Fighter Jet",
-    faction: "Chinese",
-    tier: "III",
-    image: "J-15.jpg",
-    description: "Chinese carrier-based fighter based on Su-33 design, versatile in both air and ground roles.",
-    stats: { health: 23500, speed: 860, afterburnerSpeed: 2070, agility: 49 },
-    weapons: [
-      { "name": "Type 1", "type": "Guided Bomb", "damage": 15100, "penetration": 120, "reload": 32 },
+},
+{
+  id: 307,
+  name: "J-15",
+  type: "Fighter Jet",
+  faction: "Chinese",
+  tier: "III",
+  image: "J-15.jpg",
+  description: "Chinese carrier-based fighter based on Su-33 design, versatile in both air and ground roles.",
+  stats: { health: 23500, speed: 860, afterburnerSpeed: 2070, agility: 49 },
+  weapons: [
+    { "name": "Type 1", "type": "Guided Bomb", "damage": 15100, "penetration": 120, "reload": 32 },
       { "name": "Type 90 x2", "type": "Air-to-Ground Missile", "damage": 6400, "penetration": 320, "reload": 40 },
       { "name": "Type 3", "type": "Guided Bomb", "damage": 16000, "penetration": 210, "reload": 35 },
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
@@ -2164,123 +2390,240 @@ const VEHICLES_DATA = [
       { "name": "PL-10", "type": "Short-Range Air-to-Air Missile", "damage": 7400, "penetration": 60, "reload": 20 },
       { "name": "PL-12", "type": "Medium-Range Air-to-Air Missile", "damage": 7600, "penetration": 56, "reload": 30 },
       { "name": "PL-15", "type": "Beyond Visual Range Air-to-Air Missile", "damage": 7800, "penetration": 70, "reload": 30 }
-    ]
+
+  ],
+  modules: {
+    engine: [
+      { name: "WS-10H MK1", bonus: "+150 km/h speed" },
+      { name: "WS-10H MK2", bonus: "+300 km/h speed" },
+      { name: "WS-10H MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "Type 1475 Radar MK1", bonus: "+20% detection" },
+      { name: "Type 1475 Radar MK2", bonus: "+35% detection" },
+      { name: "Type 1475 Radar MK3", bonus: "+50% detection" }
+    ],
   },
-  {
-    id: 308,
-    name: "MiG-35",
-    type: "Fighter Jet",
-    faction: "Russian",
-    tier: "III",
-    image: "MiG-35.jpg",
-    description: "Advanced MiG fighter with modern avionics, thrust-vectoring, and strong multirole performance.",
-    stats: { health: 18400, speed: 800, afterburnerSpeed: 2250, agility: 43 },
-    weapons: [
-      { name: "KAB-250", type: "Guided Bomb", damage: 14900, penetration: 130, reload: 25 },
-      { name: "FAB-500", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
-      { name: "KAB-500L", type: "Guided Bomb", damage: 17300, penetration: 310, reload: 40 },
-      { name: "R-73", type: "Short-Range AAM", damage: 4800, penetration: 56, reload: 15 },
-      { name: "Kh-38ME", type: "Air-to-Surface Missile", damage: 17300, penetration: 230, reload: 40 },
-      { name: "R-40TD", type: "Long-Range AAM", damage: 7800, penetration: 70, reload: 30 },
-      { name: "Kh-59M", type: "Air-to-Surface Missile", damage: 18400, penetration: 280, reload: 50 },
-      { name: "R-37", type: "Long-Range AAM", damage: 8400, penetration: 80, reload: 30 }
-    ]
+},
+{
+  id: 308,
+  name: "MiG-35",
+  type: "Fighter Jet",
+  faction: "Russian",
+  tier: "III",
+  image: "MiG-35.jpg",
+  description: "Advanced MiG fighter with modern avionics, thrust-vectoring, and strong multirole performance.",
+  stats: { health: 18400, speed: 800, afterburnerSpeed: 2250, agility: 43 },
+  weapons: [
+    { name: "KAB-250", type: "Guided Bomb", damage: 14900, penetration: 130, reload: 25 },
+    { name: "FAB-500", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
+    { name: "KAB-500L", type: "Guided Bomb", damage: 17300, penetration: 310, reload: 40 },
+    { name: "R-73", type: "Short-Range AAM", damage: 4800, penetration: 56, reload: 15 },
+    { name: "Kh-38ME", type: "Air-to-Surface Missile", damage: 17300, penetration: 230, reload: 40 },
+    { name: "R-40TD", type: "Long-Range AAM", damage: 7800, penetration: 70, reload: 30 },
+    { name: "Kh-59M", type: "Air-to-Surface Missile", damage: 18400, penetration: 280, reload: 50 },
+    { name: "R-37", type: "Long-Range AAM", damage: 8400, penetration: 80, reload: 30 }
+
+  ],
+  modules: {
+    engine: [
+      { name: "RD-33MK MK1", bonus: "+150 km/h speed" },
+      { name: "RD-33MK MK2", bonus: "+300 km/h speed" },
+      { name: "RD-33MK MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "Zhuk-AE Radar MK1", bonus: "+20% detection" },
+      { name: "Zhuk-AE Radar MK2", bonus: "+35% detection" },
+      { name: "Zhuk-AE Radar MK3", bonus: "+50% detection" }
+    ],
+    agility: [
+      { name: "Thrust Vectoring MK1", bonus: "+10% agility" },
+      { name: "Thrust Vectoring MK2", bonus: "+20% agility" },
+      { name: "Thrust Vectoring MK3", bonus: "+30% agility" }
+    ],
   },
+},
 
 {
-    "id": 309,
-    "name": "F-15SE Silent Eagle",
-    "type": "Fighter Jet",
-    "faction": "American",
-    "tier": "III",
-    "image": "F-15EX-Eagle-II.jpg",
-    "description": "advanced variant of the F-15 Strike Eagle with modern avionics and stealth characteristics.",
-    "stats": { "health": 19800, "speed": 780, "afterburnerSpeed": 2390, "agility": 43 },
-    "weapons": [
-      { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
-      { "name": "GBU-31", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
-      { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
-      { "name": "AGM-65", "type": "Air-to-Surface Missile", "damage": 11000, "penetration": 830, "reload": 22 },
-      { "name": "AIM-7", "type": "Medium-Range AAM", "damage": 6200, "penetration": 65, "reload": 20 },
-      { "name": "AGM-84H/K", "type": "Anti-Ship Missile", "damage": 18900, "penetration": 310, "reload": 35 },
-      { "name": "AIM-120", "type": "Medium-Range AAM", "damage": 11300, "penetration": 60, "reload": 20 }
-    ]
+  id: 309,
+  name: "F-15SE Silent Eagle",
+  type: "Fighter Jet",
+  faction: "American",
+  tier: "III",
+  image: "F-15EX-Eagle-II.jpg",
+  description: "advanced variant of the F-15 Strike Eagle with modern avionics and stealth characteristics.",
+  stats: { health: 19800, speed: 780, afterburnerSpeed: 2390, agility: 43 },
+  weapons: [
+    { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
+    { name: "GBU-31", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
+    { name: "GBU-32", type: "Guided Bomb", damage: 15700, penetration: 200, reload: 35 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+    { name: "AGM-84H/K", type: "Anti-Ship Missile", damage: 18900, penetration: 310, reload: 35 },
+    { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 }
+
+  ],
+  modules: {
+    engine: [
+      { name: "F110-GE-132 MK1", bonus: "+150 km/h speed" },
+      { name: "F110-GE-132 MK2", bonus: "+300 km/h speed" },
+      { name: "F110-GE-132 MK3", bonus: "+450 km/h speed" }
+    ],
+    avionics: [
+      { name: "APG-82 AESA Radar MK1", bonus: "+20% detection" },
+      { name: "APG-82 AESA Radar MK2", bonus: "+35% detection" },
+      { name: "APG-82 AESA Radar MK3", bonus: "+50% detection" }
+    ],
   },
-  {
-    "id": 310,
-    "name": "Su-35S",
-    "type": "Fighter Jet",
-    "faction": "Russian",
-    "tier": "III",
-    "image": "Su-35S.png",
-    "description": "Highly maneuverable 4++ generation multirole fighter with thrust vectoring engines and powerful radar.",
-    "stats": { "health": 24400, "speed": 880, "afterburnerSpeed": 2250, "agility": 49 },
-    "weapons": [
-      { "name": "R-73", "type": "Short-Range AAM", "damage": 4900, "penetration": 60, "reload": 15 },
-      { "name": "R-27", "type": "Medium-Range AAM", "damage": 8100, "penetration": 65, "reload": 20},
-      { "name": "R-77", "type": "Medium-Range AAM", "damage": 8100, "penetration": 55, "reload": 20 },
-      { "name": "Kh-31", "type": "Air-to-Surface Missile", "damage": 8100, "penetration": 230, "reload": 20 },
-      { "name": "Kh-38M", "type": "Air-to-Ground Missile", "damage": 17300, "penetration": 310, "reload": 40 },
-      { "name": "KAB-500L", "type": "Guided Bomb (Laser)", "damage": 17300, "penetration": 320, "reload": 40 },
-      { "name": "KAB-500Kr", "type": "Guided Bomb (TV)", "damage": 17800, "penetration": 210, "reload": 40 },
-      { "name": "FAB-500", "type": "Unguided Bomb", "damage": 16000, "penetration": 210, "reload": 35 },
-      { "name": "B-8M1", "type": "Rocket Pod (S-8)", "damage": 5100, "penetration": 420, "reload": 20, "rateOfFire": "80 rockets" },
-      { "name": "B-13L", "type": "Rocket Pod (S-13)", "damage": 9200, "penetration": 250, "reload": 40, "rateOfFire": "20 rockets" },
-      { "name": "GSh-30-1 30mm", "type": "Autocannon", "damage": 400, "penetration": 70, "rateOfFire": "1500 rpm" }
+},
+{
+  id: 310,
+  name: "Su-35S",
+  type: "Fighter Jet",
+  faction: "Russian",
+  tier: "III",
+  image: "Su-35S.png",
+  description: "Highly maneuverable 4++ generation multirole fighter with thrust vectoring engines and powerful radar.",
+  stats: { health: 24400, speed: 880, afterburnerSpeed: 2250, agility: 49 },
+  weapons: [
+    { name: "R-73", type: "Short-Range AAM", damage: 4900, penetration: 60, reload: 15 },
+    { name: "R-27", type: "Medium-Range AAM", damage: 8100, penetration: 65, reload: 20},
+    { name: "R-77", type: "Medium-Range AAM", damage: 8100, penetration: 55, reload: 20 },
+    { name: "Kh-31", type: "Air-to-Surface Missile", damage: 8100, penetration: 230, reload: 20 },
+    { name: "Kh-38M", type: "Air-to-Ground Missile", damage: 17300, penetration: 310, reload: 40 },
+    { name: "KAB-500L", type: "Guided Bomb (Laser)", damage: 17300, penetration: 320, reload: 40 },
+    { name: "KAB-500Kr", type: "Guided Bomb (TV)", damage: 17800, penetration: 210, reload: 40 },
+    { name: "FAB-500", type: "Unguided Bomb", damage: 16000, penetration: 210, reload: 35 },
+    { name: "B-8M1", type: "Rocket Pod (S-8)", damage: 5100, penetration: 420, reload: 20, rateOfFire: "80 rockets" },
+    { name: "B-13L", type: "Rocket Pod (S-13)", damage: 9200, penetration: 250, reload: 40, rateOfFire: "20 rockets" },
+    { name: "GSh-30-1 30mm", type: "Autocannon", damage: 400, penetration: 70, rateOfFire: "1500 rpm" }
+  ],
+  modules: {
+    engine: [
+      { name: "Saturn AL-41F1S MK1", bonus: "+250 km/h speed" },
+      { name: "Saturn AL-41F1S MK2", bonus: "+500 km/h speed" },
+      { name: "Saturn AL-41F1S MK3", bonus: "+750 km/h speed" }
+    ],
+    stealth: [
+      { name: "RAM Coating MK1", bonus: "+10% stealth" },
+      { name: "RAM Coating MK2", bonus: "+20% stealth" },
+      { name: "RAM Coating MK3", bonus: "+30% stealth" }
+    ],
+    avionics: [
+      { name: "Irbis-E Radar MK1", bonus: "+20% detection" },
+      { name: "Irbis-E Radar MK2", bonus: "+35% detection" },
+      { name: "Irbis-E Radar MK3", bonus: "+50% detection" }
     ]
+  }
+},
+
+
+{
+    id: 311,
+    name: "A-10A Thunderbolt",
+    type: "Fighter Jet",
+    faction: "American",
+    tier: "III",
+    image: "A-10A-Thunderbolt.jpg",
+    description: "Close air support aircraft designed around the GAU-8 Avenger cannon.",
+    stats: { health: 27600, speed: 560, afterburnerSpeed: 760, agility: 48 },
+    weapons: [
+     { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "MK-84", type: "General-Purpose Bomb", damage: 19400, penetration: 360, reload: 40 },
+    { name: "LAU-10 x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
+    { name: "GBU-32", type: "Guided Bomb", damage: 15700, penetration: 200, reload: 35 },
+    { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-132", type: "Short-Range AAM", damage: 5200, penetration: 65, reload: 15 },
+    { name: "AGM-12B", type: "Air-to-Surface Missile", damage: 11500, penetration: 600, reload: 41 },
+    { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 }
+
+    ],
+    modules: {
+      engine: [
+        { name: "TF34-GE-100 MK1", bonus: "+40 km/h speed" },
+        { name: "TF34-GE-100 MK2", bonus: "+80 km/h speed" },
+        { name: "TF34-GE-100 MK3", bonus: "+120 km/h speed" },
+      ],
+      stealth: [
+        { name: "IR Suppression MK1", bonus: "+5% stealth" },
+        { name: "IR Suppression MK2", bonus: "+10% stealth" },
+        { name: "IR Suppression MK3", bonus: "+15% stealth" },
+      ],
+      avionics: [
+        { name: "Targeting Pod MK1", bonus: "+20% accuracy" },
+        { name: "Targeting Pod MK2", bonus: "+35% accuracy" },
+        { name: "Targeting Pod MK3", bonus: "+50% accuracy" },
+      ],
+    },
   },
+  
   {
-    "id": 311,
-    "name": "A-10A Thunderbolt",
-    "type": "Fighter Jet",
-    "faction": "American",
-    "tier": "III",
-    "image": "A-10A-Thunderbolt.jpg",
-    "description": "Close air support aircraft designed around the GAU-8 Avenger cannon.",
-    "stats": { "health": 27600, "speed": 560, "afterburnerSpeed": 760, "agility": 48 },
-    "weapons": [
-      { "name": "LAU-61", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
-      { "name": "MK-84", "type": "General-Purpose Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
-      { "name": "LAU-10 x3", "type": "Rocket Pod", "damage": 7400, "penetration": 500, "reload": 40 },
-      { "name": "GBU-32", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
-      { "name": "GBU-12", "type": "Guided Bomb", "damage": 18590, "penetration": 120, "reload": 30 },
-      { "name": "AGM-65", "type": "Air-to-Surface Missile", "damage": 11000, "penetration": 830, "reload": 22 },
-      { "name": "AIM-132", "type": "Short-Range AAM", "damage": 5200, "penetration": 65, "reload": 15 },
-      { "name": "AGM-12B", "type": "Air-to-Surface Missile", "damage": 11500, "penetration": 600, "reload": 41 },
-      { "name": "AIM-120", "type": "Medium-Range AAM", "damage": 11300, "penetration": 60, "reload": 20 }
-    ]
+    id: 400,
+    name: "Leopard 2A4",
+    type: "Main Battle Tank",
+    faction: "German",
+    tier: "III",
+    description: "Proven main battle tank with excellent firepower and mobility balance.",
+    image: "Leopard-2A4.jpg",
+    stats: { health: 39200, speed: 72, armor: "800mm", agility: 32 },
+    weapons: [
+      { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
+      { name: "DM13", type: "Main Gun", damage: 9800, penetration: 393 },
+      { name: "DM23", type: "Main Gun", damage: 38911, penetration: 337 }
+
+    ],
+    modules: {
+      engine: [
+        { name: "MTU MB 873 MK1", bonus: "+8 km/h speed" },
+        { name: "MTU MB 873 MK2", bonus: "+16 km/h speed" },
+        { name: "MTU MB 873 MK3", bonus: "+24 km/h speed" },
+      ],
+      armor: [
+        { name: "Composite Armor MK1", bonus: "+150mm protection" },
+        { name: "Composite Armor MK2", bonus: "+300mm protection" },
+        { name: "Composite Armor MK3", bonus: "+450mm protection" },
+      ],
+      fireControl: [
+        { name: "EMES 15 MK1", bonus: "+12% accuracy" },
+        { name: "EMES 15 MK2", bonus: "+20% accuracy" },
+        { name: "EMES 15 MK3", bonus: "+28% accuracy" },
+      ],
+    },
   },
-  {
-    "id": 400,
-    "name": "Leopard 2A4",
-    "type": "Main Battle Tank",
-    "faction": "German",
-    "tier": "III",
-    "description": "Proven main battle tank with excellent firepower and mobility balance.",
-    "image": "Leopard-2A4.jpg",
-    "stats": { "health": 39200, "speed": 72, "armor": "800mm", "agility": 32 },
-    "weapons": [
-      { "name": "DM12", "type": "Main Gun", "damage": 12100, "penetration": 480 },
-      { "name": "DM13", "type": "Main Gun", "damage": 9800, "penetration": 393 },
-      { "name": "DM23", "type": "Main Gun", "damage": 38911, "penetration": 337 }
-    ]
-  },
-  {
-    "id": 401,
-    "name": "T-72A",
-    "type": "Main Battle Tank",
-    "faction": "Russian",
-    "tier": "III",
-    "description": "Widely exported main battle tank with robust design and effective firepower.",
-    "image": "T-72A.jpg",
-    "stats": { "health": 37500, "speed": 60, "armor": "750mm", "agility": 44 },
-    "weapons": [
-      { "name": "3BM22", "type": "Main Gun", "damage": 11100, "penetration": 425 },
-      { "name": "30F26", "type": "Main Gun", "damage": 5000, "penetration": 92 },
-      { "name": "9M119", "type": "Main Gun", "damage": 10160, "penetration": 750 },
-      { "name": "3BM42", "type": "Main Gun", "damage": 11700, "penetration": 720 },
-      { "name": "3BK12M", "type": "Main Gun", "damage": 12140, "penetration": 440 }
-    ]
+   {
+    id: 401,
+    name: "T-72A",
+    type: "Main Battle Tank",
+    faction: "Russian",
+    tier: "III",
+    description: "Widely exported main battle tank with robust design and effective firepower.",
+    image: "T-72A.jpg",
+    stats: { health: 37500, speed: 60, armor: "750mm", agility: 44 },
+    weapons: [
+      { name: "3BM22", type: "Main Gun", damage: 11100, penetration: 425 },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "9M119", type: "Main Gun", damage: 10160, penetration: 750 },
+      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "3BK12M", type: "Main Gun", damage: 12140, penetration: 440 }
+    ],
+    modules: {
+      engine: [
+        { name: "V-46-6 MK1", bonus: "+8 km/h speed" },
+        { name: "V-46-6 MK2", bonus: "+16 km/h speed" },
+        { name: "V-46-6 MK3", bonus: "+24 km/h speed" },
+      ],
+      armor: [
+        { name: "Composite Armor MK1", bonus: "+140mm protection" },
+        { name: "Composite Armor MK2", bonus: "+280mm protection" },
+        { name: "Composite Armor MK3", bonus: "+420mm protection" },
+      ],
+      fireControl: [
+        { name: "TPD-K1 MK1", bonus: "+12% accuracy" },
+        { name: "TPD-K1 MK2", bonus: "+22% accuracy" },
+        { name: "TPD-K1 MK3", bonus: "+32% accuracy" },
+      ],
+    },
   },
   {
     "id": 402,
@@ -2288,15 +2631,32 @@ const VEHICLES_DATA = [
     "type": "Main Battle Tank",
     "faction": "American",
     "tier": "III",
-    "image": "M1-Abrams.jpg",
+    image: "M1-Abrams.jpg",
     "description": "M1A1 with M256 120mm smoothbore.",
     "stats": { "health": 38400, "speed": 69, "armor": "900mm", "agility": 36 },
     "weapons": [
-      { "name": "M829", "type": "Main Gun", "damage": 9020, "penetration": 490 },
-      { "name": "M830", "type": "Main Gun", "damage": 10930, "penetration": 800 },
-      { "name": "AMP", "type": "Main Gun", "damage": 11070, "penetration": 200 },
-      { "name": "M829A1", "type": "Main Gun", "damage": 9520, "penetration": 630 }
-    ]
+      { name: "M829", type: "Main Gun", damage: 9020, penetration: 490 },
+      { name: "M830", type: "Main Gun", damage: 10930, penetration: 800 },
+      { name: "AMP", type: "Main Gun", damage: 11070, penetration: 200 },
+      { name: "M829A1", type: "Main Gun", damage: 9520, penetration: 630 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "AGT1500 MK1", "bonus": "+8 km/h speed" },
+        { "name": "AGT1500 MK2", "bonus": "+16 km/h speed" },
+        { "name": "AGT1500 MK3", "bonus": "+24 km/h speed" }
+      ],
+      "armor": [
+        { "name": "Chobham Composite MK1", "bonus": "+120mm effective armor" },
+        { "name": "Chobham Composite MK2", "bonus": "+240mm effective armor" },
+        { "name": "Chobham Composite MK3", "bonus": "+360mm effective armor" }
+      ],
+      "fireControl": [
+        { "name": "CITV FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "CITV FCS MK2", "bonus": "+18% accuracy" },
+        { "name": "CITV FCS MK3", "bonus": "+26% accuracy" }
+      ]
+    }
   },
   {
     "id": 403,
@@ -2304,15 +2664,34 @@ const VEHICLES_DATA = [
     "type": "Main Battle Tank",
     "faction": "American",
     "tier": "III",
-    "image": "MBT-70.jpg",
+    image: "MBT-70.jpg",
     "description": "Experimental joint American-German tank with 152mm gun/missile launcher.",
     "stats": { "health": 37200, "speed": 65, "armor": "800mm", "agility": 30 },
     "weapons": [
-      { "name": "XM578E1", "type": "Main Gun", "damage": 10400, "penetration": 285 },
-      { "name": "M657A2", "type": "Main Gun", "damage": 13500, "penetration": 138 },
-      { "name": "MGM51 Shillelagh", "type": "Main Gun", "damage": 9500, "penetration": 431 },
-      { "name": "M657A2", "type": "Main Gun", "damage": 11300, "penetration": 380 }
-    ]
+      { name: "XM578E1", type: "Main Gun", damage: 10400, penetration: 285 },
+      { name: "M657A2", type: "Main Gun", damage: 13500, penetration: 138 },
+      { name: "MGM51 Shillelagh", type: "Main Gun", damage: 9500, penetration: 431 },
+      { name: "M657A2", type: "Main Gun", damage: 11300, penetration: 380 }
+
+    ],
+    "modules": {
+      "engine": [
+        { "name": "AGT1500 MK1", "bonus": "+10% speed" },
+        { "name": "AGT1500 MK2", "bonus": "+20% speed" },
+        { "name": "AGT1500 MK3", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Composite MK1", "bonus": "+120mm armor" },
+        { "name": "Composite MK2", "bonus": "+240mm armor" },
+        { "name": "Composite MK3", "bonus": "+360mm armor" }
+      ],
+      "fireControl": [
+        { "name": "Advanced FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "Advanced FCS MK2", "bonus": "+18% accuracy" },
+        { "name": "Advanced FCS MK3", "bonus": "+26% accuracy" }
+      ]
+    }
+
   },
   {
     "id": 404,
@@ -2320,16 +2699,33 @@ const VEHICLES_DATA = [
     "type": "Main Battle Tank",
     "faction": "Polish",
     "tier": "III",
-    "image": "PT-91-Twardy.jpg",
+    image: "PT-91-Twardy.jpg",
     "description": "Polish upgrade of the Soviet T-72M1 with improved armor and fire control.",
     "stats": { "health": 38200, "speed": 60, "armor": "820mm", "agility": 40 },
     "weapons": [
-      { "name": "3BM22", "type": "Main Gun", "damage": 11100, "penetration": 425 },
-      { "name": "30F26", "type": "Main Gun", "damage": 5000, "penetration": 92 },
-      { "name": "9M119", "type": "Main Gun", "damage": 10160, "penetration": 750 },
-      { "name": "3BM42", "type": "Main Gun", "damage": 11700, "penetration": 720 },
-      { "name": "3BK12M", "type": "Main Gun", "damage": 12140, "penetration": 440 }
-    ]
+      { name: "3BM22", type: "Main Gun", damage: 11100, penetration: 425 },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "9M119", type: "Main Gun", damage: 10160, penetration: 750 },
+      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "3BK12M", type: "Main Gun", damage: 12140, penetration: 440 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "V-46-6", "bonus": "+10% speed" },
+        { "name": "V-46-6A", "bonus": "+20% speed" },
+        { "name": "V-46-6B", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Composite MK1", "bonus": "+120mm armor" },
+        { "name": "Composite MK2", "bonus": "+240mm armor" },
+        { "name": "Composite MK3", "bonus": "+360mm armor" }
+      ],
+      "fireControl": [
+        { "name": "FCS-3", "bonus": "+10% accuracy" },
+        { "name": "FCS-4", "bonus": "+18% accuracy" },
+        { "name": "FCS-5", "bonus": "+26% accuracy" }
+      ]
+    }
   },
   {
     "id": 405,
@@ -2337,15 +2733,32 @@ const VEHICLES_DATA = [
     "type": "Main Battle Tank",
     "faction": "Russian",
     "tier": "III",
-    "image": "T-64BV.jpg",
+    image: "T-64BV.jpg",
     "description": "Soviet main battle tank with composite armor and 125mm smoothbore gun.",
     "stats": { "health": 36700, "speed": 55, "armor": "800mm", "agility": 45 },
     "weapons": [
-      { "name": "3BM42", "type": "Main Gun", "damage": 11700, "penetration": 720 },
-      { "name": "9M112", "type": "Main Gun", "damage": 10070, "penetration": 700 },
-      { "name": "30F26", "type": "Main Gun", "damage": 5000, "penetration": 92 },
-      { "name": "3BK18M", "type": "Main Gun", "damage": 12390, "penetration": 550 }
-    ]
+      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "9M112", type: "Main Gun", damage: 10070, penetration: 700 },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "5TDF", "bonus": "+10% speed" },
+        { "name": "5TDF-A", "bonus": "+20% speed" },
+        { "name": "5TDF-B", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Composite MK1", "bonus": "+120mm armor" },
+        { "name": "Composite MK2", "bonus": "+240mm armor" },
+        { "name": "Composite MK3", "bonus": "+360mm armor" }
+      ],
+      "fireControl": [
+        { "name": "FCS-3", "bonus": "+10% accuracy" },
+        { "name": "FCS-4", "bonus": "+18% accuracy" },
+        { "name": "FCS-5", "bonus": "+26% accuracy" }
+      ]
+    }
   },
   {
     "id": 406,
@@ -2353,30 +2766,64 @@ const VEHICLES_DATA = [
     "type": "Main Battle Tank",
     "faction": "Japanese",
     "tier": "III",
-    "image": "Type-90.jpg",
+    image: "Type-90.jpg",
     "description": "Japanese main battle tank with advanced armor and 120mm smoothbore gun.",
     "stats": { "health": 37000, "speed": 55, "armor": "720mm", "agility": 40 },
     "weapons": [
-      { "name": "JM33", "type": "Main Gun", "damage": 11330, "penetration": 481 },
-      { "name": "JM12A1", "type": "Main Gun", "damage": 12360, "penetration": 480 },
-      { "name": "Type 10", "type": "Main Gun", "damage": 2920, "penetration": 650 }
-    ]
+      { name: "JM33", type: "Main Gun", damage: 11330, penetration: 481 },
+      { name: "JM12A1", type: "Main Gun", damage: 12360, penetration: 480 },
+      { name: "Type 10", type: "Main Gun", damage: 2920, penetration: 650 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "KA-501", "bonus": "+10% speed" },
+        { "name": "KA-502", "bonus": "+20% speed" },
+        { "name": "KA-503", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Composite Armor MK1", "bonus": "+120mm effective armor" },
+        { "name": "Composite Armor MK2", "bonus": "+240mm effective armor" },
+        { "name": "Composite Armor MK3", "bonus": "+360mm effective armor" }
+      ],
+      "fireControl": [
+        { "name": "FCS Type-1", "bonus": "+10% accuracy" },
+        { "name": "FCS Type-2", "bonus": "+18% accuracy" },
+        { "name": "FCS Type-3", "bonus": "+26% accuracy" }
+      ]
+    }
   },
-  {
+    {
     "id": 407,
     "name": "M60A3 (MZK)",
     "type": "Main Battle Tank",
     "faction": "Turkish",
     "tier": "III",
-    "image": "M60A3-(MZK).jpg",
+    image: "M60A3-(MZK).jpg",
     "description": "Improved export variant of ZTZ96 with enhanced protection and gun systems.",
     "stats": { "health": 39100, "speed": 55, "armor": "770mm", "agility": 36 },
     "weapons": [
-      { "name": "DM12 HEAT", "type": "Main Gun", "damage": 10630, "penetration": 400 },
-      { "name": "DM512 HESH", "type": "Main Gun", "damage": 10090, "penetration": 127 },
-      { "name": "DM23 APFSDS", "type": "Main Gun", "damage": 9630, "penetration": 337 },
-      { "name": "DM33 APFSDS", "type": "Main Gun", "damage": 9940, "penetration": 508 }
-    ]
+      { name: "DM12 HEAT", type: "Main Gun", damage: 10630, penetration: 400 },
+      { name: "DM512 HESH", type: "Main Gun", damage: 10090, penetration: 127 },
+      { name: "DM23 APFSDS", type: "Main Gun", damage: 9630, penetration: 337 },
+      { name: "DM33 APFSDS", type: "Main Gun", damage: 9940, penetration: 508 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Type 6C-A", "bonus": "+10% speed" },
+        { "name": "Type 6C-B", "bonus": "+20% speed" },
+        { "name": "Type 6C-C", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Composite + ERA MK1", "bonus": "+150mm armor" },
+        { "name": "Composite + ERA MK2", "bonus": "+300mm armor" },
+        { "name": "Composite + ERA MK3", "bonus": "+450mm armor" }
+      ],
+      "fireControl": [
+        { "name": "FCS ZTZ-96A MK1", "bonus": "+10% accuracy" },
+        { "name": "FCS ZTZ-96A MK2", "bonus": "+18% accuracy" },
+        { "name": "FCS ZTZ-96A MK3", "bonus": "+26% accuracy" }
+      ]
+    }
   },
   {
     "id": 408,
@@ -2384,15 +2831,32 @@ const VEHICLES_DATA = [
     "type": "Main Battle Tank",
     "faction": "Chinese",
     "tier": "III",
-    "image": "ZTZ85-II.jpg",
+    image: "ZTZ85-II.jpg",
     "description": "Chinese upgrade of Type 85 tank with improved armor and firepower.",
     "stats": { "health": 35200, "speed": 57, "armor": "700mm", "agility": 38 },
     "weapons": [
-      { "name": "125-I", "type": "Main Gun", "damage": 9020, "penetration": 465 },
-      { "name": "DTB125", "type": "Main Gun", "damage": 4300, "penetration": 160 },
-      { "name": "DTP-125", "type": "Main Gun", "damage": 9430, "penetration": 480 },
-      { "name": "DTC10-125", "type": "Main Gun", "damage": 8800, "penetration": 680 }
-    ]
+      { name: "125-I", type: "Main Gun", damage: 9020, penetration: 465 },
+      { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
+      { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
+      { name: "DTC10-125", type: "Main Gun", damage: 8800, penetration: 680 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "12150L", "bonus": "+10% speed" },
+        { "name": "12150L-A", "bonus": "+20% speed" },
+        { "name": "12150L-B", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "ERA MK1", "bonus": "+100mm effective armor" },
+        { "name": "ERA MK2", "bonus": "+200mm effective armor" },
+        { "name": "ERA MK3", "bonus": "+300mm effective armor" }
+      ],
+      "fireControl": [
+        { "name": "FCS ZTZ-1", "bonus": "+10% accuracy" },
+        { "name": "FCS ZTZ-2", "bonus": "+18% accuracy" },
+        { "name": "FCS ZTZ-3", "bonus": "+26% accuracy" }
+      ]
+    }
   },
   {
     "id": 409,
@@ -2400,15 +2864,32 @@ const VEHICLES_DATA = [
     "type": "Main Battle Tank",
     "faction": "Chinese",
     "tier": "III",
-    "image": "ZTZ96.jpg",
+    image: "ZTZ96.jpg",
     "description": "Modern Chinese MBT with 125mm smoothbore and composite armor.",
     "stats": { "health": 36500, "speed": 24, "armor": "750mm", "agility": 34 },
     "weapons": [
-      { "name": "125-I", "type": "Main Gun", "damage": 9020, "penetration": 465 },
-      { "name": "DTB125", "type": "Main Gun", "damage": 4300, "penetration": 160 },
-      { "name": "DTP-125", "type": "Main Gun", "damage": 9430, "penetration": 480 },
-      { "name": "DTC10-125", "type": "Main Gun", "damage": 8800, "penetration": 680 }
-    ]
+      { name: "125-I", type: "Main Gun", damage: 9020, penetration: 465 },
+      { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
+      { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
+      { name: "DTC10-125", type: "Main Gun", damage: 8800, penetration: 680 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Type 6A", "bonus": "+10% speed" },
+        { "name": "Type 6B", "bonus": "+20% speed" },
+        { "name": "Type 6C", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Composite MK1", "bonus": "+120mm armor" },
+        { "name": "Composite MK2", "bonus": "+240mm armor" },
+        { "name": "Composite MK3", "bonus": "+360mm armor" }
+      ],
+      "fireControl": [
+        { "name": "FCS ZTZ-96 MK1", "bonus": "+10% accuracy" },
+        { "name": "FCS ZTZ-96 MK2", "bonus": "+18% accuracy" },
+        { "name": "FCS ZTZ-96 MK3", "bonus": "+26% accuracy" }
+      ]
+    }
   },
   {
     "id": 410,
@@ -2416,48 +2897,100 @@ const VEHICLES_DATA = [
     "type": "Main Battle Tank",
     "faction": "Chinese",
     "tier": "III",
-    "image": "ZTZ-96A-(P).jpg",
+    image: "ZTZ-96A-(P).jpg",
     "description": "Improved export variant of ZTZ96 with enhanced protection and gun systems.",
     "stats": { "health": 36900, "speed": 24, "armor": "770mm", "agility": 34 },
     "weapons": [
-      { "name": "DTB125", "type": "Main Gun", "damage": 4300, "penetration": 160 },
-      { "name": "DTP-125", "type": "Main Gun", "damage": 9430, "penetration": 480 },
-      { "name": "Type1985 I", "type": "Main Gun", "damage": 10220, "penetration": 466 },
-      { "name": "GP125", "type": "Main Gun", "damage": 9120, "penetration": 650 }
-    ]
+      { name: "DTB125", type: "Main Gun", damage: 4300, penetration: 160 },
+      { name: "DTP-125", type: "Main Gun", damage: 9430, penetration: 480 },
+      { name: "Type1985 I", type: "Main Gun", damage: 10220, penetration: 466 },
+      { name: "GP125", type: "Main Gun", damage: 9120, penetration: 650 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Type 6C-A", "bonus": "+10% speed" },
+        { "name": "Type 6C-B", "bonus": "+20% speed" },
+        { "name": "Type 6C-C", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Composite + ERA MK1", "bonus": "+150mm armor" },
+        { "name": "Composite + ERA MK2", "bonus": "+300mm armor" },
+        { "name": "Composite + ERA MK3", "bonus": "+450mm armor" }
+      ],
+      "fireControl": [
+        { "name": "FCS ZTZ-96A MK1", "bonus": "+10% accuracy" },
+        { "name": "FCS ZTZ-96A MK2", "bonus": "+18% accuracy" },
+        { "name": "FCS ZTZ-96A MK3", "bonus": "+26% accuracy" }
+      ]
+    }
   },
-  {
+    {
     "id": 411,
     "name": "AMX-30 Super",
     "type": "Main Battle Tank",
     "faction": "French",
     "tier": "III",
-    "image": "AMX-30-Super.jpg",
+    image: "AMX-30-Super.jpg",
     "description": "French Main Battle Tank featuring improved armor, a powerfull 105mm gun and control system",
     "stats": { "health": 36000, "speed": 65, "armor": "770mm", "agility": 42 },
     "weapons": [
-      { "name": "OF 105 F1 APFSDS", "type": "Main Gun", "damage": 9910, "penetration": 361 },
-      { "name": "OE 105 F1 HEI", "type": "Main Gun", "damage": 4500, "penetration": 55 },
-      { "name": "OCC 105 F1 HEAT", "type": "Main Gun", "damage": 10790, "penetration": 350 },
-      { "name": "OF 105 F2 APFSDS", "type": "Main Gun", "damage": 10090, "penetration": 459 }
-    ]
+      { name: "OF 105 F1 APFSDS", type: "Main Gun", damage: 9910, penetration: 361 },
+      { name: "OE 105 F1 HEI", type: "Main Gun", damage: 4500, penetration: 55 },
+      { name: "OCC 105 F1 HEAT", type: "Main Gun", damage: 10790, penetration: 350 },
+      { name: "OF 105 F2 APFSDS", type: "Main Gun", damage: 10090, penetration: 459 },
+     
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Type 6C-A", "bonus": "+10% speed" },
+        { "name": "Type 6C-B", "bonus": "+20% speed" },
+        { "name": "Type 6C-C", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Composite + ERA MK1", "bonus": "+150mm armor" },
+        { "name": "Composite + ERA MK2", "bonus": "+300mm armor" },
+        { "name": "Composite + ERA MK3", "bonus": "+450mm armor" }
+      ],
+      "fireControl": [
+        { "name": "FCS ZTZ-96A MK1", "bonus": "+10% accuracy" },
+        { "name": "FCS ZTZ-96A MK2", "bonus": "+18% accuracy" },
+        { "name": "FCS ZTZ-96A MK3", "bonus": "+26% accuracy" }
+      ]
+    }
   },
   {
-    "id": 412,
-    "name": "Merkava Mk.3",
-    "type": "Main Battle Tank",
-    "faction": "Israeli",
-    "tier": "III",
-    "description": "An Israeli MBT featuring modular armor, advanced fire control, 120mm gun, and rear troop compartment.",
-    "image": "Merkava-Mk.3.jpg",
-    "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
-    "weapons": [
-      { "name": "3BM22", "type": "Main Gun", "damage": 11100, "penetration": 425 },
-      { "name": "30F26", "type": "Main Gun", "damage": 5000, "penetration": 92 },
-      { "name": "9M119", "type": "Main Gun", "damage": 10160, "penetration": 750 },
-      { "name": "3BM42", "type": "Main Gun", "damage": 11700, "penetration": 720 },
-      { "name": "3BK12M", "type": "Main Gun", "damage": 12140, "penetration": 440 }
-    ]
+    id: 412,
+    name: "Merkava Mk.3",
+    type: "Main Battle Tank",
+    faction: "Israeli",
+    tier: "III",
+    description: "An Israeli MBT featuring modular armor, advanced fire control, 120mm gun, and rear troop compartment.",
+    image: "Merkava-Mk.3.jpg",
+    stats: { health: 0, speed: 0, armor: "0", agility: 0 },
+    weapons: [
+      { name: "3BM22", type: "Main Gun", damage: 11100, penetration: 425 },
+      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "9M119", type: "Main Gun", damage: 10160, penetration: 750 },
+      { name: "3BM42", type: "Main Gun", damage: 11700, penetration: 720 },
+      { name: "3BK12M", type: "Main Gun", damage: 12140, penetration: 440 }
+    ],
+    modules: {
+      engine: [
+        { name: "V-46-6 MK1", bonus: "+8 km/h speed" },
+        { name: "V-46-6 MK2", bonus: "+16 km/h speed" },
+        { name: "V-46-6 MK3", bonus: "+24 km/h speed" },
+      ],
+      armor: [
+        { name: "Composite Armor MK1", bonus: "+140mm protection" },
+        { name: "Composite Armor MK2", bonus: "+280mm protection" },
+        { name: "Composite Armor MK3", bonus: "+420mm protection" },
+      ],
+      fireControl: [
+        { name: "TPD-K1 MK1", bonus: "+12% accuracy" },
+        { name: "TPD-K1 MK2", bonus: "+22% accuracy" },
+        { name: "TPD-K1 MK3", bonus: "+32% accuracy" },
+      ],
+    },
   },
   {
     "id": 412,
@@ -2465,15 +2998,32 @@ const VEHICLES_DATA = [
     "type": "SPH",
     "faction": "Chinese",
     "tier": "III",
-    "image": "PLZ-07B.jpg",
+    image: "PLZ-07B.jpg",
     "description": "Chinese 155mm self-propelled howitzer with high mobility and firepower.",
     "stats": { "health": 26000, "speed": 59, "armor": "200mm", "agility": 35 },
     "weapons": [
-      { "name": "GP120A", "type": "Main Gun", "damage": 8100, "penetration": 240 },
-      { "name": "GP120B", "type": "Main Gun", "damage": 7400, "penetration": 480 },
-      { "name": "3OF56", "type": "Main Gun", "damage": 12200, "penetration": 120 },
-      { "name": "ZBP1", "type": "Main Gun", "damage": 10450, "penetration": 400 }
-    ]
+      { name: "GP120A", type: "Main Gun", damage: 8100, penetration: 240 },
+      { name: "GP120B", type: "Main Gun", damage: 7400, penetration: 480 },
+      { name: "3OF56", type: "Main Gun", damage: 12200, penetration: 120 },
+      { name: "ZBP1", type: "Main Gun", damage: 10450, penetration: 400 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel 12150L", "bonus": "+10% speed" },
+        { "name": "Diesel 12150L-A", "bonus": "+20% speed" },
+        { "name": "Diesel 12150L-B", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Light Composite MK1", "bonus": "+50mm armor" },
+        { "name": "Light Composite MK2", "bonus": "+100mm armor" },
+        { "name": "Light Composite MK3", "bonus": "+150mm armor" }
+      ],
+      "fireControl": [
+        { "name": "SPG FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "SPG FCS MK2", "bonus": "+18% accuracy" },
+        { "name": "SPG FCS MK3", "bonus": "+26% accuracy" }
+      ]
+    }
   },
   {
     "id": 413,
@@ -2481,14 +3031,31 @@ const VEHICLES_DATA = [
     "type": "SPH",
     "faction": "Japanese",
     "tier": "III",
-    "image": "M110A2.jpg",
+    image: "M110A2.jpg",
     "description": "American 203mm self-propelled artillery for heavy bombardment.",
     "stats": { "health": 27800, "speed": 63, "armor": "150mm", "agility": 36 },
     "weapons": [
-      { "name": "M106", "type": "Main Gun", "damage": 10600, "penetration": 152 },
-      { "name": "M650", "type": "Main Gun", "damage": 11700, "penetration": 185 },
-      { "name": "M404", "type": "Main Gun", "damage": 9500, "penetration": 120 }
-    ]
+      { name: "M106", type: "Main Gun", damage: 10600, penetration: 152 },
+      { name: "M650", type: "Main Gun", damage: 11700, penetration: 185 },
+      { name: "M404", type: "Main Gun", damage: 9500, penetration: 120 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Gas Turbine A1", "bonus": "+5% speed" },
+        { "name": "Gas Turbine A2", "bonus": "+10% speed" },
+        { "name": "Gas Turbine A3", "bonus": "+15% speed" }
+      ],
+      "armor": [
+        { "name": "Light Armor MK1", "bonus": "+50mm armor" },
+        { "name": "Light Armor MK2", "bonus": "+100mm armor" },
+        { "name": "Light Armor MK3", "bonus": "+150mm armor" }
+      ],
+      "fireControl": [
+        { "name": "Artillery FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "Artillery FCS MK2", "bonus": "+18% accuracy" },
+        { "name": "Artillery FCS MK3", "bonus": "+26% accuracy" }
+      ]
+    }
   },
   {
     "id": 414,
@@ -2496,15 +3063,32 @@ const VEHICLES_DATA = [
     "type": "SPH",
     "faction": "Russian",
     "tier": "III",
-    "image": "2S31-Vena.jpg",
+    image: "2S31-Vena.jpg",
     "description": "Russian 120mm mortar howitzer on tracked chassis.",
     "stats": { "health": 23500, "speed": 79, "armor": "180mm", "agility": 42 },
     "weapons": [
-      { "name": "ZVOF110", "type": "Main Gun", "damage": 11500, "penetration": 120 },
-      { "name": "KM-8 Gran", "type": "Main Gun", "damage": 7000, "penetration": 180 },
-      { "name": "3BO34", "type": "Main Gun", "damage": 9800, "penetration": 240 },
-      { "name": "Kitolov 2M", "type": "Main Gun", "damage": 5100, "penetration": 280 }
-    ]
+      { name: "ZVOF110", type: "Main Gun", damage: 11500, penetration: 120 },
+      { name: "KM-8 Gran", type: "Main Gun", damage: 7000, penetration: 180 },
+      { name: "3BO34", type: "Main Gun", damage: 9800, penetration: 240 },
+      { name: "Kitolov 2M", type: "Main Gun", damage: 5100, penetration: 280 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "V-84A", "bonus": "+10% speed" },
+        { "name": "V-84B", "bonus": "+20% speed" },
+        { "name": "V-84C", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Light Composite MK1", "bonus": "+50mm armor" },
+        { "name": "Light Composite MK2", "bonus": "+100mm armor" },
+        { "name": "Light Composite MK3", "bonus": "+150mm armor" }
+      ],
+      "fireControl": [
+        { "name": "Mortar FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "Mortar FCS MK2", "bonus": "+18% accuracy" },
+        { "name": "Mortar FCS MK3", "bonus": "+26% accuracy" }
+      ]
+    }
   },
   {
     "id": 415,
@@ -2512,15 +3096,32 @@ const VEHICLES_DATA = [
     "type": "SPH",
     "faction": "American",
     "tier": "III",
-    "image": "XM2001-Crusader.jpg",
+    image: "XM2001-Crusader.jpg",
     "description": "Experimental 155mm self-propelled howitzer with automatic loading.",
     "stats": { "health": 34800, "speed": 67, "armor": "200mm", "agility": 38 },
     "weapons": [
-      { "name": "M982 HEDP", "type": "Main Gun", "damage": 6600, "penetration": 280 },
-      { "name": "M795 HE", "type": "Main Gun", "damage": 12700, "penetration": 950 },
-      { "name": "M267A2 HEAT", "type": "Main Gun", "damage": 8900, "penetration": 135 },
-      { "name": "M864 CH", "type": "Main Gun", "damage": 8000, "penetration": 85 }
-    ]
+      { name: "M982 HEDP", type: "Main Gun", damage: 6600, penetration: 280 },
+      { name: "M795 HE", type: "Main Gun", damage: 12700, penetration: 950 },
+      { name: "M267A2 HEAT", type: "Main Gun", damage: 8900, penetration: 135 },
+      { name: "M864 CH", type: "Main Gun", damage: 8000, penetration: 85 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel Crusader MK1", "bonus": "+10% speed" },
+        { "name": "Diesel Crusader MK2", "bonus": "+20% speed" },
+        { "name": "Diesel Crusader MK3", "bonus": "+30% speed" }
+      ],
+      "armor": [
+        { "name": "Composite MK1", "bonus": "+100mm armor" },
+        { "name": "Composite MK2", "bonus": "+200mm armor" },
+        { "name": "Composite MK3", "bonus": "+300mm armor" }
+      ],
+      "fireControl": [
+        { "name": "Crusader FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "Crusader FCS MK2", "bonus": "+18% accuracy" },
+        { "name": "Crusader FCS MK3", "bonus": "+26% accuracy" }
+      ]
+    }
   },
   {
     "id": 416,
@@ -2528,28 +3129,58 @@ const VEHICLES_DATA = [
     "type": "Anti-Air",
     "faction": "German",
     "tier": "III",
-    "image": "Gepard-1A2.jpg",
+    image: "Gepard-1A2.jpg",
     "description": "German SPAAG with twin 35mm Oerlikon cannons and radar-guided fire control.",
     "stats": { "health": 28900, "speed": 65, "armor": "35mm", "agility": 30 },
     "weapons": [
-      { "name": "25 x 228 API", "type": "Main Gun", "damage": 580, "penetration": 75 },
-      { "name": "25 x 228 HEI", "type": "Main Gun", "damage": 300, "penetration": 59 },
-      { "name": "35 x 228 APDS", "type": "Main Gun", "damage": 610, "penetration": 127 },
-      { "name": "Fliegerfaust 2 Stinger", "type": "Missile", "damage": 4210, "penetration": 60, "reload": 12 }
-    ]
+       { name: "25 x 228 API", type: "Main Gun", damage: 580, penetration: 75 },
+       { name: "25 x 228 HEI", type: "Main Gun", damage: 300, penetration: 59 },
+       { name: "35 x 228 APDS", type: "Main Gun", damage: 610, penetration: 127 },
+       { name: "Fliegerfaust 2 Stinger", type: "Missile", damage: 4210, penetration: 60, reload: 12 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "MTU MB 833 Ka-500", "bonus": "+10% speed" },
+        { "name": "MTU MB 833 Ka-501", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Targeting Radar MK1", "bonus": "+20% detection" },
+        { "name": "Targeting Radar MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Chaff/Flare MK1", "bonus": "+20% countermeasures" },
+        { "name": "Chaff/Flare MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
+   
+  
   {
     "id": 418,
     "name": "K-31 Cheonma",
     "type": "Anti-Air",
     "faction": "SouthKorean",
     "tier": "III",
-    "image": "K-31-Cheonma.jpg",
+    image: "K-31-Cheonma.jpg",
     "description": "Korean SPAAG with 30mm cannons and short-range SAM missiles.",
     "stats": { "health": 23100, "speed": 60, "armor": "25mm", "agility": 35 },
     "weapons": [
-      { "name": "Crotale-NG-Launcher", "type": "Missile", "damage": 5790, "penetration": 58, "reload": 12 }
-    ]
+      { name: "Crotale-NG-Launcher", type: "Missile", damage: 5790, penetration: 58, reload: 12 },
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel Engine MK1", "bonus": "+10% speed" },
+        { "name": "Diesel Engine MK2", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Targeting Radar MK1", "bonus": "+20% detection" },
+        { "name": "Targeting Radar MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Chaff/Flare MK1", "bonus": "+20% countermeasures" },
+        { "name": "Chaff/Flare MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 419,
@@ -2557,15 +3188,29 @@ const VEHICLES_DATA = [
     "type": "Anti-Air",
     "faction": "Chinese",
     "tier": "III",
-    "image": "PGZ-09.jpg",
+    image: "PGZ-09.jpg",
     "description": "Tracked Chinese self-propelled AA, twin 35mm guns, light armor, medium mobility, excels against helicopters and low-flying aircraft.",
     "stats": { "health": 25500, "speed": 60, "armor": "30mm", "agility": 30 },
     "weapons": [
-      { "name": "DKG01A", "type": "Main Gun", "damage": 270, "penetration": 59 },
-      { "name": "DKP01A", "type": "Main Gun", "damage": 500, "penetration": 75 },
-      { "name": "DM23", "type": "Main Gun", "damage": 530, "penetration": 127 },
-      { "name": "PMD062", "type": "Main Gun", "damage": 290, "penetration": 59 }
-    ]
+      { name: "DKG01A", type: "Main Gun", damage: 270, penetration: 59 },
+      { name: "DKP01A", type: "Main Gun", damage: 500, penetration: 75 },
+      { name: "DM23", type: "Main Gun", damage: 530, penetration: 127 },
+      { name: "PMD062", type: "Main Gun", damage: 290, penetration: 59 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel 12150L", "bonus": "+10% speed" },
+        { "name": "Diesel 12150L-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Targeting Radar MK1", "bonus": "+20% detection" },
+        { "name": "Targeting Radar MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Chaff/Flare MK1", "bonus": "+20% countermeasures" },
+        { "name": "Chaff/Flare MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 420,
@@ -2573,15 +3218,29 @@ const VEHICLES_DATA = [
     "type": "Anti-Air",
     "faction": "Russian",
     "tier": "III",
-    "image": "2S6M1-Tunguska-M1.jpg",
+    image: "2S6M1-Tunguska-M1.jpg",
     "description": "Russian SPAAG with twin 30mm cannons and 9M311 SAM missiles.",
     "stats": { "health": 25000, "speed": 65, "armor": 35, "agility": 35 },
     "weapons": [
-      { "name": "3UBR6", "type": "Main Gun", "damage": 560, "penetration": 71 },
-      { "name": "30F8", "type": "Main Gun", "damage": 675, "penetration": 50 },
-      { "name": "3UBR8", "type": "Main Gun", "damage": 590, "penetration": 165 },
-      { "name": "ZUR 9M311", "type": "Missile", "damage": 8100, "penetration": 69, "reload": 24 }
-    ]
+      { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
+      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
+      { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
+      { name: "ZUR 9M311", type: "Missile", damage: 8100, penetration: 69, reload: 24 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "V-84A", "bonus": "+10% speed" },
+        { "name": "V-84B", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Chaff/Flare MK1", "bonus": "+20% countermeasures" },
+        { "name": "Chaff/Flare MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 421,
@@ -2589,14 +3248,28 @@ const VEHICLES_DATA = [
     "type": "Anti-Air",
     "faction": "Chinese",
     "tier": "III",
-    "image": "Type-625E-SHORAD.jpg",
+    image: "Type-625E-SHORAD.jpg",
     "description": "Chinese short-range air defense vehicle with 25mm cannons and SAM missiles.",
     "stats": { "health": 22000, "speed": 100, "armor": "25mm", "agility": 60 },
     "weapons": [
-      { "name": "30*160 APFSDS", "type": "Main Gun", "damage": 0, "penetration": 128 },
-      { "name": "30*160 HEI", "type": "Main Gun", "damage": 351, "penetration": 60 },
-      { "name": "FB-10A", "type": "Missile", "damage": 4800, "penetration": 55, "reload": 15 }
-    ]
+      { name: "30*160 APFSDS", type: "Main Gun", damage: 0, penetration: 128 },
+      { name: "30*160 HEI", type: "Main Gun", damage: 351, penetration: 60 },
+      { name: "FB-10A", type: "Missile", damage: 4800, penetration: 55, reload: 15 },
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel 12150L", "bonus": "+10% speed" },
+        { "name": "Diesel 12150L-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Chaff/Flare MK1", "bonus": "+20% countermeasures" },
+        { "name": "Chaff/Flare MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 422,
@@ -2604,12 +3277,26 @@ const VEHICLES_DATA = [
     "type": "Anti-Air",
     "faction": "American",
     "tier": "III",
-    "image": "XM975.jpg",
+    image: "XM975.jpg",
     "description": "US SPAAG with 20mm Vulcan cannon and Stinger SAM missiles.",
     "stats": { "health": 23500, "speed": 57, "armor": "40mm", "agility": 30 },
     "weapons": [
-      { "name": "SAM Rokand", "type": "Missile", "damage": 8910, "penetration": 85, "reload": 6 }
-    ]
+      { name: "SAM Rokand", type: "Missile", damage: 8910, penetration: 85, reload: 6 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel MK1", "bonus": "+10% speed" },
+        { "name": "Diesel MK2", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Chaff/Flare MK1", "bonus": "+20% countermeasures" },
+        { "name": "Chaff/Flare MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 423,
@@ -2617,12 +3304,26 @@ const VEHICLES_DATA = [
     "type": "Anti-Air",
     "faction": "Chinese",
     "tier": "III",
-    "image": "AFT-10.jpg",
+    image: "AFT-10.jpg",
     "description": "Modern armored combat vehicle with high mobility, HJ-10 Missiles, advanced targeting, versatile for battlefield assaults and defense operationsand",
     "stats": { "health": 26000, "speed": 70, "armor": "30mm", "agility": 40 },
     "weapons": [
-      { "name": "HJ-10", "type": "Missile", "damage": 12558, "penetration": 1400, "reload": 13 }
-    ]
+      { name: "HJ-10", type: "Missile", damage: 12558, penetration: 1400, reload: 13 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel 12150L", "bonus": "+10% speed" },
+        { "name": "Diesel 12150L-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Chaff/Flare MK1", "bonus": "+20% countermeasures" },
+        { "name": "Chaff/Flare MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 424,
@@ -2630,13 +3331,27 @@ const VEHICLES_DATA = [
     "type": "Missile Carrier",
     "faction": "American",
     "tier": "III",
-    "image": "M113-Hellfire.jpg",
+    image: "M113-Hellfire.jpg",
     "description": "M113 variant carrying AGM-114 Hellfire missiles for ground and air targets.",
     "stats": { "health": 24500, "speed": 62, "armor": "25mm", "agility": 35 },
     "weapons": [
-      { "name": "ATGMs ARL", "type": "Missile", "damage": 9000, "penetration": 950, "reload": 10 },
-      { "name": "ATGMs Laser", "type": "Missile", "damage": 10900, "penetration": 1000, "reload": 10 }
-    ]
+      { name: "ATGMs ARL", type: "Missile", damage: 9000, penetration: 950, reload: 10 },
+      { name: "ATGMs Laser", type: "Missile", damage: 10900, penetration: 1000, reload: 10 },
+    ],
+    "modules": {
+      "engine": [
+        { "name": "V6 Diesel MK1", "bonus": "+10% speed" },
+        { "name": "V6 Diesel MK2", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Targeting System MK1", "bonus": "+20% accuracy" },
+        { "name": "Targeting System MK2", "bonus": "+40% accuracy" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 425,
@@ -2644,14 +3359,28 @@ const VEHICLES_DATA = [
     "type": "MLRS",
     "faction": "Russian",
     "tier": "III",
-    "image": "9A52-2-Smerch.jpg",
+    image: "9A52-2-Smerch.jpg",
     "description": "Heavy Russian MLRS with 300mm rockets for long-range bombardment.",
     "stats": { "health": 26000, "speed": 60, "armor": "25mm", "agility": 23 },
     "weapons": [
-      { "name": "9M542 HE", "type": "Missile", "damage": 18000, "penetration": 120, "reload": 16 },
-      { "name": "9M530 HESH", "type": "Missile", "damage": 16600, "penetration": 300, "reload": 16 },
-      { "name": "9M55K5 CH", "type": "Missile", "damage": 17100, "penetration": 460, "reload": 16 }
-    ]
+      { name: "9M542 HE", type: "Missile", damage: 18000, penetration: 120, reload: 16 },
+      { name: "9M530 HESH", type: "Missile", damage: 16600, penetration: 300, reload: 16 },
+      { name: "9M55K5 CH", type: "Missile", damage: 17100, penetration: 460, reload: 16 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "V-12 Diesel MK1", "bonus": "+10% speed" },
+        { "name": "V-12 Diesel MK2", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "MLRS FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "MLRS FCS MK2", "bonus": "+20% accuracy" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 426,
@@ -2659,14 +3388,28 @@ const VEHICLES_DATA = [
     "type": "MLRS",
     "faction": "Chinese",
     "tier": "III",
-    "image": "Type-89-MLRS.jpg",
+    image: "Type-89-MLRS.jpg",
     "description": "Japanese 300mm MLRS for long-range artillery strikes.",
     "stats": { "health": 24500, "speed": 55, "armor": "25mm", "agility": 36 },
     "weapons": [
-      { "name": "Type 81 FSBS", "type": "Missile", "damage": 11900, "penetration": 165, "reload": 20 },
-      { "name": "Type 81 FFBE", "type": "Missile", "damage": 10600, "penetration": 220, "reload": 20 },
-      { "name": "Type 81", "type": "Missile", "damage": 9350, "penetration": 260, "reload": 20 }
-    ]
+      { name: "Type 81 FSBS", type: "Missile", damage: 11900, penetration: 165, reload: 20 },
+      { name: "Type 81 FFBE", type: "Missile", damage: 10600, penetration: 220, reload: 20 },
+      { name: "Type 81", type: "Missile", damage: 9350, penetration: 260, reload: 20 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel 12150L", "bonus": "+10% speed" },
+        { "name": "Diesel 12150L-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "MLRS FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "MLRS FCS MK2", "bonus": "+20% accuracy" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 427,
@@ -2674,13 +3417,27 @@ const VEHICLES_DATA = [
     "type": "MLRS",
     "faction": "Japanese",
     "tier": "III",
-    "image": "Type-75-MLRS.jpg",
+    image: "Type-75-MLRS.jpg",
     "description": "Japanese 300mm MLRS for long-range artillery strikes.",
     "stats": { "health": 22800, "speed": 51, "armor": "30mm", "agility": 35.5 },
     "weapons": [
-      { "name": "Type 75 HE", "type": "Missile", "damage": 5700, "penetration": 85, "reload": 30 },
-      { "name": "Type 75 mod 2 HEAT", "type": "Missile", "damage": 10300, "penetration": 350, "reload": 30 }
-    ]
+      { name: "Type 75 HE", type: "Missile", damage: 5700, penetration: 85, reload: 30 },
+      { name: "Type 75 mod 2 HEAT", type: "Missile", damage: 10300, penetration: 350, reload: 30 },
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel 12150L", "bonus": "+10% speed" },
+        { "name": "Diesel 12150L-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "MLRS FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "MLRS FCS MK2", "bonus": "+20% accuracy" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 428,
@@ -2688,12 +3445,26 @@ const VEHICLES_DATA = [
     "type": "Anti-Air",
     "faction": "Chinese",
     "tier": "III",
-    "image": "AFT-09.jpg",
+    image: "AFT-09.jpg",
     "description": "Mobile missile tank with reinforced armor, launches guided missiles, excels in long-range strikes, tactical support, and battlefield versatility.",
     "stats": { "health": 23000, "speed": 96, "armor": "30mm", "agility": 40 },
     "weapons": [
-      { "name": "ATGM HJ-9", "type": "Missile", "damage": 10192, "penetration": 1200, "reload": 6 }
-    ]
+      { name: "ATGM HJ-9", type: "Missile", damage: 10192, penetration: 1200, reload: 6 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel 12150L", "bonus": "+10% speed" },
+        { "name": "Diesel 12150L-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Chaff/Flare MK1", "bonus": "+20% countermeasures" },
+        { "name": "Chaff/Flare MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 429,
@@ -2701,15 +3472,29 @@ const VEHICLES_DATA = [
     "type": "Tank Destroyer",
     "faction": "American",
     "tier": "III",
-    "image": "LAV-600.jpg",
+    image: "LAV-600.jpg",
     "description": "Armored wheeled vehicle equipped with short-range missiles and machine guns.",
     "stats": { "health": 24000, "speed": 95, "armor": "20mm", "agility": 27 },
     "weapons": [
-      { "name": "M392", "type": "Main Gun", "damage": 8295, "penetration": 350 },
-      { "name": "M393", "type": "Main Gun", "damage": 11800, "penetration": 127 },
-      { "name": "M456", "type": "Main Gun", "damage": 9800, "penetration": 400 },
-      { "name": "M833", "type": "Main Gun", "damage": 9900, "penetration": 472 }
-    ]
+      { name: "M392", type: "Main Gun", damage: 8295, penetration: 350 },
+      { name: "M393", type: "Main Gun", damage: 11800, penetration: 127 },
+      { name: "M456", type: "Main Gun", damage: 9800, penetration: 400 },
+      { name: "M833", type: "Main Gun", damage: 9900, penetration: 472 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 430,
@@ -2717,13 +3502,27 @@ const VEHICLES_DATA = [
     "type": "Light Tank",
     "faction": "American",
     "tier": "III",
-    "image": "HSTV-L.jpg",
+    image: "HSTV-L.jpg",
     "description": "A lightweight prototype tank, emphasizing mobility, advanced optics, and rapid firepower.",
     "stats": { "health": 26000, "speed": 84, "armor": "47mm", "agility": 40 },
     "weapons": [
-      { "name": "XM855HE", "type": "Main Gun", "damage": 7560, "penetration": 68 },
-      { "name": "XM885AP", "type": "Main Gun", "damage": 6160, "penetration": 370 }
-    ]
+     { name: "XM855HE", type: "Main Gun", damage: 7560, penetration: 68 },
+     { name: "XM885AP", type: "Main Gun", damage: 6160, penetration: 370 }
+],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 431,
@@ -2731,16 +3530,30 @@ const VEHICLES_DATA = [
     "type": "Light Tank",
     "faction": "SouthKorean",
     "tier": "III",
-    "image": "K21-KNIFV.jpg",
+    image: "K21-KNIFV.jpg",
     "description": "South Korean infantry fighting vehicle, offering strong firepower, amphibious capability, protection, and advanced digital battlefield systems.",
     "stats": { "health": 35900, "speed": 76 , "armor": 50, "agility": 42 },
     "weapons": [
-      { "name": "K237 APFSDS", "type": "Main Gun", "damage": 1490, "penetration": 200 },
-      { "name": "K236 HEI", "type": "Main Gun", "damage": 770, "penetration": 74 },
-      { "name": "K219 AP", "type": "Main Gun", "damage": 1340, "penetration": 147 },
-      { "name": "K216 HEI", "type": "Main Gun", "damage": 690, "penetration": 68 },
-      { "name": "Spike-LR2", "type": "Missile", "damage": 10090, "penetration": 900, "reload": 10 }
-    ]
+     { name: "K237 APFSDS", type: "Main Gun", damage: 1490, penetration: 200 },
+     { name: "K236 HEI", type: "Main Gun", damage: 770, penetration: 74 },
+     { name: "K219 AP", type: "Main Gun", damage: 1340, penetration: 147 },
+     { name: "K216 HEI", type: "Main Gun", damage: 690, penetration: 68 },
+     { name: "Spike-LR2", type: "Missile", damage: 10090, penetration: 900, reload: 10 },
+],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 432,
@@ -2748,15 +3561,30 @@ const VEHICLES_DATA = [
     "type": "Light Tank",
     "faction": "British",
     "tier": "III",
-    "image": "Rookiat-MTTD.jpg",
+    image: "Rookiat-MTTD.jpg",
     "description": "The Rooikat MTTD is a fast, wheeled tank destroyer with strong firepower.",
     "stats": { "health": 27200, "speed": 120, "armor": "40mm", "agility": 28 },
     "weapons": [
-      { "name": "DM23", "type": "Main Gun", "damage": 8911, "penetration": 337 },
-      { "name": "DM33", "type": "Main Gun", "damage": 10060, "penetration": 508 },
-      { "name": "DM12", "type": "Main Gun", "damage": 12100, "penetration": 480 },
-      { "name": "DM512", "type": "Main Gun", "damage": 10210, "penetration": 127 }
-    ]
+    { name: "DM23", type: "Main Gun", damage: 8911, penetration: 337 },
+    { name: "DM33", type: "Main Gun", damage: 10060, penetration: 508 },
+    { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
+    { name: "DM512", type: "Main Gun", damage: 10210, penetration: 127 }
+
+],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 433,
@@ -2764,16 +3592,31 @@ const VEHICLES_DATA = [
     "type": "Light Tank",
     "faction": "Chinese",
     "tier": "III",
-    "image": "ZBL-08.jpg.png",
+    image: "ZBL-08.jpg.png",
     "description": "Wheeled armored personnel carrier with good mobility, moderate armor, versatile weapon options.",
     "stats": { "health": 26900, "speed": 111, "armor": "40mm", "agility": 64 },
     "weapons": [
-      { "name": "ZUBR6 APBC", "type": "Main Gun", "damage": 540, "penetration": 112 },
-      { "name": "Z0F8", "type": "Main Gun", "damage": 675, "penetration": 50 },
-      { "name": "ZUBR8", "type": "Main Gun", "damage": 525, "penetration": 165 },
-      { "name": "M929", "type": "Main Gun", "damage": 630, "penetration": 189 },
-      { "name": "HJ-73B", "type": "Missile", "damage": 7800, "penetration": 500, "reload": 6 }
-    ]
+      { name: "ZUBR6 APBC", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "Z0F8", type: "Main Gun", damage: 675, penetration: 50 },
+      { name: "ZUBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
+      { name: "HJ-73B", type: "Missile", damage: 7800, penetration: 500, reload: 6 }
+
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 434,
@@ -2781,16 +3624,31 @@ const VEHICLES_DATA = [
     "type": "Light Tank",
     "faction": "American",
     "tier": "III",
-    "image": "XM8.png",
+    image: "XM8.png",
     "description": "Wheeled armored personnel carrier with good mobility, moderate armor, versatile weapon options.",
     "stats": { "health": 26900, "speed": 111, "armor": "40mm", "agility": 64 },
     "weapons": [
-      { "name": "ZUBR6 APBC", "type": "Main Gun", "damage": 540, "penetration": 112 },
-      { "name": "Z0F8", "type": "Main Gun", "damage": 675, "penetration": 50 },
-      { "name": "ZUBR8", "type": "Main Gun", "damage": 525, "penetration": 165 },
-      { "name": "M929", "type": "Main Gun", "damage": 630, "penetration": 189 },
-      { "name": "HJ-73B", "type": "Missile", "damage": 7800, "penetration": 500, "reload": 6 }
-    ]
+      { name: "ZUBR6 APBC", type: "Main Gun", damage: 540, penetration: 112 },
+      { name: "Z0F8", type: "Main Gun", damage: 675, penetration: 50 },
+      { name: "ZUBR8", type: "Main Gun", damage: 525, penetration: 165 },
+      { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
+      { name: "HJ-73B", type: "Missile", damage: 7800, penetration: 500, reload: 6 }
+
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 435,
@@ -2798,7 +3656,7 @@ const VEHICLES_DATA = [
     "type": "Light Tank",
     "faction": "French",
     "tier": "III",
-    "image": "VBCI-2.jpg",
+    image: "VBCI-2.jpg",
     "description": "A French 8×8 infantry fighting vehicle, upgraded from the VBCI with better armor and mobility",
     "stats": { "health": 26900, "speed": 111, "armor": "40mm", "agility": 64 },
     "weapons": [
@@ -2806,7 +3664,21 @@ const VEHICLES_DATA = [
       { "name": "MK266 HEI", "type": "Cannon", "damage": 520, "penetration": 55, "reload": 10 },
       { "name": "MK258 APFSDS", "type": "Cannon", "damage": 1100, "penetration": 165, "reload": 10 },
       { "name": "MBDA-MMP", "type": "Missile", "damage": 12540, "penetration": 1000, "reload": 10 }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
   {
     "id": 436,
@@ -2814,484 +3686,861 @@ const VEHICLES_DATA = [
     "type": "Tank Destroyer",
     "faction": "Chinese",
     "tier": "III",
-    "image": "WMA301.jpg",
+    image: "WMA301.jpg",
     "description": "A Chinese modern wheeled armored vehicle with strong firepower, protection, and mobility..",
     "stats": { "health": 28200, "speed": 85, "armor": "25mm", "agility": 35 },
     "weapons": [
-      { "name": "Type 83 APFSDS", "type": "Main Gun", "damage": 10340, "penetration": 425 },
-      { "name": "Type 83 HEAT", "type": "Main Gun", "damage": 9900, "penetration": 400 },
-      { "name": "Type 83 HESH", "type": "Main Gun", "damage": 9410, "penetration": 127 },
-      { "name": "GP 105", "type": "Main Gun", "damage": 9180, "penetration": 750 }
-    ]
+      { name: "Type 83 APFSDS", type: "Main Gun", damage: 10340, penetration: 425 },
+      { name: "Type 83 HEAT", type: "Main Gun", damage: 9900, penetration: 400 },
+      { name: "Type 83 HESH", type: "Main Gun", damage: 9410, penetration: 127 },
+      { name: "GP 105", type: "Main Gun", damage: 9180, penetration: 750 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel 12150L", "bonus": "+10% speed" },
+        { "name": "Diesel 12150L-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "MLRS FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "MLRS FCS MK2", "bonus": "+20% accuracy" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
-  {
+   {
     "id": 437,
     "name": "Centauro I 120",
     "type": "Tank Destroyer",
     "faction": "Italian",
     "tier": "III",
-    "image": "Centauro-I-120.jpg",
+    image: "Centauro-I-120.jpg",
     "description": "Italian wheeled tank destroyer, 120mm gun, fast and mobile, light armor, strong firepower, ideal for hit-and-run and reconnaissance.",
     "stats": { "health": 26800, "speed": 110, "armor": "40mm", "agility": 41.8 },
     "weapons": [
-      { "name": "DM33 APFSDS", "type": "Main Gun", "damage": 11120, "penetration": 550 },
-      { "name": "DM12A1 HEATFS", "type": "Main Gun", "damage": 12100, "penetration": 480 },
-      { "name": "CL3143 APFSDS", "type": "Main Gun", "damage": 11520, "penetration": 690 }
-    ]
+      { name: "DM33 APFSDS", type: "Main Gun", damage: 11120, penetration: 550 },
+      { name: "DM12A1 HEATFS", type: "Main Gun", damage: 12100, penetration: 480 },
+      { name: "CL3143 APFSDS", type: "Main Gun", damage: 11520, penetration: 690 }
+    ],
+    "modules": {
+      "engine": [
+        { "name": "Diesel 12150L", "bonus": "+10% speed" },
+        { "name": "Diesel 12150L-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "MLRS FCS MK1", "bonus": "+10% accuracy" },
+        { "name": "MLRS FCS MK2", "bonus": "+20% accuracy" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
-  {
-    "id": 438,
-    "name": "BMD3",
-    "type": "Light Tank",
-    "faction": "Russian",
-    "tier": "III",
-    "description": "Light infantry fighting vehicle with amphibious capability and rapid deployment design.",
-    "image": "BMD3.jpg",
-    "stats": { "health": 24000, "speed": 70, "armor": "420mm", "agility": 40 },
-    "weapons": [
-      { "name": "3UBR6", "type": "Main Gun", "damage": 560, "penetration": 71 },
-      { "name": "3UBR8", "type": "Main Gun", "damage": 590, "penetration": 165 },
-      { "name": "30F8", "type": "Main Gun", "damage": 675, "penetration": 50 },
-      { "name": "M929", "type": "Main Gun", "damage": 630, "penetration": 189 },
-      { "name": "9K135 Kornet", "type": "Missile", "damage": 9473, "penetration": 1000, "reload": 8 },
-      { "name": "AGS-17", "type": "Missile", "damage": 2640, "penetration": 50, "reload": 6 }
-    ]
-  },
-  {
+   {
+    id: 438,
+    name: "BMD3",
+    type: "Light Tank",
+    faction: "Russian",
+    tier: "III",
+    description: "Light infantry fighting vehicle with amphibious capability and rapid deployment design.",
+    image: "BMD3.jpg",
+    stats: { health: 24000, speed: 70, armor: "420mm", agility: 40 },
+    weapons: [
+      { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
+      { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
+      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
+      { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
+      { name: "9K135 Kornet", type: "Missile", damage: 9473, penetration: 1000, reload: 8 },
+      { name: "AGS-17", type: "Missile", damage: 2640, penetration: 50, reload: 6 }
+    ],
+    modules: {
+      engine: [
+        { name: "UTD-29 MK1", bonus: "+12 km/h speed" },
+        { name: "UTD-29 MK2", bonus: "+24 km/h speed" },
+        { name: "UTD-29 MK3", bonus: "+36 km/h speed" },
+      ],
+      armor: [
+        { name: "Aluminum Armor MK1", bonus: "+80mm protection" },
+        { name: "Aluminum Armor MK2", bonus: "+160mm protection" },
+        { name: "Aluminum Armor MK3", bonus: "+240mm protection" },
+      ],
+      fireControl: [
+        { name: "BPK-3-42 MK1", bonus: "+14% accuracy" },
+        { name: "BPK-3-42 MK2", bonus: "+26% accuracy" },
+        { name: "BPK-3-42 MK3", bonus: "+38% accuracy" },
+      ],
+      }
+    },
+    {
     "id": 439,
     "name": "Strf 9040 BILL",
     "type": "Light Tank",
     "faction": "Sweden",
     "tier": "III",
-    "image": "Strf-9040-BILL.jpg",
+    image: "Strf-9040-BILL.jpg",
     "description": "Swedish light tank with 40 mm autocannon and ATGMs, versatile but lightly armored, fast, lethal.",
     "stats": { "health": 26300, "speed": 80, "armor": "47mm", "agility": 36 },
     "weapons": [
-      { "name": "Rbs 56", "type": "Missile", "damage": 7850, "penetration": 510, "reload": 10 },
-      { "name": "Slsgr m/90 HEI", "type": "Main Gun", "damage": 640, "penetration": 61 },
-      { "name": "Slpprj m/90 APSFSDS", "type": "Main Gun", "damage": 1370, "penetration": 173 },
-      { "name": "Slpprj m/01 APFSDS", "type": "Main Gun", "damage": 1380, "penetration": 239 }
-    ]
+     { name: "Rbs 56", type: "Missile", damage: 7850, penetration: 510, reload: 10 },
+     { name: "Slsgr m/90 HEI", type: "Main Gun", damage: 640, penetration: 61 },
+     { name: "Slpprj m/90 APSFSDS", type: "Main Gun", damage: 1370, penetration: 173 },
+     { name: "Slpprj m/01 APFSDS", type: "Main Gun", damage: 1380, penetration: 239 },
+
+
+],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
-  {
+    {
     "id": 440,
     "name": "M3A3 Bradley",
     "type": "Light Tank",
     "faction": "American",
     "tier": "III",
-    "image": "M3A3-Bradley.jpg",
+    image: "M3A3-Bradley.jpg",
     "description": "Fast, armored infantry vehicle with strong firepower and decent survivability.",
     "stats": { "health": 26000, "speed": 84, "armor": "47mm", "agility": 40 },
     "weapons": [
-      { "name": "PGU-32U/T", "type": "Main Gun", "damage": 405, "penetration": 115 },
-      { "name": "M791", "type": "Main Gun", "damage": 473, "penetration": 111 },
-      { "name": "M792", "type": "Main Gun", "damage": 608, "penetration": 48 },
-      { "name": "M919", "type": "Main Gun", "damage": 495, "penetration": 140 }
-    ]
+     { name: "PGU-32U/T", type: "Main Gun", damage: 405, penetration: 115 },
+     { name: "M791", type: "Main Gun", damage: 473, penetration: 111 },
+     { name: "M792", type: "Main Gun", damage: 608, penetration: 48 },
+     { name: "M919", type: "Main Gun", damage: 495, penetration: 140 }
+
+
+],
+    "modules": {
+      "engine": [
+        { "name": "Diesel V6", "bonus": "+10% speed" },
+        { "name": "Diesel V6-A", "bonus": "+20% speed" }
+      ],
+      "fireControl": [
+        { "name": "Radar Targeting MK1", "bonus": "+20% detection" },
+        { "name": "Radar Targeting MK2", "bonus": "+40% detection" }
+      ],
+      "defense": [
+        { "name": "Smoke Launcher MK1", "bonus": "+20% countermeasures" },
+        { "name": "Smoke Launcher MK2", "bonus": "+35% countermeasures" }
+      ]
+    }
   },
-  {
-    "id": 500,
-    "name": "Mi-35P Hind-F",
-    "type": "Helicopter",
-    "faction": "Russian",
-    "tier": "III",
-    "image": "Mi-35P-Hind-F.jpg",
-    "description": "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
-    "stats": { "health": 21840, "speed": 221, "verticalSpeed": 13, "agility": 46 },
-    "weapons": [
-      { "name": "9K38 IGLA-V", "type": "Short-Range AAM", "damage": 4100, "penetration": 30, "reload": 15 },
-      { "name": "9K121 Vikhr", "type": "Anti-Tank Missile", "damage": 7800, "penetration": 1000, "reload": 30 },
-      { "name": "Attack ATGM", "type": "Anti-Tank Missile", "damage": 7500, "penetration": 850, "reload": 30 },
-      { "name": "9-A 5013", "type": "Air-to-Ground Missile", "damage": 5100, "penetration": 460, "reload": 20 },
-      { "name": "B8V20", "type": "Air-to-Ground Missile", "damage": 5100, "penetration": 420, "reload": 20 },
-      { "name": "B-13L", "type": "Air-to-Ground Missile", "damage": 9200, "penetration": 160, "reload": 40 },
-      { "name": "Kh-29T", "type": "Air-to-Ground Missile", "damage": 17800, "penetration": 280, "reload": 38 }
+   {
+    id: 500,
+    name: "Mi-35P Hind-F",
+    type: "Helicopter",
+    faction: "Russian",
+    tier: "III",
+    image: "Mi-35P-Hind-F.jpg",
+    description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
+    stats: { health: 21840, speed: 221, verticalSpeed: 13, agility: 46 },
+    weapons: [
+      { name: "9K38 IGLA-V", type: "Short-Range AAM", damage: 4100, penetration: 30, reload: 15 },
+      { name: "9K121 Vikhr", type: "Anti-Tank Missile", damage: 7800, penetration: 1000, reload: 30 },
+      { name: "Attack ATGM", type: "Anti-Tank Missile", damage: 7500, penetration: 850, reload: 30 },
+      { name: "9-A 5013", type: "Air-to-Ground Missile", damage: 5100, penetration: 460, reload: 20 },
+      { name: "B8V20", type: "Air-to-Ground Missile", damage: 5100, penetration: 420, reload: 20 },
+      { name: "B-13L", type: "Air-to-Ground Missile", damage: 9200, penetration: 160, reload: 40 },
+      { name: "Kh-29T", type: "Air-to-Ground Missile", damage: 17800, penetration: 280, reload: 38 }
     ],
-    "guns": [
-      { "name": "GSh-23L(23mm)", "type": "Autocannon", "damage": 60, "penetration": 70, "reload": 250 },
-      { "name": "UPK-23-250(23mm)", "type": "Rocket Pod", "damage": 300, "penetration": 70, "reload": 1200 }
-    ]
-  },
-  {
-    "id": 501,
-    "name": "Mi-24 Super Hind",
-    "type": "Helicopter",
-    "faction": "Russian",
-    "tier": "III",
-    "image": "Mi-24-Super-Hind.jpg",
-    "description": "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
-    "stats": { "health": 28100, "speed": 335, "verticalSpeed": 25, "agility": 79 },
-    "weapons": [
-      { "name": "UB-32-57", "type": "Rocket Pod", "damage": 3900, "penetration": 220, "reload": 20 },
-      { "name": "9K38 Igla-V", "type": "AAM (MANPADS)", "damage": 4100, "penetration": 30, "reload": 15 },
-      { "name": "S-24", "type": "Missile", "damage": 14600, "penetration": 180, "reload": 15 },
-      { "name": "R-60", "type": "AAM", "damage": 4600, "penetration": 36, "reload": 10 },
-      { "name": "B8v20", "type": "Rocket Pod", "damage": 5100, "penetration": 420, "reload": 20 },
-      { "name": "9M120 Attack", "type": "Missile", "damage": 7500, "penetration": 850, "reload": 25 },
-      { "name": "B-13L", "type": "Rocket Pod", "damage": 9200, "penetration": 160, "reload": 40 },
-      { "name": "Attack ATGM", "type": "Missile", "damage": 7500, "penetration": 850, "reload": 30 },
-      { "name": "KAB-250", "type": "Missile", "damage": 14900, "penetration": 130, "reload": 25 },
-      { "name": "DENEL ZT3 Ingwe", "type": "Missile", "damage": 10260, "penetration": 1000, "reload": 25 }
+    guns: [
+      { name: "GSh-23L(23mm)", type: "Autocannon", damage: 60, penetration: 70, reload: 250 },
+      { name: "UPK-23-250(23mm)", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 }
     ],
-    "guns": [
-      { "name": "Giat M693(20mm)", "type": "Autocannon", "damage": 65, "penetration": 55, "reload": 240 }
-    ]
+    modules: {
+      engine: [
+        { name: "VK-2500 Upgrade MK1", bonus: "+10% speed" },
+        { name: "VK-2500 Upgrade MK2", bonus: "+20% speed" }
+      ],
+      avionics: [
+        { name: "Hind Targeting Suite MK1", bonus: "+20% lock speed" },
+        { name: "Hind Targeting Suite MK2", bonus: "+35% lock speed" }
+      ],
+      defense: [
+        { name: "Vitebsk ECM MK1", bonus: "+20% missile defense" }
+      ]
+    }
   },
   {
-    "id": 502,
-    "name": "AH-64E Apache",
-    "type": "Helicopter",
-    "faction": "American",
-    "tier": "III",
-    "image": "AH-64E-Apache.jpg",
-    "description": "Advanced attack helicopter with multi-role capabilities and proven combat record.",
-    "stats": { "health": 20000, "speed": 280, "verticalSpeed": 19.4, "agility": 60 },
-    "weapons": [
-      { "name": "ADS Starstreak", "type": "Air-to-Ground Missile", "damage": 7300, "penetration": 50, "reload": 15 },
-      { "name": "AIM-9 Sidewinder", "type": "Short-Range AAM", "damage": 5700, "penetration": 45, "reload": 15 },
-      { "name": "AIM-92", "type": "Short-Range AAM", "damage": 4700, "penetration": 35, "reload": 10 },
-      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
-      { "name": "AGM-169 JAGM", "type": "Air-to-Ground Missile", "damage": 9800, "penetration": 1200, "reload": 30 },
-      { "name": "AGR-20 BLR", "type": "Rocket Pod", "damage": 5200, "penetration": 128, "reload": 20 },
-      { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
-      { "name": "LAU-61", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
-      { "name": "LAU-10", "type": "Rocket Pod", "damage": 7400, "penetration": 500, "reload": 30 }
+    id: 501,
+    name: "Mi-24 Super Hind",
+    type: "Helicopter",
+    faction: "Russian",
+    tier: "III",
+    image: "Mi-24-Super-Hind.jpg",
+    description: "Export version of Mi-24 family — gunship/transport hybrid with heavy ATGMs and rockets in MWT.",
+    stats: { health: 28100, speed: 335, verticalSpeed: 25, agility: 79 },
+    weapons: [
+      { name: "UB-32-57", type: "Rocket Pod", damage: 3900, penetration: 220, reload: 20 },
+      { name: "9K38 Igla-V", type: "AAM (MANPADS)", damage: 4100, penetration: 30, reload: 15 },
+      { name: "S-24", type: "Missile", damage: 14600, penetration: 180, reload: 15 },
+      { name: "R-60", type: "AAM", damage: 4600, penetration: 36, reload: 10 },
+      { name: "B8v20", type: "Rocket Pod", damage: 5100, penetration: 420, reload: 20 },
+      { name: "9M120 Attack", type: "Missile", damage: 7500, penetration: 850, reload: 25 },
+      { name: "B-13L", type: "Rocket Pod", damage: 9200, penetration: 160, reload: 40 },
+      { name: "Attack ATGM", type: "Missile", damage: 7500, penetration: 850, reload: 30 },
+      { name: "KAB-250", type: "Missile", damage: 14900, penetration: 130, reload: 25 },
+      { name: "DENEL ZT3 Ingwe", type: "Missile", damage: 10260, penetration: 1000, reload: 25 }
     ],
-    "guns": [
-      { "name": "M230(30mm)", "type": "Autocannon", "damage": 90, "penetration": 85, "reload": 300 }
-    ]
-  },
-  {
-    "id": 503,
-    "name": "OH-1 Ninja",
-    "type": "Helicopter",
-    "faction": "Japanese",
-    "tier": "III",
-    "image": "OH-1-Ninja.jpg",
-    "description": "Agile Japanese attack/recon helicopter—fast and nimble with light AAMs in MWT.",
-    "stats": { "health": 17900, "speed": 297, "verticalSpeed": 32, "agility": 70 },
-    "weapons": [
-      { "name": "LAU-68", "type": "Rocket Pod", "damage": 4300, "penetration": 290, "reload": 20 },
-      { "name": "AGR-20-BLR", "type": "Rocket Pod", "damage": 5200, "penetration": 128, "reload": 20 },
-      { "name": "FASGWL", "type": "Air-to-Ground Missile", "damage": 5300, "penetration": 250, "reload": 20 },
-      { "name": "LAU-150", "type": "Rocket Pod", "damage": 7800, "penetration": 600, "reload": 40 },
-      { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
-      { "name": "Toshiba Type-91", "type": "Air-to-Ground Missile", "damage": 4700, "penetration": 35, "reload": 10 },
-      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
-      { "name": "ADS Starstreak", "type": "Air-to-Ground Missile", "damage": 7300, "penetration": 50, "reload": 15 }
+    guns: [
+      { name: "Giat M693(20mm)", type: "Autocannon", damage: 65, penetration: 55, reload: 240 }
     ],
-    "guns": []
+    modules: {
+      engine: [
+        { name: "VK-2500 Upgrade MK1", bonus: "+10% speed" },
+        { name: "VK-2500 Upgrade MK2", bonus: "+20% speed" }
+      ],
+      avionics: [
+        { name: "Hind Targeting Suite MK1", bonus: "+20% lock speed" },
+        { name: "Hind Targeting Suite MK2", bonus: "+35% lock speed" }
+      ],
+      defense: [
+        { name: "Vitebsk ECM MK1", bonus: "+20% missile defense" }
+      ]
+    }
   },
   {
-    "id": 504,
-    "name": "Super Lynx Mk88A",
-    "type": "Helicopter",
-    "faction": "British",
-    "tier": "III",
-    "image": "Super-Lynx-Mk88A.jpg",
-    "description": "British naval helicopter adapted for anti-ship and light attack roles (small weapon capacity in MWT).",
-    "stats": { "health": 22000, "speed": 300, "verticalSpeed": 16.7, "agility": 40 },
-    "weapons": [
-      { "name": "Storm Shadow", "type": "Cruise Missile", "damage": 20000, "penetration": 370, "reload": 40 },
-      { "name": "APKWS", "type": "Guided Rocket", "damage": 5400, "penetration": 140, "reload": 20 },
-      { "name": "AIM-9 Sidewinder", "type": "Short-Range AAM", "damage": 5700, "penetration": 45, "reload": 15 },
-      { "name": "FASGWL", "type": "Air-to-Ground Missile", "damage": 5300, "penetration": 250, "reload": 20 },
-      { "name": "FASGW-ANL", "type": "Air-to-Ground Missile", "damage": 10300, "penetration": 350, "reload": 38 },
-      { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
-      { "name": "AIM-92", "type": "Short-Range AAM", "damage": 4700, "penetration": 35, "reload": 10 },
-      { "name": "MBDA Meteor", "type": "BVR AAM", "damage": 11900, "penetration": 300, "reload": 32 }
+    id: 502,
+    name: "AH-64E Apache",
+    type: "Helicopter",
+    faction: "American",
+    tier: "III",
+    image: "AH-64E-Apache.jpg",
+    description: "Advanced attack helicopter with multi-role capabilities and proven combat record.",
+    stats: { health: 20000, speed: 280, verticalSpeed: 19.4, agility: 60 },
+    weapons: [
+      { name: "ADS Starstreak", type: "Air-to-Ground Missile", damage: 7300, penetration: 50, reload: 15 },
+      { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 5700, penetration: 45, reload: 15 },
+      { name: "AIM-92", type: "Short-Range AAM", damage: 4700, penetration: 35, reload: 10 },
+      { name: "AGM-114 Hellfire", type: "Air-to-Ground Missile", damage: 9000, penetration: 950, reload: 30 },
+      { name: "AGM-169 JAGM", type: "Air-to-Ground Missile", damage: 9800, penetration: 1200, reload: 30 },
+      { name: "AGR-20 BLR", type: "Rocket Pod", damage: 5200, penetration: 128, reload: 20 },
+      { name: "Brimstone", type: "Air-to-Ground Missile", damage: 8100, penetration: 800, reload: 20 },
+      { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+      { name: "LAU-10", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 30 }
     ],
-    "guns": []
-  },
-  {
-    "id": 505,
-    "name": "Z-9WA Harbin",
-    "type": "Helicopter",
-    "faction": "Chinese",
-    "tier": "III",
-    "image": "Z-9WA-Harbin.jpg",
-    "description": "Heavily armed Z-9 variant with multi-mount capability (x4 mounts for some missiles in MWT).",
-    "stats": { "health": 17800, "speed": 320, "verticalSpeed": 22.2, "agility": 60 },
-    "weapons": [
-      { "name": "HJ-8E", "type": "Anti-Tank Missile", "damage": 9890, "penetration": 480, "reload": 15 },
-      { "name": "TYPE 57-1", "type": "Rocket Pod", "damage": 3700, "penetration": 200, "reload": 15 },
-      { "name": "TY-90", "type": "Short-Range AAM", "damage": 4600, "penetration": 30, "reload": 10 },
-      { "name": "FS-70", "type": "Rocket Pod", "damage": 4200, "penetration": 290, "reload": 20 },
-      { "name": "TYPE-90", "type": "Air-to-Ground Missile", "damage": 6400, "penetration": 320, "reload": 40 },
-      { "name": "AKD-9", "type": "Air-to-Ground Missile", "damage": 8000, "penetration": 800, "reload": 15 },
-      { "name": "FS-70", "type": "Rocket Pod", "damage": 4200, "penetration": 290, "reload": 20 },
-      { "name": "AKD-10", "type": "Air-to-Ground Missile", "damage": 8600, "penetration": 1400, "reload": 20 }
+    guns: [
+      { name: "M230(30mm)", type: "Autocannon", damage: 90, penetration: 85, reload: 300 }
     ],
-    "guns": [
-      { "name": "QJK99(12.7mm)", "type": "Heavy MG", "damage": 50, "penetration": 40, "reload": 100 }
-    ]
+    modules: {
+      engine: [
+        { name: "T700-GE-701D MK1", bonus: "+20 km/h speed" },
+        { name: "T700-GE-701D MK2", bonus: "+40 km/h speed" },
+        { name: "T700-GE-701D MK3", bonus: "+60 km/h speed" }
+      ],
+      survivability: [
+        { name: "Chaff/Flare MK1", bonus: "+10% evasion" },
+        { name: "Chaff/Flare MK2", bonus: "+20% evasion" },
+        { name: "Chaff/Flare MK3", bonus: "+30% evasion" }
+      ],
+      avionics: [
+        { name: "Longbow Radar MK1", bonus: "+15% detection" },
+        { name: "Longbow Radar MK2", bonus: "+25% detection" },
+        { name: "Longbow Radar MK3", bonus: "+35% detection" }
+      ]
+    }
   },
   {
-    "id": 506,
-    "name": "Z-20 Harbin",
-    "type": "Helicopter",
-    "faction": "Chinese",
-    "tier": "III",
-    "image": "Z-20-Harbin.jpg",
-    "description": "Modern multi-role Chinese helicopter with stub wings; carries Chinese ATGMs and rockets in MWT.",
-    "stats": { "health": 18400, "speed": 280, "verticalSpeed": 16.7, "agility": 55 },
-    "weapons": [
-      { "name": "HJ-10", "type": "Anti-Tank Missile", "damage": 13800, "penetration": 1400, "reload": 30 },
-      { "name": "TYPE 57-1", "type": "Rocket Pod", "damage": 3700, "penetration": 200, "reload": 15 },
-      { "name": "TY-90", "type": "Short-Range AAM", "damage": 4600, "penetration": 30, "reload": 10 },
-      { "name": "TYPE 90", "type": "Air-to-Ground Missile", "damage": 6400, "penetration": 320, "reload": 40 },
-      { "name": "FT-9", "type": "Air-to-Ground Missile", "damage": 10800, "penetration": 70, "reload": 20 },
-      { "name": "HJ-8E", "type": "Anti-Tank Missile", "damage": 9890, "penetration": 480, "reload": 15 },
-      { "name": "AG-300/M", "type": "Air-to-Ground Missile", "damage": 9200, "penetration": 600, "reload": 20 },
-      { "name": "CM-502KG", "type": "Air-to-Ground Missile", "damage": 7800, "penetration": 1000, "reload": 28 }
+    id: 503,
+    name: "OH-1 Ninja",
+    type: "Helicopter",
+    faction: "Japanese",
+    tier: "III",
+    image: "OH-1-Ninja.jpg",
+    description: "Agile Japanese attack/recon helicopter—fast and nimble with light AAMs in MWT.",
+    stats: { health: 17900, speed: 297, verticalSpeed: 32, agility: 70 },
+    weapons: [
+      { name: "LAU-68", type: "Rocket Pod", damage: 4300, penetration: 290, reload: 20 },
+      { name: "AGR-20-BLR", type: "Rocket Pod", damage: 5200, penetration: 128, reload: 20 },
+      { name: "FASGWL", type: "Air-to-Ground Missile", damage: 5300, penetration: 250, reload: 20 },
+      { name: "LAU-150", type: "Rocket Pod", damage: 7800, penetration: 600, reload: 40 },
+      { name: "Brimstone", type: "Air-to-Ground Missile", damage: 8100, penetration: 800, reload: 20 },
+      { name: "Toshiba Type-91", type: "Air-to-Ground Missile", damage: 4700, penetration: 35, reload: 10 },
+      { name: "AGM-114 Hellfire", type: "Air-to-Ground Missile", damage: 9000, penetration: 950, reload: 30 },
+      { name: "ADS Starstreak", type: "Air-to-Ground Missile", damage: 7300, penetration: 50, reload: 15 }
     ],
-    "guns": [
-      { "name": "CS-LM12(7.62mm)", "type": "MG", "damage": 25, "penetration": 20, "reload": 80 }
-    ]
+    guns: [],
+    modules: {
+      engine: [
+        { name: "Mitsubishi TS-1 MK1", bonus: "+10% speed" },
+        { name: "Mitsubishi TS-1 MK2", bonus: "+20% speed" }
+      ],
+      avionics: [
+        { name: "EO Sensor Suite MK1", bonus: "+20% detection" },
+        { name: "EO Sensor Suite MK2", bonus: "+40% detection" }
+      ],
+      defense: [
+        { name: "Chaff/Flare MK1", bonus: "+20% countermeasures" },
+        { name: "Chaff/Flare MK2", bonus: "+35% countermeasures" }
+      ]
+    }
   },
   {
-    "id": 507,
-    "name": "MH-60L DAP",
-    "type": "Helicopter",
-    "faction": "American",
-    "tier": "III",
-    "image": "MH-60L-DAP.jpg",
-    "description": "Armed MH-60 variant (DAP) with a flexible loadout for rockets, ATGMs and air-to-air missiles.",
-    "stats": { "health": 20020, "speed": 209, "verticalSpeed": 12, "agility": 34 },
-    "weapons": [
-      { "name": "AGM 169-JAGM", "type": "Air-to-Ground Missile", "damage": 9800, "penetration": 1200, "reload": 30 },
-      { "name": "LAU-61", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
-      { "name": "AGR-20 BLR", "type": "Rocket Pod", "damage": 5200, "penetration": 128, "reload": 20 },
-      { "name": "LAU-68", "type": "Rocket Pod", "damage": 4300, "penetration": 290, "reload": 20 },
-      { "name": "AIM-9 Sidewinder", "type": "Short-Range AAM", "damage": 5700, "penetration": 45, "reload": 15 },
-      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
-      { "name": "AIM-92", "type": "Short-Range AAM", "damage": 4700, "penetration": 35, "reload": 10 },
-      { "name": "ADS Starstreak", "type": "Air-to-Ground Missile", "damage": 7300, "penetration": 50, "reload": 15 }
+    id: 504,
+    name: "Super Lynx Mk88A",
+    type: "Helicopter",
+    faction: "British",
+    tier: "III",
+    image: "Super-Lynx-Mk88A.jpg",
+    description: "British naval helicopter adapted for anti-ship and light attack roles (small weapon capacity in MWT).",
+    stats: { health: 22000, speed: 300, verticalSpeed: 16.7, agility: 40 },
+    weapons: [
+      { name: "Storm Shadow", type: "Cruise Missile", damage: 20000, penetration: 370, reload: 40 },
+      { name: "APKWS", type: "Guided Rocket", damage: 5400, penetration: 140, reload: 20 },
+      { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 5700, penetration: 45, reload: 15 },
+      { name: "FASGWL", type: "Air-to-Ground Missile", damage: 5300, penetration: 250, reload: 20 },
+      { name: "FASGW-ANL", type: "Air-to-Ground Missile", damage: 10300, penetration: 350, reload: 38 },
+      { name: "Brimstone", type: "Air-to-Ground Missile", damage: 8100, penetration: 800, reload: 20 },
+      { name: "AIM-92", type: "Short-Range AAM", damage: 4700, penetration: 35, reload: 10 },
+      { name: "MBDA Meteor", type: "BVR AAM", damage: 11900, penetration: 300, reload: 32 }
     ],
-    "guns": [
-      { "name": "M230(30mm)", "type": "Autocannon", "damage": 90, "penetration": 85, "reload": 300 },
-      { "name": "M134 minigun(7.62mm)", "type": "Rotary Gun", "damage": 25, "penetration": 20, "reload": 80 }
-    ]
+    guns: [],
+    modules: {
+      engine: [
+        { name: "Turbine Upgrade MK1", bonus: "+10% speed" },
+        { name: "Turbine Upgrade MK2", bonus: "+20% speed" }
+      ],
+      avionics: [
+        { name: "Naval Radar MK1", bonus: "+20% detection" },
+        { name: "Naval Radar MK2", bonus: "+40% detection" }
+      ],
+      defense: [
+        { name: "Chaff/Flare MK1", bonus: "+15% countermeasures" }
+      ]
+    }
   },
   {
-    "id": 508,
-    "name": "AH-1Z Viper",
-    "type": "Helicopter",
-    "faction": "American",
-    "tier": "III",
-    "image": "AH-1Z-Viper.jpg",
-    "description": "Upgraded Cobra with improved sensors, weapons flexibility and survivability.",
-    "stats": { "health": 17472, "speed": 219, "verticalSpeed": 14, "agility": 46 },
-    "weapons": [
-      { "name": "AIM-92", "type": "Short-Range AAM", "damage": 4700, "penetration": 35, "reload": 10 },
-      { "name": "AIM-9 Sidewinder", "type": "Short-Range AAM", "damage": 5700, "penetration": 45, "reload": 15 },
-      { "name": "AGM-169 JAGM", "type": "Air-to-Ground Missile", "damage": 9800, "penetration": 1200, "reload": 30 },
-      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
-      { "name": "LAU-68", "type": "Rocket Pod", "damage": 4300, "penetration": 290, "reload": 20 },
-      { "name": "AIM-92", "type": "Short-Range AAM", "damage": 4700, "penetration": 35, "reload": 10 },
-      { "name": "AGM-65 Maverick", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
-      { "name": "LAU-10", "type": "Rocket Pod", "damage": 7400, "penetration": 500, "reload": 30 }
+    id: 505,
+    name: "Z-9WA Harbin",
+    type: "Helicopter",
+    faction: "Chinese",
+    tier: "III",
+    image: "Z-9WA-Harbin.jpg",
+    description: "Heavily armed Z-9 variant with multi-mount capability (x4 mounts for some missiles in MWT).",
+    stats: { health: 17800, speed: 320, verticalSpeed: 22.2, agility: 60 },
+    weapons: [
+      { name: "HJ-8E", type: "Anti-Tank Missile", damage: 9890, penetration: 480, reload: 15 },
+      { name: "TYPE 57-1", type: "Rocket Pod", damage: 3700, penetration: 200, reload: 15 },
+      { name: "TY-90", type: "Short-Range AAM", damage: 4600, penetration: 30, reload: 10 },
+      { name: "FS-70", type: "Rocket Pod", damage: 4200, penetration: 290, reload: 20 },
+      { name: "TYPE-90", type: "Air-to-Ground Missile", damage: 6400, penetration: 320, reload: 40 },
+      { name: "AKD-9", type: "Air-to-Ground Missile", damage: 8000, penetration: 800, reload: 15 },
+      { name: "FS-70", type: "Rocket Pod", damage: 4200, penetration: 290, reload: 20 },
+      { name: "AKD-10", type: "Air-to-Ground Missile", damage: 8600, penetration: 1400, reload: 20 }
     ],
-    "guns": [
-      { "name": "M197(20mm)", "type": "Autocannon", "damage": 60, "penetration": 50, "reload": 200 }
-    ]
-  },
-  {
-    "id": 509,
-    "name": "Ka-50 Black Shark",
-    "type": "Helicopter",
-    "faction": "Russian",
-    "tier": "III",
-    "image": "Ka-50-Black-Shark.jpg",
-    "description": "Single-seat heavy attack helicopter with heavy ATGMs and cannon armament in MWT.",
-    "stats": { "health": 21840, "speed": 222, "verticalSpeed": 53, "agility": 50 },
-    "weapons": [
-      { "name": "B8V20", "type": "Air-to-Ground Missile", "damage": 5100, "penetration": 420, "reload": 20 },
-      { "name": "9-A 5013", "type": "Air-to-Ground Missile", "damage": 5100, "penetration": 460, "reload": 20 },
-      { "name": "B-13L", "type": "Air-to-Ground Missile", "damage": 9200, "penetration": 160, "reload": 40 },
-      { "name": "Attack ATGM", "type": "Anti-Tank Missile", "damage": 7500, "penetration": 850, "reload": 30 },
-      { "name": "9k38 IGLA V", "type": "Short-Range AAM", "damage": 4100, "penetration": 30, "reload": 15 },
-      { "name": "PZRK Verba", "type": "Short-Range AAM", "damage": 4300, "penetration": 35, "reload": 10 },
-      { "name": "9K121 Vikhr", "type": "Anti-Tank Missile", "damage": 7800, "penetration": 1000, "reload": 30 },
-      { "name": "X-29T", "type": "Air-to-Ground Missile", "damage": 17800, "penetration": 280, "reload": 38 }
+    guns: [
+      { name: "QJK99(12.7mm)", type: "Heavy MG", damage: 50, penetration: 40, reload: 100 }
     ],
-    "guns": [
-      { "name": "UPK-23-250(23mm)", "type": "Rocket Pod", "damage": 300, "penetration": 70, "reload": 1200 },
-      { "name": "2A42(30mm)", "type": "Autocannon", "damage": 90, "penetration": 85, "reload": 300 }
-    ]
+    modules: {
+      engine: [
+        { name: "WZ-8A MK1", bonus: "+10 km/h speed" },
+        { name: "WZ-8A MK2", bonus: "+20 km/h speed" }
+      ],
+      armor: [
+        { name: "Light Armor MK1", bonus: "+10% survivability" },
+        { name: "Light Armor MK2", bonus: "+20% survivability" }
+      ],
+      avionics: [
+        { name: "Heavy Targeting Pod MK1", bonus: "+20% lock speed" },
+        { name: "Heavy Targeting Pod MK2", bonus: "+35% lock speed" }
+      ]
+    }
   },
   {
-    "id": 600,
-    "name": "AV-8B Harrier II",
-    "type": "Fighter Jet",
-    "faction": "American",
-    "tier": "II",
-    "description": "Vertical/Short Takeoff and Landing (V/STOL) attack aircraft with excellent ground support capabilities.",
-    "image": "AV-8B-Harrier.jpg",
-    "stats": { "health": 18600, "speed": 700, "afterburnerSpeed": 960, "agility": 34 },
-    "weapons": [
-      { "name": "LAU-61", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
-      { "name": "LAU-10 x3", "type": "Rocket Pod", "damage": 7400, "penetration": 500, "reload": 40 },
-      { "name": "GBU-12", "type": "Guided Bomb", "damage": 18590, "penetration": 120, "reload": 30 },
-      { "name": "MK-82 x3", "type": "Bomb", "damage": 14300, "penetration": 120, "reload": 40 },
-      { "name": "AGM-62A", "type": "Air-to-Surface Missile", "damage": 17600, "penetration": 240, "reload": 28 },
-      { "name": "AGM-65", "type": "Air-to-Surface Missile", "damage": 11000, "penetration": 830, "reload": 22 },
-      { "name": "AIM-132", "type": "Short-Range AAM", "damage": 5200, "penetration": 65, "reload": 15 },
-      { "name": "AIM-120", "type": "Medium-Range AAM", "damage": 11300, "penetration": 60, "reload": 20 }
-    ]
+    id: 506,
+    name: "Z-20 Harbin",
+    type: "Helicopter",
+    faction: "Chinese",
+    tier: "III",
+    image: "Z-20-Harbin.jpg",
+    description: "Modern multi-role Chinese helicopter with stub wings; carries Chinese ATGMs and rockets in MWT.",
+    stats: { health: 18400, speed: 280, verticalSpeed: 16.7, agility: 55 },
+    weapons: [
+      { name: "HJ-10", type: "Anti-Tank Missile", damage: 13800, penetration: 1400, reload: 30 },
+      { name: "TYPE 57-1", type: "Rocket Pod", damage: 3700, penetration: 200, reload: 15 },
+      { name: "TY-90", type: "Short-Range AAM", damage: 4600, penetration: 30, reload: 10 },
+      { name: "TYPE 90", type: "Air-to-Ground Missile", damage: 6400, penetration: 320, reload: 40 },
+      { name: "FT-9", type: "Air-to-Ground Missile", damage: 10800, penetration: 70, reload: 20 },
+      { name: "HJ-8E", type: "Anti-Tank Missile", damage: 9890, penetration: 480, reload: 15 },
+      { name: "AG-300/M", type: "Air-to-Ground Missile", damage: 9200, penetration: 600, reload: 20 },
+      { name: "CM-502KG", type: "Air-to-Ground Missile", damage: 7800, penetration: 1000, reload: 28 }
+    ],
+    guns: [
+      { name: "CS-LM12(7.62mm)", type: "MG", damage: 25, penetration: 20, reload: 80 }
+    ],
+    modules: {
+      engine: [
+        { name: "WZ-10 Derived Engine MK1", bonus: "+10% speed" },
+        { name: "WZ-10 Derived Engine MK2", bonus: "+20% speed" }
+      ],
+      avionics: [
+        { name: "Z-20 Sensor Suite MK1", bonus: "+20% detection" },
+        { name: "Z-20 Sensor Suite MK2", bonus: "+40% detection" }
+      ],
+      defense: [
+        { name: "Countermeasure Suite MK1", bonus: "+20% missile defense" }
+      ]
+    }
   },
   {
-    "id": 601,
-    "name": "Alpha Jet",
-    "type": "Fighter Jet",
-    "faction": "German",
-    "tier": "II",
-    "description": "Light attack aircraft and advanced trainer with excellent maneuverability.",
-    "image": "Alpha-Jet.jpg",
-    "stats": { "health": 14200, "speed": 927, "afterburnerSpeed": 1000, "agility": 85 },
-    "weapons": [
-      { "name": "SUU-20", "type": "Bomb Cluster", "damage": 14300, "penetration": 120, "reload": 40 },
-      { "name": "LAU-51", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
-      { "name": "LAU-51 x2", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
-      { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
-      { "name": "AIM-132", "type": "Short-Range AAM", "damage": 5200, "penetration": 65, "reload": 15 },
-      { "name": "AGM-65", "type": "Air-to-Surface Missile", "damage": 11000, "penetration": 830, "reload": 22 },
-      { "name": "AIM-120", "type": "Medium-Range AAM", "damage": 11300, "penetration": 60, "reload": 20 }
-    ]
+    id: 507,
+    name: "MH-60L DAP",
+    type: "Helicopter",
+    faction: "American",
+    tier: "III",
+    image: "MH-60L-DAP.jpg",
+    description: "Armed MH-60 variant (DAP) with a flexible loadout for rockets, ATGMs and air-to-air missiles.",
+    stats: { health: 20020, speed: 209, verticalSpeed: 12, agility: 34 },
+    weapons: [
+      { name: "AGM 169-JAGM", type: "Air-to-Ground Missile", damage: 9800, penetration: 1200, reload: 30 },
+      { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+      { name: "AGR-20 BLR", type: "Rocket Pod", damage: 5200, penetration: 128, reload: 20 },
+      { name: "LAU-68", type: "Rocket Pod", damage: 4300, penetration: 290, reload: 20 },
+      { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 5700, penetration: 45, reload: 15 },
+      { name: "AGM-114 Hellfire", type: "Air-to-Ground Missile", damage: 9000, penetration: 950, reload: 30 },
+      { name: "AIM-92", type: "Short-Range AAM", damage: 4700, penetration: 35, reload: 10 },
+      { name: "ADS Starstreak", type: "Air-to-Ground Missile", damage: 7300, penetration: 50, reload: 15 }
+    ],
+    guns: [
+      { name: "M230(30mm)", type: "Autocannon", damage: 90, penetration: 85, reload: 300 },
+      { name: "M134 minigun(7.62mm)", type: "Rotary Gun", damage: 25, penetration: 20, reload: 80 }
+    ],
+    modules: {
+      engine: [
+        { name: "T700 Series Upgrade MK1", bonus: "+10% speed" },
+        { name: "T700 Series Upgrade MK2", bonus: "+20% speed" }
+      ],
+      avionics: [
+        { name: "APG-Style Radar MK1", bonus: "+18% detection" },
+        { name: "Targeting Pod MK1", bonus: "+20% accuracy" }
+      ],
+      defense: [
+        { name: "Flares/Chaff MK1", bonus: "+20% countermeasures" }
+      ]
+    }
   },
   {
-    "id": 602,
-    "name": "F-14D Super Tomcat",
-    "type": "Fighter Jet",
-    "faction": "American",
-    "tier": "II",
-    "description": "Twin-engine, variable-sweep wing fighter designed for fleet defense and air superiority.",
-    "image": "F-14D-Super-Tomcat.jpg",
-    "stats": { "health": 21400, "speed": 600, "afterburnerSpeed": 2240, "agility": 52 },
-    "weapons": [
-      { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
-      { "name": "GBU-31", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
-      { "name": "GBU-12", "type": "Guided Bomb", "damage": 18590, "penetration": 120, "reload": 30 },
-      { "name": "AGM-65", "type": "Air-to-Surface Missile", "damage": 11000, "penetration": 830, "reload": 22 },
-      { "name": "AIM-7", "type": "Medium-Range AAM", "damage": 6200, "penetration": 65, "reload": 20 },
-      { "name": "AIM-54", "type": "Long-Range AAM", "damage": 8600, "penetration": 100, "reload": 30 },
-      { "name": "AIM-132", "type": "Long-Range AAM", "damage": 5200, "penetration": 65, "reload": 15 }
-    ]
+    id: 508,
+    name: "AH-1Z Viper",
+    type: "Helicopter",
+    faction: "American",
+    tier: "III",
+    image: "AH-1Z-Viper.jpg",
+    description: "Upgraded Cobra with improved sensors, weapons flexibility and survivability.",
+    stats: { health: 17472, speed: 219, verticalSpeed: 14, agility: 46 },
+    weapons: [
+      { name: "AIM-92", type: "Short-Range AAM", damage: 4700, penetration: 35, reload: 10 },
+      { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 5700, penetration: 45, reload: 15 },
+      { name: "AGM-169 JAGM", type: "Air-to-Ground Missile", damage: 9800, penetration: 1200, reload: 30 },
+      { name: "AGM-114 Hellfire", type: "Air-to-Ground Missile", damage: 9000, penetration: 950, reload: 30 },
+      { name: "LAU-68", type: "Rocket Pod", damage: 4300, penetration: 290, reload: 20 },
+      { name: "AIM-92", type: "Short-Range AAM", damage: 4700, penetration: 35, reload: 10 },
+      { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 11000, penetration: 830, reload: 22 },
+      { name: "LAU-10", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 30 }
+    ],
+    guns: [
+      { name: "M197(20mm)", type: "Autocannon", damage: 60, penetration: 50, reload: 200 }
+    ],
+    modules: {
+      engine: [
+        { name: "T700-GE-401D MK1", bonus: "+5% speed" },
+        { name: "T700-GE-401D MK2", bonus: "+10% speed" }
+      ],
+      avionics: [
+        { name: "TSS Targeting Sight MK1", bonus: "+20% targeting accuracy" },
+        { name: "TSS Targeting Sight MK2", bonus: "+35% targeting accuracy" }
+      ],
+      defense: [
+        { name: "Chaff/Flare MK1", bonus: "+20% countermeasures" },
+        { name: "Chaff/Flare MK2", bonus: "+35% countermeasures" }
+      ]
+    }
   },
   {
-    "id": 603,
-    "name": "J-10 Chengdu",
-    "type": "Fighter Jet",
-    "faction": "Chinese",
-    "tier": "II",
-    "description": "Single-engine, multirole fighter with delta wing configuration and advanced avionics.",
-    "image": "J-10-Chengdu.jpg",
-    "stats": { "health": 19900, "speed": 820, "afterburnerSpeed": 1990, "agility": 49 },
-    "weapons": [
-      { "name": "Type 2(100)", "type": "Bomb", "damage": 14000, "penetration": 110, "reload": 30 },
-      { "name": "Type 90", "type": "Short-Range AAM", "damage": 6400, "penetration": 320, "reload": 40 },
-      { "name": "TL-20", "type": "Guided Bomb", "damage": 16120, "penetration": 143, "reload": 25 },
-      { "name": "AR-1", "type": "Guided Bomb", "damage": 7400, "penetration": 1000, "reload": 16 },
-      { "name": "Type 3", "type": "Bomb", "damage": 16000, "penetration": 210, "reload": 35 },
-      { "name": "LT-2", "type": "Air-to-Surface Missile", "damage": 16200, "penetration": 250, "reload": 38 },
-      { "name": "PL-2", "type": "Short-Range AAM", "damage": 5800, "penetration": 40, "reload": 15 },
-      { "name": "PL-5", "type": "Short-Range AAM", "damage": 7100, "penetration": 40, "reload": 15 },
-      { "name": "PL-7", "type": "Short-Range AAM", "damage": 6500, "penetration": 50, "reload": 20 }
-    ]
+    id: 509,
+    name: "Ka-50 Black Shark",
+    type: "Helicopter",
+    faction: "Russian",
+    tier: "III",
+    image: "Ka-50-Black-Shark.jpg",
+    description: "Single-seat heavy attack helicopter with heavy ATGMs and cannon armament in MWT.",
+    stats: { health: 21840, speed: 222, verticalSpeed: 53, agility: 50 },
+    weapons: [
+      { name: "B8V20", type: "Air-to-Ground Missile", damage: 5100, penetration: 420, reload: 20 },
+      { name: "9-A-5013", type: "Air-to-Ground Missile", damage: 5100, penetration: 460, reload: 20 },
+      { name: "B-13L", type: "Air-to-Ground Missile", damage: 9200, penetration: 160, reload: 40 },
+      { name: "Attack ATGM", type: "Anti-Tank Missile", damage: 7500, penetration: 850, reload: 30 },
+      { name: "9k38 IGLA V", type: "Short-Range AAM", damage: 4100, penetration: 30, reload: 15 },
+      { name: "PZRK Verba", type: "Short-Range AAM", damage: 4300, penetration: 35, reload: 10 },
+      { name: "9K121 Vikhr", type: "Anti-Tank Missile", damage: 7800, penetration: 1000, reload: 30 },
+      { name: "X-29T", type: "Air-to-Ground Missile", damage: 17800, penetration: 280, reload: 38 }
+    ],
+    guns: [
+      { name: "UPK-23-250(23mm)", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 },
+      { name: "2A42(30mm)", type: "Autocannon", damage: 90, penetration: 85, reload: 300 }
+    ],
+    modules: {
+      engine: [
+        { name: "TV3-117VM Upgrade MK1", bonus: "+10% speed" },
+        { name: "TV3-117VM Upgrade MK2", bonus: "+20% speed" }
+      ],
+      avionics: [
+        { name: "Ka-50 Advanced Sensor Suite MK1", bonus: "+20% detection" },
+        { name: "Ka-50 Advanced Sensor Suite MK2", bonus: "+40% detection" }
+      ],
+      defense: [
+        { name: "Vitebsk ECM MK1", bonus: "+15% countermeasure efficiency" }
+      ]
+    }
   },
   {
-    "id": 604,
-    "name": "MiG-31BM Foxhound",
-    "type": "Fighter Jet",
-    "faction": "Russian",
-    "tier": "II",
-    "image": "MiG-31BM-Foxhound.jpg",
-    "description": "High-speed interceptor designed for long-range air defense missions.",
-    "stats": { "health": 19700, "speed": 790, "afterburnerSpeed": 2700, "agility": 37 },
-    "weapons": [
-      { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
-      { "name": "FAB-500", "type": "Bomb", "damage": 16000, "penetration": 210, "reload": 35 },
-      { "name": "KAB-500L", "type": "Guided Bomb", "damage": 17300, "penetration": 310, "reload": 40 },
-      { "name": "R-73", "type": "Short-Range AAM", "damage": 4800, "penetration": 56, "reload": 15 },
-      { "name": "Kh-38ME", "type": "Air-to-Surface Missile", "damage": 17300, "penetration": 230, "reload": 40 },
-      { "name": "R-40TD", "type": "Long-Range AAM", "damage": 7800, "penetration": 70, "reload": 30 },
-      { "name": "Kh-59M", "type": "Air-to-Surface Missile", "damage": 18400, "penetration": 280, "reload": 50 },
-      { "name": "R-37", "type": "Long-Range AAM", "damage": 8400, "penetration": 80, "reload": 30 }
-    ]
+    id: 600,
+    name: "AV-8B Harrier II",
+    type: "Fighter Jet",
+    faction: "American",
+    tier: "II",
+    description:
+      "Vertical/Short Takeoff and Landing (V/STOL) attack aircraft with excellent ground support capabilities.",
+    image: "AV-8B-Harrier.jpg",
+    stats: { health: 18600, speed: 700, afterburnerSpeed: 960, agility: 34 },
+    weapons: [
+      { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "LAU-10 x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
+    { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
+    { name: "MK-82 x3", type: "Bomb", damage: 14300, penetration: 120, reload: 40 },
+    { name: "AGM-62A", type: "Air-to-Surface Missile", damage: 17600, penetration: 240, reload: 28 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-132", type: "Short-Range AAM", damage: 5200, penetration: 65, reload: 15 },
+    { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 }
+
+    ],
+    modules: {
+      engine: [
+        { name: "Rolls-Royce F402 MK1", bonus: "+150 km/h speed" },
+        { name: "Rolls-Royce F402 MK2", bonus: "+280 km/h speed" },
+        { name: "Rolls-Royce F402 MK3", bonus: "+420 km/h speed" },
+      ],
+      avionics: [
+        { name: "AN/ASB-19 MK1", bonus: "+18% targeting" },
+        { name: "AN/ASB-19 MK2", bonus: "+32% targeting" },
+        { name: "AN/ASB-19 MK3", bonus: "+45% targeting" },
+      ],
+      armor: [
+        { name: "Titanium Plating MK1", bonus: "+1200 health" },
+        { name: "Titanium Plating MK2", bonus: "+2400 health" },
+        { name: "Titanium Plating MK3", bonus: "+3600 health" },
+      ],
+    },
   },
   {
-    "id": 605,
-    "name": "Q-5A Nanchang",
-    "type": "Fighter Jet",
-    "faction": "Chinese",
-    "tier": "II",
-    "image": "Q-5A-Nanchang.jpg",
-    "description": "Ground attack aircraft derived from the MiG-19, optimized for close air support.",
-    "stats": { "health": 16200, "speed": 780, "afterburnerSpeed": 1090, "agility": 47 },
-    "weapons": [
-      { "name": "Type 2(100)", "type": "Bomb", "damage": 14000, "penetration": 110, "reload": 30 },
-      { "name": "Type 90", "type": "Short-Range AAM", "damage": 6400, "penetration": 320, "reload": 40 },
-      { "name": "Type 1", "type": "Bomb", "damage": 15100, "penetration": 120, "reload": 32 },
-      { "name": "Type 3", "type": "Bomb", "damage": 16000, "penetration": 210, "reload": 35 },
-      { "name": "AR-1", "type": "Guided Bomb", "damage": 7400, "penetration": 1000, "reload": 16 },
-      { "name": "Type 130", "type": "Air-to-Surface Missile", "damage": 6900, "penetration": 450, "reload": 40 },
-      { "name": "PL-2", "type": "Short-Range AAM", "damage": 5800, "penetration": 40, "reload": 15 },
-      { "name": "PL-5", "type": "Short-Range AAM", "damage": 7100, "penetration": 40, "reload": 15 },
-      { "name": "PL-7", "type": "Short-Range AAM", "damage": 6500, "penetration": 50, "reload": 20 }
-    ]
+    id: 601,
+    name: "Alpha Jet",
+    type: "Fighter Jet",
+    faction: "German",
+    tier: "II",
+    description: "Light attack aircraft and advanced trainer with excellent maneuverability.",
+    image: "Alpha-Jet.jpg",
+    stats: { health: 14200, speed: 927, afterburnerSpeed: 1000, agility: 85 },
+    weapons: [
+      { name: "SUU-20", type: "Bomb Cluster", damage: 14300, penetration: 120, reload: 40 },
+    { name: "LAU-51", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "LAU-51 x2", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
+    { name: "AIM-132", type: "Short-Range AAM", damage: 5200, penetration: 65, reload: 15 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-120", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 }
+
+    ],
+    modules: {
+      engine: [
+        { name: "Larzac 04-C6 MK1", bonus: "+120 km/h speed" },
+        { name: "Larzac 04-C6 MK2", bonus: "+240 km/h speed" },
+        { name: "Larzac 04-C6 MK3", bonus: "+360 km/h speed" },
+      ],
+      avionics: [
+        { name: "VE-130 HUD MK1", bonus: "+15% accuracy" },
+        { name: "VE-130 HUD MK2", bonus: "+28% accuracy" },
+        { name: "VE-130 HUD MK3", bonus: "+40% accuracy" },
+      ],
+      armor: [
+        { name: "Light Armor MK1", bonus: "+800 health" },
+        { name: "Light Armor MK2", bonus: "+1600 health" },
+        { name: "Light Armor MK3", bonus: "+2400 health" },
+      ],
+    },
   },
   {
-    "id": 606,
-    "name": "Su-24M",
-    "type": "Fighter Jet",
-    "faction": "Russian",
-    "tier": "II",
-    "description": "Variable-sweep wing tactical bomber designed for all-weather ground attack missions.",
-    "image": "Su-24M.jpg",
-    "stats": { "health": 24200, "speed": 1315, "afterburnerSpeed": 2317, "agility": 68 },
-    "weapons": [
-      { "name": "B8M1", "type": "Rocket Pod", "damage": 5100, "penetration": 420, "reload": 20 },
-      { "name": "FAB-250", "type": "Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
-      { "name": "B-13L", "type": "Rocket Pod", "damage": 9200, "penetration": 160, "reload": 40 },
-      { "name": "KAB-500L", "type": "Guided Bomb", "damage": 17300, "penetration": 310, "reload": 40 },
-      { "name": "R-60", "type": "Short-Range AAM", "damage": 4600, "penetration": 36, "reload": 10 },
-      { "name": "Kh-23M", "type": "Air-to-Surface Missile", "damage": 12900, "penetration": 800, "reload": 38 },
-      { "name": "Kh-25MLE", "type": "Air-to-Surface Missile", "damage": 16000, "penetration": 160, "reload": 35 },
-      { "name": "Kh-38ME", "type": "Air-to-Surface Missile", "damage": 17300, "penetration": 230, "reload": 40 },
-      { "name": "Kh-59M", "type": "Air-to-Surface Missile", "damage": 18400, "penetration": 280, "reload": 50 }
-    ]
+    id: 602,
+    name: "F-14D Super Tomcat",
+    type: "Fighter Jet",
+    faction: "American",
+    tier: "II",
+    description: "Twin-engine, variable-sweep wing fighter designed for fleet defense and air superiority.",
+    image: "F-14D-Super-Tomcat.jpg",
+    stats: { health: 21400, speed: 600, afterburnerSpeed: 2240, agility: 52 },
+    weapons: [
+       { name: "GBU-38", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
+    { name: "GBU-31", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
+    { name: "GBU-12", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+    { name: "AIM-54", type: "Long-Range AAM", damage: 8600, penetration: 100, reload: 30 },
+    { name: "AIM-132", type: "Long-Range AAM", damage: 5200, penetration: 65, reload: 15 }
+
+    ],
+    modules: {
+      engine: [
+        { name: "F110-GE-400 MK1", bonus: "+200 km/h speed" },
+        { name: "F110-GE-400 MK2", bonus: "+380 km/h speed" },
+        { name: "F110-GE-400 MK3", bonus: "+560 km/h speed" },
+      ],
+      radar: [
+        { name: "AN/AWG-9 MK1", bonus: "+25% detection range" },
+        { name: "AN/AWG-9 MK2", bonus: "+45% detection range" },
+        { name: "AN/AWG-9 MK3", bonus: "+65% detection range" },
+      ],
+      armor: [
+        { name: "Reinforced Structure MK1", bonus: "+1800 health" },
+        { name: "Reinforced Structure MK2", bonus: "+3600 health" },
+        { name: "Reinforced Structure MK3", bonus: "+5400 health" },
+      ],
+    },
   },
   {
-    "id": 607,
-    "name": "F-4E Phantom",
-    "type": "Fighter Jet",
-    "faction": "American",
-    "tier": "II",
-    "description": "Legendary multi-role fighter with proven combat record and versatile weapon systems.",
-    "image": "F-4E-Phantom.jpg",
-    "stats": { "health": 19300, "speed": 790, "afterburnerSpeed": 1910, "agility": 35 },
-    "weapons": [
-      { "name": "LAU-61", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
-      { "name": "LAU-10 x3", "type": "Rocket Pod", "damage": 7400, "penetration": 500, "reload": 40 },
-      { "name": "AGM-65", "type": "Air-to-Surface Missile", "damage": 11000, "penetration": 830, "reload": 22 },
-      { "name": "AIM-7", "type": "Medium-Range AAM", "damage": 6200, "penetration": 65, "reload": 20 },
-      { "name": "AGM-12B", "type": "Air-to-Surface Missile", "damage": 11500, "penetration": 600, "reload": 41 }
-    ]
+    id: 603,
+    name: "J-10 Chengdu",
+    type: "Fighter Jet",
+    faction: "Chinese",
+    tier: "II",
+    description: "Single-engine, multirole fighter with delta wing configuration and advanced avionics.",
+    image: "J-10-Chengdu.jpg",
+    stats: { health: 19900, speed: 820, afterburnerSpeed: 1990, agility: 49 },
+    weapons: [
+     { name: "Type 2(100)", type: "Bomb", damage: 14000, penetration: 110, reload: 30 },
+    { name: "Type 90", type: "Short-Range AAM", damage: 6400, penetration: 320, reload: 40 },
+    { name: "TL-20", type: "Guided Bomb", damage: 16120, penetration: 143, reload: 25 },
+    { name: "AR-1", type: "Guided Bomb", damage: 7400, penetration: 1000, reload: 16 },
+    { name: "Type 3", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
+    { name: "LT-2", type: "Air-to-Surface Missile", damage: 16200, penetration: 250, reload: 38 },
+    { name: "PL-2", type: "Short-Range AAM", damage: 5800, penetration: 40, reload: 15 },
+    { name: "PL-5", type: "Short-Range AAM", damage: 7100, penetration: 40, reload: 15 },
+    { name: "PL-7", type: "Short-Range AAM", damage: 6500, penetration: 50, reload: 20 }
+
+    ],
+    modules: {
+      engine: [
+        { name: "WS-10A MK1", bonus: "+180 km/h speed" },
+        { name: "WS-10A MK2", bonus: "+340 km/h speed" },
+        { name: "WS-10A MK3", bonus: "+500 km/h speed" },
+      ],
+      radar: [
+        { name: "Type 1473 MK1", bonus: "+20% detection" },
+        { name: "Type 1473 MK2", bonus: "+35% detection" },
+        { name: "Type 1473 MK3", bonus: "+50% detection" },
+      ],
+      armor: [
+        { name: "Composite Armor MK1", bonus: "+1500 health" },
+        { name: "Composite Armor MK2", bonus: "+3000 health" },
+        { name: "Composite Armor MK3", bonus: "+4500 health" },
+      ],
+    },
   },
   {
-    "id": 700,
-    "name": "M60 Patton",
-    "type": "Main Battle Tank",
-    "faction": "American",
-    "tier": "II",
-    "image": "M60-Patton.jpg",
-    "description": "Cold War era main battle tank with proven reliability and combat effectiveness.",
-    "stats": { "health": 32000, "speed": 50, "armor": "93mm", "agility": 36 },
-    "weapons": [
-      { "name": "M68 105mm L52", "type": "Main Gun", "damage": 11800, "penetration": 620 },
-      { "name": "M85 12.7mm", "type": "Machine Gun", "damage": 180, "penetration": 28, "rateOfFire": "450 rpm" },
-      { "name": "M240 7.62mm", "type": "Coaxial MG", "damage": 120, "penetration": 15, "rateOfFire": "750 rpm" }
-    ]
+    id: 604,
+    name: "MiG-31BM Foxhound",
+    type: "Fighter Jet",
+    faction: "Russian",
+    tier: "II",
+    image: "MiG-31BM-Foxhound.jpg",
+    description: "High-speed interceptor designed for long-range air defense missions.",
+    stats: { health: 19700, speed: 790, afterburnerSpeed: 2700, agility: 37 },
+    weapons: [
+      { name: "KAB-250", type: "Guided Bomb", damage: 14900, penetration: 130, reload: 25 },
+    { name: "FAB-500", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
+    { name: "KAB-500L", type: "Guided Bomb", damage: 17300, penetration: 310, reload: 40 },
+    { name: "R-73", type: "Short-Range AAM", damage: 4800, penetration: 56, reload: 15 },
+    { name: "Kh-38ME", type: "Air-to-Surface Missile", damage: 17300, penetration: 230, reload: 40 },
+    { name: "R-40TD", type: "Long-Range AAM", damage: 7800, penetration: 70, reload: 30 },
+    { name: "Kh-59M", type: "Air-to-Surface Missile", damage: 18400, penetration: 280, reload: 50 },
+    { name: "R-37", type: "Long-Range AAM", damage: 8400, penetration: 80, reload: 30 }
+
+    ],
+    modules: {
+      engine: [
+        { name: "D-30F6 MK1", bonus: "+250 km/h speed" },
+        { name: "D-30F6 MK2", bonus: "+450 km/h speed" },
+        { name: "D-30F6 MK3", bonus: "+650 km/h speed" },
+      ],
+      radar: [
+        { name: "Zaslon-AM MK1", bonus: "+30% detection range" },
+        { name: "Zaslon-AM MK2", bonus: "+55% detection range" },
+        { name: "Zaslon-AM MK3", bonus: "+80% detection range" },
+      ],
+      armor: [
+        { name: "Steel Armor MK1", bonus: "+2200 health" },
+        { name: "Steel Armor MK2", bonus: "+4400 health" },
+        { name: "Steel Armor MK3", bonus: "+6600 health" },
+      ],
+    },
+  },
+  {
+    id: 605,
+    name: "Q-5A Nanchang",
+    type: "Fighter Jet",
+    faction: "Chinese",
+    tier: "II",
+    image: "Q-5A-Nanchang.jpg",
+    description: "Ground attack aircraft derived from the MiG-19, optimized for close air support.",
+    stats: { health: 16200, speed: 780, afterburnerSpeed: 1090, agility: 47 },
+    weapons: [
+     { name: "Type 2(100)", type: "Bomb", damage: 14000, penetration: 110, reload: 30 },
+    { name: "Type 90", type: "Short-Range AAM", damage: 6400, penetration: 320, reload: 40 },
+    { name: "Type 1", type: "Bomb", damage: 15100, penetration: 120, reload: 32 },
+    { name: "Type 3", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
+    { name: "AR-1", type: "Guided Bomb", damage: 7400, penetration: 1000, reload: 16 },
+    { name: "Type 130", type: "Air-to-Surface Missile", damage: 6900, penetration: 450, reload: 40 },
+    { name: "PL-2", type: "Short-Range AAM", damage: 5800, penetration: 40, reload: 15 },
+    { name: "PL-5", type: "Short-Range AAM", damage: 7100, penetration: 40, reload: 15 },
+    { name: "PL-7", type: "Short-Range AAM", damage: 6500, penetration: 50, reload: 20 }
+
+    ],
+    modules: {
+      engine: [
+        { name: "WP-6A MK1", bonus: "+160 km/h speed" },
+        { name: "WP-6A MK2", bonus: "+300 km/h speed" },
+        { name: "WP-6A MK3", bonus: "+440 km/h speed" },
+      ],
+      avionics: [
+        { name: "Type 232H MK1", bonus: "+16% targeting" },
+        { name: "Type 232H MK2", bonus: "+28% targeting" },
+        { name: "Type 232H MK3", bonus: "+40% targeting" },
+      ],
+      armor: [
+        { name: "Aluminum Armor MK1", bonus: "+1200 health" },
+        { name: "Aluminum Armor MK2", bonus: "+2400 health" },
+        { name: "Aluminum Armor MK3", bonus: "+3600 health" },
+      ],
+    },
+  },
+  {
+    id: 606,
+    name: "Su-24M",
+    type: "Fighter Jet",
+    faction: "Russian",
+    tier: "II",
+    description: "Variable-sweep wing tactical bomber designed for all-weather ground attack missions.",
+    image: "Su-24M.jpg",
+    stats: { health: 24200, speed: 1315, afterburnerSpeed: 2317, agility: 68 },
+    weapons: [
+      { name: "B8M1", type: "Rocket Pod", damage: 5100, penetration: 420, reload: 20 },
+    { name: "FAB-250", type: "Bomb", damage: 15100, penetration: 130, reload: 30 },
+    { name: "B-13L", type: "Rocket Pod", damage: 9200, penetration: 160, reload: 40 },
+    { name: "KAB-500L", type: "Guided Bomb", damage: 17300, penetration: 310, reload: 40 },
+    { name: "R-60", type: "Short-Range AAM", damage: 4600, penetration: 36, reload: 10 },
+    { name: "Kh-23M", type: "Air-to-Surface Missile", damage: 12900, penetration: 800, reload: 38 },
+    { name: "Kh-25MLE", type: "Air-to-Surface Missile", damage: 16000, penetration: 160, reload: 35 },
+    { name: "Kh-38ME", type: "Air-to-Surface Missile", damage: 17300, penetration: 230, reload: 40 },
+    { name: "Kh-59M", type: "Air-to-Surface Missile", damage: 18400, penetration: 280, reload: 50 }
+
+    ],
+    modules: {
+      engine: [
+        { name: "AL-21F-3A MK1", bonus: "+220 km/h speed" },
+        { name: "AL-21F-3A MK2", bonus: "+400 km/h speed" },
+        { name: "AL-21F-3A MK3", bonus: "+580 km/h speed" },
+      ],
+      navigation: [
+        { name: "Puma Navigation MK1", bonus: "+22% accuracy" },
+        { name: "Puma Navigation MK2", bonus: "+38% accuracy" },
+        { name: "Puma Navigation MK3", bonus: "+55% accuracy" },
+      ],
+      armor: [
+        { name: "Titanium Armor MK1", bonus: "+1800 health" },
+        { name: "Titanium Armor MK2", bonus: "+3600 health" },
+        { name: "Titanium Armor MK3", bonus: "+5400 health" },
+      ],
+    },
+  },
+  {
+    id: 607,
+    name: "F-4E Phantom",
+    type: "Fighter Jet",
+    faction: "American",
+    tier: "II",
+    description: "Legendary multi-role fighter with proven combat record and versatile weapon systems.",
+    image: "F-4E-Phantom.jpg",
+    stats: { health: 19300, speed: 790, afterburnerSpeed: 1910, agility: 35 },
+    weapons: [
+      { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "LAU-10 x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
+    { name: "AGM-65", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+    { name: "AIM-7", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+    { name: "AGM-12B", type: "Air-to-Surface Missile", damage: 11500, penetration: 600, reload: 41 }
+
+    ],
+    modules: {
+      engine: [
+        { name: "J79-GE-17 MK1", bonus: "+120 km/h speed" },
+        { name: "J79-GE-17 MK2", bonus: "+240 km/h speed" },
+        { name: "J79-GE-17 MK3", bonus: "+360 km/h speed" },
+      ],
+      stealth: [
+        { name: "ECM Pod MK1", bonus: "+8% stealth" },
+        { name: "ECM Pod MK2", bonus: "+16% stealth" },
+        { name: "ECM Pod MK3", bonus: "+24% stealth" },
+      ],
+      avionics: [
+        { name: "AN/APQ-120 MK1", bonus: "+14% detection" },
+        { name: "AN/APQ-120 MK2", bonus: "+26% detection" },
+        { name: "AN/APQ-120 MK3", bonus: "+38% detection" },
+      ],
+    },
+  },
+  
+   {
+    id: 700,
+    name: "M60 Patton",
+    type: "Main Battle Tank",
+    faction: "American",
+    tier: "II",
+    image: "M60-Patton.jpg",
+    description: "Cold War era main battle tank with proven reliability and combat effectiveness.",
+    stats: { health: 32000, speed: 50, armor: "93mm", agility: 36 },
+    weapons: [
+      { name: "M68 105mm L52", type: "Main Gun", damage: 11800, penetration: 620 },
+      { name: "M85 12.7mm", type: "Machine Gun", damage: 180, penetration: 28, rateOfFire: "450 rpm" },
+      { name: "M240 7.62mm", type: "Coaxial MG", damage: 120, penetration: 15, rateOfFire: "750 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "Continental AVDS MK1", bonus: "+6 km/h speed" },
+        { name: "Continental AVDS MK2", bonus: "+12 km/h speed" },
+        { name: "Continental AVDS MK3", bonus: "+18 km/h speed" },
+      ],
+      armor: [
+        { name: "Steel Armor MK1", bonus: "+120mm protection" },
+        { name: "Steel Armor MK2", bonus: "+240mm protection" },
+        { name: "Steel Armor MK3", bonus: "+360mm protection" },
+      ],
+      fireControl: [
+        { name: "Optical Rangefinder MK1", bonus: "+10% accuracy" },
+        { name: "Optical Rangefinder MK2", bonus: "+18% accuracy" },
+        { name: "Optical Rangefinder MK3", bonus: "+26% accuracy" },
+      ],
+    },
   },
   {
     "id": 701,
@@ -3301,11 +4550,71 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "Object-122-TM.jpg",
     "description": "Chinese prototype main battle tank, based on the Type 59, mounting a 120 mm gun.",
-    "stats": { "health": 29300, "speed": 55, "armor": "100mm", "agility": 33 },
+    "stats": {
+      "health": 29300,
+      "speed": 55,
+      "armor": "100mm",
+      "agility": 33
+    },
     "weapons": [
-      { "name": "Object 122 TM Main Gun", "type": "Main Gun", "damage": 10500, "penetration": 610 },
-      { "name": "Object 122 TM Secondary MG", "type": "Machine Gun", "damage": 160, "penetration": 21, "rateOfFire": "601 rpm" }
-    ]
+      {
+        "name": "Object 122 TM Main Gun",
+        "type": "Main Gun",
+        "damage": 10500,
+        "penetration": 610
+      },
+      {
+        "name": "Object 122 TM Secondary MG",
+        "type": "Machine Gun",
+        "damage": 160,
+        "penetration": 21,
+        "rateOfFire": "601 rpm"
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Object 122 TM Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "Object 122 TM Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "Object 122 TM Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "Object 122 TM Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "Object 122 TM Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "Object 122 TM Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "Object 122 TM FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "Object 122 TM FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "Object 122 TM FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 702,
@@ -3315,11 +4624,71 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "Type-74E.jpg",
     "description": "Japanese main battle tank, upgraded from the Type 74 series, featuring improved fire control systems.",
-    "stats": { "health": 30000, "speed": 54, "armor": "80mm", "agility": 32 },
+    "stats": {
+      "health": 30000,
+      "speed": 54,
+      "armor": "80mm",
+      "agility": 32
+    },
     "weapons": [
-      { "name": "Type 74E Main Gun", "type": "Main Gun", "damage": 11000, "penetration": 620 },
-      { "name": "Type 74E Secondary MG", "type": "Machine Gun", "damage": 170, "penetration": 22, "rateOfFire": "602 rpm" }
-    ]
+      {
+        "name": "Type 74E Main Gun",
+        "type": "Main Gun",
+        "damage": 11000,
+        "penetration": 620
+      },
+      {
+        "name": "Type 74E Secondary MG",
+        "type": "Machine Gun",
+        "damage": 170,
+        "penetration": 22,
+        "rateOfFire": "602 rpm"
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Type 74E Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "Type 74E Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "Type 74E Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "Type 74E Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "Type 74E Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "Type 74E Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "Type 74E FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "Type 74E FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "Type 74E FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 703,
@@ -3329,11 +4698,71 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "Type-74G-Kai.jpg",
     "description": "An upgraded Japanese MBT variant, featuring enhanced armor, improved fire control, and modernized night-fighting capability.",
-    "stats": { "health": 31000, "speed": 54, "armor": "80mm", "agility": 32 },
+    "stats": {
+      "health": 31000,
+      "speed": 54,
+      "armor": "80mm",
+      "agility": 32
+    },
     "weapons": [
-      { "name": "Type 74G/Kai Main Gun", "type": "Main Gun", "damage": 11500, "penetration": 630 },
-      { "name": "Type 74G/Kai Secondary MG", "type": "Machine Gun", "damage": 100, "penetration": 23, "rateOfFire": "603 rpm" }
-    ]
+      {
+        "name": "Type 74G/Kai Main Gun",
+        "type": "Main Gun",
+        "damage": 11500,
+        "penetration": 630
+      },
+      {
+        "name": "Type 74G/Kai Secondary MG",
+        "type": "Machine Gun",
+        "damage": 100,
+        "penetration": 23,
+        "rateOfFire": "603 rpm"
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Type 74G/Kai Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "Type 74G/Kai Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "Type 74G/Kai Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "Type 74G/Kai Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "Type 74G/Kai Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "Type 74G/Kai Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "Type 74G/Kai FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "Type 74G/Kai FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "Type 74G/Kai FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 704,
@@ -3343,11 +4772,71 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "T-62.jpg",
     "description": "Soviet main battle tank, armed with a 115 mm smoothbore gun and improved armor protection.",
-    "stats": { "health": 29000, "speed": 51, "armor": "100mm", "agility": 44 },
+    "stats": {
+      "health": 29000,
+      "speed": 51,
+      "armor": "100mm",
+      "agility": 44
+    },
     "weapons": [
-      { "name": "T-62 Main Gun", "type": "Main Gun", "damage": 12000, "penetration": 640 },
-      { "name": "T-62 Secondary MG", "type": "Machine Gun", "damage": 190, "penetration": 24, "rateOfFire": "604 rpm" }
-    ]
+      {
+        "name": "T-62 Main Gun",
+        "type": "Main Gun",
+        "damage": 12000,
+        "penetration": 640
+      },
+      {
+        "name": "T-62 Secondary MG",
+        "type": "Machine Gun",
+        "damage": 190,
+        "penetration": 24,
+        "rateOfFire": "604 rpm"
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "T-62 Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "T-62 Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "T-62 Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "T-62 Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "T-62 Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "T-62 Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "T-62 FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "T-62 FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "T-62 FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 705,
@@ -3357,11 +4846,71 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "T-62-545.jpg",
     "description": "Soviet T-62 variant, equipped with the 545 hp V-55 engine and improved reliability.",
-    "stats": { "health": 31000, "speed": 51, "armor": "200mm", "agility": 44 },
+    "stats": {
+      "health": 31000,
+      "speed": 51,
+      "armor": "200mm",
+      "agility": 44
+    },
     "weapons": [
-      { "name": "T-62 545 Main Gun", "type": "Main Gun", "damage": 10000, "penetration": 650 },
-      { "name": "T-62 545 Secondary MG", "type": "Machine Gun", "damage": 150, "penetration": 20, "rateOfFire": "605 rpm" }
-    ]
+      {
+        "name": "T-62 545 Main Gun",
+        "type": "Main Gun",
+        "damage": 10000,
+        "penetration": 650
+      },
+      {
+        "name": "T-62 545 Secondary MG",
+        "type": "Machine Gun",
+        "damage": 150,
+        "penetration": 20,
+        "rateOfFire": "605 rpm"
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "T-62 545 Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "T-62 545 Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "T-62 545 Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "T-62 545 Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "T-62 545 Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "T-62 545 Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "T-62 545 FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "T-62 545 FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "T-62 545 FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 706,
@@ -3371,13 +4920,50 @@ const VEHICLES_DATA = [
     "tier": "II",
     "description": "A modified Centurion with a 105mm gun, improved armor, and mobility for defense and reconnaissance missions.",
     "image": "Stridsvagn-105.jpg",
-    "stats": { "health": 36000, "speed": 50, "armour": 76, "agility": 35 },
+    "stats": {
+      "health": 36000,
+      "speed": 50,
+      "armour": 76,
+      "agility": 35
+    },
     "weapons": [
-      { "name": "slpprj m/90c APFSDS", "type": "Main Gun", "damage": 9800, "penetration": 430 },
-      { "name": "slpprj m/80 APFSDS", "type": "Main Gun", "damage": 9630, "penetration": 337 },
-      { "name": "slsgr m/61A HEI", "type": "Main Gun", "damage": 4400, "penetration": 70 },
-      { "name": "slspgr m/61 SAPHEI", "type": "Main Gun", "damage": 10090, "penetration": 127 }
-    ]
+      { name: "slpprj m/90c APFSDS", type: "Main Gun", damage: 9800, penetration: 430 },
+      { name: "slpprj m/80 APFSDS", type: "Main Gun", damage: 9630, penetration: 337 },
+      { name: "slsgr m/61A HEI", type: "Main Gun", damage: 4400, penetration: 70 },
+      { name: "slspgr m/61 SAPHEI", type: "Main Gun", damage: 10090, penetration: 127 }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 707,
@@ -3387,14 +4973,72 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "XM803.jpg",
     "description": "American prototype main battle tank, developed from the MBT-70 project, featuring advanced firepower and mobility.",
-    "stats": { "health": 35000, "speed": 60, "armor": "150mm", "agility": 30 },
+    "stats": {
+      "health": 35000,
+      "speed": 60,
+      "armor": "150mm",
+      "agility": 30
+    },
     "weapons": [
-      { "name": "XM803 Main Gun", "type": "Main Gun", "damage": 10500, "penetration": 660 },
-      { "name": "XM803 Secondary MG", "type": "Machine Gun", "damage": 160, "penetration": 21, "rateOfFire": "606 rpm" }
-    ]
-    
+      {
+        "name": "XM803 Main Gun",
+        "type": "Main Gun",
+        "damage": 10500,
+        "penetration": 660
+      },
+      {
+        "name": "XM803 Secondary MG",
+        "type": "Machine Gun",
+        "damage": 160,
+        "penetration": 21,
+        "rateOfFire": "606 rpm"
+      }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "XM803 Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "XM803 Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "XM803 Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "XM803 Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "XM803 Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "XM803 Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "XM803 FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "XM803 FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "XM803 FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
-  [
   {
     "id": 708,
     "name": "XM1 (GM)",
@@ -3402,7 +5046,7 @@ const VEHICLES_DATA = [
     "faction": "American",
     "tier": "II",
     "image": "XM1-GM.jpg",
-    "description": "U.S. prototype main battle tank by General Motors, competing against Chrysler's design for the Abrams.",
+    "description": "U.S. prototype main battle tank by General Motors, competing against Chrysler’s design for the Abrams.",
     "stats": {
       "health": 33600,
       "speed": 83,
@@ -3423,7 +5067,51 @@ const VEHICLES_DATA = [
         "penetration": 22,
         "rateOfFire": "607 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "XM1 (GM) Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "XM1 (GM) Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "XM1 (GM) Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "XM1 (GM) Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "XM1 (GM) Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "XM1 (GM) Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "XM1 (GM) FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "XM1 (GM) FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "XM1 (GM) FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 709,
@@ -3453,7 +5141,51 @@ const VEHICLES_DATA = [
         "penetration": 23,
         "rateOfFire": "608 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "BMP-2 Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "BMP-2 Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "BMP-2 Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "BMP-2 Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "BMP-2 Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "BMP-2 Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "BMP-2 FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "BMP-2 FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "BMP-2 FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 710,
@@ -3483,7 +5215,51 @@ const VEHICLES_DATA = [
         "penetration": 24,
         "rateOfFire": "609 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "BTR-82AT Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "BTR-82AT Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "BTR-82AT Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "BTR-82AT Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "BTR-82AT Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "BTR-82AT Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "BTR-82AT FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "BTR-82AT FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "BTR-82AT FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 711,
@@ -3513,44 +5289,83 @@ const VEHICLES_DATA = [
         "penetration": 20,
         "rateOfFire": "610 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "BTR-82A1 Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "BTR-82A1 Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "BTR-82A1 Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "BTR-82A1 Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "BTR-82A1 Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "BTR-82A1 Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "BTR-82A1 FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "BTR-82A1 FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "BTR-82A1 FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
-  {
-    "id": 712,
-    "name": "M3 Bradley",
-    "type": "Multirole-IFV",
-    "faction": "American",
-    "tier": "II",
-    "description": "Infantry fighting vehicle with TOW missile system and troop transport capability.",
-    "image": "M3-Bradley.jpg",
-    "stats": {
-      "health": 25000,
-      "speed": 62,
-      "armor": "38mm",
-      "agility": 35
+    {
+    id: 712,
+    name: "M3 Bradley",
+    type: "Multirole-IFV",
+    faction: "American",
+    tier: "II",
+    description: "Infantry fighting vehicle with TOW missile system and troop transport capability.",
+    image: "M3-Bradley.jpg",
+    stats: { health: 25000, speed: 62, armor: "38mm", agility: 35 },
+    weapons: [
+      { name: "TOW-2 ATGM", type: "Anti-Tank Missile", damage: 14800, penetration: 780 },
+      { name: "M242 25mm", type: "Autocannon", damage: 320, penetration: 58, rateOfFire: "200 rpm" },
+      { name: "M240C 7.62mm", type: "Coaxial MG", damage: 110, penetration: 14, rateOfFire: "750 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "Cummins VTA-903T MK1", bonus: "+10 km/h speed" },
+        { name: "Cummins VTA-903T MK2", bonus: "+20 km/h speed" },
+        { name: "Cummins VTA-903T MK3", bonus: "+30 km/h speed" },
+      ],
+      armor: [
+        { name: "Aluminum Armor MK1", bonus: "+70mm protection" },
+        { name: "Aluminum Armor MK2", bonus: "+140mm protection" },
+        { name: "Aluminum Armor MK3", bonus: "+210mm protection" },
+      ],
+      fireControl: [
+        { name: "Integrated Sight MK1", bonus: "+12% accuracy" },
+        { name: "Integrated Sight MK2", bonus: "+22% accuracy" },
+        { name: "Integrated Sight MK3", bonus: "+32% accuracy" },
+      ],
     },
-    "weapons": [
-      {
-        "name": "TOW-2 ATGM",
-        "type": "Anti-Tank Missile",
-        "damage": 14800,
-        "penetration": 780
-      },
-      {
-        "name": "M242 25mm",
-        "type": "Autocannon",
-        "damage": 320,
-        "penetration": 58,
-        "rateOfFire": "200 rpm"
-      },
-      {
-        "name": "M240C 7.62mm",
-        "type": "Coaxial MG",
-        "damage": 110,
-        "penetration": 14,
-        "rateOfFire": "750 rpm"
-      }
-    ]
   },
   {
     "id": 713,
@@ -3580,7 +5395,51 @@ const VEHICLES_DATA = [
         "penetration": 22,
         "rateOfFire": "612 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "M551 Sheridan Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "M551 Sheridan Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "M551 Sheridan Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "M551 Sheridan Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "M551 Sheridan Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "M551 Sheridan Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "M551 Sheridan FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "M551 Sheridan FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "M551 Sheridan FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 714,
@@ -3610,37 +5469,83 @@ const VEHICLES_DATA = [
         "penetration": 23,
         "rateOfFire": "613 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Object 685 Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "Object 685 Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "Object 685 Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "Object 685 Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "Object 685 Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "Object 685 Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "Object 685 FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "Object 685 FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "Object 685 FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
-  {
-    "id": 715,
-    "name": "IT-1 Dragon",
-    "type": "Missile Carrier",
-    "faction": "Russian",
-    "tier": "II",
-    "description": "Experimental missile tank destroyer with unique guided missile system.",
-    "image": "IT-1-Dragon.jpg",
-    "stats": {
-      "health": 22800,
-      "speed": 50,
-      "armor": "35mm",
-      "agility": 55
+  
+    {
+    id: 715,
+    name: "IT-1 Dragon",
+    type: "Missile Carrier",
+    faction: "Russian",
+    tier: "II",
+    description: "Experimental missile tank destroyer with unique guided missile system.",
+    image: "IT-1-Dragon.jpg",
+    stats: { health: 22800, speed: 50, armor: "35mm", agility: 55 },
+    weapons: [
+      { name: "3M7 Drakon ATGM", type: "Anti-Tank Missile", damage: 15200, penetration: 500 },
+      { name: "PKT 7.62mm", type: "Machine Gun", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
+    ],
+    modules: {
+      engine: [
+        { name: "V-54K MK1", bonus: "+6 km/h speed" },
+        { name: "V-54K MK2", bonus: "+12 km/h speed" },
+        { name: "V-54K MK3", bonus: "+18 km/h speed" },
+      ],
+      armor: [
+        { name: "Steel Armor MK1", bonus: "+100mm protection" },
+        { name: "Steel Armor MK2", bonus: "+200mm protection" },
+        { name: "Steel Armor MK3", bonus: "+300mm protection" },
+      ],
+      fireControl: [
+        { name: "Missile Guidance MK1", bonus: "+15% accuracy" },
+        { name: "Missile Guidance MK2", bonus: "+25% accuracy" },
+        { name: "Missile Guidance MK3", bonus: "+35% accuracy" },
+      ],
     },
-    "weapons": [
-      {
-        "name": "3M7 Drakon ATGM",
-        "type": "Anti-Tank Missile",
-        "damage": 15200,
-        "penetration": 500
-      },
-      {
-        "name": "PKT 7.62mm",
-        "type": "Machine Gun",
-        "damage": 95,
-        "penetration": 12,
-        "rateOfFire": "800 rpm"
-      }
-    ]
   },
   {
     "id": 716,
@@ -3670,7 +5575,51 @@ const VEHICLES_DATA = [
         "penetration": 20,
         "rateOfFire": "615 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "M163 VADS Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "M163 VADS Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "M163 VADS Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "M163 VADS Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "M163 VADS Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "M163 VADS Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "M163 VADS FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "M163 VADS FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "M163 VADS FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 717,
@@ -3700,38 +5649,84 @@ const VEHICLES_DATA = [
         "penetration": 21,
         "rateOfFire": "616 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "PGZ-04A Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "PGZ-04A Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "PGZ-04A Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "PGZ-04A Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "PGZ-04A Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "PGZ-04A Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "PGZ-04A FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "PGZ-04A FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "PGZ-04A FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
-  {
-    "id": 718,
-    "name": "ZSU-23-4M4 Shilka",
-    "type": "Anti-Air",
-    "faction": "Russian",
-    "tier": "II",
-    "description": "Modernized Soviet/Russian self-propelled anti-aircraft system, armed with four 23 mm autocannons and radar targeting.",
-    "image": "ZSU-23-4M4-Shilka.jpg",
-    "stats": {
-      "health": 21000,
-      "speed": 68,
-      "armor": "280mm",
-      "agility": 32
+   {
+    id: 718,
+    name: "ZSU-23-4M4 Shilka",
+    type: "Anti-Air",
+    faction: "Russian",
+    tier: "II",
+    description: "Modernized Soviet/Russian self-propelled anti-aircraft system, armed with four 23 mm autocannons and radar targeting.",
+    image: "ZSU-23-4M4-Shilka.jpg",
+    stats: { health: 21000, speed: 68, armor: "280mm", agility: 32 },
+    weapons: [
+      { name: "AZP-23 23mm Quad", type: "Anti-Aircraft Gun", damage: 1800, penetration: 95, rateOfFire: "3400 rpm" },
+      { name: "9M311 Sosna", type: "SAM", damage: 7500, penetration: 380 },
+    ],
+    modules: {
+      engine: [
+        { name: "V-6R MK1", bonus: "+6 km/h speed" },
+        { name: "V-6R MK2", bonus: "+12 km/h speed" },
+        { name: "V-6R MK3", bonus: "+18 km/h speed" },
+      ],
+      armor: [
+        { name: "Steel Armor MK1", bonus: "+50mm protection" },
+        { name: "Steel Armor MK2", bonus: "+100mm protection" },
+        { name: "Steel Armor MK3", bonus: "+150mm protection" },
+      ],
+      fireControl: [
+        { name: "Gun Dish Radar MK1", bonus: "+20% accuracy" },
+        { name: "Gun Dish Radar MK2", bonus: "+35% accuracy" },
+        { name: "Gun Dish Radar MK3", bonus: "+50% accuracy" },
+      ],
     },
-    "weapons": [
-      {
-        "name": "AZP-23 23mm Quad",
-        "type": "Anti-Aircraft Gun",
-        "damage": 1800,
-        "penetration": 95,
-        "rateOfFire": "3400 rpm"
-      },
-      {
-        "name": "9M311 Sosna",
-        "type": "SAM",
-        "damage": 7500,
-        "penetration": 380
-      }
-    ]
   },
+  
   {
     "id": 719,
     "name": "LAV-300",
@@ -3760,7 +5755,51 @@ const VEHICLES_DATA = [
         "penetration": 23,
         "rateOfFire": "618 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "LAV-300 Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "LAV-300 Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "LAV-300 Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "LAV-300 Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "LAV-300 Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "LAV-300 Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "LAV-300 FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "LAV-300 FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "LAV-300 FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 720,
@@ -3790,7 +5829,51 @@ const VEHICLES_DATA = [
         "penetration": 24,
         "rateOfFire": "619 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "PTL-02 Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "PTL-02 Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "PTL-02 Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "PTL-02 Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "PTL-02 Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "PTL-02 Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "PTL-02 FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "PTL-02 FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "PTL-02 FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 721,
@@ -3820,7 +5903,51 @@ const VEHICLES_DATA = [
         "penetration": 20,
         "rateOfFire": "620 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "M109 Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "M109 Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "M109 Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "M109 Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "M109 Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "M109 Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "M109 FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "M109 FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "M109 FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 722,
@@ -3850,7 +5977,51 @@ const VEHICLES_DATA = [
         "penetration": 21,
         "rateOfFire": "621 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "PLL-05 Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "PLL-05 Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "PLL-05 Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "PLL-05 Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "PLL-05 Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "PLL-05 Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "PLL-05 FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "PLL-05 FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "PLL-05 FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 723,
@@ -3880,7 +6051,51 @@ const VEHICLES_DATA = [
         "penetration": 22,
         "rateOfFire": "622 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "PLZ-83 Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "PLZ-83 Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "PLZ-83 Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "PLZ-83 Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "PLZ-83 Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "PLZ-83 Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "PLZ-83 FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "PLZ-83 FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "PLZ-83 FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 724,
@@ -3910,7 +6125,51 @@ const VEHICLES_DATA = [
         "penetration": 23,
         "rateOfFire": "623 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "2S1 Gvozdika Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "2S1 Gvozdika Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "2S1 Gvozdika Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "2S1 Gvozdika Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "2S1 Gvozdika Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "2S1 Gvozdika Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "2S1 Gvozdika FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "2S1 Gvozdika FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "2S1 Gvozdika FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 725,
@@ -3940,7 +6199,51 @@ const VEHICLES_DATA = [
         "penetration": 24,
         "rateOfFire": "624 rpm"
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "2S3 Akatsiya Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "2S3 Akatsiya Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "2S3 Akatsiya Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "2S3 Akatsiya Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "2S3 Akatsiya Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "2S3 Akatsiya Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "2S3 Akatsiya FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "2S3 Akatsiya FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "2S3 Akatsiya FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
   {
     "id": 726,
@@ -3970,433 +6273,244 @@ const VEHICLES_DATA = [
         "penetration": 20,
         "rateOfFire": "625 rpm"
       }
-    ]
-  },
-  {
-    "id": 800,
-    "name": "Z-9G Harbin",
-    "type": "Helicopter",
-    "faction": "Chinese",
-    "tier": "II",
-    "image": "Z-9G-Harbin.jpg",
-    "description": "Multi-role Chinese helicopter equipped with light rockets, cannons, and ATGMs in MWT.",
-    "stats": {
-      "health": 16900,
-      "speed": 305,
-      "verticalSpeed": 22,
-      "agility": 60
-    },
-    "weapons": [
-      {
-        "name": "Type 57-1",
-        "type": "Rocket Pod",
-        "damage": 3700,
-        "penetration": 200,
-        "reload": 15
-      },
-      {
-        "name": "FS-70",
-        "type": "Rocket Pod",
-        "damage": 4200,
-        "penetration": 290,
-        "reload": 20
-      },
-      {
-        "name": "AKD-10",
-        "type": "Air-to-Ground Missile",
-        "damage": 8600,
-        "penetration": 1400,
-        "reload": 20
-      },
-      {
-        "name": "AKD-9",
-        "type": "Air-to-Ground Missile",
-        "damage": 8000,
-        "penetration": 800,
-        "reload": 15
-      },
-      {
-        "name": "HJ-8E",
-        "type": "Anti-Tank Missile",
-        "damage": 9890,
-        "penetration": 480,
-        "reload": 15
-      },
-      {
-        "name": "Type 90",
-        "type": "Air-to-Ground Missile",
-        "damage": 6400,
-        "penetration": 320,
-        "reload": 40
-      },
-      {
-        "name": "TY-90",
-        "type": "Short-Range AAM",
-        "damage": 4600,
-        "penetration": 30,
-        "reload": 10
-      }
     ],
-    "guns": [
-      {
-        "name": "QJK99(12.7mm)",
-        "type": "Heavy MG",
-        "damage": 50,
-        "penetration": 40,
-        "reload": 100
-      }
-    ]
+    "modules": {
+      "engine": [
+        {
+          "name": "Type 74 SPH Engine MK1",
+          "bonus": "+5 km/h speed"
+        },
+        {
+          "name": "Type 74 SPH Engine MK2",
+          "bonus": "+10 km/h speed"
+        },
+        {
+          "name": "Type 74 SPH Engine MK3",
+          "bonus": "+15 km/h speed"
+        }
+      ],
+      "armor": [
+        {
+          "name": "Type 74 SPH Armor MK1",
+          "bonus": "+100mm protection"
+        },
+        {
+          "name": "Type 74 SPH Armor MK2",
+          "bonus": "+200mm protection"
+        },
+        {
+          "name": "Type 74 SPH Armor MK3",
+          "bonus": "+300mm protection"
+        }
+      ],
+      "fireControl": [
+        {
+          "name": "Type 74 SPH FCS MK1",
+          "bonus": "+10% accuracy"
+        },
+        {
+          "name": "Type 74 SPH FCS MK2",
+          "bonus": "+18% accuracy"
+        },
+        {
+          "name": "Type 74 SPH FCS MK3",
+          "bonus": "+26% accuracy"
+        }
+      ]
+    }
   },
-  {
-    "id": 801,
-    "name": "Mi-8TV",
-    "type": "Helicopter",
-    "faction": "Russian",
-    "tier": "II",
-    "description": "Versatile transport helicopter with light attack capabilities and proven reliability.",
-    "image": "Mi-8TV.jpg",
-    "stats": {
-      "health": 16616,
-      "speed": 200,
-      "verticalSpeed": 46,
-      "agility": 52
-    },
-    "weapons": [
-      {
-        "name": "UB-16-57UM",
-        "type": "Rocket Pod",
-        "damage": 3900,
-        "penetration": 220,
-        "reload": 15
-      },
-      {
-        "name": "UB-32-57",
-        "type": "Rocket Pod",
-        "damage": 3900,
-        "penetration": 220,
-        "reload": 20
-      },
-      {
-        "name": "B8V20",
-        "type": "Air-to-Ground Missile",
-        "damage": 5100,
-        "penetration": 420,
-        "reload": 20
-      },
-      {
-        "name": "B-13L",
-        "type": "Air-to-Ground Missile",
-        "damage": 9200,
-        "penetration": 160,
-        "reload": 40
-      },
-      {
-        "name": "9K38 IGLA-V",
-        "type": "Short-Range AAM",
-        "damage": 4100,
-        "penetration": 30,
-        "reload": 15
-      },
-      {
-        "name": "Attack ATGM",
-        "type": "Anti-Tank Missile",
-        "damage": 7500,
-        "penetration": 850,
-        "reload": 30
-      },
-      {
-        "name": "9M17 Falanga",
-        "type": "Anti-Tank Missile",
-        "damage": 7400,
-        "penetration": 650,
-        "reload": 30
-      }
+
+{
+    id: 800,
+    name: "Z-9G Harbin",
+    type: "Helicopter",
+    faction: "Chinese",
+    tier: "II",
+    image: "Z-9G-Harbin.jpg",
+    description: "Multi-role Chinese helicopter equipped with light rockets, cannons, and ATGMs in MWT.",
+    stats: { health: 16900, speed: 305, verticalSpeed: 22, agility: 60 },
+    weapons: [
+      { name: "Type 57-1", type: "Rocket Pod", damage: 3700, penetration: 200, reload: 15 },
+      { name: "FS-70", type: "Rocket Pod", damage: 4200, penetration: 290, reload: 20 },
+      { name: "AKD-10", type: "Air-to-Ground Missile", damage: 8600, penetration: 1400, reload: 20 },
+      { name: "AKD-9", type: "Air-to-Ground Missile", damage: 8000, penetration: 800, reload: 15 },
+      { name: "HJ-8E", type: "Anti-Tank Missile", damage: 9890, penetration: 480, reload: 15 },
+      { name: "Type 90", type: "Air-to-Ground Missile", damage: 6400, penetration: 320, reload: 40 },
+      { name: "TY-90", type: "Short-Range AAM", damage: 4600, penetration: 30, reload: 10 }
     ],
-    "guns": [
-      {
-        "name": "Afanasev A 12.7(12.7mm)",
-        "type": "Heavy MG",
-        "damage": 45,
-        "penetration": 42,
-        "reload": 100
-      },
-      {
-        "name": "UPK-23-250(23mm)",
-        "type": "Rocket Pod",
-        "damage": 300,
-        "penetration": 70,
-        "reload": 1200
-      }
-    ]
-  },
-  {
-    "id": 802,
-    "name": "MH-6 Little Bird",
-    "type": "Helicopter",
-    "faction": "American",
-    "tier": "II",
-    "image": "MH-6-Little-Bird.jpg",
-    "description": "Ultra-light scout/assault helicopter used for special operations; light armament but excellent maneuverability.",
-    "stats": {
-      "health": 15000,
-      "speed": 282,
-      "verticalSpeed": 26,
-      "agility": 75
-    },
-    "weapons": [
-      {
-        "name": "AGM 169-JAGM",
-        "type": "Air-to-Ground Missile",
-        "damage": 9800,
-        "penetration": 1200,
-        "reload": 30
-      },
-      {
-        "name": "AGM-114K X2",
-        "type": "Air-to-Ground Missile",
-        "damage": 9000,
-        "penetration": 950,
-        "reload": 30
-      },
-      {
-        "name": "AGR-20 BLR",
-        "type": "Rocket Pod",
-        "damage": 5200,
-        "penetration": 128,
-        "reload": 20
-      },
-      {
-        "name": "LAU-68",
-        "type": "Rocket Pod",
-        "damage": 4300,
-        "penetration": 290,
-        "reload": 20
-      },
-      {
-        "name": "AIM-92",
-        "type": "Short-Range AAM",
-        "damage": 4700,
-        "penetration": 35,
-        "reload": 10
-      },
-      {
-        "name": "AGM-65 Maverick",
-        "type": "Air-to-Ground Missile",
-        "damage": 11000,
-        "penetration": 830,
-        "reload": 22
-      }
+    guns: [
+      { name: "QJK99(12.7mm)", type: "Heavy MG", damage: 50, penetration: 40, reload: 100 }
     ],
-    "guns": [
-      {
-        "name": "GAU-19 MH-6 (12.7mm)",
-        "type": "Heavy MG",
-        "damage": 45,
-        "penetration": 42,
-        "reload": 90
-      },
-      {
-        "name": "M134 Minigun(7.62mm)",
-        "type": "Rotary Gun",
-        "damage": 25,
-        "penetration": 20,
-        "reload": 80
-      }
-    ]
+    modules: {
+      engine: [
+        { name: "WZ-8 Engine MK1", bonus: "+15 km/h speed" },
+        { name: "WZ-8 Engine MK2", bonus: "+30 km/h speed" }
+      ],
+      avionics: [
+        { name: "Targeting Pod MK1", bonus: "+15% lock speed" },
+        { name: "Targeting Pod MK2", bonus: "+30% lock speed" }
+      ],
+      defense: [
+        { name: "ECM Suite MK1", bonus: "+12% evasion" },
+        { name: "ECM Suite MK2", bonus: "+25% evasion" }
+      ]
+    }
   },
   {
-    "id": 803,
-    "name": "Z-11WB Changhe",
-    "type": "Helicopter",
-    "faction": "Chinese",
-    "tier": "II",
-    "image": "Z-11WB-Changhe.jpg",
-    "description": "Light Chinese helicopter (Changhe Z-11WB) with multiple light ATGM/rocket options.",
-    "stats": {
-      "health": 18421,
-      "speed": 170,
-      "verticalSpeed": 44,
-      "agility": 40
-    },
-    "weapons": [
-      {
-        "name": "HJ-8E",
-        "type": "Anti-Tank Missile",
-        "damage": 9890,
-        "penetration": 480,
-        "reload": 15
-      },
-      {
-        "name": "TYPE 57-1",
-        "type": "Rocket Pod",
-        "damage": 3700,
-        "penetration": 200,
-        "reload": 15
-      },
-      {
-        "name": "TY-90",
-        "type": "Short-Range AAM",
-        "damage": 4600,
-        "penetration": 30,
-        "reload": 10
-      },
-      {
-        "name": "AKD-9",
-        "type": "Air-to-Ground Missile",
-        "damage": 8000,
-        "penetration": 800,
-        "reload": 15
-      },
-      {
-        "name": "SW6-Drone",
-        "type": "Loitering Munition",
-        "damage": 7800,
-        "penetration": 800,
-        "reload": 16
-      },
-      {
-        "name": "TL-6",
-        "type": "Air-to-Ground Missile",
-        "damage": 19400,
-        "penetration": 830,
-        "reload": 21
-      },
-      {
-        "name": "FS-70",
-        "type": "Rocket Pod",
-        "damage": 4200,
-        "penetration": 290,
-        "reload": 20
-      },
-      {
-        "name": "AKD-10",
-        "type": "Air-to-Ground Missile",
-        "damage": 8600,
-        "penetration": 1400,
-        "reload": 20
-      },
-      {
-        "name": "FT-9",
-        "type": "Air-to-Ground Missile",
-        "damage": 10800,
-        "penetration": 70,
-        "reload": 20
-      },
-      {
-        "name": "Type-90",
-        "type": "Air-to-Ground Missile",
-        "damage": 6400,
-        "penetration": 320,
-        "reload": 40
-      }
+    id: 801,
+    name: "Mi-8TV",
+    type: "Helicopter",
+    faction: "Russian",
+    tier: "II",
+    description: "Versatile transport helicopter with light attack capabilities and proven reliability.",
+    image: "Mi-8TV.jpg",
+    stats: { health: 16616, speed: 200, verticalSpeed: 46, agility: 52 },
+    weapons: [
+      { name: "UB-16-57UM", type: "Rocket Pod", damage: 3900, penetration: 220, reload: 15 },
+      { name: "UB-32-57", type: "Rocket Pod", damage: 3900, penetration: 220, reload: 20 },
+      { name: "B8V20", type: "Air-to-Ground Missile", damage: 5100, penetration: 420, reload: 20 },
+      { name: "B-13L", type: "Air-to-Ground Missile", damage: 9200, penetration: 160, reload: 40 },
+      { name: "9K38 IGLA-V", type: "Short-Range AAM", damage: 4100, penetration: 30, reload: 15 },
+      { name: "Attack ATGM", type: "Anti-Tank Missile", damage: 7500, penetration: 850, reload: 30 },
+      { name: "9M17 Falanga", type: "Anti-Tank Missile", damage: 7400, penetration: 650, reload: 30 }
     ],
-    "guns": [
-      {
-        "name": "CS-LM12(7.62mm)",
-        "type": "MG",
-        "damage": 25,
-        "penetration": 20,
-        "reload": 80
-      }
-    ]
-  },
-  {
-    "id": 804,
-    "name": "Mi-171SH",
-    "type": "Helicopter",
-    "faction": "Russian",
-    "tier": "II",
-    "image": "Mi-171SH.jpg",
-    "description": "Modernized transport helicopter with enhanced combat capabilities and weapon systems.",
-    "stats": {
-      "health": 17500,
-      "speed": 210,
-      "verticalSpeed": 48,
-      "agility": 45
-    },
-    "weapons": [
-      {
-        "name": "Type 57-1",
-        "type": "Rocket Pod",
-        "damage": 3700,
-        "penetration": 200,
-        "reload": 15
-      },
-      {
-        "name": "TY-90",
-        "type": "Short-Range AAM",
-        "damage": 4600,
-        "penetration": 30,
-        "reload": 10
-      },
-      {
-        "name": "AKD-9",
-        "type": "Air-to-Ground Missile",
-        "damage": 8000,
-        "penetration": 800,
-        "reload": 15
-      },
-      {
-        "name": "Type 90",
-        "type": "Air-to-Ground Missile",
-        "damage": 6400,
-        "penetration": 320,
-        "reload": 40
-      },
-      {
-        "name": "HJ-8E",
-        "type": "Anti-Tank Missile",
-        "damage": 9890,
-        "penetration": 480,
-        "reload": 15
-      },
-      {
-        "name": "FS-70",
-        "type": "Rocket Pod",
-        "damage": 4200,
-        "penetration": 290,
-        "reload": 20
-      },
-      {
-        "name": "SW6-Drone",
-        "type": "Loitering Munition",
-        "damage": 7800,
-        "penetration": 800,
-        "reload": 16
-      },
-      {
-        "name": "TL-6",
-        "type": "Air-to-Ground Missile",
-        "damage": 19400,
-        "penetration": 830,
-        "reload": 21
-      },
-      {
-        "name": "AKD-10",
-        "type": "Air-to-Ground Missile",
-        "damage": 8600,
-        "penetration": 1400,
-        "reload": 20
-      }
+    guns: [
+      { name: "Afanasev A 12.7(12.7mm)", type: "Heavy MG", damage: 45, penetration: 42, reload: 100 },
+      { name: "UPK-23-250(23mm)", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 }
     ],
-    "guns": [
-      {
-        "name": "6P46 Kord(12.7mm)",
-        "type": "Heavy MG",
-        "damage": 48,
-        "penetration": 45,
-        "reload": 95
-      },
-      {
-        "name": "UPK-23-250(23mm)",
-        "type": "Rocket Pod",
-        "damage": 300,
-        "penetration": 70,
-        "reload": 1200
-      }
-    ]
+    modules: {
+      engine: [
+        { name: "TV3-117MT MK1", bonus: "+18 km/h speed" },
+        { name: "TV3-117MT MK2", bonus: "+36 km/h speed" },
+        { name: "TV3-117MT MK3", bonus: "+54 km/h speed" }
+      ],
+      survivability: [
+        { name: "Armor Plating MK1", bonus: "+8% protection" },
+        { name: "Armor Plating MK2", bonus: "+16% protection" },
+        { name: "Armor Plating MK3", bonus: "+24% protection" }
+      ],
+      avionics: [
+        { name: "Navigation Suite MK1", bonus: "+10% accuracy" },
+        { name: "Navigation Suite MK2", bonus: "+18% accuracy" },
+        { name: "Navigation Suite MK3", bonus: "+26% accuracy" }
+      ]
+    }
   },
   {
+    id: 802,
+    name: "MH-6 Little Bird",
+    type: "Helicopter",
+    faction: "American",
+    tier: "II",
+    image: "MH-6-Little-Bird.jpg",
+    description: "Ultra-light scout/assault helicopter used for special operations; light armament but excellent maneuverability.",
+    stats: { health: 15000, speed: 282, verticalSpeed: 26, agility: 75 },
+    weapons: [
+      { name: "AGM 169-JAGM", type: "Air-to-Ground Missile", damage: 9800, penetration: 1200, reload: 30 },
+      { name: "AGM-114K X2", type: "Air-to-Ground Missile", damage: 9000, penetration: 950, reload: 30 },
+      { name: "AGR-20 BLR", type: "Rocket Pod", damage: 5200, penetration: 128, reload: 20 },
+      { name: "LAU-68", type: "Rocket Pod", damage: 4300, penetration: 290, reload: 20 },
+      { name: "AIM-92", type: "Short-Range AAM", damage: 4700, penetration: 35, reload: 10 },
+      { name: "AGM-65 Maverick", type: "Air-to-Ground Missile", damage: 11000, penetration: 830, reload: 22 }
+    ],
+    guns: [
+      { name: "GAU-19 MH-6 (12.7mm)", type: "Heavy MG", damage: 45, penetration: 42, reload: 90 },
+      { name: "M134 Minigun(7.62mm)", type: "Rotary Gun", damage: 25, penetration: 20, reload: 80 }
+    ],
+    modules: {
+      engine: [
+        { name: "Turboshaft Upgrade MK1", bonus: "+10% speed" },
+        { name: "Turboshaft Upgrade MK2", bonus: "+20% speed" }
+      ],
+      avionics: [
+        { name: "Light Recon Suite MK1", bonus: "+15% detection" },
+        { name: "Light Recon Suite MK2", bonus: "+30% detection" }
+      ],
+      defense: [
+        { name: "Light Flares MK1", bonus: "+10% countermeasures" },
+        { name: "Light Flares MK2", bonus: "+20% countermeasures" }
+      ]
+    }
+  },
+  {
+    id: 803,
+    name: "Z-11WB Changhe",
+    type: "Helicopter",
+    faction: "Chinese",
+    tier: "II",
+    image: "Z-11WB-Changhe.jpg",
+    description: "Light Chinese helicopter (Changhe Z-11WB) with multiple light ATGM/rocket options.",
+    stats: { health: 18421, speed: 170, verticalSpeed: 44, agility: 40 },
+    weapons: [
+      { name: "HJ-8E", type: "Anti-Tank Missile", damage: 9890, penetration: 480, reload: 15 },
+      { name: "TYPE 57-1", type: "Rocket Pod", damage: 3700, penetration: 200, reload: 15 },
+      { name: "TY-90", type: "Short-Range AAM", damage: 4600, penetration: 30, reload: 10 },
+      { name: "AKD-9", type: "Air-to-Ground Missile", damage: 8000, penetration: 800, reload: 15 },
+      { name: "SW6-Drone", type: "Loitering Munition", damage: 7800, penetration: 800, reload: 16 },
+      { name: "TL-6", type: "Air-to-Ground Missile", damage: 19400, penetration: 830, reload: 21 },
+      { name: "FS-70", type: "Rocket Pod", damage: 4200, penetration: 290, reload: 20 },
+      { name: "AKD-10", type: "Air-to-Ground Missile", damage: 8600, penetration: 1400, reload: 20 },
+      { name: "FT-9", type: "Air-to-Ground Missile", damage: 10800, penetration: 70, reload: 20 },
+      { name: "Type-90", type: "Air-to-Ground Missile", damage: 6400, penetration: 320, reload: 40 }
+    ],
+    guns: [
+      { name: "CS-LM12(7.62mm)", type: "MG", damage: 25, penetration: 20, reload: 80 }
+    ],
+    modules: {
+      engine: [
+        { name: "WZ-8 Engine MK1", bonus: "+15 km/h speed" },
+        { name: "WZ-8 Engine MK2", bonus: "+30 km/h speed" }
+      ],
+      avionics: [
+        { name: "Targeting Pod MK1", bonus: "+15% lock speed" },
+        { name: "Targeting Pod MK2", bonus: "+30% lock speed" }
+      ],
+      defense: [
+        { name: "ECM Suite MK1", bonus: "+12% evasion" },
+        { name: "ECM Suite MK2", bonus: "+25% evasion" }
+      ]
+    }
+  },
+  {
+    id: 804,
+    name: "Mi-171SH",
+    type: "Helicopter",
+    faction: "Russian",
+    tier: "II",
+    image: "Mi-171SH.jpg",
+    description: "Modernized transport helicopter with enhanced combat capabilities and weapon systems.",
+    stats: { health: 17500, speed: 210, verticalSpeed: 48, agility: 45 },
+    weapons: [
+      { name: "Type 57-1", type: "Rocket Pod", damage: 3700, penetration: 200, reload: 15 },
+      { name: "TY-90", type: "Short-Range AAM", damage: 4600, penetration: 30, reload: 10 },
+      { name: "AKD-9", type: "Air-to-Ground Missile", damage: 8000, penetration: 800, reload: 15 },
+      { name: "Type 90", type: "Air-to-Ground Missile", damage: 6400, penetration: 320, reload: 40 },
+      { name: "HJ-8E", type: "Anti-Tank Missile", damage: 9890, penetration: 480, reload: 15 },
+      { name: "FS-70", type: "Rocket Pod", damage: 4200, penetration: 290, reload: 20 },
+      { name: "SW6-Drone", type: "Loitering Munition", damage: 7800, penetration: 800, reload: 16 },
+      { name: "TL-6", type: "Air-to-Ground Missile", damage: 19400, penetration: 830, reload: 21 },
+      { name: "AKD-10", type: "Air-to-Ground Missile", damage: 8600, penetration: 1400, reload: 20 }
+    ],
+    guns: [
+      { name: "6P46 Kord(12.7mm)", type: "Heavy MG", damage: 48, penetration: 45, reload: 95 },
+      { name: "UPK-23-250(23mm)", type: "Rocket Pod", damage: 300, penetration: 70, reload: 1200 }
+    ],
+    modules: {
+      engine: [
+        { name: "TV3-117VM Upgrade MK1", bonus: "+12% speed" },
+        { name: "TV3-117VM Upgrade MK2", bonus: "+24% speed" }
+      ],
+      avionics: [
+        { name: "Modern Avionics MK1", bonus: "+15% detection" },
+        { name: "Modern Avionics MK2", bonus: "+30% detection" }
+      ],
+      defense: [
+        { name: "Countermeasure System MK1", bonus: "+18% evasion" },
+        { name: "Countermeasure System MK2", bonus: "+32% evasion" }
+      ]
+    }
+  },
+{
     "id": 900,
     "name": "M41 Walker Bulldog",
     "type": "Main Battle Tank",
@@ -4439,7 +6553,39 @@ const VEHICLES_DATA = [
         "penetration": 296,
         "reload": 0
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 901,
@@ -4484,7 +6630,39 @@ const VEHICLES_DATA = [
         "penetration": 332,
         "reload": 0
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 902,
@@ -4516,18 +6694,50 @@ const VEHICLES_DATA = [
         "reload": 0
       },
       {
-        "name": "3BK17M HEAT",
-        "type": "Main Gun",
-        "damage": 8670,
-        "penetration": 390
-      },
+    "name": "3BK17M HEAT",
+    "type": "Main Gun",
+    "damage": 8670,
+    "penetration": 390
+  },
       {
-        "name": "3BM24 APFSDS",
-        "type": "Main Gun",
-        "damage": 7920,
-        "penetration": 360
-      }
-    ]
+    "name": "3BM24 APFSDS",
+    "type": "Main Gun",
+    "damage": 7920,
+    "penetration": 360
+  }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 903,
@@ -4544,31 +6754,65 @@ const VEHICLES_DATA = [
       "agility": 0
     },
     "weapons": [
+
+     
       {
-        "name": "M82 APBC",
-        "type": "Main Gun",
-        "damage": 7480,
-        "penetration": 185
-      },
-      {
-        "name": "M71 HE",
-        "type": "Main Gun",
-        "damage": 9900,
-        "penetration": 90
-      },
-      {
-        "name": "M318A1 APBC",
-        "type": "Main Gun",
-        "damage": 8780,
-        "penetration": 194
-      },
-      {
-        "name": "M431 HEAT",
-        "type": "Main Gun",
-        "damage": 8460,
-        "penetration": 320
-      }
-    ]
+    "name": "M82 APBC",
+    "type": "Main Gun",
+    "damage": 7480,
+    "penetration": 185
+  },
+   {
+    "name": "M71 HE",
+    "type": "Main Gun",
+    "damage": 9900,
+    "penetration": 90
+  },
+  {
+    "name": "M318A1 APBC",
+    "type": "Main Gun",
+    "damage": 8780,
+    "penetration": 194
+  },
+  {
+    "name": "M431 HEAT",
+    "type": "Main Gun",
+    "damage": 8460,
+    "penetration": 320
+  }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 904,
@@ -4599,7 +6843,39 @@ const VEHICLES_DATA = [
         "penetration": 107,
         "reload": 0
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 905,
@@ -4644,7 +6920,39 @@ const VEHICLES_DATA = [
         "penetration": 380,
         "reload": 0
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 906,
@@ -4689,7 +6997,39 @@ const VEHICLES_DATA = [
         "penetration": 360,
         "reload": 0
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 907,
@@ -4714,24 +7054,56 @@ const VEHICLES_DATA = [
         "reload": 0
       },
       {
-        "name": "T297 HESH",
-        "type": "Main Gun",
-        "damage": 8150,
-        "penetration": 117
-      },
+    "name": "T297 HESH",
+    "type": "Main Gun",
+    "damage": 8150,
+    "penetration": 117
+  },
       {
-        "name": "T297 APFSDS",
-        "type": "Main Gun",
-        "damage": 10200,
-        "penetration": 429
-      },
+    "name": "T297 APFSDS",
+    "type": "Main Gun",
+    "damage": 10200,
+    "penetration": 429
+  },
       {
-        "name": "T298E1 HEAT",
-        "type": "Main Gun",
-        "damage": 9780,
-        "penetration": 380
-      }
-    ]
+    "name": "T298E1 HEAT",
+    "type": "Main Gun",
+    "damage": 9780,
+    "penetration": 380
+  }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 908,
@@ -4749,30 +7121,62 @@ const VEHICLES_DATA = [
     },
     "weapons": [
       {
-        "name": "3UBR APBC",
-        "type": "Main Gun",
-        "damage": 540,
-        "penetration": 112
-      },
+    "name": "3UBR APBC",
+    "type": "Main Gun",
+    "damage": 540,
+    "penetration": 112
+  },
       {
-        "name": "30F8 HEI",
-        "type": "Main Gun",
-        "damage": 675,
-        "penetration": 50
-      },
+    "name": "30F8 HEI",
+    "type": "Main Gun",
+    "damage": 675,
+    "penetration": 50
+  },
       {
-        "name": "3UBRB APDS",
-        "type": "Main Gun",
-        "damage": 525,
-        "penetration": 163
-      },
+    "name": "3UBRB APDS",
+    "type": "Main Gun",
+    "damage": 525,
+    "penetration": 163
+  },
       {
-        "name": "M929 APFSDS",
-        "type": "Main Gun",
-        "damage": 550,
-        "penetration": 189
-      }
-    ]
+    "name": "M929 APFSDS",
+    "type": "Main Gun",
+    "damage": 550,
+    "penetration": 189
+  }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 909,
@@ -4789,31 +7193,64 @@ const VEHICLES_DATA = [
       "agility": 35
     },
     "weapons": [
+
       {
-        "name": "BP-350B APHE",
-        "type": "Main Gun",
-        "damage": 6264,
-        "penetration": 122
-      },
-      {
-        "name": "BP-350M HE",
-        "type": "Main Gun",
-        "damage": 7830,
-        "penetration": 76
-      },
-      {
-        "name": "BP-350M HE",
-        "type": "Main Gun",
-        "damage": 7830,
-        "penetration": 76
-      },
-      {
-        "name": "BK-354M HEAT",
-        "type": "Main Gun",
-        "damage": 6670,
-        "penetration": 320
-      }
-    ]
+    "name": "BP-350B APHE",
+    "type": "Main Gun",
+    "damage": 6264,
+    "penetration": 122
+  },
+  {
+    "name": "BP-350M HE",
+    "type": "Main Gun",
+    "damage": 7830,
+    "penetration": 76
+  },
+  {
+    "name": "BP-350M HE",
+    "type": "Main Gun",
+    "damage": 7830,
+    "penetration": 76
+  },
+   {
+    "name": "BK-354M HEAT",
+    "type": "Main Gun",
+    "damage": 6670,
+    "penetration": 320
+  }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 910,
@@ -4837,7 +7274,39 @@ const VEHICLES_DATA = [
         "penetration": 0,
         "reload": 0
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 911,
@@ -4875,7 +7344,39 @@ const VEHICLES_DATA = [
         "penetration": 400,
         "reload": 4
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 912,
@@ -4906,7 +7407,39 @@ const VEHICLES_DATA = [
         "penetration": 66,
         "reload": 0
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 913,
@@ -4937,7 +7470,39 @@ const VEHICLES_DATA = [
         "penetration": 40,
         "reload": 0
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 914,
@@ -4955,17 +7520,17 @@ const VEHICLES_DATA = [
     },
     "weapons": [
       {
-        "name": "PGU-32/U SAPHEI(LAV)",
-        "type": "Main Gun",
-        "damage": 405,
-        "penetration": 115
-      },
+    "name": "PGU-32/U SAPHEI(LAV)",
+    "type": "Main Gun",
+    "damage": 405,
+    "penetration": 115
+  },
       {
-        "name": "M791 APDS(LAV)",
-        "type": "Main Gun",
-        "damage": 473,
-        "penetration": 111
-      },
+    "name": "M791 APDS(LAV)",
+    "type": "Main Gun",
+    "damage": 473,
+    "penetration": 111
+  },
       {
         "name": "M719 APDS",
         "type": "Unknown",
@@ -4973,12 +7538,44 @@ const VEHICLES_DATA = [
         "penetration": 120
       },
       {
-        "name": "M919 APFSDS(LAV)",
-        "type": "Main Gun",
-        "damage": 495,
-        "penetration": 140
-      }
-    ]
+    "name": "M919 APFSDS(LAV)",
+    "type": "Main Gun",
+    "damage": 495,
+    "penetration": 140
+  },
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 915,
@@ -4996,30 +7593,62 @@ const VEHICLES_DATA = [
     },
     "weapons": [
       {
-        "name": "20×128 APCR",
-        "type": "Main Gun",
-        "damage": 380,
-        "penetration": 135
-      },
-      {
-        "name": "20×128 API",
-        "type": "Main Gun",
-        "damage": 380,
-        "penetration": 105
-      },
-      {
-        "name": "20×128 API ",
-        "type": "Main Gun",
-        "damage": 380,
-        "penetration": 95
-      },
-      {
-        "name": "20×128 HEI",
-        "type": "Main Gun",
-        "damage": 513,
-        "penetration": 40
-      }
-    ]
+    "name": "20×128 APCR",
+    "type": "Main Gun",
+    "damage": 380,
+    "penetration": 135
+  },
+  {
+    "name": "20×128 API",
+    "type": "Main Gun",
+    "damage": 380,
+    "penetration": 105
+  },
+  {
+    "name": "20×128 API ",
+    "type": "Main Gun",
+    "damage": 380,
+    "penetration": 95
+  },
+  {
+    "name": "20×128 HEI",
+    "type": "Main Gun",
+    "damage": 513,
+    "penetration": 40
+  }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 916,
@@ -5057,7 +7686,39 @@ const VEHICLES_DATA = [
         "penetration": 156,
         "reload": 0
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 917,
@@ -5102,8 +7763,41 @@ const VEHICLES_DATA = [
         "penetration": 370,
         "reload": 0
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
+  
   {
     "id": 919,
     "name": "WZ-501A",
@@ -5133,7 +7827,39 @@ const VEHICLES_DATA = [
         "penetration": 66,
         "reload": 0
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 920,
@@ -5151,30 +7877,62 @@ const VEHICLES_DATA = [
     },
     "weapons": [
       {
-        "name": "Type-87 APDS",
-        "type": "Main Gun",
-        "damage": 504,
-        "penetration": 111
-      },
-      {
-        "name": "Type-87 APFSDS",
-        "type": "Main Gun",
-        "damage": 528,
-        "penetration": 150
-      },
-      {
-        "name": "Type-87 HEI",
-        "type": "Main Gun",
-        "damage": 648,
-        "penetration": 45
-      },
-      {
-        "name": "Type-87 SAPHEI",
-        "type": "Main Gun",
-        "damage": 432,
-        "penetration": 105
-      }
-    ]
+    "name": "Type-87 APDS",
+    "type": "Main Gun",
+    "damage": 504,
+    "penetration": 111
+  },
+  {
+    "name": "Type-87 APFSDS",
+    "type": "Main Gun",
+    "damage": 528,
+    "penetration": 150
+  },
+  {
+    "name": "Type-87 HEI",
+    "type": "Main Gun",
+    "damage": 648,
+    "penetration": 45
+  },
+  {
+    "name": "Type-87 SAPHEI",
+    "type": "Main Gun",
+    "damage": 432,
+    "penetration": 105
+  }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 921,
@@ -5191,31 +7949,64 @@ const VEHICLES_DATA = [
       "agility": 37
     },
     "weapons": [
+     
       {
-        "name": "M792 HEI(FMS)",
-        "type": "Main Gun",
-        "damage": 608,
-        "penetration": 48
-      },
-      {
-        "name": "PGU-32/U SAPHEI(FMS)",
-        "type": "Main Gun",
-        "damage": 432,
-        "penetration": 15
-      },
-      {
-        "name": "M7911 APDS(FMS)",
-        "type": "Main Gun",
-        "damage": 473,
-        "penetration": 111
-      },
-      {
-        "name": "M919 APFSDS(FMS)",
-        "type": "Main Gun",
-        "damage": 495,
-        "penetration": 140
-      }
-    ]
+    "name": "M792 HEI(FMS)",
+    "type": "Main Gun",
+    "damage": 608,
+    "penetration": 48
+  },
+  {
+    "name": "PGU-32/U SAPHEI(FMS)",
+    "type": "Main Gun",
+    "damage": 432,
+    "penetration": 15
+  },
+  {
+    "name": "M7911 APDS(FMS)",
+    "type": "Main Gun",
+    "damage": 473,
+    "penetration": 111
+  },
+  {
+    "name": "M919 APFSDS(FMS)",
+    "type": "Main Gun",
+    "damage": 495,
+    "penetration": 140
+  }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 922,
@@ -5260,7 +8051,39 @@ const VEHICLES_DATA = [
         "penetration": 900,
         "reload": 6
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 923,
@@ -5298,13 +8121,45 @@ const VEHICLES_DATA = [
         "penetration": 112,
         "reload": 0
       },
-      {
-        "name": "BST API",
-        "type": "Main Gun",
-        "damage": 350,
-        "penetration": 112
-      }
-    ]
+     {
+    "name": "BST API",
+    "type": "Main Gun",
+    "damage": 350,
+    "penetration": 112
+  },
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 924,
@@ -5321,31 +8176,64 @@ const VEHICLES_DATA = [
       "agility": 41
     },
     "weapons": [
-      {
-        "name": "BP-350B APHE",
-        "type": "Main Gun",
-        "damage": 6264,
-        "penetration": 122
-      },
-      {
-        "name": "PFF HE",
-        "type": "Main Gun",
-        "damage": 10400,
-        "penetration": 106
-      },
-      {
-        "name": "M344A1 HEAT",
-        "type": "Main Gun",
-        "damage": 10800,
-        "penetration": 433
-      },
-      {
-        "name": "106 3A HEAT",
-        "type": "Main Gun",
-        "damage": 10000,
-        "penetration": 700
-      }
-    ]
+     
+     {
+    "name": "BP-350B APHE",
+    "type": "Main Gun",
+    "damage": 6264,
+    "penetration": 122
+  },
+  {
+    "name": "PFF HE",
+    "type": "Main Gun",
+    "damage": 10400,
+    "penetration": 106
+  },
+  {
+    "name": "M344A1 HEAT",
+    "type": "Main Gun",
+    "damage": 10800,
+    "penetration": 433
+  },
+  {
+    "name": "106 3A HEAT",
+    "type": "Main Gun",
+    "damage": 10000,
+    "penetration": 700
+  }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 925,
@@ -5362,21 +8250,42 @@ const VEHICLES_DATA = [
       "agility": 37
     },
     "weapons": [
-      {
-        "name": "9M31M HEI",
-        "type": "Missile",
-        "damage": 5870,
-        "penetration": 60,
-        "reload": 9
-      },
-      {
-        "name": "9M31 HEI",
-        "type": "Missile",
-        "damage": 4530,
-        "penetration": 60,
-        "reload": 9
-      }
-    ]
+        { name: "9M31M HEI", type: "Missile", damage: 5870, penetration: 60, reload: 9 },
+        { name: "9M31 HEI", type: "Missile", damage: 4530, penetration: 60, reload: 9 },
+   
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 926,
@@ -5393,25 +8302,58 @@ const VEHICLES_DATA = [
       "agility": 38
     },
     "weapons": [
+     
       {
-        "name": "M81A1 API",
-        "type": "Main Gun",
-        "damage": 1080,
-        "penetration": 135
-      },
-      {
-        "name": "Mk2 HEI",
-        "type": "Main Gun",
-        "damage": 1400,
-        "penetration": 56
-      },
-      {
-        "name": "Mk3 HEI",
-        "type": "Main Gun",
-        "damage": 1200,
-        "penetration": 76
-      }
-    ]
+    "name": "M81A1 API",
+    "type": "Main Gun",
+    "damage": 1080,
+    "penetration": 135
+  },
+  {
+    "name": "Mk2 HEI",
+    "type": "Main Gun",
+    "damage": 1400,
+    "penetration": 56
+  },
+  {
+    "name": "Mk3 HEI",
+    "type": "Main Gun",
+    "damage": 1200,
+    "penetration": 76
+  }
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+    }
   },
   {
     "id": 927,
@@ -5452,7 +8394,40 @@ const VEHICLES_DATA = [
         "damage": 12650,
         "penetration": 480
       }
-    ]
+    ],
+    "modules": {
+      "engine": [
+        {
+          "name": "Default Engine MK1",
+          "bonus": "+10% speed"
+        },
+        {
+          "name": "Default Engine MK2",
+          "bonus": "+20% speed"
+        }
+      ],
+      "stealth": [
+        {
+          "name": "Default Stealth MK1",
+          "bonus": "+10% stealth"
+        },
+        {
+          "name": "Default Stealth MK2",
+          "bonus": "+20% stealth"
+        }
+      ],
+      "avionics": [
+        {
+          "name": "Default Avionics MK1",
+          "bonus": "+20% detection"
+        },
+        {
+          "name": "Default Avionics MK2",
+          "bonus": "+40% detection"
+        }
+      ]
+
+    }
   }
 ];
 
