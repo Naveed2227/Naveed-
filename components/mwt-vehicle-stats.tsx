@@ -3419,10 +3419,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
   }
 
   const filteredVehicles = VEHICLES.filter((vehicle) => {
-    const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesType = typeFilter.length === 0 || typeFilter.includes(vehicle.type)
-    const matchesTier = tierFilter.length === 0 || tierFilter.includes(formatTier(vehicle.tier))
-    const matchesCountry = countryFilter.length === 0 || countryFilter.includes(vehicle.faction)
+    const vehicleName = vehicle?.name || '';
+    const vehicleType = vehicle?.type || '';
+    const vehicleTier = vehicle?.tier ? formatTier(vehicle.tier) : '';
+    const vehicleFaction = vehicle?.faction || '';
+    
+    const matchesSearch = vehicleName.toLowerCase().includes(searchQuery.toLowerCase())
+    const matchesType = typeFilter.length === 0 || (vehicleType && typeFilter.includes(vehicleType))
+    const matchesTier = tierFilter.length === 0 || (vehicleTier && tierFilter.includes(vehicleTier))
+    const matchesCountry = countryFilter.length === 0 || (vehicleFaction && countryFilter.includes(vehicleFaction))
     const matchesRarity = rarityFilter.length === 0 || rarityFilter.includes(getVehicleRarity(vehicle.name))
     const matchesObtainMethod = obtainMethodFilter.length === 0 || obtainMethodFilter.includes(getVehicleObtainMethod(vehicle.name))
     const matchesFavorites = !showFavoritesOnly || favorites.has(vehicle.id)
@@ -3464,16 +3469,19 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     setIsLoading(true)
 
     const getVehicleInfo = (query: string) => {
-      const lowerQuery = query.toLowerCase().trim()
+      if (!query) return null;
+      const lowerQuery = query.toLowerCase ? query.toLowerCase().trim() : ''
 
       // Enhanced vehicle search with better matching
       const searchVehicle = (name: string) => {
-        const cleanName = name.toLowerCase().replace(/[-\s]/g, "")
+        if (!name) return null;
+        const cleanName = name.toLowerCase ? name.toLowerCase().replace(/[-\s]/g, "") : '';
         return VEHICLES.find(
           (v) =>
-            v.name.toLowerCase().includes(name.toLowerCase()) ||
+            v?.name && name &&
+            (v.name.toLowerCase().includes(name.toLowerCase()) ||
             v.name.toLowerCase().replace(/[-\s]/g, "").includes(cleanName) ||
-            cleanName.includes(v.name.toLowerCase().replace(/[-\s]/g, "")),
+            cleanName.includes(v.name.toLowerCase().replace(/[-\s]/g, "")))
         )
       }
 
@@ -3522,8 +3530,15 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           )
         },
         bestByNation: (nation: string) => {
-          const nationVehicles = VEHICLES.filter((v) => v.faction.toLowerCase().includes(nation.toLowerCase()))
-          return nationVehicles.reduce((prev, current) => (prev.stats.health > current.stats.health ? prev : current))
+          if (!nation) return null;
+          const lowerNation = nation.toLowerCase ? nation.toLowerCase() : '';
+          const nationVehicles = VEHICLES.filter((v) => 
+            v?.faction && v.faction.toLowerCase && v.faction.toLowerCase().includes(lowerNation)
+          );
+          if (nationVehicles.length === 0) return null;
+          return nationVehicles.reduce((prev, current) => 
+            (prev?.stats?.health > current?.stats?.health ? prev : current)
+          )
         },
       }
 
