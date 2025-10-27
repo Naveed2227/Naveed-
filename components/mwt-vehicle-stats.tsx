@@ -266,7 +266,9 @@ const newVehicles = [
   "9K31 Strela-1",
   "Merkava Mk.3",
   "B-Type",
-  "T-90M"
+  "T-90M",
+  "F-5E Tiger II",
+  "ERC-90 F4 Sagaie",
 ];
 
 const isNewVehicle = (vehicleName: string): boolean => {
@@ -3180,6 +3182,19 @@ const VEHICLES_DATA = [
   },
   {
     "id": 603,
+    "name": "F-5E Tiger II",
+    "type": "Fighter Jet",
+    "faction": "Mexican",
+    "tier": "II",
+    "description": "A nimble, supersonic fighter featuring twin J85 engines, 20 mm cannons, Sidewinders, and versatile bomb loadouts.",
+    "image": "F-5E-Tiger-II.jpg",
+    "stats": { "health": 0, "speed": 0, "afterburnerSpeed": 0, "agility": 0 },
+    "weapons": [
+      
+    ]
+  },
+  {
+    "id": 604,
     "name": "J-10 Chengdu",
     "type": "Fighter Jet",
     "faction": "Chinese",
@@ -3200,7 +3215,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 604,
+    "id": 605,
     "name": "MiG-31BM Foxhound",
     "type": "Fighter Jet",
     "faction": "Russian",
@@ -3220,7 +3235,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 605,
+    "id": 606,
     "name": "Q-5A Nanchang",
     "type": "Fighter Jet",
     "faction": "Chinese",
@@ -3241,7 +3256,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 606,
+    "id": 607,
     "name": "Su-24M",
     "type": "Fighter Jet",
     "faction": "Russian",
@@ -3262,7 +3277,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 607,
+    "id": 608,
     "name": "F-4E Phantom",
     "type": "Fighter Jet",
     "faction": "American",
@@ -3280,36 +3295,19 @@ const VEHICLES_DATA = [
   },
   
    {
-    id: 700,
-    name: "M60 Patton",
-    type: "Main Battle Tank",
-    faction: "American",
-    tier: "II",
-    image: "M60-Patton.jpg",
-    description: "Cold War era main battle tank with proven reliability and combat effectiveness.",
-    stats: { health: 32000, speed: 50, armor: "93mm", agility: 36 },
-    weapons: [
-      { name: "M68 105mm L52", type: "Main Gun", damage: 11800, penetration: 620 },
-      { name: "M85 12.7mm", type: "Machine Gun", damage: 180, penetration: 28, rateOfFire: "450 rpm" },
-      { name: "M240 7.62mm", type: "Coaxial MG", damage: 120, penetration: 15, rateOfFire: "750 rpm" },
-    ],
-    modules: {
-      engine: [
-        { name: "Continental AVDS MK1", bonus: "+6 km/h speed" },
-        { name: "Continental AVDS MK2", bonus: "+12 km/h speed" },
-        { name: "Continental AVDS MK3", bonus: "+18 km/h speed" },
-      ],
-      armor: [
-        { name: "Steel Armor MK1", bonus: "+120mm protection" },
-        { name: "Steel Armor MK2", bonus: "+240mm protection" },
-        { name: "Steel Armor MK3", bonus: "+360mm protection" },
-      ],
-      fireControl: [
-        { name: "Optical Rangefinder MK1", bonus: "+10% accuracy" },
-        { name: "Optical Rangefinder MK2", bonus: "+18% accuracy" },
-        { name: "Optical Rangefinder MK3", bonus: "+26% accuracy" },
-      ],
-    },
+    "id": 700,
+    "name": "M60 Patton",
+    "type": "Main Battle Tank",
+    "faction": "American",
+    "tier": "II",
+    "image": "M60-Patton.jpg",
+    "description": "Cold War era main battle tank with proven reliability and combat effectiveness.",
+    "stats": { "health": 32000, "speed": 50, "armor": "93mm", "agility": 36 },
+    "weapons": [
+      { "name": "M68 105mm L52", "type": "Main Gun", "damage": 11800, "penetration": 620 },
+      { "name": "M85 12.7mm", "type": "Machine Gun", "damage": 180, "penetration": 28, "rateOfFire": "450 rpm" },
+      { "name": "M240 7.62mm", "type": "Coaxial MG", "damage": 120, "penetration": 15, "rateOfFire": "750 rpm" }
+    ]
   },
   {
     "id": 701,
@@ -3319,71 +3317,11 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "Object-122-TM.jpg",
     "description": "Chinese prototype main battle tank, based on the Type 59, mounting a 120 mm gun.",
-    "stats": {
-      "health": 29300,
-      "speed": 55,
-      "armor": "100mm",
-      "agility": 33
-    },
+    "stats": { "health": 29300, "speed": 55, "armor": "100mm", "agility": 33 },
     "weapons": [
-      {
-        "name": "Object 122 TM Main Gun",
-        "type": "Main Gun",
-        "damage": 10500,
-        "penetration": 610
-      },
-      {
-        "name": "Object 122 TM Secondary MG",
-        "type": "Machine Gun",
-        "damage": 160,
-        "penetration": 21,
-        "rateOfFire": "601 rpm"
-      }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "Object 122 TM Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "Object 122 TM Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "Object 122 TM Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "Object 122 TM Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "Object 122 TM Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "Object 122 TM Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "Object 122 TM FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "Object 122 TM FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "Object 122 TM FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+      { "name": "Object 122 TM Main Gun", "type": "Main Gun", "damage": 10500, "penetration": 610 },
+      { "name": "Object 122 TM Secondary MG", "type": "Machine Gun", "damage": 160, "penetration": 21, "rateOfFire": "601 rpm" }
+    ]
   },
   {
     "id": 702,
@@ -3393,71 +3331,11 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "Type-74E.jpg",
     "description": "Japanese main battle tank, upgraded from the Type 74 series, featuring improved fire control systems.",
-    "stats": {
-      "health": 30000,
-      "speed": 54,
-      "armor": "80mm",
-      "agility": 32
-    },
+    "stats": { "health": 30000, "speed": 54, "armor": "80mm", "agility": 32 },
     "weapons": [
-      {
-        "name": "Type 74E Main Gun",
-        "type": "Main Gun",
-        "damage": 11000,
-        "penetration": 620
-      },
-      {
-        "name": "Type 74E Secondary MG",
-        "type": "Machine Gun",
-        "damage": 170,
-        "penetration": 22,
-        "rateOfFire": "602 rpm"
-      }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "Type 74E Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "Type 74E Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "Type 74E Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "Type 74E Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "Type 74E Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "Type 74E Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "Type 74E FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "Type 74E FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "Type 74E FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+      { "name": "Type 74E Main Gun", "type": "Main Gun", "damage": 11000, "penetration": 620 },
+      { "name": "Type 74E Secondary MG", "type": "Machine Gun", "damage": 170, "penetration": 22, "rateOfFire": "602 rpm" }
+    ]
   },
   {
     "id": 703,
@@ -3467,71 +3345,11 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "Type-74G-Kai.jpg",
     "description": "An upgraded Japanese MBT variant, featuring enhanced armor, improved fire control, and modernized night-fighting capability.",
-    "stats": {
-      "health": 31000,
-      "speed": 54,
-      "armor": "80mm",
-      "agility": 32
-    },
+    "stats": { "health": 31000, "speed": 54, "armor": "80mm", "agility": 32 },
     "weapons": [
-      {
-        "name": "Type 74G/Kai Main Gun",
-        "type": "Main Gun",
-        "damage": 11500,
-        "penetration": 630
-      },
-      {
-        "name": "Type 74G/Kai Secondary MG",
-        "type": "Machine Gun",
-        "damage": 100,
-        "penetration": 23,
-        "rateOfFire": "603 rpm"
-      }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "Type 74G/Kai Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "Type 74G/Kai Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "Type 74G/Kai Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "Type 74G/Kai Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "Type 74G/Kai Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "Type 74G/Kai Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "Type 74G/Kai FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "Type 74G/Kai FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "Type 74G/Kai FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+      { "name": "Type 74G/Kai Main Gun", "type": "Main Gun", "damage": 11500, "penetration": 630 },
+      { "name": "Type 74G/Kai Secondary MG", "type": "Machine Gun", "damage": 100, "penetration": 23, "rateOfFire": "603 rpm" }
+    ]
   },
   {
     "id": 704,
@@ -3541,71 +3359,11 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "T-62.jpg",
     "description": "Soviet main battle tank, armed with a 115 mm smoothbore gun and improved armor protection.",
-    "stats": {
-      "health": 29000,
-      "speed": 51,
-      "armor": "100mm",
-      "agility": 44
-    },
+    "stats": { "health": 29000, "speed": 51, "armor": "100mm", "agility": 44 },
     "weapons": [
-      {
-        "name": "T-62 Main Gun",
-        "type": "Main Gun",
-        "damage": 12000,
-        "penetration": 640
-      },
-      {
-        "name": "T-62 Secondary MG",
-        "type": "Machine Gun",
-        "damage": 190,
-        "penetration": 24,
-        "rateOfFire": "604 rpm"
-      }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "T-62 Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "T-62 Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "T-62 Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "T-62 Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "T-62 Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "T-62 Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "T-62 FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "T-62 FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "T-62 FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+      { "name": "T-62 Main Gun", "type": "Main Gun", "damage": 12000, "penetration": 640 },
+      { "name": "T-62 Secondary MG", "type": "Machine Gun", "damage": 190, "penetration": 24, "rateOfFire": "604 rpm" }
+    ]
   },
   {
     "id": 705,
@@ -3615,71 +3373,11 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "T-62-545.jpg",
     "description": "Soviet T-62 variant, equipped with the 545 hp V-55 engine and improved reliability.",
-    "stats": {
-      "health": 31000,
-      "speed": 51,
-      "armor": "200mm",
-      "agility": 44
-    },
+    "stats": { "health": 31000, "speed": 51, "armor": "200mm", "agility": 44 },
     "weapons": [
-      {
-        "name": "T-62 545 Main Gun",
-        "type": "Main Gun",
-        "damage": 10000,
-        "penetration": 650
-      },
-      {
-        "name": "T-62 545 Secondary MG",
-        "type": "Machine Gun",
-        "damage": 150,
-        "penetration": 20,
-        "rateOfFire": "605 rpm"
-      }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "T-62 545 Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "T-62 545 Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "T-62 545 Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "T-62 545 Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "T-62 545 Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "T-62 545 Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "T-62 545 FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "T-62 545 FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "T-62 545 FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+      { "name": "T-62 545 Main Gun", "type": "Main Gun", "damage": 10000, "penetration": 650 },
+      { "name": "T-62 545 Secondary MG", "type": "Machine Gun", "damage": 150, "penetration": 20, "rateOfFire": "605 rpm" }
+    ]
   },
   {
     "id": 706,
@@ -3689,50 +3387,13 @@ const VEHICLES_DATA = [
     "tier": "II",
     "description": "A modified Centurion with a 105mm gun, improved armor, and mobility for defense and reconnaissance missions.",
     "image": "Stridsvagn-105.jpg",
-    "stats": {
-      "health": 36000,
-      "speed": 50,
-      "armour": 76,
-      "agility": 35
-    },
+    "stats": { "health": 36000, "speed": 50, "armour": 76, "agility": 35 },
     "weapons": [
-      { name: "slpprj m/90c APFSDS", type: "Main Gun", damage: 9800, penetration: 430 },
-      { name: "slpprj m/80 APFSDS", type: "Main Gun", damage: 9630, penetration: 337 },
-      { name: "slsgr m/61A HEI", type: "Main Gun", damage: 4400, penetration: 70 },
-      { name: "slspgr m/61 SAPHEI", type: "Main Gun", damage: 10090, penetration: 127 }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "Default Engine MK1",
-          "bonus": "+10% speed"
-        },
-        {
-          "name": "Default Engine MK2",
-          "bonus": "+20% speed"
-        }
-      ],
-      "stealth": [
-        {
-          "name": "Default Stealth MK1",
-          "bonus": "+10% stealth"
-        },
-        {
-          "name": "Default Stealth MK2",
-          "bonus": "+20% stealth"
-        }
-      ],
-      "avionics": [
-        {
-          "name": "Default Avionics MK1",
-          "bonus": "+20% detection"
-        },
-        {
-          "name": "Default Avionics MK2",
-          "bonus": "+40% detection"
-        }
-      ]
-    }
+      { "name": "slpprj m/90c APFSDS", "type": "Main Gun", "damage": 9800, "penetration": 430 },
+      { "name": "slpprj m/80 APFSDS", "type": "Main Gun", "damage": 9630, "penetration": 337 },
+      { "name": "slsgr m/61A HEI", "type": "Main Gun", "damage": 4400, "penetration": 70 },
+      { "name": "slspgr m/61 SAPHEI", "type": "Main Gun", "damage": 10090, "penetration": 127 }
+    ]
   },
   {
     "id": 707,
@@ -3742,72 +3403,14 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "XM803.jpg",
     "description": "American prototype main battle tank, developed from the MBT-70 project, featuring advanced firepower and mobility.",
-    "stats": {
-      "health": 35000,
-      "speed": 60,
-      "armor": "150mm",
-      "agility": 30
-    },
+    "stats": { "health": 35000, "speed": 60, "armor": "150mm", "agility": 30 },
     "weapons": [
-      {
-        "name": "XM803 Main Gun",
-        "type": "Main Gun",
-        "damage": 10500,
-        "penetration": 660
-      },
-      {
-        "name": "XM803 Secondary MG",
-        "type": "Machine Gun",
-        "damage": 160,
-        "penetration": 21,
-        "rateOfFire": "606 rpm"
-      }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "XM803 Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "XM803 Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "XM803 Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "XM803 Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "XM803 Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "XM803 Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "XM803 FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "XM803 FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "XM803 FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+      { "name": "XM803 Main Gun", "type": "Main Gun", "damage": 10500, "penetration": 660 },
+      { "name": "XM803 Secondary MG", "type": "Machine Gun", "damage": 160, "penetration": 21, "rateOfFire": "606 rpm" }
+    ]
+    
   },
+  [
   {
     "id": 708,
     "name": "XM1 (GM)",
@@ -3815,7 +3418,7 @@ const VEHICLES_DATA = [
     "faction": "American",
     "tier": "II",
     "image": "XM1-GM.jpg",
-    "description": "U.S. prototype main battle tank by General Motors, competing against Chrysler’s design for the Abrams.",
+    "description": "U.S. prototype main battle tank by General Motors, competing against Chrysler's design for the Abrams.",
     "stats": {
       "health": 33600,
       "speed": 83,
@@ -3836,51 +3439,7 @@ const VEHICLES_DATA = [
         "penetration": 22,
         "rateOfFire": "607 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "XM1 (GM) Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "XM1 (GM) Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "XM1 (GM) Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "XM1 (GM) Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "XM1 (GM) Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "XM1 (GM) Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "XM1 (GM) FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "XM1 (GM) FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "XM1 (GM) FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": 709,
@@ -3910,51 +3469,7 @@ const VEHICLES_DATA = [
         "penetration": 23,
         "rateOfFire": "608 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "BMP-2 Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "BMP-2 Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "BMP-2 Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "BMP-2 Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "BMP-2 Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "BMP-2 Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "BMP-2 FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "BMP-2 FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "BMP-2 FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": 710,
@@ -3984,51 +3499,7 @@ const VEHICLES_DATA = [
         "penetration": 24,
         "rateOfFire": "609 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "BTR-82AT Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "BTR-82AT Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "BTR-82AT Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "BTR-82AT Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "BTR-82AT Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "BTR-82AT Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "BTR-82AT FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "BTR-82AT FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "BTR-82AT FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": 711,
@@ -4058,83 +3529,44 @@ const VEHICLES_DATA = [
         "penetration": 20,
         "rateOfFire": "610 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "BTR-82A1 Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "BTR-82A1 Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "BTR-82A1 Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "BTR-82A1 Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "BTR-82A1 Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "BTR-82A1 Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "BTR-82A1 FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "BTR-82A1 FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "BTR-82A1 FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
-    {
-    id: 712,
-    name: "M3 Bradley",
-    type: "Multirole-IFV",
-    faction: "American",
-    tier: "II",
-    description: "Infantry fighting vehicle with TOW missile system and troop transport capability.",
-    image: "M3-Bradley.jpg",
-    stats: { health: 25000, speed: 62, armor: "38mm", agility: 35 },
-    weapons: [
-      { name: "TOW-2 ATGM", type: "Anti-Tank Missile", damage: 14800, penetration: 780 },
-      { name: "M242 25mm", type: "Autocannon", damage: 320, penetration: 58, rateOfFire: "200 rpm" },
-      { name: "M240C 7.62mm", type: "Coaxial MG", damage: 110, penetration: 14, rateOfFire: "750 rpm" },
-    ],
-    modules: {
-      engine: [
-        { name: "Cummins VTA-903T MK1", bonus: "+10 km/h speed" },
-        { name: "Cummins VTA-903T MK2", bonus: "+20 km/h speed" },
-        { name: "Cummins VTA-903T MK3", bonus: "+30 km/h speed" },
-      ],
-      armor: [
-        { name: "Aluminum Armor MK1", bonus: "+70mm protection" },
-        { name: "Aluminum Armor MK2", bonus: "+140mm protection" },
-        { name: "Aluminum Armor MK3", bonus: "+210mm protection" },
-      ],
-      fireControl: [
-        { name: "Integrated Sight MK1", bonus: "+12% accuracy" },
-        { name: "Integrated Sight MK2", bonus: "+22% accuracy" },
-        { name: "Integrated Sight MK3", bonus: "+32% accuracy" },
-      ],
+  {
+    "id": 712,
+    "name": "M3 Bradley",
+    "type": "Multirole-IFV",
+    "faction": "American",
+    "tier": "II",
+    "description": "Infantry fighting vehicle with TOW missile system and troop transport capability.",
+    "image": "M3-Bradley.jpg",
+    "stats": {
+      "health": 25000,
+      "speed": 62,
+      "armor": "38mm",
+      "agility": 35
     },
+    "weapons": [
+      {
+        "name": "TOW-2 ATGM",
+        "type": "Anti-Tank Missile",
+        "damage": 14800,
+        "penetration": 780
+      },
+      {
+        "name": "M242 25mm",
+        "type": "Autocannon",
+        "damage": 320,
+        "penetration": 58,
+        "rateOfFire": "200 rpm"
+      },
+      {
+        "name": "M240C 7.62mm",
+        "type": "Coaxial MG",
+        "damage": 110,
+        "penetration": 14,
+        "rateOfFire": "750 rpm"
+      }
+    ]
   },
   {
     "id": 713,
@@ -4164,51 +3596,7 @@ const VEHICLES_DATA = [
         "penetration": 22,
         "rateOfFire": "612 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "M551 Sheridan Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "M551 Sheridan Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "M551 Sheridan Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "M551 Sheridan Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "M551 Sheridan Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "M551 Sheridan Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "M551 Sheridan FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "M551 Sheridan FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "M551 Sheridan FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": 714,
@@ -4238,83 +3626,37 @@ const VEHICLES_DATA = [
         "penetration": 23,
         "rateOfFire": "613 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "Object 685 Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "Object 685 Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "Object 685 Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "Object 685 Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "Object 685 Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "Object 685 Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "Object 685 FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "Object 685 FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "Object 685 FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
-  
-    {
-    id: 715,
-    name: "IT-1 Dragon",
-    type: "Missile Carrier",
-    faction: "Russian",
-    tier: "II",
-    description: "Experimental missile tank destroyer with unique guided missile system.",
-    image: "IT-1-Dragon.jpg",
-    stats: { health: 22800, speed: 50, armor: "35mm", agility: 55 },
-    weapons: [
-      { name: "3M7 Drakon ATGM", type: "Anti-Tank Missile", damage: 15200, penetration: 500 },
-      { name: "PKT 7.62mm", type: "Machine Gun", damage: 95, penetration: 12, rateOfFire: "800 rpm" },
-    ],
-    modules: {
-      engine: [
-        { name: "V-54K MK1", bonus: "+6 km/h speed" },
-        { name: "V-54K MK2", bonus: "+12 km/h speed" },
-        { name: "V-54K MK3", bonus: "+18 km/h speed" },
-      ],
-      armor: [
-        { name: "Steel Armor MK1", bonus: "+100mm protection" },
-        { name: "Steel Armor MK2", bonus: "+200mm protection" },
-        { name: "Steel Armor MK3", bonus: "+300mm protection" },
-      ],
-      fireControl: [
-        { name: "Missile Guidance MK1", bonus: "+15% accuracy" },
-        { name: "Missile Guidance MK2", bonus: "+25% accuracy" },
-        { name: "Missile Guidance MK3", bonus: "+35% accuracy" },
-      ],
+  {
+    "id": 715,
+    "name": "IT-1 Dragon",
+    "type": "Missile Carrier",
+    "faction": "Russian",
+    "tier": "II",
+    "description": "Experimental missile tank destroyer with unique guided missile system.",
+    "image": "IT-1-Dragon.jpg",
+    "stats": {
+      "health": 22800,
+      "speed": 50,
+      "armor": "35mm",
+      "agility": 55
     },
+    "weapons": [
+      {
+        "name": "3M7 Drakon ATGM",
+        "type": "Anti-Tank Missile",
+        "damage": 15200,
+        "penetration": 500
+      },
+      {
+        "name": "PKT 7.62mm",
+        "type": "Machine Gun",
+        "damage": 95,
+        "penetration": 12,
+        "rateOfFire": "800 rpm"
+      }
+    ]
   },
   {
     "id": 716,
@@ -4344,51 +3686,7 @@ const VEHICLES_DATA = [
         "penetration": 20,
         "rateOfFire": "615 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "M163 VADS Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "M163 VADS Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "M163 VADS Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "M163 VADS Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "M163 VADS Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "M163 VADS Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "M163 VADS FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "M163 VADS FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "M163 VADS FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": 717,
@@ -4418,84 +3716,38 @@ const VEHICLES_DATA = [
         "penetration": 21,
         "rateOfFire": "616 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "PGZ-04A Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "PGZ-04A Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "PGZ-04A Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "PGZ-04A Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "PGZ-04A Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "PGZ-04A Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "PGZ-04A FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "PGZ-04A FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "PGZ-04A FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
-   {
-    id: 718,
-    name: "ZSU-23-4M4 Shilka",
-    type: "Anti-Air",
-    faction: "Russian",
-    tier: "II",
-    description: "Modernized Soviet/Russian self-propelled anti-aircraft system, armed with four 23 mm autocannons and radar targeting.",
-    image: "ZSU-23-4M4-Shilka.jpg",
-    stats: { health: 21000, speed: 68, armor: "280mm", agility: 32 },
-    weapons: [
-      { name: "AZP-23 23mm Quad", type: "Anti-Aircraft Gun", damage: 1800, penetration: 95, rateOfFire: "3400 rpm" },
-      { name: "9M311 Sosna", type: "SAM", damage: 7500, penetration: 380 },
-    ],
-    modules: {
-      engine: [
-        { name: "V-6R MK1", bonus: "+6 km/h speed" },
-        { name: "V-6R MK2", bonus: "+12 km/h speed" },
-        { name: "V-6R MK3", bonus: "+18 km/h speed" },
-      ],
-      armor: [
-        { name: "Steel Armor MK1", bonus: "+50mm protection" },
-        { name: "Steel Armor MK2", bonus: "+100mm protection" },
-        { name: "Steel Armor MK3", bonus: "+150mm protection" },
-      ],
-      fireControl: [
-        { name: "Gun Dish Radar MK1", bonus: "+20% accuracy" },
-        { name: "Gun Dish Radar MK2", bonus: "+35% accuracy" },
-        { name: "Gun Dish Radar MK3", bonus: "+50% accuracy" },
-      ],
+  {
+    "id": 718,
+    "name": "ZSU-23-4M4 Shilka",
+    "type": "Anti-Air",
+    "faction": "Russian",
+    "tier": "II",
+    "description": "Modernized Soviet/Russian self-propelled anti-aircraft system, armed with four 23 mm autocannons and radar targeting.",
+    "image": "ZSU-23-4M4-Shilka.jpg",
+    "stats": {
+      "health": 21000,
+      "speed": 68,
+      "armor": "280mm",
+      "agility": 32
     },
+    "weapons": [
+      {
+        "name": "AZP-23 23mm Quad",
+        "type": "Anti-Aircraft Gun",
+        "damage": 1800,
+        "penetration": 95,
+        "rateOfFire": "3400 rpm"
+      },
+      {
+        "name": "9M311 Sosna",
+        "type": "SAM",
+        "damage": 7500,
+        "penetration": 380
+      }
+    ]
   },
-  
   {
     "id": 719,
     "name": "LAV-300",
@@ -4524,51 +3776,7 @@ const VEHICLES_DATA = [
         "penetration": 23,
         "rateOfFire": "618 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "LAV-300 Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "LAV-300 Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "LAV-300 Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "LAV-300 Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "LAV-300 Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "LAV-300 Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "LAV-300 FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "LAV-300 FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "LAV-300 FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": 720,
@@ -4598,51 +3806,7 @@ const VEHICLES_DATA = [
         "penetration": 24,
         "rateOfFire": "619 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "PTL-02 Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "PTL-02 Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "PTL-02 Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "PTL-02 Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "PTL-02 Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "PTL-02 Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "PTL-02 FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "PTL-02 FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "PTL-02 FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": 721,
@@ -4672,51 +3836,7 @@ const VEHICLES_DATA = [
         "penetration": 20,
         "rateOfFire": "620 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "M109 Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "M109 Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "M109 Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "M109 Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "M109 Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "M109 Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "M109 FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "M109 FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "M109 FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": 722,
@@ -4746,51 +3866,7 @@ const VEHICLES_DATA = [
         "penetration": 21,
         "rateOfFire": "621 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "PLL-05 Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "PLL-05 Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "PLL-05 Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "PLL-05 Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "PLL-05 Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "PLL-05 Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "PLL-05 FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "PLL-05 FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "PLL-05 FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": 723,
@@ -4820,51 +3896,7 @@ const VEHICLES_DATA = [
         "penetration": 22,
         "rateOfFire": "622 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "PLZ-83 Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "PLZ-83 Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "PLZ-83 Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "PLZ-83 Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "PLZ-83 Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "PLZ-83 Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "PLZ-83 FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "PLZ-83 FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "PLZ-83 FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": 724,
@@ -4894,51 +3926,7 @@ const VEHICLES_DATA = [
         "penetration": 23,
         "rateOfFire": "623 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "2S1 Gvozdika Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "2S1 Gvozdika Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "2S1 Gvozdika Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "2S1 Gvozdika Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "2S1 Gvozdika Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "2S1 Gvozdika Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "2S1 Gvozdika FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "2S1 Gvozdika FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "2S1 Gvozdika FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": 725,
@@ -4968,51 +3956,7 @@ const VEHICLES_DATA = [
         "penetration": 24,
         "rateOfFire": "624 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "2S3 Akatsiya Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "2S3 Akatsiya Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "2S3 Akatsiya Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "2S3 Akatsiya Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "2S3 Akatsiya Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "2S3 Akatsiya Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "2S3 Akatsiya FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "2S3 Akatsiya FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "2S3 Akatsiya FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
   {
     "id": 726,
@@ -5042,51 +3986,7 @@ const VEHICLES_DATA = [
         "penetration": 20,
         "rateOfFire": "625 rpm"
       }
-    ],
-    "modules": {
-      "engine": [
-        {
-          "name": "Type 74 SPH Engine MK1",
-          "bonus": "+5 km/h speed"
-        },
-        {
-          "name": "Type 74 SPH Engine MK2",
-          "bonus": "+10 km/h speed"
-        },
-        {
-          "name": "Type 74 SPH Engine MK3",
-          "bonus": "+15 km/h speed"
-        }
-      ],
-      "armor": [
-        {
-          "name": "Type 74 SPH Armor MK1",
-          "bonus": "+100mm protection"
-        },
-        {
-          "name": "Type 74 SPH Armor MK2",
-          "bonus": "+200mm protection"
-        },
-        {
-          "name": "Type 74 SPH Armor MK3",
-          "bonus": "+300mm protection"
-        }
-      ],
-      "fireControl": [
-        {
-          "name": "Type 74 SPH FCS MK1",
-          "bonus": "+10% accuracy"
-        },
-        {
-          "name": "Type 74 SPH FCS MK2",
-          "bonus": "+18% accuracy"
-        },
-        {
-          "name": "Type 74 SPH FCS MK3",
-          "bonus": "+26% accuracy"
-        }
-      ]
-    }
+    ]
   },
 
 {
@@ -9645,6 +8545,8 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "Merkava Mk.3",
       "B-Type",
       "T-90M",
+      "F-5E Tiger II",
+      "ERC-90 F4 Sagaie",
       
       
       
