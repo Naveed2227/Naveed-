@@ -259,11 +259,7 @@ const formatTier = (tier: string | number): string => {
 
 // New Vehicles System
 const newVehicles = [
-  "X2 Shinshin",
-  "Leopard 2A8",
-  "Al-Khalid",
-  "Arjun Mk.2",
-  "9K31 Strela-1",
+  
   "Merkava Mk.3",
   "B-Type",
   "T-90M",
