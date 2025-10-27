@@ -671,25 +671,6 @@ const BATTLE_PASSES = [
 
 const VEHICLES_DATA = [
   {
-    id: 0,
-    name: "F-5E Tiger II",
-    type: "Fighter Jet",
-    faction: "American",
-    tier: "III",
-    description: "Lightweight, highly maneuverable multirole fighter known for its agility and versatility in both air-to-air and ground attack roles.",
-    image: "F-5E-Tiger-II.jpg",
-    stats: { health: 18500, speed: 920, afterburnerSpeed: 1750, agility: 65 },
-    weapons: [
-      { "name": "AIM-9P Sidewinder", "type": "Short-Range AAM", "damage": 5800, "penetration": 55, "reload": 12 },
-      { "name": "AIM-9L Sidewinder", "type": "Short-Range AAM", "damage": 6200, "penetration": 60, "reload": 14 },
-      { "name": "AGM-65B Maverick", "type": "Air-to-Ground Missile", "damage": 12500, "penetration": 750, "reload": 25 },
-      { "name": "Mk.82 Snakeye", "type": "Unguided Bomb", "damage": 13800, "penetration": 250, "reload": 30 },
-      { "name": "Mk.84", "type": "Unguided Bomb", "damage": 19800, "penetration": 400, "reload": 45 },
-      { "name": "LAU-3 Rocket Pod", "type": "Rocket Pod", "damage": 4500, "penetration": 300, "reload": 8 },
-      { "name": "M39 20mm Cannon", "type": "Cannon", "damage": 2800, "penetration": 45, "reload": 0.2 }
-    ]
-  },
-  {
     id: 1,
     name: "Su-57M",
     type: "Fighter Jet",
@@ -5842,6 +5823,7 @@ const getAircraftRole = (vehicle: any) => {
   if (vehicle.name.includes("X2 Shinshin")) return "stealth"
   if (vehicle.name.includes("B-Type")) return "stealth"
   if (vehicle.name.includes("F-16C Night Falcon")) return "multi-role"
+  if (vehicle.name.includes("F-5E Tiger II")) return "multi-role"
   if (vehicle.name.includes("TU-222")) return "bomber"
   if (vehicle.name.includes("MiG-35")) return "interceptor"
   if (vehicle.name.includes("MiG-31BM Foxhound")) return "interceptor"
