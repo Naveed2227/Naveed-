@@ -5452,6 +5452,7 @@ const VEHICLES_DATA = [
         "damage": 12650,
         "penetration": 480
       }
+    ]
   }
 ];
 
