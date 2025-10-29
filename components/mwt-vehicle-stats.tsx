@@ -1667,7 +1667,7 @@ const VEHICLES_DATA = [
     image: "TOS-1A.jpg",
     description: "Heavy flamethrower rocket launcher mounted on a tank chassis, designed for area suppression and destruction of entrenched enemies.",
     stats: {
-      health: 37100,
+      health: 38800,
       speed: 60,
       reverseSpeed: 25,
       turretRotationSpeed: 20,
