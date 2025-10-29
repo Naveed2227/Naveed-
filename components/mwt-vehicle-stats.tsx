@@ -968,7 +968,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Next-generation main battle tank with unmanned turret and advanced armor systems.",
     image: "T-14-Armata.jpg",
-    stats: { health: 38900, speed: 70, reverseSpeed: 70, armor: "1200mm", agility: 34 },
+    stats: { health: 42400, speed: 75, reverseSpeed: 70, armor: "1200mm", agility: 34 },
     weapons: [
       { name: "3BM69 Vacuum-1", type: "Main Gun", damage: 10670, penetration: 900 },
       { name: "30F26", type: "Main Gun", damage: 5000, penetration: 920 },
@@ -1017,7 +1017,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Altay.jpg",
     description: "Turkey's modern main battle tank, emphasizing firepower, protection, mobility, and advanced technology.",
-    stats: { health: 42600, speed: 62, armor: "1200mm", agility: 36 },
+    stats: { health: 45700, speed: 68, armor: "1200mm", agility: 36, turnRate: 46 },
     weapons: [
       { name: "DM63A1 APFSDS", type: "Main Gun", damage: 18500, penetration: 950, reload: 5.2 },
       { name: "DM11", type: "Main Gun", damage: 5000, penetration: 87 },
@@ -1165,7 +1165,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "T-14-(152).jpg",
     description: "Next-generation Russian MBT prototype equipped with a powerful 152mm smoothbore gun and advanced armor.",
-    stats: { health: 39700, speed: 73, armor: "1000mm", agility: 34 },
+    stats: { health: 43100, speed: 73, armor: "1000mm", agility: 34 },
     weapons: [
       { name: "Grifel-1", type: "Main Gun", damage: 15440, penetration: 850 },
       { name: "Grifel-2", type: "Main Gun", damage: 16100, penetration: 1100 },
@@ -1181,7 +1181,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Merkava-Mk.4.jpg",
     description: "Heavily armored main battle tank with unique rear-engine design and crew survivability focus.",
-    stats: { health: 42500, speed: 64, armor: "1050mm", agility: 38 },
+    stats: { health: 45600, speed: 64, armor: "1050mm", agility: 38 },
     weapons: [
       { name: "M322", type: "Main Gun", damage: 9900, penetration: 589 },
       { name: "M338", type: "Main Gun", damage: 10000, penetration: 620 },
@@ -1547,7 +1547,8 @@ const VEHICLES_DATA = [
     image: "Al-Khalid.jpg",
     description: "Pakistani main battle tank, jointly developed with China, featuring advanced firepower, mobility, and protection, serving as Pakistan Army's backbone.",
     stats: {
-      health: 40800,
+      health: 43600,
+      turnRate: 45,
       speed: 70,
       reverseSpeed: 0,
       turretRotationSpeed: 0,
@@ -2775,7 +2776,7 @@ const VEHICLES_DATA = [
     "tier": "III",
     "image": "Rookiat-MTTD.jpg",
     "description": "The Rooikat MTTD is a fast, wheeled tank destroyer with strong firepower.",
-    "stats": { "health": 27200, "speed": 120, "armor": "40mm", "agility": 28 },
+    "stats": { "health": 27200, "speed": 110, "armor": "40mm", "agility": 28 },
     "weapons": [
       { "name": "DM23", "type": "Main Gun", "damage": 8911, "penetration": 337 },
       { "name": "DM33", "type": "Main Gun", "damage": 10060, "penetration": 508 },
@@ -3329,7 +3330,7 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "M60-Patton.jpg",
     "description": "Cold War era main battle tank with proven reliability and combat effectiveness.",
-    "stats": { "health": 32000, "speed": 50, "armor": "93mm", "agility": 36 },
+    "stats": { "health": 36300, "speed": 50, "armor": "93mm", "agility": 36 },
     "weapons": [
       { "name": "M68 105mm L52", "type": "Main Gun", "damage": 11800, "penetration": 620 },
       { "name": "M85 12.7mm", "type": "Machine Gun", "damage": 180, "penetration": 28, "rateOfFire": "450 rpm" },
