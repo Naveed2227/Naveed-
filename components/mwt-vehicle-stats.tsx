@@ -543,6 +543,18 @@ const getRarityColor = (rarity: string) => {
 
 // Battle Pass Data Structure
 const BATTLE_PASSES = [
+{
+    id: 12,
+    month: "November 2025",
+    name: "",
+    image: "2025-Now.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: ["T-90M", "B-Type"], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["B-Type"],
+      free: ["T-90M"]
+    }
+  },
  {
     id: 11,
     month: "October 2025",
