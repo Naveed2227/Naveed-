@@ -259,19 +259,14 @@ const formatTier = (tier: string | number): string => {
 
 // New Vehicles System
 const newVehicles = [
-  "X2 Shinshin",
-  "Leopard 2A8",
-  "Al-Khalid",
-  "Arjun Mk.2",
-  "9K31 Strela-1",
+  "B-Type",
+  "T-90M",
   
 ];
 
 // Upcoming Vehicles System
 const upcomingVehicles = [
   "Merkava Mk.3",
-  "B-Type",
-  "T-90M",
   "F-5E Tiger II",
   "ERC-90 F4 Sagaie",
   // Add upcoming vehicle names here
@@ -847,12 +842,19 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "B-Type.jpg",
     description: "The B-Type is a futuristic Chinese stealth jet with extreme speed, agility, and firepower, capable of near-space and atmospheric dominance.",
-    stats: { health: 0, speed: 0, afterburnerSpeed: 3675, agility: 0 },
+    stats: { health: 36400, speed: 840, afterburnerSpeed: 3310, agility: 60 },
     weapons: [
-      { "name": "KD-21", "type": "Ballistic Missile", "damage": 40000, "penetration": 0, "reload": 0 },
+      
+      { "name": "PL-10", "type": "Short-Range AAM", "damage": 7400, "penetration": 60, "reload": 20 },
+      { "name": "PL-12", "damage": 7600, "penetration": 56, "reload": 30 },
+      { "name": "PL-15", "type": "BVR AAM", "damage": 7800, "penetration": 70, "reload": 30 },
       { "name": "PL-17", "type": "Air-to-Air Missile", "damage": 0, "penetration": 0, "reload": 0 },
+      { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
+      { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
+      { "name": "TL-20", "type": "Guided Bomb", "damage": 16120, "penetration": 143, "reload": 25 },
+      { "name": "AKF-98A", "type": "Air-to-Ground Missile", "damage": 20500, "penetration": 410, "reload": 40 },
       { "name": "HD-1A", "type": "Air-to-Ground Missile", "damage": 25000, "penetration": 0, "reload": 0 },
-      { "name": "LS-6/250", "type": "Guided Bomb", "damage": 0, "penetration": 0, "reload": 0 }
+      { "name": "KD-21", "type": "Ballistic Missile", "damage": 40000, "penetration": 0, "reload": 0 },
     ]
   },
   {
