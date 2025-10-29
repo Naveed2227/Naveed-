@@ -269,6 +269,7 @@ const upcomingVehicles = [
   "Merkava Mk.3",
   "F-5E Tiger II",
   "ERC-90 F4 Sagaie",
+  "Su-47 Berkut",
   // Add upcoming vehicle names here
 ];
 
@@ -500,7 +501,8 @@ const getVehicleRarity = (vehicleName: string) => {
 "K2 Black Panther",
 "Al-Khalid",
 "B-Type",
-"T-90M"
+"T-90M",
+"Su-47 Berkut",
 
 
 
@@ -859,6 +861,20 @@ const VEHICLES_DATA = [
   },
   {
     id: 9,
+    name: "Su-47 Berkut",
+    type: "Fighter Jet",
+    faction: "Russian",
+    tier: "IV",
+    image: "Su-47-Berkut.jpg",
+    description: "Experimental Russian fighter with forward-swept wings, advanced agility, composite materials, and testbed for next-generation aerodynamics and avionics.",
+    stats: { health: 0, speed: 0, afterburnerSpeed: 0, agility: 0 },
+    weapons: [
+      
+      
+    ]
+  },
+  {
+    id: 10,
     name: "YF-23",
     type: "Fighter Jet",
     faction: "American",
@@ -878,7 +894,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 10,
+    id: 11,
     name: "F-35B Lightning II",
     type: "Fighter Jet",
     faction: "American",
@@ -897,7 +913,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 11,
+    id: 12,
     name: "J-50",
     type: "Fighter Jet",
     faction: "Chinese",
@@ -919,7 +935,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 12,
+    id: 13,
     name: "Su-75 Checkmate",
     type: "Fighter Jet",
     faction: "Russian",
@@ -939,7 +955,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 13,
+    id: 14,
     name: "X2 Shinshin",
     type: "Fighter Jet",
     faction: "Japanese",
@@ -8278,10 +8294,10 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     const constructionVehicles = [
    
       "Merkava Mk.3",
-      "B-Type",
       "T-90M",
       "ERC-90 F4 Sagaie",
       "F-5E Tiger II",
+      "Su-47 Berkut",
       
       
       
