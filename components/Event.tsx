@@ -21,6 +21,17 @@ interface Event {
 // All events in chronological order
 const events: Event[] = [
 {
+    id: 23,
+    name: "Light and Shadow",
+    image: "/Events/Light-and-Shadow.jpg",
+    startDate: "2025-11-1",
+    endDate: "2025-11-9",
+    vehicles: [
+      { id: 1, name: "ERC-90 F4 Sagaie", type: "free" },
+      { id: 2, name: "F-5E Tiger II", type: "main" },
+    ],
+  },
+{
     id: 22,
     name: "Halloween",
     image: "/Events/Halloween.jpg",
