@@ -261,14 +261,14 @@ const formatTier = (tier: string | number): string => {
 const newVehicles = [
   "B-Type",
   "T-90M",
+  "F-5E Tiger II",
+  "ERC-90 F4 Sagaie",
   
 ];
 
 // Upcoming Vehicles System
 const upcomingVehicles = [
   "Merkava Mk.3",
-  "F-5E Tiger II",
-  "ERC-90 F4 Sagaie",
   "Su-47 Berkut",
   // Add upcoming vehicle names here
 ];
@@ -458,6 +458,8 @@ const getVehicleRarity = (vehicleName: string) => {
 "Stridsvagn 105",
 "Strf 9040 BILL",
 "Merkava Mk.3",
+"F-5E Tiger II",
+"ERC-90 F4 Sagaie",
 
 
 
@@ -1528,6 +1530,32 @@ const VEHICLES_DATA = [
       { name: "MK246", type: "Main Gun", damage: 510, penetration: 87 },
       { name: "MK266", type: "Main Gun", damage: 270, penetration: 55 },
       { name: "SPIKE-LR II", type: "Missile", damage: 10090, penetration: 900, reload: 10 }
+    ]
+  },
+  {
+    id: 133,
+    name: "T-90M",
+    type: "Main Battle Tank",
+    faction: "Russian",
+    tier: "IV",
+    image: "T-90M.jpg",
+    description: "Russia’s advanced main battle tank, featuring upgraded armor, firepower, electronics, and battlefield survivability.",
+    stats: {
+      health: 41300,
+      speed: 70,
+      reverseSpeed: 0,
+      turretRotationSpeed: 0,
+      hullRotationSpeed: 45,
+      armor: 900,
+      agility: 0
+    },
+    weapons: [
+      { name: "3BM46 APFSDS", type: "Main Gun", damage: 11640, penetration: 690 },
+      { name: "30F26 HEI", type: "Main Gun", damage: 5000, penetration: 92 },
+      { name: "3BM70 APFSDS", type: "Main Gun", damage: 12010, penetration: 870 },
+      { name: "3BK18M HEAT", type: "Main Gun", damage: 12390, penetration: 550 },
+      { name: "9M119 HEAT", type: "Main Gun", damage: 10160, penetration: 750 },
+      
     ]
   },
   {
@@ -3228,13 +3256,17 @@ const VEHICLES_DATA = [
     "tier": "II",
     "description": "A nimble, supersonic fighter featuring twin J85 engines, 20 mm cannons, Sidewinders, and versatile bomb loadouts.",
     "image": "F-5E-Tiger-II.jpg",
-    "stats": { "health": 0, "speed": 0, "afterburnerSpeed": 0, "agility": 0 },
+    "stats": { "health": 17000, "speed": 770, "afterburnerSpeed": 1570, "agility": 40 },
     "weapons": [
-      { "name": "M117 Cone 45", "damage": 25000, "penetration": 0, "reload": 0 },
-      { "name": "Mk-83", "damage": 0, "penetration": 0, "reload": 0 },
-      { "name": "LAU-51", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
+      { "name": "M117 Cone 45", "damage": 16200, "penetration": 139, "reload": 25 },
+      { "name": "Mk-82", "damage": 14300, "penetration": 120, "reload": 25 },
+      { "name": "Mk-83", "damage": 15700, "penetration": 200, "reload": 35 },
+      { "name": "LAU-51", "type": "Rocket Pod", "damage": 4600, "penetration": 290, "reload": 26 },
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+      { "name": "GAU-13A", "type": "Rocket Pod", "damage": 560, "penetration": 98, "reload": 20 },
+      { "name": "AGM-65", "type": "Air-to-Surface Missile", "damage": 11000, "penetration": 830, "reload": 22 },
       { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 5700, penetration: 45, reload: 15 },
+      { "name": "AIM-120", "type": "Medium-Range AAM", "damage": 11300, "penetration": 80, "reload": 20 }
     ]
   },
   {
@@ -3631,11 +3663,11 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "ERC-90-F4-Sagaie.jpg",
     "description": "A fast French-Designed reconnaissance vehicle with a 90 mm gun, light armor, and high mobility for Tier II combat.",
-    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "stats": { "health": 27500, "speed": 95, "armor": "0mm", "agility": 45 },
     "weapons": [
-      { "name": "F1 HEATFS", "type": "Main Gun", "damage": 0, "penetration": 0 },
-      { "name": "CTS-90 HESH", "type": "Main Gun", "damage": 0, "penetration": 0 },
-      { "name": "OFL 90 F1 APFSDS", "type": "Machine Gun", "damage": 0, "penetration": 380 },
+      { "name": "F1 HEATFS", "type": "Main Gun", "damage": 9480, "penetration": 340 },
+      { "name": "CTS-90 HESH", "type": "Main Gun", "damage": 6810, "penetration": 115 },
+      { "name": "OFL 90 F1 APFSDS", "type": "Machine Gun", "damage": 8760, "penetration": 380 },
       
     ]
   },
@@ -8294,9 +8326,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     const constructionVehicles = [
    
       "Merkava Mk.3",
-      "T-90M",
-      "ERC-90 F4 Sagaie",
-      "F-5E Tiger II",
       "Su-47 Berkut",
       
       
