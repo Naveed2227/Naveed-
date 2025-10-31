@@ -55,7 +55,6 @@ const vehicleVideos: VehicleVideo[] = [
   { name: "BM-57-2 Kochevnik", url: "https://youtu.be/e2gYaosFftg?si=uFjqcAi7yNJlh7fm", start: "0:57", end: "1:11" },
   { name: "ADATS", url: "https://youtu.be/39WF8j01eNc?si=GZqvbdLLZSvJbljj", start: "3:27", end: "3:43" },
   { name: "MGM-166 LOSAT", url: "https://youtu.be/WyxgmKTIplg?si=jiYWpAGGV-GQ0ikg", start: "1:12", end: "2:03" },
-  { name: "Leopard 2A-RC 3.0", url: "https://youtu.be/zj_CG2ZvV_8?si=-EAy7IVGQaHpyZu5", start: "1:23", end: "2:05" },
   { name: "T-90M", url: "https://youtu.be/79tBU-YziHU?si=aekLLVGrAdmElNGz", start: "1:27", end: "2:15" },
 
 
