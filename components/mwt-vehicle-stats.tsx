@@ -270,6 +270,8 @@ const newVehicles = [
 const upcomingVehicles = [
   "Merkava Mk.3",
   "Su-47 Berkut",
+  "ZLT-11",
+  "Rooivalk",
   // Add upcoming vehicle names here
 ];
 
@@ -1682,6 +1684,27 @@ const VEHICLES_DATA = [
   },
   {
     id: 138,
+    name: "ZLT-11",
+    type: "Tank Destroyer",
+    faction: "Chinese",
+    tier: "IV",
+    image: "ZLT-11.jpg",
+    description: "A Chinese wheeled infantry fighting vehicle, armed with a 105 mm cannon, machine guns, anti-tank missiles, and designed for rapid deployment and high battlefield mobility.",
+    stats: {
+      health: 0,
+      speed: 0,
+      reverseSpeed: 0,
+      turretRotationSpeed: 0,
+      hullRotationSpeed: 0,
+      armor: 0,
+      agility: 0
+    },
+    weapons: [
+      
+    ]
+  },
+  {
+    id: 139,
     name: "M-SHORAD",
     type: "Anti-Air",
     faction: "American",
@@ -1704,7 +1727,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 139,
+    id: 140,
     name: "TOS-1A",
     type: "MLRS",
     faction: "Russian",
@@ -1726,7 +1749,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 140,
+    id: 141,
     name: "M270 MLRS",
     type: "MLRS",
     faction: "American",
@@ -1743,7 +1766,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 141,
+    id: 142,
     name: "PLZ-05",
     type: "SPH",
     faction: "Chinese",
@@ -1767,7 +1790,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 142,
+    id: 143,
     name: "M109A6 Paladin",
     type: "SPH",
     faction: "American",
@@ -1791,7 +1814,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 143,
+    id: 144,
     name: "FK 2000",
     type: "Anti-Air",
     faction: "Chinese",
@@ -1814,7 +1837,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 144,
+    id: 145,
     name: "Otomatic 76",
     type: "Anti-Air",
     faction: "Italian",
@@ -1829,7 +1852,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 145,
+    id: 146,
     name: "BM-57-2 Kochevnik",
     type: "Tank Destroyer",
     faction: "Russian",
@@ -1853,7 +1876,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 146,
+    id: 147,
     name: "ADATS",
     type: "Missile Carrier",
     faction: "American",
@@ -1879,7 +1902,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 147,
+    id: 148,
     name: "MGM-166 LOSAT",
     type: "Missile Carrier",
     faction: "American",
@@ -3075,6 +3098,20 @@ const VEHICLES_DATA = [
   },
   {
     "id": 505,
+    "name": "Rooivalk",
+    "type": "Helicopter",
+    "faction": "South-African",
+    "tier": "III",
+    "image": "Rooivalk.jpg",
+    "description": "A South African attack helicopter, highly maneuverable, armed with cannons, rockets, and missiles, designed for close air support and battlefield reconnaissance.",
+    "stats": { "health": 0, "speed": 0, "verticalSpeed": 0, "agility": 0 },
+    "weapons": [
+      
+    ],
+    "guns": []
+  },
+  {
+    "id": 506,
     "name": "Z-9WA Harbin",
     "type": "Helicopter",
     "faction": "Chinese",
@@ -3097,7 +3134,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 506,
+    "id": 507,
     "name": "Z-20 Harbin",
     "type": "Helicopter",
     "faction": "Chinese",
@@ -3120,7 +3157,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 507,
+    "id": 508,
     "name": "MH-60L DAP",
     "type": "Helicopter",
     "faction": "American",
@@ -3144,7 +3181,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 508,
+    "id": 509,
     "name": "AH-1Z Viper",
     "type": "Helicopter",
     "faction": "American",
@@ -3167,7 +3204,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 509,
+    "id": 510,
     "name": "Ka-50 Black Shark",
     "type": "Helicopter",
     "faction": "Russian",
@@ -6043,7 +6080,7 @@ const getFlagImage = (faction: string): string => {
     Indian: "/India.png",
     Pakistani: "/Pakistan.png",
     Mexican: "/Mexico.png",
-  
+    "South-African": "/south-africa.png",
   
   }
   return flags[faction] || "/default-flag.png"
@@ -8327,6 +8364,8 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
    
       "Merkava Mk.3",
       "Su-47 Berkut",
+      "ZLT-11",
+      "Rooivalk",
       
       
       
