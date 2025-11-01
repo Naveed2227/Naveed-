@@ -263,6 +263,7 @@ const newVehicles = [
   "T-90M",
   "F-5E Tiger II",
   "ERC-90 F4 Sagaie",
+  "CSH-2 Rooivalk",
   
 ];
 
@@ -271,7 +272,7 @@ const upcomingVehicles = [
   "Merkava Mk.3",
   "Su-47 Berkut",
   "ZLT-11",
-  "Rooivalk",
+  
   // Add upcoming vehicle names here
 ];
 
@@ -3103,15 +3104,25 @@ const VEHICLES_DATA = [
   },
   {
     "id": 505,
-    "name": "Rooivalk",
+    "name": "CSH-2 Rooivalk",
     "type": "Helicopter",
     "faction": "South-African",
     "tier": "III",
     "image": "Rooivalk.jpg",
     "description": "A South African attack helicopter, highly maneuverable, armed with cannons, rockets, and missiles, designed for close air support and battlefield reconnaissance.",
-    "stats": { "health": 0, "speed": 0, "verticalSpeed": 0, "agility": 0 },
+    "stats": { "health": 24800, "speed": 310, "verticalSpeed": 32, "agility": 70 },
     "weapons": [
-      
+      { "name": "FZ233", "type": "Cruise Missile", "damage": 4600, "penetration": 290, "reload": 10 },
+      { "name": "FZ275", "type": "Guided Rocket", "damage": 4600, "penetration": 290, "reload": 16 },
+      { "name": "FZ231", "type": "Guided Rocket", "damage": 4600, "penetration": 290, "reload": 26 },
+      { "name": "Mistral x2", "type": "Guided Rocket", "damage": 4800, "penetration": 38, "reload": 11 },
+      { "name": "V3E A-Darter", "type": "Guided Rocket", "damage": 6400, "penetration": 63, "reload": 14 },
+      { "name": "FASGW-ANL", "type": "Guided Rocket", "damage": 10300, "penetration": 350, "reload": 38 },
+      { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
+      { "name": "HOT-3", "type": "Guided Rocket", "damage": 9820, "penetration": 1300, "reload": 23 },
+      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9900, "penetration": 1200, "reload": 30 },
+      { "name": "ZT-6 Mokopa", "type": "Guided Rocket", "damage": 10010, "penetration": 1350, "reload": 22 },
+     
     ],
     "guns": []
   },
@@ -8372,7 +8383,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "Merkava Mk.3",
       "Su-47 Berkut",
       "ZLT-11",
-      "Rooivalk",
+     
       
       
       
