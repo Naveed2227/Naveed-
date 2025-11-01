@@ -21,14 +21,25 @@ interface Event {
 // All events in chronological order
 const events: Event[] = [
 {
+    id: 24,
+    name: "MWT Turns One (Stage 1)",
+    image: "/Events/MWT-Turns-One.jpg",
+    startDate: "2025-11-3",
+    endDate: "2025-11-12",
+    vehicles: [
+      { id: 1, name: "Merkava Mk.3", type: "free" },
+      { id: 2, name: "M1 Abrams Block 3", type: "free" },
+    ],
+  },
+{
     id: 23,
     name: "Light and Shadow",
     image: "/Events/Light-and-Shadow.jpg",
     startDate: "2025-11-1",
     endDate: "2025-11-9",
     vehicles: [
-      { id: 1, name: "ERC-90 F4 Sagaie", type: "free" },
-      { id: 2, name: "F-5E Tiger II", type: "main" },
+      { id: 1, name: "ERC-90 F4 Sagaie", type: "bundle" },
+      { id: 2, name: "F-5E Tiger II", type: "bundle" },
     ],
   },
 {

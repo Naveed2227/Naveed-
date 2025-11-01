@@ -7594,7 +7594,9 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "HSTV-L",
       "XM8 AGS",
       "VBCI-2",
-      "Centauro I 120"
+      "Centauro I 120",
+      "F-5E Tiger II",
+  "ERC-90 F4 Sagaie",
     ];
     
     const marketVehicles = [
