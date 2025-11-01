@@ -276,7 +276,10 @@ const upcomingVehicles = [
 ];
 
 const isNewVehicle = (vehicleName: string): boolean => {
-  return newVehicles.includes(vehicleName);
+  // Perform case-insensitive comparison for exact match
+  return newVehicles.some(vehicle => 
+    vehicle.toLowerCase() === vehicleName.toLowerCase()
+  );
 };
 
 const isUpcomingVehicle = (vehicleName: string): boolean => {
@@ -8672,16 +8675,31 @@ ${modulesList}
 ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : isConstructionVehicle(vehicle.name) ? "🚧 CONSTRUCTION VEHICLE - Under Development" : isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : "🆓 Standard Vehicle"}`
   }
 
-  const filteredVehicles = VEHICLES.filter((vehicle) => {
-    const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase())
-    const matchesType = typeFilter.length === 0 || typeFilter.includes(vehicle.type)
-    const matchesTier = tierFilter.length === 0 || tierFilter.includes(formatTier(vehicle.tier))
-    const matchesCountry = countryFilter.length === 0 || countryFilter.includes(vehicle.faction)
-    const matchesRarity = rarityFilter.length === 0 || rarityFilter.includes(getVehicleRarity(vehicle.name))
-    const matchesObtainMethod = obtainMethodFilter.length === 0 || obtainMethodFilter.includes(getVehicleObtainMethod(vehicle.name))
-    const matchesFavorites = !showFavoritesOnly || favorites.has(vehicle.id)
-    return matchesSearch && matchesType && matchesTier && matchesCountry && matchesRarity && matchesObtainMethod && matchesFavorites
-  })
+  // First, separate new vehicles from others
+  const [newVehiclesList, otherVehiclesList] = [...VEHICLES].reduce(
+    (acc, vehicle) => {
+      const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase())
+      const matchesType = typeFilter.length === 0 || typeFilter.includes(vehicle.type)
+      const matchesTier = tierFilter.length === 0 || tierFilter.includes(formatTier(vehicle.tier))
+      const matchesCountry = countryFilter.length === 0 || countryFilter.includes(vehicle.faction)
+      const matchesRarity = rarityFilter.length === 0 || rarityFilter.includes(getVehicleRarity(vehicle.name))
+      const matchesObtainMethod = obtainMethodFilter.length === 0 || obtainMethodFilter.includes(getVehicleObtainMethod(vehicle.name))
+      const matchesFavorites = !showFavoritesOnly || favorites.has(vehicle.id)
+      
+      if (matchesSearch && matchesType && matchesTier && matchesCountry && matchesRarity && matchesObtainMethod && matchesFavorites) {
+        if (isNewVehicle(vehicle.name)) {
+          acc[0].push(vehicle)
+        } else {
+          acc[1].push(vehicle)
+        }
+      }
+      return acc
+    },
+    [[], []] as [Vehicle[], Vehicle[]]
+  )
+
+  // Combine new vehicles first, then all other vehicles in their original order
+  const filteredVehicles = [...newVehiclesList, ...otherVehiclesList]
 
   const indexOfLastVehicle = currentPage * vehiclesPerPage
   const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage
