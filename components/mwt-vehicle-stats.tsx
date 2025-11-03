@@ -264,12 +264,12 @@ const newVehicles = [
   "F-5E Tiger II",
   "ERC-90 F4 Sagaie",
   "CSH-2 Rooivalk",
-  
+  "Merkava Mk.3",
 ];
 
 // Upcoming Vehicles System
 const upcomingVehicles = [
-  "Merkava Mk.3",
+  
   "Su-47 Berkut",
   "ZLT-11",
   
@@ -1555,7 +1555,8 @@ const VEHICLES_DATA = [
       turretRotationSpeed: 0,
       hullRotationSpeed: 45,
       armor: 900,
-      agility: 0
+      agility: 40
+
     },
     weapons: [
       { name: "3BM46 APFSDS", type: "Main Gun", damage: 11640, penetration: 690 },
@@ -2549,13 +2550,13 @@ const VEHICLES_DATA = [
     "tier": "III",
     "description": "An Israeli MBT featuring modular armor, advanced fire control, 120mm gun, and rear troop compartment.",
     "image": "Merkava-Mk.3.jpg",
-    "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
+    "stats": { "health": 48500, "speed": 60, "armor": "420", "agility": 34 },
     "weapons": [
-      { "name": "3BM22", "type": "Main Gun", "damage": 11100, "penetration": 425 },
-      { "name": "30F26", "type": "Main Gun", "damage": 5000, "penetration": 92 },
-      { "name": "9M119", "type": "Main Gun", "damage": 10160, "penetration": 750 },
-      { "name": "3BM42", "type": "Main Gun", "damage": 11700, "penetration": 720 },
-      { "name": "3BK12M", "type": "Main Gun", "damage": 12140, "penetration": 440 }
+      { "name": "M325 HEAT", "type": "Main Gun", "damage": 12100, "penetration": 480 },
+      { "name": "M339 HEI", "type": "Main Gun", "damage": 4900, "penetration": 85 },
+      { "name": "M322 APFSDS", "type": "Main Gun", "damage": 11310, "penetration": 589 },
+      { "name": "Soltam", "type": "Morter", "damage": 2970, "penetration": 125, "reload": 4 }
+      
     ]
   },
   {
@@ -7373,6 +7374,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [chatInput, setChatInput] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const [vehicleInfoOpen, setVehicleInfoOpen] = useState<string | null>(null)
+  const [activeCategory, setActiveCategory] = useState<'all' | 'market' | 'event' | 'upcoming'>('all')
   const vehiclesPerPage = 15
 
   const [showAbout, setShowAbout] = useState(false)
@@ -7611,70 +7613,40 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     ];
     
     const marketVehicles = [
-      "Type 10",
-      "Challenger 3",
-      "Leopard 2A7+",
-      "T-14 Armata (152)",
-      "KF31 Lynx",
-      "M10 Booker",
-      "M-SHORAD",
-      "M109A6 Paladin",
-      "Otomatic 76",
-      "F-16C Night Falcon",
-      "Mitsubishi F2B",
-      "KA-50",
-      "T54E1",
-      "CM25",
-      "T-55AMD",
-      "SU-152 Taran",
-      "Leopard 2A4",
-      "PT-91 Twardy",
-      "ZTZ-96A (P)",
-      "2S31 Vena",
-      "K-31 Cheonma",
-      "Type 625E SHORAD",
-      "Type 89 MLRS",
-      "AFT-09",
-      "WMA301",
-      "AFT-10",
-      "Type 16 MCV",
-      "VT-4A1",
-      "Leopard 2A7 Plus",
-      "Su-39",
-      "Su-35S",
-      "Alpha Jet",
-      "Mitsubishi F-2B",
-      "Su-24M",
-      "Ka-50 Black Shark",
-      "OH-1 Ninja",
-      "T-95M",
-      "M1 Abrams CATTB",
-      "Leclerc S2 AZUR",
-      "T-64BV",
-      "M60A3 (MZK)",
-      "Rookiat MTTD",
-      "BMD3",
-      "K21 KNIFV",
-      "Stridsvagn 105",
-      "Strf 9040 BILL",
+      "SB-1",
+      "Ka-58 Black Ghost",
+      "Tu-222",
+      "YF-23",
+      "X-2 Shinshin",
       "B-Type",
+      "Su-57M",
       "T-90M",
+      "KF-51 Panther",
+      "Object 640",
+      "Merkava Mk.4",
+      "M1 Abrams CATTB",
+      "Leopard 2A8",
+      "EMBT 120",
+      "Abrams X",
+      "VT-4A1",
+      "Type 16 MCV",
+      "Type 10",
+      "T-14 (152)",
+      "M-SHORAD SPAA",
+      "Leopard 2A7 Plus",
+      "KF31 Lynx",
+      "Gepard 1A2",
+      "XM8 AGS",
+      "Type 625E SHORAD",
+      "HSTV-L",
+      "Type 74E",
     ];
     
     const eventGachaVehicles = [
       "Su-57 Felon",
-      "Su-57M",
-      "YF-23",
-      "Su-75 Checkmate",
-      "KF-51 Panther",
-      "EMBT 120",
       "Type 90",
       "XM2001 Crusader",
       "Gepard 1A2",
-      "Abrams X",
-      "Merkava Mk.4",
-      "Object 640",
-      "Ka-58 Black Ghost",
       "J-50",
       "MiG-41M",
       "T-20 Monolit",
@@ -8355,12 +8327,12 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "HSTV-L",
       "Ka-58 Black Ghost",
       "T-14 (152)",
-      "Leopard 2A7V",
       "Type 16 MCV",
       "M-SHORAD",
       "EMBT 120",
       "KF31 Lynx",
       "VT-4A1",
+      "Type 74E",
       "YF-23",
       "Gepard 1A2",
       "Type 625E SHORAD",
@@ -8371,7 +8343,10 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "XM8 AGS",
       "Object 640",
       "Leopard 2A8",
-      "X2 Shinshin"
+      "X2 Shinshin",
+      "B-Type",
+      "T-90M",
+    
 
     ]
     return marketVehicles.includes(vehicleName)
@@ -8380,7 +8355,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
    
-      "Merkava Mk.3",
+      
       "Su-47 Berkut",
       "ZLT-11",
      
@@ -8585,7 +8560,6 @@ const missileHasTags = (missileName: string) => {
 "M270 MLRS",
 "Otomatic 76",
 "F-16C Night Falcon",
-"MiG-41M",
 "IT-1 Dragon",
 "SR-5 GMLRS",
 "T-25 Pamir",
@@ -8646,7 +8620,10 @@ const missileHasTags = (missileName: string) => {
 "K2 Black Panther",
 "Strf 9040 BILL",
 "Merkava Mk.3",
-        
+"F-5E Tiger II",
+"ERC-90 F4 Sagaie",
+"Su-47 Berkut",
+"ZLT-11",
 
 ]
    return exclusiveVehicles.includes(vehicleName)
@@ -8698,10 +8675,20 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       const matchesTier = tierFilter.length === 0 || tierFilter.includes(formatTier(vehicle.tier))
       const matchesCountry = countryFilter.length === 0 || countryFilter.includes(vehicle.faction)
       const matchesRarity = rarityFilter.length === 0 || rarityFilter.includes(getVehicleRarity(vehicle.name))
-      const matchesObtainMethod = obtainMethodFilter.length === 0 || obtainMethodFilter.includes(getVehicleObtainMethod(vehicle.name))
-      const matchesFavorites = !showFavoritesOnly || favorites.has(vehicle.id)
+      const matchesObtainMethod = obtainMethodFilter.length === 0 || obtainMethodFilter.some(method => getVehicleObtainMethod(vehicle.name).includes(method))
+      const matchesFavorites = !showFavoritesOnly || favorites.has(vehicle.id.toString())
       
-      if (matchesSearch && matchesType && matchesTier && matchesCountry && matchesRarity && matchesObtainMethod && matchesFavorites) {
+      // Apply category filter
+      let matchesCategory = true
+      if (activeCategory === 'market') {
+        matchesCategory = isMarketVehicle(vehicle.name)
+      } else if (activeCategory === 'event') {
+        matchesCategory = isExclusiveVehicle(vehicle.name)
+      } else if (activeCategory === 'upcoming') {
+        matchesCategory = isUpcomingVehicle(vehicle.name)
+      }
+      
+      if (matchesSearch && matchesType && matchesTier && matchesCountry && matchesRarity && matchesObtainMethod && matchesFavorites && matchesCategory) {
         if (isNewVehicle(vehicle.name)) {
           acc[0].push(vehicle)
         } else {
@@ -9826,6 +9813,46 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 )}
                 
                 <div className="space-y-6 relative">
+                  {/* Category Toggle Buttons */}
+                  <div className="mb-4 space-y-2">
+                    {[
+                      { id: 'market', label: 'Market', color: 'orange' },
+                      { id: 'event', label: 'Event/Gacha', color: 'purple' },
+                      { id: 'upcoming', label: 'Upcoming', color: 'red' },
+                      { id: 'all', label: 'Show All Vehicles', color: 'cyan' }
+                    ].map(({ id, label, color }) => (
+                      <motion.div 
+                        key={id}
+                        className="relative overflow-hidden rounded-lg"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <button
+                          onClick={() => setActiveCategory(id as any)}
+                          className={`relative w-full text-left p-3 rounded-lg border transition-all duration-200 ${
+                            activeCategory === id 
+                              ? `bg-${color}-600/30 border-${color}-500/50 text-${color}-300` 
+                              : 'bg-slate-700/50 border-slate-600/50 text-slate-300 hover:bg-slate-700/80'
+                          }`}
+                        >
+                          <AnimatePresence>
+                            {activeCategory === id && (
+                              <motion.span
+                                layoutId="activeIndicator"
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                              />
+                            )}
+                          </AnimatePresence>
+                          <span className="relative z-10">{label}</span>
+                        </button>
+                      </motion.div>
+                    ))}
+                  </div>
+                  
                   {/* Favorites Toggle */}
                   <div className="mb-4">
                     <motion.label
