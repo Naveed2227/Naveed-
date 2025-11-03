@@ -9814,7 +9814,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                 
                 <div className="space-y-6 relative">
                   {/* Category Toggle Buttons */}
-                  <div className="mb-4 space-y-2">
+                  <div className="mb-4 space-y-2 flex flex-col items-center">
                     {[
                       { id: 'market', label: 'Market', color: 'orange' },
                       { id: 'event', label: 'Event/Gacha', color: 'purple' },
@@ -9829,7 +9829,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       >
                         <button
                           onClick={() => setActiveCategory(id as any)}
-                          className={`relative w-full text-left p-3 rounded-lg border transition-all duration-200 ${
+                          className={`relative w-48 text-center p-2 text-sm rounded-lg border transition-all duration-200 ${
                             activeCategory === id 
                               ? `bg-${color}-600/30 border-${color}-500/50 text-${color}-300` 
                               : 'bg-slate-700/50 border-slate-600/50 text-slate-300 hover:bg-slate-700/80'
@@ -10149,6 +10149,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                                 </motion.label>
                               ))}
                             </div>
+                          
                           </div>
                         </motion.div>
                       )}
