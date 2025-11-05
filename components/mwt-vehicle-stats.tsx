@@ -266,6 +266,7 @@ const newVehicles = [
   "CSH-2 Rooivalk",
   "Merkava Mk.3",
   "Su-47 Berkut",
+  "ZLT-11",
 ];
 
 // Upcoming Vehicles System
@@ -1710,16 +1711,19 @@ const VEHICLES_DATA = [
     image: "ZLT-11.jpg",
     description: "A Chinese wheeled infantry fighting vehicle, armed with a 105 mm cannon, machine guns, anti-tank missiles, and designed for rapid deployment and high battlefield mobility.",
     stats: {
-      health: 0,
-      speed: 0,
-      reverseSpeed: 0,
-      turretRotationSpeed: 0,
-      hullRotationSpeed: 0,
-      armor: 0,
-      agility: 0
+      health: 33900,
+      speed: 100,
+      reverseSpeed: 40,
+      turretRotationSpeed: 45.3,
+      hullRotationSpeed: 45.3,
+      armor: 30,
+      agility: 45.30
     },
     weapons: [
-      
+      { name: "Type 83 HEAT", type: "Main Gun", damage: 10890, penetration: 425 },
+      { name: "DTB-1 HESH", type: "Main Gun", damage: 4500, penetration: 55 },
+      { name: "DTW-2 APFSDS", type: "Main Gun", damage: 10310, penetration: 580 },
+      { name: "GP 105 HEAT", type: "Main Gun", damage: 9180, penetration: 750 },
     ]
   },
   {
@@ -8374,8 +8378,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
    
       
       
-      "ZLT-11",
-     
+      
       
       
       
