@@ -265,12 +265,13 @@ const newVehicles = [
   "ERC-90 F4 Sagaie",
   "CSH-2 Rooivalk",
   "Merkava Mk.3",
+  "Su-47 Berkut",
 ];
 
 // Upcoming Vehicles System
 const upcomingVehicles = [
   
-  "Su-47 Berkut",
+  
   "ZLT-11",
   
   // Add upcoming vehicle names here
@@ -875,8 +876,19 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Su-47-Berkut.jpg",
     description: "Experimental Russian fighter with forward-swept wings, advanced agility, composite materials, and testbed for next-generation aerodynamics and avionics.",
-    stats: { health: 0, speed: 0, afterburnerSpeed: 0, agility: 0 },
+    stats: { health: 34600, speed: 880, afterburnerSpeed: 2250, agility: 60 },
     weapons: [
+    
+      { "name": "R-37", "type": "Medium-Range Air-to-Air Missile", "damage": 8400, "penetration": 80, "reload": 30 },
+      { "name": "R-73", "type": "Short-Range Air-to-Air Missile", "damage": 4800, "penetration": 56, "reload": 15 },
+      { "name": "R-77", "type": "Short-Range Air-to-Air Missile", "damage": 8100, "penetration": 55, "reload": 20 },
+      { "name": "FAB-250-M62", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
+      { "name": "KAB-250", "type": "Air-to-Ground Missile", "damage": 14900, "penetration": 130, "reload": 25 },
+      { "name": "KAB500KR", "type": "Air-to-Ground Missile", "damage": 17800, "penetration": 320, "reload": 40 },
+      { "name": "KAB-500L", "type": "Air-to-Ground Missile", "damage": 17300, "penetration": 310, "reload": 40 },
+      { "name": "Kh-25MD-E", "type": "Air-to-Ground Missile", "damage": 16000, "penetration": 160, "reload": 35 },
+      { "name": "Kh-69", "type": "Air-to-Ground Missile", "damage": 18400, "penetration": 230, "reload": 40 },
+      { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
       
       
     ]
@@ -7375,6 +7387,11 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [currentPage, setCurrentPage] = useState(1)
   const [vehicleInfoOpen, setVehicleInfoOpen] = useState<string | null>(null)
   const [activeCategory, setActiveCategory] = useState<'all' | 'market' | 'event' | 'upcoming'>('all')
+  const handleCategoryChange = (category: 'all' | 'market' | 'event' | 'upcoming') => {
+    setActiveCategory(category)
+    setShowUpcomingAlert(category === 'upcoming')
+  }
+  const [showUpcomingAlert, setShowUpcomingAlert] = useState(false)
   const vehiclesPerPage = 15
 
   const [showAbout, setShowAbout] = useState(false)
@@ -8356,7 +8373,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     const constructionVehicles = [
    
       
-      "Su-47 Berkut",
+      
       "ZLT-11",
      
       
@@ -11029,7 +11046,22 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           </p>
         </div>
 
-        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Upcoming Vehicles Alert */}
+       {activeCategory === 'upcoming' && (
+         <div className="col-span-full mb-4 bg-red-600/20 border-l-4 border-red-500 p-4 rounded-r">
+           <div className="flex items-start">
+             <svg className="h-5 w-5 text-red-200 mt-0.5 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+               <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+             </svg>
+             <div>
+               <h3 className="text-sm font-medium text-red-100">Upcoming Vehicles Notice</h3>
+               <p className="text-sm text-red-200">These vehicles are upcoming and might not have complete or accurate data yet.</p>
+             </div>
+           </div>
+         </div>
+       )}
+       
+       <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {paginatedVehicles.map((vehicle) => (
             <motion.div
               key={vehicle.id}
