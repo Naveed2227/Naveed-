@@ -273,7 +273,7 @@ const newVehicles = [
 const upcomingVehicles = [
   
   
-  "ZLT-11",
+  
   
   // Add upcoming vehicle names here
 ];
