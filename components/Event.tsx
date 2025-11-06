@@ -28,7 +28,7 @@ const events: Event[] = [
     endDate: "2025-11-25",
     vehicles: [
       { id: 1, name: "Leclerc S2 AZUR", type: "free" },
-      { id: 2, name: "BM-57-2 Kochevnik", type: "" },
+      { id: 2, name: "BM-57-2 Kochevnik", type: "gacha" },
     ],
   },
 {
