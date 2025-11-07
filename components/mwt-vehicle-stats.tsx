@@ -2566,7 +2566,7 @@ const VEHICLES_DATA = [
     "tier": "III",
     "description": "An Israeli MBT featuring modular armor, advanced fire control, 120mm gun, and rear troop compartment.",
     "image": "Merkava-Mk.3.jpg",
-    "stats": { "health": 48500, "speed": 60, "armor": "420", "agility": 34 },
+    "stats": { "health": 42100, "speed": 60, "armor": "420", "agility": 34 },
     "weapons": [
       { "name": "M325 HEAT", "type": "Main Gun", "damage": 12100, "penetration": 480 },
       { "name": "M339 HEI", "type": "Main Gun", "damage": 4900, "penetration": 85 },
