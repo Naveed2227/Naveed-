@@ -1056,7 +1056,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Altay.jpg",
     description: "Turkey's modern main battle tank, emphasizing firepower, protection, mobility, and advanced technology.",
-    stats: { health: 45700, speed: 68, armor: "1200mm", agility: 36, turnRate: 46 },
+    stats: { health: 42600, speed: 68, armor: "1000mm", agility: 35, turnRate: 46 },
     weapons: [
       { name: "DM63A1 APFSDS", type: "Main Gun", damage: 18500, penetration: 950, reload: 5.2 },
       { name: "DM11", type: "Main Gun", damage: 5000, penetration: 87 },
@@ -1106,7 +1106,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "M1-Abrams-Block-3.jpg",
     description: "An Experimental prototype tank intended as a successor to the Abrams MBT family",
-    stats: { health: 39600, speed: 80, reverseSpeed: 50, maneuverability: 40, armor: "1150mm", agility: 40 },
+    stats: { health: 41000, speed: 80, reverseSpeed: 50, maneuverability: 40, armor: "900mm", agility: 40 },
     weapons: [
       { name: "M830A1", type: "Main Gun", damage: 12100, penetration: 850 },
       { name: "M829A3", type: "Main Gun", damage: 10450, penetration: 670 },
@@ -1220,7 +1220,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Merkava-Mk.4.jpg",
     description: "Heavily armored main battle tank with unique rear-engine design and crew survivability focus.",
-    stats: { health: 45600, speed: 64, armor: "1050mm", agility: 38 },
+    stats: { health: 46900, speed: 64, armor: "950mm", agility: 38 },
     weapons: [
       { name: "M322", type: "Main Gun", damage: 9900, penetration: 589 },
       { name: "M338", type: "Main Gun", damage: 10000, penetration: 620 },
@@ -1284,7 +1284,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Pantsir-S-1.jpg",
     description: "Combined gun-missile air defense system with advanced radar capabilities.",
-    stats: { health: 32500, speed: 70, armor: "420mm", agility: 35 },
+    stats: { health: 32700, speed: 70, armor: "420mm", agility: 35 },
     weapons: [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
@@ -1427,7 +1427,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Karrar.jpg",
     description: "An Iranian main battle tank, featuring upgraded armor, firepower, and technology from T-72 design.",
-    stats: { health: 39800, speed: 70, armor: "980mm", agility: 35 },
+    stats: { health: 39800, speed: 70, armor: "850mm", agility: 35 },
     weapons: [
       { name: "3OF19", type: "Main Gun", damage: 5000, penetration: 82 },
       { name: "3BK29", type: "Main Gun", damage: 12630, penetration: 660 },
@@ -1444,7 +1444,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Leclerc-S2-AZUR.jpg",
     description: "Upgraded French main battle tank with urban warfare package and improved armor.",
-    stats: { health: 42400, speed: 72, armor: "1080mm", agility: 41 },
+    stats: { health: 44700, speed: 72, armor: "900mm", agility: 41 },
     weapons: [
       { name: "OFL 120 G1 APFSDS", type: "Main Gun", damage: 11240, penetration: 495 },
       { name: "OE 120 F1 HEI", type: "Main Gun", damage: 5000, penetration: 85 },
