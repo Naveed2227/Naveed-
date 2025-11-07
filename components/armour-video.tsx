@@ -56,11 +56,13 @@ const vehicleVideos: VehicleVideo[] = [
   { name: "ADATS", url: "https://youtu.be/39WF8j01eNc?si=GZqvbdLLZSvJbljj", start: "3:27", end: "3:43" },
   { name: "MGM-166 LOSAT", url: "https://youtu.be/WyxgmKTIplg?si=jiYWpAGGV-GQ0ikg", start: "1:12", end: "2:03" },
   { name: "T-90M", url: "https://youtu.be/79tBU-YziHU?si=aekLLVGrAdmElNGz", start: "1:27", end: "2:15" },
+  { name: "ZLT-11", url: "https://youtu.be/pa3FohCQVAc", start: "", end: "" },
+
 
 
 { name: "Leopard 2A4", url: "https://youtu.be/ADYn5h6REy8?si=ko7f1KNBdyzFUh9l", start: "1:13", end: "1:44" },
 { name: "T-72A", url: "https://youtu.be/F5IDobI4sa0?si=PQ-ESOgZkfhUno7L", start: "1:16", end: "1:36" },
-{ name: "M1 Abrams", url: "https://youtu.be/QcSBtdRkIoE?si=5u8EAljAcrmlFgWa", start: "0:07", end: "0:40" },
+{ name: "M1A1 Abrams", url: "https://youtu.be/QcSBtdRkIoE?si=5u8EAljAcrmlFgWa", start: "0:07", end: "0:40" },
 { name: "MBT-70", url: "https://youtu.be/M6gZPpIVlls?si=B86cpgUDgUC8L069", start: "0:24", end: "1:01" },
 { name: "PT-91 Twardy", url: "https://youtu.be/wKR__cc3Pdo?si=GFiW4gWuvaByeYsN", start: "1:27", end: "2:06" },
 { name: "T-64BV", url: "https://youtu.be/hNwWFWSTBPw?si=mRiRGQLq5rK0H7SD", start: "1:18", end: "2:16" },
@@ -98,6 +100,7 @@ const vehicleVideos: VehicleVideo[] = [
 { name: "BMD3", url: "https://youtu.be/lsfaocg-oWY?si=LnVz-K6h4E9SOqn3", start: "2:15", end: "2:40" },
 { name: "Strf 9040 BILL", url: "https://youtu.be/ybzazLIpflE?si=H685YxMswhm4sMjH", start: "1:10", end: "1:34" },
 { name: "M3A3 Bradley", url: "https://youtu.be/9nrSQ6TOv2s?si=OQUMRfbtgnEeubK3", start: "0:23", end: "0:44" },
+{ name: "Merkava Mk.3", url: "https://youtu.be/9e0u3YtWzdo?si=mnRJDYEiLefRdiUB", start: "1:26", end: "2:18" },
 
 
 { name: "M60 Patton", url: "", start: "", end: "" },  

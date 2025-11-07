@@ -362,7 +362,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "MH-60L DAP",
 "Z-9G Harbin",
 "MH-6 Little Bird",
-"M1 Abrams",
+"M1A1 Abrams",
 "M3A3 Bradley",
 "ZBL-08",
 "M110A2",
@@ -2400,12 +2400,12 @@ const VEHICLES_DATA = [
   },
   {
     "id": 402,
-    "name": "M1 Abrams",
+    "name": "M1A1 Abrams",
     "type": "Main Battle Tank",
     "faction": "American",
     "tier": "III",
     "image": "M1-Abrams.jpg",
-    "description": "M1A1 with M256 120mm smoothbore.",
+    "description": "An American main battle tank with a 120mm gun, composite armor, gas turbine engine, four crew, combat-proven.",
     "stats": { "health": 38400, "speed": 69, "armor": "900mm", "agility": 36 },
     "weapons": [
       { "name": "M829", "type": "Main Gun", "damage": 9020, "penetration": 490 },
