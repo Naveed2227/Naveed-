@@ -76,7 +76,6 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="lazyOnload"
         />
-      <head>
         {/* Basic Meta */}
         <meta
           name="viewport"
@@ -135,12 +134,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* Google AdSense */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          crossOrigin="anonymous"
-        />
+        {/* Google AdSense - Script is already included above */}
       </head>
       <body className={inter.className}>
         {children}
