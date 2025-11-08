@@ -1,11 +1,7 @@
 import type React from "react";
 import type { Metadata } from "next";
-import {
-  Inter,
-  Geist as V0_Font_Geist,
-  Geist_Mono as V0_Font_Geist_Mono,
-  Source_Serif_4 as V0_Font_Source_Serif_4,
-} from "next/font/google";
+import { Inter, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4,} from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -74,6 +70,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
+          crossOrigin="anonymous"
+          strategy="lazyOnload"
+        />
+      <head>
         {/* Basic Meta */}
         <meta
           name="viewport"
@@ -139,7 +142,9 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+      </body>
     </html>
   );
 }
