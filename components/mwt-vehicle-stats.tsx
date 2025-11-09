@@ -3450,9 +3450,11 @@ const VEHICLES_DATA = [
     "description": "Cold War era main battle tank with proven reliability and combat effectiveness.",
     "stats": { "health": 36300, "speed": 50, "armor": "93mm", "agility": 36 },
     "weapons": [
-      { "name": "M68 105mm L52", "type": "Main Gun", "damage": 11800, "penetration": 620 },
-      { "name": "M85 12.7mm", "type": "Machine Gun", "damage": 180, "penetration": 28, "rateOfFire": "450 rpm" },
-      { "name": "M240 7.62mm", "type": "Coaxial MG", "damage": 120, "penetration": 15, "rateOfFire": "750 rpm" }
+      { "name": "M392A2 APDS", "type": "Main Gun", "damage": 9860, "penetration": 372 },
+      { "name": "M393 HESH", "type": "Main Gun", "damage": 10340, "penetration": 127 },
+      { "name": "M456 HEAT", "type": "Main Gun", "damage": 10890, "penetration": 400 },
+      { "name": "M833 APFSDS", "type": "Main Gun", "damage": 9860, "penetration": 495 },
+     
     ]
   },
   {
