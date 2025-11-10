@@ -272,7 +272,9 @@ const newVehicles = [
 // Upcoming Vehicles System
 const upcomingVehicles = [
   
-  
+"HARP General Krueger",
+"M60A3 TTS",
+"AMX-10RC",
   
   
   // Add upcoming vehicle names here
@@ -698,23 +700,7 @@ const BATTLE_PASSES = [
 ];
 
 const VEHICLES_DATA = [
-  {
-    id: 0,  // Will be auto-incremented
-    name: "Pan Spatial",
-    type: "Fighter Jet",
-    faction: "European",
-    tier: "IV",
-    description: "Advanced multirole fighter with cutting-edge avionics and stealth capabilities.",
-    image: "PAN-SPATIAL.jpg",
-    stats: { health: 25500, speed: 800, afterburnerSpeed: 2450, agility: 50 },
-    weapons: [
-      { "name": "Meteor", "type": "BVR AAM", "damage": 12500, "penetration": 70, "reload": 18 },
-      { "name": "SCALP-EG", "type": "Cruise Missile", "damage": 25000, "penetration": 1000, "reload": 50 },
-      { "name": "Storm Shadow", "type": "Air-to-Ground Missile", "damage": 18500, "penetration": 380, "reload": 42 },
-      { "name": "ASRAAM", "type": "Short-Range AAM", "damage": 6000, "penetration": 70, "reload": 14 },
-      { "name": "Paveway IV", "type": "Guided Bomb", "damage": 16000, "penetration": 180, "reload": 30 }
-    ]
-  },
+  
   {
     id: 1,
     name: "Su-57M",
@@ -849,7 +835,7 @@ const VEHICLES_DATA = [
     faction: "Russian",
     tier: "IV",
     description: "Fifth-generation stealth fighter with advanced maneuverability and sensor fusion.",
-    image: "SU-57-Felon.jpg",
+    image: "Su-57-Felon.jpg",
     stats: { health: 21900, speed: 860, afterburnerSpeed: 2340, agility: 53 },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
@@ -904,7 +890,7 @@ const VEHICLES_DATA = [
       { "name": "KAB-250", "type": "Air-to-Ground Missile", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "KAB500KR", "type": "Air-to-Ground Missile", "damage": 17800, "penetration": 320, "reload": 40 },
       { "name": "KAB-500L", "type": "Air-to-Ground Missile", "damage": 17300, "penetration": 310, "reload": 40 },
-      { "name": "Kh-25MD-E", "type": "Air-to-Ground Missile", "damage": 16000, "penetration": 160, "reload": 35 },
+      { "name": "Kh-25MLE", "type": "Air-to-Ground Missile", "damage": 16000, "penetration": 160, "reload": 35 },
       { "name": "Kh-69", "type": "Air-to-Ground Missile", "damage": 18400, "penetration": 230, "reload": 40 },
       { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
       
@@ -6001,7 +5987,7 @@ const VEHICLES_DATA = [
     "id": 1000,
     "name": "HARP General Krueger",
     "type": "Main Battle Tank",
-    "faction": "Pan Spatial",
+    "faction": "Pan-Spatial",
     "tier": "",
     "description": "Armored vehicle mounting a high-velocity railgun, featuring advanced targeting, reinforced chassis, precision long-range fire, and rapid strike capability.",
     "image": "HARP-General-Krueger.jpg",
@@ -6175,8 +6161,10 @@ const getFlagImage = (faction: string): string => {
     Indian: "/India.png",
     Pakistani: "/Pakistan.png",
     Mexican: "/Mexico.png",
+     Mexican: "/Mexico.png",
+    Pan-Spatial: "/PAN-SPATIAL.jpg",
     "South-African": "/south-africa.png",
-  
+    "Pan Spatial": "/PAN-SPATIAL.jpg.png"
   }
   return flags[faction] || "/default-flag.png"
 }
@@ -8472,6 +8460,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   "R-93M",
   "KD-21",
   "Storm Shadow",
+  "HD-1A",
 ];
 
 const antiWarningMissiles = [
@@ -8522,7 +8511,8 @@ const antiWarningMissiles = [
   "9K38 IGLA-V",
   "9M120 Attack",
   "R-93M",
-  "KD-21"
+  "KD-21",
+  "HD-1A",
 ];
 
 const longRangeMissiles = [
@@ -8547,7 +8537,8 @@ const longRangeMissiles = [
   "Type 12 STS",
   "Storm Shadow",
   "KAB-250",
-  "KD-21"
+  "KD-21",
+  "HD-1A",
 
 ];
 
@@ -8580,6 +8571,11 @@ const laserGuidedMissiles = [
   "S-24",
   "KD-21",
   "KAB-500L",
+  "HD-1A",
+  "BEE17A/155", 
+  "GP155A", 
+  "GP155B",
+  "GP155E", 
 
 
 ];
@@ -13700,6 +13696,7 @@ const MainPage = () => {
   );
 };
 
+// This is the default export that Next.js will use
 export default function Page() {
   return <MainPage />;
 }
