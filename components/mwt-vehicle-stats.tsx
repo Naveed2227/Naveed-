@@ -699,6 +699,23 @@ const BATTLE_PASSES = [
 
 const VEHICLES_DATA = [
   {
+    id: 0,  // Will be auto-incremented
+    name: "Pan Spatial",
+    type: "Fighter Jet",
+    faction: "European",
+    tier: "IV",
+    description: "Advanced multirole fighter with cutting-edge avionics and stealth capabilities.",
+    image: "PAN-SPATIAL.jpg",
+    stats: { health: 25500, speed: 800, afterburnerSpeed: 2450, agility: 50 },
+    weapons: [
+      { "name": "Meteor", "type": "BVR AAM", "damage": 12500, "penetration": 70, "reload": 18 },
+      { "name": "SCALP-EG", "type": "Cruise Missile", "damage": 25000, "penetration": 1000, "reload": 50 },
+      { "name": "Storm Shadow", "type": "Air-to-Ground Missile", "damage": 18500, "penetration": 380, "reload": 42 },
+      { "name": "ASRAAM", "type": "Short-Range AAM", "damage": 6000, "penetration": 70, "reload": 14 },
+      { "name": "Paveway IV", "type": "Guided Bomb", "damage": 16000, "penetration": 180, "reload": 30 }
+    ]
+  },
+  {
     id: 1,
     name: "Su-57M",
     type: "Fighter Jet",
@@ -2560,6 +2577,32 @@ const VEHICLES_DATA = [
   },
   {
     "id": 412,
+    "name": "M60A3 TTS",
+    "type": "Main Battle Tank",
+    "faction": "American",
+    "tier": "III",
+    "image": "M60A3-TTS.jpg",
+    "description": "The M60A3 TTS is a Cold War–era U.S. MBT featuring advanced thermal imaging fire control system, laser rangefinder, ballistic computer, stabilized 105mm gun, and improved armor.",
+    "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
+    "weapons": [
+      
+    ]
+  },
+  {
+    "id": 413,
+    "name": "AMX-10RC",
+    "type": "Main Battle Tank",
+    "faction": "French",
+    "tier": "III",
+    "image": "AMX-10RC.jpg",
+    "description": "Wheeled French reconnaissance tank armed with 105mm gun, offering high mobility, amphibious capability, and effective long-range firepower.",
+    "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
+    "weapons": [
+      
+    ]
+  },
+  {
+    "id": 414,
     "name": "Merkava Mk.3",
     "type": "Main Battle Tank",
     "faction": "Israeli",
@@ -2572,11 +2615,10 @@ const VEHICLES_DATA = [
       { "name": "M339 HEI", "type": "Main Gun", "damage": 4900, "penetration": 85 },
       { "name": "M322 APFSDS", "type": "Main Gun", "damage": 11310, "penetration": 589 },
       { "name": "Soltam", "type": "Morter", "damage": 2970, "penetration": 125, "reload": 4 }
-      
     ]
   },
   {
-    "id": 412,
+    "id": 415,
     "name": "PLZ-07B",
     "type": "SPH",
     "faction": "Chinese",
@@ -2592,7 +2634,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 413,
+    "id": 416,
     "name": "M110A2",
     "type": "SPH",
     "faction": "Japanese",
@@ -2607,7 +2649,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 414,
+    "id": 417,
     "name": "2S31 Vena",
     "type": "SPH",
     "faction": "Russian",
@@ -2623,7 +2665,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 415,
+    "id": 418,
     "name": "XM2001 Crusader",
     "type": "SPH",
     "faction": "American",
@@ -2639,7 +2681,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 416,
+    "id": 419,
     "name": "Gepard 1A2",
     "type": "Anti-Air",
     "faction": "German",
@@ -2655,7 +2697,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 418,
+    "id": 420,
     "name": "K-31 Cheonma",
     "type": "Anti-Air",
     "faction": "SouthKorean",
@@ -2668,7 +2710,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 419,
+    "id": 421,
     "name": "PGZ-09",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -2684,7 +2726,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 420,
+    "id": 422,
     "name": "2S6M1 Tunguska-M1",
     "type": "Anti-Air",
     "faction": "Russian",
@@ -2700,7 +2742,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 421,
+    "id": 423,
     "name": "Type 625E SHORAD",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -2715,7 +2757,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 422,
+    "id": 424,
     "name": "XM975",
     "type": "Anti-Air",
     "faction": "American",
@@ -2728,7 +2770,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 423,
+    "id": 425,
     "name": "AFT-10",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -2741,7 +2783,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 424,
+    "id": 426,
     "name": "M113 Hellfire",
     "type": "Missile Carrier",
     "faction": "American",
@@ -2755,7 +2797,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 425,
+    "id": 427,
     "name": "9A52-2 Smerch",
     "type": "MLRS",
     "faction": "Russian",
@@ -2770,7 +2812,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 426,
+    "id": 428,
     "name": "Type 89 MLRS",
     "type": "MLRS",
     "faction": "Chinese",
@@ -2785,7 +2827,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 427,
+    "id": 429,
     "name": "Type 75 MLRS",
     "type": "MLRS",
     "faction": "Japanese",
@@ -2799,7 +2841,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 428,
+    "id": 430,
     "name": "AFT-09",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -2812,7 +2854,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 429,
+    "id": 431,
     "name": "LAV-600",
     "type": "Tank Destroyer",
     "faction": "American",
@@ -2828,7 +2870,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 430,
+    "id": 432,
     "name": "HSTV-L",
     "type": "Light Tank",
     "faction": "American",
@@ -2837,12 +2879,13 @@ const VEHICLES_DATA = [
     "description": "A lightweight prototype tank, emphasizing mobility, advanced optics, and rapid firepower.",
     "stats": { "health": 26000, "speed": 84, "armor": "47mm", "agility": 40 },
     "weapons": [
-      { "name": "XM855HE", "type": "Main Gun", "damage": 7560, "penetration": 68 },
-      { "name": "XM885AP", "type": "Main Gun", "damage": 6160, "penetration": 370 }
+      { "name": "M833", "type": "Main Gun", "damage": 9900, "penetration": 472 },
+      { "name": "M456 HEAT", "type": "Main Gun", "damage": 8900, "penetration": 400 },
+      { "name": "M496 APFSDS", "type": "Main Gun", "damage": 10000, "penetration": 480 }
     ]
   },
   {
-    "id": 431,
+    "id": 433,
     "name": "K21 KNIFV",
     "type": "Light Tank",
     "faction": "SouthKorean",
@@ -2859,7 +2902,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 432,
+    "id": 434,
     "name": "Rookiat MTTD",
     "type": "Light Tank",
     "faction": "British",
@@ -2875,7 +2918,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 433,
+    "id": 435,
     "name": "ZBL-08",
     "type": "Light Tank",
     "faction": "Chinese",
@@ -2892,7 +2935,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 434,
+    "id": 436,
     "name": "ХM8 AGS",
     "type": "Light Tank",
     "faction": "American",
@@ -2909,7 +2952,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 435,
+    "id": 437,
     "name": "VBCI-2",
     "type": "Light Tank",
     "faction": "French",
@@ -2925,7 +2968,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 436,
+    "id": 438,
     "name": "WMA301",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -2941,7 +2984,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 437,
+    "id": 439,
     "name": "Centauro I 120",
     "type": "Tank Destroyer",
     "faction": "Italian",
@@ -2956,7 +2999,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 438,
+    "id": 440,
     "name": "BMD3",
     "type": "Light Tank",
     "faction": "Russian",
@@ -2974,13 +3017,13 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 439,
+    "id": 441,
     "name": "Strf 9040 BILL",
     "type": "Light Tank",
     "faction": "Sweden",
     "tier": "III",
     "image": "Strf-9040-BILL.jpg",
-    "description": "Swedish light tank with 40 mm autocannon and ATGMs, versatile but lightly armored, fast, lethal.",
+    "description": "Swedish light tank with 40 mm autocannon and ATGMs, versatile but lightly armored, fast, lethal.",
     "stats": { "health": 26300, "speed": 80, "armor": "47mm", "agility": 36 },
     "weapons": [
       { "name": "Rbs 56", "type": "Missile", "damage": 7850, "penetration": 510, "reload": 10 },
@@ -2990,7 +3033,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 440,
+    "id": 442,
     "name": "M3A3 Bradley",
     "type": "Light Tank",
     "faction": "American",
@@ -5950,7 +5993,24 @@ const VEHICLES_DATA = [
       ]
 
     }
-  }
+  },
+
+
+
+  {
+    "id": 1000,
+    "name": "HARP General Krueger",
+    "type": "Main Battle Tank",
+    "faction": "Pan Spatial",
+    "tier": "",
+    "description": "Armored vehicle mounting a high-velocity railgun, featuring advanced targeting, reinforced chassis, precision long-range fire, and rapid strike capability.",
+    "image": "HARP-General-Krueger.jpg",
+    "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
+    "weapons": [
+      
+    ]
+  },
+
 ];
 
 const getAircraftRole = (vehicle: any) => {
