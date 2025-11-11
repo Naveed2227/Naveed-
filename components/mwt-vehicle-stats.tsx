@@ -6157,14 +6157,12 @@ const getFlagImage = (faction: string): string => {
     Sweden: "/Sweden.png",
     Iranian: "/Iranian-flag.png",
     Polish: "/Poland-flag.webp",
-    SouthKorean: "/SouthKorea-flag.jpg",
+     SouthKorean: "/SouthKorea-flag.jpg",
     Indian: "/India.png",
     Pakistani: "/Pakistan.png",
     Mexican: "/Mexico.png",
-     Mexican: "/Mexico.png",
-    Pan-Spatial: "/PAN-SPATIAL.jpg",
-    "South-African": "/south-africa.png",
-    "Pan Spatial": "/PAN-SPATIAL.jpg.png"
+    "Pan Spatial": "/pan-spatial-flag.png",
+    "South-African": "/south-africa.png"
   }
   return flags[faction] || "/default-flag.png"
 }
