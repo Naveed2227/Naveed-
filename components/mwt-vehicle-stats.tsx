@@ -1948,6 +1948,25 @@ const VEHICLES_DATA = [
       { name: "LOSAT MGM", type: "Missile", damage: 12740, penetration: 764, reload: 20 }
     ]
   },
+
+
+
+
+  {
+    "id": 1000,
+    "name": "HARP General Krueger",
+    "type": "Main Battle Tank",
+    "faction": "Pan-Spatial",
+    "tier": "IV",
+    "description": "Armored vehicle mounting a high-velocity railgun, featuring advanced targeting, reinforced chassis, precision long-range fire, and rapid strike capability.",
+    "image": "HARP-General-Krueger.jpg",
+    "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
+    "weapons": [
+      
+    ]
+  },
+
+
   {
     id: 200,
     name: "Mi-28NM",
@@ -5983,19 +6002,7 @@ const VEHICLES_DATA = [
 
 
 
-  {
-    "id": 1000,
-    "name": "HARP General Krueger",
-    "type": "Main Battle Tank",
-    "faction": "Pan-Spatial",
-    "tier": "",
-    "description": "Armored vehicle mounting a high-velocity railgun, featuring advanced targeting, reinforced chassis, precision long-range fire, and rapid strike capability.",
-    "image": "HARP-General-Krueger.jpg",
-    "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
-    "weapons": [
-      
-    ]
-  },
+  
 
 ];
 
@@ -6161,7 +6168,7 @@ const getFlagImage = (faction: string): string => {
     Indian: "/India.png",
     Pakistani: "/Pakistan.png",
     Mexican: "/Mexico.png",
-    "Pan Spatial": "/pan-spatial-flag.png",
+    "Pan-Spatial": "/PAN-SPATIAL.jpg",
     "South-African": "/south-africa.png"
   }
   return flags[faction] || "/default-flag.png"
