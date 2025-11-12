@@ -261,9 +261,6 @@ const formatTier = (tier: string | number): string => {
 const newVehicles = [
   "B-Type",
   "T-90M",
-  "F-5E Tiger II",
-  "ERC-90 F4 Sagaie",
-  "CSH-2 Rooivalk",
   "Merkava Mk.3",
   "Su-47 Berkut",
   "ZLT-11",
