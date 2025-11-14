@@ -7,8 +7,7 @@
  * Currently configured for Discord verification.
  */
 
-const dns = require('dns').promises;
-const { promisify } = require('util');
+const dns = require('dns');
 
 const DISCORD_RECORD_NAME = '_discord';
 const DISCORD_RECORD_VALUE = 'dh=fca3fe5679cc51e80bee9f3151b04bfa89acdf77';
@@ -18,8 +17,9 @@ async function checkTxtRecord(recordName, expectedValue) {
   try {
     console.log(`🔍 Checking TXT record: ${recordName}.${DOMAIN}`);
     
-    // Try to resolve the TXT record
-    const records = await dns.resolveTxt(`${recordName}.${DOMAIN}`);
+    // Try to resolve the TXT record using promisify
+    const resolveTxt = require('util').promisify(dns.resolveTxt);
+    const records = await resolveTxt(`${recordName}.${DOMAIN}`);
     
     // DNS returns arrays of strings (each record can be split into multiple parts)
     const flattenedRecords = records.map(record => 
