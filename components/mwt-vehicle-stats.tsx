@@ -12116,10 +12116,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <div className="mt-6 pt-4 border-t border-slate-600">
                     <h3 className="text-xl font-semibold text-cyan-400 mb-3">Updates</h3>
                     <div className="space-y-3">
-                     <div className="bg-slate-700/50 p-3 rounded-lg">
-  
 
-                        <div className="bg-slate-700/50 p-3 rounded-lg">
+
+
+                     <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-cyan-300">Version 1.1.01   (14/11/2025)</span>
                           <span className="text-sm text-slate-400">Update</span>
@@ -12185,6 +12185,9 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         </ul>
                       </div>
                     
+
+
+
                     </div>
                   </div>
                 </div>
