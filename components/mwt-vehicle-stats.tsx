@@ -9629,7 +9629,23 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
     }, 1000)
   }
 
-  // Main component return
+  const Page = () => {
+    const [activePage, setActivePage] = useState('home');
+
+    return (
+      <div className="min-h-screen bg-gray-900 text-white p-4">
+        <div className="max-w-7xl mx-auto">
+          <Pages activePage={activePage} onPageChange={setActivePage} />
+          
+          {activePage === 'home' && <MwtVehicleStats />}
+          {activePage === 'about' && <AboutPage />}
+          {activePage === 'contact' && <ContactPage />}
+          {activePage === 'privacy' && <PrivacyPolicyPage />}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
@@ -12100,17 +12116,82 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                   <div className="mt-6 pt-4 border-t border-slate-600">
                     <h3 className="text-xl font-semibold text-cyan-400 mb-3">Updates</h3>
                     <div className="space-y-3">
+
+
+
+
+
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.1.01   (14/11/2025)</span>
+                          <span className="text-sm text-slate-400">Update</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Updated vehicle stats</li>
+                          <li>• Minor bugs fixed</li>
+                          
+                        </ul>
+                    <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.1.00   (9/11/2025)</span>
+                          <span className="text-sm text-slate-400">Major Update</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Mwt Assistant is now available on Playstore!!!</li>
+                          
+                        </ul>
+                      </div>
+                   <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.0.04   (5/11/2025)</span>
+                          <span className="text-sm text-slate-400">Update</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Fixed the "Download stats" images</li>
+                          <li>• New filter buttons</li>
+                          <li>• Minor bugs fixed</li>
+                        </ul>
+                      </div>
+                    <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.0.03   (1/11/2025)</span>
+                          <span className="text-sm text-slate-400">Update</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Added new filtering options</li>
+                          <li>• Vehicle images bug fixed</li>
+                          <li>• Updated vehicle data with latest changes</li>
+                        </ul>
+                      </div>
+                     <div className="bg-slate-700/50 p-3 rounded-lg">
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.0.02   (28/10/2025)</span>
+                          <span className="text-sm text-slate-400">Update</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Fixed banner ad placeholder size</li>
+                          <li>• Added "New" and "Upcoming" tags</li>
+                          <li>• Updated vehicle data with latest changes</li>
+                        </ul>
+                      </div>
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.0.01   (18/10/2025)</span>
+                          <span className="text-sm text-slate-400">Update</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Added new filtering options</li>
+                          <li>• Fixed the Event tab bug</li>
+                          <li>• Updated vehicle data with latest changes</li>
+                        </ul>
+                      </div>
                      <div className="bg-slate-700/50 p-3 rounded-lg">
   
 
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version 1.0.00   (11/Oct/2025)</span>
+                          <span className="font-medium text-cyan-300">Version 1.0.00   (12/10/2025)</span>
                           <span className="text-sm text-slate-400">Initial</span>
-                           </div>
-                        <ul className="text-sm text-slate-300 space-y-1">
-                          <li>• Initial release of MWT Assistant Web version</li>
-                        </ul>
-                      </div>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
                           <li>• Initial release of MWT Assistant Web version</li>
