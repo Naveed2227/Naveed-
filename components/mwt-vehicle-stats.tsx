@@ -12122,6 +12122,11 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-cyan-300">Version 1.0.00   (11/Oct/2025)</span>
                           <span className="text-sm text-slate-400">Initial</span>
+                           </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Initial release of MWT Assistant Web version</li>
+                        </ul>
+                      </div>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
                           <li>• Initial release of MWT Assistant Web version</li>
