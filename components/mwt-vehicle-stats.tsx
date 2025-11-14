@@ -12165,12 +12165,12 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
             Discord: nesli27
             <CopyToClipboard text="nesli27" className="ml-1" />
           </p>
-          <p className="text-white text-xs">Server Moderator, Supporter</p>
+          <p className="text-white text-xs">Server Admin, Supporter</p>
         </div>
         <div className="p-2">
           <h4 className="text-cyan-300 font-semibold text-base">QWE</h4>
           <p className="text-white text-[10px] mb-0.5">Discord: qwe._.mwt</p>
-          <p className="text-white text-xs">Server Moderator, Supporter, Coordinator</p>
+          <p className="text-white text-xs">Server Admin, Supporter, Coordinator</p>
         </div>
         <div className="p-2">
           <h4 className="text-cyan-300 font-semibold text-base">Strider 1</h4>
