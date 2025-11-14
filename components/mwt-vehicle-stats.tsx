@@ -10969,65 +10969,145 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                       </div>
                     </div>
                     
-                    <div className="space-y-1">
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="bg-slate-800/70 p-2 rounded">
-                          <div className="text-xs text-slate-400">Health</div>
-                          <div className="text-lg font-bold text-cyan-300">
-                            {upgradedHealth.toLocaleString()}
-                          </div>
-                          {currentUpgradeLevel > 0 && (
-                            <div className="text-xs mt-0.5">
-                              <span className="text-green-400">
-                                +{Math.round((upgradedHealth / vehicle.stats.health - 1) * 100)}%
-                              </span>
-                            </div>
-                          )}
+                    <div className="space-y-3">
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.1.01 (14/11/2025)</span>
+                          <span className="text-sm text-slate-400">Update</span>
                         </div>
-                        
-                        <div className="bg-slate-800/70 p-2 rounded">
-                          <div className="text-xs text-slate-400">Speed</div>
-                          <div className="text-lg font-bold text-cyan-300">
-                            {upgradedSpeed} km/h
-                          </div>
-                          {currentUpgradeLevel > 0 && (
-                            <div className="text-xs mt-0.5">
-                              <span className="text-green-400">
-                                +{Math.round((upgradedSpeed / vehicle.stats.speed - 1) * 100)}%
-                              </span>
-                            </div>
-                          )}
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Updated vehicle stats</li>
+                          <li>• Minor bugs fixed</li>
+                        </ul>
+                      </div>
+
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.1.00 (9/11/2025)</span>
+                          <span className="text-sm text-slate-400">Major Update</span>
                         </div>
-                        
-                        {upgradedAfterburner > 0 && (
-                          <div className="bg-slate-800/70 p-2 rounded">
-                            <div className="text-xs text-slate-400">Afterburner</div>
-                            <div className="text-lg font-bold text-cyan-300">
-                              {upgradedAfterburner} km/h
-                            </div>
-                            {currentUpgradeLevel > 0 && (
-                              <div className="text-xs mt-0.5">
-                                <span className="text-green-400">
-                                  +{Math.round((upgradedAfterburner / (vehicle.stats.afterburnerSpeed || upgradedAfterburner) - 1) * 100)}%
-                                </span>
-                              </div>
-                            )}
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Mwt Assistant is now available on Playstore!!!</li>
+                        </ul>
+                      </div>
+
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.0.04 (5/11/2025)</span>
+                          <span className="text-sm text-slate-400">Update</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Fixed the "Download stats" images</li>
+                          <li>• New filter buttons</li>
+                          <li>• Minor bugs fixed</li>
+                        </ul>
+                      </div>
+
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.0.03 (1/11/2025)</span>
+                          <span className="text-sm text-slate-400">Update</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Added new filtering options</li>
+                          <li>• Vehicle images bug fixed</li>
+                          <li>• Updated vehicle data with latest changes</li>
+                        </ul>
+                      </div>
+
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.0.02 (28/10/2025)</span>
+                          <span className="text-sm text-slate-400">Update</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Fixed banner ad placeholder size</li>
+                          <li>• Added "New" and "Upcoming" tags</li>
+                          <li>• Updated vehicle data with latest changes</li>
+                        </ul>
+                      </div>
+
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.0.01 (18/10/2025)</span>
+                          <span className="text-sm text-slate-400">Update</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Added new filtering options</li>
+                          <li>• Fixed the Event tab bug</li>
+                          <li>• Updated vehicle data with latest changes</li>
+                        </ul>
+                      </div>
+
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.0.00 (12/10/2025)</span>
+                          <span className="text-sm text-slate-400">Initial</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Initial release of MWT Assistant Web version</li>
+                        </ul>
+                      </div>
+
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="bg-slate-800/70 p-2 rounded">
+                        <div className="text-xs text-slate-400">Health</div>
+                        <div className="text-lg font-bold text-cyan-300">
+                          {upgradedHealth.toLocaleString()}
+                        </div>
+                        {currentUpgradeLevel > 0 && (
+                          <div className="text-xs mt-0.5">
+                            <span className="text-green-400">
+                              +{Math.round((upgradedHealth / vehicle.stats.health - 1) * 100)}%
+                            </span>
                           </div>
                         )}
-                        
+                      </div>
+                      
+                      <div className="bg-slate-800/70 p-2 rounded">
+                        <div className="text-xs text-slate-400">Speed</div>
+                        <div className="text-lg font-bold text-cyan-300">
+                          {upgradedSpeed} km/h
+                        </div>
+                        {currentUpgradeLevel > 0 && (
+                          <div className="text-xs mt-0.5">
+                            <span className="text-green-400">
+                              +{Math.round((upgradedSpeed / vehicle.stats.speed - 1) * 100)}%
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {upgradedAfterburner > 0 && (
                         <div className="bg-slate-800/70 p-2 rounded">
-                          <div className="text-xs text-slate-400">Agility</div>
+                          <div className="text-xs text-slate-400">Afterburner</div>
                           <div className="text-lg font-bold text-cyan-300">
-                            {upgradedAgility}
+                            {upgradedAfterburner} km/h
                           </div>
                           {currentUpgradeLevel > 0 && (
                             <div className="text-xs mt-0.5">
                               <span className="text-green-400">
-                                +{Math.round((upgradedAgility / (vehicle.stats.agility || upgradedAgility) - 1) * 100)}%
+                                +{Math.round((upgradedAfterburner / (vehicle.stats.afterburnerSpeed || upgradedAfterburner) - 1) * 100)}%
                               </span>
                             </div>
                           )}
                         </div>
+                      )}
+                      
+                      <div className="bg-slate-800/70 p-2 rounded">
+                        <div className="text-xs text-slate-400">Agility</div>
+                        <div className="text-lg font-bold text-cyan-300">
+                          {upgradedAgility}
+                        </div>
+                        {currentUpgradeLevel > 0 && (
+                          <div className="text-xs mt-0.5">
+                            <span className="text-green-400">
+                              +{Math.round((upgradedAgility / (vehicle.stats.agility || upgradedAgility) - 1) * 100)}%
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -12117,31 +12197,30 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                     <h3 className="text-xl font-semibold text-cyan-400 mb-3">Updates</h3>
                     <div className="space-y-3">
 
-
-
-                     <div className="bg-slate-700/50 p-3 rounded-lg">
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version 1.1.01   (14/11/2025)</span>
+                          <span className="font-medium text-cyan-300">Version 1.1.01 (14/11/2025)</span>
                           <span className="text-sm text-slate-400">Update</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
                           <li>• Updated vehicle stats</li>
                           <li>• Minor bugs fixed</li>
-                          
                         </ul>
-                    <div className="bg-slate-700/50 p-3 rounded-lg">
+                      </div>
+
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version 1.1.00   (9/11/2025)</span>
+                          <span className="font-medium text-cyan-300">Version 1.1.00 (9/11/2025)</span>
                           <span className="text-sm text-slate-400">Major Update</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
                           <li>• Mwt Assistant is now available on Playstore!!!</li>
-                          
                         </ul>
                       </div>
-                   <div className="bg-slate-700/50 p-3 rounded-lg">
+
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version 1.0.04   (5/11/2025)</span>
+                          <span className="font-medium text-cyan-300">Version 1.0.04 (5/11/2025)</span>
                           <span className="text-sm text-slate-400">Update</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
@@ -12150,9 +12229,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <li>• Minor bugs fixed</li>
                         </ul>
                       </div>
-                    <div className="bg-slate-700/50 p-3 rounded-lg">
+
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version 1.0.03   (1/11/2025)</span>
+                          <span className="font-medium text-cyan-300">Version 1.0.03 (1/11/2025)</span>
                           <span className="text-sm text-slate-400">Update</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
@@ -12161,10 +12241,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <li>• Updated vehicle data with latest changes</li>
                         </ul>
                       </div>
-                     <div className="bg-slate-700/50 p-3 rounded-lg">
+
                       <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version 1.0.02   (28/10/2025)</span>
+                          <span className="font-medium text-cyan-300">Version 1.0.02 (28/10/2025)</span>
                           <span className="text-sm text-slate-400">Update</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
@@ -12173,9 +12253,10 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <li>• Updated vehicle data with latest changes</li>
                         </ul>
                       </div>
+
                       <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium text-cyan-300">Version 1.0.01   (18/10/2025)</span>
+                          <span className="font-medium text-cyan-300">Version 1.0.01 (18/10/2025)</span>
                           <span className="text-sm text-slate-400">Update</span>
                         </div>
                         <ul className="text-sm text-slate-300 space-y-1">
@@ -12184,9 +12265,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
                           <li>• Updated vehicle data with latest changes</li>
                         </ul>
                       </div>
-                    
 
-
+                      <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.0.00 (12/10/2025)</span>
+                          <span className="text-sm text-slate-400">Initial</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• Initial release of MWT Assistant Web version</li>
+                        </ul>
+                      </div>
 
                     </div>
                   </div>
