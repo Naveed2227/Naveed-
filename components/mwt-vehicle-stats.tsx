@@ -9619,6 +9619,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
              `• "Tier IV vehicles" - Category listings\n\n` +
              `What would you like to analyze?`
     }
+  }
 
     setTimeout(() => {
       const response = getVehicleInfo(chatInput)
@@ -9628,23 +9629,6 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
       setChatInput("")
     }, 1000)
   }
-
-  const Page = () => {
-    const [activePage, setActivePage] = useState('home');
-
-    return (
-      <div className="min-h-screen bg-gray-900 text-white p-4">
-        <div className="max-w-7xl mx-auto">
-          <Pages activePage={activePage} onPageChange={setActivePage} />
-          
-          {activePage === 'home' && <MwtVehicleStats />}
-          {activePage === 'about' && <AboutPage />}
-          {activePage === 'contact' && <ContactPage />}
-          {activePage === 'privacy' && <PrivacyPolicyPage />}
-        </div>
-      </div>
-    );
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
