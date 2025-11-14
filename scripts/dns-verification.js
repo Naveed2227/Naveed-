@@ -7,7 +7,7 @@
  * Currently configured for Discord verification.
  */
 
-const dns = require('dns');
+const { execSync } = require('child_process');
 
 const DISCORD_RECORD_NAME = '_discord';
 const DISCORD_RECORD_VALUE = 'dh=fca3fe5679cc51e80bee9f3151b04bfa89acdf77';
@@ -17,29 +17,38 @@ async function checkTxtRecord(recordName, expectedValue) {
   try {
     console.log(`🔍 Checking TXT record: ${recordName}.${DOMAIN}`);
     
-    // Try to resolve the TXT record using promisify
-    const resolveTxt = require('util').promisify(dns.resolveTxt);
-    const records = await resolveTxt(`${recordName}.${DOMAIN}`);
-    
-    // DNS returns arrays of strings (each record can be split into multiple parts)
-    const flattenedRecords = records.map(record => 
-      Array.isArray(record) ? record.join('') : record
-    );
-    
-    console.log(`📋 Found records:`, flattenedRecords);
-    
-    // Check if our expected value exists
-    const hasExpectedRecord = flattenedRecords.some(record => 
-      record === expectedValue
-    );
-    
-    if (hasExpectedRecord) {
-      console.log(`✅ SUCCESS: Found expected TXT record: ${expectedValue}`);
-      return true;
-    } else {
-      console.log(`❌ FAILED: Expected record not found`);
-      console.log(`   Expected: ${expectedValue}`);
-      console.log(`   Found: ${flattenedRecords.join(', ')}`);
+    // Use nslookup command to check TXT record
+    try {
+      const output = execSync(`nslookup -type=TXT ${recordName}.${DOMAIN}`, { encoding: 'utf8', timeout: 10000 });
+      console.log(`📋 DNS Query Output:`, output);
+      
+      // Parse the output to find TXT records
+      const lines = output.split('\n');
+      const txtRecords = lines.filter(line => line.includes('text =') || line.includes('TXT'));
+      
+      if (txtRecords.length > 0) {
+        console.log(`📋 Found TXT records:`, txtRecords);
+        
+        // Check if our expected value exists
+        const hasExpectedRecord = txtRecords.some(record => 
+          record.includes(expectedValue)
+        );
+        
+        if (hasExpectedRecord) {
+          console.log(`✅ SUCCESS: Found expected TXT record: ${expectedValue}`);
+          return true;
+        } else {
+          console.log(`❌ FAILED: Expected record not found`);
+          console.log(`   Expected: ${expectedValue}`);
+          console.log(`   Found: ${txtRecords.join(', ')}`);
+          return false;
+        }
+      } else {
+        console.log(`❌ FAILED: No TXT records found`);
+        return false;
+      }
+    } catch (execError) {
+      console.log(`❌ FAILED: DNS query failed - ${execError.message}`);
       return false;
     }
     
