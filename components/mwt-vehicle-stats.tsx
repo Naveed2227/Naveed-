@@ -11330,7 +11330,7 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
               )}
 
               <div className="flex items-start justify-between gap-3 mb-3 sm:mb-4">
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed flex-1">{vehicle.description}</p>
+                <div className="flex-1"></div>
                 <motion.button
                   onClick={(e) => {
                     e.stopPropagation();
