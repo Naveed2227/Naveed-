@@ -272,7 +272,7 @@ const upcomingVehicles = [
 "HARP General Krueger",
 "M60A3 TTS",
 "AMX-10RC",
-  
+"Ka-90",
   
   // Add upcoming vehicle names here
 ];
@@ -2135,6 +2135,28 @@ const VEHICLES_DATA = [
       { name: "XM915(20mm)", type: "Autocannon", damage: 70, penetration: 60, reload: 220 }
     ]
   },
+  {
+    id: 207,
+    name: "Ka-90",
+    type: "Helicopter",
+    faction: "Russian",
+    tier: "IV",
+    image: "Ka-90.jpg",
+    description: "Russian Ka-90 concept blends helicopter lift with jet propulsion, promising vertical takeoff, high-speed cruise, advanced rotors and hybrid flight performance.",
+    stats: { health: 0, speed: 0, verticalSpeed: 0, agility: 0 },
+    weapons: [
+      { "name": "RVV-MD", "type": "Medium-Range AAM", "damage": 4800, "penetration": 65, "reload": 15 },
+      { "name": "RVV-SD", "type": "Medium-Range AAM", "damage": 6500, "penetration": 65, "reload": 20 },
+      { "name": "KAB-500L", "type": "Air-to-Ground Missile", "damage": 17300, "penetration": 310, "reload": 40 },
+      { "name": "Kh-69", "type": "Air-to-Ground Missile", "damage": 18400, "penetration": 230, "reload": 40 },
+      { "name": "Hermes", "type": "Air-to-Ground Missile", "damage": 11500, "penetration": 1000, "reload": 35 },
+      { "name": "Kh-MD-E", "damage": 12400, "penetration": 250, "reload": 20 },
+      { "name": "9M120 Attack", "damage": 7500, "penetration": 850, "reload": 25 },
+      { "name": "B8V20", "damage": 5100, "penetration": 420, "reload": 20 },
+      
+    ]
+    
+  }
   {
     id: 300,
     name: "Mitsubishi F-2B",
@@ -7713,6 +7735,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "Type 625E SHORAD",
       "HSTV-L",
       "Type 74E",
+      "Ka-90",
     ];
     
     const eventGachaVehicles = [
@@ -8434,7 +8457,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "HARP General Krueger",
 "M60A3 TTS",
 "AMX-10RC",
-      
+"Ka-90",
       
       
       
