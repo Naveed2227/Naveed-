@@ -8769,13 +8769,17 @@ ${weaponsList}
 🔧 UPGRADE MODULES:
 ${modulesList}
 
-${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" : isConstructionVehicle(vehicle.name) ? "🚧 CONSTRUCTION VEHICLE - Under Development" : isExclusiveVehicle(vehicle.name) ? "🎲 EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : "🆓 Standard Vehicle"}`
+${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : isConstructionVehicle(vehicle.name) ? " CONSTRUCTION VEHICLE - Under Development" : isExclusiveVehicle(vehicle.name) ? " EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : " Standard Vehicle"}`
   }
+
+  const normalizeForSearch = (value: string) => value.toLowerCase().replace(/[^a-z0-9]/g, "")
 
   // First, separate new vehicles from others
   const [newVehiclesList, otherVehiclesList] = [...VEHICLES].reduce(
     (acc, vehicle) => {
-      const matchesSearch = vehicle.name.toLowerCase().includes(searchQuery.toLowerCase())
+      const normalizedName = normalizeForSearch(vehicle.name)
+      const normalizedQuery = normalizeForSearch(searchQuery)
+      const matchesSearch = normalizedName.includes(normalizedQuery)
       const matchesType = typeFilter.length === 0 || typeFilter.includes(vehicle.type)
       const matchesTier = tierFilter.length === 0 || tierFilter.includes(formatTier(vehicle.tier))
       const matchesCountry = countryFilter.length === 0 || countryFilter.includes(vehicle.faction)
@@ -10669,6 +10673,16 @@ ${isMarketVehicle(vehicle.name) ? "💰 PREMIUM VEHICLE - Available in Market" :
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6">
             <div className="flex-1 min-w-0">
               <div>
+                <div className="flex justify-start ml-14 mb-2">
+                  <a
+                    href="https://play.google.com/store/apps/details?id=app.mwtassistantunofficial.android&pcampaignid=web_share"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 text-xs sm:text-sm font-semibold text-slate-900 shadow-lg shadow-cyan-400/30 hover:shadow-cyan-300/40 transform hover:-translate-y-0.5 hover:scale-[1.02] transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900 animate-pulse"
+                  >
+                    Install app
+                  </a>
+                </div>
                 <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 text-transparent bg-clip-text mx-14">MWT Assistant</h1>
                 <p className="text-xs sm:text-sm text-slate-400 mt-1 ml-14">Comprehensive vehicle statistics and comparisons</p>
               </div>

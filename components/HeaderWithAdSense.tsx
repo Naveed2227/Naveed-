@@ -59,6 +59,14 @@ export default function HeaderWithAdSense() {
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href="https://play.google.com/store/apps/details?id=app.mwtassistantunofficial.android&pcampaignid=web_share"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-4 py-2 text-xs md:text-sm font-semibold rounded-full bg-gradient-to-r from-emerald-500 via-cyan-400 to-blue-500 text-slate-900 shadow-lg shadow-cyan-500/30 hover:shadow-cyan-400/50 hover:from-emerald-400 hover:via-cyan-300 hover:to-blue-400 transition-all duration-300 animate-pulse border border-cyan-300/70 whitespace-nowrap"
+              >
+                Install App Version
+              </a>
               <div className="pb-4 w-full">
                 <div className="flex flex-col lg:flex-row gap-3 md:gap-4 items-start lg:items-center justify-between">
                   <div className="relative w-full lg:w-64 xl:w-80 flex-1">
