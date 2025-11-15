@@ -2156,7 +2156,7 @@ const VEHICLES_DATA = [
       
     ]
     
-  }
+  },
   {
     id: 300,
     name: "Mitsubishi F-2B",
