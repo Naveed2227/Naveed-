@@ -12256,6 +12256,21 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                     <h3 className="text-xl font-semibold text-cyan-400 mb-3">Updates</h3>
                     <div className="space-y-3">
 
+
+
+                     <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.1.02 (19/11/2025)</span>
+                          <span className="text-sm text-slate-400">Update</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• New "Vehicle with this weapon" features to show vehicles with same weapon</li>
+                          <li>• Battle Pass images updated</li>
+                          <li>• Minor bugs fixed</li>
+                        </ul>
+                      </div>
+
+
                       <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-cyan-300">Version 1.1.01 (14/11/2025)</span>
