@@ -13604,7 +13604,10 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                             <div
                               key={veh.id}
                               className="min-w-[260px] max-w-[320px] bg-slate-950 rounded-xl border border-slate-700 overflow-hidden cursor-pointer flex flex-col shadow-2xl hover:-translate-y-0.5 hover:border-emerald-500 transition"
-                              onClick={() => setSearchQuery(veh.name)}
+                              onClick={() => {
+                                setSearchQuery(veh.name);
+                                setSelectedWeaponForModal(null);
+                              }}
                             >
                               <div className="relative w-full pb-[56.25%] bg-slate-900">
                                 {veh.image && (
