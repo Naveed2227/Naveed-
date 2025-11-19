@@ -7468,6 +7468,51 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     }
     return baseValue;
   };
+
+  const normalizeWeaponName = (str: string) => {
+    return (str || '')
+      .toString()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim()
+  }
+
+  const levenshteinDistance = (a: string, b: string) => {
+    a = normalizeWeaponName(a)
+    b = normalizeWeaponName(b)
+
+    if (!a.length || !b.length) return Math.max(a.length, b.length)
+
+    const dp = new Array(b.length + 1).fill(0)
+    for (let j = 0; j <= b.length; j++) dp[j] = j
+
+    for (let i = 1; i <= a.length; i++) {
+      let prev = dp[0]
+      dp[0] = i
+      for (let j = 1; j <= b.length; j++) {
+        const tmp = dp[j]
+        if (a[i - 1] === b[j - 1]) {
+          dp[j] = prev
+        } else {
+          dp[j] = Math.min(prev + 1, dp[j] + 1, dp[j - 1] + 1)
+        }
+        prev = tmp
+      }
+    }
+
+    return dp[b.length]
+  }
+
+  const weaponSimilarityScore = (a: string, b: string) => {
+    a = normalizeWeaponName(a)
+    b = normalizeWeaponName(b)
+
+    if (!a.length && !b.length) return 1
+    const maxLen = Math.max(a.length, b.length)
+    if (!maxLen) return 0
+    const dist = levenshteinDistance(a, b)
+    return 1 - dist / maxLen
+  }
   const [searchQuery, setSearchQuery] = useState("")
   const [typeFilter, setTypeFilter] = useState<string[]>([])
   const [tierFilter, setTierFilter] = useState<string[]>([])
@@ -7500,6 +7545,9 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [armourVideoVehicle, setArmourVideoVehicle] = useState<string | null>(null)
 
   const [selectedWeaponForModal, setSelectedWeaponForModal] = useState<any | null>(null)
+  const [vehiclesWithWeapon, setVehiclesWithWeapon] = useState<any[]>([])
+
+  const vehiclesWithWeaponRef = useRef<HTMLDivElement | null>(null)
 
   const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
   const [vehicleDetailsOpenId, setVehicleDetailsOpenId] = useState<string | null>(null)
@@ -7530,8 +7578,38 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [weaponsModalOpenId, vehicleDetailsOpenId])
-  
-  
+
+  useEffect(() => {
+    if (!selectedWeaponForModal?.name) {
+      setVehiclesWithWeapon([])
+      return
+    }
+
+    const currentName = selectedWeaponForModal.name
+    const threshold = 0.85
+
+    const matches = VEHICLES.filter((veh: any) => {
+      if (!Array.isArray(veh.weapons)) return false
+      return veh.weapons.some((w: any) => {
+        if (!w?.name) return false
+        const normCurrent = normalizeWeaponName(currentName)
+        const normWeapon = normalizeWeaponName(w.name)
+        if (!normCurrent || !normWeapon) return false
+
+        // Exact normalized match
+        if (normCurrent === normWeapon) return true
+
+        const score = weaponSimilarityScore(normCurrent, normWeapon)
+
+        // High similarity AND one name contains the other
+        const contains = normCurrent.includes(normWeapon) || normWeapon.includes(normCurrent)
+        return score >= threshold && contains
+      })
+    })
+
+    setVehiclesWithWeapon(matches)
+  }, [selectedWeaponForModal?.name, VEHICLES])
+
   // Sidebar state
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [activeTab, setActiveTab] = useState("battlepass")
@@ -13474,7 +13552,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
 
               {/* Content area */}
               <div className="flex-1 overflow-y-auto px-4 py-6 flex flex-col items-center">
-                <div className="w-full max-w-3xl space-y-6">
+                <div className="w-full md:w-full lg:w-3/4 max-w-5xl space-y-6">
                   <h3 className="text-sm font-semibold text-slate-300 tracking-wide uppercase">
                     Missile statistics
                   </h3>
@@ -13497,6 +13575,82 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                       </div>
                     </div>
                   </div>
+
+                  {vehiclesWithWeapon.length > 0 && (
+                    <div className="space-y-3">
+                      <h3 className="text-sm font-semibold text-slate-300 tracking-wide uppercase">
+                        Vehicles with this weapon
+                      </h3>
+
+                      <div className="relative flex items-center">
+                        <button
+                          type="button"
+                          aria-label="Scroll left"
+                          className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-slate-900/90 text-slate-200 shadow-lg hover:bg-blue-700/90 absolute -left-3 z-10"
+                          onClick={() => {
+                            if (vehiclesWithWeaponRef.current) {
+                              vehiclesWithWeaponRef.current.scrollBy({ left: -320, behavior: 'smooth' })
+                            }
+                          }}
+                        >
+                          
+                        </button>
+
+                        <div
+                          ref={vehiclesWithWeaponRef}
+                          className="flex gap-4 overflow-x-auto py-2 px-1"
+                        >
+                          {vehiclesWithWeapon.map((veh: any) => (
+                            <div
+                              key={veh.id}
+                              className="min-w-[260px] max-w-[320px] bg-slate-950 rounded-xl border border-slate-700 overflow-hidden cursor-pointer flex flex-col shadow-2xl hover:-translate-y-0.5 hover:border-emerald-500 transition"
+                              onClick={() => setSearchQuery(veh.name)}
+                            >
+                              <div className="relative w-full pb-[56.25%] bg-slate-900">
+                                {veh.image && (
+                                  <img
+                                    src={veh.image}
+                                    alt={veh.name}
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                  />
+                                )}
+                              </div>
+                              <div className="p-3 flex flex-col gap-1">
+                                <div className="text-sm font-semibold text-slate-100 truncate">
+                                  {veh.name}
+                                </div>
+                                <div className="flex flex-wrap gap-1 mt-1">
+                                  <span className="text-[10px] px-2 py-0.5 rounded-full border border-slate-500 text-slate-200 uppercase tracking-wide">
+                                    {veh.rarity || 'Standard'}
+                                  </span>
+                                  <span className="text-[10px] px-2 py-0.5 rounded-full border border-slate-700 text-slate-300">
+                                    {veh.type}
+                                  </span>
+                                </div>
+                                <div className="flex items-center justify-between text-[11px] text-slate-400 mt-1">
+                                  <span>{veh.type}</span>
+                                  <span>{veh.tier ? `Tier ${veh.tier}` : ''}</span>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        <button
+                          type="button"
+                          aria-label="Scroll right"
+                          className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-slate-900/90 text-slate-200 shadow-lg hover:bg-blue-700/90 absolute -right-3 z-10"
+                          onClick={() => {
+                            if (vehiclesWithWeaponRef.current) {
+                              vehiclesWithWeaponRef.current.scrollBy({ left: 320, behavior: 'smooth' })
+                            }
+                          }}
+                        >
+                          
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
