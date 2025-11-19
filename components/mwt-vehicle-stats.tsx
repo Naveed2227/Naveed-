@@ -7499,6 +7499,8 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [showCredits, setShowCredits] = useState(false)
   const [armourVideoVehicle, setArmourVideoVehicle] = useState<string | null>(null)
 
+  const [selectedWeaponForModal, setSelectedWeaponForModal] = useState<any | null>(null)
+
   const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
   const [vehicleDetailsOpenId, setVehicleDetailsOpenId] = useState<string | null>(null)
   const weaponsModalRef = useRef<HTMLDivElement>(null)
@@ -12938,7 +12940,11 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                             </div>
                           ) : displayVehicle.weapons?.length > 0 ? (
                             displayVehicle.weapons.map((weapon: any, idx: number) => (
-                              <div key={idx} className="bg-slate-800/80 rounded-lg p-3 border border-slate-700/50 group">
+                              <div
+                                key={idx}
+                                className="bg-slate-800/80 rounded-lg p-3 border border-slate-700/50 group cursor-pointer"
+                                onClick={() => setSelectedWeaponForModal(weapon)}
+                              >
                                 <div className="mb-2">
                                   <h4 className="text-base font-medium text-cyan-300 flex items-center gap-2">
                                     {weapon.name}
@@ -13351,7 +13357,11 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
 
               <div className="space-y-4">
                 {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon, index) => (
-                  <div key={index} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+                  <div
+                    key={index}
+                    className="bg-slate-800/50 rounded-lg p-4 border border-slate-700 cursor-pointer"
+                    onClick={() => setSelectedWeaponForModal(weapon)}
+                  >
                     <div className="flex items-center justify-between mb-2">
                       <h4 className="text-lg font-semibold text-cyan-300">{weapon.name}</h4>
                       <div className="flex flex-col gap-1">
@@ -13440,6 +13450,54 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {selectedWeaponForModal && (
+          <div className="fixed inset-0 bg-slate-950/95 z-50 flex flex-col">
+            <div className="flex-1 w-full h-full flex flex-col">
+              {/* Top bar */}
+              <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800">
+                <h2 className="text-xl font-semibold text-cyan-300 truncate pr-10">
+                  {selectedWeaponForModal?.name || 'Missile'}
+                </h2>
+                <button
+                  onClick={() => setSelectedWeaponForModal(null)}
+                  className="text-slate-400 hover:text-slate-100"
+                  aria-label="Close missile details"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Content area */}
+              <div className="flex-1 overflow-y-auto px-4 py-6 flex flex-col items-center">
+                <div className="w-full max-w-3xl space-y-6">
+                  <h3 className="text-sm font-semibold text-slate-300 tracking-wide uppercase">
+                    Missile statistics
+                  </h3>
+
+                  <div className="bg-slate-900/80 border border-slate-800 rounded-lg px-4 py-4 divide-y divide-slate-800">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 pb-3">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-slate-400">Damage</span>
+                        <span className="text-slate-100 font-semibold">
+                          {selectedWeaponForModal?.damage ?? 'N/A'}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-slate-400">Reload time</span>
+                        <span className="text-slate-100 font-semibold">
+                          {selectedWeaponForModal?.reload != null
+                            ? `${selectedWeaponForModal.reload}s`
+                            : 'N/A'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
