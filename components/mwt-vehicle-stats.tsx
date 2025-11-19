@@ -272,6 +272,7 @@ const upcomingVehicles = [
 "HARP General Krueger",
 "M60A3 TTS",
 "AMX-10RC",
+"T-15 Barbaris",
 "Ka-90",
   
   // Add upcoming vehicle names here
@@ -512,7 +513,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "B-Type",
 "T-90M",
 "Su-47 Berkut",
-
+"T-15 Barbaris",
 
 
 
@@ -1503,6 +1504,19 @@ const VEHICLES_DATA = [
   },
   {
     id: 131,
+    name: "T-15 Barbaris",
+    type: "Tank Destroyer",
+    faction: "Russian",
+    tier: "IV",
+    image: "T-15-Barbaris.jpg",
+    description: "A heavily armored IFV featuring a 57 mm autocannon, Kornet-EM missiles, strong frontal protection, and impressive mobility for its weight overall.",
+    stats: { health: 0, speed: , armor: "450", agility: 0 },
+    weapons: [
+      { name: "9K135 Kornet", type: "Missile", damage: 14820, penetration: 1000, reload: 12 }
+    ]
+  },
+  {
+    id: 132,
     name: "T-20 Monolit",
     type: "Tank Destroyer",
     faction: "Russian",
@@ -1525,11 +1539,11 @@ const VEHICLES_DATA = [
       { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
       { name: "VOG-17M", type: "Missile", damage: 1600, penetration: 60, reload: 1.7 },
       { name: "VOG-30", type: "Missile", damage: 1800, penetration: 76, reload: 1.7 },
-      { name: "9K135 Kornet", type: "Missile", damage: 14820, penetration: 1000, reload: 12 },
+      { name: "9K135 Kornet", type: "Missile", damage: 14820, penetration: 1000, reload: 12 }
     ]
   },
   {
-    id: 132,
+    id: 133,
     name: "KF31 Lynx",
     type: "Light Tank",
     faction: "German",
@@ -1554,7 +1568,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 133,
+    id: 134,
     name: "T-90M",
     type: "Main Battle Tank",
     faction: "Russian",
@@ -1569,19 +1583,17 @@ const VEHICLES_DATA = [
       hullRotationSpeed: 45,
       armor: 900,
       agility: 40
-
     },
     weapons: [
       { name: "3BM46 APFSDS", type: "Main Gun", damage: 11640, penetration: 690 },
       { name: "30F26 HEI", type: "Main Gun", damage: 5000, penetration: 92 },
       { name: "3BM70 APFSDS", type: "Main Gun", damage: 12010, penetration: 870 },
       { name: "3BK18M HEAT", type: "Main Gun", damage: 12390, penetration: 550 },
-      { name: "9M119 HEAT", type: "Main Gun", damage: 10160, penetration: 750 },
-      
+      { name: "9M119 HEAT", type: "Main Gun", damage: 10160, penetration: 750 }
     ]
   },
   {
-    id: 133,
+    id: 135,
     name: "K2 Black Panther",
     type: "Main Battle Tank",
     faction: "SouthKorean",
@@ -1601,17 +1613,17 @@ const VEHICLES_DATA = [
       { name: "K276 APFSDS", type: "Main Gun", damage: 11500, penetration: 600 },
       { name: "K279 APFSDS", type: "Main Gun", damage: 11830, penetration: 740 },
       { name: "K280 HEAT-MP", type: "Main Gun", damage: 12450, penetration: 680 },
-      { name: "KSTAM-II", type: "Missile", damage: 9560, penetration: 850}
+      { name: "KSTAM-II", type: "Missile", damage: 9560, penetration: 850 }
     ]
   },
   {
-    id: 134,
+    id: 136,
     name: "Al-Khalid",
     type: "Main Battle Tank",
     faction: "Pakistani",
     tier: "IV",
     image: "Al-Khalid.jpg",
-    description: "Pakistani main battle tank, jointly developed with China, featuring advanced firepower, mobility, and protection, serving as Pakistan Army's backbone.",
+    description: "Pakistani main battle tank, jointly developed with China, featuring advanced firepower, mobility, and protection.",
     stats: {
       health: 43600,
       turnRate: 45,
@@ -1630,13 +1642,13 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 135,
+    id: 137,
     name: "Arjun Mk.2",
     type: "Main Battle Tank",
     faction: "Indian",
     tier: "IV",
     image: "Arjun-Mk.2.jpg",
-    description: "India's upgraded battle tank with stronger armor, 120mm missile-firing gun, advanced systems, and better mobility for modern combat.",
+    description: "India's upgraded battle tank with stronger armor, 120mm missile-firing gun, and advanced systems.",
     stats: {
       health: 46600,
       speed: 70,
@@ -1654,13 +1666,13 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 136,
+    id: 138,
     name: "M10 Booker",
     type: "Light Tank",
     faction: "American",
     tier: "IV",
     image: "M10-Booker.jpg",
-    description: "A mobile assault gun designed to neutralize fortified positions and light armor, featuring a 105mm M35 gun.",
+    description: "A mobile assault gun designed to neutralize fortified positions and light armor.",
     stats: {
       health: 39300,
       speed: 75,
@@ -1675,11 +1687,11 @@ const VEHICLES_DATA = [
       { name: "M393A2", type: "Main Gun", damage: 10340, penetration: 127 },
       { name: "M456A2", type: "Main Gun", damage: 10890, penetration: 400 },
       { name: "M900", type: "Main Gun", damage: 10320, penetration: 582 },
-      { name: "SwitchBlade 300", type: "Missile", damage: 6730, penetration: 390, reload: 15}
+      { name: "SwitchBlade 300", type: "Missile", damage: 6730, penetration: 390, reload: 15 }
     ]
   },
   {
-    id: 137,
+    id: 139,
     name: "PL-01",
     type: "Light Tank",
     faction: "Polish",
@@ -1703,13 +1715,13 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 138,
+    id: 140,
     name: "ZLT-11",
     type: "Tank Destroyer",
     faction: "Chinese",
     tier: "IV",
     image: "ZLT-11.jpg",
-    description: "A Chinese wheeled infantry fighting vehicle, armed with a 105 mm cannon, machine guns, anti-tank missiles, and designed for rapid deployment and high battlefield mobility.",
+    description: "A Chinese wheeled infantry fighting vehicle armed with a 105 mm cannon and anti-tank missiles.",
     stats: {
       health: 33900,
       speed: 100,
@@ -1723,17 +1735,17 @@ const VEHICLES_DATA = [
       { name: "Type 83 HEAT", type: "Main Gun", damage: 10890, penetration: 425 },
       { name: "DTB-1 HESH", type: "Main Gun", damage: 4500, penetration: 55 },
       { name: "DTW-2 APFSDS", type: "Main Gun", damage: 10310, penetration: 580 },
-      { name: "GP 105 HEAT", type: "Main Gun", damage: 9180, penetration: 750 },
+      { name: "GP 105 HEAT", type: "Main Gun", damage: 9180, penetration: 750 }
     ]
   },
   {
-    id: 139,
+    id: 141,
     name: "M-SHORAD",
     type: "Anti-Air",
     faction: "American",
     tier: "IV",
     image: "M-SHORAD.jpg",
-    description: "Mobile short-range air defense system equipped with autocannons, Stinger missiles, and radar-guided targeting.",
+    description: "Mobile short-range air defense system with autocannons and Stinger missiles.",
     stats: {
       health: 27900,
       speed: 97,
@@ -1750,13 +1762,13 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 140,
+    id: 142,
     name: "TOS-1A",
     type: "MLRS",
     faction: "Russian",
     tier: "IV",
     image: "TOS-1A.jpg",
-    description: "Heavy flamethrower rocket launcher mounted on a tank chassis, designed for area suppression and destruction of entrenched enemies.",
+    description: "Heavy flamethrower rocket launcher mounted on a tank chassis.",
     stats: {
       health: 38800,
       speed: 60,
@@ -1772,14 +1784,19 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 141,
+    id: 143,
     name: "M270 MLRS",
     type: "MLRS",
     faction: "American",
     tier: "IV",
     image: "M270-MLRS.jpg",
-    description: "Multiple Launch Rocket System capable of delivering devastating area bombardment.",
-    stats: { health: 31400, speed: 65, armor: "450mm", agility: 26 },
+    description: "Rocket artillery system capable of long-range precision and area bombardment.",
+    stats: {
+      health: 31400,
+      speed: 65,
+      armor: "450mm",
+      agility: 26
+    },
     weapons: [
       { name: "M31", type: "Guided Rocket", damage: 18225, penetration: 165, reload: 15.7 },
       { name: "M31", type: "Guided Rocket", damage: 15525, penetration: 400, reload: 15.7 },
@@ -1789,13 +1806,13 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 142,
+    id: 144,
     name: "PLZ-05",
     type: "SPH",
     faction: "Chinese",
     tier: "IV",
     image: "PLZ-05.jpg",
-    description: "Modern 155mm self-propelled howitzer designed for long-range artillery support and rapid deployment.",
+    description: "Modern 155mm self-propelled howitzer designed for long-range artillery support.",
     stats: {
       health: 31200,
       speed: 56,
@@ -1813,13 +1830,13 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 143,
+    id: 145,
     name: "M109A6 Paladin",
     type: "SPH",
     faction: "American",
     tier: "IV",
     image: "M109A6-Paladin.jpg",
-    description: "Modernized 155mm self-propelled artillery system providing rapid, accurate fire support for ground forces.",
+    description: "Modernized 155mm self-propelled artillery system for accurate ground fire support.",
     stats: {
       health: 31100,
       speed: 64,
@@ -1833,17 +1850,17 @@ const VEHICLES_DATA = [
       { name: "M107", type: "Main Gun", damage: 7200, penetration: 112 },
       { name: "M549A1", type: "Main Gun", damage: 14940, penetration: 187 },
       { name: "M48A1", type: "Main Gun", damage: 6820, penetration: 115 },
-      { name: "M712 Copperhead", type: "Main Gun", damage: 4900, penetration: 431 },
+      { name: "M712 Copperhead", type: "Main Gun", damage: 4900, penetration: 431 }
     ]
   },
   {
-    id: 144,
+    id: 146,
     name: "FK 2000",
     type: "Anti-Air",
     faction: "Chinese",
     tier: "IV",
     image: "FK-2000.jpg",
-    description: "Modern Chinese mobile anti-aircraft system with radar-guided missiles and rapid-fire autocannons for air defense.",
+    description: "Modern Chinese mobile anti-aircraft system with radar-guided missiles and autocannons.",
     stats: {
       health: 35000,
       speed: 60,
@@ -1860,14 +1877,19 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 145,
+    id: 147,
     name: "Otomatic 76",
     type: "Anti-Air",
     faction: "Italian",
     tier: "IV",
     image: "Otomatic-76.jpg",
     description: "Self-propelled anti-aircraft gun with rapid-fire 76mm cannon.",
-    stats: { health: 39100, speed: 65, armor: "380mm", agility: 36 },
+    stats: {
+      health: 39100,
+      speed: 65,
+      armor: "380mm",
+      agility: 36
+    },
     weapons: [
       { name: "76/62 APFSDS", type: "Main Gun", damage: 3570, penetration: 413 },
       { name: "76/62 HE-VT MOM", type: "Main Gun", damage: 1610, penetration: 89 },
@@ -1875,13 +1897,13 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 146,
+    id: 148,
     name: "BM-57-2 Kochevnik",
     type: "Tank Destroyer",
     faction: "Russian",
     tier: "IV",
     image: "BM-57-2-Kochevnik.jpg",
-    description: "A modern Russian heavy tank armed with a 125mm smoothbore cannon and multiple defensive systems, built for frontline dominance.",
+    description: "A modern Russian heavy tank armed with a 125mm smoothbore cannon and multiple defensive systems.",
     stats: {
       health: 42800,
       speed: 75,
@@ -1899,13 +1921,13 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 147,
+    id: 149,
     name: "ADATS",
     type: "Missile Carrier",
     faction: "American",
     tier: "IV",
     image: "ADATS.jpg",
-    description: "A mobile air-defense system with radar-guided missiles, protecting forces from aerial threats.",
+    description: "Mobile air-defense system equipped with radar-guided missiles.",
     stats: {
       health: 32300,
       speed: 66,
@@ -1921,17 +1943,17 @@ const VEHICLES_DATA = [
       { name: "M792", type: "Main Gun", damage: 240, penetration: 52 },
       { name: "M919", type: "Main Gun", damage: 510, penetration: 171 },
       { name: "MIM-146", type: "Missile", damage: 12120, penetration: 900, reload: 12 },
-      { name: "MIM-146", type: "Missile", damage: 7780, penetration: 290, reload: 9 },
+      { name: "MIM-146", type: "Missile", damage: 7780, penetration: 290, reload: 9 }
     ]
   },
   {
-    id: 148,
+    id: 150,
     name: "MGM-166 LOSAT",
     type: "Missile Carrier",
     faction: "American",
     tier: "IV",
     image: "MGM-166.jpg",
-    description: "A U.S. prototype missile, using hypervelocity kinetic energy to destroy heavily armored tanks at range.",
+    description: "A U.S. prototype hypervelocity missile system designed to defeat heavy armor.",
     stats: {
       health: 29000,
       speed: 69,
@@ -8442,6 +8464,8 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "X2 Shinshin",
       "B-Type",
       "T-90M",
+      "Ka-90",
+      "T-15 Barbaris",
     
 
     ]
@@ -8458,7 +8482,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
 "M60A3 TTS",
 "AMX-10RC",
 "Ka-90",
-      
+      "T-15 Barbaris",
       
       
     ]
