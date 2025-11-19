@@ -1510,7 +1510,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "T-15-Barbaris.jpg",
     description: "A heavily armored IFV featuring a 57 mm autocannon, Kornet-EM missiles, strong frontal protection, and impressive mobility for its weight overall.",
-    stats: { health: 0, speed: , armor: "450", agility: 0 },
+    stats: { health: 0, speed: 0, armor: "450", agility: 0 },
     weapons: [
       { name: "9K135 Kornet", type: "Missile", damage: 14820, penetration: 1000, reload: 12 }
     ]
