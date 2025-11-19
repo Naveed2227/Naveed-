@@ -1505,7 +1505,7 @@ const VEHICLES_DATA = [
   {
     id: 131,
     name: "T-15 Barbaris",
-    type: "Tank Destroyer",
+    type: "Light Tank",
     faction: "Russian",
     tier: "IV",
     image: "T-15-Barbaris.jpg",
@@ -8482,8 +8482,8 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
 "M60A3 TTS",
 "AMX-10RC",
 "Ka-90",
+     
       "T-15 Barbaris",
-      
       
     ]
     return constructionVehicles.includes(vehicleName)
