@@ -1903,7 +1903,7 @@ const VEHICLES_DATA = [
     faction: "Russian",
     tier: "IV",
     image: "BM-57-2-Kochevnik.jpg",
-    description: "A modern Russian heavy tank armed with a 125mm smoothbore cannon and multiple defensive systems.",
+    description: "A modern Russian heavy tank armed with twin 57mm cannons, dual GSh-23Ms, Kornet missiles, APS, and drone support, built for speed, agility, and flanking superiority.",
     stats: {
       health: 42800,
       speed: 75,
@@ -12405,8 +12405,8 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
         <div className="p-2">
           <h4 className="text-cyan-300 font-semibold text-base">Shiroko_Chan</h4>
           <p className="text-white text-[10px] mb-0.5 flex items-center">
-            Discord: shibuya_i
-            <CopyToClipboard text="shibuya_i" className="ml-1" />
+            Discord: shiro_kam1
+            <CopyToClipboard text="shiro_kam1" className="ml-1" />
           </p>
           <p className="text-white text-xs">Server Moderator, Supporter</p>
         </div>
