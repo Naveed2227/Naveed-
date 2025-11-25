@@ -3014,7 +3014,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 434,
+    "id": 436,
     "name": "Rookiat MTTD",
     "type": "Light Tank",
     "faction": "British",
@@ -3030,7 +3030,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 435,
+    "id": 437,
     "name": "ZBL-08",
     "type": "Light Tank",
     "faction": "Chinese",
@@ -3047,7 +3047,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 436,
+    "id": 438,
     "name": "ХM8 AGS",
     "type": "Light Tank",
     "faction": "American",
@@ -3064,7 +3064,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 437,
+    "id": 439,
     "name": "VBCI-2",
     "type": "Light Tank",
     "faction": "French",
@@ -3080,7 +3080,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 438,
+    "id": 440,
     "name": "WMA301",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -3096,7 +3096,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 439,
+    "id": 441,
     "name": "Centauro I 120",
     "type": "Tank Destroyer",
     "faction": "Italian",
@@ -3111,7 +3111,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 440,
+    "id": 442,
     "name": "BMD3",
     "type": "Light Tank",
     "faction": "Russian",
@@ -3129,7 +3129,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 441,
+    "id": 443,
     "name": "Strf 9040 BILL",
     "type": "Light Tank",
     "faction": "Sweden",
@@ -3145,7 +3145,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 442,
+    "id": 444,
     "name": "M3A3 Bradley",
     "type": "Light Tank",
     "faction": "American",
