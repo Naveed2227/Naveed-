@@ -3491,6 +3491,28 @@ const VEHICLES_DATA = [
   },
   {
     "id": 607,
+    "name": "Xian JH-7A",
+    "type": "Fighter Jet",
+    "faction": "Chinese",
+    "tier": "II",
+    "image": "Xian-JH-7A.jpg",
+    "description": "A twin-engine Chinese strike aircraft optimized for low-level penetration, precision munitions delivery, maritime attack roles, and versatile all-weather operational capability.",
+    "stats": { "health": 28600, "speed": 780, "afterburnerSpeed": 1690, "agility": 52 },
+    "weapons": [
+      
+      { "name": "Type 1", "type": "Bomb", "damage": 15100, "penetration": 120, "reload": 32 },
+      { "name": "Type 90", "type": "Short-Range AAM", "damage": 6400, "penetration": 320, "reload": 40 },
+      { "name": "Type 130", "type": "Air-to-Surface Missile", "damage": 6900, "penetration": 450, "reload": 40 },
+      { "name": "TL-20", "type": "Air-to-Surface Missile", "damage": 12400, "penetration": 143, "reload": 25 },
+      { "name": "LS-6/250", "type": "Air-to-Surface Missile", "damage": 17300, "penetration": 300, "reload": 40 },
+      { "name": "PL-2", "type": "Short-Range AAM", "damage": 5900, "penetration": 35, "reload": 13 },
+      { "name": "PL-5", "type": "Short-Range AAM", "damage": 7200, "penetration": 40, "reload": 16 },
+      { "name": "PL-7", "type": "Short-Range AAM", "damage": 6100, "penetration": 50, "reload": 14 },
+      { "name": "PL-10", "type": "Short-Range AAM", "damage": 7400, "penetration": 60, "reload": 16 },
+    ]
+  },
+  {
+    "id": 607,
     "name": "Su-24M",
     "type": "Fighter Jet",
     "faction": "Russian",
