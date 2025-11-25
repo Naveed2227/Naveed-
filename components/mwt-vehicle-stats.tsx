@@ -1,4 +1,3 @@
-
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
@@ -556,6 +555,18 @@ const getRarityColor = (rarity: string) => {
 
 // Battle Pass Data Structure
 const BATTLE_PASSES = [
+{
+    id: 13,
+    month: "December 2025",
+    name: "Operation Ice Bell",
+    image: "2025-Dec.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: ["T-15 Barbaris", "Ka-90"], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["Ka-90"],
+      free: ["T-15 Barbaris"]
+    }
+  },
 {
     id: 12,
     month: "November 2025",
