@@ -21,6 +21,18 @@ interface Event {
 // All events in chronological order
 const events: Event[] = [
 {
+    id: 26,
+    name: "Festive Dinner",
+    image: "/Events/Festive-Dinner.jpg",
+    startDate: "2025-11-26",
+    endDate: "2025-12-7",
+    vehicles: [
+      { id: 1, name: "M60A3 TTS", type: "free" },
+      { id: 2, name: "M10 Booker", type: "gacha" },
+      { id: 3, name: "MGM-166 LOSAT", type: "bundle" },
+    ],
+  },
+{
     id: 25,
     name: "MWT Turns One (Stage 2)",
     image: "/Events/MWT-Turns-One.jpg",
