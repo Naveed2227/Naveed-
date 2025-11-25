@@ -1,3 +1,4 @@
+
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
@@ -261,6 +262,7 @@ const formatTier = (tier: string | number): string => {
 const newVehicles = [
   "B-Type",
   "T-90M",
+  "Xian JH-7A",
   
 ];
 
@@ -272,7 +274,13 @@ const upcomingVehicles = [
 "AMX-10RC",
 "T-15 Barbaris",
 "Ka-90",
-  
+"M1 AGDS",
+"Leopard 2 Revolution",
+"T-72B1",
+"TAN-SAM-1C",
+"RAH-66 Comanche",
+"FV101 Scorpion-90",
+
   // Add upcoming vehicle names here
 ];
 
@@ -364,7 +372,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "M3A3 Bradley",
 "ZBL-08",
 "M110A2",
-
+"Xian JH-7A",
 
 
 
@@ -6310,7 +6318,9 @@ const getFlagImage = (faction: string): string => {
     Pakistani: "/Pakistan.png",
     Mexican: "/Mexico.png",
     "Pan-Spatial": "/PAN-SPATIAL.jpg",
-    "South-African": "/south-africa.png"
+    "South-African": "/south-africa.png",
+    "Venezuelan": "/venezuelan-flag.png",
+    "Indonesian": "/indonesian-flag.png"
   }
   return flags[faction] || "/default-flag.png"
 }
@@ -8658,12 +8668,18 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       
       
       
-      "HARP General Krueger",
+"HARP General Krueger",
 "M60A3 TTS",
 "AMX-10RC",
 "Ka-90",
-     
-      "T-15 Barbaris",
+"T-15 Barbaris",
+"M1 AGDS",
+"Leopard 2 Revolution",
+"T-72B1",
+"TAN-SAM-1C",
+"RAH-66 Comanche",
+"FV101 Scorpion-90",
+
       
     ]
     return constructionVehicles.includes(vehicleName)
