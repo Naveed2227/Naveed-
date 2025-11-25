@@ -2511,6 +2511,19 @@ const VEHICLES_DATA = [
   },
   {
     "id": 405,
+    "name": "T-72B1",
+    "type": "Main Battle Tank",
+    "faction": "Venezuelan",
+    "tier": "III",
+    "image": "T-72B1.jpg",
+    "description": "A modernized Soviet main battle tank in Venezuelan service, featuring improved armor, mobility, and firepower suitable for regional defense needs.",
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "weapons": [
+      
+    ]
+  },
+  {
+    "id": 405,
     "name": "T-64BV",
     "type": "Main Battle Tank",
     "faction": "Russian",
@@ -2825,6 +2838,18 @@ const VEHICLES_DATA = [
     "stats": { "health": 26000, "speed": 70, "armor": "30mm", "agility": 40 },
     "weapons": [
       { "name": "HJ-10", "type": "Missile", "damage": 12558, "penetration": 1400, "reload": 13 }
+    ]
+  },
+  {
+    "id": 425,
+    "name": "TAN-SAM-1C",
+    "type": "Anti-Air",
+    "faction": "Japanese",
+    "tier": "III",
+    "image": "TAN-SAM-1C.jpg",
+    "description": "A Japanese short-range, mobile, surface-to-air missile system designed to defend against low-altitude aerial threats with quick reaction and high accuracy.",
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "weapons": [
     ]
   },
   {
@@ -3326,6 +3351,21 @@ const VEHICLES_DATA = [
   },
   {
     "id": 510,
+    "name": "RAH-66 Comanche",
+    "type": "Helicopter",
+    "faction": "American",
+    "tier": "III",
+    "image": "RAH-66-Comanche.jpg",
+    "description": "A stealthy, agile U.S. scout/attack helicopter prototype designed for reconnaissance, low-observable operations, advanced sensors, and precision engagement, cancelled before full production.",
+    "stats": { "health": 0, "speed": 0, "verticalSpeed": 0, "agility": 0 },
+    "weapons": [
+     
+    ],
+   
+    
+  },
+  {
+    "id": 511,
     "name": "Ka-50 Black Shark",
     "type": "Helicopter",
     "faction": "Russian",
@@ -3512,7 +3552,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 607,
+    "id": 608,
     "name": "Su-24M",
     "type": "Fighter Jet",
     "faction": "Russian",
@@ -3533,7 +3573,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 608,
+    "id": 609,
     "name": "F-4E Phantom",
     "type": "Fighter Jet",
     "faction": "American",
@@ -3869,6 +3909,19 @@ const VEHICLES_DATA = [
   },
   {
     "id": 722,
+    "name": "FV101 Scorpion-90",
+    "type": "Light Tank",
+    "faction": "Indonesian",
+    "tier": "II",
+    "image": "FV101-Scorpion-90.jpg",
+    "description": "A lightweight British armored reconnaissance vehicle used by Indonesia, combining high mobility, a 90 mm gun, and effective fire support for diverse terrain operations.",
+    "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
+    "weapons": [
+    
+    ]
+  },
+  {
+    "id": 723,
     "name": "M109",
     "type": "SPH",
     "faction": "American",
@@ -3882,7 +3935,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 723,
+    "id": 724,
     "name": "PLL-05",
     "type": "SPH",
     "faction": "Chinese",
@@ -3896,7 +3949,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 724,
+    "id": 725,
     "name": "PLZ-83",
     "type": "SPH",
     "faction": "Chinese",
@@ -3910,7 +3963,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 725,
+    "id": 726,
     "name": "2S1 Gvozdika",
     "type": "SPH",
     "faction": "Russian",
@@ -3924,7 +3977,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 726,
+    "id": 727,
     "name": "2S3 Akatsiya",
     "type": "SPH",
     "faction": "Russian",
@@ -3938,7 +3991,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 727,
+    "id": 728,
     "name": "Type 74 SPH",
     "type": "SPH",
     "faction": "Japanese",
