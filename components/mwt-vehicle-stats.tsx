@@ -261,9 +261,7 @@ const formatTier = (tier: string | number): string => {
 const newVehicles = [
   "B-Type",
   "T-90M",
-  "Merkava Mk.3",
-  "Su-47 Berkut",
-  "ZLT-11",
+  
 ];
 
 // Upcoming Vehicles System
@@ -2272,6 +2270,7 @@ const VEHICLES_DATA = [
     weapons: [
       { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
       { "name": "FAB-250", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
+      { "name": "KAB500KR", "type": "Guided Bomb", "damage": 17800, "penetration": 320, "reload": 40 },
       { "name": "Kh-MD-E", "type": "Air-to-Ground Missile", "damage": 12400, "penetration": 250, "reload": 20 },
       { "name": "R-73", "type": "Short-Range Air-to-Air Missile", "damage": 4800, "penetration": 56, "reload": 15 },
       { "name": "Kh-38ME", "type": "Air-to-Ground Missile", "damage": 17300, "penetration": 230, "reload": 40 },
