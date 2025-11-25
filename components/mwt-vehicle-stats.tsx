@@ -1321,6 +1321,7 @@ const VEHICLES_DATA = [
       { name: "XM964", type: "Main Gun", damage: 14640, penetration: 1050, Reload: 8 }
     ]
   },
+  
   {
     id: 120,
     name: "VT-4A1",
@@ -1416,6 +1417,19 @@ const VEHICLES_DATA = [
       { name: "L23A1", type: "Main Gun", damage: 11400, penetration: 397 },
       { name: "L31A7", type: "Main Gun", damage: 11870, penetration: 152 },
       { name: "L26", type: "Main Gun", damage: 11600, penetration: 494 },
+    ]
+  },
+  {
+    id: 125,
+    name: "Leopard 2 Revolution",
+    type: "Main Battle Tank",
+    faction: "Indonesian",
+    tier: "IV",
+    image: "Leopard-2-Revolution.jpg",
+    description: "An upgraded German main battle tank variant operated by Indonesia, featuring enhanced armor, modern sensors, improved crew protection, and advanced digital fire-control systems.",
+    stats: { health: 0, speed: 0, armor: "0mm", agility: 0 },
+    weapons: [
+     
     ]
   },
   {
@@ -1757,6 +1771,19 @@ const VEHICLES_DATA = [
       { name: "XM914", type: "Main Gun", damage: 633, penetration: 120 },
       { name: "Stinger Launcher", type: "Missile", damage: 4700, penetration: 35, reload: 10 },
       { name: "AGM-114 Hellfire", type: "Missile", damage: 11700, penetration: 950, reload: 10 }
+    ]
+  },
+  {
+    id: 119,
+    name: "M1 AGDS",
+    type: "Anti-Air",
+    faction: "American",
+    tier: "IV",
+    image: "M1-AGDS.jpg",
+    description: "A conceptual U.S. armored air-defense vehicle design combining heavy protection, advanced sensors, and rapid-fire weapons for close-range battlefield air-defense roles.",
+    stats: { health: 0, speed: 0, armor: "0mm", agility: 0 },
+    weapons: [
+     
     ]
   },
   {
@@ -2516,14 +2543,12 @@ const VEHICLES_DATA = [
     "faction": "Venezuelan",
     "tier": "III",
     "image": "T-72B1.jpg",
-    "description": "A modernized Soviet main battle tank in Venezuelan service, featuring improved armor, mobility, and firepower suitable for regional defense needs.",
+    "description": "A modernized Soviet main battle tank in Venezuelan service, featuring improved armor, mobility, and firepower.",
     "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
-    "weapons": [
-      
-    ]
+    "weapons": []
   },
   {
-    "id": 405,
+    "id": 406,
     "name": "T-64BV",
     "type": "Main Battle Tank",
     "faction": "Russian",
@@ -2539,7 +2564,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 406,
+    "id": 407,
     "name": "Type 90",
     "type": "Main Battle Tank",
     "faction": "Japanese",
@@ -2554,7 +2579,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 407,
+    "id": 408,
     "name": "M60A3 (MZK)",
     "type": "Main Battle Tank",
     "faction": "Turkish",
@@ -2570,7 +2595,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 408,
+    "id": 409,
     "name": "ZTZ85-II",
     "type": "Main Battle Tank",
     "faction": "Chinese",
@@ -2586,7 +2611,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 409,
+    "id": 410,
     "name": "ZTZ96",
     "type": "Main Battle Tank",
     "faction": "Chinese",
@@ -2602,7 +2627,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 410,
+    "id": 411,
     "name": "ZTZ-96A (P)",
     "type": "Main Battle Tank",
     "faction": "Chinese",
@@ -2618,13 +2643,13 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 411,
+    "id": 412,
     "name": "AMX-30 Super",
     "type": "Main Battle Tank",
     "faction": "French",
     "tier": "III",
     "image": "AMX-30-Super.jpg",
-    "description": "French Main Battle Tank featuring improved armor, a powerfull 105mm gun and control system",
+    "description": "French Main Battle Tank featuring improved armor, a powerful 105mm gun and control system.",
     "stats": { "health": 36000, "speed": 65, "armor": "770mm", "agility": 42 },
     "weapons": [
       { "name": "OF 105 F1 APFSDS", "type": "Main Gun", "damage": 9910, "penetration": 361 },
@@ -2633,39 +2658,38 @@ const VEHICLES_DATA = [
       { "name": "OF 105 F2 APFSDS", "type": "Main Gun", "damage": 10090, "penetration": 459 }
     ]
   },
+
   {
-    "id": 412,
+    "id": 413,
     "name": "M60A3 TTS",
     "type": "Main Battle Tank",
     "faction": "American",
     "tier": "III",
     "image": "M60A3-TTS.jpg",
-    "description": "The M60A3 TTS is a Cold War–era U.S. MBT featuring advanced thermal imaging fire control system, laser rangefinder, ballistic computer, stabilized 105mm gun, and improved armor.",
+    "description": "The M60A3 TTS is a Cold War–era U.S. MBT featuring advanced thermal imaging fire control system.",
     "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
-    "weapons": [
-      
-    ]
+    "weapons": []
   },
+
   {
-    "id": 413,
+    "id": 414,
     "name": "AMX-10RC",
     "type": "Main Battle Tank",
     "faction": "French",
     "tier": "III",
     "image": "AMX-10RC.jpg",
-    "description": "Wheeled French reconnaissance tank armed with 105mm gun, offering high mobility, amphibious capability, and effective long-range firepower.",
+    "description": "Wheeled French reconnaissance tank armed with 105mm gun.",
     "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
-    "weapons": [
-      
-    ]
+    "weapons": []
   },
+
   {
-    "id": 414,
+    "id": 415,
     "name": "Merkava Mk.3",
     "type": "Main Battle Tank",
     "faction": "Israeli",
     "tier": "III",
-    "description": "An Israeli MBT featuring modular armor, advanced fire control, 120mm gun, and rear troop compartment.",
+    "description": "An Israeli MBT featuring modular armor, advanced fire control, 120mm gun.",
     "image": "Merkava-Mk.3.jpg",
     "stats": { "health": 42100, "speed": 60, "armor": "420", "agility": 34 },
     "weapons": [
@@ -2675,8 +2699,9 @@ const VEHICLES_DATA = [
       { "name": "Soltam", "type": "Morter", "damage": 2970, "penetration": 125, "reload": 4 }
     ]
   },
+
   {
-    "id": 415,
+    "id": 416,
     "name": "PLZ-07B",
     "type": "SPH",
     "faction": "Chinese",
@@ -2691,8 +2716,9 @@ const VEHICLES_DATA = [
       { "name": "ZBP1", "type": "Main Gun", "damage": 10450, "penetration": 400 }
     ]
   },
+
   {
-    "id": 416,
+    "id": 417,
     "name": "M110A2",
     "type": "SPH",
     "faction": "Japanese",
@@ -2706,8 +2732,9 @@ const VEHICLES_DATA = [
       { "name": "M404", "type": "Main Gun", "damage": 9500, "penetration": 120 }
     ]
   },
+
   {
-    "id": 417,
+    "id": 418,
     "name": "2S31 Vena",
     "type": "SPH",
     "faction": "Russian",
@@ -2722,8 +2749,9 @@ const VEHICLES_DATA = [
       { "name": "Kitolov 2M", "type": "Main Gun", "damage": 5100, "penetration": 280 }
     ]
   },
+
   {
-    "id": 418,
+    "id": 419,
     "name": "XM2001 Crusader",
     "type": "SPH",
     "faction": "American",
@@ -2738,8 +2766,9 @@ const VEHICLES_DATA = [
       { "name": "M864 CH", "type": "Main Gun", "damage": 8000, "penetration": 85 }
     ]
   },
+
   {
-    "id": 419,
+    "id": 420,
     "name": "Gepard 1A2",
     "type": "Anti-Air",
     "faction": "German",
@@ -2754,8 +2783,9 @@ const VEHICLES_DATA = [
       { "name": "Fliegerfaust 2 Stinger", "type": "Missile", "damage": 4210, "penetration": 60, "reload": 12 }
     ]
   },
+
   {
-    "id": 420,
+    "id": 421,
     "name": "K-31 Cheonma",
     "type": "Anti-Air",
     "faction": "SouthKorean",
@@ -2767,14 +2797,15 @@ const VEHICLES_DATA = [
       { "name": "Crotale-NG-Launcher", "type": "Missile", "damage": 5790, "penetration": 58, "reload": 12 }
     ]
   },
+
   {
-    "id": 421,
+    "id": 422,
     "name": "PGZ-09",
     "type": "Anti-Air",
     "faction": "Chinese",
     "tier": "III",
     "image": "PGZ-09.jpg",
-    "description": "Tracked Chinese self-propelled AA, twin 35mm guns, light armor, medium mobility, excels against helicopters and low-flying aircraft.",
+    "description": "Tracked Chinese self-propelled AA, twin 35mm guns.",
     "stats": { "health": 25500, "speed": 60, "armor": "30mm", "agility": 30 },
     "weapons": [
       { "name": "DKG01A", "type": "Main Gun", "damage": 270, "penetration": 59 },
@@ -2783,8 +2814,9 @@ const VEHICLES_DATA = [
       { "name": "PMD062", "type": "Main Gun", "damage": 290, "penetration": 59 }
     ]
   },
+
   {
-    "id": 422,
+    "id": 423,
     "name": "2S6M1 Tunguska-M1",
     "type": "Anti-Air",
     "faction": "Russian",
@@ -2799,8 +2831,9 @@ const VEHICLES_DATA = [
       { "name": "ZUR 9M311", "type": "Missile", "damage": 8100, "penetration": 69, "reload": 24 }
     ]
   },
+
   {
-    "id": 423,
+    "id": 424,
     "name": "Type 625E SHORAD",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -2814,66 +2847,70 @@ const VEHICLES_DATA = [
       { "name": "FB-10A", "type": "Missile", "damage": 4800, "penetration": 55, "reload": 15 }
     ]
   },
+
   {
-    "id": 424,
+    "id": 425,
     "name": "XM975",
     "type": "Anti-Air",
     "faction": "American",
     "tier": "III",
     "image": "XM975.jpg",
-    "description": "US SPAAG with 20mm Vulcan cannon and Stinger SAM missiles.",
+    "description": "US SPAAG with Vulcan cannon and Stinger missiles.",
     "stats": { "health": 23500, "speed": 57, "armor": "40mm", "agility": 30 },
     "weapons": [
       { "name": "SAM Rokand", "type": "Missile", "damage": 8910, "penetration": 85, "reload": 6 }
     ]
   },
+
   {
-    "id": 425,
+    "id": 426,
     "name": "AFT-10",
     "type": "Anti-Air",
     "faction": "Chinese",
     "tier": "III",
     "image": "AFT-10.jpg",
-    "description": "Modern armored combat vehicle with high mobility, HJ-10 Missiles, advanced targeting, versatile for battlefield assaults and defense operationsand",
+    "description": "Modern armored vehicle with HJ-10 Missiles.",
     "stats": { "health": 26000, "speed": 70, "armor": "30mm", "agility": 40 },
     "weapons": [
       { "name": "HJ-10", "type": "Missile", "damage": 12558, "penetration": 1400, "reload": 13 }
     ]
   },
+
   {
-    "id": 425,
+    "id": 427,
     "name": "TAN-SAM-1C",
     "type": "Anti-Air",
     "faction": "Japanese",
     "tier": "III",
     "image": "TAN-SAM-1C.jpg",
-    "description": "A Japanese short-range, mobile, surface-to-air missile system designed to defend against low-altitude aerial threats with quick reaction and high accuracy.",
+    "description": "Japanese short-range mobile SAM system.",
     "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
-    "weapons": [
-    ]
+    "weapons": []
   },
+
   {
-    "id": 426,
+    "id": 428,
     "name": "M113 Hellfire",
     "type": "Missile Carrier",
     "faction": "American",
     "tier": "III",
     "image": "M113-Hellfire.jpg",
-    "description": "M113 variant carrying AGM-114 Hellfire missiles for ground and air targets.",
+    "description": "M113 variant carrying AGM-114 Hellfire missiles.",
     "stats": { "health": 24500, "speed": 62, "armor": "25mm", "agility": 35 },
     "weapons": [
       { "name": "ATGMs ARL", "type": "Missile", "damage": 9000, "penetration": 950, "reload": 10 },
       { "name": "ATGMs Laser", "type": "Missile", "damage": 10900, "penetration": 1000, "reload": 10 }
     ]
   },
+
   {
-    "id": 427,
+    "id": 429,
     "name": "9A52-2 Smerch",
     "type": "MLRS",
     "faction": "Russian",
     "tier": "III",
     "image": "9A52-2-Smerch.jpg",
-    "description": "Heavy Russian MLRS with 300mm rockets for long-range bombardment.",
+    "description": "Heavy Russian MLRS with 300mm rockets.",
     "stats": { "health": 26000, "speed": 60, "armor": "25mm", "agility": 23 },
     "weapons": [
       { "name": "9M542 HE", "type": "Missile", "damage": 18000, "penetration": 120, "reload": 16 },
@@ -2881,14 +2918,15 @@ const VEHICLES_DATA = [
       { "name": "9M55K5 CH", "type": "Missile", "damage": 17100, "penetration": 460, "reload": 16 }
     ]
   },
+
   {
-    "id": 428,
+    "id": 430,
     "name": "Type 89 MLRS",
     "type": "MLRS",
     "faction": "Chinese",
     "tier": "III",
     "image": "Type-89-MLRS.jpg",
-    "description": "Japanese 300mm MLRS for long-range artillery strikes.",
+    "description": "Chinese MLRS system.",
     "stats": { "health": 24500, "speed": 55, "armor": "25mm", "agility": 36 },
     "weapons": [
       { "name": "Type 81 FSBS", "type": "Missile", "damage": 11900, "penetration": 165, "reload": 20 },
@@ -2896,41 +2934,44 @@ const VEHICLES_DATA = [
       { "name": "Type 81", "type": "Missile", "damage": 9350, "penetration": 260, "reload": 20 }
     ]
   },
+
   {
-    "id": 429,
+    "id": 431,
     "name": "Type 75 MLRS",
     "type": "MLRS",
     "faction": "Japanese",
     "tier": "III",
     "image": "Type-75-MLRS.jpg",
-    "description": "Japanese 300mm MLRS for long-range artillery strikes.",
+    "description": "Japanese 300mm MLRS.",
     "stats": { "health": 22800, "speed": 51, "armor": "30mm", "agility": 35.5 },
     "weapons": [
       { "name": "Type 75 HE", "type": "Missile", "damage": 5700, "penetration": 85, "reload": 30 },
       { "name": "Type 75 mod 2 HEAT", "type": "Missile", "damage": 10300, "penetration": 350, "reload": 30 }
     ]
   },
+
   {
-    "id": 430,
+    "id": 432,
     "name": "AFT-09",
     "type": "Anti-Air",
     "faction": "Chinese",
     "tier": "III",
     "image": "AFT-09.jpg",
-    "description": "Mobile missile tank with reinforced armor, launches guided missiles, excels in long-range strikes, tactical support, and battlefield versatility.",
+    "description": "Mobile missile tank with guided missiles.",
     "stats": { "health": 23000, "speed": 96, "armor": "30mm", "agility": 40 },
     "weapons": [
       { "name": "ATGM HJ-9", "type": "Missile", "damage": 10192, "penetration": 1200, "reload": 6 }
     ]
   },
+
   {
-    "id": 431,
+    "id": 433,
     "name": "LAV-600",
     "type": "Tank Destroyer",
     "faction": "American",
     "tier": "III",
     "image": "LAV-600.jpg",
-    "description": "Armored wheeled vehicle equipped with short-range missiles and machine guns.",
+    "description": "Armored wheeled vehicle with strong firepower.",
     "stats": { "health": 24000, "speed": 95, "armor": "20mm", "agility": 27 },
     "weapons": [
       { "name": "M392", "type": "Main Gun", "damage": 8295, "penetration": 350 },
@@ -2939,14 +2980,15 @@ const VEHICLES_DATA = [
       { "name": "M833", "type": "Main Gun", "damage": 9900, "penetration": 472 }
     ]
   },
+
   {
-    "id": 432,
+    "id": 434,
     "name": "HSTV-L",
     "type": "Light Tank",
     "faction": "American",
     "tier": "III",
     "image": "HSTV-L.jpg",
-    "description": "A lightweight prototype tank, emphasizing mobility, advanced optics, and rapid firepower.",
+    "description": "A lightweight prototype tank with high mobility.",
     "stats": { "health": 26000, "speed": 84, "armor": "47mm", "agility": 40 },
     "weapons": [
       { "name": "M833", "type": "Main Gun", "damage": 9900, "penetration": 472 },
@@ -2955,14 +2997,14 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 433,
+    "id": 435,
     "name": "K21 KNIFV",
     "type": "Light Tank",
     "faction": "SouthKorean",
     "tier": "III",
     "image": "K21-KNIFV.jpg",
-    "description": "South Korean infantry fighting vehicle, offering strong firepower, amphibious capability, protection, and advanced digital battlefield systems.",
-    "stats": { "health": 35900, "speed": 76 , "armor": 50, "agility": 42 },
+    "description": "South Korean infantry fighting vehicle with strong firepower.",
+    "stats": { "health": 35900, "speed": 76, "armor": 50, "agility": 42 },
     "weapons": [
       { "name": "K237 APFSDS", "type": "Main Gun", "damage": 1490, "penetration": 200 },
       { "name": "K236 HEI", "type": "Main Gun", "damage": 770, "penetration": 74 },
