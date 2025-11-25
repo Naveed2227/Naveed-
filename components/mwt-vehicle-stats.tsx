@@ -12330,7 +12330,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
 </p>
 
                   <p className="text-sm text-slate-400">
-                    Created by Naveed2227 • Version 1.00.0 • Built with CSS and TypeScript
+                    Created and Runned by Naveed2227 
                   </p>
                    <div className="flex items-center space-x-4 pt-2">
                     <p className="text-sm text-slate-400">Contact:</p>
@@ -12384,7 +12384,17 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                     <div className="space-y-3">
 
 
-
+                    <div className="bg-slate-700/50 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium text-cyan-300">Version 1.1.01 (25/11/2025)</span>
+                          <span className="text-sm text-slate-400">Update</span>
+                        </div>
+                        <ul className="text-sm text-slate-300 space-y-1">
+                          <li>• New Vehicles added for December</li>
+                          <li>• Flag problem fixed</li>
+                          <li>• Minor bugs fixed</li>
+                        </ul>
+                      </div>
                      <div className="bg-slate-700/50 p-3 rounded-lg">
                         <div className="flex justify-between items-center mb-1">
                           <span className="font-medium text-cyan-300">Version 1.1.02 (19/11/2025)</span>
