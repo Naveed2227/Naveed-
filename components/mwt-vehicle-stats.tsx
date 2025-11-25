@@ -1371,582 +1371,566 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 123,
-    name: "Challenger 3",
-    type: "Main Battle Tank",
-    faction: "British",
-    tier: "IV",
-    image: "Challenger-3.jpg",
-    description: "Next-generation British main battle tank with smoothbore gun and digital turret.",
-    stats: { health: 46200, speed: 70, armor: "1180mm", agility: 32 },
-    weapons: [
-      { name: "DM11", type: "Main Gun", damage: 5000, penetration: 85 },
-      { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
-      { name: "DM33", type: "Main Gun", damage: 11230, penetration: 550 },
-      { name: "DM63", type: "Main Gun", damage: 11760, penetration: 810 }
+    "id": 123,
+    "name": "Challenger 3",
+    "type": "Main Battle Tank",
+    "faction": "British",
+    "tier": "IV",
+    "image": "Challenger-3.jpg",
+    "description": "Next-generation British main battle tank with smoothbore gun and digital turret.",
+    "stats": { "health": 46200, "speed": 70, "armor": 1180, "agility": 32 },
+    "weapons": [
+      { "name": "DM11", "type": "Main Gun", "damage": 5000, "penetration": 85 },
+      { "name": "DM12", "type": "Main Gun", "damage": 12100, "penetration": 480 },
+      { "name": "DM33", "type": "Main Gun", "damage": 11230, "penetration": 550 },
+      { "name": "DM63", "type": "Main Gun", "damage": 11760, "penetration": 810 }
     ]
   },
   {
-    id: 124,
-    name: "EMBT 120",
-    type: "Main Battle Tank",
-    faction: "French",
-    tier: "IV",
-    image: "EMBT-120.jpg",
-    description: "A hybrid European main battle tank, combining Leopard 2 chassis with Leclerc turret.",
-    stats: { health: 41900, speed: 75, armor: "1160mm", agility: 38 },
-    weapons: [
-      { name: "OCC120G1", type: "Main Gun", damage: 11840, penetration: 480 },
-      { name: "OE120F1", type: "Main Gun", damage: 4800, penetration: 85 },
-      { name: "OFL120F1", type: "Main Gun", damage: 11040, penetration: 575 },
-      { name: "SHARD120", type: "Main Gun", damage: 11300, penetration: 575 }
+    "id": 124,
+    "name": "EMBT 120",
+    "type": "Main Battle Tank",
+    "faction": "French",
+    "tier": "IV",
+    "image": "EMBT-120.jpg",
+    "description": "A hybrid European main battle tank, combining Leopard 2 chassis with Leclerc turret.",
+    "stats": { "health": 41900, "speed": 75, "armor": 1160, "agility": 38 },
+    "weapons": [
+      { "name": "OCC120G1", "type": "Main Gun", "damage": 11840, "penetration": 480 },
+      { "name": "OE120F1", "type": "Main Gun", "damage": 4800, "penetration": 85 },
+      { "name": "OFL120F1", "type": "Main Gun", "damage": 11040, "penetration": 575 },
+      { "name": "SHARD120", "type": "Main Gun", "damage": 11300, "penetration": 575 }
     ]
   },
   {
-    id: 125,
-    name: "FV4034 Challenger 2 TES",
-    type: "Main Battle Tank",
-    faction: "British",
-    tier: "IV",
-    image: "FV4034-Challenger-2-TES.jpg",
-    description: "A heavily upgraded British main battle tank with advanced armor for urban warfare.",
-    stats: { health: 42700, speed: 56, armor: "1120mm", agility: 30 },
-    weapons: [
-      
-      { name: "L27A1", type: "Main Gun", damage: 11850, penetration: 610 },
-      { name: "L23A1", type: "Main Gun", damage: 11400, penetration: 397 },
-      { name: "L31A7", type: "Main Gun", damage: 11870, penetration: 152 },
-      { name: "L26", type: "Main Gun", damage: 11600, penetration: 494 },
+    "id": 125,
+    "name": "FV4034 Challenger 2 TES",
+    "type": "Main Battle Tank",
+    "faction": "British",
+    "tier": "IV",
+    "image": "FV4034-Challenger-2-TES.jpg",
+    "description": "A heavily upgraded British main battle tank with advanced armor for urban warfare.",
+    "stats": { "health": 42700, "speed": 56, "armor": 1120, "agility": 30 },
+    "weapons": [
+      { "name": "L27A1", "type": "Main Gun", "damage": 11850, "penetration": 610 },
+      { "name": "L23A1", "type": "Main Gun", "damage": 11400, "penetration": 397 },
+      { "name": "L31A7", "type": "Main Gun", "damage": 11870, "penetration": 152 },
+      { "name": "L26", "type": "Main Gun", "damage": 11600, "penetration": 494 }
     ]
   },
   {
-    id: 125,
-    name: "Leopard 2 Revolution",
-    type: "Main Battle Tank",
-    faction: "Indonesian",
-    tier: "IV",
-    image: "Leopard-2-Revolution.jpg",
-    description: "An upgraded German main battle tank variant operated by Indonesia, featuring enhanced armor, modern sensors, improved crew protection, and advanced digital fire-control systems.",
-    stats: { health: 0, speed: 0, armor: "0mm", agility: 0 },
-    weapons: [
-     
+    "id": 126,
+    "name": "Leopard 2 Revolution",
+    "type": "Main Battle Tank",
+    "faction": "Indonesian",
+    "tier": "IV",
+    "image": "Leopard-2-Revolution.jpg",
+    "description": "An upgraded German main battle tank variant operated by Indonesia, featuring enhanced armor, modern sensors, improved crew protection, and advanced digital fire-control systems.",
+    "stats": { "health": 0, "speed": 0, "armor": 0, "agility": 0 },
+    "weapons": []
+  },
+  {
+    "id": 127,
+    "name": "Karrar",
+    "type": "Main Battle Tank",
+    "faction": "Iranian",
+    "tier": "IV",
+    "image": "Karrar.jpg",
+    "description": "An Iranian main battle tank, featuring upgraded armor, firepower, and technology from T-72 design.",
+    "stats": { "health": 39800, "speed": 70, "armor": 850, "agility": 35 },
+    "weapons": [
+      { "name": "3OF19", "type": "Main Gun", "damage": 5000, "penetration": 82 },
+      { "name": "3BK29", "type": "Main Gun", "damage": 12630, "penetration": 660 },
+      { "name": "3BM29 Nadfil", "type": "Main Gun", "damage": 11250, "penetration": 500 },
+      { "name": "3BM50 Lead-1", "type": "Main Gun", "damage": 11170, "penetration": 755 },
+      { "name": "Tondar", "type": "Main Gun", "damage": 10160, "penetration": 750 }
     ]
   },
   {
-    id: 126,
-    name: "Karrar",
-    type: "Main Battle Tank",
-    faction: "Iranian",
-    tier: "IV",
-    image: "Karrar.jpg",
-    description: "An Iranian main battle tank, featuring upgraded armor, firepower, and technology from T-72 design.",
-    stats: { health: 39800, speed: 70, armor: "850mm", agility: 35 },
-    weapons: [
-      { name: "3OF19", type: "Main Gun", damage: 5000, penetration: 82 },
-      { name: "3BK29", type: "Main Gun", damage: 12630, penetration: 660 },
-      { name: "3BM29 Nadfil", type: "Main Gun", damage: 11250, penetration: 500 },
-      { name: "3BM50 Lead-1", type: "Main Gun", damage: 11170, penetration: 755 },
-      { name: "Tondar", type: "Main Gun", damage: 10160, penetration: 750 }
+    "id": 128,
+    "name": "Leclerc S2 AZUR",
+    "type": "Main Battle Tank",
+    "faction": "French",
+    "tier": "IV",
+    "image": "Leclerc-S2-AZUR.jpg",
+    "description": "Upgraded French main battle tank with urban warfare package and improved armor.",
+    "stats": { "health": 44700, "speed": 72, "armor": 900, "agility": 41 },
+    "weapons": [
+      { "name": "OFL 120 G1 APFSDS", "type": "Main Gun", "damage": 11240, "penetration": 495 },
+      { "name": "OE 120 F1 HEI", "type": "Main Gun", "damage": 5000, "penetration": 85 },
+      { "name": "OCC 120 G1 HEAT", "type": "Main Gun", "damage": 12230, "penetration": 480 },
+      { "name": "OFL 120 F1 APFSDS", "type": "Main Gun", "damage": 11610, "penetration": 675 }
     ]
   },
   {
-    id: 127,
-    name: "Leclerc S2 AZUR",
-    type: "Main Battle Tank",
-    faction: "French",
-    tier: "IV",
-    image: "Leclerc-S2-AZUR.jpg",
-    description: "Upgraded French main battle tank with urban warfare package and improved armor.",
-    stats: { health: 44700, speed: 72, armor: "900mm", agility: 41 },
-    weapons: [
-      { name: "OFL 120 G1 APFSDS", type: "Main Gun", damage: 11240, penetration: 495 },
-      { name: "OE 120 F1 HEI", type: "Main Gun", damage: 5000, penetration: 85 },
-      { name: "OCC 120 G1 HEAT", type: "Main Gun", damage: 12230, penetration: 480 },
-      { name: "OFL 120 F1 APFSDS", type: "Main Gun", damage: 11610, penetration: 675 },
-      
+    "id": 129,
+    "name": "Object 640",
+    "type": "Main Battle Tank",
+    "faction": "Russian",
+    "tier": "IV",
+    "image": "Object-640.jpg",
+    "description": "The Object 640 \"Black Eagle\" is a Russian prototype main battle tank with modular armor.",
+    "stats": { "health": 42400, "speed": 80, "armor": 1200, "agility": 38 },
+    "weapons": [
+      { "name": "3BM60 Lead-2", "type": "Main Gun", "damage": 11830, "penetration": 780 },
+      { "name": "3BK18M", "type": "Main Gun", "damage": 12390, "penetration": 550 },
+      { "name": "3OF26", "type": "Main Gun", "damage": 5000, "penetration": 92 },
+      { "name": "9M119", "type": "Main Gun", "damage": 10160, "penetration": 750 }
     ]
   },
   {
-    id: 128,
-    name: "Object 640",
-    type: "Main Battle Tank",
-    faction: "Russian",
-    tier: "IV",
-    image: "Object-640.jpg",
-    description: "The Object 640 \"Black Eagle\" is a Russian prototype main battle tank with modular armor.",
-    stats: { health: 42400, speed: 80, armor: "1200mm", agility: 38 },
-    weapons: [
-      { name: "3BM60 Lead-2", type: "Main Gun", damage: 11830, penetration: 780 },
-      { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 },
-      { name: "3OF26", type: "Main Gun", damage: 5000, penetration: 92 },
-      { name: "9M119", type: "Main Gun", damage: 10160, penetration: 750 }
+    "id": 130,
+    "name": "Leopard 2A-RC 3.0",
+    "type": "Main Battle Tank",
+    "faction": "German",
+    "tier": "IV",
+    "image": "Leopard-2-A-RC-3.0.jpg",
+    "description": "Mobile gun system with rapid deployment capability and stealth features.",
+    "stats": { "health": 41900, "speed": 70, "armor": 300, "agility": 38 },
+    "weapons": [
+      { "name": "XM1401E APFSDS", "type": "Main Gun", "damage": 13090, "penetration": 950 },
+      { "name": "XME140 HEI", "type": "Main Gun", "damage": 13780, "penetration": 103 },
+      { "name": "XMH140 HEAT", "type": "Main Gun", "damage": 14080, "penetration": 866 },
+      { "name": "SpikeNLOS", "type": "Missile", "damage": 14250, "penetration": 1000, "reload": 4 }
     ]
   },
   {
-    id: 129,
-    name: "Leopard 2A-RC 3.0",
-    type: "Main Battle Tank",
-    faction: "German",
-    tier: "IV",
-    image: "Leopard-2-A-RC-3.0.jpg",
-    description: "Mobile gun system with rapid deployment capability and stealth features.",
-    stats: { health: 41900, speed: 70, armor: "300mm", agility: 38 },
-    weapons: [
-      { name: "XM1401E APFSDS", type: "Main Gun", damage: 13090, penetration: 950 },
-      { name: "XME140 HEI", type: "Main Gun", damage: 13780, penetration: 103 },
-      { name: "XMH140 HEAT", type: "Main Gun", damage: 14080, penetration: 866 },
-      { name: "SpikeNLOS", type: "Missile", damage: 14250, penetration: 1000, reload: 4 }
+    "id": 131,
+    "name": "Leopard 2A8",
+    "type": "Main Battle Tank",
+    "faction": "German",
+    "tier": "IV",
+    "image": "Leopard-2A8.jpg",
+    "description": "A modern German main battle tank, featuring advanced armor, improved firepower, and upgraded targeting systems for battlefield dominance.",
+    "stats": { "health": 45900, "speed": 72, "armor": 710, "agility": 38 },
+    "weapons": [
+      { "name": "DM53 APFSDS", "type": "Main Gun", "damage": 11440, "penetration": 650 },
+      { "name": "DM11 HEI", "type": "Main Gun", "damage": 5000, "penetration": 85 },
+      { "name": "DM73 APFSDS", "type": "Main Gun", "damage": 11940, "penetration": 900 },
+      { "name": "DM12A1 HEAT", "type": "Main Gun", "damage": 12140, "penetration": 500 }
     ]
   },
   {
-    id: 130,
-    name: "Leopard 2A8",
-    type: "Main Battle Tank",
-    faction: "German",
-    tier: "IV",
-    image: "Leopard-2A8.jpg",
-    description: "A modern German main battle tank, featuring advanced armor, improved firepower, and upgraded targeting systems for battlefield dominance.",
-    stats: { health: 45900, speed: 72, armor: "710", agility: 38 },
-    weapons: [
-      { name: "DM53 APFSDS", type: "Main Gun", damage: 11440, penetration: 650 },
-      { name: "DM11 HEI", type: "Main Gun", damage: 5000, penetration: 85 },
-      { name: "DM73 APFSDS", type: "Main Gun", damage: 11940, penetration: 900 },
-      { name: "DM12A1 HEAT", type: "Main Gun", damage: 12140, penetration: 500 }
+    "id": 132,
+    "name": "T-15 Barbaris",
+    "type": "Light Tank",
+    "faction": "Russian",
+    "tier": "IV",
+    "image": "T-15-Barbaris.jpg",
+    "description": "A heavily armored IFV featuring a 57 mm autocannon, Kornet-EM missiles, strong frontal protection, and impressive mobility for its weight overall.",
+    "stats": { "health": 0, "speed": 0, "armor": 450, "agility": 0 },
+    "weapons": [
+      { "name": "9K135 Kornet", "type": "Missile", "damage": 14820, "penetration": 1000, "reload": 12 }
     ]
   },
   {
-    id: 131,
-    name: "T-15 Barbaris",
-    type: "Light Tank",
-    faction: "Russian",
-    tier: "IV",
-    image: "T-15-Barbaris.jpg",
-    description: "A heavily armored IFV featuring a 57 mm autocannon, Kornet-EM missiles, strong frontal protection, and impressive mobility for its weight overall.",
-    stats: { health: 0, speed: 0, armor: "450", agility: 0 },
-    weapons: [
-      { name: "9K135 Kornet", type: "Missile", damage: 14820, penetration: 1000, reload: 12 }
-    ]
-  },
-  {
-    id: 132,
-    name: "T-20 Monolit",
-    type: "Tank Destroyer",
-    faction: "Russian",
-    tier: "IV",
-    image: "T-20-Monolit.jpg",
-    description: "Advanced Russian main battle tank equipped with a 2A42 autocannon, Kornet ATGMs, and a 30mm AGS-30 grenade launcher. Known for its formidable firepower and versatility on the battlefield.",
-    stats: {
-      health: 42300,
-      speed: 70,
-      reverseSpeed: 50,
-      turretRotationSpeed: 49.8,
-      hullRotationSpeed: 40,
-      armor: 400,
-      agility: 45
+    "id": 133,
+    "name": "T-20 Monolit",
+    "type": "Tank Destroyer",
+    "faction": "Russian",
+    "tier": "IV",
+    "image": "T-20-Monolit.jpg",
+    "description": "Advanced Russian main battle tank equipped with a 2A42 autocannon, Kornet ATGMs, and a 30mm AGS-30 grenade launcher. Known for its formidable firepower and versatility on the battlefield.",
+    "stats": {
+      "health": 42300,
+      "speed": 70,
+      "reverseSpeed": 50,
+      "turretRotationSpeed": 49.8,
+      "hullRotationSpeed": 40,
+      "armor": 400,
+      "agility": 45
     },
-    weapons: [
-      { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
-      { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
-      { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
-      { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
-      { name: "VOG-17M", type: "Missile", damage: 1600, penetration: 60, reload: 1.7 },
-      { name: "VOG-30", type: "Missile", damage: 1800, penetration: 76, reload: 1.7 },
-      { name: "9K135 Kornet", type: "Missile", damage: 14820, penetration: 1000, reload: 12 }
+    "weapons": [
+      { "name": "3UBR6", "type": "Main Gun", "damage": 560, "penetration": 71 },
+      { "name": "3UBR8", "type": "Main Gun", "damage": 590, "penetration": 165 },
+      { "name": "30F8", "type": "Main Gun", "damage": 675, "penetration": 50 },
+      { "name": "M929", "type": "Main Gun", "damage": 630, "penetration": 189 },
+      { "name": "VOG-17M", "type": "Missile", "damage": 1600, "penetration": 60, "reload": 1.7 },
+      { "name": "VOG-30", "type": "Missile", "damage": 1800, "penetration": 76, "reload": 1.7 },
+      { "name": "9K135 Kornet", "type": "Missile", "damage": 14820, "penetration": 1000, "reload": 12 }
     ]
   },
   {
-    id: 133,
-    name: "KF31 Lynx",
-    type: "Light Tank",
-    faction: "German",
-    tier: "IV",
-    image: "KF31-Lynx.jpg",
-    description: "A versatile German infantry fighting vehicle equipped with a 30mm autocannon and Spike LR2 missiles, adaptable for various combat roles.",
-    stats: {
-      health: 38600,
-      speed: 80,
-      reverseSpeed: 30,
-      turretRotationSpeed: 50,
-      hullRotationSpeed: 40,
-      armor: 300,
-      agility: 40
+    "id": 134,
+    "name": "KF31 Lynx",
+    "type": "Light Tank",
+    "faction": "German",
+    "tier": "IV",
+    "image": "KF31-Lynx.jpg",
+    "description": "A versatile German infantry fighting vehicle equipped with a 30mm autocannon and Spike LR2 missiles, adaptable for various combat roles.",
+    "stats": {
+      "health": 38600,
+      "speed": 80,
+      "reverseSpeed": 30,
+      "turretRotationSpeed": 50,
+      "hullRotationSpeed": 40,
+      "armor": 300,
+      "agility": 40
     },
-    weapons: [
-      { name: "PMC287", type: "Main Gun", damage: 570, penetration: 195 },
-      { name: "PMC308", type: "Main Gun", damage: 300, penetration: 80 },
-      { name: "MK246", type: "Main Gun", damage: 510, penetration: 87 },
-      { name: "MK266", type: "Main Gun", damage: 270, penetration: 55 },
-      { name: "SPIKE-LR II", type: "Missile", damage: 10090, penetration: 900, reload: 10 }
+    "weapons": [
+      { "name": "PMC287", "type": "Main Gun", "damage": 570, "penetration": 195 },
+      { "name": "PMC308", "type": "Main Gun", "damage": 300, "penetration": 80 },
+      { "name": "MK246", "type": "Main Gun", "damage": 510, "penetration": 87 },
+      { "name": "MK266", "type": "Main Gun", "damage": 270, "penetration": 55 },
+      { "name": "SPIKE-LR II", "type": "Missile", "damage": 10090, "penetration": 900, "reload": 10 }
     ]
   },
   {
-    id: 134,
-    name: "T-90M",
-    type: "Main Battle Tank",
-    faction: "Russian",
-    tier: "IV",
-    image: "T-90M.jpg",
-    description: "Russia’s advanced main battle tank, featuring upgraded armor, firepower, electronics, and battlefield survivability.",
-    stats: {
-      health: 41300,
-      speed: 70,
-      reverseSpeed: 0,
-      turretRotationSpeed: 0,
-      hullRotationSpeed: 45,
-      armor: 900,
-      agility: 40
+    "id": 135,
+    "name": "T-90M",
+    "type": "Main Battle Tank",
+    "faction": "Russian",
+    "tier": "IV",
+    "image": "T-90M.jpg",
+    "description": "Russia’s advanced main battle tank, featuring upgraded armor, firepower, electronics, and battlefield survivability.",
+    "stats": {
+      "health": 41300,
+      "speed": 70,
+      "reverseSpeed": 0,
+      "turretRotationSpeed": 0,
+      "hullRotationSpeed": 45,
+      "armor": 900,
+      "agility": 40
     },
-    weapons: [
-      { name: "3BM46 APFSDS", type: "Main Gun", damage: 11640, penetration: 690 },
-      { name: "30F26 HEI", type: "Main Gun", damage: 5000, penetration: 92 },
-      { name: "3BM70 APFSDS", type: "Main Gun", damage: 12010, penetration: 870 },
-      { name: "3BK18M HEAT", type: "Main Gun", damage: 12390, penetration: 550 },
-      { name: "9M119 HEAT", type: "Main Gun", damage: 10160, penetration: 750 }
+    "weapons": [
+      { "name": "3BM46 APFSDS", "type": "Main Gun", "damage": 11640, "penetration": 690 },
+      { "name": "30F26 HEI", "type": "Main Gun", "damage": 5000, "penetration": 92 },
+      { "name": "3BM70 APFSDS", "type": "Main Gun", "damage": 12010, "penetration": 870 },
+      { "name": "3BK18M HEAT", "type": "Main Gun", "damage": 12390, "penetration": 550 },
+      { "name": "9M119 HEAT", "type": "Main Gun", "damage": 10160, "penetration": 750 }
     ]
   },
   {
-    id: 135,
-    name: "K2 Black Panther",
-    type: "Main Battle Tank",
-    faction: "SouthKorean",
-    tier: "IV",
-    image: "K2-Black-Panther.jpg",
-    description: "South Korea's advanced main battle tank, featuring superior firepower, mobility, armor protection, and state-of-the-art battlefield technology.",
-    stats: {
-      health: 42800,
-      speed: 75,
-      reverseSpeed: 0,
-      turretRotationSpeed: 0,
-      hullRotationSpeed: 40,
-      armor: 600,
-      agility: 0
+    "id": 136,
+    "name": "K2 Black Panther",
+    "type": "Main Battle Tank",
+    "faction": "SouthKorean",
+    "tier": "IV",
+    "image": "K2-Black-Panther.jpg",
+    "description": "South Korea's advanced main battle tank, featuring superior firepower, mobility, armor protection, and state-of-the-art battlefield technology.",
+    "stats": {
+      "health": 42800,
+      "speed": 75,
+      "reverseSpeed": 0,
+      "turretRotationSpeed": 0,
+      "hullRotationSpeed": 40,
+      "armor": 600,
+      "agility": 0
     },
-    weapons: [
-      { name: "K276 APFSDS", type: "Main Gun", damage: 11500, penetration: 600 },
-      { name: "K279 APFSDS", type: "Main Gun", damage: 11830, penetration: 740 },
-      { name: "K280 HEAT-MP", type: "Main Gun", damage: 12450, penetration: 680 },
-      { name: "KSTAM-II", type: "Missile", damage: 9560, penetration: 850 }
+    "weapons": [
+      { "name": "K276 APFSDS", "type": "Main Gun", "damage": 11500, "penetration": 600 },
+      { "name": "K279 APFSDS", "type": "Main Gun", "damage": 11830, "penetration": 740 },
+      { "name": "K280 HEAT-MP", "type": "Main Gun", "damage": 12450, "penetration": 680 },
+      { "name": "KSTAM-II", "type": "Missile", "damage": 9560, "penetration": 850 }
     ]
   },
   {
-    id: 136,
-    name: "Al-Khalid",
-    type: "Main Battle Tank",
-    faction: "Pakistani",
-    tier: "IV",
-    image: "Al-Khalid.jpg",
-    description: "Pakistani main battle tank, jointly developed with China, featuring advanced firepower, mobility, and protection.",
-    stats: {
-      health: 43600,
-      turnRate: 45,
-      speed: 70,
-      reverseSpeed: 0,
-      turretRotationSpeed: 0,
-      hullRotationSpeed: 0,
-      armor: 810,
-      agility: 38
+    "id": 137,
+    "name": "Al-Khalid",
+    "type": "Main Battle Tank",
+    "faction": "Pakistani",
+    "tier": "IV",
+    "image": "Al-Khalid.jpg",
+    "description": "Pakistani main battle tank, jointly developed with China, featuring advanced firepower, mobility, and protection.",
+    "stats": {
+      "health": 43600,
+      "turnRate": 45,
+      "speed": 70,
+      "reverseSpeed": 0,
+      "turretRotationSpeed": 0,
+      "hullRotationSpeed": 0,
+      "armor": 810,
+      "agility": 38
     },
-    weapons: [
-      { name: "DTB-125 HE", type: "Main Gun", damage: 4980, penetration: 83 },
-      { name: "DTP-125 HEAT", type: "Main Gun", damage: 12230, penetration: 480 },
-      { name: "DTC10-125", type: "Main Gun", damage: 11620, penetration: 680 },
-      { name: "TYPE 1985-I", type: "Main Gun", damage: 11120, penetration: 466 }
+    "weapons": [
+      { "name": "DTB-125 HE", "type": "Main Gun", "damage": 4980, "penetration": 83 },
+      { "name": "DTP-125 HEAT", "type": "Main Gun", "damage": 12230, "penetration": 480 },
+      { "name": "DTC10-125", "type": "Main Gun", "damage": 11620, "penetration": 680 },
+      { "name": "TYPE 1985-I", "type": "Main Gun", "damage": 11120, "penetration": 466 }
     ]
   },
   {
-    id: 137,
-    name: "Arjun Mk.2",
-    type: "Main Battle Tank",
-    faction: "Indian",
-    tier: "IV",
-    image: "Arjun-Mk.2.jpg",
-    description: "India's upgraded battle tank with stronger armor, 120mm missile-firing gun, and advanced systems.",
-    stats: {
-      health: 46600,
-      speed: 70,
-      reverseSpeed: 0,
-      turretRotationSpeed: 0,
-      hullRotationSpeed: 35,
-      armor: 810,
-      agility: 35
+    "id": 138,
+    "name": "Arjun Mk.2",
+    "type": "Main Battle Tank",
+    "faction": "Indian",
+    "tier": "IV",
+    "image": "Arjun-Mk.2.jpg",
+    "description": "India's upgraded battle tank with stronger armor, 120mm missile-firing gun, and advanced systems.",
+    "stats": {
+      "health": 46600,
+      "speed": 70,
+      "reverseSpeed": 0,
+      "turretRotationSpeed": 0,
+      "hullRotationSpeed": 35,
+      "armor": 810,
+      "agility": 35
     },
-    weapons: [
-      { name: "L31A7 HESH", type: "Main Gun", damage: 11500, penetration: 152 },
-      { name: "PCD APHE", type: "Main Gun", damage: 12160, penetration: 450 },
-      { name: "Mk.II APFSD", type: "Main Gun", damage: 11560, penetration: 650 },
-      { name: "LAHAT HEAT", type: "Main Gun", damage: 10250, penetration: 800 }
+    "weapons": [
+      { "name": "L31A7 HESH", "type": "Main Gun", "damage": 11500, "penetration": 152 },
+      { "name": "PCD APHE", "type": "Main Gun", "damage": 12160, "penetration": 450 },
+      { "name": "Mk.II APFSD", "type": "Main Gun", "damage": 11560, "penetration": 650 },
+      { "name": "LAHAT HEAT", "type": "Main Gun", "damage": 10250, "penetration": 800 }
     ]
   },
   {
-    id: 138,
-    name: "M10 Booker",
-    type: "Light Tank",
-    faction: "American",
-    tier: "IV",
-    image: "M10-Booker.jpg",
-    description: "A mobile assault gun designed to neutralize fortified positions and light armor.",
-    stats: {
-      health: 39300,
-      speed: 75,
-      reverseSpeed: 30,
-      turretRotationSpeed: 30,
-      hullRotationSpeed: 35,
-      armor: 350,
-      agility: 38
+    "id": 139,
+    "name": "M10 Booker",
+    "type": "Light Tank",
+    "faction": "American",
+    "tier": "IV",
+    "image": "M10-Booker.jpg",
+    "description": "A mobile assault gun designed to neutralize fortified positions and light armor.",
+    "stats": {
+      "health": 39300,
+      "speed": 75,
+      "reverseSpeed": 30,
+      "turretRotationSpeed": 30,
+      "hullRotationSpeed": 35,
+      "armor": 350,
+      "agility": 38
     },
-    weapons: [
-      { name: "M392A2", type: "Main Gun", damage: 9480, penetration: 372 },
-      { name: "M393A2", type: "Main Gun", damage: 10340, penetration: 127 },
-      { name: "M456A2", type: "Main Gun", damage: 10890, penetration: 400 },
-      { name: "M900", type: "Main Gun", damage: 10320, penetration: 582 },
-      { name: "SwitchBlade 300", type: "Missile", damage: 6730, penetration: 390, reload: 15 }
+    "weapons": [
+      { "name": "M392A2", "type": "Main Gun", "damage": 9480, "penetration": 372 },
+      { "name": "M393A2", "type": "Main Gun", "damage": 10340, "penetration": 127 },
+      { "name": "M456A2", "type": "Main Gun", "damage": 10890, "penetration": 400 },
+      { "name": "M900", "type": "Main Gun", "damage": 10320, "penetration": 582 },
+      { "name": "SwitchBlade 300", "type": "Missile", "damage": 6730, "penetration": 390, "reload": 15 }
     ]
-  },
+   },   
   {
-    id: 139,
-    name: "PL-01",
-    type: "Light Tank",
-    faction: "Polish",
-    tier: "IV",
-    image: "PL-01.jpg",
-    description: "A concept stealth tank featuring a 120mm cannon and advanced camouflage systems.",
-    stats: {
-      health: 36100,
-      speed: 85,
-      reverseSpeed: 45,
-      turretRotationSpeed: 40,
-      hullRotationSpeed: 30,
-      armor: 320,
-      agility: 36
+    "id": 140,
+    "name": "PL-01",
+    "type": "Light Tank",
+    "faction": "Polish",
+    "tier": "IV",
+    "image": "PL-01.jpg",
+    "description": "A concept stealth tank featuring a 120mm cannon and advanced camouflage systems.",
+    "stats": {
+      "health": 36100,
+      "speed": 85,
+      "reverseSpeed": 45,
+      "turretRotationSpeed": 40,
+      "hullRotationSpeed": 30,
+      "armor": 320,
+      "agility": 36
     },
-    weapons: [
-      { name: "M829A3", type: "Main Gun", damage: 10450, penetration: 670 },
-      { name: "M830", type: "Main Gun", damage: 10930, penetration: 800 },
-      { name: "MRM-CE", type: "Main Gun", damage: 10000, penetration: 850 },
-      { name: "MRM-KE", type: "Main Gun", damage: 9150, penetration: 980 }
+    "weapons": [
+      { "name": "M829A3", "type": "Main Gun", "damage": 10450, "penetration": 670 },
+      { "name": "M830", "type": "Main Gun", "damage": 10930, "penetration": 800 },
+      { "name": "MRM-CE", "type": "Main Gun", "damage": 10000, "penetration": 850 },
+      { "name": "MRM-KE", "type": "Main Gun", "damage": 9150, "penetration": 980 }
     ]
   },
   {
-    id: 140,
-    name: "ZLT-11",
-    type: "Tank Destroyer",
-    faction: "Chinese",
-    tier: "IV",
-    image: "ZLT-11.jpg",
-    description: "A Chinese wheeled infantry fighting vehicle armed with a 105 mm cannon and anti-tank missiles.",
-    stats: {
-      health: 33900,
-      speed: 100,
-      reverseSpeed: 40,
-      turretRotationSpeed: 45.3,
-      hullRotationSpeed: 45.3,
-      armor: 30,
-      agility: 45.30
+    "id": 141,
+    "name": "ZLT-11",
+    "type": "Tank Destroyer",
+    "faction": "Chinese",
+    "tier": "IV",
+    "image": "ZLT-11.jpg",
+    "description": "A Chinese wheeled infantry fighting vehicle armed with a 105 mm cannon and anti-tank missiles.",
+    "stats": {
+      "health": 33900,
+      "speed": 100,
+      "reverseSpeed": 40,
+      "turretRotationSpeed": 45.3,
+      "hullRotationSpeed": 45.3,
+      "armor": 30,
+      "agility": 45.3
     },
-    weapons: [
-      { name: "Type 83 HEAT", type: "Main Gun", damage: 10890, penetration: 425 },
-      { name: "DTB-1 HESH", type: "Main Gun", damage: 4500, penetration: 55 },
-      { name: "DTW-2 APFSDS", type: "Main Gun", damage: 10310, penetration: 580 },
-      { name: "GP 105 HEAT", type: "Main Gun", damage: 9180, penetration: 750 }
+    "weapons": [
+      { "name": "Type 83 HEAT", "type": "Main Gun", "damage": 10890, "penetration": 425 },
+      { "name": "DTB-1 HESH", "type": "Main Gun", "damage": 4500, "penetration": 55 },
+      { "name": "DTW-2 APFSDS", "type": "Main Gun", "damage": 10310, "penetration": 580 },
+      { "name": "GP 105 HEAT", "type": "Main Gun", "damage": 9180, "penetration": 750 }
     ]
   },
   {
-    id: 141,
-    name: "M-SHORAD",
-    type: "Anti-Air",
-    faction: "American",
-    tier: "IV",
-    image: "M-SHORAD.jpg",
-    description: "Mobile short-range air defense system with autocannons and Stinger missiles.",
-    stats: {
-      health: 27900,
-      speed: 97,
-      reverseSpeed: 30,
-      turretRotationSpeed: 55,
-      hullRotationSpeed: 50,
-      armor: 250,
-      agility: 55
+    "id": 142,
+    "name": "M-SHORAD",
+    "type": "Anti-Air",
+    "faction": "American",
+    "tier": "IV",
+    "image": "M-SHORAD.jpg",
+    "description": "Mobile short-range air defense system with autocannons and Stinger missiles.",
+    "stats": {
+      "health": 27900,
+      "speed": 97,
+      "reverseSpeed": 30,
+      "turretRotationSpeed": 55,
+      "hullRotationSpeed": 50,
+      "armor": 250,
+      "agility": 55
     },
-    weapons: [
-      { name: "XM914", type: "Main Gun", damage: 633, penetration: 120 },
-      { name: "Stinger Launcher", type: "Missile", damage: 4700, penetration: 35, reload: 10 },
-      { name: "AGM-114 Hellfire", type: "Missile", damage: 11700, penetration: 950, reload: 10 }
+    "weapons": [
+      { "name": "XM914", "type": "Main Gun", "damage": 633, "penetration": 120 },
+      { "name": "Stinger Launcher", "type": "Missile", "damage": 4700, "penetration": 35, "reload": 10 },
+      { "name": "AGM-114 Hellfire", "type": "Missile", "damage": 11700, "penetration": 950, "reload": 10 }
     ]
   },
   {
-    id: 119,
-    name: "M1 AGDS",
-    type: "Anti-Air",
-    faction: "American",
-    tier: "IV",
-    image: "M1-AGDS.jpg",
-    description: "A conceptual U.S. armored air-defense vehicle design combining heavy protection, advanced sensors, and rapid-fire weapons for close-range battlefield air-defense roles.",
-    stats: { health: 0, speed: 0, armor: "0mm", agility: 0 },
-    weapons: [
-     
-    ]
+    "id": 143,
+    "name": "M1 AGDS",
+    "type": "Anti-Air",
+    "faction": "American",
+    "tier": "IV",
+    "image": "M1-AGDS.jpg",
+    "description": "A conceptual U.S. armored air-defense vehicle design combining heavy protection, advanced sensors, and rapid-fire weapons for close-range battlefield air-defense roles.",
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "weapons": []
   },
   {
-    id: 142,
-    name: "TOS-1A",
-    type: "MLRS",
-    faction: "Russian",
-    tier: "IV",
-    image: "TOS-1A.jpg",
-    description: "Heavy flamethrower rocket launcher mounted on a tank chassis.",
-    stats: {
-      health: 38800,
-      speed: 60,
-      reverseSpeed: 25,
-      turretRotationSpeed: 20,
-      hullRotationSpeed: 30,
-      armor: 400,
-      agility: 44
+    "id": 144,
+    "name": "TOS-1A",
+    "type": "MLRS",
+    "faction": "Russian",
+    "tier": "IV",
+    "image": "TOS-1A.jpg",
+    "description": "Heavy flamethrower rocket launcher mounted on a tank chassis.",
+    "stats": {
+      "health": 38800,
+      "speed": 60,
+      "reverseSpeed": 25,
+      "turretRotationSpeed": 20,
+      "hullRotationSpeed": 30,
+      "armor": 400,
+      "agility": 44
     },
-    weapons: [
-      { name: "M0.1.01.04 TBC", type: "Missile", damage: 4500, penetration: 160, reload: 35 },
-      { name: "M0.1.01.04M INC", type: "Missile", damage: 12600, penetration: 85, reload: 35 }
+    "weapons": [
+      { "name": "M0.1.01.04 TBC", "type": "Missile", "damage": 4500, "penetration": 160, "reload": 35 },
+      { "name": "M0.1.01.04M INC", "type": "Missile", "damage": 12600, "penetration": 85, "reload": 35 }
     ]
   },
   {
-    id: 143,
-    name: "M270 MLRS",
-    type: "MLRS",
-    faction: "American",
-    tier: "IV",
-    image: "M270-MLRS.jpg",
-    description: "Rocket artillery system capable of long-range precision and area bombardment.",
-    stats: {
-      health: 31400,
-      speed: 65,
-      armor: "450mm",
-      agility: 26
+    "id": 145,
+    "name": "M270 MLRS",
+    "type": "MLRS",
+    "faction": "American",
+    "tier": "IV",
+    "image": "M270-MLRS.jpg",
+    "description": "Rocket artillery system capable of long-range precision and area bombardment.",
+    "stats": { "health": 31400, "speed": 65, "armor": "450mm", "agility": 26 },
+    "weapons": [
+      { "name": "M31", "type": "Guided Rocket", "damage": 18225, "penetration": 165, "reload": 15.7 },
+      { "name": "M31", "type": "Guided Rocket", "damage": 15525, "penetration": 400, "reload": 15.7 },
+      { "name": "G-MLRS-ER", "type": "Guided Rocket", "damage": 16200, "penetration": 250, "reload": 15.7 },
+      { "name": "ATACMS Block I", "type": "Missile", "damage": 20500, "penetration": 200, "reload": 20 },
+      { "name": "ATACMS Block II", "type": "Missile", "damage": 21250, "penetration": 600, "reload": 20 }
+    ]
+  },
+  {
+    "id": 146,
+    "name": "PLZ-05",
+    "type": "SPH",
+    "faction": "Chinese",
+    "tier": "IV",
+    "image": "PLZ-05.jpg",
+    "description": "Modern 155mm self-propelled howitzer designed for long-range artillery support.",
+    "stats": {
+      "health": 31200,
+      "speed": 56,
+      "reverseSpeed": 16,
+      "turretRotationSpeed": 25,
+      "hullRotationSpeed": 30,
+      "armor": 350,
+      "agility": 30
     },
-    weapons: [
-      { name: "M31", type: "Guided Rocket", damage: 18225, penetration: 165, reload: 15.7 },
-      { name: "M31", type: "Guided Rocket", damage: 15525, penetration: 400, reload: 15.7 },
-      { name: "G-MLRS-ER", type: "Guided Rocket", damage: 16200, penetration: 250, reload: 15.7 },
-      { name: "ATACMS Block I", type: "Missile", damage: 20500, penetration: 200, reload: 20 },
-      { name: "ATACMS Block II", type: "Missile", damage: 21250, penetration: 600, reload: 20 }
+    "weapons": [
+      { "name": "BEE17A/155", "type": "Main Gun", "damage": 16875, "penetration": 135 },
+      { "name": "GP155A", "type": "Main Gun", "damage": 11250, "penetration": 200 },
+      { "name": "GP155B", "type": "Main Gun", "damage": 10625, "penetration": 250 },
+      { "name": "GP155E", "type": "Main Gun", "damage": 10250, "penetration": 400 }
     ]
   },
   {
-    id: 144,
-    name: "PLZ-05",
-    type: "SPH",
-    faction: "Chinese",
-    tier: "IV",
-    image: "PLZ-05.jpg",
-    description: "Modern 155mm self-propelled howitzer designed for long-range artillery support.",
-    stats: {
-      health: 31200,
-      speed: 56,
-      reverseSpeed: 16,
-      turretRotationSpeed: 25,
-      hullRotationSpeed: 30,
-      armor: 350,
-      agility: 30
+    "id": 147,
+    "name": "M109A6 Paladin",
+    "type": "SPH",
+    "faction": "American",
+    "tier": "IV",
+    "image": "M109A6-Paladin.jpg",
+    "description": "Modernized 155mm self-propelled artillery system for accurate ground fire support.",
+    "stats": {
+      "health": 31100,
+      "speed": 64,
+      "reverseSpeed": 26,
+      "turretRotationSpeed": 25,
+      "hullRotationSpeed": 30,
+      "armor": 350,
+      "agility": 28
     },
-    weapons: [
-      { name: "BEE17A/155", type: "Main Gun", damage: 16875, penetration: 135 },
-      { name: "GP155A", type: "Main Gun", damage: 11250, penetration: 200 },
-      { name: "GP155B", type: "Main Gun", damage: 10625, penetration: 250 },
-      { name: "GP155E", type: "Main Gun", damage: 10250, penetration: 400 }
+    "weapons": [
+      { "name": "M107", "type": "Main Gun", "damage": 7200, "penetration": 112 },
+      { "name": "M549A1", "type": "Main Gun", "damage": 14940, "penetration": 187 },
+      { "name": "M48A1", "type": "Main Gun", "damage": 6820, "penetration": 115 },
+      { "name": "M712 Copperhead", "type": "Main Gun", "damage": 4900, "penetration": 431 }
     ]
   },
   {
-    id: 145,
-    name: "M109A6 Paladin",
-    type: "SPH",
-    faction: "American",
-    tier: "IV",
-    image: "M109A6-Paladin.jpg",
-    description: "Modernized 155mm self-propelled artillery system for accurate ground fire support.",
-    stats: {
-      health: 31100,
-      speed: 64,
-      reverseSpeed: 26,
-      turretRotationSpeed: 25,
-      hullRotationSpeed: 30,
-      armor: 350,
-      agility: 28
+    "id": 148,
+    "name": "FK 2000",
+    "type": "Anti-Air",
+    "faction": "Chinese",
+    "tier": "IV",
+    "image": "FK-2000.jpg",
+    "description": "Modern Chinese mobile anti-aircraft system with radar-guided missiles and autocannons.",
+    "stats": {
+      "health": 35000,
+      "speed": 60,
+      "reverseSpeed": 60,
+      "turretRotationSpeed": 60,
+      "hullRotationSpeed": 50,
+      "armor": 300,
+      "agility": 75
     },
-    weapons: [
-      { name: "M107", type: "Main Gun", damage: 7200, penetration: 112 },
-      { name: "M549A1", type: "Main Gun", damage: 14940, penetration: 187 },
-      { name: "M48A1", type: "Main Gun", damage: 6820, penetration: 115 },
-      { name: "M712 Copperhead", type: "Main Gun", damage: 4900, penetration: 431 }
+    "weapons": [
+      { "name": "BZT-30", "type": "Main Gun", "damage": 500, "penetration": 116 },
+      { "name": "OZT-30", "type": "Main Gun", "damage": 680, "penetration": 56 },
+      { "name": "FK-2000", "type": "Missile", "damage": 9720, "penetration": 102, "reload": 25 }
     ]
   },
   {
-    id: 146,
-    name: "FK 2000",
-    type: "Anti-Air",
-    faction: "Chinese",
-    tier: "IV",
-    image: "FK-2000.jpg",
-    description: "Modern Chinese mobile anti-aircraft system with radar-guided missiles and autocannons.",
-    stats: {
-      health: 35000,
-      speed: 60,
-      reverseSpeed: 60,
-      turretRotationSpeed: 60,
-      hullRotationSpeed: 50,
-      armor: 300,
-      agility: 75
+    "id": 149,
+    "name": "Otomatic 76",
+    "type": "Anti-Air",
+    "faction": "Italian",
+    "tier": "IV",
+    "image": "Otomatic-76.jpg",
+    "description": "Self-propelled anti-aircraft gun with rapid-fire 76mm cannon.",
+    "stats": { "health": 39100, "speed": 65, "armor": "380mm", "agility": 36 },
+    "weapons": [
+      { "name": "76/62 APFSDS", "type": "Main Gun", "damage": 3570, "penetration": 413 },
+      { "name": "76/62 HE-VT MOM", "type": "Main Gun", "damage": 1610, "penetration": 89 },
+      { "name": "76/62 SAPOM", "type": "Main Gun", "damage": 2750, "penetration": 100 }
+    ]
+  },
+  {
+    "id": 150,
+    "name": "BM-57-2 Kochevnik",
+    "type": "Tank Destroyer",
+    "faction": "Russian",
+    "tier": "IV",
+    "image": "BM-57-2-Kochevnik.jpg",
+    "description": "A modern Russian heavy tank armed with twin 57mm cannons, dual GSh-23Ms, Kornet missiles, APS, and drone support, built for speed, agility, and flanking superiority.",
+    "stats": {
+      "health": 42800,
+      "speed": 75,
+      "reverseSpeed": 28,
+      "turretRotationSpeed": 45,
+      "hullRotationSpeed": 40,
+      "armor": 500,
+      "agility": 40
     },
-    weapons: [
-      { name: "BZT-30", type: "Main Gun", damage: 500, penetration: 116 },
-      { name: "OZT-30", type: "Main Gun", damage: 680, penetration: 56 },
-      { name: "FK-2000", type: "Missile", damage: 9720, penetration: 102, reload: 25 }
+    "weapons": [
+      { "name": "BR-281SP", "type": "Main Gun", "damage": 1540, "penetration": 147 },
+      { "name": "BR-281U", "type": "Main Gun", "damage": 1400, "penetration": 181 },
+      { "name": "OR-281", "type": "Main Gun", "damage": 800, "penetration": 73 },
+      { "name": "9K135 Kornet", "type": "Missile", "damage": 14820, "penetration": 1000, "reload": 12 }
     ]
   },
   {
-    id: 147,
-    name: "Otomatic 76",
-    type: "Anti-Air",
-    faction: "Italian",
-    tier: "IV",
-    image: "Otomatic-76.jpg",
-    description: "Self-propelled anti-aircraft gun with rapid-fire 76mm cannon.",
-    stats: {
-      health: 39100,
-      speed: 65,
-      armor: "380mm",
-      agility: 36
-    },
-    weapons: [
-      { name: "76/62 APFSDS", type: "Main Gun", damage: 3570, penetration: 413 },
-      { name: "76/62 HE-VT MOM", type: "Main Gun", damage: 1610, penetration: 89 },
-      { name: "76/62 SAPOM", type: "Main Gun", damage: 2750, penetration: 100 }
-    ]
-  },
-  {
-    id: 148,
-    name: "BM-57-2 Kochevnik",
-    type: "Tank Destroyer",
-    faction: "Russian",
-    tier: "IV",
-    image: "BM-57-2-Kochevnik.jpg",
-    description: "A modern Russian heavy tank armed with twin 57mm cannons, dual GSh-23Ms, Kornet missiles, APS, and drone support, built for speed, agility, and flanking superiority.",
-    stats: {
-      health: 42800,
-      speed: 75,
-      reverseSpeed: 28,
-      turretRotationSpeed: 45,
-      hullRotationSpeed: 40,
-      armor: 500,
-      agility: 40
-    },
-    weapons: [
-      { name: "BR-281SP", type: "Main Gun", damage: 1540, penetration: 147 },
-      { name: "BR-281U", type: "Main Gun", damage: 1400, penetration: 181 },
-      { name: "OR-281", type: "Main Gun", damage: 800, penetration: 73 },
-      { name: "9K135 Kornet", type: "Missile", damage: 14820, penetration: 1000, reload: 12 }
-    ]
-  },
-  {
-    id: 149,
+    id: 151,
     name: "ADATS",
     type: "Missile Carrier",
     faction: "American",
@@ -1972,7 +1956,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 150,
+    id: 152,
     name: "MGM-166 LOSAT",
     type: "Missile Carrier",
     faction: "American",
