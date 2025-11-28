@@ -262,6 +262,8 @@ const newVehicles = [
   "B-Type",
   "T-90M",
   "Xian JH-7A",
+  "M60A3 TTS",
+  "M1 AGDS",
   
 ];
 
@@ -269,11 +271,9 @@ const newVehicles = [
 const upcomingVehicles = [
   
 "HARP General Krueger",
-"M60A3 TTS",
 "AMX-10RC",
 "T-15 Barbaris",
 "Ka-90",
-"M1 AGDS",
 "Leopard 2 Revolution",
 "T-72B1",
 "TAN-SAM-1C",
@@ -519,7 +519,8 @@ const getVehicleRarity = (vehicleName: string) => {
 "T-90M",
 "Su-47 Berkut",
 "T-15 Barbaris",
-
+ "M1 AGDS",
+  "M60A3 TTS",
 
 
 ];
@@ -1796,8 +1797,15 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "M1-AGDS.jpg",
     "description": "A conceptual U.S. armored air-defense vehicle design combining heavy protection, advanced sensors, and rapid-fire weapons for close-range battlefield air-defense roles.",
-    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
-    "weapons": []
+    "stats": { "health": 47700, "speed": 69, "armor": "800mm", "agility": 36 },
+    "weapons": [
+      { "name": "PMD-060 APFSDS", "type": "Main Gun", "damage": 800, "penetration": 186 },
+      { "name": "PMD-074 HEI", "type": "Main Gun", "damage": 370, "penetration": 65 },
+      { "name": "PMD-478 HE", "type": "Main Gun", "damage": 400, "penetration": 50 },
+      { "name": "MIM-146", "type": "Missile", "damage": 5100, "penetration": 900, "reload": 16 },
+      { "name": "XM1018AD HE", "type": "Missile", "damage": 1330, "penetration": 85, "reload": 6 },
+      { "name": "XM1018 HEI", "type": "Missile", "damage": 1500, "penetration": 100, "reload": 6 }
+    ]
   },
   {
     "id": 144,
@@ -2670,8 +2678,15 @@ const VEHICLES_DATA = [
     "tier": "III",
     "image": "M60A3-TTS.jpg",
     "description": "The M60A3 TTS is a Cold War–era U.S. MBT featuring advanced thermal imaging fire control system.",
-    "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
-    "weapons": []
+    "stats": { "health": 42100, "speed": 52, "armor": "400", "agility": 38 },
+    "weapons": [
+
+      { "name": "M392A2 APDS", "type": "Main Gun", "damage": 9860, "penetration": 372 },
+      { "name": "M393 HESH", "type": "Main Gun", "damage": 10340, "penetration": 127 },
+      { "name": "M456 HEAT", "type": "Main Gun", "damage": 10890, "penetration": 400 },
+      { "name": "M833 APFSDS", "type": "Main Gun", "damage": 9860, "penetration": 495 },
+      
+    ]
   },
 
   {
@@ -8680,11 +8695,9 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       
       
 "HARP General Krueger",
-"M60A3 TTS",
 "AMX-10RC",
 "Ka-90",
 "T-15 Barbaris",
-"M1 AGDS",
 "Leopard 2 Revolution",
 "T-72B1",
 "TAN-SAM-1C",
