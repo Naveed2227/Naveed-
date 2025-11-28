@@ -263,7 +263,8 @@ const newVehicles = [
   "Xian JH-7A",
   "M60A3 TTS",
   "M1 AGDS",
-  
+  "T-15 Barbaris",
+"Ka-90",
 ];
 
 // Upcoming Vehicles System
@@ -271,8 +272,6 @@ const upcomingVehicles = [
   
 "HARP General Krueger",
 "AMX-10RC",
-"T-15 Barbaris",
-"Ka-90",
 "Leopard 2 Revolution",
 "T-72B1",
 "TAN-SAM-1C",
@@ -518,6 +517,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "T-90M",
 "Su-47 Berkut",
 "T-15 Barbaris",
+"Ka-90",
  "M1 AGDS",
   "M60A3 TTS",
 
@@ -1537,9 +1537,13 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "T-15-Barbaris.jpg",
     "description": "A heavily armored IFV featuring a 57 mm autocannon, Kornet-EM missiles, strong frontal protection, and impressive mobility for its weight overall.",
-    "stats": { "health": 0, "speed": 0, "armor": 450, "agility": 0 },
+    "stats": { "health": 45900, "speed": 96, "armor": 120, "agility": 42 },
     "weapons": [
-      { "name": "9K135 Kornet", "type": "Missile", "damage": 14820, "penetration": 1000, "reload": 12 }
+      { "name": "3BM22 API", "type": "Main Gun", "damage": 1540, "penetration": 147 },
+      { "name": "3U08 HEI", "type": "Main Gun", "damage": 800, "penetration": 75 },
+      { "name": "53-UOR-281U HEI", "type": "Main Gun", "damage": 890, "penetration": 85 },
+      { "name": "53-UBR-281U APFSDS", "type": "Main Gun", "damage": 1740, "penetration": 340 },
+      { "name": "9K135 Kornet-EM", "type": "Missile", "damage": 6100, "penetration": 450, "reload": 6 }
     ]
   },
   {
@@ -1794,7 +1798,7 @@ const VEHICLES_DATA = [
     "type": "Anti-Air",
     "faction": "American",
     "tier": "IV",
-    "image": "M1-AGDS.jpg",
+    "image": "M1-AGDS.png",
     "description": "A conceptual U.S. armored air-defense vehicle design combining heavy protection, advanced sensors, and rapid-fire weapons for close-range battlefield air-defense roles.",
     "stats": { "health": 47700, "speed": 69, "armor": "800mm", "agility": 36 },
     "weapons": [
@@ -2200,7 +2204,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Ka-90.jpg",
     description: "Russian Ka-90 concept blends helicopter lift with jet propulsion, promising vertical takeoff, high-speed cruise, advanced rotors and hybrid flight performance.",
-    stats: { health: 0, speed: 0, verticalSpeed: 0, agility: 0 },
+    stats: { health: 30800, speed: 700, verticalSpeed: 40, agility: 70 },
     weapons: [
       { "name": "RVV-MD", "type": "Medium-Range AAM", "damage": 4800, "penetration": 65, "reload": 15 },
       { "name": "RVV-SD", "type": "Medium-Range AAM", "damage": 6500, "penetration": 65, "reload": 20 },
@@ -8695,8 +8699,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       
 "HARP General Krueger",
 "AMX-10RC",
-"Ka-90",
-"T-15 Barbaris",
 "Leopard 2 Revolution",
 "T-72B1",
 "TAN-SAM-1C",

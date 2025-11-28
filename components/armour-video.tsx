@@ -57,6 +57,8 @@ const vehicleVideos: VehicleVideo[] = [
   { name: "MGM-166 LOSAT", url: "https://youtu.be/WyxgmKTIplg?si=jiYWpAGGV-GQ0ikg", start: "1:12", end: "2:03" },
   { name: "T-90M", url: "https://youtu.be/79tBU-YziHU?si=aekLLVGrAdmElNGz", start: "1:27", end: "2:15" },
   { name: "ZLT-11", url: "https://youtu.be/pa3FohCQVAc", start: "", end: "" },
+  { name: "M1 AGDS", url: "https://youtu.be/30djqeyzcGE?si=nGTsaXhSZ3RbuhiW", start: "0:55", end: "1:29" },
+  { name: "ZLT-11", url: "https://youtu.be/pa3FohCQVAc", start: "", end: "" },
 
 
 
