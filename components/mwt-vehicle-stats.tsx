@@ -13833,7 +13833,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
           <div className="flex items-center justify-center space-x-6">
             {/* Patreon */}
             <a 
-              href="https://www.patreon.com/cw/Naveed2227" 
+              href="https://www.patreon.com/c/mwtassistant" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="text-[#FF424D] hover:opacity-80 transition-opacity"
