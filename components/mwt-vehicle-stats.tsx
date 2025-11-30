@@ -1795,7 +1795,7 @@ const VEHICLES_DATA = [
   {
     "id": 143,
     "name": "M1 AGDS",
-    "type": "Anti-Air",
+    "type": "Missile Carrier",
     "faction": "American",
     "tier": "IV",
     "image": "M1-AGDS.png",
@@ -8725,7 +8725,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   "YJ-1000",
   "KD-88",
   "CM-102A",
-  "AGM-84H/K",
   "9K38 Igla-V",
   "R-60",
   "9K38 IGLA-V",
@@ -8974,7 +8973,7 @@ const missileHasTags = (missileName: string) => {
 "ERC-90 F4 Sagaie",
 "Su-47 Berkut",
 "ZLT-11",
-
+"M1 AGDS",
 ]
    return exclusiveVehicles.includes(vehicleName)
   }
