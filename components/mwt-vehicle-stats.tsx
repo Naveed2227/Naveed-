@@ -1537,7 +1537,7 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "T-15-Barbaris.jpg",
     "description": "A heavily armored IFV featuring a 57 mm autocannon, Kornet-EM missiles, strong frontal protection, and impressive mobility for its weight overall.",
-    "stats": { "health": 45900, "speed": 96, "armor": 120, "agility": 42 },
+    "stats": { "health": 45900, "speed": 69, "armor": 120, "agility": 42 },
     "weapons": [
       { "name": "3BM22 API", "type": "Main Gun", "damage": 1540, "penetration": 147 },
       { "name": "3U08 HEI", "type": "Main Gun", "damage": 800, "penetration": 75 },

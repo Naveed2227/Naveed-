@@ -58,7 +58,7 @@ const vehicleVideos: VehicleVideo[] = [
   { name: "T-90M", url: "https://youtu.be/79tBU-YziHU?si=aekLLVGrAdmElNGz", start: "1:27", end: "2:15" },
   { name: "ZLT-11", url: "https://youtu.be/pa3FohCQVAc", start: "", end: "" },
   { name: "M1 AGDS", url: "https://youtu.be/30djqeyzcGE?si=nGTsaXhSZ3RbuhiW", start: "0:55", end: "1:29" },
-  { name: "ZLT-11", url: "https://youtu.be/pa3FohCQVAc", start: "", end: "" },
+  { name: "T-15 Barbaris", url: "https://youtu.be/4LsQ0YcUKOU?si=tQYaSpZd_z-8x196", start: "1:39", end: "2:33" },
 
 
 
