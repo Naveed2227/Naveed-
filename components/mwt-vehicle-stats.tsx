@@ -265,6 +265,9 @@ const newVehicles = [
   "M1 AGDS",
   "T-15 Barbaris",
 "Ka-90",
+"TAN-SAM-1C",
+"T-72B1",
+"RAH-66 Comanche",
 ];
 
 // Upcoming Vehicles System
@@ -273,9 +276,6 @@ const upcomingVehicles = [
 "HARP General Krueger",
 "AMX-10RC",
 "Leopard 2 Revolution",
-"T-72B1",
-"TAN-SAM-1C",
-"RAH-66 Comanche",
 "FV101 Scorpion-90",
 
   // Add upcoming vehicle names here
@@ -2558,8 +2558,13 @@ const VEHICLES_DATA = [
     "tier": "III",
     "image": "T-72B1.jpg",
     "description": "A modernized Soviet main battle tank in Venezuelan service, featuring improved armor, mobility, and firepower.",
-    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
-    "weapons": []
+    "stats": { "health": 39100, "speed": 60, "armor": "600mm", "agility": 42 },
+    "weapons": [
+    { "name": "3BK12M HEAT", "type": "Main Gun", "damage": 12140, "penetration": 440 },
+    { "name": "30F46 HEI", "type": "Main Gun", "damage": 5000, "penetration": 92 },
+    { "name": "3BM22 Zakolka APFSDS", "type": "Main Gun", "damage": 11100, "penetration": 425 },
+    { "name": "3BM42 Mango APFSDS", "type": "Main Gun", "damage": 11390, "penetration": 565 },
+    ]
   },
   {
     "id": 406,
@@ -2569,7 +2574,7 @@ const VEHICLES_DATA = [
     "tier": "III",
     "image": "T-64BV.jpg",
     "description": "Soviet main battle tank with composite armor and 125mm smoothbore gun.",
-    "stats": { "health": 36700, "speed": 55, "armor": "800mm", "agility": 45 },
+    "stats": { "health": 36700, "speed": 55, "armor": "600mm", "agility": 45 },
     "weapons": [
       { "name": "3BM42", "type": "Main Gun", "damage": 11700, "penetration": 720 },
       { "name": "9M112", "type": "Main Gun", "damage": 10070, "penetration": 700 },
@@ -2905,8 +2910,11 @@ const VEHICLES_DATA = [
     "tier": "III",
     "image": "TAN-SAM-1C.jpg",
     "description": "Japanese short-range mobile SAM system.",
-    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
-    "weapons": []
+    "stats": { "health": 25400, "speed": 80, "armor": "8mm", "agility": 0 },
+    "weapons": [
+      { "name": "P 4001 HEI", "type": "Missile", "damage": 5070, "penetration": 68, "reload": 8 },
+      { "name": "P 4001B HEI", "type": "Missile", "damage": 5630, "penetration": 68, "reload": 8 }
+    ]
   },
 
   {
@@ -3420,9 +3428,20 @@ const VEHICLES_DATA = [
     "tier": "III",
     "image": "RAH-66-Comanche.jpg",
     "description": "A stealthy, agile U.S. scout/attack helicopter prototype designed for reconnaissance, low-observable operations, advanced sensors, and precision engagement, cancelled before full production.",
-    "stats": { "health": 0, "speed": 0, "verticalSpeed": 0, "agility": 0 },
+    "stats": { "health": 22220, "speed": 410, "verticalSpeed": 36, "agility": 70 },
     "weapons": [
-     
+      { "name": "LAND-LGR4", "type": "Air-to-Ground Missile", "damage": 4300, "penetration": 290, "reload": 20 },
+      { "name": "AGM-114 Hellfire x1", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 10 },
+      { "name": "FIM-92 Stinger", "type": "Air-to-Ground Missile", "damage": 4700, "penetration": 35, "reload": 10 },
+      { "name": "APKWS", "type": "Air-to-Ground Missile", "damage": 5400, "penetration": 140, "reload": 20 },
+      { "name": "FASGWL", "type": "Air-to-Ground Missile", "damage": 5300, "penetration": 250, "reload": 20 },
+      { "name": "LAU-150", "type": "Air-to-Ground Missile", "damage": 7800, "penetration": 600, "reload": 40 },
+      { "name": "FIM-92 Stinger", "type": "Air-to-Ground Missile", "damage": 8200, "penetration": 800, "reload": 20 },
+      { "name": "AGM-65 Maverick", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
+      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9900, "penetration": 1200, "reload": 30 },
+      { "name": "ADS STARSTREAK", "type": "Air-to-Ground Missile", "damage": 7300, "penetration": 50, "reload": 15 },
+    
+      
     ],
    
     
@@ -8700,9 +8719,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
 "HARP General Krueger",
 "AMX-10RC",
 "Leopard 2 Revolution",
-"T-72B1",
-"TAN-SAM-1C",
-"RAH-66 Comanche",
 "FV101 Scorpion-90",
 
       
