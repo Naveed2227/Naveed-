@@ -1076,10 +1076,10 @@ const VEHICLES_DATA = [
     description: "Turkey's modern main battle tank, emphasizing firepower, protection, mobility, and advanced technology.",
     stats: { health: 42600, speed: 68, armor: "1000mm", agility: 35, turnRate: 46 },
     weapons: [
-      { name: "DM63A1 APFSDS", type: "Main Gun", damage: 18500, penetration: 950, reload: 5.2 },
-      { name: "DM11", type: "Main Gun", damage: 5000, penetration: 87 },
-      { name: "DM12A2 HEATFS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 },
-      { name: "DM73 APFSDS", type: "Main Gun", damage: 19200, penetration: 1250, reload: 5.2 }
+      { name: "DM63A1 APFSDS", type: "Main Gun", damage: 11760, penetration: 810 },
+      { name: "DM11 HEI", type: "Main Gun", damage: 5000, penetration: 85 },
+      { name: "DM12A2 HEAT", type: "Main Gun", damage: 12140, penetration: 500 },
+      { name: "DM-73 APFSDS", type: "Main Gun", damage: 11940, penetration: 900 }
     ]
   },
   {
@@ -1415,10 +1415,10 @@ const VEHICLES_DATA = [
     "description": "A hybrid European main battle tank, combining Leopard 2 chassis with Leclerc turret.",
     "stats": { "health": 41900, "speed": 75, "armor": 1160, "agility": 38 },
     "weapons": [
-      { "name": "OCC120G1", "type": "Main Gun", "damage": 11840, "penetration": 480 },
-      { "name": "OE120F1", "type": "Main Gun", "damage": 4800, "penetration": 85 },
-      { "name": "OFL120F1", "type": "Main Gun", "damage": 11040, "penetration": 575 },
-      { "name": "SHARD120", "type": "Main Gun", "damage": 11300, "penetration": 575 }
+      { "name": "OCC 120 G1 HEAT", "type": "Main Gun", "damage": 12230, "penetration": 480 },
+      { "name": "OE120F1 HEI", "type": "Main Gun", "damage": 4800, "penetration": 85 },
+      { "name": "OFL120F1 APFSDS", "type": "Main Gun", "damage": 11610, "penetration": 675 },
+      { "name": "SHARD120", "type": "Main Gun", "damage": 11910, "penetration": 820 }
     ]
   },
   {
@@ -8732,6 +8732,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   "KD-21",
   "Storm Shadow",
   "HD-1A",
+  "ADS STARSTREAK",
 ];
 
 const antiWarningMissiles = [
@@ -8784,6 +8785,7 @@ const antiWarningMissiles = [
   "R-93M",
   "KD-21",
   "HD-1A",
+  "ADS STARSTREAK",
 ];
 
 const longRangeMissiles = [
