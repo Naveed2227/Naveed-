@@ -2212,6 +2212,7 @@ const VEHICLES_DATA = [
       { "name": "Hermes", "type": "Air-to-Ground Missile", "damage": 11500, "penetration": 1000, "reload": 35 },
       { "name": "Kh-MD-E", "damage": 12400, "penetration": 250, "reload": 20 },
       { "name": "9M120 Attack", "damage": 7500, "penetration": 850, "reload": 25 },
+      { "name": "B-13L", "damage": 9200, "penetration": 160, "reload": 40 },
       { "name": "B8V20", "damage": 5100, "penetration": 420, "reload": 20 },
       
     ]
