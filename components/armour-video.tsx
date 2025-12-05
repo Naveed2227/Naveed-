@@ -103,6 +103,7 @@ const vehicleVideos: VehicleVideo[] = [
 { name: "Strf 9040 BILL", url: "https://youtu.be/ybzazLIpflE?si=H685YxMswhm4sMjH", start: "1:10", end: "1:34" },
 { name: "M3A3 Bradley", url: "https://youtu.be/9nrSQ6TOv2s?si=OQUMRfbtgnEeubK3", start: "0:23", end: "0:44" },
 { name: "Merkava Mk.3", url: "https://youtu.be/9e0u3YtWzdo?si=mnRJDYEiLefRdiUB", start: "1:26", end: "2:18" },
+{ name: "T-72B1", url: "https://youtu.be/XDuCbv863Qo?si=IsuHwk1fHj1j6u5z", start: "0:25", end: "1:00" },
 
 
 { name: "M60 Patton", url: "", start: "", end: "" },  
