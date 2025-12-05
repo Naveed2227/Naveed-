@@ -370,7 +370,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "ZBL-08",
 "M110A2",
 "Xian JH-7A",
-
+"T-72B1",
 
 
  ];
@@ -471,8 +471,8 @@ const getVehicleRarity = (vehicleName: string) => {
 "Merkava Mk.3",
 "F-5E Tiger II",
 "ERC-90 F4 Sagaie",
-
-
+"TAN-SAM-1C",
+"M60A3 TTS",
 
 
 
@@ -519,8 +519,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "T-15 Barbaris",
 "Ka-90",
  "M1 AGDS",
-  "M60A3 TTS",
-
+"RAH-66 Comanche",
 
 ];
   const legendaryVehicles = [
