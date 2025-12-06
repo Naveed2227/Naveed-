@@ -1,14 +1,35 @@
+import type React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+import { Inter, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4,} from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
 // Initialize fonts
-const inter = Inter({ 
+const _geist = V0_Font_Geist({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
+const _geistMono = V0_Font_Geist_Mono({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
+const _sourceSerif_4 = V0_Font_Source_Serif_4({ subsets: ['latin'], weight: ["200","300","400","500","600","700","800","900"] })
+
+const inter = Inter({ subsets: ["latin"] });
+const v0FontGeist = V0_Font_Geist({
   subsets: ["latin"],
-  variable: '--font-inter'
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  preload: false,
+});
+const v0FontGeistMono = V0_Font_Geist_Mono({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  preload: false,
+});
+const v0FontSourceSerif4 = V0_Font_Source_Serif_4({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -58,7 +79,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} ${inter.variable}`}>
+    <html lang="en">
       <head>
         <Script
           async
@@ -66,9 +87,67 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="lazyOnload"
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+        {/* Basic Meta */}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+        />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+
+        {/* Favicon */}
+        <link rel="icon" href="/icon-512.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/icon-512.png" />
+        <link rel="shortcut icon" href="/icon-512.png" type="image/png" />
+
+        {/* Open Graph / Twitter */}
+        <meta property="og:title" content={metadata.openGraph?.title} />
+        <meta property="og:description" content={metadata.openGraph?.description} />
+        <meta property="og:image" content="https://www.mwtassistant.com/icon-512.png" />
+        <meta property="og:url" content={metadata.openGraph?.url} />
+        <meta property="og:type" content="website" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metadata.openGraph?.title} />
+        <meta name="twitter:description" content={metadata.openGraph?.description} />
+        <meta name="twitter:image" content="https://www.mwtassistant.com/icon-512.png" />
+
+        {/* Schema.org for Google */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "MWT Assistant",
+              url: "https://www.mwtassistant.com",
+              logo: "https://www.mwtassistant.com/icon-512.png",
+              sameAs: [
+                "https://www.facebook.com/profile.php?id=61581489612967",
+                "https://www.instagram.com/mwt_assistant/",
+              ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "MWT Assistant",
+              url: "https://www.mwtassistant.com",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://www.mwtassistant.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
+
+        {/* Google AdSense - Script is already included above */}
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={inter.className}>
         {children}
       </body>
     </html>
