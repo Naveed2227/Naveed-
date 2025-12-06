@@ -1,25 +1,41 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter, Source_Serif_4 } from "next/font/google";
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+import { Inter, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4,} from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
 // Initialize fonts
+const _geist = V0_Font_Geist({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
+const _geistMono = V0_Font_Geist_Mono({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
+const _sourceSerif_4 = V0_Font_Source_Serif_4({ subsets: ['latin'], weight: ["200","300","400","500","600","700","800","900"] })
+
 const inter = Inter({ subsets: ["latin"] });
-const v0FontSourceSerif4 = Source_Serif_4({
+const v0FontGeist = V0_Font_Geist({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  preload: false,
+});
+const v0FontGeistMono = V0_Font_Geist_Mono({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  preload: false,
+});
+const v0FontSourceSerif4 = V0_Font_Source_Serif_4({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
   preload: false,
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
-    template: "%s | MWT Assistant"
-  },
-  description: "View and compare all vehicles in MWT, including Su-57M, Abram X, Mi-35, F-22 Raptor — only on MWT Assistant.",
+  title: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
+  description:
+    "View and compare all vehicles in MWT, including Su-57M, Abram X, Mi-35, F-22 Raptor — only on MWT Assistant.",
   keywords: ["MWT", "vehicle stats", "tank comparison", "war thunder mobile", "military vehicles", "battle pass", "game guide", "tank specs", "aircraft stats"],
   metadataBase: new URL('https://www.mwtassistant.com'),
   alternates: {
@@ -27,7 +43,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "MWT Assistant - Vehicle Stats & Comparison Tool",
-    description: "Comprehensive stats and comparison tool for all vehicles in Modern War Thunder. Compare tanks, aircraft, and more with detailed specifications and performance data.",
+    description:
+      "Comprehensive stats and comparison tool for all vehicles in Modern War Thunder. Compare tanks, aircraft, and more with detailed specifications and performance data.",
     url: "https://www.mwtassistant.com",
     siteName: "MWT Assistant",
     locale: 'en_US',
@@ -51,13 +68,9 @@ export const metadata: Metadata = {
     google: 'YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE',
   },
   icons: {
-    icon: [
-      { url: "/icon-512.png" },
-    ],
-    apple: [
-      { url: "/icon-512.png" },
-    ],
-    shortcut: ["/icon-512.png"],
+    icon: "/icon-512.png",
+    apple: "/icon-512.png",
+    shortcut: "/icon-512.png",
   },
   generator: 'v0.app'
 };
@@ -66,7 +79,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en">
       <head>
         <Script
           async
@@ -134,7 +147,7 @@ export default function RootLayout({
 
         {/* Google AdSense - Script is already included above */}
       </head>
-      <body className={`${GeistSans.variable} ${GeistMono.variable} ${inter.className}`}>
+      <body className={inter.className}>
         {children}
       </body>
     </html>
