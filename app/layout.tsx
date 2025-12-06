@@ -1,32 +1,53 @@
 import type React from "react";
-import type { Metadata } from "next";
-import { Inter, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4,} from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, Source_Serif_4 } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
-
 
 // Initialize fonts
-const _geist = V0_Font_Geist({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
-const _geistMono = V0_Font_Geist_Mono({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
-const _sourceSerif_4 = V0_Font_Source_Serif_4({ subsets: ['latin'], weight: ["200","300","400","500","600","700","800","900"] })
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: '--font-inter',
+  display: 'swap'
+});
 
-const inter = Inter({ subsets: ["latin"] });
-const v0FontGeist = V0_Font_Geist({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  preload: false,
+// Using Inter as a fallback for Geist
+const geist = Inter({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-geist',
+  display: 'swap'
 });
-const v0FontGeistMono = V0_Font_Geist_Mono({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  preload: false,
+
+// Using Inter as a fallback for Geist Mono
+const geistMono = Inter({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-geist-mono',
+  display: 'swap'
 });
-const v0FontSourceSerif4 = V0_Font_Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-  preload: false,
+
+// Initialize Source Serif 4
+const sourceSerif = Source_Serif_4({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-source-serif',
+  display: 'swap'
 });
+
+const SITE_URL = 'https://www.mwtassistant.com';
+const SITE_NAME = 'MWT Assistant';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  ],
+};
 
 export const metadata: Metadata = {
   title: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
@@ -71,11 +92,40 @@ export const metadata: Metadata = {
   generator: 'v0.app'
 };
 
+// Schema.org structured data
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'MWT Assistant',
+    url: 'https://www.mwtassistant.com',
+    logo: 'https://www.mwtassistant.com/icon-512.png',
+    sameAs: [
+      'https://www.facebook.com/profile.php?id=61581489612967',
+      'https://www.instagram.com/mwt_assistant/',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'MWT Assistant',
+    url: 'https://www.mwtassistant.com',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://www.mwtassistant.com/search?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  },
+];
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html 
+      lang="en" 
+      className={`${inter.variable} ${geist.variable} ${geistMono.variable} ${sourceSerif.variable} font-sans antialiased`}
+    >
       <head>
         <Script
           async
@@ -96,15 +146,15 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/icon-512.png" type="image/png" />
 
         {/* Open Graph / Twitter */}
-        <meta property="og:title" content={metadata.openGraph?.title} />
-        <meta property="og:description" content={metadata.openGraph?.description} />
+        <meta property="og:title" content={metadata.openGraph?.title?.toString()} />
+        <meta property="og:description" content={metadata.openGraph?.description?.toString()} />
         <meta property="og:image" content="https://www.mwtassistant.com/icon-512.png" />
-        <meta property="og:url" content={metadata.openGraph?.url} />
+        <meta property="og:url" content={metadata.openGraph?.url?.toString()} />
         <meta property="og:type" content="website" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metadata.openGraph?.title} />
-        <meta name="twitter:description" content={metadata.openGraph?.description} />
+        <meta name="twitter:title" content={metadata.openGraph?.title?.toString()} />
+        <meta name="twitter:description" content={metadata.openGraph?.description?.toString()} />
         <meta name="twitter:image" content="https://www.mwtassistant.com/icon-512.png" />
 
         {/* Schema.org for Google */}
@@ -140,10 +190,8 @@ export default function RootLayout({
             }),
           }}
         />
-
-        {/* Google AdSense - Script is already included above */}
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} font-sans`}>
         {children}
       </body>
     </html>
