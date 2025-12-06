@@ -20,6 +20,18 @@ interface Event {
 
 // All events in chronological order
 const events: Event[] = [
+  {
+    id: 27,
+    name: "Steel Winter",
+    image: "/Events/Steel-Winter.jpg",
+    startDate: "2025-11-8",
+    endDate: "2025-12-25",
+    vehicles: [
+      { id: 1, name: "RAH-66 Comanche", type: "" },
+      { id: 2, name: "J-50", type: "gacha" },
+    
+    ],
+  },
 {
     id: 26,
     name: "Festive Dinner",
