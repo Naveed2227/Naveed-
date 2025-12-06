@@ -1,26 +1,41 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from "next/font/google";
+import { Inter, Source_Serif_4 } from "next/font/google";
+import localFont from 'next/font/local';
 import Script from "next/script";
 import "./globals.css";
 
 // Initialize fonts
 const inter = Inter({ subsets: ["latin"] });
-const v0FontGeist = V0_Font_Geist({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  preload: false,
-});
-const v0FontGeistMono = V0_Font_Geist_Mono({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  preload: false,
-});
-const v0FontSourceSerif4 = V0_Font_Source_Serif_4({
+const v0FontSourceSerif4 = Source_Serif_4({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
   preload: false,
+});
+
+// Load local Geist fonts
+const v0FontGeist = localFont({
+  src: [
+    {
+      path: '../public/fonts/Geist/Geist-Variable.woff2',
+      weight: '100 900',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-geist',
+  display: 'swap',
+});
+
+const v0FontGeistMono = localFont({
+  src: [
+    {
+      path: '../public/fonts/Geist-Mono/GeistMono-Variable.woff2',
+      weight: '100 900',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-geist-mono',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
