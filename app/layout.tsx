@@ -1,24 +1,30 @@
 import type React from "react";
 import type { Metadata, Viewport } from "next";
-import { Inter, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from "next/font/google";
+import { Inter, Source_Serif_4 } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
 // Font configurations
-const inter = Inter({ subsets: ["latin"] });
-const geist = V0_Font_Geist({ 
-  subsets: ['latin'], 
-  weight: ["100","200","300","400","500","600","700","800","900"],
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: '--font-inter'
+});
+
+// Using Inter as a fallback for Geist
+const geist = Inter({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-geist'
 });
 
-const geistMono = V0_Font_Geist_Mono({ 
-  subsets: ['latin'], 
-  weight: ["100","200","300","400","500","600","700","800","900"],
+// Using Inter as a fallback for Geist Mono
+const geistMono = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-geist-mono'
 });
 
-const sourceSerif = V0_Font_Source_Serif_4({ 
+const sourceSerif = Source_Serif_4({ 
   subsets: ['latin'], 
   weight: ["200","300","400","500","600","700","800","900"],
   variable: '--font-source-serif'
@@ -140,7 +146,7 @@ export default function RootLayout({
   return (
     <html 
       lang="en" 
-      className={`${geist.variable} ${geistMono.variable} ${inter.className} ${sourceSerif.variable}`}
+      className={`${inter.variable} ${geist.variable} ${geistMono.variable} ${sourceSerif.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -158,7 +164,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} font-sans`}>
         {children}
       </body>
     </html>
