@@ -1,155 +1,88 @@
-import type React from "react";
-import type { Metadata } from "next";
-import { Inter, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4,} from "next/font/google";
-import Script from "next/script";
-import "./globals.css";
-import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
-import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
-import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
-import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
-import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
-import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
-
-// Initialize fonts
-const _geist = V0_Font_Geist({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
-const _geistMono = V0_Font_Geist_Mono({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
-const _sourceSerif_4 = V0_Font_Source_Serif_4({ subsets: ['latin'], weight: ["200","300","400","500","600","700","800","900"] })
-
-const inter = Inter({ subsets: ["latin"] });
-const v0FontGeist = V0_Font_Geist({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  preload: false,
-});
-const v0FontGeistMono = V0_Font_Geist_Mono({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  preload: false,
-});
-const v0FontSourceSerif4 = V0_Font_Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-  preload: false,
-});
-
-export const metadata: Metadata = {
-  title: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
-  description:
-    "View and compare all vehicles in MWT, including Su-57M, Abram X, Mi-35, F-22 Raptor — only on MWT Assistant.",
-  keywords: ["MWT", "vehicle stats", "tank comparison", "war thunder mobile", "military vehicles", "battle pass", "game guide", "tank specs", "aircraft stats"],
-  metadataBase: new URL('https://www.mwtassistant.com'),
-  alternates: {
-    canonical: '/',
+{
+  "name": "my-v0-project",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "build:export": "next build && next export",
+    "dev": "next dev",
+    "export": "next export",
+    "lint": "next lint",
+    "start": "next start",
+    "verify-dns": "node scripts/dns-verification.js"
   },
-  openGraph: {
-    title: "MWT Assistant - Vehicle Stats & Comparison Tool",
-    description:
-      "Comprehensive stats and comparison tool for all vehicles in Modern War Thunder. Compare tanks, aircraft, and more with detailed specifications and performance data.",
-    url: "https://www.mwtassistant.com",
-    siteName: "MWT Assistant",
-    locale: 'en_US',
-    type: 'website',
-    images: [
-      {
-        url: "https://www.mwtassistant.com/icon-512.png",
-        width: 512,
-        height: 512,
-        alt: "MWT Assistant Logo",
-      },
-    ],
+  "dependencies": {
+    "@emotion/is-prop-valid": "latest",
+    "@hookform/resolvers": "^3.10.0",
+    "@radix-ui/react-accordion": "1.2.2",
+    "@radix-ui/react-alert-dialog": "1.1.4",
+    "@radix-ui/react-aspect-ratio": "1.1.1",
+    "@radix-ui/react-avatar": "1.1.2",
+    "@radix-ui/react-checkbox": "1.1.3",
+    "@radix-ui/react-collapsible": "1.1.2",
+    "@radix-ui/react-context-menu": "2.2.4",
+    "@radix-ui/react-dialog": "1.1.4",
+    "@radix-ui/react-dropdown-menu": "2.1.4",
+    "@radix-ui/react-hover-card": "1.1.4",
+    "@radix-ui/react-label": "2.1.1",
+    "@radix-ui/react-menubar": "1.1.4",
+    "@radix-ui/react-navigation-menu": "1.2.3",
+    "@radix-ui/react-popover": "1.1.4",
+    "@radix-ui/react-progress": "1.1.1",
+    "@radix-ui/react-radio-group": "1.2.2",
+    "@radix-ui/react-scroll-area": "1.2.2",
+    "@radix-ui/react-select": "2.1.4",
+    "@radix-ui/react-separator": "1.1.1",
+    "@radix-ui/react-slider": "1.2.2",
+    "@radix-ui/react-slot": "1.1.1",
+    "@radix-ui/react-switch": "1.1.2",
+    "@radix-ui/react-tabs": "1.1.2",
+    "@radix-ui/react-toast": "1.2.4",
+    "@radix-ui/react-toggle": "1.1.1",
+    "@radix-ui/react-toggle-group": "1.1.1",
+    "@radix-ui/react-tooltip": "1.1.6",
+    "@vercel/analytics": "1.3.1",
+    "autoprefixer": "^10.4.20",
+    "child_process": "latest",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "1.0.4",
+    "date-fns": "4.1.0",
+    "embla-carousel-react": "8.5.1",
+    "firebase": "latest",
+    "framer-motion": "latest",
+    "geist": "latest",
+    "input-otp": "1.4.1",
+    "lucide-react": "^0.454.0",
+    "next": "^14.1.0",
+    "next-themes": "latest",
+    "react": "^19",
+    "react-day-picker": "9.8.0",
+    "react-dom": "^19",
+    "react-hook-form": "^7.60.0",
+    "react-resizable-panels": "^2.1.7",
+    "recharts": "2.15.4",
+    "sonner": "^1.7.4",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^0.9.9",
+    "zod": "3.25.67"
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'MWT Assistant - Vehicle Stats & Comparison Tool',
-    description: 'Compare and analyze all vehicles in Modern War Thunder with detailed stats and specifications.',
-    images: ['https://www.mwtassistant.com/icon-512.png'],
-  },
-  verification: {
-    google: 'YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE',
-  },
-  icons: {
-    icon: "/icon-512.png",
-    apple: "/icon-512.png",
-    shortcut: "/icon-512.png",
-  },
-  generator: 'v0.app'
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="en">
-      <head>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
-        />
-        {/* Basic Meta */}
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-        />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-
-        {/* Favicon */}
-        <link rel="icon" href="/icon-512.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/icon-512.png" />
-        <link rel="shortcut icon" href="/icon-512.png" type="image/png" />
-
-        {/* Open Graph / Twitter */}
-        <meta property="og:title" content={metadata.openGraph?.title} />
-        <meta property="og:description" content={metadata.openGraph?.description} />
-        <meta property="og:image" content="https://www.mwtassistant.com/icon-512.png" />
-        <meta property="og:url" content={metadata.openGraph?.url} />
-        <meta property="og:type" content="website" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={metadata.openGraph?.title} />
-        <meta name="twitter:description" content={metadata.openGraph?.description} />
-        <meta name="twitter:image" content="https://www.mwtassistant.com/icon-512.png" />
-
-        {/* Schema.org for Google */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "MWT Assistant",
-              url: "https://www.mwtassistant.com",
-              logo: "https://www.mwtassistant.com/icon-512.png",
-              sameAs: [
-                "https://www.facebook.com/profile.php?id=61581489612967",
-                "https://www.instagram.com/mwt_assistant/",
-              ],
-            }),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "MWT Assistant",
-              url: "https://www.mwtassistant.com",
-              potentialAction: {
-                "@type": "SearchAction",
-                target: "https://www.mwtassistant.com/search?q={search_term_string}",
-                "query-input": "required name=search_term_string",
-              },
-            }),
-          }}
-        />
-
-        {/* Google AdSense - Script is already included above */}
-      </head>
-      <body className={inter.className}>
-        {children}
-      </body>
-    </html>
-  );
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.9",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "postcss": "^8.5",
+    "tailwindcss": "^4.1.9",
+    "tw-animate-css": "1.3.3",
+    "typescript": "^5"
+  }
 }
+
+
+import './globals.css'
+
+export const metadata = {
+      generator: 'v0.app'
+    };
