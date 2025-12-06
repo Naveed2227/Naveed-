@@ -1,25 +1,24 @@
-import type { Metadata, Viewport } from 'next';
-import { Inter, Source_Serif_4 } from 'next/font/google';
-import Script from 'next/script';
-import './globals.css';
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+import type React from "react";
+import type { Metadata, Viewport } from "next";
+import { Inter, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from "next/font/google";
+import Script from "next/script";
+import "./globals.css";
 
-// Optimize font loading with next/font
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-  preload: true,
-  fallback: ['system-ui', 'sans-serif']
+// Initialize fonts
+const inter = Inter({ subsets: ["latin"] });
+const geist = V0_Font_Geist({ 
+  subsets: ['latin'], 
+  weight: ["100","200","300","400","500","600","700","800","900"] 
 });
 
-const sourceSerif = Source_Serif_4({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-source-serif',
-  display: 'swap',
-  preload: true
+const geistMono = V0_Font_Geist_Mono({ 
+  subsets: ['latin'], 
+  weight: ["100","200","300","400","500","600","700","800","900"] 
+});
+
+const sourceSerif4 = V0_Font_Source_Serif_4({ 
+  subsets: ['latin'], 
+  weight: ["200","300","400","500","600","700","800","900"] 
 });
 
 const SITE_URL = 'https://www.mwtassistant.com';
