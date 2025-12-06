@@ -1,7 +1,6 @@
 import type React from "react";
 import type { Metadata, Viewport } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
-import { GeistSans, GeistMono } from 'geist/font';
 import Script from "next/script";
 import "./globals.css";
 
@@ -11,16 +10,24 @@ const inter = Inter({
   variable: '--font-inter'
 });
 
-// Using Geist fonts from the geist package
-const geistSans = GeistSans;
-const geistMono = GeistMono;
+// Using Inter as a fallback for Geist
+const geist = Inter({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-geist'
+});
 
-// Source Serif 4 for serif text
+// Using Inter as a fallback for Geist Mono
+const geistMono = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-geist-mono'
+});
+
 const sourceSerif = Source_Serif_4({ 
   subsets: ['latin'], 
   weight: ["200","300","400","500","600","700","800","900"],
-  variable: '--font-source-serif',
-  display: 'swap'
+  variable: '--font-source-serif'
 });
 
 const SITE_URL = 'https://www.mwtassistant.com';
@@ -110,7 +117,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} ${sourceSerif.variable}`}>
+    <html lang="en" className={`${inter.variable} ${geist.variable} ${geistMono.variable} ${sourceSerif.variable}`}>
       <head>
         <Script
           async
