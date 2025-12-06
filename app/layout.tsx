@@ -4,21 +4,24 @@ import { Inter, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source
 import Script from "next/script";
 import "./globals.css";
 
-// Initialize fonts
+// Font configurations
 const inter = Inter({ subsets: ["latin"] });
 const geist = V0_Font_Geist({ 
   subsets: ['latin'], 
-  weight: ["100","200","300","400","500","600","700","800","900"] 
+  weight: ["100","200","300","400","500","600","700","800","900"],
+  variable: '--font-geist'
 });
 
 const geistMono = V0_Font_Geist_Mono({ 
   subsets: ['latin'], 
-  weight: ["100","200","300","400","500","600","700","800","900"] 
+  weight: ["100","200","300","400","500","600","700","800","900"],
+  variable: '--font-geist-mono'
 });
 
-const sourceSerif4 = V0_Font_Source_Serif_4({ 
+const sourceSerif = V0_Font_Source_Serif_4({ 
   subsets: ['latin'], 
-  weight: ["200","300","400","500","600","700","800","900"] 
+  weight: ["200","300","400","500","600","700","800","900"],
+  variable: '--font-source-serif'
 });
 
 const SITE_URL = 'https://www.mwtassistant.com';
@@ -137,16 +140,16 @@ export default function RootLayout({
   return (
     <html 
       lang="en" 
-      className={`${GeistSans.variable} ${GeistMono.variable} ${inter.variable} ${sourceSerif.variable}`}
+      className={`${geist.variable} ${geistMono.variable} ${inter.className} ${sourceSerif.variable}`}
       suppressHydrationWarning
     >
       <head>
         {/* Google AdSense */}
         <Script
-          id="adsbygoogle-init"
-          strategy="afterInteractive"
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID}`}
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
           crossOrigin="anonymous"
+          strategy="lazyOnload"
         />
         
         {/* Structured Data */}
@@ -155,7 +158,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.className} antialiased min-h-screen bg-background font-sans`}>
+      <body className={inter.className}>
         {children}
       </body>
     </html>
