@@ -4,7 +4,7 @@ import { Inter, Source_Serif_4 } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
-// Font configurations
+// Initialize fonts
 const inter = Inter({ 
   subsets: ["latin"],
   variable: '--font-inter'
@@ -32,7 +32,6 @@ const sourceSerif = Source_Serif_4({
 
 const SITE_URL = 'https://www.mwtassistant.com';
 const SITE_NAME = 'MWT Assistant';
-const SITE_DESCRIPTION = 'View and compare all vehicles in MWT, including Su-57M, Abram X, Mi-35, F-22 Raptor with detailed specifications and performance data.';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -46,72 +45,46 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: `${SITE_NAME} | Vehicle Stats & Battle Pass`,
-    template: `%s | ${SITE_NAME}`,
-  },
-  description: SITE_DESCRIPTION,
-  keywords: [
-    'MWT', 'War Thunder Mobile', 'vehicle stats', 'tank comparison', 
-    'military vehicles', 'battle pass', 'game guide', 'tank specs', 
-    'aircraft stats', 'vehicle comparison', 'war thunder stats'
-  ],
+  title: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
+  description:
+    "View and compare all vehicles in MWT, including Su-57M, Abram X, Mi-35, F-22 Raptor — only on MWT Assistant.",
+  keywords: ["MWT", "vehicle stats", "tank comparison", "war thunder mobile", "military vehicles", "battle pass", "game guide", "tank specs", "aircraft stats"],
+  metadataBase: new URL('https://www.mwtassistant.com'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: {
-      default: `${SITE_NAME} | Vehicle Stats & Comparison Tool`,
-      template: `%s | ${SITE_NAME}`,
-    },
-    description: SITE_DESCRIPTION,
-    url: SITE_URL,
-    siteName: SITE_NAME,
+    title: "MWT Assistant - Vehicle Stats & Comparison Tool",
+    description:
+      "Comprehensive stats and comparison tool for all vehicles in Modern War Thunder. Compare tanks, aircraft, and more with detailed specifications and performance data.",
+    url: "https://www.mwtassistant.com",
+    siteName: "MWT Assistant",
     locale: 'en_US',
     type: 'website',
     images: [
       {
-        url: `${SITE_URL}/icon-512.png`,
+        url: "https://www.mwtassistant.com/icon-512.png",
         width: 512,
         height: 512,
-        alt: `${SITE_NAME} Logo`,
+        alt: "MWT Assistant Logo",
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${SITE_NAME} - Vehicle Stats & Comparison Tool`,
-    description: SITE_DESCRIPTION,
-    images: [`${SITE_URL}/icon-512.png`],
-    creator: '@mwt_assistant',
+    title: 'MWT Assistant - Vehicle Stats & Comparison Tool',
+    description: 'Compare and analyze all vehicles in Modern War Thunder with detailed stats and specifications.',
+    images: ['https://www.mwtassistant.com/icon-512.png'],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
+  verification: {
+    google: 'YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE',
   },
   icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
-      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
-    ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
+    icon: "/icon-512.png",
+    apple: "/icon-512.png",
+    shortcut: "/icon-512.png",
   },
-  manifest: '/site.webmanifest',
-  other: {
-    'msapplication-TileColor': '#ffffff',
-  },
-    generator: 'v0.app'
+  generator: 'v0.app'
 };
 
 // Schema.org structured data
@@ -119,9 +92,9 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: SITE_NAME,
-    url: SITE_URL,
-    logo: `${SITE_URL}/icon-512.png`,
+    name: 'MWT Assistant',
+    url: 'https://www.mwtassistant.com',
+    logo: 'https://www.mwtassistant.com/icon-512.png',
     sameAs: [
       'https://www.facebook.com/profile.php?id=61581489612967',
       'https://www.instagram.com/mwt_assistant/',
@@ -130,11 +103,11 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: SITE_NAME,
-    url: SITE_URL,
+    name: 'MWT Assistant',
+    url: 'https://www.mwtassistant.com',
     potentialAction: {
       '@type': 'SearchAction',
-      target: `${SITE_URL}/search?q={search_term_string}`,
+      target: 'https://www.mwtassistant.com/search?q={search_term_string}',
       'query-input': 'required name=search_term_string',
     },
   },
@@ -144,25 +117,73 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html 
-      lang="en" 
-      className={`${inter.variable} ${geist.variable} ${geistMono.variable} ${sourceSerif.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`${inter.variable} ${geist.variable} ${geistMono.variable} ${sourceSerif.variable}`}>
       <head>
-        {/* Google AdSense */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
           crossOrigin="anonymous"
           strategy="lazyOnload"
         />
-        
-        {/* Structured Data */}
+        {/* Basic Meta */}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+        />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+
+        {/* Favicon */}
+        <link rel="icon" href="/icon-512.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/icon-512.png" />
+        <link rel="shortcut icon" href="/icon-512.png" type="image/png" />
+
+        {/* Open Graph / Twitter */}
+        <meta property="og:title" content={metadata.openGraph?.title} />
+        <meta property="og:description" content={metadata.openGraph?.description} />
+        <meta property="og:image" content="https://www.mwtassistant.com/icon-512.png" />
+        <meta property="og:url" content={metadata.openGraph?.url} />
+        <meta property="og:type" content="website" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metadata.openGraph?.title} />
+        <meta name="twitter:description" content={metadata.openGraph?.description} />
+        <meta name="twitter:image" content="https://www.mwtassistant.com/icon-512.png" />
+
+        {/* Schema.org for Google */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "MWT Assistant",
+              url: "https://www.mwtassistant.com",
+              logo: "https://www.mwtassistant.com/icon-512.png",
+              sameAs: [
+                "https://www.facebook.com/profile.php?id=61581489612967",
+                "https://www.instagram.com/mwt_assistant/",
+              ],
+            }),
+          }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "MWT Assistant",
+              url: "https://www.mwtassistant.com",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://www.mwtassistant.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
+
+        {/* Google AdSense - Script is already included above */}
       </head>
       <body className={`${inter.className} font-sans`}>
         {children}
