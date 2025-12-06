@@ -1,88 +1,164 @@
-{
-  "name": "my-v0-project",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "build": "next build",
-    "build:export": "next build && next export",
-    "dev": "next dev",
-    "export": "next export",
-    "lint": "next lint",
-    "start": "next start",
-    "verify-dns": "node scripts/dns-verification.js"
+import type { Metadata, Viewport } from 'next';
+import { Inter, Source_Serif_4 } from 'next/font/google';
+import Script from 'next/script';
+import './globals.css';
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+
+// Optimize font loading with next/font
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'sans-serif']
+});
+
+const sourceSerif = Source_Serif_4({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-source-serif',
+  display: 'swap',
+  preload: true
+});
+
+const SITE_URL = 'https://www.mwtassistant.com';
+const SITE_NAME = 'MWT Assistant';
+const SITE_DESCRIPTION = 'View and compare all vehicles in MWT, including Su-57M, Abram X, Mi-35, F-22 Raptor with detailed specifications and performance data.';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  ],
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} | Vehicle Stats & Battle Pass`,
+    template: `%s | ${SITE_NAME}`,
   },
-  "dependencies": {
-    "@emotion/is-prop-valid": "latest",
-    "@hookform/resolvers": "^3.10.0",
-    "@radix-ui/react-accordion": "1.2.2",
-    "@radix-ui/react-alert-dialog": "1.1.4",
-    "@radix-ui/react-aspect-ratio": "1.1.1",
-    "@radix-ui/react-avatar": "1.1.2",
-    "@radix-ui/react-checkbox": "1.1.3",
-    "@radix-ui/react-collapsible": "1.1.2",
-    "@radix-ui/react-context-menu": "2.2.4",
-    "@radix-ui/react-dialog": "1.1.4",
-    "@radix-ui/react-dropdown-menu": "2.1.4",
-    "@radix-ui/react-hover-card": "1.1.4",
-    "@radix-ui/react-label": "2.1.1",
-    "@radix-ui/react-menubar": "1.1.4",
-    "@radix-ui/react-navigation-menu": "1.2.3",
-    "@radix-ui/react-popover": "1.1.4",
-    "@radix-ui/react-progress": "1.1.1",
-    "@radix-ui/react-radio-group": "1.2.2",
-    "@radix-ui/react-scroll-area": "1.2.2",
-    "@radix-ui/react-select": "2.1.4",
-    "@radix-ui/react-separator": "1.1.1",
-    "@radix-ui/react-slider": "1.2.2",
-    "@radix-ui/react-slot": "1.1.1",
-    "@radix-ui/react-switch": "1.1.2",
-    "@radix-ui/react-tabs": "1.1.2",
-    "@radix-ui/react-toast": "1.2.4",
-    "@radix-ui/react-toggle": "1.1.1",
-    "@radix-ui/react-toggle-group": "1.1.1",
-    "@radix-ui/react-tooltip": "1.1.6",
-    "@vercel/analytics": "1.3.1",
-    "autoprefixer": "^10.4.20",
-    "child_process": "latest",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "cmdk": "1.0.4",
-    "date-fns": "4.1.0",
-    "embla-carousel-react": "8.5.1",
-    "firebase": "latest",
-    "framer-motion": "latest",
-    "geist": "latest",
-    "input-otp": "1.4.1",
-    "lucide-react": "^0.454.0",
-    "next": "^14.1.0",
-    "next-themes": "latest",
-    "react": "^19",
-    "react-day-picker": "9.8.0",
-    "react-dom": "^19",
-    "react-hook-form": "^7.60.0",
-    "react-resizable-panels": "^2.1.7",
-    "recharts": "2.15.4",
-    "sonner": "^1.7.4",
-    "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7",
-    "vaul": "^0.9.9",
-    "zod": "3.25.67"
+  description: SITE_DESCRIPTION,
+  keywords: [
+    'MWT', 'War Thunder Mobile', 'vehicle stats', 'tank comparison', 
+    'military vehicles', 'battle pass', 'game guide', 'tank specs', 
+    'aircraft stats', 'vehicle comparison', 'war thunder stats'
+  ],
+  alternates: {
+    canonical: '/',
   },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.9",
-    "@types/node": "^22",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "postcss": "^8.5",
-    "tailwindcss": "^4.1.9",
-    "tw-animate-css": "1.3.3",
-    "typescript": "^5"
-  }
+  openGraph: {
+    title: {
+      default: `${SITE_NAME} | Vehicle Stats & Comparison Tool`,
+      template: `%s | ${SITE_NAME}`,
+    },
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: `${SITE_URL}/icon-512.png`,
+        width: 512,
+        height: 512,
+        alt: `${SITE_NAME} Logo`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE_NAME} - Vehicle Stats & Comparison Tool`,
+    description: SITE_DESCRIPTION,
+    images: [`${SITE_URL}/icon-512.png`],
+    creator: '@mwt_assistant',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/site.webmanifest',
+  other: {
+    'msapplication-TileColor': '#ffffff',
+  },
+    generator: 'v0.app'
+};
+
+// Schema.org structured data
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/icon-512.png`,
+    sameAs: [
+      'https://www.facebook.com/profile.php?id=61581489612967',
+      'https://www.instagram.com/mwt_assistant/',
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: SITE_URL,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${SITE_URL}/search?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  },
+];
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html 
+      lang="en" 
+      className={`${GeistSans.variable} ${GeistMono.variable} ${inter.variable} ${sourceSerif.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Google AdSense */}
+        <Script
+          id="adsbygoogle-init"
+          strategy="afterInteractive"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID}`}
+          crossOrigin="anonymous"
+        />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body className={`${inter.className} antialiased min-h-screen bg-background font-sans`}>
+        {children}
+      </body>
+    </html>
+  );
 }
-
-
-import './globals.css'
-
-export const metadata = {
-      generator: 'v0.app'
-    };
