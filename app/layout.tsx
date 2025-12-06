@@ -15,9 +15,11 @@ const v0FontSourceSerif4 = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
-  title: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
-  description:
-    "View and compare all vehicles in MWT, including Su-57M, Abram X, Mi-35, F-22 Raptor — only on MWT Assistant.",
+  title: {
+    default: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
+    template: "%s | MWT Assistant"
+  },
+  description: "View and compare all vehicles in MWT, including Su-57M, Abram X, Mi-35, F-22 Raptor — only on MWT Assistant.",
   keywords: ["MWT", "vehicle stats", "tank comparison", "war thunder mobile", "military vehicles", "battle pass", "game guide", "tank specs", "aircraft stats"],
   metadataBase: new URL('https://www.mwtassistant.com'),
   alternates: {
@@ -25,8 +27,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "MWT Assistant - Vehicle Stats & Comparison Tool",
-    description:
-      "Comprehensive stats and comparison tool for all vehicles in Modern War Thunder. Compare tanks, aircraft, and more with detailed specifications and performance data.",
+    description: "Comprehensive stats and comparison tool for all vehicles in Modern War Thunder. Compare tanks, aircraft, and more with detailed specifications and performance data.",
     url: "https://www.mwtassistant.com",
     siteName: "MWT Assistant",
     locale: 'en_US',
@@ -50,9 +51,13 @@ export const metadata: Metadata = {
     google: 'YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE',
   },
   icons: {
-    icon: "/icon-512.png",
-    apple: "/icon-512.png",
-    shortcut: "/icon-512.png",
+    icon: [
+      { url: "/icon-512.png" },
+    ],
+    apple: [
+      { url: "/icon-512.png" },
+    ],
+    shortcut: ["/icon-512.png"],
   },
   generator: 'v0.app'
 };
