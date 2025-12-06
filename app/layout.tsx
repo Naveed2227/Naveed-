@@ -1,7 +1,8 @@
 import type React from "react";
 import type { Metadata } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
-import localFont from 'next/font/local';
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 import Script from "next/script";
 import "./globals.css";
 
@@ -11,31 +12,6 @@ const v0FontSourceSerif4 = Source_Serif_4({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
   preload: false,
-});
-
-// Load local Geist fonts
-const v0FontGeist = localFont({
-  src: [
-    {
-      path: '../public/fonts/Geist/Geist-Variable.woff2',
-      weight: '100 900',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-geist',
-  display: 'swap',
-});
-
-const v0FontGeistMono = localFont({
-  src: [
-    {
-      path: '../public/fonts/Geist-Mono/GeistMono-Variable.woff2',
-      weight: '100 900',
-      style: 'normal',
-    },
-  ],
-  variable: '--font-geist-mono',
-  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -85,7 +61,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
         <Script
           async
@@ -153,7 +129,7 @@ export default function RootLayout({
 
         {/* Google AdSense - Script is already included above */}
       </head>
-      <body className={inter.className}>
+      <body className={`${GeistSans.variable} ${GeistMono.variable} ${inter.className}`}>
         {children}
       </body>
     </html>
