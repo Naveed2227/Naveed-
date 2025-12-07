@@ -7394,6 +7394,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [dbInitialized, setDbInitialized] = useState(false);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [vehicleTypeFilter, setVehicleTypeFilter] = useState<string | null>(null);
 
   // Load favorites from IndexedDB on component mount
   useEffect(() => {
@@ -9071,8 +9072,29 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
     [[], []] as [Vehicle[], Vehicle[]]
   )
 
-  // Combine new vehicles first, then all other vehicles in their original order
-  const filteredVehicles = [...newVehiclesList, ...otherVehiclesList]
+  // Filter vehicles by type if a filter is active
+  const filterVehiclesByType = (vehicles: any[]) => {
+    if (!vehicleTypeFilter) return vehicles;
+    
+    return vehicles.filter(vehicle => {
+      const type = vehicle.type?.toLowerCase();
+      if (vehicleTypeFilter === 'jets') {
+        return ['jet', 'bomber', 'fighter jet'].includes(type);
+      } else if (vehicleTypeFilter === 'heli') {
+        return type === 'helicopter';
+      } else if (vehicleTypeFilter === 'tanks') {
+        return [
+          'tank', 'ifv', 'spaa', 'td', 
+          'main battle tank', 'light tank', 'tank destroyer',
+          'mlrs', 'missile carrier', 'sph', 'anti-air'
+        ].includes(type);
+      }
+      return true;
+    });
+  };
+
+  // Combine new vehicles first, then all other vehicles in their original order, and apply type filter
+  const filteredVehicles = filterVehiclesByType([...newVehiclesList, ...otherVehiclesList])
 
   const indexOfLastVehicle = currentPage * vehiclesPerPage
   const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage
@@ -11402,10 +11424,41 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
         )}
 
         <div className="mb-6 flex items-center justify-between">
-          <p className="text-slate-400 mx-1.5">
-            Showing {indexOfFirstVehicle + 1}-{Math.min(indexOfLastVehicle, filteredVehicles.length)} of{" "}
-            {filteredVehicles.length} vehicles
-          </p>
+          <div className="flex flex-wrap items-center justify-between gap-4 w-full">
+            <p className="text-slate-400 mx-1.5">
+              Showing {indexOfFirstVehicle + 1}-{Math.min(indexOfLastVehicle, filteredVehicles.length)} of{" "}
+              {filteredVehicles.length} vehicles
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {['Jets', 'Heli', 'Tanks'].map((type) => (
+                <button
+                  key={type}
+                  onClick={() => {
+                    setVehicleTypeFilter(vehicleTypeFilter === type.toLowerCase() ? null : type.toLowerCase());
+                    setCurrentPage(1); // Reset to first page when changing filters
+                  }}
+                  className={`px-3 py-1 text-sm rounded-full transition-colors ${
+                    vehicleTypeFilter === type.toLowerCase()
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-slate-700 hover:bg-slate-600 text-slate-300'
+                  }`}
+                >
+                  {type}
+                </button>
+              ))}
+              {vehicleTypeFilter && (
+                <button
+                  onClick={() => {
+                    setVehicleTypeFilter(null);
+                    setCurrentPage(1); // Reset to first page when clearing filter
+                  }}
+                  className="px-3 py-1 text-sm text-slate-300 hover:text-white"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Upcoming Vehicles Alert */}
