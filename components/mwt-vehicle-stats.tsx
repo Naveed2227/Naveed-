@@ -270,6 +270,7 @@ const newVehicles = [
 "RAH-66 Comanche",
 "Leopard 2 Revolution",
 "FV101 Scorpion-90",
+
 ];
 
 // Upcoming Vehicles System
@@ -9003,6 +9004,12 @@ const missileHasTags = (missileName: string) => {
 "ERC-90 F4 Sagaie",
 "Su-47 Berkut",
 "ZLT-11",
+"TAN-SAM-1C",
+"T-72B1",
+"RAH-66 Comanche",
+"Leopard 2 Revolution",
+"FV101 Scorpion-90",
+"M60A3 TTS",
 "M1 AGDS",
 ]
    return exclusiveVehicles.includes(vehicleName)
