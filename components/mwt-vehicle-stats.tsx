@@ -268,6 +268,8 @@ const newVehicles = [
 "TAN-SAM-1C",
 "T-72B1",
 "RAH-66 Comanche",
+"Leopard 2 Revolution",
+"FV101 Scorpion-90",
 ];
 
 // Upcoming Vehicles System
@@ -275,8 +277,7 @@ const upcomingVehicles = [
   
 "HARP General Krueger",
 "AMX-10RC",
-"Leopard 2 Revolution",
-"FV101 Scorpion-90",
+
 
   // Add upcoming vehicle names here
 ];
@@ -416,7 +417,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "XM8 AGS",
 "VBCI-2",
 "Centauro I 120",
-
+"FV101 Scorpion-90",
 
 
 
@@ -520,6 +521,8 @@ const getVehicleRarity = (vehicleName: string) => {
 "Ka-90",
  "M1 AGDS",
 "RAH-66 Comanche",
+"Leopard 2 Revolution",
+
 
 ];
   const legendaryVehicles = [
@@ -1444,8 +1447,14 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Leopard-2-Revolution.jpg",
     "description": "An upgraded German main battle tank variant operated by Indonesia, featuring enhanced armor, modern sensors, improved crew protection, and advanced digital fire-control systems.",
-    "stats": { "health": 0, "speed": 0, "armor": 0, "agility": 0 },
-    "weapons": []
+    "stats": { "health": 46400, "speed": 68, "armor": 0, "agility": 35 },
+    "weapons": [
+      { "name": "DM11", "type": "Main Gun", "damage": 4900, "penetration": 87 },
+      { "name": "DM53A1", "type": "Main Gun", "damage": 11500, "penetration": 680 },
+      { "name": "DM12A1", "type": "Main Gun", "damage": 12100, "penetration": 480 },
+      { "name": "DM63", "type": "Main Gun", "damage": 11760, "penetration": 810 }
+
+    ]
   },
   {
     "id": 127,
@@ -3997,9 +4006,12 @@ const VEHICLES_DATA = [
     "tier": "II",
     "image": "FV101-Scorpion-90.jpg",
     "description": "A lightweight British armored reconnaissance vehicle used by Indonesia, combining high mobility, a 90 mm gun, and effective fire support for diverse terrain operations.",
-    "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
+    "stats": { "health": 29700, "speed": 80, "armor": "26", "agility": 42 },
     "weapons": [
-    
+       { "name": "M625A1 HESH", "type": "Main Gun", "damage": 9180, "penetration": 102 },
+       { "name": "M620A1 HEAT", "type": "Main Gun", "damage": 9450, "penetration": 250 },
+       { "name": "M652A1 APFSDS", "type": "Main Gun", "damage": 8870, "penetration": 374 },
+      
     ]
   },
   {
@@ -8719,8 +8731,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       
 "HARP General Krueger",
 "AMX-10RC",
-"Leopard 2 Revolution",
-"FV101 Scorpion-90",
+
 
       
     ]
