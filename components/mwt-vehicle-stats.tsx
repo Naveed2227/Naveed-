@@ -1028,7 +1028,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Next-generation main battle tank with unmanned turret and advanced armor systems.",
     image: "T-14-Armata.jpg",
-    stats: { health: 42400, speed: 75, reverseSpeed: 70, armor: "1200mm", agility: 34 },
+    stats: { health: 42400, speed: 75, reverseSpeed: 70, armor: "780mm", agility: 34 },
     weapons: [
       { name: "3BM69 Vacuum-1", type: "Main Gun", damage: 10670, penetration: 900 },
       { name: "30F26", type: "Main Gun", damage: 5000, penetration: 920 },
@@ -1044,7 +1044,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Abrams-X.jpg",
     description: "Next-generation prototype tank with unmanned turret and advanced systems.",
-    stats: { health: 40300, speed: 75, reverseSpeed: 45, armor: "1100mm", agility: 35 },
+    stats: { health: 40300, speed: 75, reverseSpeed: 45, armor: "800mm", agility: 35 },
     weapons: [
       { name: "M829A3", type: "Main Gun", damage: 10450, penetration: 670 },
       { name: "MRM-KE", type: "Main Gun", damage: 9150, penetration: 980 },
@@ -1062,7 +1062,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Type-10.jpg",
     description: "Modern main battle tank optimized for Japanese terrain with advanced fire control.",
-    stats: { health: 39800, speed: 72, reverseSpeed: 72, armor: "850mm", agility: 45 },
+    stats: { health: 39800, speed: 72, reverseSpeed: 72, armor: "750mm", agility: 45 },
     weapons: [
       { name: "JM33 APFSDS", type: "Main Gun", damage: 11330, penetration: 481 },
       { name: "JM12A1 HEAT", type: "Main Gun", damage: 12360, penetration: 480 },
@@ -1077,7 +1077,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Altay.jpg",
     description: "Turkey's modern main battle tank, emphasizing firepower, protection, mobility, and advanced technology.",
-    stats: { health: 42600, speed: 68, armor: "1000mm", agility: 35, turnRate: 46 },
+    stats: { health: 42600, speed: 68, armor: "650mm", agility: 35, turnRate: 46 },
     weapons: [
       { name: "DM63A1 APFSDS", type: "Main Gun", damage: 11760, penetration: 810 },
       { name: "DM11 HEI", type: "Main Gun", damage: 5000, penetration: 85 },
@@ -1093,7 +1093,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "T-90A.jpg",
     description: "Modernized main battle tank with improved armor and advanced fire control.",
-    stats: { health: 40000, speed: 65, reverseSpeed: 30, maneuverability: 44, armor: "1050mm", agility: 44 },
+    stats: { health: 40000, speed: 65, reverseSpeed: 30, maneuverability: 44, armor: "600mm", agility: 44 },
     weapons: [
       { name: "3BM42", type: "Main Gun", damage: 11390, penetration: 565 },
       { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
@@ -1110,7 +1110,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "KF-51-Panther.jpg",
     description: "Next-generation main battle tank with 130mm gun and advanced digital systems.",
-    stats: { health: 44000, speed: 74, armor: "1200mm", agility: 39 },
+    stats: { health: 44000, speed: 74, armor: "800mm", agility: 39 },
     weapons: [
       { name: "DM11-1", type: "Main Gun", damage: 5300, penetration: 117 },
       { name: "DM12-1", type: "Main Gun", damage: 13640, penetration: 800 },
@@ -1127,7 +1127,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "M1-Abrams-Block-3.jpg",
     description: "An Experimental prototype tank intended as a successor to the Abrams MBT family",
-    stats: { health: 41000, speed: 80, reverseSpeed: 50, maneuverability: 40, armor: "900mm", agility: 40 },
+    stats: { health: 41000, speed: 80, reverseSpeed: 50, maneuverability: 40, armor: "600mm", agility: 40 },
     weapons: [
       { name: "M830A1", type: "Main Gun", damage: 12100, penetration: 850 },
       { name: "M829A3", type: "Main Gun", damage: 10450, penetration: 670 },
@@ -1143,7 +1143,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Leopard-2A7V.jpg",
     description: "Most advanced Leopard variant with urban warfare modifications and enhanced protection.",
-    stats: { health: 42100, speed: 64, armor: "1080mm", agility: 37 },
+    stats: { health: 42100, speed: 64, armor: "730mm", agility: 37 },
     weapons: [
       { name: "DM11", type: "Main Gun", damage: 5000, penetration: 85 },
       { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
@@ -1159,7 +1159,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "T-25-Pamir.jpg",
     description: "Advanced main battle tank with next-generation armor and fire control systems.",
-    stats: { health: 40000, speed: 65, armor: "1250mm", agility: 30 },
+    stats: { health: 40000, speed: 65, armor: "810mm", agility: 30 },
     weapons: [
       { name: "3BM50 Lead-1", type: "Main Gun", damage: 11170, penetration: 755 },
       { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
@@ -1175,7 +1175,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "T-95M.jpg",
     description: "Experimental heavy tank with revolutionary armor design and 152mm gun.",
-    stats: { health: 38100, speed: 75, armor: "1400mm", agility: 30 },
+    stats: { health: 38100, speed: 75, armor: "740mm", agility: 30 },
     weapons: [
       { name: "Grifel-1", type: "Main Gun", damage: 15440, penetration: 850 },
       { name: "Grifel-2", type: "Main Gun", damage: 16100, penetration: 1100 },
@@ -1193,7 +1193,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "T-104-Bastion.jpg",
     description: "A Russian heavy main battle tank, featuring strong armor, AI-assisted and protection systems.",
-    stats: { health: 42200, speed: 60, armor: "1320mm", agility: 45 },
+    stats: { health: 42200, speed: 60, armor: "820mm", agility: 45 },
     weapons: [
       { name: "Grifel-1", type: "Main Gun", damage: 15440, penetration: 850 },
       { name: "Grifel-2", type: "Main Gun", damage: 16100, penetration: 1100 },
@@ -1225,7 +1225,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "T-14-(152).jpg",
     description: "Next-generation Russian MBT prototype equipped with a powerful 152mm smoothbore gun and advanced armor.",
-    stats: { health: 43100, speed: 73, armor: "1000mm", agility: 34 },
+    stats: { health: 43100, speed: 73, armor: "750mm", agility: 34 },
     weapons: [
       { name: "Grifel-1", type: "Main Gun", damage: 15440, penetration: 850 },
       { name: "Grifel-2", type: "Main Gun", damage: 16100, penetration: 1100 },
@@ -1241,7 +1241,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Merkava-Mk.4.jpg",
     description: "Heavily armored main battle tank with unique rear-engine design and crew survivability focus.",
-    stats: { health: 46900, speed: 64, armor: "950mm", agility: 38 },
+    stats: { health: 46900, speed: 64, armor: "730mm", agility: 38 },
     weapons: [
       { name: "M322", type: "Main Gun", damage: 9900, penetration: 589 },
       { name: "M338", type: "Main Gun", damage: 10000, penetration: 620 },
@@ -1257,7 +1257,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Tank support fighting vehicle designed for urban combat and infantry support.",
     image: "BMPT-Terminator-2.jpg",
-    stats: { health: 40600, speed: 65, armor: "850mm", agility: 44 },
+    stats: { health: 40600, speed: 65, armor: "550mm", agility: 44 },
     weapons: [
       { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
       { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
@@ -1337,7 +1337,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "M1-Abrams-CATTB.jpg",
     description: "Experimental American tank with 140mm gun, advanced armor, and fire control, testing technologies to boost combat effectiveness.",
-    stats: { health: 43700, speed: 72, armor: "1100mm", agility: 36 },
+    stats: { health: 43700, speed: 72, armor: "870mm", agility: 36 },
     weapons: [
       { name: "XM965", type: "Main Gun", damage: 16560, penetration: 1000, Reload: 8 },
       { name: "XM964", type: "Main Gun", damage: 14640, penetration: 1050, Reload: 8 }
@@ -1352,7 +1352,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "VT-4A1.jpg",
     description: "Export variant main battle tank with advanced fire control and modular protection.",
-    stats: { health: 43200, speed: 71, armor: "1100mm", agility: 37 },
+    stats: { health: 43200, speed: 71, armor: "690mm", agility: 37 },
     weapons: [
       { name: "BTA4", type: "Main Gun", damage: 11660, penetration: 7000 },
       { name: "DTB12-125", type: "Main Gun", damage: 5000, penetration: 83 },
@@ -1368,7 +1368,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "ZTZ99A.jpg",
     description: "Advanced main battle tank with composite armor and laser warning systems.",
-    stats: { health: 42400, speed: 76, armor: "1150mm", agility: 40 },
+    stats: { health: 42400, speed: 76, armor: "650mm", agility: 40 },
     weapons: [
       { name: "DTB-125 HE", type: "Main Gun", damage: 4980, penetration: 183 },
       { name: "DTP-125 HEAT", type: "Main Gun", damage: 12230, penetration: 480 },
@@ -1384,7 +1384,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "ZTZ99-III.jpg",
     description: "Latest variant with enhanced armor package and improved battlefield management systems.",
-    stats: { health: 41700, speed: 65, armor: "1200mm", agility: 34 },
+    stats: { health: 41700, speed: 65, armor: "630mm", agility: 34 },
     weapons: [
       { name: "DTB-125 HEI", type: "Main Gun", damage: 4980, penetration: 83 },
       { name: "BTA4", type: "Main Gun", damage: 11600, penetration: 700 },
@@ -1400,7 +1400,7 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Challenger-3.jpg",
     "description": "Next-generation British main battle tank with smoothbore gun and digital turret.",
-    "stats": { "health": 46200, "speed": 70, "armor": 1180, "agility": 32 },
+    "stats": { "health": 46200, "speed": 70, "armor": 800, "agility": 32 },
     "weapons": [
       { "name": "DM11", "type": "Main Gun", "damage": 5000, "penetration": 85 },
       { "name": "DM12", "type": "Main Gun", "damage": 12100, "penetration": 480 },
@@ -1416,7 +1416,7 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "EMBT-120.jpg",
     "description": "A hybrid European main battle tank, combining Leopard 2 chassis with Leclerc turret.",
-    "stats": { "health": 41900, "speed": 75, "armor": 1160, "agility": 38 },
+    "stats": { "health": 41900, "speed": 75, "armor": 640, "agility": 38 },
     "weapons": [
       { "name": "OCC 120 G1 HEAT", "type": "Main Gun", "damage": 12230, "penetration": 480 },
       { "name": "OE120F1 HEI", "type": "Main Gun", "damage": 4800, "penetration": 85 },
@@ -1432,7 +1432,7 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "FV4034-Challenger-2-TES.jpg",
     "description": "A heavily upgraded British main battle tank with advanced armor for urban warfare.",
-    "stats": { "health": 42700, "speed": 56, "armor": 1120, "agility": 30 },
+    "stats": { "health": 42700, "speed": 56, "armor": 800, "agility": 30 },
     "weapons": [
       { "name": "L27A1", "type": "Main Gun", "damage": 11850, "penetration": 610 },
       { "name": "L23A1", "type": "Main Gun", "damage": 11400, "penetration": 397 },
@@ -1448,7 +1448,7 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Leopard-2-Revolution.jpg",
     "description": "An upgraded German main battle tank variant operated by Indonesia, featuring enhanced armor, modern sensors, improved crew protection, and advanced digital fire-control systems.",
-    "stats": { "health": 46400, "speed": 68, "armor": 0, "agility": 35 },
+    "stats": { "health": 46400, "speed": 68, "armor": 640, "agility": 35 },
     "weapons": [
       { "name": "DM11", "type": "Main Gun", "damage": 4900, "penetration": 87 },
       { "name": "DM53A1", "type": "Main Gun", "damage": 11500, "penetration": 680 },
@@ -1465,7 +1465,7 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Karrar.jpg",
     "description": "An Iranian main battle tank, featuring upgraded armor, firepower, and technology from T-72 design.",
-    "stats": { "health": 39800, "speed": 70, "armor": 850, "agility": 35 },
+    "stats": { "health": 39800, "speed": 70, "armor": 590, "agility": 35 },
     "weapons": [
       { "name": "3OF19", "type": "Main Gun", "damage": 5000, "penetration": 82 },
       { "name": "3BK29", "type": "Main Gun", "damage": 12630, "penetration": 660 },
@@ -1482,7 +1482,7 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Leclerc-S2-AZUR.jpg",
     "description": "Upgraded French main battle tank with urban warfare package and improved armor.",
-    "stats": { "health": 44700, "speed": 72, "armor": 900, "agility": 41 },
+    "stats": { "health": 44700, "speed": 72, "armor": 640, "agility": 41 },
     "weapons": [
       { "name": "OFL 120 G1 APFSDS", "type": "Main Gun", "damage": 11240, "penetration": 495 },
       { "name": "OE 120 F1 HEI", "type": "Main Gun", "damage": 5000, "penetration": 85 },
@@ -1498,7 +1498,7 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Object-640.jpg",
     "description": "The Object 640 \"Black Eagle\" is a Russian prototype main battle tank with modular armor.",
-    "stats": { "health": 42400, "speed": 80, "armor": 1200, "agility": 38 },
+    "stats": { "health": 42400, "speed": 80, "armor": 700, "agility": 38 },
     "weapons": [
       { "name": "3BM60 Lead-2", "type": "Main Gun", "damage": 11830, "penetration": 780 },
       { "name": "3BK18M", "type": "Main Gun", "damage": 12390, "penetration": 550 },
@@ -1514,7 +1514,7 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Leopard-2-A-RC-3.0.jpg",
     "description": "Mobile gun system with rapid deployment capability and stealth features.",
-    "stats": { "health": 41900, "speed": 70, "armor": 300, "agility": 38 },
+    "stats": { "health": 41900, "speed": 70, "armor": 640, "agility": 38 },
     "weapons": [
       { "name": "XM1401E APFSDS", "type": "Main Gun", "damage": 13090, "penetration": 950 },
       { "name": "XME140 HEI", "type": "Main Gun", "damage": 13780, "penetration": 103 },
@@ -1621,7 +1621,7 @@ const VEHICLES_DATA = [
       "reverseSpeed": 0,
       "turretRotationSpeed": 0,
       "hullRotationSpeed": 45,
-      "armor": 900,
+      "armor": 800,
       "agility": 40
     },
     "weapons": [
@@ -1671,7 +1671,7 @@ const VEHICLES_DATA = [
       "reverseSpeed": 0,
       "turretRotationSpeed": 0,
       "hullRotationSpeed": 0,
-      "armor": 810,
+      "armor": 650,
       "agility": 38
     },
     "weapons": [
@@ -1695,7 +1695,7 @@ const VEHICLES_DATA = [
       "reverseSpeed": 0,
       "turretRotationSpeed": 0,
       "hullRotationSpeed": 35,
-      "armor": 810,
+      "armor": 660,
       "agility": 35
     },
     "weapons": [
@@ -1809,7 +1809,7 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "M1-AGDS.png",
     "description": "A conceptual U.S. armored air-defense vehicle design combining heavy protection, advanced sensors, and rapid-fire weapons for close-range battlefield air-defense roles.",
-    "stats": { "health": 47700, "speed": 69, "armor": "800mm", "agility": 36 },
+    "stats": { "health": 47700, "speed": 69, "armor": "770mm", "agility": 36 },
     "weapons": [
       { "name": "PMD-060 APFSDS", "type": "Main Gun", "damage": 800, "penetration": 186 },
       { "name": "PMD-074 HEI", "type": "Main Gun", "damage": 370, "penetration": 65 },
@@ -1958,7 +1958,7 @@ const VEHICLES_DATA = [
       "reverseSpeed": 28,
       "turretRotationSpeed": 45,
       "hullRotationSpeed": 40,
-      "armor": 500,
+      "armor": 700,
       "agility": 40
     },
     "weapons": [
@@ -11855,7 +11855,33 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                       </div>
                     </div>
                     <div className="bg-slate-800/50 rounded-lg p-3">
-                      <div className="text-xs text-slate-400 mb-1">Armor</div>
+                      <div className="text-xs text-slate-400 mb-1 flex items-center gap-1">
+                        Armor
+                        <div className="relative group ml-1">
+                          <button 
+                            className="w-4 h-4 flex items-center justify-center text-xs rounded-full border border-blue-400 text-blue-400 hover:bg-blue-900/50 transition-colors"
+                            onMouseEnter={(e) => {
+                              const tooltip = e.currentTarget.nextElementSibling as HTMLElement;
+                              tooltip.classList.remove('hidden');
+                            }}
+                            onMouseLeave={(e) => {
+                              const tooltip = e.currentTarget.nextElementSibling as HTMLElement;
+                              tooltip.classList.add('hidden');
+                            }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const tooltip = e.currentTarget.nextElementSibling as HTMLElement;
+                              tooltip.classList.toggle('hidden');
+                            }}
+                            aria-label="Armor information"
+                          >
+                            ?
+                          </button>
+                          <div className="absolute z-10 hidden left-1/2 transform -translate-x-1/2 bottom-full mb-1 w-48 bg-slate-800 text-white text-xs p-2 rounded shadow-lg">
+                            Armor stats are based on average calculations and might not be 100% accurate
+                          </div>
+                        </div>
+                      </div>
                       <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
                         {vehicle.stats.armor}
                         {isEditor && isEditMode && (
@@ -13212,8 +13238,34 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                               {displayVehicle.stats.armor && (
                                 <div className="bg-slate-800/80 rounded-lg p-4">
                                   <div className="flex justify-between items-center mb-1">
-                                    <span className="text-xs font-medium text-gray-300">ARMOR</span>
-                                    <span className="text-sm font-bold text-white flex items-center gap-1">
+                                    <span className="text-xs font-medium text-gray-300 flex items-center gap-1">
+                                      ARMOR
+                                      <div className="relative group ml-1">
+                                        <button
+                                          className="w-4 h-4 flex items-center justify-center text-xs rounded-full border border-blue-400 text-blue-400 hover:bg-blue-900/50 transition-colors"
+                                          onMouseEnter={(e) => {
+                                            const tooltip = e.currentTarget.nextElementSibling as HTMLElement;
+                                            tooltip.classList.remove('hidden');
+                                          }}
+                                          onMouseLeave={(e) => {
+                                            const tooltip = e.currentTarget.nextElementSibling as HTMLElement;
+                                            tooltip.classList.add('hidden');
+                                          }}
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            const tooltip = e.currentTarget.nextElementSibling as HTMLElement;
+                                            tooltip.classList.toggle('hidden');
+                                          }}
+                                          aria-label="Armor information"
+                                        >
+                                          ?
+                                        </button>
+                                        <div className="absolute z-10 hidden left-1/2 transform -translate-x-1/2 bottom-full mb-1 w-48 bg-slate-800 text-white text-xs p-2 rounded shadow-lg">
+                                          Armor stats are based on average calculations and might not be 100% accurate
+                                        </div>
+                                      </div>
+                                    </span>
+                                    <span className="text-sm font-bold text-white">
                                       {displayVehicle.stats.armor}
                                       {isEditor && isEditMode && (
                                         <button
