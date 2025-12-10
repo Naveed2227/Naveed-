@@ -418,7 +418,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "XM8 AGS",
 "VBCI-2",
 "Centauro I 120",
-"FV101 Scorpion-90",
+
 
 
 
@@ -475,7 +475,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "ERC-90 F4 Sagaie",
 "TAN-SAM-1C",
 "M60A3 TTS",
-
+"FV101 Scorpion-90",
 
 
 ];
@@ -13117,6 +13117,19 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                         </div>
                       )}
                     </div>
+                    <div className="flex justify-end mt-2">
+                      <button
+                        onClick={() => {
+                          setSelectedWeaponForModal(weapon);
+                          findVehiclesWithWeapon(weapon.name);
+                        }}
+                        className="bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 px-2 rounded transition-colors duration-200 flex items-center gap-1"
+                        title="Show vehicles with this weapon"
+                      >
+                        <Search className="w-3 h-3" />
+                        <span>Vehicles</span>
+                      </button>
+                    </div>
                   </div>
 
                   {/* Vehicle Armour Video - Mobile Only */}
@@ -13327,7 +13340,6 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                               <div
                                 key={idx}
                                 className="bg-slate-800/80 rounded-lg p-3 border border-slate-700/50 group cursor-pointer"
-                                onClick={() => setSelectedWeaponForModal(weapon)}
                               >
                                 <div className="mb-2">
                                   <h4 className="text-base font-medium text-cyan-300 flex items-center gap-2">
@@ -13483,6 +13495,17 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                                     </div>
                                   ))}
                                 </div>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedWeaponForModal(weapon);
+                                    findVehiclesWithWeapon(weapon.name);
+                                  }}
+                                  className="mt-3 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded text-sm transition-colors duration-200 flex items-center justify-center gap-2"
+                                >
+                                  <Search className="w-4 h-4" />
+                                  Show Vehicles with this Weapon
+                                </button>
                               </div>
                             ))
                           ) : (
@@ -13743,8 +13766,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                 {VEHICLES.find((v) => v.id.toString() === weaponsModalOpenId)?.weapons.map((weapon, index) => (
                   <div
                     key={index}
-                    className="bg-slate-800/50 rounded-lg p-4 border border-slate-700 cursor-pointer"
-                    onClick={() => setSelectedWeaponForModal(weapon)}
+                    className="bg-slate-800/50 rounded-lg p-4 border border-slate-700"
                   >
                     <div className="flex items-center justify-between mb-2">
                       <h4 className="text-lg font-semibold text-cyan-300">{weapon.name}</h4>
@@ -13806,7 +13828,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                         ))}
                       </div>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mb-3">
                       <div>
                         <span className="text-slate-400">Damage: </span>
                         <span className="text-cyan-300 font-bold text-lg">{weapon.damage}</span>
@@ -13831,6 +13853,19 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                           <span className="text-cyan-300">{weapon.lockTime}</span>
                         </div>
                       )}
+                    </div>
+                    <div className="flex justify-end mt-2">
+                      <button
+                        onClick={() => {
+                          setSelectedWeaponForModal(weapon);
+                          findVehiclesWithWeapon(weapon.name);
+                        }}
+                        className="bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 px-2 rounded transition-colors duration-200 flex items-center gap-1"
+                        title="Show vehicles with this weapon"
+                      >
+                        <Search className="w-3 h-3" />
+                        <span>Vehicles</span>
+                      </button>
                     </div>
                   </div>
                 ))}
