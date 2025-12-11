@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect } from "react";
 import type { Metadata } from "next";
 import { Inter, Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
@@ -75,19 +73,21 @@ export const metadata: Metadata = {
   generator: 'v0.app'
 };
 
+// Client-side initialization component
+function ClarityAnalytics() {
+  useEffect(() => {
+    initClarity();
+  }, []);
+  return null;
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // Initialize Clarity on the client side
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      initClarity();
-    }
-  }, []);
   return (
     <html lang="en">
       <head>
-        {/* Clarity script will be injected by the initClarity function */}
+        <ClarityAnalytics />
       </head>
       <head>
         <Script
