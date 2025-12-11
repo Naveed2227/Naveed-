@@ -1,9 +1,8 @@
-import { useEffect } from "react";
+import type React from "react";
 import type { Metadata } from "next";
 import { Inter, Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import { initClarity } from "@/lib/clarity";
 
 // Initialize fonts
 const geist = Geist({ 
@@ -73,22 +72,11 @@ export const metadata: Metadata = {
   generator: 'v0.app'
 };
 
-// Client-side initialization component
-function ClarityAnalytics() {
-  useEffect(() => {
-    initClarity();
-  }, []);
-  return null;
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <head>
-        <ClarityAnalytics />
-      </head>
       <head>
         <Script
           async
