@@ -13503,10 +13503,11 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                                     setSelectedWeaponForModal(weapon);
                                     findVehiclesWithWeapon(weapon.name);
                                   }}
-                                  className="ml-auto bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 px-2 rounded transition-colors duration-200 flex items-center gap-1"
+                                  className="ml-auto bg-blue-600 hover:bg-blue-700 text-white text-[11px] py-1 px-2 rounded transition-colors duration-200 flex items-center gap-1 whitespace-nowrap"
+                                  title="Show similar vehicles with this weapon"
                                 >
-                                  <Search className="w-3 h-3" />
-                                  Similar Vehicles
+                                  <Search className="w-3 h-3 flex-shrink-0" />
+                                  <span>Similar vehicles with this weapon</span>
                                 </button>
                               </div>
                             ))
