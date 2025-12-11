@@ -11644,11 +11644,11 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
 
                {/* Vehicle Image Display */}
               {vehicle.image && (
-                <div className="opacity-100 mb-3 sm:mb-4 flex-col pb-[-6px] pb-[-px] pb-[-6px] relative">
+                <div className="relative">
                   <img
                     src={vehicle.image}
                     alt={`${vehicle.name} vehicle`}
-                    className="w-full sm:h-40 md:h-48 object-cover rounded-lg mb-3 bg-slate-800/20 shadow-lg h-36"
+                    className="w-full h-36 sm:h-40 md:h-48 object-cover rounded-lg bg-slate-800/20 shadow-lg"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none';
                     }}
@@ -12011,19 +12011,21 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                 >
                   <div className="space-y-4">
                     <div>
-                      <h4 className="text-sm font-semibold text-cyan-300 mb-2">Weapons</h4>
-                      <div className="space-y-2">
+                      <h4 className="text-2xs font-semibold text-cyan-300/80 mb-1">WEAPONS</h4>
+                      <div className="space-y-1">
                         {vehicle.weapons.map((weapon: any, idx: number) => (
-                          <div key={idx} className="bg-slate-800/30 rounded p-2">
-                            <div className="flex justify-between items-start">
-                              <div className="font-medium text-cyan-200">{weapon.name}</div>
-                              <div className="text-right text-xs">
-                                <div className="text-cyan-300 font-bold">DMG: {weapon.damage}</div>
-                                <div className="text-cyan-300 font-bold">PEN: {weapon.penetration}</div>
-                                <div className="text-cyan-300 font-bold">REL: {weapon.reload}</div>
-                                {weapon.rateOfFire && <div className="text-slate-400">{weapon.rateOfFire}</div>}
+                          <div key={idx} className="bg-slate-800/40 rounded p-1">
+                            <div className="flex justify-between items-center">
+                              <div className="text-2xs font-medium text-cyan-200/90 truncate max-w-[120px]">{weapon.name}</div>
+                              <div className="flex gap-2 text-[10px]">
+                                <div className="text-cyan-300/90">{weapon.damage} <span className="text-slate-400/80">DMG</span></div>
+                                <div className="text-cyan-300/90">{weapon.penetration} <span className="text-slate-400/80">PEN</span></div>
+                                <div className="text-cyan-300/90">{weapon.reload} <span className="text-slate-400/80">REL</span></div>
                               </div>
                             </div>
+                            {weapon.rateOfFire && (
+                              <div className="text-[10px] text-slate-400/80 mt-0.5">{weapon.rateOfFire}</div>
+                            )}
                           </div>
                         ))}
                       </div>
@@ -13501,10 +13503,10 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                                     setSelectedWeaponForModal(weapon);
                                     findVehiclesWithWeapon(weapon.name);
                                   }}
-                                  className="mt-3 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded text-sm transition-colors duration-200 flex items-center justify-center gap-2"
+                                  className="ml-auto bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 px-2 rounded transition-colors duration-200 flex items-center gap-1"
                                 >
-                                  <Search className="w-4 h-4" />
-                                  Show Vehicles with this Weapon
+                                  <Search className="w-3 h-3" />
+                                  Similar Vehicles
                                 </button>
                               </div>
                             ))
