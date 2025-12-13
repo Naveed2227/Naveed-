@@ -8765,20 +8765,23 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
 
 // Standard missile systems
 const standardMissiles = [
-  "57E6M",
-  "Stinger",
-  "Hellfire",
-  "FK 2000",
-  "FK-2000",
-  "Fliegerfaust 2 Stinger",
-  "9M311",
-  "SAM Rokand",
-  "TAN-SAM-1C",
-  "P 4001 HEI",
-  "P 4001B HEI",
-  "9M311 Sosna",
-  "9M31M HEI",
-  "9M31 HEI"
+  "AAM 57E6M",
+"Stinger Launcher",
+"AGM-114 Hellfire",
+"MIM-146",
+"XM1018AD HE",
+"XM1018 HEI",
+"FK-2000",
+"MIM-146 (first variant)",
+"MIM-146 (second variant)",
+"Fliegerfaust 2 Stinger",
+"Crotale-NG-Launcher",
+"ZUR 9M311",
+"FB-10A",
+"SAM Rokand",
+"9M311 Sosna",
+"9M31M HEI",
+"9M31 HEI"
 ];
 
 const antiWarningMissiles = [
