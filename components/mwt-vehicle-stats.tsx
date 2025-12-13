@@ -8751,7 +8751,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   "R-40TD",
   "R-93M",
   "Storm Shadow",
-  "YJ-1000",
   "KD-88",
   "CM-102A",
   "9K38 Igla-V",
