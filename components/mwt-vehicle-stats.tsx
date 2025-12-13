@@ -7718,6 +7718,8 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
 
   const [selectedWeaponForModal, setSelectedWeaponForModal] = useState<any | null>(null)
   const [vehiclesWithWeapon, setVehiclesWithWeapon] = useState<any[]>([])
+  const [originalVehicleName, setOriginalVehicleName] = useState<string | null>(null)
+  const [selectedVehicle, setSelectedVehicle] = useState<any | null>(null)
 
   const vehiclesWithWeaponRef = useRef<HTMLDivElement | null>(null)
 
@@ -8765,7 +8767,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
 
 // Standard missile systems
 const standardMissiles = [
-  "AAM 57E6M",
+"AAM 57E6M",
 "Stinger Launcher",
 "AGM-114 Hellfire",
 "MIM-146",
@@ -13145,6 +13147,12 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                     <div className="flex justify-end mt-2">
                       <button
                         onClick={() => {
+                          setOriginalVehicleName(searchQuery);
+                          // Save the currently selected vehicle before opening the modal
+                          const currentVehicle = VEHICLES.find(v => v.name === searchQuery);
+                          if (currentVehicle) {
+                            setSelectedVehicle(currentVehicle);
+                          }
                           setSelectedWeaponForModal(weapon);
                           findVehiclesWithWeapon(weapon.name);
                         }}
@@ -13533,6 +13541,12 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
+                                    setOriginalVehicleName(searchQuery);
+                                    // Save the currently selected vehicle before opening the modal
+                                    const currentVehicle = VEHICLES.find(v => v.name === searchQuery);
+                                    if (currentVehicle) {
+                                      setSelectedVehicle(currentVehicle);
+                                    }
                                     setSelectedWeaponForModal(weapon);
                                     findVehiclesWithWeapon(weapon.name);
                                   }}
@@ -13893,6 +13907,12 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                     <div className="flex justify-end mt-2">
                       <button
                         onClick={() => {
+                          setOriginalVehicleName(searchQuery);
+                          // Save the currently selected vehicle before opening the modal
+                          const currentVehicle = VEHICLES.find(v => v.name === searchQuery);
+                          if (currentVehicle) {
+                            setSelectedVehicle(currentVehicle);
+                          }
                           setSelectedWeaponForModal(weapon);
                           findVehiclesWithWeapon(weapon.name);
                         }}
@@ -13919,7 +13939,26 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                   {selectedWeaponForModal?.name || 'Missile'}
                 </h2>
                 <button
-                  onClick={() => setSelectedWeaponForModal(null)}
+                  onClick={async () => {
+                    if (originalVehicleName) {
+                      // Find the original vehicle to restore
+                      const originalVehicle = VEHICLES.find(v => v.name === originalVehicleName);
+                      if (originalVehicle) {
+                        setSearchQuery(originalVehicleName);
+                        // Force a re-render by setting vehicle to null first
+                        setSelectedVehicle(null);
+                        // Then set the actual vehicle
+                        setTimeout(() => {
+                          setSelectedVehicle(originalVehicle);
+                          setVehicleDetailsOpenId(originalVehicle.id?.toString() || null);
+                        }, 0);
+                      } else {
+                        setSearchQuery(originalVehicleName);
+                      }
+                      setOriginalVehicleName(null);
+                    }
+                    setSelectedWeaponForModal(null);
+                  }}
                   className="text-slate-400 hover:text-slate-100"
                   aria-label="Close missile details"
                 >
@@ -13983,6 +14022,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                               className="min-w-[260px] max-w-[320px] bg-slate-950 rounded-xl border border-slate-700 overflow-hidden cursor-pointer flex flex-col shadow-2xl hover:-translate-y-0.5 hover:border-emerald-500 transition"
                               onClick={() => {
                                 setSearchQuery(veh.name);
+                                setOriginalVehicleName(null);
                                 setSelectedWeaponForModal(null);
                               }}
                             >
