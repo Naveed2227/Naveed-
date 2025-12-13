@@ -8763,6 +8763,24 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   "ADS STARSTREAK",
 ];
 
+// Standard missile systems
+const standardMissiles = [
+  "57E6M",
+  "Stinger",
+  "Hellfire",
+  "FK 2000",
+  "FK-2000",
+  "Fliegerfaust 2 Stinger",
+  "9M311",
+  "SAM Rokand",
+  "TAN-SAM-1C",
+  "P 4001 HEI",
+  "P 4001B HEI",
+  "9M311 Sosna",
+  "9M31M HEI",
+  "9M31 HEI"
+];
+
 const antiWarningMissiles = [
   "SAM Rokand",
   "Kh-47M2 Kinzhal",
@@ -8910,7 +8928,7 @@ const rocketPods = [
 const missileHasTags = (missileName: string) => {
   const tags = []
 
-  // Maintain specific order: Anti-Flare, Anti-Warning, Long-Range, Laser-guided, Rocket Pod
+  // Maintain specific order: Anti-Flare, Anti-Warning, Long-Range, Laser-guided, Rocket Pod, Standard Missile
   if (antiFlareMissiles.includes(missileName)) {
     tags.push('anti-flare')
   }
@@ -8925,6 +8943,9 @@ const missileHasTags = (missileName: string) => {
   }
   if (rocketPods.includes(missileName)) {
     tags.push('rocket-pod')
+  }
+  if (standardMissiles.includes(missileName)) {
+    tags.push('missile')
   }
 
   return tags
@@ -13481,6 +13502,16 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                                             </svg>
                                           </div>
                                           <span className="text-purple-400 font-medium">Rocket-Pod</span>
+                                        </>
+                                      )}
+                                      {tag === 'missile' && (
+                                        <>
+                                          <div className="w-3 h-3 text-yellow-400">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                              <path d="M20 12l-8-8v5H5v6h7v5l8-8z"/>
+                                            </svg>
+                                          </div>
+                                          <span className="text-yellow-400 font-medium">Missile</span>
                                         </>
                                       )}
                                       {tag === 'laser-guided' && (
