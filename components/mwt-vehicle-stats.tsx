@@ -8774,8 +8774,9 @@ const standardMissiles = [
 "XM1018AD HE",
 "XM1018 HEI",
 "FK-2000",
-"MIM-146 (first variant)",
-"MIM-146 (second variant)",
+"MIM-146",
+"MIM-146",
+"LOSAT MGM"
 "Fliegerfaust 2 Stinger",
 "Crotale-NG-Launcher",
 "ZUR 9M311",
@@ -8783,7 +8784,15 @@ const standardMissiles = [
 "SAM Rokand",
 "9M311 Sosna",
 "9M31M HEI",
-"9M31 HEI"
+"9M31 HEI",
+"9K338 Igla-S HEI",
+"Hongying-6 HEI",
+"9M311 HEI",
+"Roland-1 HEI",
+"Cheonma HEI",
+"FB-10A HEI",
+"AAM 57E6M HEI",
+"Stinger Launcher",
 ];
 
 const antiWarningMissiles = [
