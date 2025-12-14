@@ -8776,7 +8776,7 @@ const standardMissiles = [
 "FK-2000",
 "MIM-146",
 "MIM-146",
-"LOSAT MGM"
+"LOSAT MGM",
 "Fliegerfaust 2 Stinger",
 "Crotale-NG-Launcher",
 "ZUR 9M311",
