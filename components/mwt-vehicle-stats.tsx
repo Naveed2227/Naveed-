@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Copy, Info, Mail, Shield, FileText } from "lucide-react"
+import Script from "next/script";
 
 // Pages component
 const Pages = ({ activePage, onPageChange }: { activePage: string, onPageChange: (page: string) => void }) => {
@@ -732,7 +733,7 @@ const VEHICLES_DATA = [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
       { "name": "KAB500KR", "type": "Guided Bomb", "damage": 17800, "penetration": 320, "reload": 40 },
-      { "name": "KAB-500L", "type": "Guided Bomb", "damage": 17300, "penetration": 310, "reload": 40 },
+      { "name": "KAB500L", "type": "Guided Bomb", "damage": 17300, "penetration": 310, "reload": 40 },
       { "name": "Kh-47M2 Kinzhal", "type": "Ballistic Missile", "damage": 35000, "penetration": 1200, "reload": 60 },
       { "name": "RVV-MD", "type": "Medium-Range AAM", "damage": 4800, "penetration": 65, "reload": 15 },
       { "name": "Kh-38MLE", "type": "Air-to-Ground Missile", "damage": 17800, "penetration": 400, "reload": 40 },
@@ -14655,44 +14656,21 @@ const MainPage = () => {
 
       <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-2">
         <div key="banner-ad" className="w-full" style={{ width: '780px', margin: '0 auto' }}>
-          <ins
-            className="adsbygoogle"
-            style={{
-              display: 'block',
-              width: '780px',
-              height: '90px',
-              margin: '0 auto',
-              backgroundColor: '#f3f4f6' // Light gray background as placeholder
-            }}
-            data-ad-client="ca-pub-3724137161724998"
-            data-ad-slot="6518875801"
-            data-ad-format="horizontal"
-            data-full-width-responsive="false"
-          >
-            <div style={{
-              width: '728px',
-              height: '90px',
-              margin: '0 auto',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
-              color: '#94a3b8',
-              fontSize: '14px',
-              fontWeight: '500',
-              border: '1px solid #334155',
-              borderRadius: '4px',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-            }}>
-              <div style={{ 
-                textAlign: 'center',
-                padding: '1rem'
-              }}>
-                <div style={{ fontSize: '16px', marginBottom: '4px', color: '#e2e8f0' }}>Advertisement</div>
-                <div>Banner Ad (728×90)</div>
-              </div>
-            </div>
-          </ins>
+          <div style={{ width: '728px', height: '90px', margin: '0 auto' }}>
+            <Script id="hpf-atoptions" strategy="afterInteractive">
+              {`window.atOptions = {
+  'key' : '26985683759ed90ebd2497232a5046ba',
+  'format' : 'iframe',
+  'height' : 90,
+  'width' : 728,
+  'params' : {}
+};`}
+            </Script>
+            <Script
+              strategy="afterInteractive"
+              src="https://www.highperformanceformat.com/26985683759ed90ebd2497232a5046ba/invoke.js"
+            />
+          </div>
         </div>
       </div>
       <CookieConsentBanner />
