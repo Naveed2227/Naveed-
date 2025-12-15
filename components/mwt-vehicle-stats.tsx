@@ -7722,6 +7722,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [selectedVehicle, setSelectedVehicle] = useState<any | null>(null)
 
   const vehiclesWithWeaponRef = useRef<HTMLDivElement | null>(null)
+  const selectedWeaponImageRef = useRef<HTMLImageElement | null>(null)
 
   const [weaponsModalOpenId, setWeaponsModalOpenId] = useState<string | null>(null)
   const [vehicleDetailsOpenId, setVehicleDetailsOpenId] = useState<string | null>(null)
@@ -8963,6 +8964,64 @@ const missileHasTags = (missileName: string) => {
   }
 
   return tags
+}
+
+const getMissileImageCandidates = (weaponName: string) => {
+  const getAssetPrefix = () => {
+    if (typeof window === 'undefined') return ''
+    const fromNext = (window as any).__NEXT_DATA__?.assetPrefix
+    if (typeof fromNext === 'string' && fromNext.trim().length > 0) {
+      return fromNext.replace(/\/+$/, '')
+    }
+    const baseHref = (typeof document !== 'undefined'
+      ? document.querySelector('base')?.getAttribute('href')
+      : null) || ''
+    if (baseHref && baseHref !== '/') {
+      return baseHref.replace(/\/+$/, '')
+    }
+    return ''
+  }
+
+  const baseName = String(weaponName || '').replace(/\s*\(.*?\)\s*/g, '').trim()
+  const withNormalizedSpaces = baseName.replace(/\s+/g, ' ').trim()
+  const withHyphenBetweenLettersAndNumbers = withNormalizedSpaces.replace(/([A-Za-z])([0-9])/g, '$1-$2')
+  const withHyphensInsteadOfSpaces = withNormalizedSpaces.replace(/\s+/g, '-')
+  const encodedBase = encodeURIComponent(withNormalizedSpaces)
+  const encodedHyphen = encodeURIComponent(withHyphenBetweenLettersAndNumbers)
+  const encodedHyphensInsteadOfSpaces = encodeURIComponent(withHyphensInsteadOfSpaces)
+
+  const names = Array.from(
+    new Set([
+      withNormalizedSpaces,
+      withHyphenBetweenLettersAndNumbers,
+      withHyphensInsteadOfSpaces,
+      encodedBase,
+      encodedHyphen,
+      encodedHyphensInsteadOfSpaces,
+    ])
+  ).filter(Boolean)
+
+  const exts = ['jpg', 'png', 'webp', 'jpeg']
+  const out: string[] = []
+
+  const prefix = getAssetPrefix()
+  const withPrefix = (p: string) => {
+    if (!prefix) return p
+    if (prefix === '.') return `.${p}`
+    if (prefix.startsWith('http://') || prefix.startsWith('https://')) return `${prefix}${p}`
+    return `${prefix}${p}`
+  }
+
+  const add = (p: string) => {
+    out.push(withPrefix(p))
+    if (p.startsWith('/')) out.push(withPrefix(p.slice(1)))
+  }
+
+  for (const n of names) add(`/missile/${n}.jpg`)
+  for (const n of names) {
+    for (const ext of exts) add(`/missile/${n}.${ext}`)
+  }
+  return out
 }
 
 
@@ -13381,190 +13440,244 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                             displayVehicle.weapons.map((weapon: any, idx: number) => (
                               <div
                                 key={idx}
-                                className="bg-slate-800/80 rounded-lg p-3 border border-slate-700/50 group cursor-pointer"
+                                className="bg-slate-800/80 rounded-lg p-4 border border-slate-700/50 group cursor-pointer"
                               >
-                                <div className="mb-2">
-                                  <h4 className="text-base font-medium text-cyan-300 flex items-center gap-2">
-                                    {weapon.name}
-                                    {isEditor && isEditMode && (
-                                      <button
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          const next = prompt('Edit Weapon Name', String(weapon.name || ''));
-                                          if (next !== null) {
-                                            saveEdit(displayVehicle.id, `weapons[${idx}].name`, next.trim());
+                                <div className="flex flex-col sm:flex-row gap-4">
+                                  <div className="flex flex-col items-start flex-shrink-0">
+                                    <div className="w-28 h-28 sm:w-32 sm:h-32 aspect-square bg-slate-900/40 rounded overflow-hidden border-2 border-blue-700/80">
+                                      <img
+                                        src={getMissileImageCandidates(weapon.name)[0]}
+                                        alt={String(weapon.name || "")}
+                                        className="w-full h-full object-contain"
+                                        data-idx="0"
+                                        onError={(e) => {
+                                          const candidates = getMissileImageCandidates(weapon.name)
+                                          const img = e.currentTarget
+                                          const nextIdx = Number(img.dataset.idx || "0") + 1
+                                          if (nextIdx < candidates.length) {
+                                            img.dataset.idx = String(nextIdx)
+                                            img.src = candidates[nextIdx]
+                                          } else {
+                                            img.style.display = 'none'
                                           }
                                         }}
-                                        className="text-[10px] leading-none hover:opacity-80"
-                                        title={`Edit ${weapon.name}`}
-                                        aria-label={`Edit ${weapon.name}`}
-                                      >
-                                        ✏️
-                                      </button>
-                                    )}
-                                  </h4>
-                                </div>
-                                <div className="grid grid-cols-2 gap-2 text-sm">
-                                  <div>
-                                    <div className="text-slate-400 text-xs">Damage</div>
-                                    <div className="font-medium flex items-center gap-1">
-                                      {weapon.damage ?? 'N/A'}
-                                      {isEditor && isEditMode && (
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            const raw = prompt('Edit Damage (number)', String(weapon.damage ?? '0'));
-                                            if (raw !== null) {
-                                              const val = parseInt(raw, 10);
-                                              if (!isNaN(val)) saveEdit(displayVehicle.id, `weapons[${idx}].damage`, val);
-                                            }
-                                          }}
-                                          className="ml-1 text-[10px] leading-none hover:opacity-80"
-                                          title={`Edit Damage`}
-                                          aria-label={`Edit Damage`}
-                                        >
-                                          ✏️
-                                        </button>
-                                      )}
+                                      />
                                     </div>
+                                    <button
+                                      type="button"
+                                      onClick={(e) => {
+                                        e.stopPropagation()
+                                        const img = (e.currentTarget.previousElementSibling?.querySelector('img') as HTMLImageElement | null)
+                                        const url = (img as any)?.currentSrc || img?.src
+                                        if (!url) return
+
+                                        const urlNoQuery = url.split('#')[0].split('?')[0]
+                                        const resolved = new URL(urlNoQuery, window.location.href)
+                                        const fileName = decodeURIComponent(resolved.pathname.split('/').pop() || 'missile.jpg')
+
+                                        const link = document.createElement('a')
+                                        link.href = url
+                                        link.download = fileName
+                                        document.body.appendChild(link)
+                                        link.click()
+                                        document.body.removeChild(link)
+                                      }}
+                                      className="mt-2 p-2 rounded bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                                      title="Download missile image"
+                                      aria-label="Download missile image"
+                                    >
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                        <polyline points="7 10 12 15 17 10" />
+                                        <line x1="12" y1="15" x2="12" y2="3" />
+                                      </svg>
+                                    </button>
                                   </div>
-                                  <div>
-                                    <div className="text-slate-400 text-xs">Penetration</div>
-                                    <div className="font-medium flex items-center gap-1">
-                                      {weapon.penetration ?? 'N/A'}
-                                      {isEditor && isEditMode && (
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            const raw = prompt('Edit Penetration (number)', String(weapon.penetration ?? '0'));
-                                            if (raw !== null) {
-                                              const val = parseInt(raw, 10);
-                                              if (!isNaN(val)) saveEdit(displayVehicle.id, `weapons[${idx}].penetration`, val);
-                                            }
-                                          }}
-                                          className="ml-1 text-[10px] leading-none hover:opacity-80"
-                                          title={`Edit Penetration`}
-                                          aria-label={`Edit Penetration`}
-                                        >
-                                          ✏️
-                                        </button>
+                                  <div className="flex-1 min-w-0 flex flex-col">
+                                    <div className="mb-2">
+                                      <h4 className="text-lg sm:text-xl font-semibold text-cyan-300 flex items-center gap-2">
+                                        <span className="truncate">{weapon.name}</span>
+                                        {isEditor && isEditMode && (
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              const next = prompt('Edit Weapon Name', String(weapon.name || ''));
+                                              if (next !== null) {
+                                                saveEdit(displayVehicle.id, `weapons[${idx}].name`, next.trim());
+                                              }
+                                            }}
+                                            className="text-[10px] leading-none hover:opacity-80"
+                                            title={`Edit ${weapon.name}`}
+                                            aria-label={`Edit ${weapon.name}`}
+                                          >
+                                            ✏️
+                                          </button>
+                                        )}
+                                      </h4>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                                      <div>
+                                        <div className="text-slate-400 text-xs">Damage</div>
+                                        <div className="text-base font-semibold flex items-center gap-1">
+                                          {weapon.damage ?? 'N/A'}
+                                          {isEditor && isEditMode && (
+                                            <button
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                const raw = prompt('Edit Damage (number)', String(weapon.damage ?? '0'));
+                                                if (raw !== null) {
+                                                  const val = parseInt(raw, 10);
+                                                  if (!isNaN(val)) saveEdit(displayVehicle.id, `weapons[${idx}].damage`, val);
+                                                }
+                                              }}
+                                              className="ml-1 text-[10px] leading-none hover:opacity-80"
+                                              title={`Edit Damage`}
+                                              aria-label={`Edit Damage`}
+                                            >
+                                              ✏️
+                                            </button>
+                                          )}
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <div className="text-slate-400 text-xs">Penetration</div>
+                                        <div className="text-base font-semibold flex items-center gap-1">
+                                          {weapon.penetration ?? 'N/A'}
+                                          {isEditor && isEditMode && (
+                                            <button
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                const raw = prompt('Edit Penetration (number)', String(weapon.penetration ?? '0'));
+                                                if (raw !== null) {
+                                                  const val = parseInt(raw, 10);
+                                                  if (!isNaN(val)) saveEdit(displayVehicle.id, `weapons[${idx}].penetration`, val);
+                                                }
+                                              }}
+                                              className="ml-1 text-[10px] leading-none hover:opacity-80"
+                                              title={`Edit Penetration`}
+                                              aria-label={`Edit Penetration`}
+                                            >
+                                              ✏️
+                                            </button>
+                                          )}
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <div className="text-slate-400 text-xs">Reload</div>
+                                        <div className="text-base font-semibold flex items-center gap-1">
+                                          {weapon.reload != null ? `${weapon.reload}s` : 'N/A'}
+                                          {isEditor && isEditMode && (
+                                            <button
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                const raw = prompt('Edit Reload (seconds)', String(weapon.reload ?? '0'));
+                                                if (raw !== null) {
+                                                  const val = parseFloat(raw);
+                                                  if (!isNaN(val as any)) saveEdit(displayVehicle.id, `weapons[${idx}].reload`, val);
+                                                }
+                                              }}
+                                              className="ml-1 text-[10px] leading-none hover:opacity-80"
+                                              title={`Edit Reload`}
+                                              aria-label={`Edit Reload`}
+                                            >
+                                              ✏️
+                                            </button>
+                                          )}
+                                        </div>
+                                      </div>
+                                      {weapon.range && (
+                                        <div>
+                                          <div className="text-slate-400 text-xs">Range</div>
+                                          <div className="font-medium">{weapon.range}m</div>
+                                        </div>
                                       )}
                                     </div>
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                      {missileHasTags(weapon.name).map((tag, tagIndex) => (
+                                        <div key={tagIndex} className="flex items-center gap-1 bg-slate-700/50 px-2 py-1 rounded text-xs">
+                                          {tag === 'anti-flare' && (
+                                            <>
+                                              <div className="w-3 h-3 text-orange-400">
+                                                <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                                </svg>
+                                              </div>
+                                              <span className="text-orange-400 font-medium">Anti-Flare</span>
+                                            </>
+                                          )}
+                                          {tag === 'anti-warning' && (
+                                            <>
+                                              <div className="w-3 h-3 text-red-400">
+                                                <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                                </svg>
+                                              </div>
+                                              <span className="text-red-400 font-medium">Anti-Warning</span>
+                                            </>
+                                          )}
+                                          {tag === 'long-range' && (
+                                            <>
+                                              <div className="w-3 h-3 text-blue-400">
+                                                <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                                                </svg>
+                                              </div>
+                                              <span className="text-blue-400 font-medium">Long-Range</span>
+                                            </>
+                                          )}
+                                          {tag === 'rocket-pod' && (
+                                            <>
+                                              <div className="w-3 h-3 text-purple-400">
+                                                <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                                  <path d="M12 2C11.45 2 11 2.45 11 3v9H5l7 7 7-7h-6V3c0-.55-.45-1-1-1z"/>
+                                                </svg>
+                                              </div>
+                                              <span className="text-purple-400 font-medium">Rocket-Pod</span>
+                                            </>
+                                          )}
+                                          {tag === 'laser-guided' && (
+                                            <>
+                                              <div className="w-3 h-3 text-green-400">
+                                                <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                                  <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
+                                                </svg>
+                                              </div>
+                                              <span className="text-green-400 font-medium">Laser-Guided</span>
+                                            </>
+                                          )}
+                                          {tag === 'missile' && (
+                                            <>
+                                              <div className="w-3 h-3 text-yellow-400">
+                                                <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                                  <path d="M20 12l-8-8v5H5v6h7v5l8-8z"/>
+                                                </svg>
+                                              </div>
+                                              <span className="text-yellow-400 font-medium">Missile</span>
+                                            </>
+                                          )}
+                                        </div>
+                                      ))}
+                                    </div>
+                                    <button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setOriginalVehicleName(searchQuery);
+                                        // Save the currently selected vehicle before opening the modal
+                                        const currentVehicle = VEHICLES.find(v => v.name === searchQuery);
+                                        if (currentVehicle) {
+                                          setSelectedVehicle(currentVehicle);
+                                        }
+                                        setSelectedWeaponForModal(weapon);
+                                        findVehiclesWithWeapon(weapon.name);
+                                      }}
+                                      className="mt-3 sm:mt-auto sm:ml-auto bg-blue-600 hover:bg-blue-700 text-white text-xs py-2 px-3 rounded transition-colors duration-200 flex items-center gap-2 whitespace-nowrap self-start sm:self-end"
+                                      title="Show similar vehicles with this weapon"
+                                    >
+                                      <Search className="w-4 h-4 flex-shrink-0" />
+                                      <span>Similar vehicles with this weapon</span>
+                                    </button>
                                   </div>
-                                  <div>
-                                    <div className="text-slate-400 text-xs">Reload</div>
-                                    <div className="font-medium flex items-center gap-1">
-                                      {weapon.reload != null ? `${weapon.reload}s` : 'N/A'}
-                                      {isEditor && isEditMode && (
-                                        <button
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            const raw = prompt('Edit Reload (seconds)', String(weapon.reload ?? '0'));
-                                            if (raw !== null) {
-                                              const val = parseFloat(raw);
-                                              if (!isNaN(val as any)) saveEdit(displayVehicle.id, `weapons[${idx}].reload`, val);
-                                            }
-                                          }}
-                                          className="ml-1 text-[10px] leading-none hover:opacity-80"
-                                          title={`Edit Reload`}
-                                          aria-label={`Edit Reload`}
-                                        >
-                                          ✏️
-                                        </button>
-                                      )}
-                                    </div>
-                                  </div>
-                                  {weapon.range && (
-                                    <div>
-                                      <div className="text-slate-400 text-xs">Range</div>
-                                      <div className="font-medium">{weapon.range}m</div>
-                                    </div>
-                                  )}
                                 </div>
-                                <div className="mt-2 flex flex-wrap gap-1">
-                                  {missileHasTags(weapon.name).map((tag, tagIndex) => (
-                                    <div key={tagIndex} className="flex items-center gap-1 bg-slate-700/50 px-2 py-1 rounded text-xs">
-                                      {tag === 'anti-flare' && (
-                                        <>
-                                          <div className="w-3 h-3 text-orange-400">
-                                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                            </svg>
-                                          </div>
-                                          <span className="text-orange-400 font-medium">Anti-Flare</span>
-                                        </>
-                                      )}
-                                      {tag === 'anti-warning' && (
-                                        <>
-                                          <div className="w-3 h-3 text-red-400">
-                                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                                            </svg>
-                                          </div>
-                                          <span className="text-red-400 font-medium">Anti-Warning</span>
-                                        </>
-                                      )}
-                                      {tag === 'long-range' && (
-                                        <>
-                                          <div className="w-3 h-3 text-blue-400">
-                                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-                                            </svg>
-                                          </div>
-                                          <span className="text-blue-400 font-medium">Long-Range</span>
-                                        </>
-                                      )}
-                                      {tag === 'rocket-pod' && (
-                                        <>
-                                          <div className="w-3 h-3 text-purple-400">
-                                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                              <path d="M12 2C11.45 2 11 2.45 11 3v9H5l7 7 7-7h-6V3c0-.55-.45-1-1-1z"/>
-                                            </svg>
-                                          </div>
-                                          <span className="text-purple-400 font-medium">Rocket-Pod</span>
-                                        </>
-                                      )}
-                                      {tag === 'missile' && (
-                                        <>
-                                          <div className="w-3 h-3 text-yellow-400">
-                                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                              <path d="M20 12l-8-8v5H5v6h7v5l8-8z"/>
-                                            </svg>
-                                          </div>
-                                          <span className="text-yellow-400 font-medium">Missile</span>
-                                        </>
-                                      )}
-                                      {tag === 'laser-guided' && (
-                                        <>
-                                          <div className="w-3 h-3 text-green-400">
-                                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                              <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/>
-                                            </svg>
-                                          </div>
-                                          <span className="text-green-400 font-medium">Laser-Guided</span>
-                                        </>
-                                      )}
-                                    </div>
-                                  ))}
-                                </div>
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    setOriginalVehicleName(searchQuery);
-                                    // Save the currently selected vehicle before opening the modal
-                                    const currentVehicle = VEHICLES.find(v => v.name === searchQuery);
-                                    if (currentVehicle) {
-                                      setSelectedVehicle(currentVehicle);
-                                    }
-                                    setSelectedWeaponForModal(weapon);
-                                    findVehiclesWithWeapon(weapon.name);
-                                  }}
-                                  className="ml-auto bg-blue-600 hover:bg-blue-700 text-white text-[11px] py-1 px-2 rounded transition-colors duration-200 flex items-center gap-1 whitespace-nowrap"
-                                  title="Show similar vehicles with this weapon"
-                                >
-                                  <Search className="w-3 h-3 flex-shrink-0" />
-                                  <span>Similar vehicles with this weapon</span>
-                                </button>
                               </div>
                             ))
                           ) : (
@@ -13827,9 +13940,61 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                     key={index}
                     className="bg-slate-800/50 rounded-lg p-4 border border-slate-700"
                   >
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="text-lg font-semibold text-cyan-300">{weapon.name}</h4>
-                      <div className="flex flex-col gap-1">
+                    <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-2">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="flex flex-col items-start flex-shrink-0">
+                          <div className="w-24 h-24 sm:w-28 sm:h-28 aspect-square bg-slate-900/40 rounded overflow-hidden border-2 border-blue-700/80">
+                            <img
+                              src={getMissileImageCandidates(weapon.name)[0]}
+                              alt={String((weapon as any)?.name || "")}
+                              className="w-full h-full object-contain"
+                              data-idx="0"
+                              onError={(e) => {
+                                const candidates = getMissileImageCandidates((weapon as any)?.name)
+                                const img = e.currentTarget
+                                const nextIdx = Number(img.dataset.idx || "0") + 1
+                                if (nextIdx < candidates.length) {
+                                  img.dataset.idx = String(nextIdx)
+                                  img.src = candidates[nextIdx]
+                                } else {
+                                  img.style.display = 'none'
+                                }
+                              }}
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              const img = (e.currentTarget.previousElementSibling?.querySelector('img') as HTMLImageElement | null)
+                              const url = (img as any)?.currentSrc || img?.src
+                              if (!url) return
+
+                              const urlNoQuery = url.split('#')[0].split('?')[0]
+                              const resolved = new URL(urlNoQuery, window.location.href)
+                              const fileName = decodeURIComponent(resolved.pathname.split('/').pop() || 'missile.jpg')
+
+                              const link = document.createElement('a')
+                              link.href = url
+                              link.download = fileName
+                              document.body.appendChild(link)
+                              link.click()
+                              document.body.removeChild(link)
+                            }}
+                            className="mt-2 p-2 rounded bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                            title="Download missile image"
+                            aria-label="Download missile image"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                              <polyline points="7 10 12 15 17 10" />
+                              <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                          </button>
+                        </div>
+                        <h4 className="text-xl font-semibold text-cyan-300 truncate">{weapon.name}</h4>
+                      </div>
+                      <div className="flex flex-col gap-1 flex-shrink-0">
                         {missileHasTags(weapon.name).map((tag, tagIndex) => (
                           <div key={tagIndex} className="flex items-center gap-1 bg-slate-700/50 px-2 py-1 rounded text-xs">
                             {tag === 'anti-flare' && (
@@ -13862,14 +14027,13 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                                 <span className="text-blue-400 font-medium">Long-Range</span>
                               </>
                             )}
-                             {tag === 'rocket-pod' && (
+                            {tag === 'rocket-pod' && (
                               <>
                                 <div className="w-3 h-3 text-purple-400">
-                                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                   <path d="M12 2C11.45 2 11 2.45 11 3v9H5l7 7 7-7h-6V3c0-.55-.45-1-1-1z"/>
-                                 </svg>
+                                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                    <path d="M12 2C11.45 2 11 2.45 11 3v9H5l7 7 7-7h-6V3c0-.55-.45-1-1-1z"/>
+                                  </svg>
                                 </div>
-                         
                                 <span className="text-purple-400 font-medium">Rocket-Pod</span>
                               </>
                             )}
@@ -13982,21 +14146,74 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                     Missile statistics
                   </h3>
 
-                  <div className="bg-slate-900/80 border border-slate-800 rounded-lg px-4 py-4 divide-y divide-slate-800">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 pb-3">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-slate-400">Damage</span>
-                        <span className="text-slate-100 font-semibold">
-                          {selectedWeaponForModal?.damage ?? 'N/A'}
-                        </span>
+                  <div className="flex flex-col md:flex-row gap-4">
+                    <div className="flex flex-col items-start flex-shrink-0">
+                      <div className="w-36 h-36 md:w-44 md:h-44 aspect-square bg-slate-900/40 rounded overflow-hidden border-2 border-blue-700/80">
+                        <img
+                          ref={selectedWeaponImageRef}
+                          src={getMissileImageCandidates(selectedWeaponForModal?.name)[0]}
+                          alt={String(selectedWeaponForModal?.name || '')}
+                          className="w-full h-full object-contain"
+                          data-idx="0"
+                          onError={(e) => {
+                            const candidates = getMissileImageCandidates(selectedWeaponForModal?.name)
+                            const img = e.currentTarget
+                            const nextIdx = Number(img.dataset.idx || "0") + 1
+                            if (nextIdx < candidates.length) {
+                              img.dataset.idx = String(nextIdx)
+                              img.src = candidates[nextIdx]
+                            } else {
+                              img.style.display = 'none'
+                            }
+                          }}
+                        />
                       </div>
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-slate-400">Reload time</span>
-                        <span className="text-slate-100 font-semibold">
-                          {selectedWeaponForModal?.reload != null
-                            ? `${selectedWeaponForModal.reload}s`
-                            : 'N/A'}
-                        </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const img = selectedWeaponImageRef.current
+                          const url = (img as any)?.currentSrc || img?.src
+                          if (!url) return
+
+                          const urlNoQuery = url.split('#')[0].split('?')[0]
+                          const resolved = new URL(urlNoQuery, window.location.href)
+                          const fileName = decodeURIComponent(resolved.pathname.split('/').pop() || 'missile.jpg')
+
+                          const link = document.createElement('a')
+                          link.href = url
+                          link.download = fileName
+                          document.body.appendChild(link)
+                          link.click()
+                          document.body.removeChild(link)
+                        }}
+                        className="mt-2 p-2 rounded bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                        title="Download missile image"
+                        aria-label="Download missile image"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                          <polyline points="7 10 12 15 17 10" />
+                          <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    <div className="flex-1 bg-slate-900/80 border border-slate-800 rounded-lg px-4 py-4 divide-y divide-slate-800">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 pb-3">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-slate-400">Damage</span>
+                          <span className="text-slate-100 font-semibold">
+                            {selectedWeaponForModal?.damage ?? 'N/A'}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-slate-400">Reload time</span>
+                          <span className="text-slate-100 font-semibold">
+                            {selectedWeaponForModal?.reload != null
+                              ? `${selectedWeaponForModal.reload}s`
+                              : 'N/A'}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
