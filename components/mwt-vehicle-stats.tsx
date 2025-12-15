@@ -14645,6 +14645,24 @@ const MainPage = () => {
         <div className="sm:pt-0">
           <Pages activePage={activePage} onPageChange={setActivePage} />
         </div>
+
+        <div className="mt-4 flex justify-center sm:hidden">
+          <div style={{ width: '320px', height: '50px' }}>
+            <Script id="hpf-atoptions-320x50" strategy="afterInteractive">
+              {`window.atOptions = {
+  'key' : '12ed5f2a30761db8a8f48d836b669b85',
+  'format' : 'iframe',
+  'height' : 50,
+  'width' : 320,
+  'params' : {}
+};`}
+            </Script>
+            <Script
+              strategy="afterInteractive"
+              src="https://www.highperformanceformat.com/12ed5f2a30761db8a8f48d836b669b85/invoke.js"
+            />
+          </div>
+        </div>
         
         <div className="mt-4">
           {activePage === 'home' && <MwtVehicleStats vehicles={VEHICLES_DATA} />}
