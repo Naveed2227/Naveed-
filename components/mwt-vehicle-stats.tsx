@@ -14638,6 +14638,15 @@ function CookieConsentBanner() {
 
 const MainPage = () => {
   const [activePage, setActivePage] = useState('home');
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const update = () => setIsMobile(window.innerWidth < 640);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
   
   return (
     <div className="min-h-screen bg-gray-900 text-white">
@@ -14646,23 +14655,25 @@ const MainPage = () => {
           <Pages activePage={activePage} onPageChange={setActivePage} />
         </div>
 
-        <div className="mt-4 flex justify-center sm:hidden">
-          <div style={{ width: '320px', height: '50px' }}>
-            <Script id="hpf-atoptions-320x50" strategy="afterInteractive">
-              {`window.atOptions = {
+        {isMobile && (
+          <div className="mt-4 flex justify-center">
+            <div style={{ width: '320px', height: '50px' }}>
+              <Script id="hpf-atoptions-320x50" strategy="afterInteractive">
+                {`window.atOptions = {
   'key' : '12ed5f2a30761db8a8f48d836b669b85',
   'format' : 'iframe',
   'height' : 50,
   'width' : 320,
   'params' : {}
 };`}
-            </Script>
-            <Script
-              strategy="afterInteractive"
-              src="https://www.highperformanceformat.com/12ed5f2a30761db8a8f48d836b669b85/invoke.js"
-            />
+              </Script>
+              <Script
+                strategy="afterInteractive"
+                src="https://www.highperformanceformat.com/12ed5f2a30761db8a8f48d836b669b85/invoke.js"
+              />
+            </div>
           </div>
-        </div>
+        )}
         
         <div className="mt-4">
           {activePage === 'home' && <MwtVehicleStats vehicles={VEHICLES_DATA} />}
@@ -14672,25 +14683,27 @@ const MainPage = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-2">
-        <div key="banner-ad" className="w-full" style={{ width: '780px', margin: '0 auto' }}>
-          <div style={{ width: '728px', height: '90px', margin: '0 auto' }}>
-            <Script id="hpf-atoptions" strategy="afterInteractive">
-              {`window.atOptions = {
+      {!isMobile && (
+        <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-2">
+          <div key="banner-ad" className="w-full" style={{ width: '780px', margin: '0 auto' }}>
+            <div style={{ width: '728px', height: '90px', margin: '0 auto' }}>
+              <Script id="hpf-atoptions" strategy="afterInteractive">
+                {`window.atOptions = {
   'key' : '26985683759ed90ebd2497232a5046ba',
   'format' : 'iframe',
   'height' : 90,
   'width' : 728,
   'params' : {}
 };`}
-            </Script>
-            <Script
-              strategy="afterInteractive"
-              src="https://www.highperformanceformat.com/26985683759ed90ebd2497232a5046ba/invoke.js"
-            />
+              </Script>
+              <Script
+                strategy="afterInteractive"
+                src="https://www.highperformanceformat.com/26985683759ed90ebd2497232a5046ba/invoke.js"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <CookieConsentBanner />
     </div>
   );
