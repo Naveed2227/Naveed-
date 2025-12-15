@@ -13443,7 +13443,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                                 className="bg-slate-800/80 rounded-lg p-4 border border-slate-700/50 group cursor-pointer"
                               >
                                 <div className="flex flex-col sm:flex-row gap-4">
-                                  <div className="flex flex-col items-start flex-shrink-0">
+                                  <div className="flex flex-col items-start flex-shrink-0" data-missile-image-container>
                                     <div className="w-28 h-28 sm:w-32 sm:h-32 aspect-square bg-slate-900/40 rounded overflow-hidden border-2 border-blue-700/80">
                                       <img
                                         src={getMissileImageCandidates(weapon.name)[0]}
@@ -13458,7 +13458,12 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                                             img.dataset.idx = String(nextIdx)
                                             img.src = candidates[nextIdx]
                                           } else {
-                                            img.style.display = 'none'
+                                            const container = img.closest('[data-missile-image-container]') as HTMLElement | null
+                                            if (container) {
+                                              container.style.display = 'none'
+                                            } else {
+                                              img.style.display = 'none'
+                                            }
                                           }
                                         }}
                                       />
@@ -13942,7 +13947,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                   >
                     <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-2">
                       <div className="flex items-center gap-3 min-w-0">
-                        <div className="flex flex-col items-start flex-shrink-0">
+                        <div className="flex flex-col items-start flex-shrink-0" data-missile-image-container>
                           <div className="w-24 h-24 sm:w-28 sm:h-28 aspect-square bg-slate-900/40 rounded overflow-hidden border-2 border-blue-700/80">
                             <img
                               src={getMissileImageCandidates(weapon.name)[0]}
@@ -13957,7 +13962,12 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                                   img.dataset.idx = String(nextIdx)
                                   img.src = candidates[nextIdx]
                                 } else {
-                                  img.style.display = 'none'
+                                  const container = img.closest('[data-missile-image-container]') as HTMLElement | null
+                                  if (container) {
+                                    container.style.display = 'none'
+                                  } else {
+                                    img.style.display = 'none'
+                                  }
                                 }
                               }}
                             />
@@ -14147,7 +14157,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                   </h3>
 
                   <div className="flex flex-col md:flex-row gap-4">
-                    <div className="flex flex-col items-start flex-shrink-0">
+                    <div className="flex flex-col items-start flex-shrink-0" data-missile-image-container>
                       <div className="w-36 h-36 md:w-44 md:h-44 aspect-square bg-slate-900/40 rounded overflow-hidden border-2 border-blue-700/80">
                         <img
                           ref={selectedWeaponImageRef}
@@ -14163,7 +14173,12 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                               img.dataset.idx = String(nextIdx)
                               img.src = candidates[nextIdx]
                             } else {
-                              img.style.display = 'none'
+                              const container = img.closest('[data-missile-image-container]') as HTMLElement | null
+                              if (container) {
+                                container.style.display = 'none'
+                              } else {
+                                img.style.display = 'none'
+                              }
                             }
                           }}
                         />
