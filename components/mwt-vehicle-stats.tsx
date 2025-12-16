@@ -2466,7 +2466,7 @@ const VEHICLES_DATA = [
     "weapons": [
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
     { name: "MK-84", type: "General-Purpose Bomb", damage: 19400, penetration: 360, reload: 40 },
-    { name: "LAU-10 x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
+    { name: "LAU-10x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
     { name: "GBU-32 JDAM", type: "Guided Bomb", damage: 15700, penetration: 200, reload: 35 },
     { name: "GBU-12 Paveway II", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
     { name: "AGM-65 Maverick", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
@@ -3487,7 +3487,7 @@ const VEHICLES_DATA = [
     "stats": { "health": 18600, "speed": 700, "afterburnerSpeed": 960, "agility": 34 },
     "weapons": [
       { "name": "LAU-61", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
-      { "name": "LAU-10", "type": "Rocket Pod", "damage": 7400, "penetration": 500, "reload": 30 },
+      { "name": "LAU-10x3", "type": "Rocket Pod", "damage": 7400, "penetration": 500, "reload": 30 },
       { "name": "GBU-12 Paveway II", "type": "Guided Bomb", "damage": 18590, "penetration": 120, "reload": 30 },
       { "name": "MK-82", "type": "Bomb", "damage": 14300, "penetration": 120, "reload": 40 },
       { "name": "AGM-62A Walleye", "type": "Air-to-Surface Missile", "damage": 17600, "penetration": 240, "reload": 28 },
