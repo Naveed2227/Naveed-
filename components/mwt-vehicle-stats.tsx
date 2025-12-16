@@ -838,11 +838,11 @@ const VEHICLES_DATA = [
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
-      { "name": "C-13DF", "type": "Autocannon", "damage": 9200, "penetration": 160, "reload": 30 },
+      { "name": "C-13DF BLOCK", "type": "Autocannon", "damage": 9200, "penetration": 160, "reload": 30 },
       { "name": "KAB-500L", "type": "Guided Bomb", "damage": 17300, "penetration": 310, "reload": 40 },
       { "name": "Kh-MD-E", "type": "Air-to-Ground Missile", "damage": 12400, "penetration": 250, "reload": 20 },
       { "name": "R-93M", "type": "Short-Range AAM", "damage": 5000, "penetration": 65, "reload": 15 },
-      { "name": "9K38", "type": "Surface-to-Air Missile", "damage": 4100, "penetration": 30, "reload": 15 },
+      { "name": "9K38 IGLA-V BLOCK", "type": "Surface-to-Air Missile", "damage": 4100, "penetration": 30, "reload": 15 },
       { "name": "RVV-SD", "type": "Medium-Range AAM", "damage": 6500, "penetration": 65, "reload": 20 },
       { "name": "Kh-23M", "type": "Air-to-Ground Missile", "damage": 12900, "penetration": 800, "reload": 38 }
     ]
@@ -990,13 +990,15 @@ const VEHICLES_DATA = [
     stats: { health: 18900, speed: 900, afterburnerSpeed: 2310, agility: 60 },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
-      { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
-      { "name": "UPK-23-250", "type": "Autocannon", "damage": 400, "penetration": 71, "reload": 25 },
       { "name": "KAB500KR", "type": "Guided Bomb", "damage": 17800, "penetration": 320, "reload": 40 },
+      { "name": "KAB-500L", "type": "Air-to-Ground Missile", "damage": 17300, "penetration": 310, "reload": 40 },
       { "name": "Kh-MD-E", "type": "Air-to-Ground Missile", "damage": 12400, "penetration": 250, "reload": 20 },
+      { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
       { "name": "RVV-MD", "type": "Medium-Range AAM", "damage": 4800, "penetration": 65, "reload": 15 },
       { "name": "RVV-SD", "type": "Medium-Range AAM", "damage": 6500, "penetration": 65, "reload": 20 },
-      { "name": "Kh-23M", "type": "Air-to-Ground Missile", "damage": 12900, "penetration": 800, "reload": 38 }
+      { "name": "Kh-38MLE", "type": "Air-to-Ground Missile", "damage": 17800, "penetration": 400, "reload": 40 },
+      { "name": "Kh-23M", "type": "Air-to-Ground Missile", "damage": 12900, "penetration": 800, "reload": 38 },
+      { "name": "Kh-69", "type": "Air-to-Ground Missile", "damage": 18400, "penetration": 230, "reload": 40 },
     ]
   },
   {
@@ -2450,13 +2452,13 @@ const VEHICLES_DATA = [
       { "name": "R-27", "type": "Medium-Range AAM", "damage": 8100, "penetration": 65, "reload": 20},
       { "name": "R-77", "type": "Medium-Range AAM", "damage": 8100, "penetration": 55, "reload": 20 },
       { "name": "Kh-31", "type": "Air-to-Surface Missile", "damage": 8100, "penetration": 230, "reload": 20 },
-      { "name": "Kh-38M", "type": "Air-to-Ground Missile", "damage": 17300, "penetration": 310, "reload": 40 },
+      { "name": "Kh-38ME", "type": "Air-to-Ground Missile", "damage": 17300, "penetration": 310, "reload": 40 },
       { "name": "KAB-500L", "type": "Guided Bomb (Laser)", "damage": 17300, "penetration": 320, "reload": 40 },
-      { "name": "KAB-500Kr", "type": "Guided Bomb (TV)", "damage": 17800, "penetration": 210, "reload": 40 },
+      { "name": "KAB500KR", "type": "Guided Bomb (TV)", "damage": 17800, "penetration": 210, "reload": 40 },
       { "name": "FAB-500", "type": "Unguided Bomb", "damage": 16000, "penetration": 210, "reload": 35 },
-      { "name": "B-8M1", "type": "Rocket Pod (S-8)", "damage": 5100, "penetration": 420, "reload": 20, "rateOfFire": "80 rockets" },
+      { "name": "B8M1", "type": "Rocket Pod (S-8)", "damage": 5100, "penetration": 420, "reload": 20, "rateOfFire": "80 rockets" },
       { "name": "B-13L", "type": "Rocket Pod (S-13)", "damage": 9200, "penetration": 250, "reload": 40, "rateOfFire": "20 rockets" },
-      { "name": "GSh-30-1 30mm", "type": "Autocannon", "damage": 400, "penetration": 70, "rateOfFire": "1500 rpm" }
+
     ]
   },
   {
@@ -8983,22 +8985,39 @@ const getMissileImageCandidates = (weaponName: string) => {
     return ''
   }
 
-  const baseName = String(weaponName || '').replace(/\s*\(.*?\)\s*/g, '').trim()
-  const withNormalizedSpaces = baseName.replace(/\s+/g, ' ').trim()
-  const withHyphenBetweenLettersAndNumbers = withNormalizedSpaces.replace(/([A-Za-z])([0-9])/g, '$1-$2')
-  const withHyphensInsteadOfSpaces = withNormalizedSpaces.replace(/\s+/g, '-')
-  const encodedBase = encodeURIComponent(withNormalizedSpaces)
+  const rawName = String(weaponName || '')
+  const withoutParentheses = rawName.replace(/\s*\(.*?\)\s*/g, ' ').trim()
+  const withNormalizedSpaces = withoutParentheses.replace(/\s+/g, ' ').trim()
+  const sanitized = withNormalizedSpaces
+    .replace(/["“”'`]+/g, '')
+    .replace(/[\\/]+/g, '-')
+    .replace(/[<>:*?|]+/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+  const sanitizedNoTrailingDots = sanitized.replace(/[.\s]+$/g, '').trim()
+  const withHyphenBetweenLettersAndNumbers = sanitizedNoTrailingDots.replace(/([A-Za-z])([0-9])/g, '$1-$2')
+  const withHyphensInsteadOfSpaces = sanitizedNoTrailingDots.replace(/\s+/g, '-')
+  const withUnderscoresInsteadOfSpaces = sanitizedNoTrailingDots.replace(/\s+/g, '_')
+
+  const encodedBase = encodeURIComponent(sanitizedNoTrailingDots)
   const encodedHyphen = encodeURIComponent(withHyphenBetweenLettersAndNumbers)
   const encodedHyphensInsteadOfSpaces = encodeURIComponent(withHyphensInsteadOfSpaces)
+  const encodedUnderscoresInsteadOfSpaces = encodeURIComponent(withUnderscoresInsteadOfSpaces)
 
   const names = Array.from(
     new Set([
       withNormalizedSpaces,
+      sanitizedNoTrailingDots,
       withHyphenBetweenLettersAndNumbers,
       withHyphensInsteadOfSpaces,
+      withUnderscoresInsteadOfSpaces,
+      sanitizedNoTrailingDots.toLowerCase(),
+      withHyphensInsteadOfSpaces.toLowerCase(),
+      withUnderscoresInsteadOfSpaces.toLowerCase(),
       encodedBase,
       encodedHyphen,
       encodedHyphensInsteadOfSpaces,
+      encodedUnderscoresInsteadOfSpaces,
     ])
   ).filter(Boolean)
 

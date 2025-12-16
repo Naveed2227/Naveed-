@@ -25,18 +25,18 @@ This project requires a DNS TXT record for Discord domain verification.
 After adding the record, you can verify it's working:
 
 #### Using the included script:
-\`\`\`bash
+```bash
 node scripts/dns-verification.js
-\`\`\`
+```
 
 #### Using command line:
-\`\`\`bash
+```bash
 # Windows
 nslookup -type=TXT _discord.mwtassistant.com
 
 # macOS/Linux
 dig TXT _discord.mwtassistant.com
-\`\`\`
+```
 
 #### Online tools:
 - [Google Admin Toolbox - Dig](https://toolbox.googleapps.com/apps/dig/)
