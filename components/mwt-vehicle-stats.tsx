@@ -2235,7 +2235,7 @@ const VEHICLES_DATA = [
   "description": "Multirole fighter developed from the F-16, optimized for anti-ship and air-to-air roles.",
   "stats": { "health": 20400,  "speed": 550, "afterburnerSpeed": 2210, "agility": 49  },
   "weapons": [
-    { "name": "JLAU-3/A", "type": "Rocket Pod", "damage": 5200, "penetration": 128, "reload": 20 },
+    { "name": "JLAU-3A", "type": "Rocket Pod", "damage": 5200, "penetration": 128, "reload": 20 },
     { "name": "GBU-38 JDAM", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
     { "name": "GBU-32 JDAM", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
     { "name": "GBU-31 JDAM", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
