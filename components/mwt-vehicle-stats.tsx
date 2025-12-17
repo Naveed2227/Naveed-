@@ -3544,8 +3544,8 @@ const VEHICLES_DATA = [
     "stats": { "health": 17000, "speed": 770, "afterburnerSpeed": 1570, "agility": 40 },
     "weapons": [
       { "name": "GBU-12 Paveway II", "type": "Guided Bomb", "damage": 16200, "penetration": 139, "reload": 25 },
-      { "name": "Mk-82", "type": "Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
-      { "name": "Mk-83", "type": "Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
+      { "name": "MK-82", "type": "Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
+      { "name": "MK-83", "type": "Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
       { "name": "LAU-51", "type": "Rocket Pod", "damage": 4600, "penetration": 290, "reload": 26 },
       { "name": "LAU-61", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
       { "name": "GAU-13A", "type": "Rocket Pod", "damage": 560, "penetration": 98, "reload": 20 },
