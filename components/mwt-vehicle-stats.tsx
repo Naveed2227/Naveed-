@@ -773,7 +773,7 @@ const VEHICLES_DATA = [
     stats: { health: 21200, speed: 848, afterburnerSpeed: 2200, agility: 52 },
     weapons: [
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
-      { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
+      { "name": "LS-6-250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
       { "name": "TL-20", "type": "Guided Bomb", "damage": 16120, "penetration": 143, "reload": 25 },
       { "name": "CM-506KG", "type": "Air-to-Ground Missile", "damage": 13000, "penetration": 90, "reload": 25 },
       { "name": "PL-10", "type": "Short-Range AAM", "damage": 7400, "penetration": 60, "reload": 20 },
@@ -816,7 +816,7 @@ const VEHICLES_DATA = [
     stats: { health: 22600, speed: 780, afterburnerSpeed: 2250, agility: 48 },
     weapons: [
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
-      { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
+      { "name": "LS-6-250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
       { "name": "TL-20", "type": "Guided Bomb", "damage": 16120, "penetration": 143, "reload": 25 },
       { "name": "YJ-1000", "type": "Anti-Ship Missile", "damage": 21600, "penetration": 500, "reload": 40 },
       { "name": "PL-10", "type": "Short-Range AAM", "damage": 7400, "penetration": 60, "reload": 20 },
@@ -884,7 +884,7 @@ const VEHICLES_DATA = [
       { "name": "PL-15", "type": "BVR AAM", "damage": 8400, "penetration": 70, "reload": 17 },
       { "name": "PL-17", "type": "Air-to-Air Missile", "damage": 11700, "penetration": 100, "reload": 26 },
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
-      { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
+      { "name": "LS-6-250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
       { "name": "TL-20", "type": "Guided Bomb", "damage": 12400, "penetration": 143, "reload": 25 },
       { "name": "AKF-98A", "type": "Air-to-Ground Missile", "damage": 20500, "penetration": 410, "reload": 40 },
       { "name": "HD-1A", "type": "Air-to-Ground Missile", "damage": 25000, "penetration": 1000, "reload": 43 },
@@ -968,7 +968,7 @@ const VEHICLES_DATA = [
     stats: { health: 26600, speed: 840, afterburnerSpeed: 2480, agility: 55 },
     weapons: [
       { "name": "FT-3", "damage": 15800, "penetration": 210, "reload": 34 },
-      { "name": "LS-6/250", "damage": 17300, "penetration": 300, "reload": 40 },
+      { "name": "LS-6-250", "damage": 17300, "penetration": 300, "reload": 40 },
       { "name": "TL-20", "damage": 16120, "penetration": 143, "reload": 25 },
       { "name": "Type 3", "damage": 16000, "penetration": 210, "reload": 35 },
       { "name": "YJ-1000", "damage": 21600, "penetration": 500, "reload": 40 },
@@ -1020,7 +1020,7 @@ const VEHICLES_DATA = [
   { "name": "GBU-31 JDAM", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
   { "name": "JNAAM", "type": "Guided Bomb", "damage": 8100, "penetration": 85, "reload": 35 },
   { "name": "Type 12 STS", "type": "Guided Bomb", "damage": 16200, "penetration": 170, "reload": 40 },
-  { "name": "JLAU-3/A", "damage": 5200, "penetration": 128, "reload": 20 }
+  { "name": "JLAU-3A", "damage": 5200, "penetration": 128, "reload": 20 }
 ]
   },
   {
@@ -2297,7 +2297,7 @@ const VEHICLES_DATA = [
     stats: { health: 21300, speed: 780, afterburnerSpeed: 2030, agility: 43 },
     weapons: [
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
-      { "name": "LS-6/250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
+      { "name": "LS-6-250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
       { "name": "KD-88", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
       { "name": "PL-10", "type": "Short-Range Air-to-Air Missile", "damage": 7400, "penetration": 60, "reload": 20 },
       { "name": "PL-12", "type": "BVR AAM", "damage": 7600, "penetration": 56, "reload": 30 },
@@ -3634,7 +3634,7 @@ const VEHICLES_DATA = [
       { "name": "Type 90", "type": "Short-Range AAM", "damage": 6400, "penetration": 320, "reload": 40 },
       { "name": "Type 130", "type": "Air-to-Surface Missile", "damage": 6900, "penetration": 450, "reload": 40 },
       { "name": "TL-20", "type": "Air-to-Surface Missile", "damage": 12400, "penetration": 143, "reload": 25 },
-      { "name": "LS-6/250", "type": "Air-to-Surface Missile", "damage": 17300, "penetration": 300, "reload": 40 }
+      { "name": "LS-6-250", "type": "Air-to-Surface Missile", "damage": 17300, "penetration": 300, "reload": 40 }
     ]
   },
   {
