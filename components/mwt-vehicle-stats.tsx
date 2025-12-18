@@ -279,7 +279,7 @@ const upcomingVehicles = [
   
 "HARP General Krueger",
 "AMX-10RC",
-"ZTQ15",
+"ZTQ-15",
 "2S38 Derivation",
 "Object 447A",
 "Panzer 87-140",
@@ -287,7 +287,8 @@ const upcomingVehicles = [
 "Al Kafil-1",
 "Vijayanta",
 "Pandur II",
-
+"EF-2000 Typhoon",
+"EC-665 Tiger HAP",
 
   // Add upcoming vehicle names here
 ];
@@ -567,6 +568,18 @@ const getRarityColor = (rarity: string) => {
 
 // Battle Pass Data Structure
 const BATTLE_PASSES = [
+  {
+    id: 14,
+    month: "January 2026",
+    name: "Operation New Generation",
+    image: "2026-Jan.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: ["Panzer 87-140", "ZTQ-15"], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["ZTQ-15"],
+      free: ["Panzer 87-140"]
+    }
+  },
 {
     id: 13,
     month: "December 2025",
@@ -7580,7 +7593,57 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     }
   };
 
-  // Ad-related code has been removed
+  // Add Google AdSense script to document head
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Only add the script if it doesn't exist
+      if (!document.querySelector('script[src*="pagead2.googlesyndication"]')) {
+        const script = document.createElement('script');
+        script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998';
+        script.async = true;
+        script.crossOrigin = 'anonymous';
+        document.head.appendChild(script);
+      }
+
+      // Initialize ads
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.error('Error initializing ads:', e);
+      }
+    }
+  }, []);
+
+  // Add banner ad component with proper initialization
+  const BannerAd = () => {
+    useEffect(() => {
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {
+        console.error('Error initializing ad:', e);
+      }
+    }, []);
+
+    return (
+      <div className="w-full bg-slate-800 py-2 px-4 flex justify-center items-center border-b border-slate-700 sticky top-0 z-50">
+        <div className="w-full max-w-7xl mx-auto">
+          <ins 
+            className="adsbygoogle"
+            style={{
+              display: 'block',
+              width: '100%',
+              height: '90px',
+              margin: '0 auto'
+            }}
+            data-ad-client="ca-pub-3724137161724998"
+            data-ad-slot="YOUR_AD_SLOT"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
+        </div>
+      </div>
+    );
+  };
   const [VEHICLES, setVEHICLES] = useState(initialVehicles);
   const router = useRouter()
   const [upgradeLevels, setUpgradeLevels] = useState<Record<string, number>>({});
@@ -8825,7 +8888,17 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       
       
 "HARP General Krueger",
-"AMX-10RC",
+"AMX-10RC",,
+"ZTQ-15",
+"2S38 Derivation",
+"Object 447A",
+"Panzer 87-140",
+"M1A1 AIM TUSK",
+"Al Kafil-1",
+"Vijayanta",
+"Pandur II",
+"EF-2000 Typhoon",
+"EC-665 Tiger HAP",
 
 
       
@@ -11275,6 +11348,31 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
         </div>
       </header>
 
+      {/* Google AdSense Banner - 728x90 Leaderboard */}
+      <div className="w-full bg-slate-800/50 border-b border-slate-700">
+        <div className="max-w-3xl mx-auto px-2 py-1">
+        <div key="banner-ad" className="w-full flex justify-center">
+          <ins
+            className="adsbygoogle"
+            style={{
+              display: 'block',
+              width: '320px',
+              height: '50px',
+              margin: '0 auto',
+              backgroundColor: '#f3f4f6'
+            }}
+            data-ad-client="ca-pub-3724137161724998"
+            data-ad-slot="6518875801"
+            data-ad-format="horizontal"
+            data-full-width-responsive="false"
+          >
+            <div style={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
               color: '#94a3b8',
               fontSize: '12px',
               fontWeight: '500',
@@ -14720,7 +14818,21 @@ const MainPage = () => {
 
         {isMobile && (
           <div className="mt-4 flex justify-center">
-            {/* Ad container removed */}
+            <div style={{ width: '320px', height: '50px' }}>
+              <Script id="hpf-atoptions-320x50" strategy="afterInteractive">
+                {`window.atOptions = {
+  'key' : '',
+  'format' : 'iframe',
+  'height' : 50,
+  'width' : 320,
+  'params' : {}
+};`}
+              </Script>
+              <Script
+                strategy="afterInteractive"
+                src=""
+              />
+            </div>
           </div>
         )}
         
@@ -14735,7 +14847,21 @@ const MainPage = () => {
       {!isMobile && (
         <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-2">
           <div key="banner-ad" className="w-full" style={{ width: '780px', margin: '0 auto' }}>
-            {/* Ad container removed */}
+            <div style={{ width: '728px', height: '90px', margin: '0 auto' }}>
+              <Script id="hpf-atoptions" strategy="afterInteractive">
+                {`window.atOptions = {
+  'key' : '',
+  'format' : 'iframe',
+  'height' : 90,
+  'width' : 728,
+  'params' : {}
+};`}
+              </Script>
+              <Script
+                strategy="afterInteractive"
+                src=""
+              />
+            </div>
           </div>
         </div>
       )}
