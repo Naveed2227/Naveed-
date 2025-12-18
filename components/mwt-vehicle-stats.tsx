@@ -9041,7 +9041,6 @@ const longRangeMissiles = [
 
 const laserGuidedMissiles = [
   "Kh-47M2 Kinzhal",
-  "AIM-120 AMRAAM",
   "AGM-12B",
   "TL-20",
   "Kh-59M",
