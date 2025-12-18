@@ -14850,7 +14850,7 @@ const MainPage = () => {
             <div style={{ width: '728px', height: '90px', margin: '0 auto' }}>
               <Script id="hpf-atoptions" strategy="afterInteractive">
                 {`window.atOptions = {
-  'key' : '26985683759ed90ebd2497232a5046b""a',
+  'key' : '26985683759ed90ebd2497232a5046ba',
   'format' : 'iframe',
   'height' : 90,
   'width' : 728,
@@ -14859,7 +14859,7 @@ const MainPage = () => {
               </Script>
               <Script
                 strategy="afterInteractive"
-                src="https://www.highperformanceformat.com/26985683759ed90ebd2497232a5046b""a"/invoke.js"
+                src="https://www.highperformanceformat.com/26985683759ed90ebd2497232a5046b/invoke.js"
               />
             </div>
           </div>
