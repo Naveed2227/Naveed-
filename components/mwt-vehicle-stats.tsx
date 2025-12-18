@@ -279,6 +279,14 @@ const upcomingVehicles = [
   
 "HARP General Krueger",
 "AMX-10RC",
+"ZTQ15",
+"2S38 Derivation",
+"Object 447A",
+"Panzer 87-140",
+"M1A1 AIM TUSK",
+"Al Kafil-1",
+"Vijayanta",
+"Pandur II",
 
 
   // Add upcoming vehicle names here
@@ -559,6 +567,18 @@ const getRarityColor = (rarity: string) => {
 
 // Battle Pass Data Structure
 const BATTLE_PASSES = [
+  {
+    id: 14,
+    month: "January 2026",
+    name: "Operation New Generation",
+    image: "2026-Jan.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: ["Panzer 87-140", "ZTQ-15"], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["ZTQ-15"],
+      free: ["Panzer 87-140"]
+    }
+  },
 {
     id: 13,
     month: "December 2025",
@@ -807,6 +827,20 @@ const VEHICLES_DATA = [
   },
   {
     id: 5,
+    name: "EF-2000 Typhoon",
+    type: "Fighter Jet",
+    faction: "Austrian",
+    tier: "IV",
+    image: "EF-2000-Typhoon.jpg",
+    description: "The Eurofighter EF-2000 Typhoon is Austria's primary supersonic multi-role fighter jet, providing national air sovereignty and defense capabilities.",
+     stats: { health: 0, speed: 0, afterburnerSpeed: 0, agility: 0 },
+    weapons: [
+
+
+    ]
+  },
+  {
+    id: 6,
     name: "J-35",
     type: "Fighter Jet",
     faction: "Chinese",
@@ -827,7 +861,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 6,
+    id: 7,
     name: "MiG-41M",
     type: "Fighter Jet",
     faction: "Russian",
@@ -848,7 +882,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 7,
+    id: 8,
     name: "Su-57 Felon",
     type: "Fighter Jet",
     faction: "Russian",
@@ -869,7 +903,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 8,
+    id: 9,
     name: "B-Type",
     type: "Fighter Jet",
     faction: "Chinese",
@@ -892,7 +926,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 9,
+    id: 10,
     name: "Su-47 Berkut",
     type: "Fighter Jet",
     faction: "Russian",
@@ -917,7 +951,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 10,
+    id: 11,
     name: "YF-23",
     type: "Fighter Jet",
     faction: "American",
@@ -937,7 +971,7 @@ const VEHICLES_DATA = [
 ]
   },
   {
-    id: 11,
+    id: 12,
     name: "F-35B Lightning II",
     type: "Fighter Jet",
     faction: "American",
@@ -958,7 +992,7 @@ const VEHICLES_DATA = [
 ]
   },
   {
-    id: 12,
+    id: 13,
     name: "J-50",
     type: "Fighter Jet",
     faction: "Chinese",
@@ -980,7 +1014,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 13,
+    id: 14,
     name: "Su-75 Checkmate",
     type: "Fighter Jet",
     faction: "Russian",
@@ -1002,7 +1036,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 14,
+    id: 15,
     name: "X2 Shinshin",
     type: "Fighter Jet",
     faction: "Japanese",
@@ -1479,6 +1513,40 @@ const VEHICLES_DATA = [
   },
   {
     "id": 128,
+    "name": "ZTQ-15",
+    "type": "Light Tank",
+    "faction": "Chinese",
+    "tier": "IV",
+    "image": "ZTQ-15.jpg",
+    "description": "Modern Chinese light tank designed for high-altitude operations, featuring advanced mobility, firepower, and rapid deployment capabilities.",
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "weapons": []
+  },
+{
+    "id": 129,
+    "name": "Object 447A",
+    "type": "Main Battle Tank",
+    "faction": "Russian",
+    "tier": "IV",
+    "image": "Object-447A.jpg",
+    "description": "Experimental Russian main battle tank prototype emphasizing heavy firepower, improved protection systems, and advanced battlefield technology.",
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "weapons": []
+  },
+  {
+    "id": 130,
+    "name": "Panzer 87-140",
+    "type": "Main Battle Tank",
+    "faction": "Swiss",
+    "tier": "IV",
+    "image": "Panzer-87-140.jpg",
+    "description": "Swiss experimental main battle tank upgrade featuring a powerful 140mm cannon, enhanced armor protection, and improved survivability.",
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "weapons": []
+  },
+
+  {
+    "id": 131,
     "name": "Leclerc S2 AZUR",
     "type": "Main Battle Tank",
     "faction": "French",
@@ -1494,7 +1562,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 129,
+    "id": 132,
     "name": "Object 640",
     "type": "Main Battle Tank",
     "faction": "Russian",
@@ -1510,7 +1578,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 130,
+    "id": 133,
     "name": "Leopard 2A-RC 3.0",
     "type": "Main Battle Tank",
     "faction": "German",
@@ -1526,7 +1594,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 131,
+    "id": 134,
     "name": "Leopard 2A8",
     "type": "Main Battle Tank",
     "faction": "German",
@@ -1542,7 +1610,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 132,
+    "id": 135,
     "name": "T-15 Barbaris",
     "type": "Light Tank",
     "faction": "Russian",
@@ -1559,7 +1627,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 133,
+    "id": 136,
     "name": "T-20 Monolit",
     "type": "Tank Destroyer",
     "faction": "Russian",
@@ -1586,7 +1654,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 134,
+    "id": 137,
     "name": "KF31 Lynx",
     "type": "Light Tank",
     "faction": "German",
@@ -1611,7 +1679,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 135,
+    "id": 138,
     "name": "T-90M",
     "type": "Main Battle Tank",
     "faction": "Russian",
@@ -1636,7 +1704,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 136,
+    "id": 139,
     "name": "K2 Black Panther",
     "type": "Main Battle Tank",
     "faction": "SouthKorean",
@@ -1660,7 +1728,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 137,
+    "id": 140,
     "name": "Al-Khalid",
     "type": "Main Battle Tank",
     "faction": "Pakistani",
@@ -1685,7 +1753,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 138,
+    "id": 141,
     "name": "Arjun Mk.2",
     "type": "Main Battle Tank",
     "faction": "Indian",
@@ -1709,7 +1777,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 139,
+    "id": 142,
     "name": "M10 Booker",
     "type": "Light Tank",
     "faction": "American",
@@ -1734,7 +1802,7 @@ const VEHICLES_DATA = [
     ]
    },   
   {
-    "id": 140,
+    "id": 143,
     "name": "PL-01",
     "type": "Light Tank",
     "faction": "Polish",
@@ -1758,7 +1826,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 141,
+    "id": 144,
     "name": "ZLT-11",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -1782,7 +1850,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 142,
+    "id": 145,
     "name": "M-SHORAD",
     "type": "Anti-Air",
     "faction": "American",
@@ -1805,7 +1873,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 143,
+    "id": 146,
     "name": "M1 AGDS",
     "type": "Missile Carrier",
     "faction": "American",
@@ -1823,7 +1891,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 144,
+    "id": 147,
     "name": "TOS-1A",
     "type": "MLRS",
     "faction": "Russian",
@@ -1845,7 +1913,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 145,
+    "id": 148,
     "name": "M270 MLRS",
     "type": "MLRS",
     "faction": "American",
@@ -1862,7 +1930,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 146,
+    "id": 149,
     "name": "PLZ-05",
     "type": "SPH",
     "faction": "Chinese",
@@ -1886,7 +1954,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 147,
+    "id": 150,
     "name": "M109A6 Paladin",
     "type": "SPH",
     "faction": "American",
@@ -1910,7 +1978,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 148,
+    "id": 151,
     "name": "FK 2000",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -1933,7 +2001,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 149,
+    "id": 152,
     "name": "Otomatic 76",
     "type": "Anti-Air",
     "faction": "Italian",
@@ -1948,7 +2016,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 150,
+    "id": 153,
     "name": "BM-57-2 Kochevnik",
     "type": "Tank Destroyer",
     "faction": "Russian",
@@ -1972,7 +2040,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 151,
+    id: 154,
     name: "ADATS",
     type: "Missile Carrier",
     faction: "American",
@@ -1998,7 +2066,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 152,
+    id: 155,
     name: "MGM-166 LOSAT",
     type: "Missile Carrier",
     faction: "American",
@@ -2022,19 +2090,7 @@ const VEHICLES_DATA = [
 
 
 
-  {
-    "id": 1000,
-    "name": "HARP General Krueger",
-    "type": "Main Battle Tank",
-    "faction": "Pan-Spatial",
-    "tier": "IV",
-    "description": "Armored vehicle mounting a high-velocity railgun, featuring advanced targeting, reinforced chassis, precision long-range fire, and rapid strike capability.",
-    "image": "HARP-General-Krueger.jpg",
-    "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
-    "weapons": [
-      
-    ]
-  },
+  
 
 
   {
@@ -2693,9 +2749,19 @@ const VEHICLES_DATA = [
       { "name": "OF 105 F2 APFSDS", "type": "Main Gun", "damage": 10090, "penetration": 459 }
     ]
   },
-
-  {
+{
     "id": 413,
+    "name": "M1A1 AIM TUSK",
+    "type": "Main Battle Tank",
+    "faction": "Australian",
+    "tier": "III",
+    "image": "M1A1_AIM_TUSK.jpg",
+    "description": "Upgraded American Abrams tank featuring urban survival kit, enhanced optics, reinforced armor, and improved situational awareness systems.",
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "weapons": []
+  },
+  {
+    "id": 414,
     "name": "M60A3 TTS",
     "type": "Main Battle Tank",
     "faction": "American",
@@ -2714,7 +2780,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 414,
+    "id": 415,
     "name": "AMX-10RC",
     "type": "Main Battle Tank",
     "faction": "French",
@@ -2726,7 +2792,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 415,
+    "id": 416,
     "name": "Merkava Mk.3",
     "type": "Main Battle Tank",
     "faction": "Israeli",
@@ -2743,7 +2809,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 416,
+    "id": 417,
     "name": "PLZ-07B",
     "type": "SPH",
     "faction": "Chinese",
@@ -2760,7 +2826,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 417,
+    "id": 418,
     "name": "M110A2",
     "type": "SPH",
     "faction": "Japanese",
@@ -2776,7 +2842,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 418,
+    "id": 419,
     "name": "2S31 Vena",
     "type": "SPH",
     "faction": "Russian",
@@ -2793,7 +2859,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 419,
+    "id": 420,
     "name": "XM2001 Crusader",
     "type": "SPH",
     "faction": "American",
@@ -2810,7 +2876,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 420,
+    "id": 421,
     "name": "Gepard 1A2",
     "type": "Anti-Air",
     "faction": "German",
@@ -2825,9 +2891,20 @@ const VEHICLES_DATA = [
       { "name": "Fliegerfaust 2 Stinger", "type": "Missile", "damage": 4210, "penetration": 60, "reload": 12 }
     ]
   },
+{
+    "id": 422,
+    "name": "2S38 Derivation",
+    "type": "Anti-Air",
+    "faction": "Russian",
+    "tier": "III",
+    "image": "2S38.jpg",
+    "description": "Advanced Russian combat vehicle equipped with a 57mm autocannon, capable of engaging aerial, infantry, and armored targets.",
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "weapons": []
+  },
 
   {
-    "id": 421,
+    "id": 423,
     "name": "K-31 Cheonma",
     "type": "Anti-Air",
     "faction": "SouthKorean",
@@ -2841,7 +2918,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 422,
+    "id": 424,
     "name": "PGZ-09",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -2858,7 +2935,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 423,
+    "id": 425,
     "name": "2S6M1 Tunguska-M1",
     "type": "Anti-Air",
     "faction": "Russian",
@@ -2875,7 +2952,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 424,
+    "id": 426,
     "name": "Type 625E SHORAD",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -2891,7 +2968,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 425,
+    "id": 427,
     "name": "XM975",
     "type": "Anti-Air",
     "faction": "American",
@@ -2905,7 +2982,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 426,
+    "id": 428,
     "name": "AFT-10",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -2919,7 +2996,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 427,
+    "id": 429,
     "name": "TAN-SAM-1C",
     "type": "Anti-Air",
     "faction": "Japanese",
@@ -2934,7 +3011,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 428,
+    "id": 430,
     "name": "M113 Hellfire",
     "type": "Missile Carrier",
     "faction": "American",
@@ -2949,7 +3026,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 429,
+    "id": 431,
     "name": "9A52-2 Smerch",
     "type": "MLRS",
     "faction": "Russian",
@@ -2965,7 +3042,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 430,
+    "id": 432,
     "name": "Type 89 MLRS",
     "type": "MLRS",
     "faction": "Chinese",
@@ -2981,7 +3058,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 431,
+    "id": 433,
     "name": "Type 75 MLRS",
     "type": "MLRS",
     "faction": "Japanese",
@@ -2996,7 +3073,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 432,
+    "id": 434,
     "name": "AFT-09",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3010,7 +3087,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 433,
+    "id": 435,
     "name": "LAV-600",
     "type": "Tank Destroyer",
     "faction": "American",
@@ -3027,7 +3104,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 434,
+    "id": 436,
     "name": "HSTV-L",
     "type": "Light Tank",
     "faction": "American",
@@ -3042,7 +3119,19 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 435,
+    "id": 437,
+    "name": "Pandur II",
+    "type": "Light Tank",
+    "faction": "Austrian",
+    "tier": "III",
+    "image": "PandurII.jpg",
+    "description": "Modern wheeled armored vehicle designed for troop transport, modular weapon systems, reconnaissance roles, and rapid battlefield mobility.",
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "weapons": []
+  },
+
+  {
+    "id": 438,
     "name": "K21 KNIFV",
     "type": "Light Tank",
     "faction": "SouthKorean",
@@ -3059,7 +3148,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 436,
+    "id": 439,
     "name": "Rookiat MTTD",
     "type": "Light Tank",
     "faction": "British",
@@ -3075,7 +3164,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 437,
+    "id": 440,
     "name": "ZBL-08",
     "type": "Light Tank",
     "faction": "Chinese",
@@ -3092,7 +3181,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 438,
+    "id": 441,
     "name": "ХM8 AGS",
     "type": "Light Tank",
     "faction": "American",
@@ -3109,7 +3198,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 439,
+    "id": 442,
     "name": "VBCI-2",
     "type": "Light Tank",
     "faction": "French",
@@ -3125,7 +3214,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 440,
+    "id": 443,
     "name": "WMA301",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -3141,7 +3230,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 441,
+    "id": 444,
     "name": "Centauro I 120",
     "type": "Tank Destroyer",
     "faction": "Italian",
@@ -3156,7 +3245,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 442,
+    "id": 445,
     "name": "BMD3",
     "type": "Light Tank",
     "faction": "Russian",
@@ -3174,7 +3263,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 443,
+    "id": 446,
     "name": "Strf 9040 BILL",
     "type": "Light Tank",
     "faction": "Sweden",
@@ -3190,7 +3279,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 444,
+    "id": 447,
     "name": "M3A3 Bradley",
     "type": "Light Tank",
     "faction": "American",
@@ -3277,6 +3366,7 @@ const VEHICLES_DATA = [
       { "name": "M230(30mm)", "type": "Autocannon", "damage": 90, "penetration": 85, "reload": 300 }
     ]
   },
+  
   {
     "id": 503,
     "name": "OH-1 Ninja",
@@ -3391,6 +3481,17 @@ const VEHICLES_DATA = [
   },
   {
     "id": 508,
+    "name": "EC-665 Tiger HAP",
+    "type": "Helicopter",
+    "faction": "German",
+    "tier": "III",
+    "image": "EC-665-Tiger-HAP.jpg",
+    "description": "The EC-665 Tiger HAP is a maneuverable attack helicopter designed for fire support and escort, featuring a 30mm chin-mounted cannon.",
+   stats: { health: 0, speed: 0, verticalSpeed: 0, agility: 0 },
+    "weapons": []
+  },
+  {
+    "id": 509,
     "name": "MH-60L DAP",
     "type": "Helicopter",
     "faction": "American",
@@ -3415,7 +3516,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 509,
+    "id": 510,
     "name": "AH-1Z Viper",
     "type": "Helicopter",
     "faction": "American",
@@ -3438,7 +3539,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 510,
+    "id": 511,
     "name": "RAH-66 Comanche",
     "type": "Helicopter",
     "faction": "American",
@@ -3464,7 +3565,7 @@ const VEHICLES_DATA = [
     
   },
   {
-    "id": 511,
+    "id": 512,
     "name": "Ka-50 Black Shark",
     "type": "Helicopter",
     "faction": "Russian",
@@ -6217,6 +6318,49 @@ const VEHICLES_DATA = [
 
 
 
+
+
+
+
+  {
+    "id": 1000,
+    "name": "HARP General Krueger",
+    "type": "Main Battle Tank",
+    "faction": "Pan-Spatial",
+    "tier": "IV",
+    "description": "Armored vehicle mounting a high-velocity railgun, featuring advanced targeting, reinforced chassis, precision long-range fire, and rapid strike capability.",
+    "image": "HARP-General-Krueger.jpg",
+    "stats": { "health": 0, "speed": 0, "armor": "0", "agility": 0 },
+    "weapons": [
+      
+    ]
+  },
+    {
+    "id": 1006,
+    "name": "Al Kafil-1",
+    "type": "Main Battle Tank",
+    "faction": "Iraqi",
+    "tier": "",
+    "image": "AlKafil1.jpg",
+    "description": "Iraqi-developed main battle tank modernization focused on upgraded firepower, protection systems, and improved battlefield effectiveness.",
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "weapons": []
+  },
+
+  {
+    "id": 1008,
+    "name": "Vijayanta",
+    "type": "Main Battle Tank",
+    "faction": "Indian",
+    "tier": "",
+    "image": "Vijayanta.jpg",
+    "description": "Indian main battle tank based on the Vickers design, providing balanced firepower, armor protection, and battlefield reliability.",
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
+    "weapons": []
+  },
+  
+  
+
   
 
 ];
@@ -6386,7 +6530,11 @@ const getFlagImage = (faction: string): string => {
     "Pan-Spatial": "/PAN-SPATIAL.jpg",
     "South-African": "/south-africa.png",
     "Venezuelan": "/venezuelan-flag.png",
-    "Indonesian": "/indonesian-flag.png"
+    "Indonesian": "/indonesian-flag.png",
+    "Swiss": "/switzerland-flag.png",
+    "Austrian": "/austria-flag.png",
+    "Australian": "/australia-flag.png",
+    "Iraqi": "/iraq-flag.png"
   }
   return flags[faction] || "/default-flag.png"
 }
