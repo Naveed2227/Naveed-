@@ -279,7 +279,7 @@ const upcomingVehicles = [
   
 "HARP General Krueger",
 "AMX-10RC",
-"ZTQ15",
+"ZTQ-15",
 "2S38 Derivation",
 "Object 447A",
 "Panzer 87-140",
@@ -288,6 +288,7 @@ const upcomingVehicles = [
 "Vijayanta",
 "Pandur II",
 "EF-2000 Typhoon",
+"EC-665 Tiger HAP",
 
   // Add upcoming vehicle names here
 ];
@@ -8888,7 +8889,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       
 "HARP General Krueger",
 "AMX-10RC",,
-"ZTQ15",
+"ZTQ-15",
 "2S38 Derivation",
 "Object 447A",
 "Panzer 87-140",
@@ -8897,6 +8898,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
 "Vijayanta",
 "Pandur II",
 "EF-2000 Typhoon",
+"EC-665 Tiger HAP",
 
 
       
