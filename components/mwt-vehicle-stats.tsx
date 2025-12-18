@@ -287,7 +287,7 @@ const upcomingVehicles = [
 "Al Kafil-1",
 "Vijayanta",
 "Pandur II",
-
+"EF-2000 Typhoon",
 
   // Add upcoming vehicle names here
 ];
@@ -8887,7 +8887,16 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       
       
 "HARP General Krueger",
-"AMX-10RC",
+"AMX-10RC",,
+"ZTQ15",
+"2S38 Derivation",
+"Object 447A",
+"Panzer 87-140",
+"M1A1 AIM TUSK",
+"Al Kafil-1",
+"Vijayanta",
+"Pandur II",
+"EF-2000 Typhoon",
 
 
       
