@@ -949,7 +949,7 @@ const VEHICLES_DATA = [
   { "name": "GBU-38 JDAM", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
   { "name": "GBU-31 JDAM", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
   { "name": "GBU-32 JDAM", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
-  { "name": "AGM-169 JAGM", "type": "Air-to-Ground Missile", "damage": 9800, "penetration": 1200, "reload": 30 },
+  { "name": "x4 AGM-169 JAGM", "type": "Air-to-Ground Missile", "damage": 9800, "penetration": 1200, "reload": 30 },
   { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
   { "name": "AGM-65 Maverick", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
   { "name": "Storm Shadow", "type": "Cruise Missile", "damage": 20000, "penetration": 370, "reload": 40 },
@@ -2145,7 +2145,7 @@ const VEHICLES_DATA = [
     stats: { health: 26000, speed: 500, verticalSpeed: 25, agility: 75 },
     weapons: [
       { name: "Storm Shadow", type: "Cruise Missile", damage: 20000, penetration: 370, reload: 40 },
-      { name: "AGM-114 Hellfire", type: "Air-to-Ground Missile", damage: 9000, penetration: 950, reload: 30 },
+      { name: "x4 AGM-114 Hellfire", type: "Air-to-Ground Missile", damage: 9000, penetration: 950, reload: 30 },
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
       { name: "AIM-9 Sidewinder", type: "Short-Range AAM", damage: 5700, penetration: 45, reload: 15 },
       { name: "AIM-92", type: "Short-Range AAM", damage: 4700, penetration: 35, reload: 10 },
@@ -2190,7 +2190,7 @@ const VEHICLES_DATA = [
     description: "Next-generation attack helicopter with stealth features and advanced weapons.",
     stats: { health: 18000, speed: 320, verticalSpeed: 22.2, agility: 65 },
     weapons: [
-      { "name": "LAU-61", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
+  { "name": "LAU-61", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
   { "name": "LAU-10", "type": "Rocket Pod", "damage": 7400, "penetration": 500, "reload": 30 },
   { "name": "AIM-92", "type": "Short-Range AAM", "damage": 4700, "penetration": 35, "reload": 10 },
   { "name": "LAU-150", "type": "Rocket Pod", "damage": 7800, "penetration": 600, "reload": 40 },
@@ -2198,7 +2198,7 @@ const VEHICLES_DATA = [
   { "name": "AIM-9 Sidewinder", "type": "Short-Range AAM", "damage": 5700, "penetration": 45, "reload": 15 },
   { "name": "AGR-20 BLR", "type": "Rocket Pod", "damage": 5200, "penetration": 128, "reload": 20 },
   { "name": "AGM-65 Maverick", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
-  { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
+  { "name": "x4 AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
   { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 }
 ]
   },
@@ -2256,15 +2256,16 @@ const VEHICLES_DATA = [
     image: "F-16C-Night-Falcon.jpg",
     stats: { health: 17500, speed: 790, afterburnerSpeed: 2178, agility: 48 },
     weapons: [
-       { name: "GBU-38 JDAM", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
-      { name: "GBU-39", type: "Guided Bomb", damage: 14700, penetration: 120, reload: 28 },
-      { name: "GBU-31 JDAM", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
       { name: "GBU-12 Paveway II", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
-      { name: "AIM-7 Sparrow", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+      { name: "GBU-31 JDAM", type: "Guided Bomb", damage: 19400, penetration: 360, reload: 40 },
+      { name: "GBU-38 JDAM", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
+      { name: "GBU-39", type: "Guided Bomb", damage: 14700, penetration: 120, reload: 28 },
+      { name: "AGM-84HK", type: "Anti-Ship Missile", damage: 18900, penetration: 310, reload: 35 },
       { name: "AGM-65 Maverick", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
+      { name: "AIM-7 Sparrow", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+      { name: "AIM-9 Sidewinder", type: "Medium-Range AAM", damage: 5700, penetration: 45, reload: 15 },
       { name: "AIM-120 AMRAAM", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 },
-      { name: "AGM-84HK", type: "Anti-Ship Missile", damage: 18900, penetration: 310, reload: 35 }
     ]
   },
   {
@@ -2278,12 +2279,15 @@ const VEHICLES_DATA = [
     stats: { health: 18100, speed: 810, afterburnerSpeed: 1730, agility: 41 },
     weapons: [
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
-      { name: "GBU-32 JDAM", type: "Guided Bomb", damage: 15700, penetration: 200, reload: 35 },
+      { name: "MK-81", type: "Guided Bomb", damage: 13000, penetration: 90, reload: 20 },
+      { name: "MK-82", type: "Guided Bomb", damage: 14300, penetration: 120, reload: 25 },
       { name: "GBU-12 Paveway II", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
-      { name: "AIM-7 Sparrow", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+      { name: "GBU-32 JDAM", type: "Guided Bomb", damage: 15700, penetration: 200, reload: 35 },
       { name: "AGM-65 Maverick", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
-      { "name": "AIM-132 ASRAAM", "type": "Short-Range Air-to-Air Missile", "damage": 5200, "penetration": 65, "reload": 15 },
+      { name: "AIM-7 Sparrow", type: "Medium-Range AAM", damage: 6200, penetration: 65, reload: 20 },
+      { name: "AIM-9 Sidewinder", type: "Medium-Range AAM", damage: 5700, penetration: 45, reload: 15 },
       { name: "AIM-120 AMRAAM", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 },
+      { name: "AIM-132 ASRAAM", type: "Medium-Range AAM", damage: 5200, penetration: 65, reload: 15 },
     ]
   },
   {
@@ -2298,6 +2302,7 @@ const VEHICLES_DATA = [
     weapons: [
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
       { "name": "LS-6-250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
+      { "name": "TL-20", "type": "Air-to-Ground Missile", "damage": 12400, "penetration": 143, "reload": 25 },
       { "name": "KD-88", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
       { "name": "PL-10", "type": "Short-Range Air-to-Air Missile", "damage": 7400, "penetration": 60, "reload": 20 },
       { "name": "PL-12", "type": "BVR AAM", "damage": 7600, "penetration": 56, "reload": 30 },
@@ -2317,6 +2322,7 @@ const VEHICLES_DATA = [
     weapons: [
       { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
       { "name": "FAB-250", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
+      { "name": "KAB-250", "type": "Unguided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "KAB500KR", "type": "Guided Bomb", "damage": 17800, "penetration": 320, "reload": 40 },
       { "name": "Kh-MD-E", "type": "Air-to-Ground Missile", "damage": 12400, "penetration": 250, "reload": 20 },
       { "name": "R-73", "type": "Short-Range Air-to-Air Missile", "damage": 4800, "penetration": 56, "reload": 15 },
@@ -2381,14 +2387,15 @@ const VEHICLES_DATA = [
     stats: { health: 23500, speed: 860, afterburnerSpeed: 2070, agility: 49 },
     weapons: [
       { "name": "Type 1", "type": "Guided Bomb", "damage": 15100, "penetration": 120, "reload": 32 },
-      { "name": "Type 90 x2", "type": "Air-to-Ground Missile", "damage": 6400, "penetration": 320, "reload": 40 },
+      { "name": "x2 Type 90", "type": "Air-to-Ground Missile", "damage": 6400, "penetration": 320, "reload": 40 },
       { "name": "Type 3", "type": "Guided Bomb", "damage": 16000, "penetration": 210, "reload": 35 },
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
       { "name": "KD-88", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
       { "name": "PL-7", "type": "Short-Range Air-to-Air Missile", "damage": 6500, "penetration": 50, "reload": 20 },
       { "name": "PL-10", "type": "Short-Range Air-to-Air Missile", "damage": 7400, "penetration": 60, "reload": 20 },
       { "name": "PL-12", "type": "Medium-Range Air-to-Air Missile", "damage": 7600, "penetration": 56, "reload": 30 },
-      { "name": "PL-15", "type": "Beyond Visual Range Air-to-Air Missile", "damage": 7800, "penetration": 70, "reload": 30 }
+      { "name": "PL-15", "type": "Beyond Visual Range Air-to-Air Missile", "damage": 7800, "penetration": 70, "reload": 30 },
+      { "name": "AKF-98A", "type": "Air-to-Ground Missile", "damage": 20500, "penetration": 410, "reload": 40 }
     ]
   },
   {
@@ -2422,13 +2429,15 @@ const VEHICLES_DATA = [
   "description": "Advanced variant of the F-15 Strike Eagle with modern avionics and stealth characteristics.",
   "stats": { "health": 19800, "speed": 780, "afterburnerSpeed": 2390, "agility": 43 },
   "weapons": [
-    { "name": "GBU-38 JDAM", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
     { "name": "GBU-31 JDAM", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
     { "name": "GBU-32 JDAM", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
+    { "name": "GBU-38 JDAM", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
+    { "name": "MK-84", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
     { "name": "AGM-65 Maverick", "type": "Air-to-Surface Missile", "damage": 11000, "penetration": 830, "reload": 22 },
     { "name": "AIM-7 Sparrow", "type": "Medium-Range AAM", "damage": 6200, "penetration": 65, "reload": 20 },
+    { "name": "AIM-9 Sidewinder", "type": "Medium-Range AAM", "damage": 5700, "penetration": 45, "reload": 15 },
+    { "name": "AIM-120 AMRAAM", "type": "Medium-Range AAM", "damage": 11300, "penetration": 60, "reload": 20 },
     { "name": "AGM-84HK", "type": "Anti-Ship Missile", "damage": 18900, "penetration": 310, "reload": 35 },
-    { "name": "AIM-120 AMRAAM", "type": "Medium-Range AAM", "damage": 11300, "penetration": 60, "reload": 20 }
   ]
   },
   {
@@ -2464,15 +2473,16 @@ const VEHICLES_DATA = [
     "description": "Close air support aircraft designed around the GAU-8 Avenger cannon.",
     "stats": { "health": 27600, "speed": 560, "afterburnerSpeed": 760, "agility": 48 },
     "weapons": [
-      { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
+    { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
     { name: "MK-84", type: "General-Purpose Bomb", damage: 19400, penetration: 360, reload: 40 },
     { name: "LAU-10x3", type: "Rocket Pod", damage: 7400, penetration: 500, reload: 40 },
     { name: "GBU-32 JDAM", type: "Guided Bomb", damage: 15700, penetration: 200, reload: 35 },
     { name: "GBU-12 Paveway II", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
     { name: "AGM-65 Maverick", type: "Air-to-Surface Missile", damage: 11000, penetration: 830, reload: 22 },
-    { name: "AIM-132 ASRAAM", type: "Short-Range AAM", damage: 5200, penetration: 65, reload: 15 },
     { name: "AGM-12B Bullpup", type: "Air-to-Surface Missile", damage: 11500, penetration: 600, reload: 41 },
-    { name: "AIM-120 AMRAAM", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 }
+    { "name": "AIM-9 Sidewinder", "type": "Medium-Range AAM", "damage": 5700, "penetration": 45, "reload": 15 },
+    { name: "AIM-120 AMRAAM", type: "Medium-Range AAM", damage: 11300, penetration: 60, reload: 20 },
+    { name: "AIM-132 ASRAAM", type: "Short-Range AAM", damage: 5200, penetration: 65, reload: 15 },
   ]
   },
   {
@@ -3256,8 +3266,8 @@ const VEHICLES_DATA = [
       { "name": "ADS Starstreak", "type": "Air-to-Ground Missile", "damage": 7300, "penetration": 50, "reload": 15 },
       { "name": "AIM-9 Sidewinder", "type": "Short-Range AAM", "damage": 5700, "penetration": 45, "reload": 15 },
       { "name": "AIM-92", "type": "Short-Range AAM", "damage": 4700, "penetration": 35, "reload": 10 },
-      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
-      { "name": "AGM-169 JAGM", "type": "Air-to-Ground Missile", "damage": 9800, "penetration": 1200, "reload": 30 },
+      { "name": "x4 AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
+      { "name": "x4 AGM-169 JAGM", "type": "Air-to-Ground Missile", "damage": 9800, "penetration": 1200, "reload": 30 },
       { "name": "AGR-20 BLR", "type": "Rocket Pod", "damage": 5200, "penetration": 128, "reload": 20 },
       { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
       { "name": "LAU-61", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
@@ -3283,7 +3293,7 @@ const VEHICLES_DATA = [
       { "name": "LAU-150", "type": "Rocket Pod", "damage": 7800, "penetration": 600, "reload": 40 },
       { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
       { "name": "Toshiba Type-91", "type": "Air-to-Ground Missile", "damage": 4700, "penetration": 35, "reload": 10 },
-      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
+      { "name": "x4 AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
       { "name": "ADS Starstreak", "type": "Air-to-Ground Missile", "damage": 7300, "penetration": 50, "reload": 15 }
     ],
     "guns": []
@@ -3327,7 +3337,7 @@ const VEHICLES_DATA = [
       { "name": "FASGW-ANL", "type": "Guided Rocket", "damage": 10300, "penetration": 350, "reload": 38 },
       { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
       { "name": "HOT-3", "type": "Guided Rocket", "damage": 9820, "penetration": 1300, "reload": 23 },
-      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9900, "penetration": 1200, "reload": 30 },
+      { "name": "x4 AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9900, "penetration": 1200, "reload": 30 },
       { "name": "ZT-6 Mokopa", "type": "Guided Rocket", "damage": 10010, "penetration": 1350, "reload": 22 },
      
     ],
@@ -3389,12 +3399,13 @@ const VEHICLES_DATA = [
     "description": "Armed MH-60 variant (DAP) with a flexible loadout for rockets, ATGMs and air-to-air missiles.",
     "stats": { "health": 20020, "speed": 209, "verticalSpeed": 12, "agility": 34 },
     "weapons": [
-      { "name": "AGM 169-JAGM", "type": "Air-to-Ground Missile", "damage": 9800, "penetration": 1200, "reload": 30 },
+      
       { "name": "LAU-61", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
       { "name": "AGR-20 BLR", "type": "Rocket Pod", "damage": 5200, "penetration": 128, "reload": 20 },
       { "name": "LAU-68", "type": "Rocket Pod", "damage": 4300, "penetration": 290, "reload": 20 },
       { "name": "AIM-9 Sidewinder", "type": "Short-Range AAM", "damage": 5700, "penetration": 45, "reload": 15 },
-      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
+      { "name": "x4 AGM 169-JAGM", "type": "Air-to-Ground Missile", "damage": 9800, "penetration": 1200, "reload": 30 },
+      { "name": "x4 AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
       { "name": "AIM-92", "type": "Short-Range AAM", "damage": 4700, "penetration": 35, "reload": 10 },
       { "name": "ADS Starstreak", "type": "Air-to-Ground Missile", "damage": 7300, "penetration": 50, "reload": 15 }
     ],
@@ -3415,8 +3426,8 @@ const VEHICLES_DATA = [
     "weapons": [
       { "name": "AIM-92", "type": "Short-Range AAM", "damage": 4700, "penetration": 35, "reload": 10 },
       { "name": "AIM-9 Sidewinder", "type": "Short-Range AAM", "damage": 5700, "penetration": 45, "reload": 15 },
-      { "name": "AGM-169 JAGM", "type": "Air-to-Ground Missile", "damage": 9800, "penetration": 1200, "reload": 30 },
-      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
+      { "name": "x4 AGM-169 JAGM", "type": "Air-to-Ground Missile", "damage": 9800, "penetration": 1200, "reload": 30 },
+      { "name": "x4 AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 30 },
       { "name": "LAU-68", "type": "Rocket Pod", "damage": 4300, "penetration": 290, "reload": 20 },
       { "name": "AIM-92", "type": "Short-Range AAM", "damage": 4700, "penetration": 35, "reload": 10 },
       { "name": "AGM-65 Maverick", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
@@ -3437,14 +3448,14 @@ const VEHICLES_DATA = [
     "stats": { "health": 22220, "speed": 410, "verticalSpeed": 36, "agility": 70 },
     "weapons": [
       { "name": "LAND-LGR4", "type": "Air-to-Ground Missile", "damage": 4300, "penetration": 290, "reload": 20 },
-      { "name": "AGM-114 Hellfire x1", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 10 },
+      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9000, "penetration": 950, "reload": 10 },
       { "name": "FIM-92 Stinger", "type": "Air-to-Ground Missile", "damage": 4700, "penetration": 35, "reload": 10 },
       { "name": "APKWS", "type": "Air-to-Ground Missile", "damage": 5400, "penetration": 140, "reload": 20 },
       { "name": "FASGWL", "type": "Air-to-Ground Missile", "damage": 5300, "penetration": 250, "reload": 20 },
       { "name": "LAU-150", "type": "Air-to-Ground Missile", "damage": 7800, "penetration": 600, "reload": 40 },
       { "name": "FIM-92 Stinger", "type": "Air-to-Ground Missile", "damage": 8200, "penetration": 800, "reload": 20 },
       { "name": "AGM-65 Maverick", "type": "Air-to-Ground Missile", "damage": 11000, "penetration": 830, "reload": 22 },
-      { "name": "AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9900, "penetration": 1200, "reload": 30 },
+      { "name": "x4 AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9900, "penetration": 1200, "reload": 30 },
       { "name": "ADS STARSTREAK", "type": "Air-to-Ground Missile", "damage": 7300, "penetration": 50, "reload": 15 },
     
       
