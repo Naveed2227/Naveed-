@@ -14859,7 +14859,7 @@ const MainPage = () => {
               </Script>
               <Script
                 strategy="afterInteractive"
-                src="https://www.highperformanceformat.com/26985683759ed90ebd2497232a5046b"a"/invoke.js"
+                src="https://www.highperformanceformat.com/26985683759ed90ebd2497232a5046b""a"/invoke.js"
               />
             </div>
           </div>
