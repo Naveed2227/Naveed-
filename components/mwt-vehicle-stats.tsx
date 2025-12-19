@@ -732,8 +732,20 @@ const BATTLE_PASSES = [
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
     vehicles: ["VT-4A1", "KF-51 Panther"], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["kF-51"],
+      premium: ["KF-51"],
       free: ["VT-4A1"]
+    }
+  },
+  {
+    id: 0,
+    month: "November 2024",
+    name: "Season One",
+    image: "2024-Nov.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: ["T-14 Armata (152)", "SB-1"], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["SB-1"],
+      free: ["T-14 Armata (152)"]
     }
   }
 
