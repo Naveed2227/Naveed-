@@ -61,6 +61,7 @@ const vehicleVideos: VehicleVideo[] = [
   { name: "T-15 Barbaris", url: "https://youtu.be/4LsQ0YcUKOU?si=tQYaSpZd_z-8x196", start: "1:39", end: "2:33" },
   { name: "Leopard 2 Revolution", url: "https://youtu.be/YetbVX0KXzk?si=QkYeVE28PTvFLjjQ", start: "3:20", end: "4:01" },
   { name: "Panzer 87-140", url: "https://youtu.be/Mg5jQ5Mxbw4?si=oh5uZCrWNgCShZVk", start: "0:00", end: "0:55" },
+  { name: "ZTQ-15", url: "https://youtu.be/AJyOSKAS8QQ?si=ScBUgU4RqhtgIDMl", start: "0:00", end: "1:04" },
 
 
 
