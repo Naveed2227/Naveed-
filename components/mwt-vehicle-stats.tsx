@@ -1538,7 +1538,7 @@ const VEHICLES_DATA = [
      { "name": "DTC02-105 APFSDS", "type": "Main Gun", "damage": 10430, "penetration": 580 },
      { "name": "DTP2 HEAT", "type": "Main Gun", "damage": 12680, "penetration": 650 },
      { "name": "DTB02-105 HEI", "type": "Main Gun", "damage": 11600, "penetration": 65 },
-     { "name": "GP105-GP2 HEAT", "type": "Missile", "damage": 11830, "penetration": 750 }
+     { "name": "GP105-GP2 HEAT", "type": "Missile", "damage": 11830, "penetration": 750 },
      { "name": "35x32RE SAPHEI", "type": "Missile", "damage": 4020, "penetration": 80, "reload": 5 }
     ]
   },
