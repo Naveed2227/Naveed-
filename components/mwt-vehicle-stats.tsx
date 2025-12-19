@@ -1554,8 +1554,11 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Panzer-87-140.jpg",
     "description": "Swiss experimental main battle tank upgrade featuring a powerful 140mm cannon, enhanced armor protection, and improved survivability.",
-    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
-    "weapons": []
+    "stats": { "health": 0, "speed": 0, "armor": "670mm", "agility": 0 },
+    "weapons": [
+    { "name": "Pz Kan Pfeil Pat", "type": "Main Gun", "damage": 14520, "penetration": 1000 },
+    { "name": "Pz Kan Pfeil Pat MZ", "type": "Main Gun", "damage": 17710, "penetration": 1100 },
+  ]
   },
 
   {
@@ -8904,7 +8907,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
 "ZTQ-15",
 "2S38 Derivation",
 "Object 447A",
-"Panzer 87-140",
+"Panzer87-140",
 "M1A1 AIM TUSK",
 "Al Kafil-1",
 "Vijayanta",
