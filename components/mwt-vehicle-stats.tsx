@@ -843,7 +843,7 @@ const VEHICLES_DATA = [
     description: "The Eurofighter 2000 Typhoon is Austria's primary supersonic multi-role fighter jet, providing national air sovereignty and defense capabilities.",
      stats: { health: 32376, speed: 0, afterburnerSpeed: 0, agility: 0 },
     weapons: [
-      { "name": "GBU-10 Paveway II", "type": "Missile", "damage": 0, "penetration": 0, "reload": 0 },
+      
       { "name": "GBU-48 JDAM", "type": "Guided Bomb", "damage": 0, "penetration": 0, "reload": 0 },
       { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
       { "name": "Storm Shadow", "type": "Cruise Missile", "damage": 20000, "penetration": 370, "reload": 40 },
