@@ -261,16 +261,11 @@ const formatTier = (tier: string | number): string => {
 // New Vehicles System
 const newVehicles = [
   
-  "Xian JH-7A",
-  "M60A3 TTS",
   "M1 AGDS",
   "T-15 Barbaris",
-"Ka-90",
-"TAN-SAM-1C",
-"T-72B1",
-"RAH-66 Comanche",
-"Leopard 2 Revolution",
-"FV101 Scorpion-90",
+  "Ka-90",
+  "RAH-66 Comanche",
+
 
 ];
 
