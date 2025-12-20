@@ -11305,12 +11305,12 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
         )}
       </AnimatePresence>
 
-      <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 shadow-sm pt-16 sm:pt-0">
-        <div className="max-w-7xl xl:max-w-[90rem] mx-auto p-4 sm:p-6 md:p-6 lg:p-8 mb-0 mt-0">
+      <header className="bg-slate-900/80 backdrop-blur-sm border-b border-slate-700 shadow-sm pt-2 sm:pt-2">
+        <div className="max-w-7xl xl:max-w-[90rem] mx-auto p-2 sm:p-3 md:p-4 lg:p-4 mb-0 mt-0">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6">
             <div className="flex-1 min-w-0">
               <div>
-                <div className="flex justify-start ml-14 mb-2">
+                <div className="flex justify-start ml-2 mb-1">
                   <a
                     href="https://play.google.com/store/apps/details?id=app.mwtassistantunofficial.android&pcampaignid=web_share"
                     target="_blank"
@@ -11320,8 +11320,8 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                     Install app
                   </a>
                 </div>
-                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 text-transparent bg-clip-text mx-14">MWT Assistant</h1>
-                <p className="text-xs sm:text-sm text-slate-400 mt-1 ml-14">Comprehensive vehicle statistics and comparisons</p>
+                <h1 className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 text-transparent bg-clip-text ml-2">MWT Assistant</h1>
+                <p className="text-xs text-slate-400 ml-2">Vehicle stats & comparisons</p>
               </div>
               {[
               'naveed.miandad.007@gmail.com',
@@ -14898,21 +14898,7 @@ const MainPage = () => {
 
         {isMobile && (
           <div className="mt-4 flex justify-center">
-            <div style={{ width: '320px', height: '50px' }}>
-              <Script id="hpf-atoptions-320x50" strategy="afterInteractive">
-                {`window.atOptions = {
-  'key' : '',
-  'format' : 'iframe',
-  'height' : 50,
-  'width' : 320,
-  'params' : {}
-};`}
-              </Script>
-              <Script
-                strategy="afterInteractive"
-                src=""
-              />
-            </div>
+            
           </div>
         )}
         

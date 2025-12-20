@@ -159,7 +159,24 @@ export default function RootLayout({
         {/* Google AdSense - Script is already included above */}
       </head>
       <body className={inter.className}>
-        {children}
+        <div className="min-h-screen flex flex-col">
+          {/* Banner */}
+          <div className="w-full bg-slate-900">
+            <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+              <img 
+                src="/MWT-Assistant-banner.jpg" 
+                alt="MWT Assistant Banner" 
+                className="w-full h-auto object-contain"
+                style={{ maxHeight: '120px' }}
+              />
+            </div>
+          </div>
+          
+          {/* Main Content */}
+          <main className="flex-grow">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );
