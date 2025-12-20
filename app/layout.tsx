@@ -162,12 +162,12 @@ export default function RootLayout({
         <div className="min-h-screen flex flex-col">
           {/* Banner */}
           <div className="w-full bg-slate-900">
-            <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+            <div className="max-w-5xl mx-auto w-full px-4 sm:px-6">
               <img 
                 src="/MWT-Assistant-banner.jpg" 
                 alt="MWT Assistant Banner" 
                 className="w-full h-auto object-contain"
-                style={{ maxHeight: '120px' }}
+                style={{ maxHeight: '80px' }}
               />
             </div>
           </div>
