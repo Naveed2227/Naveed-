@@ -6995,13 +6995,21 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     setIsPlaying(false);
   };
 
+  const handlePlay = () => {
+    if (playerRef.current) {
+      try {
+        playerRef.current.playVideo();
+        setIsPlaying(true);
+      } catch (e) {
+        console.error('Error playing video:', e);
+      }
+    }
+  };
+
   const handlePause = () => {
     if (playerRef.current) {
       try {
-        // Mute and pause the video, then seek to beginning
-        playerRef.current.mute();
         playerRef.current.pauseVideo();
-        playerRef.current.seekTo(0);
         setIsPlaying(false);
       } catch (e) {
         console.error('Error pausing video:', e);
@@ -7172,44 +7180,6 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
           html5: 1, // Force HTML5 player
           wmode: 'opaque', // Better iOS compatibility
           allowfullscreen: 'true', // Ensure fullscreen works
-      },
-      events: {
-        onReady: (event: any) => {
-          console.log('YouTube player is ready');
-          setIsPlayerInitialized(true);
-          // Ensure we start with audio muted
-          event.target.mute();
-          
-          // Mobile detection
-          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-          const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-          
-          // Configure iframe
-          const iframe = event.target.getIframe();
-          if (iframe) {
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.style.position = 'absolute';
-            iframe.style.top = '0';
-            iframe.style.left = '0';
-            iframe.style.border = 'none';
-            iframe.style.borderRadius = '0';
-          }
-          
-          // Start playing the video
-          setTimeout(() => {
-            try {
-              const currentState = event.target.getPlayerState();
-              if (currentState !== (window as any).YT.PlayerState.PLAYING) {
-                event.target.playVideo();
-              }
-              setIsPlaying(true);
-              startProgressTracking();
-            } catch (error) {
-              console.log('Could not autoplay video:', error);
-              setIsPlaying(false);
-            }
-          }, 100);
         },
         onError: (event: any) => {
           console.error('ArmourVideo: Player error:', event.data);
