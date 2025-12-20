@@ -6995,6 +6995,20 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     setIsPlaying(false);
   };
 
+  const handlePause = () => {
+    if (playerRef.current) {
+      try {
+        // Mute and pause the video, then seek to beginning
+        playerRef.current.mute();
+        playerRef.current.pauseVideo();
+        playerRef.current.seekTo(0);
+        setIsPlaying(false);
+      } catch (e) {
+        console.error('Error pausing video:', e);
+      }
+    }
+  };
+
   // Track if we've initialized the YouTube API
   const apiInitialized = useRef(false);
   const apiReadyCallback = useRef<(() => void) | null>(null);
@@ -7065,8 +7079,17 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     return () => {
       if (playerRef.current) {
         try {
+          // Mute and stop any playing audio
+          playerRef.current.mute();
           playerRef.current.pauseVideo();
-          playerRef.current.destroy();
+          playerRef.current.seekTo(0);
+          
+          // Small delay to ensure cleanup completes
+          setTimeout(() => {
+            if (playerRef.current) {
+              playerRef.current.destroy();
+            }
+          }, 100);
         } catch (e) {
           console.error('Error cleaning up player:', e);
         } finally {
@@ -7154,6 +7177,8 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
         onReady: (event: any) => {
           console.log('YouTube player is ready');
           setIsPlayerInitialized(true);
+          // Ensure we start with audio muted
+          event.target.mute();
           
           // Mobile detection
           const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
