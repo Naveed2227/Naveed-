@@ -6916,6 +6916,7 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isPlayerInitialized, setIsPlayerInitialized] = useState(false);
   const videoRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<any>(null);
   
@@ -6977,6 +6978,22 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
       }
     }
   }, [vehicleName]);
+
+  const handleClose = () => {
+    if (playerRef.current) {
+      try {
+        playerRef.current.pauseVideo();
+        playerRef.current.destroy();
+      } catch (e) {
+        console.error('Error stopping player on close:', e);
+      } finally {
+        playerRef.current = null;
+        setIsPlayerInitialized(false);
+      }
+    }
+    setActiveVideo(null);
+    setIsPlaying(false);
+  };
 
   // Track if we've initialized the YouTube API
   const apiInitialized = useRef(false);
@@ -7048,9 +7065,13 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     return () => {
       if (playerRef.current) {
         try {
-          playerRef.current.stopVideo();
+          playerRef.current.pauseVideo();
+          playerRef.current.destroy();
         } catch (e) {
-          console.error('Error stopping player:', e);
+          console.error('Error cleaning up player:', e);
+        } finally {
+          playerRef.current = null;
+          setIsPlayerInitialized(false);
         }
       }
     };
@@ -7059,8 +7080,8 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
   const initializePlayer = () => {
     console.log('Initializing YouTube player');
     
-    if (!activeVideo || !videoRef.current) {
-      console.log('No active video or video ref, cannot initialize');
+    if (!activeVideo || !videoRef.current || isPlayerInitialized) {
+      console.log('No active video, video ref, or player already initialized');
       return;
     }
 
@@ -7087,6 +7108,17 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
       // Clean up any existing player first
       if (playerRef.current) {
         try {
+          playerRef.current.destroy();
+        } catch (e) {
+          console.error('Error destroying existing player:', e);
+        }
+        playerRef.current = null;
+      }
+
+      // Clean up any existing player first
+      if (playerRef.current) {
+        try {
+          playerRef.current.pauseVideo();
           playerRef.current.destroy();
         } catch (e) {
           console.error('Error destroying existing player:', e);
@@ -7121,6 +7153,7 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
       events: {
         onReady: (event: any) => {
           console.log('YouTube player is ready');
+          setIsPlayerInitialized(true);
           
           // Mobile detection
           const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
