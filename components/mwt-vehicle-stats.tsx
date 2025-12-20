@@ -1638,7 +1638,7 @@ const VEHICLES_DATA = [
   {
     "id": 135,
     "name": "T-15 Barbaris",
-    "type": "Light Tank",
+    "type": "Missile Carrier",
     "faction": "Russian",
     "tier": "IV",
     "image": "T-15-Barbaris.jpg",
