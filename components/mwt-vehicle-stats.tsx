@@ -395,7 +395,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Z-20",
 "AH-84",
 "F-14D Super Tomcat",
-"J-16",
+"J-16 Shenyang",
 "Su 25UB",
 "F-15SE Silent Eagle",
 "M42A1 Duster",
@@ -2374,11 +2374,11 @@ const VEHICLES_DATA = [
   },
   {
     id: 303,
-    name: "J-16",
+    name: "J-16 Shenyang",
     type: "Fighter Jet",
     faction: "Chinese",
     tier: "III",
-    image: "J16.jpg",
+    image: "J-16-Shenyang.jpg",
     description: "Chinese twin-seat multirole fighter derived from Su-30, capable of carrying heavy weapons payload.",
     stats: { health: 21300, speed: 810, afterburnerSpeed: 2030, agility: 43 },
     weapons: [
