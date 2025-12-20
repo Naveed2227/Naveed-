@@ -7179,14 +7179,34 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
           mobile: '1', // Optimize for mobile
           html5: 1, // Force HTML5 player
           wmode: 'opaque', // Better iOS compatibility
-          allowfullscreen: 'true', // Ensure fullscreen works
+          allowfullscreen: 'true' // Ensure fullscreen works
         },
-        onError: (event: any) => {
-          console.error('ArmourVideo: Player error:', event.data);
-          console.error('ArmourVideo: Error code:', event.data);
-        },
-        onStateChange: (event: any) => {
-          console.log('ArmourVideo: Player state changed:', event.data);
+        events: {
+          onError: (event: any) => {
+            console.error('ArmourVideo: Player error:', event.data);
+            console.error('ArmourVideo: Error code:', event.data);
+          },
+          onStateChange: (event: any) => {
+            console.log('ArmourVideo: Player state changed:', event.data);
+            const YT = (window as any).YT;
+            
+            switch (event.data) {
+              case YT.PlayerState.PLAYING:
+                // Only update state if we're not already playing to prevent unnecessary re-renders
+                if (!isPlaying) {
+                  setIsPlaying(true);
+                  startProgressTracking();
+                }
+                break;
+                
+              case YT.PlayerState.PAUSED:
+                // Only update if we're not already paused
+                if (isPlaying) {
+                  setIsPlaying(false);
+                }
+                break;
+                
+              case YT.PlayerState.ENDED:
           const YT = (window as any).YT;
           
           switch (event.data) {
