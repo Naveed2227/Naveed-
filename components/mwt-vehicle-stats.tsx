@@ -517,7 +517,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Mi-24 Super Hind",
 "Leopard 2A-RC 3.0",
 "Leopard 2A8",
-"X2 Shinshin",
+"X-2 Shinshin",
 "K2 Black Panther",
 "Al-Khalid",
 "B-Type",
@@ -605,9 +605,9 @@ const BATTLE_PASSES = [
     name: "Falling Thunder",
     image: "2025-Oct.jpg", // Upload your custom image to the same directory
     description: "Dominate the frozen battlefields with elite winter warfare vehicles",
-    vehicles: ["Leopard 2A8", "X2 Shinshin"], // Vehicle IDs from VEHICLES array
+    vehicles: ["Leopard 2A8", "X-2 Shinshin"], // Vehicle IDs from VEHICLES array
     rewards: {
-      premium: ["X2 Shinshin"],
+      premium: ["X-2 Shinshin"],
       free: ["Leopard 2A8"]
     }
   },
@@ -1053,11 +1053,11 @@ const VEHICLES_DATA = [
   },
   {
     id: 15,
-    name: "X2 Shinshin",
+    name: "X-2 Shinshin",
     type: "Fighter Jet",
     faction: "Japanese",
     tier: "IV",
-    image: "X2-Shinshin.jpg",
+    image: "X-2-Shinshin.jpg",
     description: "Japan's stealth technology demonstrator, testing advanced avionics, radar, and maneuverability for future fighters.",
     stats: { health: 21400, speed: 940, afterburnerSpeed: 2230, agility: 53 },
     weapons: [
@@ -3101,7 +3101,7 @@ const VEHICLES_DATA = [
   {
     "id": 434,
     "name": "AFT-09",
-    "type": "Anti-Air",
+    "type": "Missile Carrier",
     "faction": "Chinese",
     "tier": "III",
     "image": "AFT-09.jpg",
@@ -8895,11 +8895,13 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "XM8 AGS",
       "Object 640",
       "Leopard 2A8",
-      "X2 Shinshin",
+      "X-2 Shinshin",
       "B-Type",
       "T-90M",
       "Ka-90",
       "T-15 Barbaris",
+      "ZTQ-15",
+      "Panzer 87-140",
     
 
     ]
@@ -8958,8 +8960,6 @@ const standardMissiles = [
   "Stinger Launcher",
   "AGM-114 Hellfire",
   "MIM-146",
-  "XM1018AD HE",
-  "XM1018 HEI",
   "FK-2000",
   "MIM-146",
   "MIM-146",
@@ -9079,6 +9079,7 @@ const laserGuidedMissiles = [
   "KD-21",
   "S-24",
   "KAB-500L",
+  "APKWS",
 ];
 
 const rocketPods = [
