@@ -271,7 +271,9 @@ const newVehicles = [
 
 // Upcoming Vehicles System
 const upcomingVehicles = [
-  
+
+
+  "Santa's Sleigh",
 "HARP General Krueger",
 "AMX-10RC",
 "ZTQ-15",
@@ -747,7 +749,27 @@ const BATTLE_PASSES = [
 ];
 
 const VEHICLES_DATA = [
-  
+  {
+    id: 0,
+    name: "Santa's Sleigh",
+    type: "Fighter Jet",
+    faction: "Santa",
+    tier: "V",
+    description: "The Santa's Sleigh (also goes by the name Feliz) is the North Pole's primary Mach 7+ multi-gift delivery vehicle, providing global chimney penetration and cookie-interception capabilities. Its payload bay can hold a vast collection of presents for all ages (Its a joke)",
+    image: "Santa.jpg",
+    stats: { health: 52000, speed: 2450, afterburnerSpeed: 7700, agility: 81 },
+    weapons: [
+      { "name": "AIM-120 AMRAAM", "type": "BVR AAM", "damage": 11300, "penetration": 60, "reload": 20 },
+      { "name": "AIM-132 ASRAAM", "type": "Short-Range AAM", "damage": 5200, "penetration": 65, "reload": 15 },
+      { "name": "HD-1A", "type": "Air-to-Ground Missile", "damage": 25000, "penetration": 1000, "reload": 40 },
+      { "name": "PL-17", "type": "Air-to-Air Missile", "damage": 11700, "penetration": 100, "reload": 26 },
+      { "name": "R-37", "type": "Medium-Range Air-to-Air Missile", "damage": 8400, "penetration": 80, "reload": 30 },
+      { "name": "Kh-69", "type": "Air-to-Ground Missile", "damage": 18400, "penetration": 230, "reload": 40 },
+      { "name": "Kh-47M2 Kinzhal", "type": "Ballistic Missile", "damage": 35000, "penetration": 1200, "reload": 60 },
+      { "name": "KD-21", "type": "Ballistic Missile", "damage": 39700, "penetration": 1300, "reload": 60 },
+      { "name": "Tsar Bomba", "type": "Air-to-Ground Missile", "damage": 222700, "penetration": 2227, "reload": 3600 },
+    ]
+  },
   {
     id: 1,
     name: "Su-57M",
@@ -6560,7 +6582,8 @@ const getFlagImage = (faction: string): string => {
     "Swiss": "/switzerland-flag.png",
     "Austrian": "/austria-flag.png",
     "Australian": "/australia-flag.png",
-    "Iraqi": "/iraq-flag.png"
+    "Iraqi": "/iraq-flag.png",
+    "Santa": "/santa-clause.png"
   }
   return flags[faction] || "/default-flag.png"
 }
