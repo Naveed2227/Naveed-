@@ -11973,8 +11973,8 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                 </div>
               )}
 
-              <div className="flex items-center gap-2 sm:gap-3 mb-2 px-0">
-                <div className="mr--2">
+              <div className="flex items-center gap-2 sm:gap-3 mb-7 px-0">
+                <div className="mr-1">
                   <img
                     src={getFlagImage(vehicle.faction) || "/placeholder.svg"}
                     alt={`${vehicle.faction} flag`}
