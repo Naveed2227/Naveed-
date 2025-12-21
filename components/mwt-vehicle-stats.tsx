@@ -750,11 +750,11 @@ const BATTLE_PASSES = [
 
 const VEHICLES_DATA = [
   {
-    id: 0,
+    id: 1,
     name: "Santa's Sleigh",
     type: "Fighter Jet",
     faction: "Santa",
-    tier: "IV",
+    tier: "V",
     description: "The Santa's Sleigh (also goes by the name Feliz) is the North Pole's primary Mach 7+ multi-gift delivery vehicle, providing global chimney penetration and cookie-interception capabilities. Its payload bay can hold a vast collection of presents for all ages (Its a joke)",
     image: "Santa.jpg",
     stats: { health: 52000, speed: 2450, afterburnerSpeed: 7700, agility: 81 },
