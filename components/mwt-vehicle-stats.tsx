@@ -11974,11 +11974,13 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
               )}
 
               <div className="flex items-center gap-2 sm:gap-3 mb-2 px-0">
-                <img
-                  src={getFlagImage(vehicle.faction) || "/placeholder.svg"}
-                  alt={`${vehicle.faction} flag`}
-                  className="w-6 h-4 sm:w-8 sm:h-6 object-cover rounded shadow-md"
-                />
+                <div className="mr-1">
+                  <img
+                    src={getFlagImage(vehicle.faction) || "/placeholder.svg"}
+                    alt={`${vehicle.faction} flag`}
+                    className="w-6 h-4 sm:w-8 sm:h-6 object-cover rounded shadow-md"
+                  />
+                </div>
                 <h3 className="sm:text-xl font-bold text-white flex items-center gap-1 text-base flex-row">
                   {vehicle.name}
                   {isEditor && isEditMode && (
