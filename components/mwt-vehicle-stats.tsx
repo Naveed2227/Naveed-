@@ -753,7 +753,7 @@ const VEHICLES_DATA = [
   {
     id: 1,
     name: "Santa's Sleigh",
-    type: "Fighter Jet",
+    type: "Bomber",
     faction: "Santa",
     tier: "V",
     description: "The Santa's Sleigh (also goes by the name Feliz) is the North Pole's primary Mach 7+ multi-gift delivery vehicle, providing global chimney penetration and cookie-interception capabilities. Its payload bay can hold a vast collection of presents for all ages (Its a joke)",
