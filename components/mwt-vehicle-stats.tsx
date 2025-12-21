@@ -359,7 +359,6 @@ const getVehicleRarity = (vehicleName: string) => {
 "XM975",
 "M113 Hellfire",
 "LAV-600",
-"T-90A",
 "ZTZ99A",
 "ADATS",
 "Pantsir S-1",
@@ -387,7 +386,6 @@ const getVehicleRarity = (vehicleName: string) => {
   const enhancedVehicles = [
 "F-22 Raptor",
 "J-35",
-"T-14 Armata",
 "2S19 Msta-S",
 "BMPT Terminator 2",
 "Mi-28NM",
@@ -426,7 +424,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "XM8 AGS",
 "VBCI-2",
 "Centauro I 120",
-
+"T-90A",
 
 
 
@@ -469,7 +467,6 @@ const getVehicleRarity = (vehicleName: string) => {
 "Ka-50 Black Shark",
 "OH-1 Ninja",
 "T-95M",
-"M1 Abrams CATTB",
 "Leclerc S2 AZUR",
 "T-64BV",
 "M60A3 (MZK)",
@@ -484,6 +481,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "TAN-SAM-1C",
 "M60A3 TTS",
 "FV101 Scorpion-90",
+"T-14 Armata",
 
 
 ];
@@ -531,6 +529,8 @@ const getVehicleRarity = (vehicleName: string) => {
  "M1 AGDS",
 "RAH-66 Comanche",
 "Leopard 2 Revolution",
+"M1 Abrams CATTB",
+
 
 
 ];
