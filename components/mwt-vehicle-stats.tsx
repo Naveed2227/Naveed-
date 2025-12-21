@@ -1328,7 +1328,7 @@ const VEHICLES_DATA = [
   {
     id: 114,
     name: "BMPT Terminator 2",
-    type: "Tank Destroyer",
+    type: "Missile Carrier",
     faction: "Russian",
     tier: "IV",
     description: "Tank support fighting vehicle designed for urban combat and infantry support.",
@@ -1678,7 +1678,7 @@ const VEHICLES_DATA = [
   {
     "id": 136,
     "name": "T-20 Monolit",
-    "type": "Tank Destroyer",
+    "type": "Missile Carrier",
     "faction": "Russian",
     "tier": "IV",
     "image": "T-20-Monolit.jpg",
@@ -1901,7 +1901,7 @@ const VEHICLES_DATA = [
   {
     "id": 145,
     "name": "M-SHORAD",
-    "type": "Anti-Air",
+    "type": "Missile Carrier",
     "faction": "American",
     "tier": "IV",
     "image": "M-SHORAD.jpg",
@@ -2067,7 +2067,7 @@ const VEHICLES_DATA = [
   {
     "id": 153,
     "name": "BM-57-2 Kochevnik",
-    "type": "Tank Destroyer",
+    "type": "Missile Carrier",
     "faction": "Russian",
     "tier": "IV",
     "image": "BM-57-2-Kochevnik.jpg",
@@ -3033,7 +3033,7 @@ const VEHICLES_DATA = [
   {
     "id": 428,
     "name": "AFT-10",
-    "type": "Anti-Air",
+    "type": "Missile Carrier",
     "faction": "Chinese",
     "tier": "III",
     "image": "AFT-10.jpg",
@@ -4057,7 +4057,7 @@ const VEHICLES_DATA = [
   {
     "id": 715,
     "name": "IT-1 Dragon",
-    "type": "Missile Carrier",
+    "type": "Tank Destroyer",
     "faction": "Russian",
     "tier": "II",
     "image": "IT-1-Dragon.jpg",
@@ -5043,7 +5043,7 @@ const VEHICLES_DATA = [
   {
     "id": 908,
     "name": "BMP-1",
-    "type": "Missile Carrier",
+    "type": "Light Tank",
     "faction": "Russian",
     "tier": 1,
     "description": "Soviet light armored vehicle, highly mobile, armed with 73mm gun and ATGM, excels in reconnaissance.",
@@ -5116,7 +5116,7 @@ const VEHICLES_DATA = [
   {
     "id": 909,
     "name": "BRM-1K",
-    "type": "Missile Carrier",
+    "type": "Light Tank",
     "faction": "Russian",
     "tier": 1,
     "description": "Soviet reconnaissance vehicle, lightly armored, fast, equipped with 73mm gun and sensors for scouting missions.",
@@ -5190,7 +5190,7 @@ const VEHICLES_DATA = [
   {
     "id": 910,
     "name": "BTR-60PB",
-    "type": "Missile Carrier",
+    "type": "Light Tank",
     "faction": "Russian",
     "tier": 1,
     "description": "Soviet armored personnel carrier, lightly armored, fast, armed with 14.5mm machine gun for infantry support.",
@@ -5246,7 +5246,7 @@ const VEHICLES_DATA = [
   {
     "id": 911,
     "name": "BTR-80",
-    "type": "Missile Carrier",
+    "type": "Light Tank",
     "faction": "Russian",
     "tier": 1,
     "description": "Soviet wheeled armored personnel carrier, fast and mobile, armed with 14.5mm machine gun, supports infantry effectively.",
@@ -5316,7 +5316,7 @@ const VEHICLES_DATA = [
   {
     "id": 912,
     "name": "BTR-80A",
-    "type": "Missile Carrier",
+    "type": "Light Tank",
     "faction": "Russian",
     "tier": 1,
     "description": "Soviet wheeled armored personnel carrier, upgraded with 30mm autocannon, fast and versatile for frontline support.",
@@ -5379,7 +5379,7 @@ const VEHICLES_DATA = [
   {
     "id": 913,
     "name": "LAV-25",
-    "type": "Missile Carrier",
+    "type": "Light Tank",
     "faction": "American",
     "tier": 1,
     "description": "American light armored vehicle, highly mobile, armed with 25mm autocannon, ideal for reconnaissance and rapid assaults.",
@@ -5442,7 +5442,7 @@ const VEHICLES_DATA = [
   {
     "id": 914,
     "name": "LAV-150",
-    "type": "Missile Carrier",
+    "type": "Light Tank",
     "faction": "American",
     "tier": 1,
     "description": "American wheeled armored vehicle, fast and lightly armored, equipped with 90mm gun for versatile combat roles.",
@@ -5515,7 +5515,7 @@ const VEHICLES_DATA = [
   {
     "id": 915,
     "name": "M113A1 FMS AIFV",
-    "type": "Missile Carrier",
+    "type": "Light Tank",
     "faction": "American",
     "tier": 1,
     "description": "American armored infantry fighting vehicle, lightly armored, armed with 12.7mm machine gun, transports troops and supports frontline combat.",
@@ -5736,7 +5736,7 @@ const VEHICLES_DATA = [
   {
     "id": 919,
     "name": "WZ-501A",
-    "type": "Missile Carrier",
+    "type": "Light Tank",
     "faction": "Chinese",
     "tier": 1,
     "description": "Chinese light armored vehicle, fast and agile, equipped with 73mm gun, ideal for reconnaissance and support.",
@@ -5799,7 +5799,7 @@ const VEHICLES_DATA = [
   {
     "id": 920,
     "name": "WZ-501",
-    "type": "Missile Carrier",
+    "type": "Light Tank",
     "faction": "Chinese",
     "tier": 1,
     "description": "Chinese light armored vehicle, highly mobile, armed with 73mm gun, effective for scouting and support roles.",
@@ -5872,7 +5872,7 @@ const VEHICLES_DATA = [
   {
     "id": 921,
     "name": "XM-800T",
-    "type": "Missile Carrier",
+    "type": "Light Tank",
     "faction": "American",
     "tier": 1,
     "description": "American light tank, fast and agile, armed with 76mm gun, excels at reconnaissance and flanking maneuvers.",
