@@ -359,7 +359,6 @@ const getVehicleRarity = (vehicleName: string) => {
 "XM975",
 "M113 Hellfire",
 "LAV-600",
-"ZTZ99A",
 "ADATS",
 "Pantsir S-1",
 "M1128 Stryker",
@@ -425,6 +424,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "VBCI-2",
 "Centauro I 120",
 "T-90A",
+"ZTZ99A",
 
 
 
