@@ -1558,14 +1558,9 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "ZTQ-15.jpg",
     "description": "Modern Chinese light tank designed for high-altitude operations, featuring advanced mobility, firepower, and rapid deployment capabilities.",
-    "stats": { "health": 0, "speed": 0, "armor": "265mm", "agility": 0 },
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
     "weapons": [
-     { "name": "DTW1 APFSDS", "type": "Main Gun", "damage": 9980, "penetration": 338 },
-     { "name": "DTC02-105 APFSDS", "type": "Main Gun", "damage": 10430, "penetration": 580 },
-     { "name": "DTP2 HEAT", "type": "Main Gun", "damage": 12680, "penetration": 650 },
-     { "name": "DTB02-105 HEI", "type": "Main Gun", "damage": 11600, "penetration": 65 },
-     { "name": "GP105-GP2 HEAT", "type": "Missile", "damage": 11830, "penetration": 750 },
-     { "name": "35x32RE SAPHEI", "type": "Missile", "damage": 4020, "penetration": 80, "reload": 5 }
+     
     ]
   },
 {
@@ -1587,10 +1582,9 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Panzer-87-140.jpg",
     "description": "Swiss experimental main battle tank upgrade featuring a powerful 140mm cannon, enhanced armor protection, and improved survivability.",
-    "stats": { "health": 0, "speed": 0, "armor": "670mm", "agility": 0 },
+    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
     "weapons": [
-    { "name": "Pz Kan Pfeil Pat APFSDS", "type": "Main Gun", "damage": 14520, "penetration": 1000 },
-    { "name": "Pz Kan HL Pat MZ HEAT", "type": "Main Gun", "damage": 17710, "penetration": 1100 },
+    
   ]
   },
 
