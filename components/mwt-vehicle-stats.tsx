@@ -867,11 +867,10 @@ const VEHICLES_DATA = [
      stats: { health: 32376, speed: 0, afterburnerSpeed: 0, agility: 0 },
     weapons: [
       
-      { "name": "GBU-48 JDAM", "type": "Guided Bomb", "damage": 0, "penetration": 0, "reload": 0 },
+     
       { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
       { "name": "Storm Shadow", "type": "Cruise Missile", "damage": 20000, "penetration": 370, "reload": 40 },
-      { "name": "MBDA Meteor", "type": "Missile", "damage": 0, "penetration": 0, "reload": 0 },
-      { "name": "AIM-9L Sidewinder", "type": "Missile", "damage": 0, "penetration": 0, "reload": 0 },
+     
       { "name": "AIM-120 AMRAAM", "type": "BVR AAM", "damage": 11300, "penetration": 60, "reload": 20 },
       { "name": "AIM-132 ASRAAM", "type": "Short-Range AAM", "damage": 5200, "penetration": 65, "reload": 15 },
       
