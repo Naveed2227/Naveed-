@@ -4,8 +4,6 @@ import { Inter, Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
-import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
-import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
 // Initialize fonts
 const _geist = V0_Font_Geist({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
@@ -45,6 +43,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/logo-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/logo-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/site.webmanifest',
   openGraph: {
     title: "MWT Assistant - Vehicle Stats & Comparison Tool",
     description:
@@ -72,9 +81,15 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || '',
   },
   icons: {
-    icon: "/icon-512.png",
-    apple: "/icon-512.png",
-    shortcut: "/icon-512.png",
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/logo-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/logo-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: "/logo-512x512.png",
   },
   generator: 'v0.app'
 };
@@ -106,9 +121,10 @@ export default function RootLayout({
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
         {/* Favicon */}
-        <link rel="icon" href="/icon-512.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/icon-512.png" />
-        <link rel="shortcut icon" href="/icon-512.png" type="image/png" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/logo-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/logo-512x512.png" />
 
         {/* Open Graph / Twitter */}
         <meta property="og:title" content={metadata.openGraph?.title} />
@@ -131,7 +147,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "MWT Assistant",
               url: "https://www.mwtassistant.com",
-              logo: "https://www.mwtassistant.com/icon-512.png",
+              logo: "https://www.mwtassistant.com/logo-512x512.png",
               sameAs: [
                 "https://www.facebook.com/profile.php?id=61581489612967",
                 "https://www.instagram.com/mwt_assistant/",
@@ -162,12 +178,12 @@ export default function RootLayout({
         <div className="min-h-screen flex flex-col">
           {/* Banner */}
           <div className="w-full bg-slate-900">
-            <div className="max-w-5xl mx-auto w-full px-4 sm:px-6">
+            <div className="max-w-7xl mx-auto w-full">
               <img 
                 src="/MWT-Assistant-banner.jpg" 
                 alt="MWT Assistant Banner" 
-                className="w-full h-auto object-contain"
-                style={{ maxHeight: '80px' }}
+                className="w-full h-auto object-cover"
+                style={{ maxHeight: '200px' }}
               />
             </div>
           </div>
