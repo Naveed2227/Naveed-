@@ -751,7 +751,7 @@ const BATTLE_PASSES = [
 
 const VEHICLES_DATA = [
   {
-    id: 1,
+    id: 0,
     name: "Santa's Sleigh",
     type: "Bomber",
     faction: "Santa",
