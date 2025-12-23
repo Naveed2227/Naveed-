@@ -103,8 +103,11 @@ export default function RootLayout({
         </Script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        
+        {/* Google Search Console Verification */}
+        <meta name="google-site-verification" content="0E0mlLMmecWQ_VTuwdcySiIQMIOKn6lGFUUQDMA8Fu4" />
 
-        {/* Remove manual favicon links — Next.js metadata handles it */}
+        {/* Favicon links are handled by Next.js metadata */}
 
         {/* Open Graph / Twitter */}
         <meta property="og:title" content={metadata.openGraph?.title} />
