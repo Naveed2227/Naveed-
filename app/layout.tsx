@@ -40,18 +40,19 @@ export const metadata: Metadata = {
     "View and compare all vehicles in MWT, including Su-57M, Abram X, Mi-35, F-22 Raptor — only on MWT Assistant.",
   keywords: ["MWT", "vehicle stats", "tank comparison", "war thunder mobile", "military vehicles", "battle pass", "game guide", "tank specs", "aircraft stats"],
   metadataBase: new URL('https://www.mwtassistant.com'),
-  alternates: {
-    canonical: '/',
-  },
+  alternates: { canonical: '/' },
+  // SINGLE icons object with all required sizes
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
       { url: '/logo-192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/logo-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
     apple: [
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
+    shortcut: '/logo-512x512.png',
   },
   manifest: '/site.webmanifest',
   openGraph: {
@@ -64,7 +65,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: "https://www.mwtassistant.com/icon-512.png",
+        url: "https://www.mwtassistant.com/logo-512x512.png",
         width: 512,
         height: 512,
         alt: "MWT Assistant Logo",
@@ -75,22 +76,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'MWT Assistant - Vehicle Stats & Comparison Tool',
     description: 'Compare and analyze all vehicles in Modern War Thunder with detailed stats and specifications.',
-    images: ['https://www.mwtassistant.com/icon-512.png'],
+    images: ['https://www.mwtassistant.com/logo-512x512.png'],
   },
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || '',
-  },
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/logo-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/logo-512x512.png', sizes: '512x512', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
-    shortcut: "/logo-512x512.png",
-  },
+  verification: { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || '' },
   generator: 'v0.app'
 };
 
@@ -113,32 +101,23 @@ export default function RootLayout({
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           })(window, document, "clarity", "script", "ujybyslyts");`}
         </Script>
-        {/* Basic Meta */}
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
-        {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/logo-192x192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/logo-512x512.png" />
+        {/* Remove manual favicon links — Next.js metadata handles it */}
 
         {/* Open Graph / Twitter */}
         <meta property="og:title" content={metadata.openGraph?.title} />
         <meta property="og:description" content={metadata.openGraph?.description} />
-        <meta property="og:image" content="https://www.mwtassistant.com/icon-512.png" />
+        <meta property="og:image" content="https://www.mwtassistant.com/logo-512x512.png" />
         <meta property="og:url" content={metadata.openGraph?.url} />
         <meta property="og:type" content="website" />
-
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={metadata.openGraph?.title} />
         <meta name="twitter:description" content={metadata.openGraph?.description} />
-        <meta name="twitter:image" content="https://www.mwtassistant.com/icon-512.png" />
+        <meta name="twitter:image" content="https://www.mwtassistant.com/logo-512x512.png" />
 
-        {/* Schema.org for Google */}
+        {/* Schema.org */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -171,8 +150,6 @@ export default function RootLayout({
             }),
           }}
         />
-
-        {/* Google AdSense - Script is already included above */}
       </head>
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
@@ -187,7 +164,6 @@ export default function RootLayout({
               />
             </div>
           </div>
-          
           {/* Main Content */}
           <main className="flex-grow">
             {children}
