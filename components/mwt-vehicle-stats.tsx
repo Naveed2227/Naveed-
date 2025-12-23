@@ -265,7 +265,7 @@ const newVehicles = [
   "T-15 Barbaris",
   "Ka-90",
   "RAH-66 Comanche",
-  "Santa's Sleigh",
+
 
 
 ];
