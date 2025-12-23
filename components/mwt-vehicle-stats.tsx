@@ -3700,7 +3700,7 @@ const VEHICLES_DATA = [
     "tier": "II",
     "description": "Light attack aircraft and advanced trainer with excellent maneuverability.",
     "image": "Alpha-Jet.jpg",
-    "stats": { "health": 14200, "speed": 700, "afterburnerSpeed": 1000, "agility": 85 },
+    "stats": { "health": 14200, "speed": 700, "afterburnerSpeed": 1020, "agility": 33 },
     "weapons": [
       { "name": "SUU-20", "type": "Bomb Cluster", "damage": 14300, "penetration": 120, "reload": 40 },
       { "name": "LAU-51", "type": "Rocket Pod", "damage": 4100, "penetration": 290, "reload": 20 },
