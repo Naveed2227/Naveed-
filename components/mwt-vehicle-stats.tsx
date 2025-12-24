@@ -8057,6 +8057,68 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     }
   };
   
+  // Handle sharing battlepass
+  const handleShareBattlepass = (battlepass: any) => {
+    const battlepassSlug = battlepass.name.toLowerCase().replace(/\s+/g, '-');
+    const shareUrl = `${window.location.origin}?battlepass=${encodeURIComponent(battlepassSlug)}`;
+    
+    const shareData = {
+      title: `${battlepass.name} - MWT Assistant`,
+      text: `Check out the ${battlepass.name} battlepass in MWT Assistant!`,
+      url: shareUrl
+    };
+
+    // Show toast function
+    const showToast = () => {
+      const toast = document.createElement('div');
+      toast.textContent = 'Link copied to clipboard!';
+      toast.style.position = 'fixed';
+      toast.style.bottom = '20px';
+      toast.style.left = '50%';
+      toast.style.transform = 'translateX(-50%)';
+      toast.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+      toast.style.color = 'white';
+      toast.style.padding = '10px 20px';
+      toast.style.borderRadius = '20px';
+      toast.style.zIndex = '1000';
+      toast.style.fontFamily = 'sans-serif';
+      toast.style.fontSize = '14px';
+      document.body.appendChild(toast);
+      
+      // Remove toast after 2 seconds
+      setTimeout(() => {
+        if (document.body.contains(toast)) {
+          document.body.removeChild(toast);
+        }
+      }, 2000);
+    };
+
+    // Try to copy to clipboard and show message
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      showToast();
+    }).catch(() => {
+      // Fallback if clipboard API fails
+      const tempInput = document.createElement('input');
+      document.body.appendChild(tempInput);
+      tempInput.value = shareUrl;
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast();
+    });
+
+    // Try Web Share API if available
+    if (navigator.share && window.isSecureContext) {
+      try {
+        navigator.share(shareData).catch(() => {
+          console.log('Share API not available, using clipboard instead');
+        });
+      } catch (e) {
+        console.error('Error sharing:', e);
+      }
+    }
+  };
+  
   // Update meta tags when selected vehicle changes
   useEffect(() => {
     if (typeof document === 'undefined' || !selectedVehicle) return;
