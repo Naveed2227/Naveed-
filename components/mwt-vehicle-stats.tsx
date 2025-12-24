@@ -7979,6 +7979,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [vehiclesWithWeapon, setVehiclesWithWeapon] = useState<any[]>([])
   const [originalVehicleName, setOriginalVehicleName] = useState<string | null>(null)
   const [selectedVehicle, setSelectedVehicle] = useState<any | null>(null)
+  const [metaVehicle, setMetaVehicle] = useState<any>(null)
   
   // Handle sharing vehicle
   const handleShareVehicle = (vehicle: any) => {
@@ -8045,6 +8046,51 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     }
   };
   
+  // Update meta tags when selected vehicle changes
+  useEffect(() => {
+    if (typeof document === 'undefined' || !selectedVehicle) return;
+
+    // Function to update or create meta tags
+    const updateMeta = (name: string, content: string) => {
+      let element = document.querySelector(`meta[property="${name}"]`) as HTMLMetaElement;
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute('property', name);
+        document.head.appendChild(element);
+      }
+      element.content = content;
+    };
+
+    // Set Open Graph meta tags
+    updateMeta('og:title', `${selectedVehicle.name} - MWT Assistant`);
+    updateMeta('og:description', selectedVehicle.description || `Check out ${selectedVehicle.name} in MWT Assistant!`);
+    updateMeta('og:url', `${window.location.origin}?vehicle=${encodeURIComponent(selectedVehicle.id)}`);
+    
+    if (selectedVehicle.image) {
+      // Ensure the image URL is absolute
+      const imageUrl = selectedVehicle.image.startsWith('http') 
+        ? selectedVehicle.image 
+        : `${window.location.origin}${selectedVehicle.image.startsWith('/') ? '' : '/'}${selectedVehicle.image}`;
+      
+      updateMeta('og:image', imageUrl);
+      updateMeta('og:image:width', '1200');
+      updateMeta('og:image:height', '630');
+      updateMeta('og:type', 'article');
+    }
+
+    // Also update Twitter card meta tags
+    updateMeta('twitter:card', 'summary_large_image');
+    updateMeta('twitter:title', `${selectedVehicle.name} - MWT Assistant`);
+    updateMeta('twitter:description', selectedVehicle.description || `Check out ${selectedVehicle.name} in MWT Assistant!`);
+    if (selectedVehicle.image) {
+      updateMeta('twitter:image', selectedVehicle.image.startsWith('http') 
+        ? selectedVehicle.image 
+        : `${window.location.origin}${selectedVehicle.image.startsWith('/') ? '' : '/'}${selectedVehicle.image}`);
+    }
+
+    setMetaVehicle(selectedVehicle);
+  }, [selectedVehicle]);
+
   // Handle URL parameter for direct vehicle loading
   useEffect(() => {
     if (typeof window !== 'undefined' && VEHICLES.length > 0) {
