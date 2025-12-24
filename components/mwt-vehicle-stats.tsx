@@ -7984,26 +7984,64 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const handleShareVehicle = (vehicle: any) => {
     const shareData = {
       title: `${vehicle.name} - MWT Assistant`,
-      text: `Check out ${vehicle.name} stats in MWT Assistant!`,
+      text: `Check out ${vehicle.name} in MWT Assistant!`,
       url: `${window.location.origin}?vehicle=${encodeURIComponent(vehicle.id)}`
     };
 
-    if (navigator.share) {
-      navigator.share(shareData).catch(console.error);
-    } else {
-      // Fallback for desktop
-      navigator.clipboard.writeText(shareData.url).then(() => {
-        alert('Link copied to clipboard!');
-      }).catch(() => {
-        // Fallback if clipboard API fails
-        const tempInput = document.createElement('input');
-        document.body.appendChild(tempInput);
-        tempInput.value = shareData.url;
-        tempInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempInput);
-        alert('Link copied to clipboard!');
-      });
+    // Show toast function
+    const showToast = () => {
+      const toast = document.createElement('div');
+      toast.textContent = 'Link copied to clipboard!';
+      toast.style.position = 'fixed';
+      toast.style.bottom = '20px';
+      toast.style.left = '50%';
+      toast.style.transform = 'translateX(-50%)';
+      toast.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+      toast.style.color = 'white';
+      toast.style.padding = '10px 20px';
+      toast.style.borderRadius = '20px';
+      toast.style.zIndex = '1000';
+      toast.style.fontFamily = 'sans-serif';
+      toast.style.fontSize = '14px';
+      document.body.appendChild(toast);
+      
+      // Remove toast after 2 seconds
+      setTimeout(() => {
+        if (document.body.contains(toast)) {
+          document.body.removeChild(toast);
+        }
+      }, 2000);
+    };
+
+    // Try to copy to clipboard and show message
+    navigator.clipboard.writeText(shareData.url).then(() => {
+      showToast();
+    }).catch(() => {
+      // Fallback if clipboard API fails
+      const tempInput = document.createElement('input');
+      document.body.appendChild(tempInput);
+      tempInput.value = shareData.url;
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showToast();
+    });
+
+    // Only try Web Share API if it's available and we're in a secure context
+    if (navigator.share && window.isSecureContext) {
+      try {
+        // Add image to share if available
+        if (vehicle.image) {
+          // @ts-ignore - files is not in the type definition but is supported by some browsers
+          shareData.files = [vehicle.image];
+        }
+        navigator.share(shareData).catch(() => {
+          // If share fails, the clipboard method has already copied the link
+          console.log('Share API not available, using clipboard instead');
+        });
+      } catch (e) {
+        console.error('Error sharing:', e);
+      }
     }
   };
   
