@@ -10462,6 +10462,23 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
     }, 1000)
   }
 
+  const Page = () => {
+    const [activePage, setActivePage] = useState('home');
+
+    return (
+      <div className="min-h-screen bg-gray-900 text-white p-4">
+        <div className="max-w-7xl mx-auto">
+          <Pages activePage={activePage} onPageChange={setActivePage} />
+          
+          {activePage === 'home' && <MwtVehicleStats />}
+          {activePage === 'about' && <AboutPage />}
+          {activePage === 'contact' && <ContactPage />}
+          {activePage === 'privacy' && <PrivacyPolicyPage />}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {showLoginForm && <LoginForm onClose={() => setShowLoginForm(false)} onLogin={handleLogin} />}
@@ -12208,7 +12225,6 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                     <Share className="w-5 h-5 text-gray-400 hover:text-blue-400 transition-colors duration-300" />
                   </motion.button>
                 </div>
-                </motion.button>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-3 sm:mb-4">
