@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   title: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
   description:
     "View and compare all vehicles in MWT, including Su-57M, Abram X, Mi-35, F-22 Raptor — only on MWT Assistant.",
-  keywords: ["MWT", "vehicle stats", "tank comparison", "war thunder mobile", "military vehicles", "battle pass", "game guide", "tank specs", "aircraft stats"],
+  keywords: ["MWT", "vehicle stats", "tank comparison", "military vehicles", "battle pass", "game guide", "tank specs", "aircraft stats"],
   metadataBase: new URL('https://www.mwtassistant.com'),
   alternates: { canonical: '/' },
   // SINGLE icons object with all required sizes
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MWT Assistant - Vehicle Stats & Comparison Tool",
     description:
-      "Comprehensive stats and comparison tool for all vehicles in Modern War Thunder. Compare tanks, aircraft, and more with detailed specifications and performance data.",
+      "Comprehensive stats and comparison tool for all vehicles in MWT. Compare tanks, aircraft, and more with detailed specifications and performance data.",
     url: "https://www.mwtassistant.com",
     siteName: "MWT Assistant",
     locale: 'en_US',
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'MWT Assistant - Vehicle Stats & Comparison Tool',
-    description: 'Compare and analyze all vehicles in Modern War Thunder with detailed stats and specifications.',
+    description: 'Compare and analyze all vehicles in MWT with detailed stats and specifications.',
     images: ['https://www.mwtassistant.com/logo-512x512.png'],
   },
   verification: { google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || '' },
