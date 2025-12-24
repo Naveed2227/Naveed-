@@ -12184,31 +12184,47 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
 
               <div className="flex items-start justify-between gap-3 mb-3 sm:mb-4">
                 <div className="flex-1"></div>
-                <motion.button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleFavorite(vehicle.id);
-                  }}
-                  className="p-1.5 -mt-1 -mr-1 rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 flex-shrink-0"
-                  aria-label={favorites.has(vehicle.id) ? 'Remove from favorites' : 'Add to favorites'}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <motion.div
-                    initial={false}
-                    animate={{
-                      scale: favorites.has(vehicle.id) ? [1, 1.2, 1] : 1,
+                <div className="flex items-center space-x-2">
+                  <motion.button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite(vehicle.id);
                     }}
-                    transition={{
-                      scale: { duration: 0.3, type: 'spring', stiffness: 500, damping: 15 },
-                    }}
+                    className="p-1.5 -mt-1 -mr-1 rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 flex-shrink-0"
+                    aria-label={favorites.has(vehicle.id) ? 'Remove from favorites' : 'Add to favorites'}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                   >
-                    <Heart
-                      className={`w-6 h-6 transition-colors duration-300 ${
-                        favorites.has(vehicle.id) ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"
-                      }`}
-                    />
-                  </motion.div>
+                    <motion.div
+                      initial={false}
+                      animate={{
+                        scale: favorites.has(vehicle.id) ? [1, 1.2, 1] : 1,
+                      }}
+                      transition={{
+                        scale: { duration: 0.3, type: 'spring', stiffness: 500, damping: 15 },
+                      }}
+                    >
+                      <Heart
+                        className={`w-5 h-5 transition-colors duration-300 ${
+                          favorites.has(vehicle.id) ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"
+                        }`}
+                      />
+                    </motion.div>
+                  </motion.button>
+
+                  <motion.button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleShareVehicle(vehicle);
+                    }}
+                    className="p-1.5 -mt-1 -mr-1 rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50 flex-shrink-0"
+                    aria-label="Share vehicle"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <Share className="w-5 h-5 text-gray-400 hover:text-blue-400 transition-colors duration-300" />
+                  </motion.button>
+                </div>
                 </motion.button>
               </div>
 
