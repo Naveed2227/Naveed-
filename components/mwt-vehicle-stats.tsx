@@ -7981,12 +7981,23 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [selectedVehicle, setSelectedVehicle] = useState<any | null>(null)
   const [metaVehicle, setMetaVehicle] = useState<any>(null)
   
+  // Convert vehicle name to URL-friendly slug
+  const toUrlSlug = (name: string) => {
+    return name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')  // Replace non-alphanumeric with hyphens
+      .replace(/(^-|-$)/g, '');      // Remove leading/trailing hyphens
+  };
+
   // Handle sharing vehicle
   const handleShareVehicle = (vehicle: any) => {
+    const vehicleSlug = toUrlSlug(vehicle.name);
+    const shareUrl = `${window.location.origin}?vehicle=${encodeURIComponent(vehicleSlug)}`;
+    
     const shareData = {
       title: `${vehicle.name} - MWT Assistant`,
       text: `Check out ${vehicle.name} in MWT Assistant!`,
-      url: `${window.location.origin}?vehicle=${encodeURIComponent(vehicle.id)}`
+      url: shareUrl
     };
 
     // Show toast function
@@ -8095,13 +8106,22 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   useEffect(() => {
     if (typeof window !== 'undefined' && VEHICLES.length > 0) {
       const params = new URLSearchParams(window.location.search);
-      const vehicleId = params.get('vehicle');
+      const vehicleSlug = params.get('vehicle');
       
-      if (vehicleId) {
-        const vehicle = VEHICLES.find(v => v.id.toString() === vehicleId);
+      if (vehicleSlug) {
+        // Find vehicle by matching the URL slug to the vehicle name
+        const vehicle = VEHICLES.find(v => {
+          const vehicleNameSlug = toUrlSlug(v.name);
+          return vehicleNameSlug === vehicleSlug.toLowerCase();
+        });
+        
         if (vehicle) {
           setSelectedVehicle(vehicle);
           setVehicleDetailsOpenId(vehicle.id.toString());
+          
+          // Update URL to ensure consistent formatting
+          const newUrl = `${window.location.origin}?vehicle=${toUrlSlug(vehicle.name)}`;
+          window.history.replaceState({ path: newUrl }, '', newUrl);
         }
       }
     }
