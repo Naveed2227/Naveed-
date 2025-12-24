@@ -11346,11 +11346,19 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                           </div>
                           <div className="flex-1">
                             <div className="flex items-center gap-2">
-                              <h4 className="text-base font-bold text-white
-                                         text-sm w-24
-                                         sm:text-base sm:w-28
-                                         md:text-lg md:w-36">{battlePass.name}</h4>
-                              
+                              <a 
+                                href={`?battlepass=${battlePass.name.toLowerCase().replace(/\s+/g, '-')}`}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  handleShareBattlepass(battlePass);
+                                }}
+                                className="text-base font-bold text-white hover:text-blue-400 transition-colors
+                                           text-sm w-24
+                                           sm:text-base sm:w-28
+                                           md:text-lg md:w-36"
+                              >
+                                {battlePass.name}
+                              </a>
                             </div>
                             <p className="font-medium text-blue-300
                                         text-xs
@@ -11365,6 +11373,17 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                                        md:text-xs md:px-2 md:py-1 md:w-[62px]">
                              Vehicles
                           </span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              handleShareBattlepass(battlePass);
+                            }}
+                            className="p-1 rounded-full hover:bg-slate-800 text-slate-400 hover:text-blue-400 transition-colors"
+                            title="Share battlepass"
+                          >
+                            <Share className="w-4 h-4" />
+                          </button>
                           <ChevronRight className="w-5 h-5 text-slate-400" />
                         </div>
                       </div>
