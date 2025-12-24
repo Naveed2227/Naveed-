@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Copy, Info, Mail, Shield, FileText } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Copy, Info, Mail, Shield, FileText, Share2 as Share } from "lucide-react"
 import Script from "next/script";
 
 // Pages component
@@ -7979,6 +7979,49 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [vehiclesWithWeapon, setVehiclesWithWeapon] = useState<any[]>([])
   const [originalVehicleName, setOriginalVehicleName] = useState<string | null>(null)
   const [selectedVehicle, setSelectedVehicle] = useState<any | null>(null)
+  
+  // Handle sharing vehicle
+  const handleShareVehicle = (vehicle: any) => {
+    const shareData = {
+      title: `${vehicle.name} - MWT Assistant`,
+      text: `Check out ${vehicle.name} stats in MWT Assistant!`,
+      url: `${window.location.origin}?vehicle=${encodeURIComponent(vehicle.id)}`
+    };
+
+    if (navigator.share) {
+      navigator.share(shareData).catch(console.error);
+    } else {
+      // Fallback for desktop
+      navigator.clipboard.writeText(shareData.url).then(() => {
+        alert('Link copied to clipboard!');
+      }).catch(() => {
+        // Fallback if clipboard API fails
+        const tempInput = document.createElement('input');
+        document.body.appendChild(tempInput);
+        tempInput.value = shareData.url;
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        alert('Link copied to clipboard!');
+      });
+    }
+  };
+  
+  // Handle URL parameter for direct vehicle loading
+  useEffect(() => {
+    if (typeof window !== 'undefined' && VEHICLES.length > 0) {
+      const params = new URLSearchParams(window.location.search);
+      const vehicleId = params.get('vehicle');
+      
+      if (vehicleId) {
+        const vehicle = VEHICLES.find(v => v.id.toString() === vehicleId);
+        if (vehicle) {
+          setSelectedVehicle(vehicle);
+          setVehicleDetailsOpenId(vehicle.id.toString());
+        }
+      }
+    }
+  }, [VEHICLES]);
 
   const vehiclesWithWeaponRef = useRef<HTMLDivElement | null>(null)
   const selectedWeaponImageRef = useRef<HTMLImageElement | null>(null)
@@ -13249,7 +13292,16 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                     <h2 className="text-xl font-bold text-white">{vehicle.name}</h2>
                   </div>
                   <div className="flex items-center space-x-2">
-                    
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleShareVehicle(vehicle);
+                      }}
+                      className="p-1.5 rounded-full hover:bg-slate-800 text-slate-400 hover:text-blue-400 transition-colors"
+                      title="Share vehicle"
+                    >
+                      <Share className="w-5 h-5" />
+                    </button>
                     <button
                       onClick={() => setVehicleDetailsOpenId(null)}
                       className="p-1.5 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
