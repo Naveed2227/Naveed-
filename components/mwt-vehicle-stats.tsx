@@ -8062,16 +8062,19 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     const battlepassSlug = battlepass.name.toLowerCase().replace(/\s+/g, '-');
     const shareUrl = `${window.location.origin}?battlepass=${encodeURIComponent(battlepassSlug)}`;
     
-    const shareData = {
-      title: `${battlepass.name} - MWT Assistant`,
-      text: `Check out the ${battlepass.name} battlepass in MWT Assistant!`,
-      url: shareUrl
-    };
-
     // Show toast function
-    const showToast = () => {
+    const showToast = (message: string) => {
+      // Remove any existing toasts first
+      const existingToasts = document.querySelectorAll('.share-toast');
+      existingToasts.forEach(toast => {
+        if (document.body.contains(toast)) {
+          document.body.removeChild(toast);
+        }
+      });
+      
       const toast = document.createElement('div');
-      toast.textContent = 'Link copied to clipboard!';
+      toast.className = 'share-toast';
+      toast.textContent = message;
       toast.style.position = 'fixed';
       toast.style.bottom = '20px';
       toast.style.left = '50%';
@@ -8083,40 +8086,46 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       toast.style.zIndex = '1000';
       toast.style.fontFamily = 'sans-serif';
       toast.style.fontSize = '14px';
+      toast.style.transition = 'opacity 0.3s ease';
+      toast.style.opacity = '0';
+      
       document.body.appendChild(toast);
       
-      // Remove toast after 2 seconds
+      // Trigger reflow to apply initial styles
+      toast.offsetHeight;
+      
+      // Fade in
+      toast.style.opacity = '1';
+      
+      // Remove toast after 2 seconds with fade out
       setTimeout(() => {
-        if (document.body.contains(toast)) {
-          document.body.removeChild(toast);
-        }
+        toast.style.opacity = '0';
+        setTimeout(() => {
+          if (document.body.contains(toast)) {
+            document.body.removeChild(toast);
+          }
+        }, 300);
       }, 2000);
     };
 
     // Try to copy to clipboard and show message
     navigator.clipboard.writeText(shareUrl).then(() => {
-      showToast();
+      showToast('Link copied to clipboard!');
     }).catch(() => {
       // Fallback if clipboard API fails
       const tempInput = document.createElement('input');
       document.body.appendChild(tempInput);
       tempInput.value = shareUrl;
       tempInput.select();
-      document.execCommand('copy');
+      const success = document.execCommand('copy');
       document.body.removeChild(tempInput);
-      showToast();
-    });
-
-    // Try Web Share API if available
-    if (navigator.share && window.isSecureContext) {
-      try {
-        navigator.share(shareData).catch(() => {
-          console.log('Share API not available, using clipboard instead');
-        });
-      } catch (e) {
-        console.error('Error sharing:', e);
+      
+      if (success) {
+        showToast('Link copied to clipboard!');
+      } else {
+        showToast('Failed to copy link. Please try again.');
       }
-    }
+    });
   };
   
   // Update meta tags when selected vehicle changes
@@ -11465,19 +11474,18 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                           </div>
                           <div className="flex-1">
                             <div className="flex items-center gap-2">
-                              <a 
-                                href={`?battlepass=${battlePass.name.toLowerCase().replace(/\s+/g, '-')}`}
+                              <button
                                 onClick={(e) => {
                                   e.preventDefault();
                                   handleShareBattlepass(battlePass);
                                 }}
-                                className="text-base font-bold text-white hover:text-blue-400 transition-colors
+                                className="text-left text-base font-bold text-white hover:text-blue-400 transition-colors
                                            text-sm w-24
                                            sm:text-base sm:w-28
                                            md:text-lg md:w-36"
                               >
                                 {battlePass.name}
-                              </a>
+                              </button>
                             </div>
                             <p className="font-medium text-blue-300
                                         text-xs
