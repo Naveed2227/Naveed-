@@ -7698,6 +7698,57 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     }
   };
 
+  // Handle deep linking for events
+  useEffect(() => {
+    const handleDeepLinking = () => {
+      const params = new URLSearchParams(window.location.search);
+      const eventSlug = params.get('event');
+      
+      if (eventSlug && !eventOpen) {
+        // Convert URL slug back to event name format
+        const eventName = eventSlug.split('-').map(word => 
+          word.charAt(0).toUpperCase() + word.slice(1)
+        ).join(' ');
+        
+        // Import events from Event component
+        import('./Event').then(({ events }) => {
+          // Find the event by name
+          const event = events.find(e => e.name.toLowerCase() === eventName.toLowerCase());
+          
+          if (event) {
+            setEventOpen(true);
+            setHighlightedEvent(event.id);
+            
+            // Scroll to the event after a short delay to allow the panel to open
+            setTimeout(() => {
+              const eventElement = document.getElementById(`event-${event.id}`);
+              if (eventElement) {
+                eventElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                eventElement.classList.add('ring-2', 'ring-yellow-400', 'ring-opacity-75');
+                
+                // Remove highlight after 3 seconds
+                setTimeout(() => {
+                  eventElement.classList.remove('ring-2', 'ring-yellow-400', 'ring-opacity-75');
+                  setHighlightedEvent(null);
+                }, 3000);
+              }
+            }, 500);
+          }
+        });
+      }
+    };
+
+    // Run on initial load
+    handleDeepLinking();
+
+    // Listen for URL changes
+    window.addEventListener('popstate', handleDeepLinking);
+    
+    return () => {
+      window.removeEventListener('popstate', handleDeepLinking);
+    };
+  }, [eventOpen]);
+
   // Add Google AdSense script to document head
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -7759,6 +7810,8 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [eventOpen, setEventOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<number | null>(null);
+  const [highlightedEvent, setHighlightedEvent] = useState<number | null>(null);
+  const [highlightedEvent, setHighlightedEvent] = useState<number | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState('English');
   const [translations, setTranslations] = useState(englishTranslations);
 
@@ -7790,10 +7843,47 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     const savedLanguage = localStorage.getItem('mwt_selected_language')
     if (savedLanguage) {
       setSelectedLanguage(savedLanguage)
-      if (savedLanguage === 'Urdu') {
-        setTranslations(urduTranslations)
-      } else {
+      useEffect(() => {
+        setTranslations(selectedLanguage === 'English' ? englishTranslations : urduTranslations);
+        
+        // Handle deep linking for events
+        const params = new URLSearchParams(window.location.search);
+        const eventSlug = params.get('event');
+        
+        if (eventSlug && !eventOpen) {
+          // Convert URL slug back to event name format
+          const eventName = eventSlug.split('-').map(word => 
+            word.charAt(0).toUpperCase() + word.slice(1)
+          ).join(' ');
+          
+          // Find the event by name
+          const event = events.find(e => e.name.toLowerCase() === eventName.toLowerCase());
+          
+          if (event) {
+            setEventOpen(true);
+            setHighlightedEvent(event.id);
+            
+            // Scroll to the event after a short delay to allow the panel to open
+            setTimeout(() => {
+              const eventElement = document.getElementById(`event-${event.id}`);
+              if (eventElement) {
+                eventElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                eventElement.classList.add('ring-2', 'ring-yellow-400', 'ring-opacity-75');
+                
+                // Remove highlight after 3 seconds
+                setTimeout(() => {
+                  eventElement.classList.remove('ring-2', 'ring-yellow-400', 'ring-opacity-75');
+                  setHighlightedEvent(null);
+                }, 3000);
+              }
+            }, 500);
+          }
+        }
+      }, [selectedLanguage, eventOpen]);
+      if (savedLanguage === 'English') {
         setTranslations(englishTranslations)
+      } else {
+        setTranslations(urduTranslations)
       }
     }
     
@@ -11339,7 +11429,13 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
               className="fixed top-0 left-0 bottom-0 w-full max-w-lg bg-slate-800/95 backdrop-blur-sm z-50 shadow-2xl border-r border-slate-700/50 overflow-y-auto"
             >
               <EventComponent 
-                onClose={() => setEventOpen(false)}
+                onClose={() => {
+                  setEventOpen(false);
+                  // Clear URL parameters when closing the events panel
+                  const url = new URL(window.location.href);
+                  url.searchParams.delete('event');
+                  window.history.pushState({}, '', url);
+                }}
                 onVehicleSelect={(vehicleName) => {
                   setSearchQuery(vehicleName);
                   setEventOpen(false);
