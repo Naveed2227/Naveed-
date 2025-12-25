@@ -422,8 +422,19 @@ const EventCard = ({ event, onVehicleSelect }: { event: Event, onVehicleSelect: 
     const eventSlug = event.name.toLowerCase().replace(/\s+/g, '-');
     const shareUrl = `https://www.mwtassistant.com?event=${eventSlug}`;
     navigator.clipboard.writeText(shareUrl);
-    window.open(shareUrl, '_blank');
-    alert('Event link copied to clipboard!');
+    
+    // Show notification
+    const notification = document.createElement('div');
+    notification.className = 'fixed bottom-4 right-4 bg-slate-800 text-white px-4 py-2 rounded-lg shadow-lg z-50 flex items-center space-x-2';
+    notification.innerHTML = `
+      <span>✅ Link copied to clipboard!</span>
+    `;
+    document.body.appendChild(notification);
+    
+    // Remove notification after 3 seconds
+    setTimeout(() => {
+      notification.remove();
+    }, 3000);
   };
 
   const getVehicleTypeColor = (type: string) => {
