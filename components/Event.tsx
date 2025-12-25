@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Share2 as Share } from "lucide-react"
 
 interface Vehicle {
   id: number;
@@ -21,20 +21,8 @@ interface Event {
 // All events in chronological order
 const events: Event[] = [
   {
-    id: 29,
-    name: "Steel Winter Stage 2",
-    image: "/Events/Steel-Winter-2.jpg",
-    startDate: "2025-12-26",
-    endDate: "2026-1-11",
-    vehicles: [
-      { id: 1, name: "K21 KNIFV", type: "free" },
-      { id: 2, name: "Leopard 2A-RC 3.0", type: "gacha" },
-    
-    ],
-  },
-  {
     id: 28,
-    name: "Steel Winter Stage 1",
+    name: "Steel Winter",
     image: "/Events/Steel-Winter.jpg",
     startDate: "2025-11-8",
     endDate: "2025-12-25",
@@ -429,6 +417,15 @@ const events: Event[] = [
 const EventCard = ({ event, onVehicleSelect }: { event: Event, onVehicleSelect: (vehicleName: string) => void }) => {
   const [expanded, setExpanded] = useState(false);
 
+  const handleShare = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const eventSlug = event.name.toLowerCase().replace(/\s+/g, '-');
+    const shareUrl = `https://www.mwtassistant.com?event=${eventSlug}`;
+    navigator.clipboard.writeText(shareUrl);
+    window.open(shareUrl, '_blank');
+    alert('Event link copied to clipboard!');
+  };
+
   const getVehicleTypeColor = (type: string) => {
     switch (type) {
       case 'free': return 'text-green-400';
@@ -454,9 +451,22 @@ const EventCard = ({ event, onVehicleSelect }: { event: Event, onVehicleSelect: 
         style={{ backgroundImage: `url(${event.image})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
-        <div className="absolute bottom-0 left-0 p-4">
-          <h4 className="text-2xl font-bold text-white tracking-wide group-hover:text-purple-300 transition-colors">{event.name}</h4>
-          <p className="text-sm text-slate-300">{new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}</p>
+        <div className="absolute bottom-0 left-0 p-4 w-full">
+          <div className="flex items-center justify-between">
+            <h4 className="text-2xl font-bold text-white tracking-wide group-hover:text-purple-300 transition-colors">
+              {event.name}
+            </h4>
+            <button 
+              onClick={handleShare}
+              className="p-1.5 rounded-full bg-slate-700/70 hover:bg-slate-600/80 text-slate-200 hover:text-white transition-colors"
+              title="Share event details"
+            >
+              <Share className="w-4 h-4" />
+            </button>
+          </div>
+          <p className="text-sm text-slate-300 mt-1">
+            {new Date(event.startDate).toLocaleDateString()} - {new Date(event.endDate).toLocaleDateString()}
+          </p>
         </div>
         <motion.div
           className="absolute top-4 right-4"
