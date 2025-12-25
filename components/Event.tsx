@@ -417,24 +417,16 @@ const events: Event[] = [
 const EventCard = ({ event, onVehicleSelect }: { event: Event, onVehicleSelect: (vehicleName: string) => void }) => {
   const [expanded, setExpanded] = useState(false);
 
+  const [copyNotification, setCopyNotification] = useState('');
+
   const handleShare = (e: React.MouseEvent) => {
     e.stopPropagation();
     const eventSlug = event.name.toLowerCase().replace(/\s+/g, '-');
-    const shareUrl = `https://www.mwtassistant.com?event=${eventSlug}`;
+    const shareUrl = `${window.location.origin}?event=${eventSlug}`;
     navigator.clipboard.writeText(shareUrl);
     
-    // Show notification
-    const notification = document.createElement('div');
-    notification.className = 'fixed bottom-4 right-4 bg-slate-800 text-white px-4 py-2 rounded-lg shadow-lg z-50 flex items-center space-x-2';
-    notification.innerHTML = `
-      <span>✅ Link copied to clipboard!</span>
-    `;
-    document.body.appendChild(notification);
-    
-    // Remove notification after 3 seconds
-    setTimeout(() => {
-      notification.remove();
-    }, 3000);
+    setCopyNotification('Link copied to clipboard!');
+    setTimeout(() => setCopyNotification(''), 3000);
   };
 
   const getVehicleTypeColor = (type: string) => {
@@ -452,8 +444,16 @@ const EventCard = ({ event, onVehicleSelect }: { event: Event, onVehicleSelect: 
   }
 
   return (
-    <motion.div 
-      className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden hover:border-purple-500/50 transition-all duration-300"
+    <div className="relative">
+      {copyNotification && (
+        <div className="absolute -top-2 -right-2 z-10">
+          <div className="text-xs font-medium text-green-400 bg-slate-800/90 px-3 py-1 rounded-full border border-green-400/30 shadow-lg">
+            {copyNotification}
+          </div>
+        </div>
+      )}
+      <motion.div 
+        className="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden hover:border-purple-500/50 transition-all duration-300"
       whileHover={{ scale: 1.02 }}
     >
       <button
@@ -530,6 +530,7 @@ const EventCard = ({ event, onVehicleSelect }: { event: Event, onVehicleSelect: 
         )}
       </AnimatePresence>
     </motion.div>
+  </div>
   );
 };
 
