@@ -6843,6 +6843,7 @@ const ComparisonStatBar = ({
           )}
         </div>
       </div>
+      </div>
     </div>
   );
 };
@@ -8264,6 +8265,36 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [isEditMode, setIsEditMode] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [saveNotification, setSaveNotification] = useState('')
+  
+  // Handle battlepass URL parameter
+  useEffect(() => {
+    // Only run on client side
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const battlepassSlug = urlParams.get('battlepass');
+      
+      if (battlepassSlug) {
+        // Find the battle pass by slug
+        const battlePass = BATTLE_PASSES.find(bp => 
+          bp.name.toLowerCase().replace(/\s+/g, '-') === battlepassSlug
+        );
+        
+        if (battlePass) {
+          // Open battle pass section and select the battle pass
+          setBattlePassOpen(true);
+          setSelectedBattlePass(battlePass.id);
+          
+          // Scroll to battle pass section with smooth behavior
+          setTimeout(() => {
+            const element = document.getElementById('battle-pass-section');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 100);
+        }
+      }
+    }
+  }, []);
 
   // Allowed editors and edit overrides/persistence
   const allowedEditors = [
@@ -11290,6 +11321,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
       </AnimatePresence>
 
       {/* Battle Pass Tab - Fully Responsive */}
+      <div id="battle-pass-section">
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
         className={`fixed top-1/2 left-0 z-50 bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-950 hover:to-blue-900 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-blue-700 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r-2 border-blue-600 mx-0 mr-0 ml-[-4px] ${isMenuOpen || eventOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
