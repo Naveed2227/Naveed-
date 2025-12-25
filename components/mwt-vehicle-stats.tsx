@@ -12248,29 +12248,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
               {(vehicle.type === "Main Battle Tank" || vehicle.type === "Light Tank" || vehicle.type === "Tank Destroyer" || 
                 vehicle.type === "MLRS" || vehicle.type === "Missile Carrier" || vehicle.type === "SPH" || 
                 vehicle.type === "Anti-Air") && (
-                <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
-                <button 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const shareData = {
-                      title: vehicle.name,
-                      text: `Check out the ${vehicle.name} (${vehicle.faction}) in MWT!`,
-                      url: window.location.href,
-                    };
-                    if (navigator.share) {
-                      navigator.share(shareData).catch(console.error);
-                    } else {
-                      // Fallback for browsers that don't support Web Share API
-                      navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
-                      alert('Vehicle link copied to clipboard!');
-                    }
-                  }}
-                  className="p-1.5 rounded-full bg-black/60 hover:bg-blue-600/80 transition-colors backdrop-blur-sm"
-                  aria-label="Share vehicle"
-                >
-                  <Share className="w-4 h-4 text-white" />
-                </button>
-                <div className="px-0 py-0 pl-0 pb-2.5 pt-0 border-t-0 my-[-3px] mx-[-4px]">
+                <div className="absolute top-4 right-4 px-0 py-0 pl-0 pb-2.5 pt-0 border-t-0 my-[-3px] mx-[-4px]">
                   {(() => {
                     const tankType = vehicle.type === "Main Battle Tank" ? "MBT" : 
                                    vehicle.type === "Anti-Air" ? "AA" : vehicle.type
