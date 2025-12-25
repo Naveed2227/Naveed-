@@ -6752,14 +6752,6 @@ const ComparisonStatBar = ({
   upgradeLevel1 = 0,
   upgradeLevel2 = 0,
   showUpgrade = false
-}: { 
-  label: string;
-  value1: number;
-  value2: number;
-  maxValue: number;
-  upgradeLevel1?: number;
-  upgradeLevel2?: number;
-  showUpgrade?: boolean;
 }) => {
   const upgradeColors = [
     { level: 0, color: 'bg-gray-500', textColor: 'text-gray-500' },
@@ -6772,7 +6764,7 @@ const ComparisonStatBar = ({
   const percentage2 = Math.min(100, (value2 / maxValue) * 100);
   
   // Calculate upgraded values for proper percentage display
-  const getUpgradedValue = (baseVal: number, level: number, isHealth: boolean): number => {
+  const getUpgradedValue = (baseVal: number, level: number, isHealth: boolean) => {
     if (level === 0) return baseVal;
     if (isHealth) {
       // Health: 10%, 20%, 30% increases
@@ -6850,7 +6842,6 @@ const ComparisonStatBar = ({
             />
           )}
         </div>
-      </div>
       </div>
     </div>
   );
@@ -8173,6 +8164,63 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     setMetaVehicle(selectedVehicle);
   }, [selectedVehicle]);
 
+  // Handle battlepass URL parameter
+  useEffect(() => {
+    // Only run on client side
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const battlepassSlug = urlParams.get('battlepass');
+      
+      if (battlepassSlug) {
+        // Special case for Falling Thunder battle pass
+        if (battlepassSlug === 'falling-thunder') {
+          // Find the Falling Thunder battle pass
+          const fallingThunderPass = BATTLE_PASSES.find(bp => 
+            bp.name === 'Falling Thunder'
+          );
+          
+          if (fallingThunderPass) {
+            // Open battle pass section and select the Falling Thunder battle pass
+            setBattlePassOpen(true);
+            setSelectedBattlePass(fallingThunderPass.id);
+            
+            // Update URL to clean it up
+            const cleanUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, cleanUrl);
+            
+            // Scroll to battle pass section with smooth behavior
+            setTimeout(() => {
+              const element = document.getElementById('battle-pass-section');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }, 100);
+            return;
+          }
+        }
+        
+        // Handle other battle passes
+        const battlePass = BATTLE_PASSES.find(bp => 
+          bp.name.toLowerCase().replace(/\s+/g, '-') === battlepassSlug
+        );
+        
+        if (battlePass) {
+          // Open battle pass section and select the battle pass
+          setBattlePassOpen(true);
+          setSelectedBattlePass(battlePass.id);
+          
+          // Scroll to battle pass section with smooth behavior
+          setTimeout(() => {
+            const element = document.getElementById('battle-pass-section');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 100);
+        }
+      }
+    }
+  }, []);
+
   // Handle URL parameter for direct vehicle loading
   useEffect(() => {
     if (typeof window !== 'undefined' && VEHICLES.length > 0) {
@@ -8273,36 +8321,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [isEditMode, setIsEditMode] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [saveNotification, setSaveNotification] = useState('')
-  
-  // Handle battlepass URL parameter
-  useEffect(() => {
-    // Only run on client side
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const battlepassSlug = urlParams.get('battlepass');
-      
-      if (battlepassSlug) {
-        // Find the battle pass by slug
-        const battlePass = BATTLE_PASSES.find(bp => 
-          bp.name.toLowerCase().replace(/\s+/g, '-') === battlepassSlug
-        );
-        
-        if (battlePass) {
-          // Open battle pass section and select the battle pass
-          setBattlePassOpen(true);
-          setSelectedBattlePass(battlePass.id);
-          
-          // Scroll to battle pass section with smooth behavior
-          setTimeout(() => {
-            const element = document.getElementById('battle-pass-section');
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }, 100);
-        }
-      }
-    }
-  }, []);
 
   // Allowed editors and edit overrides/persistence
   const allowedEditors = [
@@ -11329,7 +11347,6 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
       </AnimatePresence>
 
       {/* Battle Pass Tab - Fully Responsive */}
-      <div id="battle-pass-section">
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
         className={`fixed top-1/2 left-0 z-50 bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-950 hover:to-blue-900 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-blue-700 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r-2 border-blue-600 mx-0 mr-0 ml-[-4px] ${isMenuOpen || eventOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
