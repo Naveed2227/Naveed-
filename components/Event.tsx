@@ -444,7 +444,7 @@ const EventCard = ({ event, onVehicleSelect }: { event: Event, onVehicleSelect: 
   }
 
   return (
-    <div className="relative">
+    <div id={`event-${event.id}`} className="relative">
       {copyNotification && (
         <div className="absolute -top-2 -right-2 z-10">
           <div className="text-xs font-medium text-green-400 bg-slate-800/90 px-3 py-1 rounded-full border border-green-400/30 shadow-lg">
