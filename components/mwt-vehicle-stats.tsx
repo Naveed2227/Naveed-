@@ -6752,6 +6752,14 @@ const ComparisonStatBar = ({
   upgradeLevel1 = 0,
   upgradeLevel2 = 0,
   showUpgrade = false
+}: { 
+  label: string;
+  value1: number;
+  value2: number;
+  maxValue: number;
+  upgradeLevel1?: number;
+  upgradeLevel2?: number;
+  showUpgrade?: boolean;
 }) => {
   const upgradeColors = [
     { level: 0, color: 'bg-gray-500', textColor: 'text-gray-500' },
@@ -6764,7 +6772,7 @@ const ComparisonStatBar = ({
   const percentage2 = Math.min(100, (value2 / maxValue) * 100);
   
   // Calculate upgraded values for proper percentage display
-  const getUpgradedValue = (baseVal: number, level: number, isHealth: boolean) => {
+  const getUpgradedValue = (baseVal: number, level: number, isHealth: boolean): number => {
     if (level === 0) return baseVal;
     if (isHealth) {
       // Health: 10%, 20%, 30% increases
