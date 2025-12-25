@@ -461,7 +461,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Leopard 2A7 Plus",
 "Su-39",
 "Su-35S",
-"Alpha Jet",
+"Alpha Jet A",
 "Mitsubishi F-2B",
 "Su-24M",
 "Ka-50 Black Shark",
@@ -3694,7 +3694,7 @@ const VEHICLES_DATA = [
   },
   {
     "id": 601,
-    "name": "Alpha Jet",
+    "name": "Alpha Jet A",
     "type": "Fighter Jet",
     "faction": "German",
     "tier": "II",
@@ -9605,7 +9605,7 @@ const getMissileImageCandidates = (weaponName: string) => {
   const isExclusiveVehicle = (vehicleName: string) => {
     const exclusiveVehicles = [
 "Leopard 2A4",
-"Alpha Jet",
+"Alpha Jet A",
 "Su-24M",
 "M270 MLRS",
 "Otomatic 76",
