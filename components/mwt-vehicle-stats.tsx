@@ -175,6 +175,7 @@ const CopyToClipboard = ({ text, className = "" }: { text: string; className?: s
 };
 import dynamic from 'next/dynamic';
 import TermsOfService from './TermsOfService';
+import AdMobBanner from './AdMobBanner';
 
 // Import EventComponent with SSR disabled to access window object
 const EventComponent = dynamic(() => import('./Event'), { ssr: false });
@@ -15261,19 +15262,7 @@ const MainPage = () => {
         <div className="max-w-7xl xl:max-w-[90rem] mx-auto px-4 sm:px-6 md:px-8 py-2">
           <div key="banner-ad" className="w-full" style={{ width: '780px', margin: '0 auto' }}>
             <div style={{ width: '728px', height: '90px', margin: '0 auto' }}>
-              <Script id="hpf-atoptions" strategy="afterInteractive">
-                {`window.atOptions = {
-  'key' : '',
-  'format' : 'iframe',
-  'height' : 90,
-  'width' : 728,
-  'params' : {}
-};`}
-              </Script>
-              <Script
-                strategy="afterInteractive"
-                src=""
-              />
+              <AdMobBanner />
             </div>
           </div>
         </div>
