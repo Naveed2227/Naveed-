@@ -461,7 +461,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Leopard 2A7 Plus",
 "Su-39",
 "Su-35S",
-"Alpha Jet",
+"Alpha Jet A",
 "Mitsubishi F-2B",
 "Su-24M",
 "Ka-50 Black Shark",
@@ -3694,7 +3694,7 @@ const VEHICLES_DATA = [
   },
   {
     "id": 601,
-    "name": "Alpha Jet",
+    "name": "Alpha Jet A",
     "type": "Fighter Jet",
     "faction": "German",
     "tier": "II",
@@ -7668,48 +7668,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [vehicleTypeFilter, setVehicleTypeFilter] = useState<string | null>(null);
 
-  // Handle language changes and event deep linking
-  useEffect(() => {
-    // Update translations when selectedLanguage changes
-    setTranslations(selectedLanguage === 'English' ? englishTranslations : urduTranslations);
-    
-    // Handle deep linking for events
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const eventSlug = params.get('event');
-      
-      if (eventSlug && !eventOpen) {
-        // Convert URL slug back to event name format
-        const eventName = eventSlug.split('-').map(word => 
-          word.charAt(0).toUpperCase() + word.slice(1)
-        ).join(' ');
-        
-        // Find the event by name
-        const event = events.find(e => e.name.toLowerCase() === eventName.toLowerCase());
-        
-        if (event) {
-          setEventOpen(true);
-          setHighlightedEvent(event.id);
-          
-          // Scroll to the event after a short delay to allow the panel to open
-          setTimeout(() => {
-            const eventElement = document.getElementById(`event-${event.id}`);
-            if (eventElement) {
-              eventElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              eventElement.classList.add('ring-2', 'ring-yellow-400', 'ring-opacity-75');
-              
-              // Remove highlight after 3 seconds
-              setTimeout(() => {
-                eventElement.classList.remove('ring-2', 'ring-yellow-400', 'ring-opacity-75');
-                setHighlightedEvent(null);
-              }, 3000);
-            }
-          }, 500);
-        }
-      }
-    }
-  }, [selectedLanguage, eventOpen]);
-
   // Load favorites from IndexedDB on component mount
   useEffect(() => {
     if (typeof window !== 'undefined' && !dbInitialized) {
@@ -7833,7 +7791,43 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     const savedLanguage = localStorage.getItem('mwt_selected_language')
     if (savedLanguage) {
       setSelectedLanguage(savedLanguage)
-      // Set translations immediately based on saved language
+      useEffect(() => {
+        setTranslations(selectedLanguage === 'English' ? englishTranslations : urduTranslations);
+        
+        // Handle deep linking for events
+        const params = new URLSearchParams(window.location.search);
+        const eventSlug = params.get('event');
+        
+        if (eventSlug && !eventOpen) {
+          // Convert URL slug back to event name format
+          const eventName = eventSlug.split('-').map(word => 
+            word.charAt(0).toUpperCase() + word.slice(1)
+          ).join(' ');
+          
+          // Find the event by name
+          const event = events.find(e => e.name.toLowerCase() === eventName.toLowerCase());
+          
+          if (event) {
+            setEventOpen(true);
+            setHighlightedEvent(event.id);
+            
+            // Scroll to the event after a short delay to allow the panel to open
+            setTimeout(() => {
+              const eventElement = document.getElementById(`event-${event.id}`);
+              if (eventElement) {
+                eventElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                eventElement.classList.add('ring-2', 'ring-yellow-400', 'ring-opacity-75');
+                
+                // Remove highlight after 3 seconds
+                setTimeout(() => {
+                  eventElement.classList.remove('ring-2', 'ring-yellow-400', 'ring-opacity-75');
+                  setHighlightedEvent(null);
+                }, 3000);
+              }
+            }, 500);
+          }
+        }
+      }, [selectedLanguage, eventOpen]);
       if (savedLanguage === 'English') {
         setTranslations(englishTranslations)
       } else {
@@ -9611,7 +9605,7 @@ const getMissileImageCandidates = (weaponName: string) => {
   const isExclusiveVehicle = (vehicleName: string) => {
     const exclusiveVehicles = [
 "Leopard 2A4",
-"Alpha Jet",
+"Alpha Jet A",
 "Su-24M",
 "M270 MLRS",
 "Otomatic 76",
@@ -13368,8 +13362,8 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
         <div className="p-2">
           <h4 className="text-cyan-300 font-semibold text-base">Nesli27</h4>
           <p className="text-white text-[10px] mb-0.5 flex items-center">
-            Discord: nesli27
-            <CopyToClipboard text="nesli27" className="ml-1" />
+            Discord: suncatcher_27
+            <CopyToClipboard text="suncatcher_27" className="ml-1" />
           </p>
           <p className="text-white text-xs">Server Admin, Supporter</p>
         </div>
