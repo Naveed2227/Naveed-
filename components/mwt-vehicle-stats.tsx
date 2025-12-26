@@ -7840,7 +7840,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
         setTranslations(urduTranslations)
       }
     }
-    }
     
     // Load saved vehicle data if it exists
     const savedVehicleData = localStorage.getItem('mwt_vehicles_data')
