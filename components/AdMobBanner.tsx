@@ -19,12 +19,13 @@ const AdMobBanner = () => {
         window.innerWidth || 0
       );
 
+      // Smaller sizes (~3x smaller than original)
       if (width >= 1024) {
-        return { width: 728, height: 90 };
+        return { width: 468, height: 60 }; // was 728x90
       } else if (width >= 768) {
-        return { width: 468, height: 60 };
+        return { width: 320, height: 50 }; // was 468x60
       } else {
-        return { width: 320, height: 50 };
+        return { width: 200, height: 35 }; // was 320x50
       }
     };
 
@@ -38,10 +39,9 @@ const AdMobBanner = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Push ad ONLY after adSize is set and component rendered
+  // Push ad only after adSize is set
   useEffect(() => {
     if (!adSize) return;
-
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
@@ -51,7 +51,7 @@ const AdMobBanner = () => {
 
   return (
     <div className="w-full bg-white dark:bg-gray-800 py-2">
-      {/* Load AdSense script ONCE */}
+      {/* Google Ads script — load only once */}
       <Script
         async
         strategy="afterInteractive"
@@ -68,6 +68,7 @@ const AdMobBanner = () => {
               width: `${adSize.width}px`,
               height: `${adSize.height}px`,
               margin: "0 auto",
+              maxWidth: "100%",
             }}
             data-ad-client="ca-pub-3724137161724998"
             data-ad-slot="3470769238"
