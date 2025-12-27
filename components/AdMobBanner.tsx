@@ -19,13 +19,13 @@ const AdMobBanner = () => {
         window.innerWidth || 0
       );
 
-      // Smaller sizes (~3x smaller than original)
+      // Tiny sizes (~4x smaller than original)
       if (width >= 1024) {
-        return { width: 468, height: 60 }; // was 728x90
+        return { width: 250, height: 30 }; // tiny desktop
       } else if (width >= 768) {
-        return { width: 320, height: 50 }; // was 468x60
+        return { width: 200, height: 25 }; // tiny tablet
       } else {
-        return { width: 200, height: 35 }; // was 320x50
+        return { width: 160, height: 20 }; // tiny mobile
       }
     };
 
