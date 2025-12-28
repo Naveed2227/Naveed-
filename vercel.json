@@ -2,5 +2,6 @@
   "rewrites": [
     { "source": "/.well-known/assetlinks.json", "destination": "/.well-known/assetlinks.json" }
   ],
-  "redirects": []
+  "redirects": [],
+  "buildCommand": "pnpm install --no-frozen-lockfile && pnpm build"
 }
