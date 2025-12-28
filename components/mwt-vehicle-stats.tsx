@@ -11766,23 +11766,42 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                 textAlign: 'center',
                 padding: '0.5rem'
               }}>
-                <div style={{ fontSize: '12px', marginBottom: '2px', color: '#e2e8f0' }}>
-                
-               import { AdMob, BannerAdOptions, BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
+<div
+  style={{
+    width: '100%',
+    textAlign: 'center',
+    padding: '8px 0',
+    backgroundColor: '#1e293b',
+  }}
+>
+  <div
+    style={{
+      fontSize: '12px',
+      marginBottom: '2px',
+      color: '#e2e8f0',
+    }}
+  >
+    Advertisement
+  </div>
 
-async function showBannerAd() {
-  const options: BannerAdOptions = {
-    adId: 'ca-app-pub-3724137161724998/3470769238',
-    adSize: BannerAdSize.BANNER,
-    position: BannerAdPosition.BOTTOM_CENTER,
-    margin: 0,
-    isTesting: false, // ⚠️ set TRUE while testing
-  };
+  <div
+    style={{
+      fontSize: '11px',
+      color: '#94a3b8',
+    }}
+  >
+    AdMob ad unit ID
+  </div>
 
-  await AdMob.showBanner(options);
-}
-                
-                </div>
+  <div
+    style={{
+      fontSize: '11px',
+      color: '#38bdf8',
+    }}
+  >
+    Top banner: ca-app-pub-3724137161724998/3470769238
+  </div>
+</div>
                 <div style={{ fontSize: '10px' }}>Mobile Banner (320×50)</div>
               </div>
             </div>
