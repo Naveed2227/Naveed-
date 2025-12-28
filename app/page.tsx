@@ -1,8 +1,5 @@
-import dynamic from 'next/dynamic';
-
-// Import the client component with no SSR
-const HomeClient = dynamic(() => import('./HomeClient'), { ssr: false });
+import MWTVehicleStats from "@/components/mwt-vehicle-stats"
 
 export default function Home() {
-  return <HomeClient />;
+  return <MWTVehicleStats />
 }
