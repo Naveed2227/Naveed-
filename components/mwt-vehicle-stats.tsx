@@ -3,6 +3,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Copy, Info, Mail, Shield, FileText, Share2 as Share } from "lucide-react"
 import Script from "next/script";
+import TopBannerAd from './TopBannerAd';
+import { AdMob, BannerAdOptions, BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
 
 // Pages component
 const Pages = ({ activePage, onPageChange }: { activePage: string, onPageChange: (page: string) => void }) => {
@@ -11730,58 +11732,8 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
         </div>
       </header>
 
-import { useEffect } from 'react';
-import { AdMob, BannerAdOptions, BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
-
-const TopBannerAd = () => {
-  useEffect(() => {
-    const showBanner = async () => {
-      const options: BannerAdOptions = {
-        adId: 'ca-app-pub-3724137161724998/3470769238', // Your AdMob ID
-        adSize: BannerAdSize.BANNER,
-        position: BannerAdPosition.TOP_CENTER,
-        margin: 0,
-        isTesting: true, // set to false in production
-      };
-      await AdMob.showBanner(options);
-    };
-
-    showBanner();
-  }, []);
-
-  return (
-    <div className="w-full bg-slate-800/50 border-b border-slate-700">
-      <div className="max-w-3xl mx-auto px-2 py-1">
-
-        {/* Advertisement label */}
-        <div className="text-center text-xs text-slate-300 mb-1">
-          Advertisement
-        </div>
-
-        {/* Placeholder for layout; real banner shows via AdMob plugin */}
-        <div className="w-full flex justify-center">
-          <div
-            style={{
-              width: '320px',
-              height: '50px',
-              backgroundColor: '#f3f4f6',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#94a3b8',
-              fontSize: '12px',
-            }}
-          >
-            Mobile Top Banner Placeholder
-          </div>
-        </div>
-
-      </div>
-    </div>
-  );
-};
-
-export default TopBannerAd;
+      {/* Top Banner Ad - AdMob */}
+      <TopBannerAd />
 
       <main className="max-w-7xl xl:max-w-[90rem] pt-16 sm:pt-6 p-4 sm:p-6 md:p-6 lg:p-8 mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         {/* Comparison Bottom Bar - Mobile */}
