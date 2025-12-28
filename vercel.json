@@ -3,5 +3,5 @@
     { "source": "/.well-known/assetlinks.json", "destination": "/.well-known/assetlinks.json" }
   ],
   "redirects": [],
-  "buildCommand": "pnpm install --no-frozen-lockfile && pnpm build"
+  "buildCommand": "pnpm install && pnpm build"
 }
