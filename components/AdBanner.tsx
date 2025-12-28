@@ -1,56 +1,48 @@
+'use client';
+
 import { useEffect } from 'react';
+import Script from 'next/script';
+
+declare global {
+  interface Window {
+    adsbygoogle: any[];
+  }
+}
 
 const AdBanner = (): JSX.Element => {
   useEffect(() => {
-    // This will run on client-side only
-    const script1 = document.createElement('script');
-    script1.innerHTML = `
-      atOptions = {
-        'key' : '26985683759ed90ebd2497232a5046ba',
-        'format' : 'iframe',
-        'height' : 90,
-        'width' : 728,
-        'params' : {}
-      };
-    `;
-    script1.type = 'text/javascript';
-    
-    const script2 = document.createElement('script');
-    script2.src = 'https://www.highperformanceformat.com/26985683759ed90ebd2497232a5046ba/invoke.js';
-    script2.async = true;
-    script2.type = 'text/javascript';
-
-    // Create container for the ad
-    const adContainer = document.getElementById('ad-container');
-    if (adContainer) {
-      adContainer.appendChild(script1);
-      adContainer.appendChild(script2);
-    }
-
-    // Cleanup function to remove scripts when component unmounts
-    return () => {
-      if (adContainer) {
-        adContainer.innerHTML = '';
+    // Initialize ads after component mounts
+    if (window) {
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (err) {
+        console.error('Failed to push ad to adsbygoogle:', err);
       }
-    };
+    }
   }, []);
 
   return (
-    <div 
-      id="ad-container" 
-      style={{
-        width: '100%',
-        maxWidth: '728px',
-        margin: '0 auto',
-        textAlign: 'center',
-        minHeight: '90px',
-        overflow: 'hidden',
-        backgroundColor: '#f5f5f5',
-        marginBottom: '20px'
-      }}
-    >
-      {/* Ad will be loaded here */}
-    </div>
+    <>
+      {/* Google AdSense Script */}
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
+        crossOrigin="anonymous"
+        strategy="lazyOnload"
+      />
+      
+      {/* Ad Container */}
+      <div className="w-full max-w-4xl mx-auto my-4 text-center">
+        <ins
+          className="adsbygoogle block"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-3724137161724998"
+          data-ad-slot="3470769238"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+      </div>
+    </>
   );
 };
 

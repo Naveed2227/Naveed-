@@ -1,90 +1,84 @@
-"use client";
-
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Script from 'next/script';
 
-type AdSize = {
-  width: number;
-  height: number;
-};
-
 const AdMobBanner = () => {
-  const [adSize, setAdSize] = useState<AdSize | null>(null);
-  const adUnitId = 'ca-app-pub-3724137161724998/3470769238';
-
   useEffect(() => {
-    // Calculate ad size based on viewport width
-    const calculateAdSize = (): AdSize => {
-      const width = Math.min(
-        document.documentElement.clientWidth,
-        window.innerWidth || 0
-      );
-
-      // Define ad sizes based on breakpoints
-      if (width >= 1024) {
-        return { width: 728, height: 90 }; // Leaderboard
-      } else if (width >= 768) {
-        return { width: 468, height: 60 }; // Banner
-      } else {
-        return { width: 320, height: 50 }; // Mobile banner
+    // This will run on client-side only
+    const loadAd = () => {
+      try {
+        // @ts-ignore
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (error) {
+        console.error('Error loading AdMob ad:', error);
       }
     };
 
-    // Set initial ad size
-    setAdSize(calculateAdSize());
-
-    // Update ad size on window resize
-    const handleResize = () => {
-      setAdSize(calculateAdSize());
+    // Add event listener to load ad when the component mounts
+    window.addEventListener('load', loadAd);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('load', loadAd);
     };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
+
   return (
-    <div className="w-full bg-white dark:bg-gray-800 py-2">
-      <Script
-        id="adsbygoogle-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            (adsbygoogle = window.adsbygoogle || []).push({
-              google_ad_client: "ca-pub-3724137161724998",
-              enable_page_level_ads: true
-            });
-          `,
-        }}
-      />
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
-        crossOrigin="anonymous"
-        strategy="afterInteractive"
-      />
-      
-      {adSize && (
-        <div className="flex justify-center w-full">
-          <ins
-            className="adsbygoogle"
-            style={{
-              display: 'block',
-              width: `${adSize.width}px`,
-              height: `${adSize.height}px`,
-              margin: '0 auto',
-            }}
-            data-ad-client="ca-pub-3724137161724998"
-            data-ad-slot="3470769238"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          />
-        </div>
-      )}
-      
-      <Script id="adsbygoogle-push" strategy="afterInteractive">
-        {`
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        `}
-      </Script>
+    <div style={{
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+      color: '#94a3b8',
+      fontSize: '12px',
+      fontWeight: '500',
+      border: '1px solid #334155',
+      borderRadius: '4px',
+      boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
+      overflow: 'hidden',
+      position: 'relative'
+    }}>
+      {/* AdMob Ad */}
+      <div style={{ 
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+        <ins
+          className="adsbygoogle"
+          style={{ 
+            display: 'block',
+            width: '320px',
+            height: '50px',
+            margin: '0 auto'
+          }}
+          data-ad-client="ca-pub-3724137161724998"
+          data-ad-slot="3470769238"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+      </div>
+
+      {/* Fallback/Placeholder content */}
+      <div style={{ 
+        textAlign: 'center',
+        padding: '0.5rem',
+        zIndex: 1,
+        pointerEvents: 'none' // Allow clicks to pass through to the ad
+      }}>
+        <div style={{ fontSize: '12px', marginBottom: '2px', color: '#e2e8f0' }}>Advertisement</div>
+        <div style={{ fontSize: '10px' }}>Mobile Banner (320×50)</div>
+      </div>
     </div>
   );
 };
