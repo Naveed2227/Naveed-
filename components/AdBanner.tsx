@@ -58,7 +58,7 @@ const AdBanner = (): JSX.Element => {
       
       {/* Google AdSense Ad Container */}
       <div className="w-full max-w-4xl mx-auto my-4 text-center">
-        <ins className="adsbygoogle block"  style={{ display: 'block' }}  data-ad-client="ca-app-pub-3724137161724998/3470769238"  ata-ad-format="auto" data-full-width-responsive="true" ></ins>
+        "test  add"
       </div>
       
       {/* Adsterra Ad Container */}
