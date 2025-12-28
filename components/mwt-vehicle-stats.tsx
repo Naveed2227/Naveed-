@@ -11736,12 +11736,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
     
     {/* Advertisement label */}
     <div className="text-center text-xs text-slate-300 mb-1">
-      Advertisement
-    </div>
-
-    {/* Real AdSense Banner */}
-    <div className="w-full flex justify-center">
-      <ins
+            <ins
         className="adsbygoogle"
         style={{
           display: 'block',
@@ -11753,6 +11748,11 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
         data-ad-format="horizontal"
         data-full-width-responsive="false"
       />
+    </div>
+
+    {/* Real AdSense Banner */}
+    <div className="w-full flex justify-center">
+
     </div>
 
   </div>
