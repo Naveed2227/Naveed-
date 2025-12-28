@@ -11730,85 +11730,33 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
         </div>
       </header>
 
-      {/* Google AdSense Banner - 728x90 Leaderboard */}
-      <div className="w-full bg-slate-800/50 border-b border-slate-700">
-        <div className="max-w-3xl mx-auto px-2 py-1">
-        <div key="banner-ad" className="w-full flex justify-center">
-          <ins
-            className="adsbygoogle"
-            style={{
-              display: 'block',
-              width: '320px',
-              height: '50px',
-              margin: '0 auto',
-              backgroundColor: '#f3f4f6'
-            }}
-            data-ad-client="ca-pub-3724137161724998"
-            data-ad-slot="6518875801"
-            data-ad-format="horizontal"
-            data-full-width-responsive="false"
-          >
-            <div style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
-              color: '#94a3b8',
-              fontSize: '12px',
-              fontWeight: '500',
-              border: '1px solid #334155',
-              borderRadius: '4px',
-              boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
-            }}>
-              <div style={{ 
-                textAlign: 'center',
-                padding: '0.5rem'
-              }}>
-<div
-  style={{
-    width: '100%',
-    textAlign: 'center',
-    padding: '8px 0',
-    backgroundColor: '#1e293b',
-  }}
->
-  <div
-    style={{
-      fontSize: '12px',
-      marginBottom: '2px',
-      color: '#e2e8f0',
-    }}
-  >
-    Advertisement
-  </div>
+      {/* Google AdSense Banner - Mobile 320x50 */}
+<div className="w-full bg-slate-800/50 border-b border-slate-700">
+  <div className="max-w-3xl mx-auto px-2 py-1">
+    
+    {/* Advertisement label */}
+    <div className="text-center text-xs text-slate-300 mb-1">
+      Advertisement
+    </div>
 
-  <div
-    style={{
-      fontSize: '11px',
-      color: '#94a3b8',
-    }}
-  >
-    AdMob ad unit ID
-  </div>
+    {/* Real AdSense Banner */}
+    <div className="w-full flex justify-center">
+      <ins
+        className="adsbygoogle"
+        style={{
+          display: 'block',
+          width: '320px',
+          height: '50px',
+        }}
+        data-ad-client="ca-pub-3724137161724998"
+        data-ad-slot="6518875801"
+        data-ad-format="horizontal"
+        data-full-width-responsive="false"
+      />
+    </div>
 
-  <div
-    style={{
-      fontSize: '11px',
-      color: '#38bdf8',
-    }}
-  >
-    Top banner: ca-app-pub-3724137161724998/3470769238
   </div>
 </div>
-                <div style={{ fontSize: '10px' }}>Mobile Banner (320×50)</div>
-              </div>
-            </div>
-          </ins>
-        </div>
-      </div>
-      </div>
 
       <main className="max-w-7xl xl:max-w-[90rem] pt-16 sm:pt-6 p-4 sm:p-6 md:p-6 lg:p-8 mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         {/* Comparison Bottom Bar - Mobile */}
