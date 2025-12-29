@@ -3,8 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Copy, Info, Mail, Shield, FileText, Share2 as Share } from "lucide-react"
 import Script from "next/script";
-import TopBannerAd from './TopBannerAd';
-import { AdMob, BannerAdOptions, BannerAdPosition, BannerAdSize } from '@capacitor-community/admob';
 
 // Pages component
 const Pages = ({ activePage, onPageChange }: { activePage: string, onPageChange: (page: string) => void }) => {
@@ -11732,8 +11730,33 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
         </div>
       </header>
 
-      {/* Top Banner Ad - AdMob */}
-      <TopBannerAd />
+      {/* Google AdSense Banner - Mobile 320x50 */}
+<div className="w-full bg-slate-800/50 border-b border-slate-700">
+  <div className="max-w-3xl mx-auto px-2 py-1">
+    
+    {/* Advertisement label */}
+    <div className="text-center text-xs text-slate-300 mb-1">
+            <ins
+        className="adsbygoogle"
+        style={{
+          display: 'block',
+          width: '320px',
+          height: '50px',
+        }}
+        data-ad-client="ca-pub-3724137161724998"
+        data-ad-slot="6518875801"
+        data-ad-format="horizontal"
+        data-full-width-responsive="false"
+      />
+    </div>
+
+    {/* Real AdSense Banner */}
+    <div className="w-full flex justify-center">
+
+    </div>
+
+  </div>
+</div>
 
       <main className="max-w-7xl xl:max-w-[90rem] pt-16 sm:pt-6 p-4 sm:p-6 md:p-6 lg:p-8 mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         {/* Comparison Bottom Bar - Mobile */}
