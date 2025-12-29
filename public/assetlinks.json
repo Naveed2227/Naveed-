@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mwtassistant.app",
+      "sha256_cert_fingerprints": [
+        "A3:1D:26:89:3C:E5:9C:F3:A7:27:AE:8B:65:C5:57:DB:27:10:F4:71:92:26:74:62:82:26:1D:E6:71:ED:09:90"
+      ]
+    }
+  }
+]
