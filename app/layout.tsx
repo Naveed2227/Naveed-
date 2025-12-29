@@ -1,9 +1,9 @@
 import type React from "react";
 import type { Metadata } from "next";
 import { Inter, Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import BannerAd from "@/components/BannerAd";
 
 // Initialize fonts
 const _geist = V0_Font_Geist({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
@@ -148,28 +148,7 @@ export default function RootLayout({
             {children}
           </main>
           {/* Ad Banner */}
-          <div id="banner-container" className="w-full flex justify-center py-2 bg-gray-100">
-            <div id="banner-slot"></div>
-          </div>
-          <Script id="banner-ads-config" dangerouslySetInnerHTML={{
-            __html: `
-              var atOptions = {
-                'key' : '12ed5f2a30761db8a8f48d836b669b85',
-                'format' : 'iframe',
-                'height' : 50,
-                'width' : 320,
-                'params' : {}
-              };
-            `
-          }} />
-          <Script
-            src="https://www.highperformanceformat.com/12ed5f2a30761db8a8f48d836b669b85/invoke.js"
-            strategy="lazyOnload"
-            onLoad={() => {
-              // The script will automatically use the atOptions variable we defined above
-              console.log('Banner ad script loaded');
-            }}
-          />
+          <BannerAd />
         </div>
       </body>
     </html>
