@@ -88,19 +88,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
-        />
-        <Script id="microsoft-clarity" strategy="afterInteractive">
-          {`(function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-          })(window, document, "clarity", "script", "ujybyslyts");`}
-        </Script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         
@@ -156,17 +143,6 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
-          {/* Banner */}
-          <div className="w-full bg-slate-900">
-            <div className="max-w-7xl mx-auto w-full">
-              <img 
-                src="/MWT-Assistant-banner.jpg" 
-                alt="MWT Assistant Banner" 
-                className="w-full h-auto object-cover"
-                style={{ maxHeight: '200px' }}
-              />
-            </div>
-          </div>
           {/* Main Content */}
           <main className="flex-grow">
             {children}
