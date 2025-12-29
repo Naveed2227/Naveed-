@@ -10,10 +10,7 @@ const nextConfig = {
     unoptimized: true,
     domains: ['pagead2.googlesyndication.com', 'googleads.g.doubleclick.net'],
   },
-  // Enable static export for Firebase Hosting
-  output: 'export',
-  // Optional: Set the output directory (default is 'out')
-  // distDir: 'out',
+  // API routes require server-side rendering and are incompatible with static export
   
   // Add Content Security Policy for AdSense
   async headers() {
