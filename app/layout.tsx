@@ -147,6 +147,29 @@ export default function RootLayout({
           <main className="flex-grow">
             {children}
           </main>
+          {/* Ad Banner */}
+          <div id="banner-container" className="w-full flex justify-center py-2 bg-gray-100">
+            <div id="banner-slot"></div>
+          </div>
+          <Script id="banner-ads-config" dangerouslySetInnerHTML={{
+            __html: `
+              var atOptions = {
+                'key' : '12ed5f2a30761db8a8f48d836b669b85',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+              };
+            `
+          }} />
+          <Script
+            src="https://www.highperformanceformat.com/12ed5f2a30761db8a8f48d836b669b85/invoke.js"
+            strategy="lazyOnload"
+            onLoad={() => {
+              // The script will automatically use the atOptions variable we defined above
+              console.log('Banner ad script loaded');
+            }}
+          />
         </div>
       </body>
     </html>
