@@ -524,7 +524,8 @@ const getVehicleRarity = (vehicleName: string) => {
  "M1 AGDS",
 "Leopard 2 Revolution",
 "Arjun Mk.2",
-
+"ZTQ-15",
+  "Panzer 87-140",
 
 
 ];
