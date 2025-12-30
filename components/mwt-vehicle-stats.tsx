@@ -1196,7 +1196,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Leopard-2A7V.jpg",
     description: "Most advanced Leopard variant with urban warfare modifications and enhanced protection.",
-    stats: { health: 42100, speed: 64, armor: "730mm", agility: 37 },
+    stats: { health: 42100, speed: 64, armor: "690mm", agility: 37 },
     weapons: [
       { name: "DM11", type: "Main Gun", damage: 5000, penetration: 85 },
       { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
@@ -1535,7 +1535,7 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "ZTQ-15.jpg",
     "description": "Modern Chinese light tank designed for high-altitude operations, featuring advanced mobility, firepower, and rapid deployment capabilities.",
-    "stats": { "health": 0, "speed": 0, "armor": "265mm", "agility": 0 },
+    "stats": { "health": 39500, "speed": 75, "armor": "265mm", "agility": 41 },
     "weapons": [
      { "name": "DTW1 APFSDS", "type": "Main Gun", "damage": 9980, "penetration": 338, "reload": 3.6 },
      { "name": "DTC02-105 APFSDS", "type": "Main Gun", "damage": 10430, "penetration": 580, "reload": 3.6 },
@@ -1564,7 +1564,7 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Panzer-87-140.jpg",
     "description": "Swiss experimental main battle tank upgrade featuring a powerful 140mm cannon, enhanced armor protection, and improved survivability.",
-    "stats": { "health": 0, "speed": 0, "armor": "670mm", "agility": 0 },
+    "stats": { "health": 46200, "speed": 70, "armor": "670mm", "agility": 35 },
     "weapons": [
     { "name": "Pz Kan Pfeil Pat APFSDS", "type": "Main Gun", "damage": 14520, "penetration": 1000, "reload": 6.8 },
     { "name": "Pz Kan HL Pat MZ HEAT", "type": "Main Gun", "damage": 17710, "penetration": 1100, "reload": 6.8 },
