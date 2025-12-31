@@ -8,20 +8,25 @@ import com.google.android.gms.ads.MobileAds
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var adView: AdView
+    private lateinit var adViewTop: AdView
+    private lateinit var adViewBanner1: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize Mobile Ads SDK
+        // Initialize Google Mobile Ads SDK
         MobileAds.initialize(this) {}
 
-        // Reference the AdView
-        adView = findViewById(R.id.adView)
+        // Reference the banner AdViews
+        adViewTop = findViewById(R.id.adViewTop)
+        adViewBanner1 = findViewById(R.id.adViewBanner1)
 
-        // Load the banner ad
-        val adRequest = AdRequest.Builder().build()
-        adView.loadAd(adRequest)
+        // Load ads
+        val adRequestTop = AdRequest.Builder().build()
+        adViewTop.loadAd(adRequestTop)
+
+        val adRequestBanner1 = AdRequest.Builder().build()
+        adViewBanner1.loadAd(adRequestBanner1)
     }
 }

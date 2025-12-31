@@ -3,16 +3,30 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+    android:layout_height="match_parent">
+
+    <!-- Top Banner -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3724137161724998/3470769238"/>
 
     <!-- Your other UI elements can go here -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello MWT Assistant!"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:padding="16dp"/>
 
-    <!-- Banner AdView -->
-   <com.google.android.gms.ads.AdView
-    android:id="@+id/adView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    ads:adSize="BANNER"
-    ads:adUnitId="ca-app-pub-3724137161724998/3470769238"/>
+    <!-- Second Banner (Banner1) -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewBanner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3724137161724998/8428225059"/>
 </LinearLayout>
