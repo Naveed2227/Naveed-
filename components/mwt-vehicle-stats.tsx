@@ -9421,6 +9421,8 @@ const laserGuidedMissiles = [
   "S-24",
   "KAB-500L",
   "APKWS",
+  "4x BA-21",
+  "2x BA-21",
 ];
 
 const rocketPods = [
