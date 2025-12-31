@@ -1,4 +1,16 @@
+'use client'; // ensures this runs only in the browser
+
+import { useEffect, useState } from 'react';
+
 export default function BannerAd() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true); // run only after hydration
+  }, []);
+
+  if (!mounted) return null; // prevent server-side render
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: 8 }}>
       <script
