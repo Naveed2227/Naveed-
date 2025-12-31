@@ -9,10 +9,10 @@
     <!-- Your other UI elements can go here -->
 
     <!-- Banner AdView -->
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3724137161724998/3095488426"/>
+   <com.google.android.gms.ads.AdView
+    android:id="@+id/adView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    ads:adSize="BANNER"
+    ads:adUnitId="ca-app-pub-3724137161724998/3470769238"/>
 </LinearLayout>

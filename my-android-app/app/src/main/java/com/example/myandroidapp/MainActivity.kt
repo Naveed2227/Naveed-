@@ -14,13 +14,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize Google Mobile Ads SDK
+        // Initialize Mobile Ads SDK
         MobileAds.initialize(this) {}
 
         // Reference the AdView
         adView = findViewById(R.id.adView)
 
-        // Load a banner ad
+        // Load the banner ad
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
     }
