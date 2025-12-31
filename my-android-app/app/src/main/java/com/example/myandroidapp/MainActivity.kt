@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         // Initialize Google Mobile Ads SDK
         MobileAds.initialize(this) {}
 
-        // Reference the banner AdViews
+        // Reference the AdViews
         adViewTop = findViewById(R.id.adViewTop)
         adViewBanner1 = findViewById(R.id.adViewBanner1)
 

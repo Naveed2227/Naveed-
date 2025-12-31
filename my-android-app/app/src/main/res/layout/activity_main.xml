@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Top Banner -->
+    <!-- Top Banner: Always at the top -->
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewTop"
         android:layout_width="match_parent"
@@ -13,16 +13,32 @@
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-3724137161724998/3470769238"/>
 
-    <!-- Your other UI elements can go here -->
-    <TextView
+    <!-- Main content -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello MWT Assistant!"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:padding="16dp"/>
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <!-- Second Banner (Banner1) -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hello MWT Assistant!"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:padding="16dp"/>
+
+            <!-- Add other UI elements here -->
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Second Banner (Banner1) at the bottom -->
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewBanner1"
         android:layout_width="match_parent"
