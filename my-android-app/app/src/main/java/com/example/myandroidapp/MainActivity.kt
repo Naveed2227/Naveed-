@@ -1,4 +1,4 @@
-package com.example.myandroidapp
+package app.mwtassistantunofficial.android
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -17,10 +17,10 @@ class MainActivity : AppCompatActivity() {
         // Initialize Google Mobile Ads SDK
         MobileAds.initialize(this) {}
 
-        // Reference the AdView from layout
+        // Reference the AdView
         adView = findViewById(R.id.adView)
 
-        // Create an ad request and load the banner
+        // Load a banner ad
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
     }
