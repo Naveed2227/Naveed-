@@ -1,28 +1,40 @@
-'use client'; // ensures this runs only in the browser
+'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export default function BannerAd() {
-  const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
-    setMounted(true); // run only after hydration
+    // Prevent duplicate ads
+    if (document.getElementById('adsterra-script')) return;
+
+    // atOptions must exist on window
+    (window as any).atOptions = {
+      key: '26985683759ed90ebd2497232a5046ba',
+      format: 'iframe',
+      height: 90,
+      width: 728,
+      params: {},
+    };
+
+    const script = document.createElement('script');
+    script.id = 'adsterra-script';
+    script.src =
+      'https://www.highperformanceformat.com/26985683759ed90ebd2497232a5046ba/invoke.js';
+    script.async = true;
+
+    document.body.appendChild(script);
   }, []);
 
-  if (!mounted) return null; // prevent server-side render
-
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', marginTop: 8 }}>
-      <script>
-  atOptions = {
-    'key' : '26985683759ed90ebd2497232a5046ba',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/26985683759ed90ebd2497232a5046ba/invoke.js"></script>
-    </div>
+    <div
+      id="adsterra-banner"
+      style={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        marginTop: 8,
+        minHeight: 90,
+      }}
+    />
   );
 }
