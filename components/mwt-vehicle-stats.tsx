@@ -263,7 +263,8 @@ const formatTier = (tier: string | number): string => {
 const newVehicles = [
   "ZTQ-15",
   "Panzer 87-140",
-
+  "M1A1 AIM TUSK",
+  "EC-665 Tiger HAP",
   
 
 
@@ -279,12 +280,11 @@ const upcomingVehicles = [
 "AMX-10RC",
 "2S38 Derivation",
 "Object 447A",
-"M1A1 AIM TUSK",
 "Al Kafil-1",
 "Vijayanta",
 "Pandur II",
 "EF-2000 Typhoon",
-"EC-665 Tiger HAP",
+
 
   // Add upcoming vehicle names here
 ];
@@ -2785,8 +2785,13 @@ const VEHICLES_DATA = [
     "tier": "III",
     "image": "M1A1-AIM-TUSK.jpg",
     "description": "Upgraded American Abrams tank featuring urban survival kit, enhanced optics, reinforced armor, and improved situational awareness systems.",
-    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
-    "weapons": []
+    "stats": { "health": 42300, "speed": 69, "armor": "900mm", "agility": 34 },
+    "weapons": [
+    { "name": "KE-W APFSDS", "type": "Main Gun", "damage": 11270, "penetration": 630, "reload": 5 },
+    { "name": "M830 HEAT", "type": "Main Gun", "damage": 12230, "penetration": 600, "reload": 5 },
+    { "name": "M830A1 HEAT", "type": "Main Gun", "damage": 12340, "penetration": 650, "reload": 5 },
+    { "name": "KE-W-A2 APFSDS", "type": "Main Gun", "damage": 11470, "penetration": 730, "reload": 5 },
+  ]
   },
   {
     "id": 414,
@@ -3515,9 +3520,20 @@ const VEHICLES_DATA = [
     "tier": "III",
     "image": "EC-665-Tiger-HAP.jpg",
     "description": "The EC-665 Tiger HAP is a maneuverable attack helicopter designed for fire support and escort, featuring a 30mm chin-mounted cannon.",
-   stats: { health: 0, speed: 0, verticalSpeed: 0, agility: 0 },
+   stats: { health: 25700, speed: 322, verticalSpeed: 21.4, agility: 45},
     "weapons": [
-    { "name": "ADS Starstreak", "type": "Air-to-Ground Missile", "damage": 7300, "penetration": 50, "reload": 15 },
+      
+      { "name": "Mistral x2", "type": "Air-to-Ground Missile", "damage": 3100, "penetration": 27, "reload": 22 },
+      { "name": "FZ231", "type": "Air-to-Ground Missile", "damage": 5200, "penetration": 128, "reload": 26 },
+      { "name": "FZ233", "type": "Air-to-Ground Missile", "damage": 5200, "penetration": 128, "reload": 10 },
+      { "name": "Telson 12", "type": "Air-to-Ground Missile", "damage": 4100, "penetration": 300, "reload": 26 },
+      { "name": "Telson 22", "type": "Air-to-Ground Missile", "damage": 4100, "penetration": 300, "reload": 26 },
+      { "name": "APKWS", "type": "Air-to-Ground Missile", "damage": 5400, "penetration": 140, "reload": 20 },
+      { "name": "M621", "type": "Air-to-Ground Missile", "damage": 200, "penetration": 53, "reload": 20 },
+      { "name": "HOT-3", "type": "Air-to-Ground Missile", "damage": 9820, "penetration": 1300, "reload": 22 },
+      { "name": "x4 AGM-114 Hellfire", "type": "Air-to-Ground Missile", "damage": 9900, "penetration": 1200, "reload": 30 },
+      { "name": "ADS STARSTREAK", "type": "Air-to-Ground Missile", "damage": 7300, "penetration": 50, "reload": 15 },
+    
     ]
   },
   {
@@ -9259,7 +9275,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
 "AMX-10RC",,
 "2S38 Derivation",
 "Object 447A",
-"M1A1 AIM TUSK",
 "Al Kafil-1",
 "Vijayanta",
 "Pandur II",
@@ -9631,6 +9646,8 @@ const getMissileImageCandidates = (weaponName: string) => {
 "FV101 Scorpion-90",
 "M60A3 TTS",
 "M1 AGDS",
+"M1A1 AIM TUSK",
+"EC-665 Tiger HAP",
 ]
    return exclusiveVehicles.includes(vehicleName)
   }
