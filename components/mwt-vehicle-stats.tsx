@@ -9465,6 +9465,8 @@ const rocketPods = [
   "Type 57-1",
   "FS-70",
   "AGR-20 BLR",
+  "Telson 12",
+  "Telson 22",
 ];
 const missileHasTags = (missileName: string) => {
   const tags = []
