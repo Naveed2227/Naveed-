@@ -13,20 +13,16 @@ export default function BannerAd() {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: 8 }}>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            atOptions = {
-              'key' : '12ed5f2a30761db8a8f48d836b669b85',
-              'format' : 'iframe',
-              'height' : 50,
-              'width' : 320,
-              'params' : {}
-            };
-          `
-        }}
-      />
-      <script src="https://www.highperformanceformat.com/12ed5f2a30761db8a8f48d836b669b85/invoke.js"></script>
+      <script>
+  atOptions = {
+    'key' : '26985683759ed90ebd2497232a5046ba',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/26985683759ed90ebd2497232a5046ba/invoke.js"></script>
     </div>
   );
 }
