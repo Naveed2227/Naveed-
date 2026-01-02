@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import BannerAd from "@/components/BannerAd";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter', display: 'swap' });
 
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
   description: "View and compare all vehicles in MWT with detailed stats.",
   metadataBase: new URL('https://www.mwtassistant.com'),
-    generator: 'v0.app'
+  generator: 'v0.app'
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -43,9 +43,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
-          
+
           {/* Adsterra Banner at the TOP */}
-          <BannerAd />
+          <Script
+            id="adsterra-options"
+            dangerouslySetInnerHTML={{
+              __html: `
+                atOptions = {
+                  'key' : '26985683759ed90ebd2497232a5046ba',
+                  'format' : 'iframe',
+                  'height' : 90,
+                  'width' : 728,
+                  'params' : {}
+                };
+              `,
+            }}
+          />
+          <Script
+            src="https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js"
+            strategy="afterInteractive"
+          />
 
           {/* Ezoic top_of_page Ad */}
           <div id="ezoic-pub-ad-placeholder-101" />
