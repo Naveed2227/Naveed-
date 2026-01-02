@@ -16,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+
         {/* ========================= */}
         {/* Content Security Policy */}
         {/* ========================= */}
@@ -61,7 +62,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* ========================= */}
           {/* Adsterra Banner at the TOP */}
           {/* ========================= */}
-          <div id="adsterra-container" className="w-full flex justify-center my-4" />
           <Script
             id="adsterra-options"
             dangerouslySetInnerHTML={{
@@ -75,12 +75,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 };
               `,
             }}
-            strategy="afterInteractive"
           />
           <Script
             src="https://encouragementglutton.com/28147349/invoke.js"
             strategy="afterInteractive"
           />
+          <div id="adsterra-container" className="w-full flex justify-center my-4" />
 
           {/* Ezoic top_of_page Ad */}
           <div id="ezoic-pub-ad-placeholder-101" />
