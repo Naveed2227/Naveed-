@@ -2,5 +2,16 @@
   "rewrites": [
     { "source": "/.well-known/assetlinks.json", "destination": "/.well-known/assetlinks.json" }
   ],
-  "redirects": []
+  "redirects": [],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "script-src 'self' https://adsterra.com; object-src 'none';"
+        }
+      ]
+    }
+  ]
 }
