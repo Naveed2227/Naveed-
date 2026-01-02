@@ -30,10 +30,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-        
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        
+
         {/* Google AdSense */}
         <script 
           async 
@@ -41,10 +41,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
         />
       </head>
+
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
 
+          {/* ========================= */}
           {/* Adsterra Banner at the TOP */}
+          {/* ========================= */}
           <Script
             id="adsterra-options"
             dangerouslySetInnerHTML={{
@@ -63,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             src="https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js"
             strategy="afterInteractive"
           />
+          <div id="adsterra-container" className="w-full flex justify-center my-4" />
 
           {/* Ezoic top_of_page Ad */}
           <div id="ezoic-pub-ad-placeholder-101" />
