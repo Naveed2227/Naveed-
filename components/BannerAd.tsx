@@ -17,7 +17,7 @@ export default function BannerAd() {
         dangerouslySetInnerHTML={{
           __html: `
             atOptions = {
-              'key' : '12ed5f2a30761db8a8f48d836b669b85',
+              'key' : '28165066',
               'format' : 'iframe',
               'height' : 50,
               'width' : 320,
@@ -26,7 +26,7 @@ export default function BannerAd() {
           `
         }}
       />
-      <script src="https://www.highperformanceformat.com/12ed5f2a30761db8a8f48d836b669b85/invoke.js"></script>
+      <script src="https://www.highperformanceformat.com/28165066/invoke.js"></script>
     </div>
   );
 }
