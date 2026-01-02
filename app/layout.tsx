@@ -33,12 +33,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        
+        {/* Google AdSense */}
+        <script 
+          async 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
           
           {/* Adsterra Banner at the TOP */}
           <BannerAd />
+
+          {/* Ezoic top_of_page Ad */}
+          <div id="ezoic-pub-ad-placeholder-101" />
 
           {/* Main Content */}
           <main className="flex-grow">
