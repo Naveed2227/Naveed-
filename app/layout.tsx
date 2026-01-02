@@ -16,6 +16,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        {/* ========================= */}
+        {/* Content Security Policy */}
+        {/* ========================= */}
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="
+            default-src 'self';
+            script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://encouragementglutton.com;
+            connect-src 'self' https://*.google-analytics.com https://*.google.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.doubleclick.net https://firebase.googleapis.com https://adtrafficquality.google;
+            frame-src 'self' https://*.doubleclick.net https://encouragementglutton.com;
+          "
+        />
+
         {/* Ezoic Privacy Scripts */}
         <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js" />
         <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js" />
@@ -48,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* ========================= */}
           {/* Adsterra Banner at the TOP */}
           {/* ========================= */}
+          <div id="adsterra-container" className="w-full flex justify-center my-4" />
           <Script
             id="adsterra-options"
             dangerouslySetInnerHTML={{
@@ -61,12 +75,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 };
               `,
             }}
+            strategy="afterInteractive"
           />
           <Script
             src="https://encouragementglutton.com/28147349/invoke.js"
             strategy="afterInteractive"
           />
-          <div id="adsterra-container" className="w-full flex justify-center my-4" />
 
           {/* Ezoic top_of_page Ad */}
           <div id="ezoic-pub-ad-placeholder-101" />
