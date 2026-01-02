@@ -3,32 +3,19 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const inter = Inter({ subsets: ["latin"], variable: '--font-inter', display: 'swap' });
 
 export const metadata: Metadata = {
   title: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
   description: "View and compare all vehicles in MWT with detailed stats.",
-  metadataBase: new URL("https://www.mwtassistant.com"),
-  generator: "v0.app",
+  metadataBase: new URL('https://www.mwtassistant.com'),
+  generator: 'v0.app'
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        {/* ========================= */}
-        {/* Content Security Policy */}
-        {/* ========================= */}
-        <meta
-          httpEquiv="Content-Security-Policy"
-          content="
-            default-src 'self';
-            connect-src 'self' https://*.google-analytics.com https://*.google.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.doubleclick.net https://firebase.googleapis.com https://adtrafficquality.google;
-            script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://encouragementglutton.com;
-            frame-src 'self' https://*.doubleclick.net https://encouragementglutton.com;
-          "
-        />
-
         {/* Ezoic Privacy Scripts */}
         <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js" />
         <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js" />
@@ -48,8 +35,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
         {/* Google AdSense */}
-        <script
-          async
+        <script 
+          async 
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
           crossOrigin="anonymous"
         />
@@ -57,12 +44,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
+
           {/* ========================= */}
-          {/* Adsterra Desktop Banner 728x90 */}
+          {/* Adsterra Banner at the TOP */}
           {/* ========================= */}
-          <div id="adsterra-container" className="w-full flex justify-center my-4" />
           <Script
-            id="adsterra-728x90"
+            id="adsterra-options"
             dangerouslySetInnerHTML={{
               __html: `
                 atOptions = {
@@ -74,40 +61,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 };
               `,
             }}
-            strategy="afterInteractive"
           />
           <Script
             src="https://encouragementglutton.com/28147349/invoke.js"
             strategy="afterInteractive"
           />
-
-          {/* Optional: Adsterra Mobile Banner 320x50 */}
-          <div id="adsterra-mobile-container" className="w-full flex justify-center my-2 sm:hidden" />
-          <Script
-            id="adsterra-320x50"
-            dangerouslySetInnerHTML={{
-              __html: `
-                atOptions = {
-                  'key' : '28165066',
-                  'format' : 'iframe',
-                  'height' : 50,
-                  'width' : 320,
-                  'params' : {}
-                };
-              `,
-            }}
-            strategy="afterInteractive"
-          />
-          <Script
-            src="https://encouragementglutton.com/28165066/invoke.js"
-            strategy="afterInteractive"
-          />
+          <div id="adsterra-container" className="w-full flex justify-center my-4" />
 
           {/* Ezoic top_of_page Ad */}
           <div id="ezoic-pub-ad-placeholder-101" />
 
           {/* Main Content */}
-          <main className="flex-grow">{children}</main>
+          <main className="flex-grow">
+            {children}
+          </main>
+
         </div>
       </body>
     </html>
