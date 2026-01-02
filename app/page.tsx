@@ -1,9 +1,5 @@
-import EzoicVerification from "@/components/EzoicVerification";
+import MWTVehicleStats from "@/components/mwt-vehicle-stats"
 
-export default function VerificationPage() {
-  return (
-    <main className="min-h-screen bg-gray-100 py-12 px-4">
-      <EzoicVerification />
-    </main>
-  );
+export default function Home() {
+  return <MWTVehicleStats />
 }
