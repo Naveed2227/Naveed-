@@ -1,22 +1,6 @@
-import { useEffect } from "react";
-
-export default function AdsterraAd() {
-  useEffect(() => {
-    window.atOptions = {
-      key: '26985683759ed90ebd2497232a5046ba',
-      format: 'iframe',
-      height: 90,
-      width: 728,
-      params: {}
-    };
-
-    const script = document.createElement("script");
-    script.src = "https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => document.body.removeChild(script);
-  }, []);
-
-  return <div id="ad-container" style={{ width: 728, height: 90 }}></div>;
+{
+  "rewrites": [
+    { "source": "/.well-known/assetlinks.json", "destination": "/.well-known/assetlinks.json" }
+  ],
+  "redirects": []
 }
