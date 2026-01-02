@@ -36,4 +36,18 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+// Add redirects for ads.txt to Adstxtmanager
+const nextConfigWithRedirects = {
+  ...nextConfig,
+  async redirects() {
+    return [
+      {
+        source: '/ads.txt',
+        destination: 'https://srv.adstxtmanager.com/19390/mwtassistant.com',
+        permanent: true,
+      },
+    ];
+  },
+};
+
+export default nextConfigWithRedirects;
