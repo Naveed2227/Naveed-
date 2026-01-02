@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import BannerAd from "@/components/BannerAd";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter', display: 'swap' });
 
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
   description: "View and compare all vehicles in MWT with detailed stats.",
   metadataBase: new URL('https://www.mwtassistant.com'),
-    generator: 'v0.app'
+  generator: 'v0.app'
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Ezoic Privacy Scripts */}
         <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js" />
         <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js" />
-        
+
         {/* Ezoic Header Script */}
         <script async src="//www.ezojs.com/ezoic/sa.min.js" />
         <script
@@ -30,10 +30,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
-        
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        
+
         {/* Google AdSense */}
         <script 
           async 
@@ -41,11 +41,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
         />
       </head>
+
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
-          
+
+          {/* ========================= */}
           {/* Adsterra Banner at the TOP */}
-          <BannerAd />
+          {/* ========================= */}
+          <Script
+            id="adsterra-options"
+            dangerouslySetInnerHTML={{
+              __html: `
+                atOptions = {
+                  'key' : '26985683759ed90ebd2497232a5046ba',
+                  'format' : 'iframe',
+                  'height' : 90,
+                  'width' : 728,
+                  'params' : {}
+                };
+              `,
+            }}
+          />
+          <Script
+            src="https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js"
+            strategy="afterInteractive"
+          />
+          <div id="adsterra-container" className="w-full flex justify-center my-4" />
 
           {/* Ezoic top_of_page Ad */}
           <div id="ezoic-pub-ad-placeholder-101" />
