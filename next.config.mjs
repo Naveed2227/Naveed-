@@ -1,11 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
   images: {
     unoptimized: true,
     domains: [
@@ -14,7 +10,6 @@ const nextConfig = {
     ],
   },
 
-  // Add Content Security Policy for AdSense + Adsterra + Firebase
   async headers() {
     return [
       {
@@ -24,29 +19,12 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' " +
-                "https://pagead2.googlesyndication.com " +
-                "https://www.googletagmanager.com " +
-                "https://www.google-analytics.com " +
-                "https://www.google.com " +
-                "https://www.gstatic.com " +
-                "https://encouragementglutton.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://www.gstatic.com https://ep2.adtrafficquality.google https://YOUR_ADSTERRA_DOMAIN",
+              "script-src-elem 'self' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://www.gstatic.com https://ep2.adtrafficquality.google https://YOUR_ADSTERRA_DOMAIN",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              "img-src 'self' data: https://*.google.com https://*.gstatic.com https://*.google-analytics.com https://*.googletagmanager.com https://*.googleapis.com https://*.doubleclick.net https://*.googleadservices.com https://pagead2.googlesyndication.com",
-              "connect-src 'self' " +
-                "https://*.google-analytics.com " +
-                "https://*.google.com " +
-                "https://*.gstatic.com " +
-                "https://pagead2.googlesyndication.com " +
-                "https://*.doubleclick.net " +
-                "https://firebase.googleapis.com " +
-                "https://ep1.adtrafficquality.google",
-              "frame-src 'self' " +
-                "https://googleads.g.doubleclick.net " +
-                "https://tpc.googlesyndication.com " +
-                "https://pagead2.googlesyndication.com " +
-                "https://www.google.com " +
-                "https://encouragementglutton.com",
+              "img-src 'self' data: https://*.google.com https://*.gstatic.com https://*.google-analytics.com https://*.googletagmanager.com https://*.googleapis.com https://*.doubleclick.net https://pagead2.googlesyndication.com https://YOUR_ADSTERRA_DOMAIN",
+              "connect-src 'self' https://*.google-analytics.com https://*.google.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.doubleclick.net https://ep2.adtrafficquality.google https://YOUR_ADSTERRA_DOMAIN",
+              "frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://pagead2.googlesyndication.com https://www.google.com https://YOUR_ADSTERRA_DOMAIN",
               "font-src 'self' https://fonts.gstatic.com data:",
             ].join('; '),
           },
@@ -54,11 +32,7 @@ const nextConfig = {
       },
     ];
   },
-};
 
-// Add redirects for ads.txt to Adstxtmanager
-const nextConfigWithRedirects = {
-  ...nextConfig,
   async redirects() {
     return [
       {
@@ -70,4 +44,4 @@ const nextConfigWithRedirects = {
   },
 };
 
-export default nextConfigWithRedirects;
+export default nextConfig;
