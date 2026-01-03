@@ -53,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             dangerouslySetInnerHTML={{
               __html: `
                 atOptions = {
-                  'key' : '28147349',
+                  'key' : '26985683759ed90ebd2497232a5046ba',
                   'format' : 'iframe',
                   'height' : 90,
                   'width' : 728,
@@ -63,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
           />
           <Script
-            src="https://encouragementglutton.com/28147349/invoke.js"
+            src="https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js"
             strategy="afterInteractive"
           />
           <div id="adsterra-container" className="w-full flex justify-center my-4" />
