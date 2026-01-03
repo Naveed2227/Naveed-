@@ -1,67 +1,83 @@
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-import AdsterraBanner from "./components/AdsterraBanner";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const inter = Inter({ subsets: ["latin"], variable: '--font-inter', display: 'swap' });
+
+export const metadata: Metadata = {
+  title: "MWT Assistant: Vehicle Stats, Battle Pass and Events",
+  description: "View and compare all vehicles in MWT with detailed stats.",
+  metadataBase: new URL('https://www.mwtassistant.com'),
+  generator: 'v0.app'
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`${inter.className} min-h-screen flex flex-col`}>
-      
-      {/* ========================= */}
-      {/* Ezoic / Privacy Scripts */}
-      {/* ========================= */}
-      <Script
-        data-cfasync="false"
-        src="https://cmp.gatekeeperconsent.com/min.js"
-        strategy="afterInteractive"
-      />
-      <Script
-        data-cfasync="false"
-        src="https://the.gatekeeperconsent.com/cmp.min.js"
-        strategy="afterInteractive"
-      />
-      <Script
-        async
-        src="//www.ezojs.com/ezoic/sa.min.js"
-        strategy="afterInteractive"
-      />
-      <Script
-        id="ezoic-standalone"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.ezstandalone = window.ezstandalone || {};
-            ezstandalone.cmd = ezstandalone.cmd || [];
-          `,
-        }}
-      />
+    <html lang="en">
+      <head>
+        {/* Ezoic Privacy Scripts */}
+        <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js" />
+        <script data-cfasync="false" src="https://the.gatekeeperconsent.com/cmp.min.js" />
 
-      {/* ========================= */}
-      {/* Google AdSense */}
-      {/* ========================= */}
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
-        crossOrigin="anonymous"
-        strategy="afterInteractive"
-      />
+        {/* Ezoic Header Script */}
+        <script async src="//www.ezojs.com/ezoic/sa.min.js" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.ezstandalone = window.ezstandalone || {};
+              ezstandalone.cmd = ezstandalone.cmd || [];
+            `,
+          }}
+        />
 
-      {/* ========================= */}
-      {/* Adsterra Banner */}
-      {/* ========================= */}
-      <AdsterraBanner />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
-      {/* Ezoic top_of_page Ad */}
-      <div id="ezoic-pub-ad-placeholder-101" />
+        {/* Google AdSense */}
+        <script 
+          async 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3724137161724998"
+          crossOrigin="anonymous"
+        />
+      </head>
 
-      {/* Main Content */}
-      <main className="flex-grow">{children}</main>
-    </div>
+      <body className={inter.className}>
+        <div className="min-h-screen flex flex-col">
+
+          {/* ========================= */}
+          {/* Adsterra Banner at the TOP */}
+          {/* ========================= */}
+          <Script
+            id="adsterra-options"
+            dangerouslySetInnerHTML={{
+              __html: `
+                atOptions = {
+                  'key' : '28147349',
+                  'format' : 'iframe',
+                  'height' : 90,
+                  'width' : 728,
+                  'params' : {}
+                };
+              `,
+            }}
+          />
+          <Script
+            src="https://encouragementglutton.com/28147349/invoke.js"
+            strategy="afterInteractive"
+          />
+          <div id="adsterra-container" className="w-full flex justify-center my-4" />
+
+          {/* Ezoic top_of_page Ad */}
+          <div id="ezoic-pub-ad-placeholder-101" />
+
+          {/* Main Content */}
+          <main className="flex-grow">
+            {children}
+          </main>
+
+        </div>
+      </body>
+    </html>
   );
 }
-
-export const metadata = {
-      generator: 'v0.app'
-    };
