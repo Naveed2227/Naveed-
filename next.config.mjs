@@ -8,11 +8,13 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: ['pagead2.googlesyndication.com', 'googleads.g.doubleclick.net'],
+    domains: [
+      'pagead2.googlesyndication.com',
+      'googleads.g.doubleclick.net',
+    ],
   },
-  // API routes require server-side rendering and are incompatible with static export
-  
-  // Add Content Security Policy for AdSense
+
+  // Add Content Security Policy for AdSense + Adsterra + Firebase
   async headers() {
     return [
       {
@@ -22,11 +24,29 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://www.gstatic.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' " +
+                "https://pagead2.googlesyndication.com " +
+                "https://www.googletagmanager.com " +
+                "https://www.google-analytics.com " +
+                "https://www.google.com " +
+                "https://www.gstatic.com " +
+                "https://encouragementglutton.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "img-src 'self' data: https://*.google.com https://*.gstatic.com https://*.google-analytics.com https://*.googletagmanager.com https://*.googleapis.com https://*.doubleclick.net https://*.googleadservices.com https://pagead2.googlesyndication.com",
-              "connect-src 'self' https://*.google-analytics.com https://*.google.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.doubleclick.net",
-              "frame-src 'self' https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://pagead2.googlesyndication.com https://www.google.com",
+              "connect-src 'self' " +
+                "https://*.google-analytics.com " +
+                "https://*.google.com " +
+                "https://*.gstatic.com " +
+                "https://pagead2.googlesyndication.com " +
+                "https://*.doubleclick.net " +
+                "https://firebase.googleapis.com " +
+                "https://ep1.adtrafficquality.google",
+              "frame-src 'self' " +
+                "https://googleads.g.doubleclick.net " +
+                "https://tpc.googlesyndication.com " +
+                "https://pagead2.googlesyndication.com " +
+                "https://www.google.com " +
+                "https://encouragementglutton.com",
               "font-src 'self' https://fonts.gstatic.com data:",
             ].join('; '),
           },
