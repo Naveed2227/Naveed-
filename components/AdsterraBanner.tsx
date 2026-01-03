@@ -5,7 +5,7 @@ import { useEffect } from "react";
 export default function AdsterraBanner() {
   useEffect(() => {
     (window as any).atOptions = {
-      key: "26985683759ed90ebd2497232a5046ba",
+      key: "28147349",
       format: "iframe",
       height: 90,
       width: 728,
@@ -14,7 +14,7 @@ export default function AdsterraBanner() {
 
     const script = document.createElement("script");
     script.src =
-      "https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js";
+      "https://encouragementglutton.com/28147349/invoke.js";
     script.async = true;
 
     document.body.appendChild(script);
