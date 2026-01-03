@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 export default function AdsterraBanner() {
   useEffect(() => {
-    // Desktop 728x90 banner
+    // Desktop 728x90
     (window as any).atOptionsDesktop = {
       key: "26985683759ed90ebd2497232a5046ba", // desktop key
       format: "iframe",
@@ -18,7 +18,7 @@ export default function AdsterraBanner() {
     desktopScript.async = true;
     document.body.appendChild(desktopScript);
 
-    // Mobile 320x50 banner
+    // Mobile 320x50
     (window as any).atOptionsMobile = {
       key: "26985683759ed90ebd2497232a5046ba", // replace with your mobile unit key
       format: "iframe",
@@ -28,7 +28,7 @@ export default function AdsterraBanner() {
     };
     const mobileScript = document.createElement("script");
     mobileScript.src =
-      "https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js"; // replace
+      "https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js";
     mobileScript.async = true;
     document.body.appendChild(mobileScript);
 
@@ -41,13 +41,13 @@ export default function AdsterraBanner() {
 
   return (
     <>
-      {/* Desktop banner */}
+      {/* Desktop Banner */}
       <div className="mobileHide" style={{ textAlign: "center", margin: "16px 0" }} />
 
-      {/* Mobile banner */}
+      {/* Mobile Banner */}
       <div className="mobileShow" style={{ textAlign: "center", margin: "16px 0" }} />
 
-      {/* Mobile/Desktop visibility CSS */}
+      {/* Mobile/Desktop CSS */}
       <style>
         {`
           .mobileShow { display: none; }
