@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
+import AdsterraBanner from "./components/AdsterraBanner";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter', display: 'swap' });
 
@@ -48,17 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* ========================= */}
           {/* Adsterra Banner at the TOP */}
           {/* ========================= */}
-          <script>
-  atOptions = {
-    'key' : '26985683759ed90ebd2497232a5046ba',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js"></script>
-          <div id="adsterra-container" className="w-full flex justify-center my-4" />
+          <AdsterraBanner />
 
           {/* Ezoic top_of_page Ad */}
           <div id="ezoic-pub-ad-placeholder-101" />
@@ -69,7 +59,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
 
         </div>
-      </body>
-    </html>
-  );
-}
+      <

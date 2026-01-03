@@ -4,37 +4,59 @@ import { useEffect } from "react";
 
 export default function AdsterraBanner() {
   useEffect(() => {
-    // Adsterra options
-    (window as any).atOptions = {
-      key: "26985683759ed90ebd2497232a5046ba", // your Adsterra key
+    // Desktop 728x90 banner
+    (window as any).atOptionsDesktop = {
+      key: "26985683759ed90ebd2497232a5046ba", // desktop key
       format: "iframe",
       height: 90,
       width: 728,
       params: {},
     };
-
-    // Load Adsterra script
-    const script = document.createElement("script");
-    script.src =
+    const desktopScript = document.createElement("script");
+    desktopScript.src =
       "https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js";
-    script.async = true;
+    desktopScript.async = true;
+    document.body.appendChild(desktopScript);
 
-    document.body.appendChild(script);
+    // Mobile 320x50 banner
+    (window as any).atOptionsMobile = {
+      key: "26985683759ed90ebd2497232a5046ba", // replace with your mobile unit key
+      format: "iframe",
+      height: 50,
+      width: 320,
+      params: {},
+    };
+    const mobileScript = document.createElement("script");
+    mobileScript.src =
+      "https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js"; // replace
+    mobileScript.async = true;
+    document.body.appendChild(mobileScript);
 
     // Cleanup
     return () => {
-      document.body.removeChild(script);
+      document.body.removeChild(desktopScript);
+      document.body.removeChild(mobileScript);
     };
   }, []);
 
   return (
-    <div
-      style={{
-        width: "100%",
-        textAlign: "center",
-        margin: "16px 0",
-        overflow: "hidden",
-      }}
-    />
+    <>
+      {/* Desktop banner */}
+      <div className="mobileHide" style={{ textAlign: "center", margin: "16px 0" }} />
+
+      {/* Mobile banner */}
+      <div className="mobileShow" style={{ textAlign: "center", margin: "16px 0" }} />
+
+      {/* Mobile/Desktop visibility CSS */}
+      <style>
+        {`
+          .mobileShow { display: none; }
+          @media only screen and (max-width: 480px) {
+            .mobileShow { display: inline; }
+            .mobileHide { display: none; }
+          }
+        `}
+      </style>
+    </>
   );
 }
