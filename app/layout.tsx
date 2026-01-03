@@ -48,24 +48,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* ========================= */}
           {/* Adsterra Banner at the TOP */}
           {/* ========================= */}
-          <Script
-            id="adsterra-options"
-            dangerouslySetInnerHTML={{
-              __html: `
-                atOptions = {
-                  'key' : '26985683759ed90ebd2497232a5046ba',
-                  'format' : 'iframe',
-                  'height' : 90,
-                  'width' : 728,
-                  'params' : {}
-                };
-              `,
-            }}
-          />
-          <Script
-            src="https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js"
-            strategy="afterInteractive"
-          />
+          <script>
+  atOptions = {
+    'key' : '26985683759ed90ebd2497232a5046ba',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js"></script>
           <div id="adsterra-container" className="w-full flex justify-center my-4" />
 
           {/* Ezoic top_of_page Ad */}
