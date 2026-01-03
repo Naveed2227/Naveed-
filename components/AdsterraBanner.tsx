@@ -6,7 +6,7 @@ export default function AdsterraBanner() {
   useEffect(() => {
     // Adsterra options
     (window as any).atOptions = {
-      key: "26985683759ed90ebd2497232a5046ba",
+      key: "26985683759ed90ebd2497232a5046ba", // your Adsterra key
       format: "iframe",
       height: 90,
       width: 728,
@@ -21,7 +21,7 @@ export default function AdsterraBanner() {
 
     document.body.appendChild(script);
 
-    // Cleanup on unmount
+    // Cleanup
     return () => {
       document.body.removeChild(script);
     };

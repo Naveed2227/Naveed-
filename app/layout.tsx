@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import AdsterraBanner from "./components/AdsterraBanner"; // make sure path is correct
+import AdsterraBanner from "./components/AdsterraBanner"; // THIS MUST MATCH EXACTLY
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
@@ -19,9 +19,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       </head>
+
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
-          {/* Adsterra Banner at the top */}
+          {/* Adsterra Banner */}
           <AdsterraBanner />
 
           {/* Main content */}
