@@ -31,27 +31,26 @@ export default function RootLayout({
         <div className="min-h-screen flex flex-col">
 
           {/* ========================= */}
-          {/* DESKTOP Adsterra Banner */}
+          {/* ADSTERRA BANNER PLACEMENT */}
           {/* ========================= */}
-          <div className="mobileHide w-full flex justify-center my-4" style={{ minHeight: 90 }}>
-            <Script
-              id="adsterra-desktop-options"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.atOptions = {
-                    key: '26985683759ed90ebd2497232a5046ba',
-                    format: 'iframe',
-                    height: 90,
-                    width: 728,
-                    params: {}
-                  };
-                `,
-              }}
-            />
-            <Script
-              src="https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js"
-              strategy="afterInteractive"
+          <div className="w-full flex justify-center py-4 bg-transparent" style={{ minHeight: '90px' }}>
+            {/* 1. Configuration Script */}
+            <Script id="adsterra-config" strategy="afterInteractive">
+              {`
+                atOptions = {
+                  'key' : '26985683759ed90ebd2497232a5046ba',
+                  'format' : 'iframe',
+                  'height' : 90,
+                  'width' : 728,
+                  'params' : {}
+                };
+              `}
+            </Script>
+
+            {/* 2. Invocation Script */}
+            <Script 
+              src="https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js" 
+              strategy="afterInteractive" 
             />
           </div>
 
