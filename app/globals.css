@@ -16,6 +16,25 @@
 /* --- Dark mode variant --- */
 @custom-variant dark (&:is(.dark *));
 
+/* --- Ad Visibility (Mobile / Desktop) --- */
+.mobileShow {
+  display: none;
+}
+
+.mobileHide {
+  display: inline;
+}
+
+@media (max-width: 480px) {
+  .mobileShow {
+    display: inline;
+  }
+
+  .mobileHide {
+    display: none;
+  }
+}
+
 /* --- Color Variables (Light Mode) --- */
 :root {
   --background: oklch(1 0 0);
@@ -144,6 +163,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
