@@ -15,6 +15,40 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+
+      <style type="text/css">
+  .mobileShow {display: none;}
+
+  /* Smartphone Portrait and Landscape */
+  @media only screen
+    and (min-device-width : 320px)
+    and (max-device-width : 480px){ 
+      .mobileShow {display: inline;}
+  }
+  .mobileHide { display: inline; }
+
+  /* Smartphone Portrait and Landscape */
+  @media only screen
+    and (min-device-width : 320px)
+    and (max-device-width : 480px){
+     .mobileHide { display: none;}
+  }
+</style>
+
+<div class="mobileShow"> Your code snippet for mobile </div>
+
+<div class="mobileHide"> <script>
+  atOptions = {
+    'key' : '26985683759ed90ebd2497232a5046ba',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://encouragementglutton.com/26985683759ed90ebd2497232a5046ba/invoke.js"></script> </div>
+
+
       <head>
         {/* Ezoic Privacy Scripts */}
         <script data-cfasync="false" src="https://cmp.gatekeeperconsent.com/min.js" />
@@ -45,28 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
 
-          {/* ========================= */}
-          {/* Adsterra Banner at the TOP */}
-          {/* ========================= */}
-          <Script
-            id="adsterra-options"
-            dangerouslySetInnerHTML={{
-              __html: `
-                atOptions = {
-                  'key' : '28147349',
-                  'format' : 'iframe',
-                  'height' : 90,
-                  'width' : 728,
-                  'params' : {}
-                };
-              `,
-            }}
-          />
-          <Script
-            src="https://encouragementglutton.com/28147349/invoke.js"
-            strategy="afterInteractive"
-          />
-          <div id="adsterra-container" className="w-full flex justify-center my-4" />
+         
 
           {/* Ezoic top_of_page Ad */}
           <div id="ezoic-pub-ad-placeholder-101" />
