@@ -863,7 +863,7 @@ const VEHICLES_DATA = [
     type: "Fighter Jet",
     faction: "Chinese",
     tier: "IV",
-    image: "J-35A.jpg",
+    image: "J-35.jpg",
     description: "Fifth-generation stealth fighter with advanced sensor fusion and networking capabilities.",
     stats: { health: 22600, speed: 790, afterburnerSpeed: 2250, agility: 48 },
     weapons: [
