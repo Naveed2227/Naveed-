@@ -6,7 +6,16 @@
     }
   ],
   "redirects": [
-
-     
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "v0-mwt-assistant.vercel.app"
+        }
+      ],
+      "destination": "https://mwtassistant.com/:path*",
+      "permanent": true
+    }
   ]
 }
