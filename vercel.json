@@ -7,10 +7,6 @@
   ],
   "redirects": [
 
-     {
-      "source": "/(.*)",
-      "destination": "https://www.mwtassistant.com/$1",
-      "permanent": true
-    }
+     
   ]
 }
