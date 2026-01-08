@@ -12294,14 +12294,16 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                {/* Vehicle Image Display */}
               {vehicle.image && (
                 <div className="relative">
-                  <img
-                    src={vehicle.image}
-                    alt={`${vehicle.name} vehicle`}
-                    className="w-full h-36 sm:h-40 md:h-48 object-cover rounded-lg bg-slate-800/20 shadow-lg"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                    }}
-                  />
+                  <div className="w-full flex justify-center overflow-hidden rounded-lg bg-slate-800/20 shadow-lg">
+                    <img
+                      src={vehicle.image}
+                      alt={`${vehicle.name} vehicle`}
+                      className="w-auto max-w-full h-36 sm:h-40 md:h-48 object-contain"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  </div>
                   {/* Rarity Tag */}
                   <div className="absolute top-2 left-2 z-20">
                     <div className={`px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg ${getRarityColor(getVehicleRarity(vehicle.name))}`}>
@@ -15266,3 +15268,5 @@ const MainPage = () => {
 export default function Page() {
   return <MainPage />;
 }
+
+        
