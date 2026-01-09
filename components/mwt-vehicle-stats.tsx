@@ -844,7 +844,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "EF-2000-Typhoon.jpg",
     description: "The Eurofighter 2000 Typhoon is Austria's primary supersonic multi-role fighter jet, providing national air sovereignty and defense capabilities.",
-     stats: { health: 32376, speed: 0, afterburnerSpeed: 0, agility: 0 },
+     stats: { health: 0, speed: 0, afterburnerSpeed: 0, agility: 0 },
     weapons: [
       
      
