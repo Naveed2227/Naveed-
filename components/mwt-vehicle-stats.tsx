@@ -266,6 +266,7 @@ const newVehicles = [
   "M1A1 AIM TUSK",
   "EC-665 Tiger HAP",
   "EF-2000 Typhoon",
+  "Pandur II",
   
 
 
@@ -283,7 +284,7 @@ const upcomingVehicles = [
 "Object 447A",
 "Al Kafil-1",
 "Vijayanta",
-"Pandur II",
+
 
 
 
@@ -3165,8 +3166,14 @@ const VEHICLES_DATA = [
     "tier": "III",
     "image": "Pandur-II.jpg",
     "description": "Modern wheeled armored vehicle designed for troop transport, modular weapon systems, reconnaissance roles, and rapid battlefield mobility.",
-    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
-    "weapons": []
+    "stats": { "health": 26100, "speed": 105, "armor": "25mm", "agility": 41.8 },
+    "weapons": [
+      { "name": "MK266 HEI", "type": "Main Gun", "damage": 320, "penetration": 55, "reload": 10 },
+      { "name": "MK246 API", "type": "Main Gun", "damage": 560, "penetration": 87, "reload": 10 },
+      { "name": "MK258 APFSDS", "type": "Main Gun", "damage": 620, "penetration": 165, "reload": 10 },
+      { "name": "Spike-LR2", "type": "Missile", "damage": 10090, "penetration": 900, "reload": 15 }
+      
+    ]
   },
 
   {
