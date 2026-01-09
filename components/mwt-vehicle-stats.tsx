@@ -3158,7 +3158,7 @@ const VEHICLES_DATA = [
     "type": "Light Tank",
     "faction": "Austrian",
     "tier": "III",
-    "image": "PandurII.jpg",
+    "image": "Pandur-II.jpg",
     "description": "Modern wheeled armored vehicle designed for troop transport, modular weapon systems, reconnaissance roles, and rapid battlefield mobility.",
     "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
     "weapons": []
