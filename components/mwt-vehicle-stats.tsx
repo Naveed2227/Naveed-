@@ -9290,7 +9290,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
 "Object 447A",
 "Al Kafil-1",
 "Vijayanta",
-"Pandur II",
+
 
 
 
