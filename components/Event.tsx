@@ -21,6 +21,19 @@ interface Event {
 // All events in chronological order
 const events: Event[] = [
   {
+    id: 30,
+    name: "Hunter’s Trail",
+    image: "/Events/Hunter’s-Trail.jpg",
+    startDate: "2026-1-12",
+    endDate: "2026-1-25",
+    vehicles: [
+      { id: 1, name: "Pandur II", type: "gacha" },
+      { id: 2, name: "EF-2000 Typhoon", type: "gacha" },
+    
+    
+    ],
+  },
+  {
     id: 29,
     name: "Steel Winter Stage 2",
     image: "/Events/Steel-Winter-2.jpg",

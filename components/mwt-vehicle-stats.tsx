@@ -2177,7 +2177,7 @@ const VEHICLES_DATA = [
     type: "Helicopter",
     faction: "Chinese",
     tier: "IV",
-    image: "Z-19E.png",
+    image: "Z-19E.jpg",
     description: "Light attack and reconnaissance helicopter with stealth characteristics.",
     stats: { health: 19000, speed: 280, verticalSpeed: 19.4, agility: 55 },
     weapons: [
