@@ -265,6 +265,7 @@ const newVehicles = [
   "Panzer 87-140",
   "M1A1 AIM TUSK",
   "EC-665 Tiger HAP",
+  "EF-2000 Typhoon",
   
 
 
@@ -283,7 +284,7 @@ const upcomingVehicles = [
 "Al Kafil-1",
 "Vijayanta",
 "Pandur II",
-"EF-2000 Typhoon",
+
 
 
   // Add upcoming vehicle names here
@@ -844,15 +845,19 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "EF-2000-Typhoon.jpg",
     description: "The Eurofighter 2000 Typhoon is Austria's primary supersonic multi-role fighter jet, providing national air sovereignty and defense capabilities.",
-     stats: { health: 0, speed: 0, afterburnerSpeed: 0, agility: 0 },
+     stats: { health: 28400, speed: 1370, afterburnerSpeed: 1920, agility: 60 },
     weapons: [
       
-     
+      { "name": "AIM-120C-5 AMRAAM", "type": "BVR AAM", "damage": 6200, "penetration": 51, "reload": 20 },
+      { "name": "AIM-9L Sidewinder", "type": "Short-Range AAM", "damage": 4600, "penetration": 38, "reload": 15 },
+      { "name": "AIM-9M Sidewinder", "type": "Short-Range AAM", "damage": 5200, "penetration": 43, "reload": 15 },
+      { "name": "MBDA Meteor", "type": "Short-Range AAM", "damage": 9100, "penetration": 69, "reload": 28 },
+      { "name": "GBU-12 Paveway II", "type": "Guided Bomb", "damage": 14300, "penetration": 200, "reload": 20 },
+      { "name": "GBU-48 Paveway II", "type": "Guided Bomb", "damage": 15700, "penetration": 250, "reload": 30 },
+      { "name": "GBU-38", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
+      { "name": "GBU-31 JDAM", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
       { "name": "Brimstone", "type": "Air-to-Ground Missile", "damage": 8100, "penetration": 800, "reload": 20 },
       { "name": "Storm Shadow", "type": "Cruise Missile", "damage": 20000, "penetration": 370, "reload": 40 },
-     
-      { "name": "AIM-120 AMRAAM", "type": "BVR AAM", "damage": 11300, "penetration": 60, "reload": 20 },
-      { "name": "AIM-132 ASRAAM", "type": "Short-Range AAM", "damage": 5200, "penetration": 65, "reload": 15 },
       
 
     ]
