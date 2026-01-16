@@ -284,6 +284,7 @@ const upcomingVehicles = [
 "Object 447A",
 "Al Kafil-1",
 "Vijayanta",
+"TF-X Kaan",
 
 
 
@@ -840,6 +841,26 @@ const VEHICLES_DATA = [
   },
   {
     id: 5,
+    name: "TF-X Kaan",
+    type: "Fighter Jet",
+    faction: "Turkish",
+    tier: "IV",
+    image: "TF-X-Kaan.jpg",
+    description: "The TF-X Kaan is Turkey's advanced supersonic multi-role fighter jet, designed to provide air superiority, national defense, and strategic combat capabilities. It represents a cornerstone of Turkey’s indigenous aerospace and defense ambitions.",
+     stats: { health: 0, speed: 1280, afterburnerSpeed: 2400, agility: 0 },
+    weapons: [
+      
+     
+      { "name": "MBDA Meteor", "type": "Short-Range AAM", "damage": 9100, "penetration": 69, "reload": 28 },
+      { "name": "GBU-12 Paveway II", "type": "Guided Bomb", "damage": 14300, "penetration": 200, "reload": 20 },
+      { "name": "GBU-48 Paveway II", "type": "Guided Bomb", "damage": 15700, "penetration": 250, "reload": 30 },
+      
+      
+
+    ]
+  },
+  {
+    id: 6,
     name: "EF-2000 Typhoon",
     type: "Fighter Jet",
     faction: "Austrian",
@@ -864,7 +885,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 6,
+    id: 7,
     name: "J-35",
     type: "Fighter Jet",
     faction: "Chinese",
@@ -885,7 +906,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 7,
+    id: 8,
     name: "MiG-41M",
     type: "Fighter Jet",
     faction: "Russian",
@@ -906,7 +927,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 8,
+    id: 9,
     name: "Su-57 Felon",
     type: "Fighter Jet",
     faction: "Russian",
@@ -927,7 +948,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 9,
+    id: 10,
     name: "B-Type",
     type: "Fighter Jet",
     faction: "Chinese",
@@ -950,7 +971,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 10,
+    id: 11,
     name: "Su-47 Berkut",
     type: "Fighter Jet",
     faction: "Russian",
@@ -975,7 +996,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 11,
+    id: 12,
     name: "YF-23",
     type: "Fighter Jet",
     faction: "American",
@@ -995,7 +1016,7 @@ const VEHICLES_DATA = [
 ]
   },
   {
-    id: 12,
+    id: 13,
     name: "F-35B Lightning II",
     type: "Fighter Jet",
     faction: "American",
@@ -1016,7 +1037,7 @@ const VEHICLES_DATA = [
 ]
   },
   {
-    id: 13,
+    id: 14,
     name: "J-50",
     type: "Fighter Jet",
     faction: "Chinese",
@@ -1038,7 +1059,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 14,
+    id: 15,
     name: "Su-75 Checkmate",
     type: "Fighter Jet",
     faction: "Russian",
@@ -1060,7 +1081,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 15,
+    id: 16,
     name: "X-2 Shinshin",
     type: "Fighter Jet",
     faction: "Japanese",
@@ -2516,7 +2537,7 @@ const VEHICLES_DATA = [
   "type": "Fighter Jet",
   "faction": "American",
   "tier": "III",
-  "image": "F-15EX-Eagle-II.jpg",
+  "image": "F-15SE-Silent-Eagle.jpg",
   "description": "Advanced variant of the F-15 Strike Eagle with modern avionics and stealth characteristics.",
   "stats": { "health": 19800, "speed": 820, "afterburnerSpeed": 2390, "agility": 43 },
   "weapons": [
@@ -6440,6 +6461,7 @@ const getAircraftRole = (vehicle: any) => {
   if (vehicle.name.includes("MiG-41M")) return "stealth"
   if (vehicle.name.includes("X2 Shinshin")) return "stealth"
   if (vehicle.name.includes("B-Type")) return "stealth"
+  if (vehicle.name.includes("TF-X Kaan")) return "stealth"
   if (vehicle.name.includes("F-16C Night Falcon")) return "multi-role"
   if (vehicle.name.includes("F-5E Tiger II")) return "multi-role"
   if (vehicle.name.includes("TU-222")) return "bomber"
@@ -6450,6 +6472,7 @@ const getAircraftRole = (vehicle: any) => {
   if (vehicle.name.includes("J-15")) return "multi-role"
   if (vehicle.name.includes("F/A-18F Super Hornet")) return "multi-role"
   if (vehicle.name.includes("Su-37 Terminator")) return "multi-role"
+  
 
   const weapons = vehicle.weapons || []
   const hasStealthWeapons = weapons.some(
@@ -7960,6 +7983,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
     return 1 - dist / maxLen
   }
   const [searchQuery, setSearchQuery] = useState("")
+  const [searchMode, setSearchMode] = useState<'vehicle' | 'weapon'>('vehicle')
   const [typeFilter, setTypeFilter] = useState<string[]>([])
   const [tierFilter, setTierFilter] = useState<string[]>([])
   const [countryFilter, setCountryFilter] = useState<string[]>([])
@@ -9272,7 +9296,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "T-15 Barbaris",
       "ZTQ-15",
       "Panzer 87-140",
-    
+      "TF-X Kaan",
 
     ]
     return marketVehicles.includes(vehicleName)
@@ -9290,7 +9314,6 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
 "Object 447A",
 "Al Kafil-1",
 "Vijayanta",
-
 
 
 
@@ -9663,6 +9686,8 @@ const getMissileImageCandidates = (weaponName: string) => {
 "M1 AGDS",
 "M1A1 AIM TUSK",
 "EC-665 Tiger HAP",
+"EF-2000 Typhoon",
+  "Pandur II",
 ]
    return exclusiveVehicles.includes(vehicleName)
   }
@@ -9705,14 +9730,73 @@ ${modulesList}
 ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : isConstructionVehicle(vehicle.name) ? " CONSTRUCTION VEHICLE - Under Development" : isExclusiveVehicle(vehicle.name) ? " EXCLUSIVE VEHICLE - Only obtained from Gatchs and Events" : " Standard Vehicle"}`
   }
 
-  const normalizeForSearch = (value: string) => value.toLowerCase().replace(/[^a-z0-9]/g, "")
+    // Fuzzy search function
+  const fuzzySearch = (text: string, query: string) => {
+    const normalizedText = text.toLowerCase()
+    const normalizedQuery = query.toLowerCase()
+    
+    // Simple fuzzy matching: check if all query characters appear in order in the text
+    let queryIndex = 0
+    for (let i = 0; i < normalizedText.length && queryIndex < normalizedQuery.length; i++) {
+      if (normalizedText[i] === normalizedQuery[queryIndex]) {
+        queryIndex++
+      }
+    }
+    return queryIndex === normalizedQuery.length
+  }
+
+  // Get all unique weapons with their vehicle info
+  const getAllWeapons = () => {
+    const weaponsMap = new Map<string, {weapon: any, vehicle: any}[]>()
+    
+    VEHICLES.forEach(vehicle => {
+      if (!vehicle.weapons) return
+      
+      vehicle.weapons.forEach(weapon => {
+        const weaponName = weapon.name
+        if (!weaponsMap.has(weaponName)) {
+          weaponsMap.set(weaponName, [])
+        }
+        weaponsMap.get(weaponName)?.push({weapon, vehicle})
+      })
+    })
+    
+    return Array.from(weaponsMap.entries()).map(([name, data]) => ({
+      name,
+      type: data[0].weapon.type,
+      damage: data[0].weapon.damage,
+      penetration: data[0].weapon.penetration,
+      reload: data[0].weapon.reload,
+      vehicles: data.map(d => d.vehicle)
+    }))
+  }
+
+  // Filter weapons based on search query
+  const filterWeapons = (weapons: ReturnType<typeof getAllWeapons>, query: string) => {
+    if (!query) return weapons
+    
+    const normalizedQuery = query.toLowerCase()
+    return weapons.filter(weapon => 
+      fuzzySearch(weapon.name.toLowerCase(), normalizedQuery) || 
+      fuzzySearch((weapon.type || '').toLowerCase(), normalizedQuery)
+    )
+  }
 
   // First, separate new vehicles from others
   const [newVehiclesList, otherVehiclesList] = [...VEHICLES].reduce(
     (acc, vehicle) => {
-      const normalizedName = normalizeForSearch(vehicle.name)
-      const normalizedQuery = normalizeForSearch(searchQuery)
-      const matchesSearch = normalizedName.includes(normalizedQuery)
+      const normalizedName = vehicle.name.toLowerCase()
+      const normalizedQuery = searchQuery.toLowerCase()
+      
+      // Check if vehicle name matches
+      const matchesVehicleName = fuzzySearch(normalizedName, normalizedQuery)
+      
+      // Only check weapon matches if in vehicle search mode
+      const matchesWeaponName = searchMode === 'vehicle' && vehicle.weapons?.some(weapon => 
+        fuzzySearch(weapon.name.toLowerCase(), normalizedQuery)
+      ) || false
+      
+      const matchesSearch = matchesVehicleName || matchesWeaponName
       const matchesType = typeFilter.length === 0 || typeFilter.includes(vehicle.type)
       const matchesTier = tierFilter.length === 0 || tierFilter.includes(formatTier(vehicle.tier))
       const matchesCountry = countryFilter.length === 0 || countryFilter.includes(vehicle.faction)
@@ -9765,10 +9849,21 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
 
   // Combine new vehicles first, then all other vehicles in their original order, and apply type filter
   const filteredVehicles = filterVehiclesByType([...newVehiclesList, ...otherVehiclesList])
+  
+  // Get and filter weapons if in weapon search mode
+  const allWeapons = searchMode === 'weapon' ? getAllWeapons() : []
+  const filteredWeapons = searchMode === 'weapon' ? filterWeapons(allWeapons, searchQuery) : []
 
-  const indexOfLastVehicle = currentPage * vehiclesPerPage
-  const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage
-  const paginatedVehicles = filteredVehicles.slice(indexOfFirstVehicle, indexOfLastVehicle)
+  const indexOfLastItem = currentPage * vehiclesPerPage
+  const indexOfFirstItem = indexOfLastItem - vehiclesPerPage
+  
+  const paginatedVehicles = searchMode === 'vehicle' 
+    ? filteredVehicles.slice(indexOfFirstItem, indexOfLastItem)
+    : []
+    
+  const paginatedWeapons = searchMode === 'weapon'
+    ? filteredWeapons.slice(indexOfFirstItem, indexOfLastItem)
+    : []
 
   const toggleCompare = (id: string) => {
     if (compare.includes(id)) {
@@ -11743,7 +11838,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-400 w-4 h-4" />
                     <input
                       type="text"
-                      placeholder="Search vehicles..."
+                      placeholder="Search vehicles or weapons..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="pl-10 pr-10 py-2 bg-slate-800 border border-slate-600 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm touch-manipulation w-full"
@@ -12103,8 +12198,8 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
         <div className="mb-6 flex items-center justify-between">
           <div className="flex flex-wrap items-center justify-between gap-4 w-full">
             <p className="text-slate-400 mx-1.5">
-              Showing {indexOfFirstVehicle + 1}-{Math.min(indexOfLastVehicle, filteredVehicles.length)} of{" "}
-              {filteredVehicles.length} vehicles
+              Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, searchMode === 'vehicle' ? filteredVehicles.length : filteredWeapons.length)} of{" "}
+              {searchMode === 'vehicle' ? filteredVehicles.length : filteredWeapons.length} {searchMode === 'vehicle' ? 'vehicles' : 'weapons'}
             </p>
             <div className="flex flex-wrap gap-2">
               {['Jets', 'Heli', 'Tanks'].map((type) => (
@@ -12154,7 +12249,8 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
        )}
        
        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {paginatedVehicles.map((vehicle) => (
+          {/* Vehicle Cards */}
+          {searchMode === 'vehicle' && paginatedVehicles.map((vehicle) => (
             <motion.div
               key={vehicle.id}
               initial={{ opacity: 0, y: 20 }}
@@ -13057,6 +13153,26 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                   placeholder="Ask about vehicles..."
                   className="flex-1 px-3 py-2 bg-slate-800 border border-slate-600 rounded text-sm focus:ring-2 focus:ring-cyan-500"
                 />
+                <div className="space-y-2 mb-4">
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="text"
+                      placeholder="Search vehicles or weapons..."
+                      className="flex-1 px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                      value={searchQuery}
+                      onChange={(e) => {
+                        setSearchQuery(e.target.value)
+                        setCurrentPage(1)
+                      }}
+                    />
+                    <button
+                      onClick={() => setSearchMode(prev => prev === 'vehicle' ? 'weapon' : 'vehicle')}
+                      className="px-3 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition-colors"
+                    >
+                      {searchMode === 'vehicle' ? '🔍 Weapons' : '🚗 Vehicles'}
+                    </button>
+                  </div>
+                </div>
                 <button
                   onClick={handleChatSubmit}
                   className="px-3 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded transition-colors"
