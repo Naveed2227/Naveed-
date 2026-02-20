@@ -1,8 +1,10 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Copy, Info, Mail, Shield, FileText, Share2 as Share } from "lucide-react"
+import { BotMessageSquareIcon, X, Send, Search, Bot, CalendarSearchIcon, Calendar, ChevronDown, ChevronRight, Trophy, Menu, Languages, Filter, Star, MapPin, Camera, Heart, Gift, CalendarDays, Copy, Info, Mail, Shield, FileText, Share2 as Share, Layers, Newspaper } from "lucide-react"
 import Script from "next/script";
+import VehicleTierList from "./VehicleTierList";
+import Articles from "./Articles";
 
 // Pages component
 const Pages = ({ activePage, onPageChange }: { activePage: string, onPageChange: (page: string) => void }) => {
@@ -176,6 +178,8 @@ const CopyToClipboard = ({ text, className = "" }: { text: string; className?: s
 import dynamic from 'next/dynamic';
 import TermsOfService from './TermsOfService';
 import AdMobBanner from './AdMobBanner';
+import AdsterraBanner from './AdsterraBanner';
+import SlotsPreset from './slots-preset';
 
 // Import EventComponent with SSR disabled to access window object
 const EventComponent = dynamic(() => import('./Event'), { ssr: false });
@@ -261,13 +265,13 @@ const formatTier = (tier: string | number): string => {
 
 // New Vehicles System
 const newVehicles = [
-  "ZTQ-15",
-  "Panzer 87-140",
-  "M1A1 AIM TUSK",
-  "EC-665 Tiger HAP",
-  "EF-2000 Typhoon",
-  "Pandur II",
-  
+  "TF-X Kaan",
+  "CV90120",
+  "K1A1",
+  "LAV-AD",
+  "Centauro 155/39 LW",
+  "Al Kafil-1",
+  "SH-16",
 
 
 
@@ -277,14 +281,10 @@ const newVehicles = [
 const upcomingVehicles = [
 
 
-
-"HARP General Krueger",
 "AMX-10RC",
-"2S38 Derivation",
-"Object 447A",
-"Al Kafil-1",
 "Vijayanta",
-"TF-X Kaan",
+  "Tempest",
+  "Cheonma-2",
 
 
 
@@ -423,6 +423,7 @@ const getVehicleRarity = (vehicleName: string) => {
 "Centauro I 120",
 "T-90A",
 "ZTZ99A",
+"Al Kafil-1",
 
 
 
@@ -436,7 +437,6 @@ const getVehicleRarity = (vehicleName: string) => {
 "M10 Booker",
 "M-SHORAD",
 "M109A6 Paladin",
-"Otomatic 76",
 "F-16C Night Falcon",
 "Mitsubishi F2B",
 "KA-50",
@@ -483,6 +483,10 @@ const getVehicleRarity = (vehicleName: string) => {
 "RAH-66 Comanche",
 "Mi-171SH",
 "EC-665 Tiger HAP",
+"2S38 Derivatsiya",
+"LAV-AD",
+
+
 
 
 ];
@@ -531,6 +535,14 @@ const getVehicleRarity = (vehicleName: string) => {
 "ZTQ-15",
   "Panzer 87-140",
 "M1A1 AIM TUSK", 
+"Object 477",
+"Otomatic 76",
+"TF-X Kaan",
+"CV90120",
+"K1A1",
+"Centauro 155/39 LW",
+    "SH-16",
+
 
 ];
   const legendaryVehicles = [
@@ -569,6 +581,18 @@ const getRarityColor = (rarity: string) => {
 
 // Battle Pass Data Structure
 const BATTLE_PASSES = [
+{
+    id: 15,
+    month: "February 2026",
+    name: "Operation Fire Shield",
+    image: "2026-Feb.jpg", // Upload your custom image to the same directory
+    description: "Dominate the frozen battlefields with elite winter warfare vehicles",
+    vehicles: ["CV90120", "TF-X Kaan"], // Vehicle IDs from VEHICLES array
+    rewards: {
+      premium: ["TF-X Kaan"],
+      free: ["CV90120"]
+    }
+  },
   {
     id: 14,
     month: "January 2026",
@@ -762,7 +786,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Advanced fifth-generation stealth fighter with supercruise capability and advanced avionics.",
     image: "Su-57M.jpg",
-    stats: { health: 24500, speed: 1260, afterburnerSpeed: 2520, agility: 55 },
+    stats: { health: 24500, speed: 1260, afterburnerSpeed: 2520, agility: 55, battleload: 4000, mass: 18200, stealth: "20-43" },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
@@ -784,7 +808,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "F-22-Raptor.jpg",
     description: "Air superiority fighter with unmatched stealth and supercruise capabilities.",
-    stats: { health: 25100, speed: 760, afterburnerSpeed: 2170, agility: 40 },
+    stats: { health: 25100, speed: 760, afterburnerSpeed: 2170, agility: 40, battleload: 3500, mass: 19700, stealth: "30-53" },
     weapons: [
   { "name": "GBU-38 JDAM", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
   { "name": "GBU-39", "type": "Guided Bomb", "damage": 14700, "penetration": 120, "reload": 28 },
@@ -804,7 +828,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "J-20-Mighty-Dragon.jpg",
     description: "Long-range stealth fighter designed for air superiority and strike missions.",
-    stats: { health: 21200, speed: 1110, afterburnerSpeed: 2200, agility: 52 },
+    stats: { health: 21200, speed: 1110, afterburnerSpeed: 2200, agility: 53, battleload: 2500, mass: 17000, stealth: "10-23" },
     weapons: [
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
       { "name": "LS-6-250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
@@ -825,7 +849,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "TU-222.jpg",
     description: "Next-generation supersonic strategic bomber with hypersonic missile capability.",
-    stats: { health: 32800, speed: 1210, afterburnerSpeed: 2880, agility: 29 },
+    stats: { health: 32800, speed: 1210, afterburnerSpeed: 2880, agility: 29, battleload: 6000, mass: 68000, stealth: "0-13" },
     weapons: [
       { "name": "KAB-250", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "FAB-250-M62", "damage": 15100, "penetration": 130, "reload": 30 },
@@ -847,13 +871,19 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "TF-X-Kaan.jpg",
     description: "The TF-X Kaan is Turkey's advanced supersonic multi-role fighter jet, designed to provide air superiority, national defense, and strategic combat capabilities. It represents a cornerstone of Turkey’s indigenous aerospace and defense ambitions.",
-     stats: { health: 0, speed: 1280, afterburnerSpeed: 2400, agility: 0 },
+     stats: { health: 35800, speed: 1150, afterburnerSpeed: 2160, agility: 60, battleload: 4000, mass: 19760, stealth: "20-48" },
     weapons: [
       
-     
+      { "name": "Gokdogan", "type": "Short-Range AAM", "damage": 6500, "penetration": 53, "reload": 20 },
+      { "name": "Bozdogan", "type": "Short-Range AAM", "damage": 6900, "penetration": 55, "reload": 21 },
       { "name": "MBDA Meteor", "type": "Short-Range AAM", "damage": 9100, "penetration": 69, "reload": 28 },
-      { "name": "GBU-12 Paveway II", "type": "Guided Bomb", "damage": 14300, "penetration": 200, "reload": 20 },
-      { "name": "GBU-48 Paveway II", "type": "Guided Bomb", "damage": 15700, "penetration": 250, "reload": 30 },
+      { "name": "GBU-12 Paveway II", "type": "Guided Bomb", "damage": 14460, "penetration": 165, "reload": 20 },
+      { "name": "GBU-24 Paveway III", "type": "Guided Bomb", "damage": 28920, "penetration": 303, "reload": 40 },
+      { "name": "GBU-48 Paveway II", "type": "Guided Bomb", "damage": 22030, "penetration": 238, "reload": 30 },
+      { "name": "GBU-31 JDAM", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
+      { "name": "KGK-82-SIHA", "type": "Guided Bomb", "damage": 14460, "penetration": 165, "reload": 25 },
+      { "name": "KEMANKES", "type": "Guided Bomb", "damage": 9180, "penetration": 700, "reload": 16 },
+      { "name": "SOM-J", "type": "Guided Bomb", "damage": 22490, "penetration": 484, "reload": 16 },
       
       
 
@@ -867,7 +897,7 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "EF-2000-Typhoon.jpg",
     description: "The Eurofighter 2000 Typhoon is Austria's primary supersonic multi-role fighter jet, providing national air sovereignty and defense capabilities.",
-     stats: { health: 28400, speed: 1370, afterburnerSpeed: 1920, agility: 60 },
+     stats: { health: 28400, speed: 1370, afterburnerSpeed: 1920, agility: 60, battleload: 5000, mass: 11000, stealth: "10-30" },
     weapons: [
       
       { "name": "AIM-120C-5 AMRAAM", "type": "BVR AAM", "damage": 6200, "penetration": 51, "reload": 20 },
@@ -884,15 +914,35 @@ const VEHICLES_DATA = [
 
     ]
   },
-  {
+    {
     id: 7,
+    name: "Tempest",
+    type: "Fighter Jet",
+    faction: "British",
+    tier: "IV",
+    image: "Tempest.jpg",
+    description: "Next-generation sixth-generation stealth fighter under development, designed to deliver advanced air dominance through cutting-edge sensors, artificial intelligence integration, optional manned capability, and next-level electronic warfare systems. ",
+     stats: { health: 0, speed: 1180, afterburnerSpeed: 3060, agility: 52, battleload: 0, mass: 0, stealth: "0-0" },
+    weapons: [
+      
+      { "name": "AIM-120C-5 AMRAAM", "type": "BVR AAM", "damage": 6200, "penetration": 51, "reload": 20 },
+      { "name": "MBDA Meteor", "type": "Short-Range AAM", "damage": 9100, "penetration": 69, "reload": 28 },
+      { "name": "GBU-24 Paveway III", "type": "Guided Bomb", "damage": 28920, "penetration": 303, "reload": 40 },
+      { "name": "GBU-48 Paveway II", "type": "Guided Bomb", "damage": 15700, "penetration": 250, "reload": 30 },
+      
+      
+
+    ]
+  },
+  {
+    id: 8,
     name: "J-35",
     type: "Fighter Jet",
     faction: "Chinese",
     tier: "IV",
     image: "J-35.jpg",
     description: "Fifth-generation stealth fighter with advanced sensor fusion and networking capabilities.",
-    stats: { health: 22600, speed: 790, afterburnerSpeed: 2250, agility: 48 },
+    stats: { health: 22600, speed: 790, afterburnerSpeed: 2250, agility: 48, battleload: 2200, mass: 14000, stealth: "15-28" },
     weapons: [
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
       { "name": "LS-6-250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
@@ -906,14 +956,14 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 8,
+    id: 9,
     name: "MiG-41M",
     type: "Fighter Jet",
     faction: "Russian",
     tier: "IV",
     description: "Next-generation interceptor with hypersonic capabilities and advanced radar systems.",
     image: "MiG-41M.jpg",
-    stats: { health: 21200, speed: 1350, afterburnerSpeed: 4050, agility: 43 },
+    stats: { health: 21200, speed: 1350, afterburnerSpeed: 4050, agility: 43, battleload: 3300, mass: 9200, stealth: "15-28" },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "GROM-E1", "type": "Air-to-Ground Missile", "damage": 16200, "penetration": 170, "reload": 36 },
@@ -927,14 +977,14 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 9,
+    id: 10,
     name: "Su-57 Felon",
     type: "Fighter Jet",
     faction: "Russian",
     tier: "IV",
     description: "Fifth-generation stealth fighter with advanced maneuverability and sensor fusion.",
     image: "Su-57-Felon.jpg",
-    stats: { health: 21900, speed: 1170, afterburnerSpeed: 2340, agility: 53 },
+    stats: { health: 21900, speed: 1170, afterburnerSpeed: 2340, agility: 53, battleload: 4375, mass: 18200, stealth: "15-38" },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "FAB-250-M62", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
@@ -948,14 +998,14 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 10,
+    id: 11,
     name: "B-Type",
     type: "Fighter Jet",
     faction: "Chinese",
     tier: "IV",
     image: "B-Type.jpg",
     description: "The B-Type is a futuristic Chinese stealth jet with extreme speed, agility, and firepower, capable of near-space and atmospheric dominance.",
-    stats: { health: 36400, speed: 1260, afterburnerSpeed: 2960, agility: 60 },
+    stats: { health: 36400, speed: 1260, afterburnerSpeed: 2960, agility: 60, battleload: 4950, mass: 21000, stealth: "20-43" },
     weapons: [
       
       { "name": "PL-10", "type": "Short-Range AAM", "damage": 7400, "penetration": 60, "reload": 16 },
@@ -971,14 +1021,14 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 11,
+    id: 12,
     name: "Su-47 Berkut",
     type: "Fighter Jet",
     faction: "Russian",
     tier: "IV",
     image: "Su-47-Berkut.jpg",
     description: "Experimental Russian fighter with forward-swept wings, advanced agility, composite materials, and testbed for next-generation aerodynamics and avionics.",
-    stats: { health: 34600, speed: 1120, afterburnerSpeed: 2250, agility: 60 },
+    stats: { health: 34600, speed: 1120, afterburnerSpeed: 2250, agility: 60, battleload: 5625, mass: 19500, stealth: "20-48" },
     weapons: [
     
       { "name": "R-37", "type": "Medium-Range Air-to-Air Missile", "damage": 8400, "penetration": 80, "reload": 30 },
@@ -996,14 +1046,14 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 12,
+    id: 13,
     name: "YF-23",
     type: "Fighter Jet",
     faction: "American",
     tier: "IV",
     image: "YF-23.jpg",
     description: "Experimental stealth fighter designed for air superiority, rival to the F-22.",
-    stats: { health: 23800, speed: 850, afterburnerSpeed: 2070, agility: 35 },
+    stats: { health: 23800, speed: 850, afterburnerSpeed: 2070, agility: 35, battleload: 3300, mass: 16800, stealth: "25-48" },
     weapons: [
   { "name": "GBU-38 JDAM", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
   { "name": "GBU-39", "type": "Guided Bomb", "damage": 14700, "penetration": 120, "reload": 28 },
@@ -1016,14 +1066,14 @@ const VEHICLES_DATA = [
 ]
   },
   {
-    id: 13,
+    id: 14,
     name: "F-35B Lightning II",
     type: "Fighter Jet",
     faction: "American",
     tier: "IV",
     image: "F-35B-Lightning-II.jpg",
     description: "Fifth-generation stealth multirole fighter with STOVL capability.",
-    stats: { health: 20200, speed: 760, afterburnerSpeed: 1780, agility: 38 },
+    stats: { health: 20200, speed: 760, afterburnerSpeed: 1780, agility: 38, battleload: 3500, mass: 14650, stealth: "25-38" },
    weapons: [
   { "name": "GBU-38 JDAM", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
   { "name": "GBU-31 JDAM", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
@@ -1037,14 +1087,14 @@ const VEHICLES_DATA = [
 ]
   },
   {
-    id: 14,
+    id: 15,
     name: "J-50",
     type: "Fighter Jet",
     faction: "Chinese",
     tier: "IV",
     image: "J-50.jpg",
     description: "Advanced stealth air superiority fighter concept with heavy armament.",
-    stats: { health: 26600, speed: 1170, afterburnerSpeed: 2480, agility: 55 },
+    stats: { health: 26600, speed: 1170, afterburnerSpeed: 2480, agility: 55, battleload: 3500, mass: 14000, stealth: "35-58" },
     weapons: [
       { "name": "FT-3", "damage": 15800, "penetration": 210, "reload": 34 },
       { "name": "LS-6-250", "damage": 17300, "penetration": 300, "reload": 40 },
@@ -1059,14 +1109,14 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 15,
+    id: 16,
     name: "Su-75 Checkmate",
     type: "Fighter Jet",
     faction: "Russian",
     tier: "IV",
     image: "Su-75-Checkmate.jpg",
     description: "Light stealth fighter designed for export and versatile combat missions.",
-    stats: { health: 18900, speed: 1300, afterburnerSpeed: 2310, agility: 60 },
+    stats: { health: 18900, speed: 1300, afterburnerSpeed: 2310, agility: 60, battleload: 2500, mass: 12000, stealth: "20-35" },
     weapons: [
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
       { "name": "KAB500KR", "type": "Guided Bomb", "damage": 17800, "penetration": 320, "reload": 40 },
@@ -1081,14 +1131,14 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 16,
+    id: 17,
     name: "X-2 Shinshin",
     type: "Fighter Jet",
     faction: "Japanese",
     tier: "IV",
     image: "X-2-Shinshin.jpg",
     description: "Japan's stealth technology demonstrator, testing advanced avionics, radar, and maneuverability for future fighters.",
-    stats: { health: 21400, speed: 940, afterburnerSpeed: 2230, agility: 53 },
+    stats: { health: 21400, speed: 940, afterburnerSpeed: 2230, agility: 53, battleload: 2000, mass: 9700, stealth: "15-33" },
     weapons: [
   { "name": "AAM-3", "type": "Air-to-Ground Missile", "damage": 5900, "penetration": 45, "reload": 15 },
   { "name": "AAM-4", "type": "BVR AAM", "damage": 7500, "penetration": 75, "reload": 30 },
@@ -1110,12 +1160,23 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Next-generation main battle tank with unmanned turret and advanced armor systems.",
     image: "T-14-Armata.jpg",
-    stats: { health: 42400, speed: 75, reverseSpeed: 70, armor: "780mm", agility: 34 },
+    stats: { health: 44410, speed: 55.2, reverseSpeed: 55.2, hullRotation: 27.7, towerRotation: 32.1, gunElivation: "-7/15" },
+    gunSpecs: [
+      {
+        name: "2A82-1M (125mm)",
+        type: "Cannon",
+        rateOfFire: 12,
+        reload: 5,
+        ammunition: 45,
+        magazine: 1,
+        range: 1666
+      }
+    ],
     weapons: [
-      { name: "3BM69 Vacuum-1", type: "Main Gun", damage: 10670, penetration: 900 },
-      { name: "30F26", type: "Main Gun", damage: 5000, penetration: 920 },
-      { name: "3BK18M", type: "Main Gun", damage: 12390, penetration: 550 },
-      { name: "3BK21", type: "Main Gun", damage: 10250, penetration: 800 }
+      { name: "3BM69 Vacuum-1 APFSDA", type: "Main Gun", damage: 10670, penetration: 900 },
+      { name: "30F26 HEI", type: "Main Gun", damage: 5000, penetration: 920 },
+      { name: "3BK18M HEAT", type: "Main Gun", damage: 12390, penetration: 550 },
+      { name: "3BK21 HEAT", type: "Main Gun", damage: 10250, penetration: 800 }
     ]
   },
   {
@@ -1126,7 +1187,18 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Abrams-X.jpg",
     description: "Next-generation prototype tank with unmanned turret and advanced systems.",
-    stats: { health: 40300, speed: 75, reverseSpeed: 45, armor: "800mm", agility: 35 },
+    stats: { health: 45950, speed: 57.6, reverseSpeed: 33.3, hullRotation: 29.3, towerRotation: 32, gunElivation: "-10/20" },
+    gunSpecs: [
+      {
+        name: "M256A1 (120mm)",
+        type: "Cannon",
+        rateOfFire: 12,
+        reload: 5,
+        ammunition: 44,
+        magazine: 1,
+        range: 1666
+      }
+    ],
     weapons: [
       { name: "M829A3", type: "Main Gun", damage: 10450, penetration: 670 },
       { name: "MRM-KE", type: "Main Gun", damage: 9150, penetration: 980 },
@@ -1144,7 +1216,19 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Type-10.jpg",
     description: "Modern main battle tank optimized for Japanese terrain with advanced fire control.",
-    stats: { health: 39800, speed: 72, reverseSpeed: 72, armor: "750mm", agility: 45 },
+    stats: { health: 42490, speed: 56, reverseSpeed: 56, hullRotation: 32.3, towerRotation: 32.1, gunElivation: "-10/20" },
+    gunSpecs: [
+      {
+        name: "JSW-120-L44 (120mm)",
+        type: "Cannon",
+        rateOfFire: 18,
+        reload: 3.3,
+        ammunition: 34,
+        magazine: 1,
+        range: 1626
+      }
+    ],
+    
     weapons: [
       { name: "JM33 APFSDS", type: "Main Gun", damage: 11330, penetration: 481 },
       { name: "JM12A1 HEAT", type: "Main Gun", damage: 12360, penetration: 480 },
@@ -1159,7 +1243,10 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Altay.jpg",
     description: "Turkey's modern main battle tank, emphasizing firepower, protection, mobility, and advanced technology.",
-    stats: { health: 42600, speed: 68, armor: "650mm", agility: 35, turnRate: 46 },
+    stats: { health: 47060, speed: 57.6, reverseSpeed: 31.7, hullRotation: 27.7, towerRotation: 28.6, gunElivation: "-10/20" },
+    gunSpecs: [ 
+      {name: "MKE (120mm)", type: "Cannon", reload: 4.8, ammunition: 57, magazine: 1, range: 1666, targetTime: 1.9}
+             ],
     weapons: [
       { name: "DM63A1 APFSDS", type: "Main Gun", damage: 11760, penetration: 810 },
       { name: "DM11 HEI", type: "Main Gun", damage: 5000, penetration: 85 },
@@ -1175,7 +1262,8 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "T-90A.jpg",
     description: "Modernized main battle tank with improved armor and advanced fire control.",
-    stats: { health: 40000, speed: 65, reverseSpeed: 30, maneuverability: 44, armor: "600mm", agility: 44 },
+    stats: { health: 42540, speed: 48, reverseSpeed: 8.3, hullRotation: 27.7, towerRotation: 24.1, gunElivation: "-8/15" },
+    gunSpecs:[ {name: "2A46M-5 (125mm)", type: "Cannon", reload: 5.3, ammunition: 43, magazine: 1, range: 1566, targetTime: 1.8},],
     weapons: [
       { name: "3BM42", type: "Main Gun", damage: 11390, penetration: 565 },
       { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
@@ -1192,7 +1280,11 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "KF-51-Panther.jpg",
     description: "Next-generation main battle tank with 130mm gun and advanced digital systems.",
-    stats: { health: 44000, speed: 74, armor: "800mm", agility: 39 },
+    stats: { health: 45730, speed: 74, reverseSpeed: 8.3, hullRotation: 29.2, towerRotation: 31.7, gunElivation: "-8/15" },
+    gunSpecs: [
+      { name: "Rh130 L-52 (130mm)", type: "Cannon", rateOfFire: 8, reload: 4.3, ammunition: 38, magazine: 1, range: 1760, targetTime: 2.0 },
+      { name: "2A46M-5 (125mm)", type: "Drone launcher", reload: 13, ammunition: 4, magazine: 4,  range: 1166 },
+    ],
     weapons: [
       { name: "DM11-1", type: "Main Gun", damage: 5300, penetration: 117 },
       { name: "DM12-1", type: "Main Gun", damage: 13640, penetration: 800 },
@@ -1209,7 +1301,9 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "M1-Abrams-Block-3.jpg",
     description: "An Experimental prototype tank intended as a successor to the Abrams MBT family",
-    stats: { health: 41000, speed: 80, reverseSpeed: 50, maneuverability: 40, armor: "600mm", agility: 40 },
+    stats: { health: 43390, speed: 57.6, reverseSpeed: 31.7, hullRotation: 30.8, towerRotation: 28.6, gunElivation: "-10/20" },
+    gunSpecs:[ {name: "XM360E1 (120mm)", type: "Cannon", reload: 4.8, ammunition: 50, magazine: 1, range: 1706, targetTime: 1.9},
+    ],
     weapons: [
       { name: "M830A1", type: "Main Gun", damage: 12100, penetration: 850 },
       { name: "M829A3", type: "Main Gun", damage: 10450, penetration: 670 },
@@ -1225,7 +1319,18 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Leopard-2A7V.jpg",
     description: "Most advanced Leopard variant with urban warfare modifications and enhanced protection.",
-    stats: { health: 42100, speed: 64, armor: "690mm", agility: 37 },
+    stats: { health: 46410, speed: 51.8, reverseSpeed: 25.5, hullRotation: 25.5, towerRotation: 32, gunElivation: "-10/20" },
+    gunSpecs: [
+      {
+        name: "Rh120 L/55 A1 (120mm)",
+        type: "Cannon",
+        reload: 4.7,
+        ammunition: 37,
+        magazine: 1,
+        range: 1666
+      }
+    ],
+
     weapons: [
       { name: "DM11", type: "Main Gun", damage: 5000, penetration: 85 },
       { name: "DM12", type: "Main Gun", damage: 12100, penetration: 480 },
@@ -1241,7 +1346,17 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "T-25-Pamir.jpg",
     description: "Advanced main battle tank with next-generation armor and fire control systems.",
-    stats: { health: 40000, speed: 65, armor: "810mm", agility: 30 },
+    stats: { health: 46620, speed: 60.4, reverseSpeed: 60.4, hullRotation: 26, towerRotation: 26.9, gunElivation: "-7/15" },
+    gunSpecs: [
+      {
+        name: "2A100M T2 (125mm)",
+        type: "Cannon",
+        reload: 10,
+        ammunition: 40,
+        magazine: 2,
+        range: 1706
+      }
+    ],
     weapons: [
       { name: "3BM50 Lead-1", type: "Main Gun", damage: 11170, penetration: 755 },
       { name: "30F26", type: "Main Gun", damage: 5000, penetration: 92 },
@@ -1257,7 +1372,17 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "T-95M.jpg",
     description: "Experimental heavy tank with revolutionary armor design and 152mm gun.",
-    stats: { health: 38100, speed: 75, armor: "740mm", agility: 30 },
+    stats: { health: 35070, speed: 52.7, reverseSpeed: 52.7, hullRotation: 27.3, towerRotation: 30.4, gunElivation: "-7/15" },
+    gunSpecs: [
+      {
+        name: "2A83 (152mm)",
+        type: "Cannon",
+        reload: 6.8,
+        ammunition: 30,
+        magazine: 1,
+        range: 1726
+      }
+    ],
     weapons: [
       { name: "Grifel-1", type: "Main Gun", damage: 15440, penetration: 850 },
       { name: "Grifel-2", type: "Main Gun", damage: 16100, penetration: 1100 },
@@ -1275,7 +1400,17 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "T-104-Bastion.jpg",
     description: "A Russian heavy main battle tank, featuring strong armor, AI-assisted and protection systems.",
-    stats: { health: 42200, speed: 60, armor: "820mm", agility: 45 },
+    stats: { health: 50500, speed: 46.5, reverseSpeed: 32.1, hullRotation: 23, towerRotation: 28.6, gunElivation: "-7/15" },
+    gunSpecs: [
+      {
+        name: "2A83M2 (152mm)",
+        type: "Cannon",
+        reload: 6.8,
+        ammunition: 38,
+        magazine: 1,
+        range: 1760
+      }
+    ],
     weapons: [
       { name: "Grifel-1", type: "Main Gun", damage: 15440, penetration: 850 },
       { name: "Grifel-2", type: "Main Gun", damage: 16100, penetration: 1100 },
@@ -1291,7 +1426,17 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Type-16-MCV.jpg",
     description: "Mobile Combat Vehicle with excellent mobility and firepower for rapid deployment.",
-    stats: { health: 33000, speed: 100, armor: "420mm", agility: 42 },
+    stats: { health: 35010, speed: 74.6, reverseSpeed: 30.3, towerRotation: 33.8, gunElivation: "-7/25" },
+    gunSpecs: [
+      {
+        name: "JCV (105mm)",
+        type: "Cannon",
+        reload: 3.8,
+        ammunition: 40,
+        magazine: 1,
+        range: 1626
+      }
+    ],
     weapons: [
       { name: "M735", type: "Main Gun", damage: 9630, penetration: 340 },
       { name: "Type 75", type: "Main Gun", damage: 10460, penetration: 127 },
@@ -1307,7 +1452,17 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "T-14-(152).jpg",
     description: "Next-generation Russian MBT prototype equipped with a powerful 152mm smoothbore gun and advanced armor.",
-    stats: { health: 43100, speed: 73, armor: "750mm", agility: 34 },
+    stats: { health: 45070, speed: 53.5, reverseSpeed: 53.5, hullRotation: 25.9, towerRotation: 36.9, gunElivation: "-7/15" },
+    gunSpecs: [
+      {
+        name: "2A83-M (152mm)",
+        type: "Cannon",
+        reload: 6.6,
+        ammunition: 30,
+        magazine: 1,
+        range: 1760
+      }
+    ],
     weapons: [
       { name: "Grifel-1", type: "Main Gun", damage: 15440, penetration: 850 },
       { name: "Grifel-2", type: "Main Gun", damage: 16100, penetration: 1100 },
@@ -1323,7 +1478,25 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Merkava-Mk.4.jpg",
     description: "Heavily armored main battle tank with unique rear-engine design and crew survivability focus.",
-    stats: { health: 46900, speed: 64, armor: "730mm", agility: 38 },
+    stats: { health: 46900, speed: 51.6, reverseSpeed: 51.6, hullRotation: 27.3, towerRotation: 26.9, gunElivation: "-7/20" },
+    gunSpecs: [
+      {
+        name: "IMI MG253 (120mm)",
+        type: "Cannon",
+        reload: 5,
+        ammunition: 46,
+        magazine: 1,
+        range: 1626
+      },
+{
+        name: "Soltam (60mm)",
+        type: "Bomb",
+        reload: 4,
+        ammunition: 30,
+        magazine: 1,
+        range: 833
+      }
+    ],
     weapons: [
       { name: "M322", type: "Main Gun", damage: 9900, penetration: 589 },
       { name: "M338", type: "Main Gun", damage: 10000, penetration: 620 },
@@ -1339,13 +1512,32 @@ const VEHICLES_DATA = [
     tier: "IV",
     description: "Tank support fighting vehicle designed for urban combat and infantry support.",
     image: "BMPT-Terminator-2.jpg",
-    stats: { health: 40600, speed: 65, armor: "550mm", agility: 44 },
+    stats: { health: 41100, speed: 46.5, reverseSpeed: 9.2, hullRotation: 28.6, towerRotation: 36.1, gunElivation: "-10/45" },
+    gunSpecs: [
+      {
+        name: "2A42 (30mm)",
+        type: "Cannon",
+        rateOfFire: 9.2,
+        reload: 10,
+        ammunition: 850,
+        magazine: 150,
+        range: 1500
+      },
+{
+        name: "9M120 Ataka (130mm)",
+        type: "Missile launcher",
+        reload: 12,
+        ammunition: 8,
+        magazine: 1,
+        range: 2000
+      }
+    ],
     weapons: [
       { name: "3UBR6", type: "Main Gun", damage: 560, penetration: 71 },
       { name: "3UBR8", type: "Main Gun", damage: 590, penetration: 165 },
       { name: "30F8", type: "Main Gun", damage: 675, penetration: 50 },
       { name: "M929", type: "Main Gun", damage: 630, penetration: 189 },
-      { name: "9M120 Ataka", type: "Missile", damage: 13220, penetration: 800, reload: 12 }
+      { name: "9M120 Ataka", type: "Missile", damage: 13220, penetration: 800 }
     ]
   },
   {
@@ -1356,10 +1548,31 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "SR-5-GMLRS.jpg",
     description: "Guided multiple launch rocket system with precision strike capability.",
-    stats: { health: 29900, speed: 85, armor: "380mm", agility: 18 },
+    stats: { health: 33050, speed: 63.4, reverseSpeed: 33.6, towerRotation: 14.3, gunElivation: "0/70" },
+    gunSpecs: [
+      {
+        name: "BRE122 (122mm)",
+        type: "Missile Launcher",
+        reload: 10,
+        ammunition: 20,
+        magazine: 20,
+        range: 1600
+      },
+{
+        name: "GE220 (220mm)",
+        type: "Missile Launcher",
+        reload: 15,
+        ammunition: 6,
+        magazine: 6,
+        range: 1733
+      },
+    ],
     weapons: [
-      { name: "BRE1 HE", type: "Missile", damage: 9400, penetration: 120, reload: 10 },
-      { name: "BRE7 HESH", type: "Missile", damage: 11100, penetration: 140, reload: 15 },
+      { name: "BRE1 HE", type: "Missile", damage: 9400, penetration: 120 },
+      { name: "BRE7 HESH", type: "Missile", damage: 10100, penetration: 280},
+{ name: "GR1 HESH", type: "Missile", damage: 13000, penetration: 200},
+{ name: "GR170 HE", type: "Missile", damage: 11100, penetration: 140},
+{ name: "Dragon Drone 60B HEAT", type: "Missile", damage: 1230, penetration: 800},
       
     ]
   },
@@ -1371,7 +1584,17 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "2S19-Msta-S.jpg",
     description: "Self-propelled howitzer with long-range precision artillery capability.",
-    stats: { health: 34300, speed: 60, armor: "450mm", agility: 32 },
+    stats: { health: 40090, speed: 46.5, reverseSpeed: 18.3, hullRotation: 24.8, towerRotation: 20.1, gunElivation: "-3/70" },
+    gunSpecs: [
+      {
+        name: "2A64 (152mm)",
+        type: "Cannon",
+        reload: 7.5,
+        ammunition: 50,
+        magazine: 1,
+        range: 2000
+      }
+    ],
     weapons: [
       { name: "30F25", type: "Main Gun", damage: 15000, penetration: 160 },
       { name: "30F45", type: "Main Gun", damage: 16200, penetration: 180 },
@@ -1387,7 +1610,28 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "Pantsir-S-1.jpg",
     description: "Combined gun-missile air defense system with advanced radar capabilities.",
-    stats: { health: 32700, speed: 70, armor: "420mm", agility: 35 },
+    stats: { health: 32360, speed: 53.5, reverseSpeed: 53.5, hullRotation: 33.6, towerRotation: 56.7, gunElivation: "-8/85" },
+    gunSpecs: [
+      {
+        name: "2A38M (30mm)",
+        type: "Cannon",
+        rateOfFire: 12.5,
+        reload: 6,
+        ammunition: 136,
+        magazine: 484,
+        range: 1666,
+      },
+{
+        name: "AAM 57E6M (90mm)",
+        type: "Missile Launcher",
+        reload: 18,
+        ammunition: 12,
+        magazine: 484,
+        range: 1900,
+        targetTime: 1.2
+      },
+
+    ],
     weapons: [
       { name: "3UBR6", type: "Main Gun", damage: 540, penetration: 112 },
       { name: "3UBR8", type: "Main Gun", damage: 525, penetration: 165 },
@@ -1403,7 +1647,17 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "M1128-Stryker.jpg",
     description: "Mobile gun system with rapid deployment capability and stealth features.",
-    stats: { health: 28800, speed: 97, armor: "380mm", agility: 40.1 },
+    stats: { health: 32480, speed: 71.6, reverseSpeed: 18.5, towerRotation: 32.1, gunElivation: "-8/20" },
+    gunSpecs: [
+      {
+        name: "M68A1E8 (105mm)",
+        type: "Cannon",
+        reload: 5,
+        ammunition: 18,
+        magazine: 1,
+        range: 1373
+      }
+    ],
     weapons: [
       { name: "M392A2", type: "Main Gun", damage: 9480, penetration: 372 },
       { name: "M393A2", type: "Main Gun", damage: 10340, penetration: 127 },
@@ -1419,7 +1673,17 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "M1-Abrams-CATTB.jpg",
     description: "Experimental American tank with 140mm gun, advanced armor, and fire control, testing technologies to boost combat effectiveness.",
-    stats: { health: 43700, speed: 72, armor: "870mm", agility: 36 },
+    stats: { health: 48200, speed: 50, reverseSpeed: 25.2, hullRotation: 27.9, towerRotation: 32.3, gunElivation: "-8/18" },
+    gunSpecs: [
+      {
+        name: "XM291 (140mm)",
+        type: "Cannon",
+        reload: 8,
+        ammunition: 38,
+        magazine: 2,
+        range: 1760
+      }
+    ],
     weapons: [
       { name: "XM965", type: "Main Gun", damage: 16560, penetration: 1000, Reload: 8 },
       { name: "XM964", type: "Main Gun", damage: 14640, penetration: 1050, Reload: 8 }
@@ -1434,9 +1698,19 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "VT-4A1.jpg",
     description: "Export variant main battle tank with advanced fire control and modular protection.",
-    stats: { health: 43200, speed: 71, armor: "690mm", agility: 37 },
+    stats: { health: 45470, speed: 58.8, reverseSpeed: 15.6, hullRotation: 27.3, towerRotation: 30.4, gunElivation: "-7/15" },
+    gunSpecs: [
+      {
+        name: "ZPT98 (125mm)",
+        type: "Cannon",
+        reload: 5.2,
+        ammunition: 38,
+        magazine: 1,
+        range: 1626
+      }
+    ],
     weapons: [
-      { name: "BTA4", type: "Main Gun", damage: 11660, penetration: 7000 },
+      { name: "BTA4", type: "Main Gun", damage: 11660, penetration: 700 },
       { name: "DTB12-125", type: "Main Gun", damage: 5000, penetration: 83 },
       { name: "BTS8 PELE", type: "Main Gun", damage: 13320, penetration: 1000 },
       { name: "GP125", type: "Main Gun", damage: 10190, penetration: 800 }
@@ -1450,7 +1724,17 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "ZTZ99A.jpg",
     description: "Advanced main battle tank with composite armor and laser warning systems.",
-    stats: { health: 42400, speed: 76, armor: "650mm", agility: 40 },
+    stats: { health: 44410, speed: 63, reverseSpeed: 31.2, hullRotation: 28.8, towerRotation: 30.4, gunElivation: "-7/15" },
+    gunSpecs: [
+      {
+        name: "Type 99A (125mm)",
+        type: "Cannon",
+        reload: 5.2,
+        ammunition: 39,
+        magazine: 1,
+        range: 1473
+      }
+    ],
     weapons: [
       { name: "DTB-125 HE", type: "Main Gun", damage: 4980, penetration: 183 },
       { name: "DTP-125 HEAT", type: "Main Gun", damage: 12230, penetration: 480 },
@@ -1466,7 +1750,17 @@ const VEHICLES_DATA = [
     tier: "IV",
     image: "ZTZ99-III.jpg",
     description: "Latest variant with enhanced armor package and improved battlefield management systems.",
-    stats: { health: 41700, speed: 65, armor: "630mm", agility: 34 },
+    stats: { health: 46940, speed: 54.6, reverseSpeed: 10.1, hullRotation: 24.5, towerRotation: 32.1, gunElivation: "-7/15" },
+    gunSpecs: [
+      {
+        name: "ZPT98 (125mm)",
+        type: "Cannon",
+        reload: 5.2,
+        ammunition: 39,
+        magazine: 1,
+        range: 1626
+      }
+    ],
     weapons: [
       { name: "DTB-125 HEI", type: "Main Gun", damage: 4980, penetration: 83 },
       { name: "BTA4", type: "Main Gun", damage: 11600, penetration: 700 },
@@ -1482,7 +1776,17 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Challenger-3.jpg",
     "description": "Next-generation British main battle tank with smoothbore gun and digital turret.",
-    "stats": { "health": 46200, "speed": 70, "armor": 800, "agility": 32 },
+    "stats": { "health": 47420, "speed": 54.8, reverseSpeed: 33.6, hullRotation: 24.5, towerRotation: 28.6, gunElivation: "-9/20" },
+    gunSpecs: [
+      {
+        name: "Rh12 L/55 A1 (120mm)",
+        type: "Cannon",
+        reload: 5.2,
+        ammunition: 37,
+        magazine: 1,
+        range: 1666
+      }
+    ],
     "weapons": [
       { "name": "DM11", "type": "Main Gun", "damage": 5000, "penetration": 85 },
       { "name": "DM12", "type": "Main Gun", "damage": 12100, "penetration": 480 },
@@ -1498,7 +1802,17 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "EMBT-120.jpg",
     "description": "A hybrid European main battle tank, combining Leopard 2 chassis with Leclerc turret.",
-    "stats": { "health": 41900, "speed": 75, "armor": 640, "agility": 38 },
+    "stats": { "health": 46180, "speed": 54.6, reverseSpeed: 36.7, hullRotation: 27.3, towerRotation: 32.1, gunElivation: "-9/15" },
+    gunSpecs: [
+      {
+        name: "Ascalon (120mm)",
+        type: "Cannon",
+        reload: 4.8,
+        ammunition: 46,
+        magazine: 1,
+        range: 1760
+      }
+    ],
     "weapons": [
       { "name": "OCC 120 G1 HEAT", "type": "Main Gun", "damage": 12230, "penetration": 480 },
       { "name": "OE120F1 HEI", "type": "Main Gun", "damage": 4800, "penetration": 85 },
@@ -1514,7 +1828,17 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "FV4034-Challenger-2-TES.jpg",
     "description": "A heavily upgraded British main battle tank with advanced armor for urban warfare.",
-    "stats": { "health": 42700, "speed": 56, "armor": 800, "agility": 30 },
+    "stats": { "health": 49240, "speed": 47.6, reverseSpeed: 31.1, hullRotation: 23, towerRotation: 25.8, gunElivation: "-10/20" },
+    gunSpecs: [
+      {
+        name: "L30E4 (120mm)",
+        type: "Cannon",
+        reload: 5,
+        ammunition: 52,
+        magazine: 1,
+        range: 1626
+      }
+    ],
     "weapons": [
       { "name": "L27A1", "type": "Main Gun", "damage": 11850, "penetration": 610 },
       { "name": "L23A1", "type": "Main Gun", "damage": 11400, "penetration": 397 },
@@ -1530,7 +1854,17 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Leopard-2-Revolution.jpg",
     "description": "An upgraded German main battle tank variant operated by Indonesia, featuring enhanced armor, modern sensors, improved crew protection, and advanced digital fire-control systems.",
-    "stats": { "health": 46400, "speed": 68, "armor": 640, "agility": 35 },
+    "stats": { "health": 46400, "speed": 57.1, reverseSpeed: 25.7, hullRotation: 25.2, towerRotation: 32.1, gunElivation: "-9/18" },
+    gunSpecs: [
+      {
+        name: "Rh120 L/44 (120mm)",
+        type: "Cannon",
+        reload: 4.7,
+        ammunition: 42,
+        magazine: 1,
+        range: 1666
+      }
+    ],
     "weapons": [
       { "name": "DM11", "type": "Main Gun", "damage": 4900, "penetration": 87 },
       { "name": "DM53A1", "type": "Main Gun", "damage": 11500, "penetration": 680 },
@@ -1547,7 +1881,17 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "Karrar.jpg",
     "description": "An Iranian main battle tank, featuring upgraded armor, firepower, and technology from T-72 design.",
-    "stats": { "health": 39800, "speed": 70, "armor": 590, "agility": 35 },
+    "stats": { "health": 42430, "speed": 54.8, reverseSpeed: 21, hullRotation: 25.2, towerRotation: 29.2, gunElivation: "-10/13" },
+    gunSpecs: [
+      {
+        name: "2A46 (125mm)",
+        type: "Cannon",
+        reload: 5.3,
+        ammunition: 42,
+        magazine: 1,
+        range: 1526
+      }
+    ],
     "weapons": [
       { "name": "3OF19", "type": "Main Gun", "damage": 5000, "penetration": 82 },
       { "name": "3BK29", "type": "Main Gun", "damage": 12630, "penetration": 660 },
@@ -1564,7 +1908,27 @@ const VEHICLES_DATA = [
     "tier": "IV",
     "image": "ZTQ-15.jpg",
     "description": "Modern Chinese light tank designed for high-altitude operations, featuring advanced mobility, firepower, and rapid deployment capabilities.",
-    "stats": { "health": 39500, "speed": 75, "armor": "265mm", "agility": 41 },
+    "stats": { "health": 39530, "speed": 64.5, reverseSpeed: 33.6, hullRotation: 32.4, towerRotation: 36.1, gunElivation: "-8/20" },
+    gunSpecs: [
+      {
+        name: "Type-15 (105mm)",
+        type: "Cannon",
+        reload: 3.6,
+        ammunition: 38,
+        magazine: 1,
+        range: 1666
+      },
+{
+        name: "QLZ-04 (35mm)",
+        type: "Bomb",
+        rateOfFire: 5,
+        reload: 6,
+        ammunition: 45,
+        magazine: 1,
+        range: 1000
+      }
+
+    ],
     "weapons": [
      { "name": "DTW1 APFSDS", "type": "Main Gun", "damage": 9980, "penetration": 338, "reload": 3.6 },
      { "name": "DTC02-105 APFSDS", "type": "Main Gun", "damage": 10430, "penetration": 580, "reload": 3.6 },
@@ -1576,24 +1940,75 @@ const VEHICLES_DATA = [
   },
 {
     "id": 129,
-    "name": "Object 447A",
+    "name": "Object 477",
     "type": "Main Battle Tank",
     "faction": "Russian",
     "tier": "IV",
-    "image": "Object-447A.jpg",
+    "image": "Object-477A.jpg",
     "description": "Experimental Russian main battle tank prototype emphasizing heavy firepower, improved protection systems, and advanced battlefield technology.",
-    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
-    "weapons": []
+    "stats": { "health": 45010, "speed": 48.4, reverseSpeed: 20.2, hullRotation: 24.5, towerRotation: 24.1, gunElivation: "-6/18" },
+    gunSpecs: [
+      {
+        name: "2A73 (152mm)",
+        type: "Cannon",
+        reload: 12,
+        ammunition: 35,
+        magazine: 10,
+        range: 1760
+      }
+    ],
+         "weapons": [
+    { "name": "Grifel-1 APFSDS", "type": "Missile", "damage": 15440, "penetration": 850, "reload": 5 },
+    { "name": "Grifel-2 APFSDS", "type": "Missile", "damage": 16100, "penetration": 1100, "reload": 5 },
+    { "name": "Grifel-3 HEAT", "type": "Missile", "damage": 16990, "penetration": 900, "reload": 5 },
+    { "name": "30F39 Krasnopol HEDP", "type": "Missile", "damage": 12490, "penetration": 480, "reload": 5 },
+    ]
   },
   {
     "id": 130,
+    "name": "Cheonma-2",
+    "type": "Main Battle Tank",
+    "faction": "North Korean",
+    "tier": "IV",
+    "image": "Cheonma-2.jpg",
+    "description": "A North Korean modern MBT prototype, designed to enhance armored warfare capabilities through improved firepower, upgraded protection systems, and the integration of modern battlefield technologies.",
+    "stats": { "health": 0, "speed": 0, reverseSpeed: 0, hullRotation: 0, towerRotation: 0, gunElivation: "-0/0" },
+    gunSpecs: [
+      {
+        name: "2A73 (152mm)",
+        type: "Cannon",
+        reload: 12,
+        ammunition: 35,
+        magazine: 10,
+        range: 1760
+      }
+    ],
+         "weapons": [
+    { "name": "Grifel-1 APFSDS", "type": "Missile", "damage": 15440, "penetration": 850, "reload": 5 },
+    { "name": "Grifel-2 APFSDS", "type": "Missile", "damage": 16100, "penetration": 1100, "reload": 5 },
+    { "name": "Grifel-3 HEAT", "type": "Missile", "damage": 16990, "penetration": 900, "reload": 5 },
+    { "name": "30F39 Krasnopol HEDP", "type": "Missile", "damage": 12490, "penetration": 480, "reload": 5 },
+    ]
+  },
+  {
+    "id": 131,
     "name": "Panzer 87-140",
     "type": "Main Battle Tank",
     "faction": "Swiss",
     "tier": "IV",
     "image": "Panzer-87-140.jpg",
     "description": "Swiss experimental main battle tank upgrade featuring a powerful 140mm cannon, enhanced armor protection, and improved survivability.",
-    "stats": { "health": 46200, "speed": 70, "armor": "670mm", "agility": 35 },
+    "stats": { "health": 46200, "speed": 50.7, reverseSpeed: 26.1, hullRotation: 26.4, towerRotation: 32.3, gunElivation: "-10/20" },
+    gunSpecs: [
+      {
+        name: "RUAG L/47 (140mm)",
+        type: "Cannon",
+        reload: 5.4,
+        ammunition: 32,
+        magazine: 1,
+        range: 1860
+      }
+    ],
     "weapons": [
     { "name": "Pz Kan Pfeil Pat APFSDS", "type": "Main Gun", "damage": 14520, "penetration": 1000, "reload": 6.8 },
     { "name": "Pz Kan HL Pat MZ HEAT", "type": "Main Gun", "damage": 17710, "penetration": 1100, "reload": 6.8 },
@@ -1602,14 +2017,24 @@ const VEHICLES_DATA = [
 
 
   {
-    "id": 131,
+    "id": 132,
     "name": "Leclerc S2 AZUR",
     "type": "Main Battle Tank",
     "faction": "French",
     "tier": "IV",
     "image": "Leclerc-S2-AZUR.jpg",
     "description": "Upgraded French main battle tank with urban warfare package and improved armor.",
-    "stats": { "health": 44700, "speed": 72, "armor": 640, "agility": 41 },
+    "stats": { "health": 46610, "speed": 58.1, reverseSpeed: 31.9, hullRotation: 27.3, towerRotation: 32.1, gunElivation: "-8/120" },
+    gunSpecs: [
+      {
+        name: "CN-120-26 (120mm)",
+        type: "Cannon",
+        reload: 5.2,
+        ammunition: 40,
+        magazine: 1,
+        range: 1726
+      }
+    ],
     "weapons": [
       { "name": "OFL 120 G1 APFSDS", "type": "Main Gun", "damage": 11240, "penetration": 495 },
       { "name": "OE 120 F1 HEI", "type": "Main Gun", "damage": 5000, "penetration": 85 },
@@ -1618,14 +2043,24 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 132,
+    "id": 133,
     "name": "Object 640",
     "type": "Main Battle Tank",
     "faction": "Russian",
     "tier": "IV",
     "image": "Object-640.jpg",
     "description": "The Object 640 \"Black Eagle\" is a Russian prototype main battle tank with modular armor.",
-    "stats": { "health": 42400, "speed": 80, "armor": 700, "agility": 38 },
+    "stats": { "health": 44550, "speed": 63, reverseSpeed: 22.9, hullRotation: 28.8, towerRotation: 32.3, gunElivation: "-7/15" },
+    gunSpecs: [
+      {
+        name: "2A46M-1 (125mm)",
+        type: "Cannon",
+        reload: 5,
+        ammunition: 45,
+        magazine: 1,
+        range: 1706
+      }
+    ],
     "weapons": [
       { "name": "3BM60 Lead-2", "type": "Main Gun", "damage": 11830, "penetration": 780 },
       { "name": "3BK18M", "type": "Main Gun", "damage": 12390, "penetration": 550 },
@@ -1634,14 +2069,33 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 133,
+    "id": 134,
     "name": "Leopard 2A-RC 3.0",
     "type": "Main Battle Tank",
     "faction": "German",
     "tier": "IV",
     "image": "Leopard-2-A-RC-3.0.jpg",
     "description": "Mobile gun system with rapid deployment capability and stealth features.",
-    "stats": { "health": 41900, "speed": 70, "armor": 640, "agility": 38 },
+    "stats": { "health": 46180, "speed": 60.5, reverseSpeed: 32.1, hullRotation: 27.3, towerRotation: 32.1, gunElivation: "-15/20" },
+    gunSpecs: [
+      {
+        name: "NPz K-140 (140mm)",
+        type: "Cannon",
+        reload: 6.2,
+        ammunition: 38,
+        magazine: 1,
+        range: 170
+      },
+{
+        name: "Spke NLOS (150mm)",
+        type: "Missile Launcher",
+        reload: 4,
+        ammunition: 4,
+        magazine: 1,
+        range: 1400
+      }
+
+    ],
     "weapons": [
       { "name": "XM1401E APFSDS", "type": "Main Gun", "damage": 13090, "penetration": 950 },
       { "name": "XME140 HEI", "type": "Main Gun", "damage": 13780, "penetration": 103 },
@@ -1650,14 +2104,24 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 134,
+    "id": 135,
     "name": "Leopard 2A8",
     "type": "Main Battle Tank",
     "faction": "German",
     "tier": "IV",
     "image": "Leopard-2A8.jpg",
     "description": "A modern German main battle tank, featuring advanced armor, improved firepower, and upgraded targeting systems for battlefield dominance.",
-    "stats": { "health": 45900, "speed": 72, "armor": 710, "agility": 38 },
+    "stats": { "health": 47050, "speed": 58.8, reverseSpeed: 27.5, hullRotation: 27.3, towerRotation: 32.1, gunElivation: "-9/18" },
+    gunSpecs: [
+      {
+        name: "Rh 120 L/55 (120mm)",
+        type: "Cannon",
+        reload: 4.7,
+        ammunition: 7,
+        magazine: 1,
+        range: 1666
+      }
+    ],
     "weapons": [
       { "name": "DM53 APFSDS", "type": "Main Gun", "damage": 11440, "penetration": 650 },
       { "name": "DM11 HEI", "type": "Main Gun", "damage": 5000, "penetration": 85 },
@@ -1666,14 +2130,34 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 135,
+    "id": 136,
     "name": "T-15 Barbaris",
     "type": "Missile Carrier",
     "faction": "Russian",
     "tier": "IV",
     "image": "T-15-Barbaris.jpg",
     "description": "A heavily armored IFV featuring a 57 mm autocannon, Kornet-EM missiles, strong frontal protection, and impressive mobility for its weight overall.",
-    "stats": { "health": 45900, "speed": 69, "armor": 120, "agility": 42 },
+    "stats": { "health": 45940, "speed": 55.6, reverseSpeed: 55.6, hullRotation: 23, towerRotation: 38.4, gunElivation: "-10/50" },
+    gunSpecs: [
+      {
+        name: "2A91 (57mm)",
+        type: "Cannon",
+        rateOfFire: 2,
+        reload: 5,
+        ammunition: 184,
+        magazine: 184,
+        range: 1706
+      },
+{
+        name: "9K135 Kornet-EM (152mm)",
+        type: "Missile Launcher",
+        reload: 6,
+        ammunition: 8,
+        magazine: 4,
+        range: 2000
+      }
+
+    ],
     "weapons": [
       { "name": "3BM22 API", "type": "Main Gun", "damage": 1540, "penetration": 147 },
       { "name": "3U08 HEI", "type": "Main Gun", "damage": 800, "penetration": 75 },
@@ -1683,22 +2167,43 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 136,
+    "id": 137,
     "name": "T-20 Monolit",
     "type": "Missile Carrier",
     "faction": "Russian",
     "tier": "IV",
     "image": "T-20-Monolit.jpg",
     "description": "Advanced Russian main battle tank equipped with a 2A42 autocannon, Kornet ATGMs, and a 30mm AGS-30 grenade launcher. Known for its formidable firepower and versatility on the battlefield.",
-    "stats": {
-      "health": 42300,
-      "speed": 70,
-      "reverseSpeed": 50,
-      "turretRotationSpeed": 49.8,
-      "hullRotationSpeed": 40,
-      "armor": 400,
-      "agility": 45
-    },
+    "stats": {"health": 42630, "speed": 58.1,reverseSpeed: 58.1, hullRotation: 25.9, towerRotation: 40.1, gunElivation: "-8/45" },
+    gunSpecs: [
+      {
+        name: "2A42 (30mm)",
+        type: "Cannon",
+        rateOfFire: 9.2,
+        reload: 0,
+        ammunition: 600,
+        magazine: 150,
+        range: 1500
+      },
+{
+        name: "2A82-1M (30mm)",
+        type: "Bomb",
+        rateOfFire: 1.7,
+        reload: 5,
+        ammunition: 29,
+        magazine: 1,
+        range: 666
+      },
+{
+        name: "9K135 Kornet (152mm)",
+        type: "Missile Launcher",
+        reload: 12,
+        ammunition: 8,
+        magazine: 1,
+        range: 1666
+      }
+    ],
+   
     "weapons": [
       { "name": "3UBR6", "type": "Main Gun", "damage": 560, "penetration": 71 },
       { "name": "3UBR8", "type": "Main Gun", "damage": 590, "penetration": 165 },
@@ -1710,7 +2215,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 137,
+    "id": 138,
     "name": "KF31 Lynx",
     "type": "Light Tank",
     "faction": "German",
@@ -1718,14 +2223,29 @@ const VEHICLES_DATA = [
     "image": "KF31-Lynx.jpg",
     "description": "A versatile German infantry fighting vehicle equipped with a 30mm autocannon and Spike LR2 missiles, adaptable for various combat roles.",
     "stats": {
-      "health": 38600,
-      "speed": 80,
-      "reverseSpeed": 30,
-      "turretRotationSpeed": 50,
-      "hullRotationSpeed": 40,
-      "armor": 300,
-      "agility": 40
-    },
+      "health": 40500,
+      "speed": 60.5,
+      reverseSpeed: 26.9, hullRotation: 28.8, towerRotation: 45.8, gunElivation: "-10/45" },
+    gunSpecs: [
+      {
+        name: "2A82-1M (30mm)",
+        type: "Cannon",
+        rateOfFire: 9.3,
+        reload: 5,
+        ammunition: 928,
+        magazine: 232,
+        range: 1526
+      },
+{
+        name: "Spike-LR II (110mm)",
+        type: "Cannon",
+        reload: 10,
+        ammunition: 4,
+        magazine: 1,
+        range: 1500,
+        targetTime: 2
+      }
+    ],
     "weapons": [
       { "name": "PMC287", "type": "Main Gun", "damage": 570, "penetration": 195 },
       { "name": "PMC308", "type": "Main Gun", "damage": 300, "penetration": 80 },
@@ -1735,7 +2255,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 138,
+    "id": 139,
     "name": "T-90M",
     "type": "Main Battle Tank",
     "faction": "Russian",
@@ -1743,14 +2263,19 @@ const VEHICLES_DATA = [
     "image": "T-90M.jpg",
     "description": "Russia’s advanced main battle tank, featuring upgraded armor, firepower, electronics, and battlefield survivability.",
     "stats": {
-      "health": 41300,
-      "speed": 70,
-      "reverseSpeed": 0,
-      "turretRotationSpeed": 0,
-      "hullRotationSpeed": 45,
-      "armor": 800,
-      "agility": 40
-    },
+      "health": 4330,
+      "speed": 56.5,
+      reverseSpeed: 16.8, hullRotation: 27.3, towerRotation: 32.3, gunElivation: "-8/15" },
+    gunSpecs: [
+      {
+        name: "2A46M-5 (125mm)",
+        type: "Cannon",
+        reload: 5.3,
+        ammunition: 40,
+        magazine: 1,
+        range: 1566
+      }
+    ],
     "weapons": [
       { "name": "3BM46 APFSDS", "type": "Main Gun", "damage": 11640, "penetration": 690 },
       { "name": "30F26 HEI", "type": "Main Gun", "damage": 5000, "penetration": 92 },
@@ -1760,7 +2285,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 139,
+    "id": 140,
     "name": "K2 Black Panther",
     "type": "Main Battle Tank",
     "faction": "SouthKorean",
@@ -1768,14 +2293,19 @@ const VEHICLES_DATA = [
     "image": "K2-Black-Panther.jpg",
     "description": "South Korea's advanced main battle tank, featuring superior firepower, mobility, armor protection, and state-of-the-art battlefield technology.",
     "stats": {
-      "health": 42800,
-      "speed": 75,
-      "reverseSpeed": 0,
-      "turretRotationSpeed": 0,
-      "hullRotationSpeed": 40,
-      "armor": 600,
-      "agility": 0
-    },
+      "health": 44840,
+      "speed": 56.5,
+      reverseSpeed: 29.4, hullRotation: 28.8, towerRotation: 338, gunElivation: "-11/20" },
+    gunSpecs: [
+      {
+        name: "CN08 L/55 (120mm)",
+        type: "Cannon",
+        reload: 4.5,
+        ammunition: 40,
+        magazine: 1,
+        range: 1666
+      }
+    ],
     "weapons": [
       { "name": "K276 APFSDS", "type": "Main Gun", "damage": 11500, "penetration": 600 },
       { "name": "K279 APFSDS", "type": "Main Gun", "damage": 11830, "penetration": 740 },
@@ -1784,7 +2314,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 140,
+    "id": 141,
     "name": "Al-Khalid",
     "type": "Main Battle Tank",
     "faction": "Pakistani",
@@ -1792,15 +2322,19 @@ const VEHICLES_DATA = [
     "image": "Al-Khalid.jpg",
     "description": "Pakistani main battle tank, jointly developed with China, featuring advanced firepower, mobility, and protection.",
     "stats": {
-      "health": 43600,
-      "turnRate": 45,
-      "speed": 70,
-      "reverseSpeed": 0,
-      "turretRotationSpeed": 0,
-      "hullRotationSpeed": 0,
-      "armor": 650,
-      "agility": 38
-    },
+      "health": 46230,
+      "speed": 52.2,
+      reverseSpeed: 25.2, hullRotation: 29.5, towerRotation: 33.8, gunElivation: "-7/15" },
+    gunSpecs: [
+      {
+        name: "ZPT98 (125mm)",
+        type: "Cannon",
+        reload: 5,
+        ammunition: 49,
+        magazine: 1,
+        range: 1626
+      }
+    ],
     "weapons": [
       { "name": "DTB-125 HE", "type": "Main Gun", "damage": 4980, "penetration": 83 },
       { "name": "DTP-125 HEAT", "type": "Main Gun", "damage": 12230, "penetration": 480 },
@@ -1809,7 +2343,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 141,
+    "id": 142,
     "name": "Arjun Mk.2",
     "type": "Main Battle Tank",
     "faction": "Indian",
@@ -1817,14 +2351,19 @@ const VEHICLES_DATA = [
     "image": "Arjun-Mk.2.jpg",
     "description": "India's upgraded battle tank with stronger armor, 120mm missile-firing gun, and advanced systems.",
     "stats": {
-      "health": 46600,
-      "speed": 70,
-      "reverseSpeed": 0,
-      "turretRotationSpeed": 0,
-      "hullRotationSpeed": 35,
-      "armor": 660,
-      "agility": 35
-    },
+      "health": 47730,
+      "speed": 52.2,
+      reverseSpeed: 17.6, hullRotation: 27.1, towerRotation: 29.2, gunElivation: "-10/20" },
+    gunSpecs: [
+      {
+        name: "CTG-120 (120mm)",
+        type: "Cannon",
+        reload: 4.8,
+        ammunition: 39,
+        magazine: 1,
+        range: 1626
+      }
+    ],
     "weapons": [
       { "name": "L31A7 HESH", "type": "Main Gun", "damage": 11500, "penetration": 152 },
       { "name": "PCD APHE", "type": "Main Gun", "damage": 12160, "penetration": 450 },
@@ -1833,7 +2372,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 142,
+    "id": 143,
     "name": "M10 Booker",
     "type": "Light Tank",
     "faction": "American",
@@ -1841,14 +2380,29 @@ const VEHICLES_DATA = [
     "image": "M10-Booker.jpg",
     "description": "A mobile assault gun designed to neutralize fortified positions and light armor.",
     "stats": {
-      "health": 39300,
-      "speed": 75,
-      "reverseSpeed": 30,
-      "turretRotationSpeed": 30,
-      "hullRotationSpeed": 35,
-      "armor": 350,
-      "agility": 38
-    },
+      "health": 40390,
+      "speed": 60.5,
+     reverseSpeed: 35.8, hullRotation: 27.3, towerRotation: 32.1, gunElivation: "-10/20" },
+    gunSpecs: [
+      {
+        name: "M35 (105mm)",
+        type: "Cannon",
+        reload: 4.6,
+        ammunition: 31,
+        magazine: 1,
+        range: 1566
+      },
+{
+        name: "SwitchBlade 300 (100mm)",
+        type: "Drone Launcher",
+        reload: 15,
+        ammunition: 4,
+        magazine: 4,
+        range: 1000,
+        targetTime: 1.2
+      }
+
+    ],
     "weapons": [
       { "name": "M392A2", "type": "Main Gun", "damage": 9480, "penetration": 372 },
       { "name": "M393A2", "type": "Main Gun", "damage": 10340, "penetration": 127 },
@@ -1858,7 +2412,33 @@ const VEHICLES_DATA = [
     ]
    },   
   {
-    "id": 143,
+    "id": 144,
+    "name": "CV90120",
+    "type": "Light Tank",
+    "faction": "Sweden",
+    "tier": "IV",
+    "image": "CV90120.jpg",
+    "description": "The CV90120 is a Swedish experimental light tank based on the CV90 platform, mounting a 120 mm smoothbore gun to provide high firepower with enhanced mobility.",
+    stats: { health: 42510, speed: 56, reverseSpeed: 33.6, hullRotation: 37.2, towerRotation: 40.1, gunElivation: "-8/22" },
+    gunSpecs: [
+      {
+        name: "RUAG L/50 (120mm)",
+        type: "Cannon",
+        reload: 3.8,
+        ammunition: 45,
+        magazine: 1,
+        range: 1666
+      }
+    ],
+    "weapons": [
+      { "name": "DM23 APFSDS", "type": "Main Gun", "damage": 11660, "penetration": 410 },
+{ "name": "slsgr m/95 HEDP", "type": "Main Gun", "damage": 13600, "penetration": 130 },
+{ "name": "DM12A1 HEAT", "type": "Main Gun", "damage": 12890, "penetration": 480 },
+{ "name": "slpprj m/95 APFSDS", "type": "Main Gun", "damage": 12290, "penetration": 700 },
+    ]
+   },   
+  {
+    "id": 145,
     "name": "PL-01",
     "type": "Light Tank",
     "faction": "Polish",
@@ -1866,14 +2446,19 @@ const VEHICLES_DATA = [
     "image": "PL-01.jpg",
     "description": "A concept stealth tank featuring a 120mm cannon and advanced camouflage systems.",
     "stats": {
-      "health": 36100,
-      "speed": 85,
-      "reverseSpeed": 45,
-      "turretRotationSpeed": 40,
-      "hullRotationSpeed": 30,
-      "armor": 320,
-      "agility": 36
-    },
+      "health": 340,
+      "speed": 58.8,
+      reverseSpeed: 32.1, hullRotation: 25, towerRotation: 37.2, gunElivation: "-10/20" },
+    gunSpecs: [
+      {
+        name: "CTG (120mm)",
+        type: "Cannon",
+        reload: 4.8,
+        ammunition: 45,
+        magazine: 1,
+        range: 1666
+      }
+    ],
     "weapons": [
       { "name": "M829A3", "type": "Main Gun", "damage": 10450, "penetration": 670 },
       { "name": "M830", "type": "Main Gun", "damage": 10930, "penetration": 800 },
@@ -1882,7 +2467,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 144,
+    "id": 146,
     "name": "ZLT-11",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -1890,14 +2475,19 @@ const VEHICLES_DATA = [
     "image": "ZLT-11.jpg",
     "description": "A Chinese wheeled infantry fighting vehicle armed with a 105 mm cannon and anti-tank missiles.",
     "stats": {
-      "health": 33900,
-      "speed": 100,
-      "reverseSpeed": 40,
-      "turretRotationSpeed": 45.3,
-      "hullRotationSpeed": 45.3,
-      "armor": 30,
-      "agility": 45.3
-    },
+      "health": 34430,
+      "speed": 74.6,
+      reverseSpeed: 26.9, towerRotation: 36.1, gunElivation: "-5/18" },
+    gunSpecs: [
+      {
+        name: "ZPL-98A (105mm)",
+        type: "Cannon",
+        reload: 4,
+        ammunition: 40,
+        magazine: 1,
+        range: 1666
+      }
+    ],
     "weapons": [
       { "name": "Type 83 HEAT", "type": "Main Gun", "damage": 10890, "penetration": 425 },
       { "name": "DTB-1 HESH", "type": "Main Gun", "damage": 4500, "penetration": 55 },
@@ -1906,7 +2496,36 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 145,
+    "id": 147,
+    "name": "Centauro 155/39 LW",
+    "type": "Tank Destroyer",
+    "faction": "Italian",
+    "tier": "IV",
+    "image": "Centauro-155-39-LW.jpg",
+    "description": "The Centauro 155/39 LW is an Italian wheeled self-propelled artillery system designed to deliver rapid, long-range fire support with high strategic mobility.",
+    "stats": {
+      "health": 37450,
+      "speed": 74.6,
+      reverseSpeed: 31.6, towerRotation: 18.3, gunElivation: "-4/55" },
+    gunSpecs: [
+      {
+        name: "FH70 (155mm)",
+        type: "Cannon",
+        reload: 7.5,
+        ammunition: 15,
+        magazine: 1,
+        range: 2000
+      }
+    ],
+    "weapons": [
+{ "name": "Vulcano 155 BER HE", "type": "Main Gun", "damage": 16900, "penetration": 230 },
+{ "name": "Vulcano 155 SAL APCR", "type": "Main Gun", "damage": 20500, "penetration": 700 },
+{ "name": "Vulcano 155 GLP HEDP", "type": "Main Gun", "damage": 12900, "penetration": 380 },
+
+    ]
+  },
+  {
+    "id": 148,
     "name": "M-SHORAD",
     "type": "Missile Carrier",
     "faction": "American",
@@ -1914,40 +2533,94 @@ const VEHICLES_DATA = [
     "image": "M-SHORAD.jpg",
     "description": "Mobile short-range air defense system with autocannons and Stinger missiles.",
     "stats": {
-      "health": 27900,
-      "speed": 97,
-      "reverseSpeed": 30,
-      "turretRotationSpeed": 55,
-      "hullRotationSpeed": 50,
-      "armor": 250,
-      "agility": 55
-    },
+      "health": 31540,
+      "speed": 71.6,
+      reverseSpeed: 29.4, towerRotation: 44.1, gunElivation: "-8/80" },
+    gunSpecs: [
+      {
+        name: "XM914 (30mm)",
+        type: "Cannon",
+        rateOfFire: 8.3,
+        reload: 10,
+        ammunition: 500,
+        magazine: 250,
+        range: 1566
+      },
+{
+        name: "Stinger Launcher (70mm)",
+        type: "Missile Launcher",
+        reload: 10,
+        ammunition: 8,
+        magazine: 4,
+        range: 1200,
+        targetTime: 1
+      },
+{
+        name: "AGM-144 Hellfire (178mm)",
+        type: "Missile Launcher",
+        reload: 10,
+        ammunition: 8,
+        magazine: 1,
+        range: 1100,
+        targetTime: 3
+      }
+
+    ],
     "weapons": [
-      { "name": "XM914", "type": "Main Gun", "damage": 633, "penetration": 120 },
-      { "name": "Stinger Launcher", "type": "Missile", "damage": 4700, "penetration": 35, "reload": 10 },
-      { "name": "AGM-114 Hellfire", "type": "Missile", "damage": 11700, "penetration": 950, "reload": 10 }
+      { "name": "M789", "type": "Main Gun", "damage": 633, "penetration": 120 },
+      { "name": "FIM-92 Stinger", "type": "Missile", "damage": 4700, "penetration": 35 },
+      { "name": "AGM-114 Hellfire", "type": "Missile", "damage": 9000, "penetration": 950 }
     ]
   },
   {
-    "id": 146,
+    "id": 149,
     "name": "M1 AGDS",
     "type": "Missile Carrier",
     "faction": "American",
     "tier": "IV",
     "image": "M1-AGDS.png",
     "description": "A conceptual U.S. armored air-defense vehicle design combining heavy protection, advanced sensors, and rapid-fire weapons for close-range battlefield air-defense roles.",
-    "stats": { "health": 47700, "speed": 69, "armor": "770mm", "agility": 36 },
+    "stats": { "health": 47660, "speed": 53.5, reverseSpeed: 25.2, hullRotation: 27.9, towerRotation: 40.1, gunElivation: "-13/56" },
+    gunSpecs: [
+      {
+        name: "Bushmastr III (3mm)",
+        type: "Cannon",
+        rateOfFire: 8,
+        reload: 10,
+        ammunition: 600,
+        magazine: 300,
+        range: 1473
+      },
+{
+        name: "MIM-146 (152mm)",
+        type: "Missile Lancher",
+        reload: 16,
+        ammunition: 12,
+        magazine: 1,
+        range: 2000,
+        targetTime: 1.5
+      },
+{
+        name: "Bomb",
+        rateOfFire: 1.5,
+        reload: 6,
+        ammunition: 180,
+        magazine: 1,
+        range: 666
+      }
+
+    ],
     "weapons": [
       { "name": "PMD-060 APFSDS", "type": "Main Gun", "damage": 800, "penetration": 186 },
       { "name": "PMD-074 HEI", "type": "Main Gun", "damage": 370, "penetration": 65 },
       { "name": "PMD-478 HE", "type": "Main Gun", "damage": 400, "penetration": 50 },
-      { "name": "MIM-146", "type": "Missile", "damage": 5100, "penetration": 900, "reload": 16 },
-      { "name": "XM1018AD HE", "type": "Missile", "damage": 1330, "penetration": 85, "reload": 6 },
-      { "name": "XM1018 HEI", "type": "Missile", "damage": 1500, "penetration": 100, "reload": 6 }
+      { "name": "MIM-146", "type": "Missile", "damage": 5100, "penetration": 900},
+      { "name": "XM1018AD HE", "type": "Missile", "damage": 1330, "penetration": 85},
+      { "name": "XM1018 HEI", "type": "Missile", "damage": 1500, "penetration": 100 }
     ]
   },
   {
-    "id": 147,
+    "id": 150,
     "name": "TOS-1A",
     "type": "MLRS",
     "faction": "Russian",
@@ -1955,28 +2628,52 @@ const VEHICLES_DATA = [
     "image": "TOS-1A.jpg",
     "description": "Heavy flamethrower rocket launcher mounted on a tank chassis.",
     "stats": {
-      "health": 38800,
-      "speed": 60,
-      "reverseSpeed": 25,
-      "turretRotationSpeed": 20,
-      "hullRotationSpeed": 30,
-      "armor": 400,
-      "agility": 44
-    },
+      "health": 32930,
+      "speed": 48.4,
+      reverseSpeed: 8.4, hullRotation: 21.7, towerRotation: 48.4, gunElivation: "-0/60" },
+    gunSpecs: [
+      {
+        name: "M0.1.01 (220mm)",
+        type: "Missile Launcher",
+        reload: 35,
+        ammunition: 24,
+        magazine: 24,
+        range: 1466
+      }
+    ],
     "weapons": [
       { "name": "M0.1.01.04 TBC", "type": "Missile", "damage": 4500, "penetration": 160, "reload": 35 },
       { "name": "M0.1.01.04M INC", "type": "Missile", "damage": 12600, "penetration": 85, "reload": 35 }
     ]
   },
   {
-    "id": 148,
+    "id": 151,
     "name": "M270 MLRS",
     "type": "MLRS",
     "faction": "American",
     "tier": "IV",
     "image": "M270-MLRS.jpg",
     "description": "Rocket artillery system capable of long-range precision and area bombardment.",
-    "stats": { "health": 31400, "speed": 65, "armor": "450mm", "agility": 26 },
+    "stats": { "health": 32930, "speed": 52.4, reverseSpeed: 23.5, hullRotation: 25.9, towerRotation: 57.3, gunElivation: "-10/65" },
+    gunSpecs: [
+      {
+        name: "MRLS Launcher (227mm)",
+        type: "Missile Launcher",
+        reload: 10,
+        ammunition: 6,
+        magazine: 6,
+        range: 1800
+      },
+{
+        name: "MRLS ATACMS Launcher (610mm)",
+        type: "Missile Launcher",
+        reload: 20,
+        ammunition: 1,
+        magazine: 1,
+        range: 2000
+      }
+
+    ],
     "weapons": [
       { "name": "M31", "type": "Guided Rocket", "damage": 18225, "penetration": 165, "reload": 15.7 },
       { "name": "M31", "type": "Guided Rocket", "damage": 15525, "penetration": 400, "reload": 15.7 },
@@ -1986,7 +2683,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 149,
+    "id": 152,
     "name": "PLZ-05",
     "type": "SPH",
     "faction": "Chinese",
@@ -1994,14 +2691,19 @@ const VEHICLES_DATA = [
     "image": "PLZ-05.jpg",
     "description": "Modern 155mm self-propelled howitzer designed for long-range artillery support.",
     "stats": {
-      "health": 31200,
-      "speed": 56,
-      "reverseSpeed": 16,
-      "turretRotationSpeed": 25,
-      "hullRotationSpeed": 30,
-      "armor": 350,
-      "agility": 30
-    },
+      "health": 40800,
+      "speed": 48.4,
+      reverseSpeed: 16.8, hullRotation: 27.9, towerRotation: 8, gunElivation: "-3/70" },
+    gunSpecs: [
+      {
+        name: "PLZ 155/52 (152mm)",
+        type: "Cannon",
+        reload: 8.5,
+        ammunition: 30,
+        magazine: 1,
+        range: 2133
+      }
+    ],
     "weapons": [
       { "name": "BEE17A/155", "type": "Main Gun", "damage": 16875, "penetration": 135 },
       { "name": "GP155A", "type": "Main Gun", "damage": 11250, "penetration": 200 },
@@ -2010,7 +2712,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 150,
+    "id": 153,
     "name": "M109A6 Paladin",
     "type": "SPH",
     "faction": "American",
@@ -2018,14 +2720,19 @@ const VEHICLES_DATA = [
     "image": "M109A6-Paladin.jpg",
     "description": "Modernized 155mm self-propelled artillery system for accurate ground fire support.",
     "stats": {
-      "health": 31100,
-      "speed": 64,
-      "reverseSpeed": 26,
-      "turretRotationSpeed": 25,
-      "hullRotationSpeed": 30,
-      "armor": 350,
-      "agility": 28
-    },
+      "health": 37590,
+      "speed": 45.2,
+     reverseSpeed: 15.1, hullRotation: 20.1, towerRotation: 12, gunElivation: "-4/75" },
+    gunSpecs: [
+      {
+        name: "M284 (155mm)",
+        type: "Cannon",
+        reload: 10,
+        ammunition: 39,
+        magazine: 1,
+        range: 2200
+      }
+    ],
     "weapons": [
       { "name": "M107", "type": "Main Gun", "damage": 7200, "penetration": 112 },
       { "name": "M549A1", "type": "Main Gun", "damage": 14940, "penetration": 187 },
@@ -2034,7 +2741,36 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 151,
+    "id": 154,
+    "name": "SH-16",
+    "type": "SPH",
+    "faction": "Chinese",
+    "tier": "IV",
+    "image": "SH-16.jpg",
+    "description": "The SH-16 is a Chinese wheeled 155 mm self-propelled howitzer that provides long-range indirect fire support with improved mobility and rapid deployment capability.",
+    "stats": {
+      "health": 39040,
+      "speed": 59.7,
+      reverseSpeed: 33.6, towerRotation: 20.1, gunElivation: "-0/55" },
+    gunSpecs: [
+      {
+        name: "SH16 (155mm)",
+        type: "Cannon",
+        reload: 7,
+        ammunition: 30,
+        magazine: 1,
+        range: 2266
+      }
+    ],
+    "weapons": [
+     { "name": "ERFB-BB HE", "type": "Main Gun", "damage": 14000, "penetration": 170 },
+     { "name": "ERFB-BB-RA HESH", "type": "Main Gun", "damage": 15800, "penetration": 270 },
+     { "name": "GP155A HE", "type": "Main Gun", "damage": 10600, "penetration": 300 },
+     { "name": "GP155E HEAT", "type": "Main Gun", "damage": 12330, "penetration": 900 }
+    ]
+  },
+  {
+    "id": 155,
     "name": "FK 2000",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -2042,14 +2778,30 @@ const VEHICLES_DATA = [
     "image": "FK-2000.jpg",
     "description": "Modern Chinese mobile anti-aircraft system with radar-guided missiles and autocannons.",
     "stats": {
-      "health": 35000,
-      "speed": 60,
-      "reverseSpeed": 60,
-      "turretRotationSpeed": 60,
-      "hullRotationSpeed": 50,
-      "armor": 300,
-      "agility": 75
-    },
+      "health": 36280,
+      "speed": 56,
+      reverseSpeed: 37.8, towerRotation: 57.9, gunElivation: "-8/80" },
+    gunSpecs: [
+      {
+        name: "Kashtan-M (30mm)",
+        type: "Cannon",
+        rateOfFire: 25,
+        reload: 12,
+        ammunition: 1500,
+        magazine: 500,
+        range: 1800
+      },
+{
+        name: "FK-2000 (300mm)",
+        type: "Missile Launcher",
+        reload: 25,
+        ammunition: 12,
+        magazine: 1,
+        range: 1900,
+        targetTime: 1.5
+      }
+
+    ],
     "weapons": [
       { "name": "BZT-30", "type": "Main Gun", "damage": 500, "penetration": 116 },
       { "name": "OZT-30", "type": "Main Gun", "damage": 680, "penetration": 56 },
@@ -2057,14 +2809,25 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 152,
+    "id": 156,
     "name": "Otomatic 76",
     "type": "Anti-Air",
     "faction": "Italian",
     "tier": "IV",
     "image": "Otomatic-76.jpg",
     "description": "Self-propelled anti-aircraft gun with rapid-fire 76mm cannon.",
-    "stats": { "health": 39100, "speed": 65, "armor": "380mm", "agility": 36 },
+    "stats": { "health": 37820, "speed": 48.4, reverseSpeed: 20.2, hullRotation: 27.1, towerRotation: 56.5, gunElivation: "-5/60" },
+    gunSpecs: [
+      {
+        name: "OTO Breda Cannone da 76/62 (73mm)",
+        type: "Cannon",
+        rateOfFire: 2,
+        reload: 5,
+        ammunition: 90,
+        magazine: 29,
+        range: 2500
+      }
+    ],
     "weapons": [
       { "name": "76/62 APFSDS", "type": "Main Gun", "damage": 3570, "penetration": 413 },
       { "name": "76/62 HE-VT MOM", "type": "Main Gun", "damage": 1610, "penetration": 89 },
@@ -2072,7 +2835,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 153,
+    "id": 157,
     "name": "BM-57-2 Kochevnik",
     "type": "Missile Carrier",
     "faction": "Russian",
@@ -2080,14 +2843,29 @@ const VEHICLES_DATA = [
     "image": "BM-57-2-Kochevnik.jpg",
     "description": "A modern Russian heavy tank armed with twin 57mm cannons, dual GSh-23Ms, Kornet missiles, APS, and drone support, built for speed, agility, and flanking superiority.",
     "stats": {
-      "health": 42800,
-      "speed": 75,
-      "reverseSpeed": 28,
-      "turretRotationSpeed": 45,
-      "hullRotationSpeed": 40,
-      "armor": 700,
-      "agility": 40
-    },
+      "health": 42840,
+      "speed": 54.6,
+      reverseSpeed: 54.6, hullRotation: 27.3, towerRotation: 41.8, gunElivation: "-5/50" },
+    gunSpecs: [
+      {
+        name: "2A91 (57mm)",
+        type: "Cannon",
+        rateOfFire: 5,
+        reload: 8,
+        ammunition: 200,
+        magazine: 50,
+        range: 2000
+      },
+{
+        name: "9K135 Kornet (152mm)",
+        type: "Missile Launcher",
+        reload: 12,
+        ammunition: 8,
+        magazine: 1,
+        range: 1666
+      }
+
+    ],
     "weapons": [
       { "name": "BR-281SP", "type": "Main Gun", "damage": 1540, "penetration": 147 },
       { "name": "BR-281U", "type": "Main Gun", "damage": 1400, "penetration": 181 },
@@ -2096,7 +2874,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 154,
+    id: 158,
     name: "ADATS",
     type: "Missile Carrier",
     faction: "American",
@@ -2104,14 +2882,39 @@ const VEHICLES_DATA = [
     image: "ADATS.jpg",
     description: "Mobile air-defense system equipped with radar-guided missiles.",
     stats: {
-      health: 32300,
-      speed: 66,
-      reverseSpeed: 21,
-      turretRotationSpeed: 45,
-      hullRotationSpeed: 35,
-      armor: 500,
-      agility: 35
-    },
+      health: 34250,
+      speed: 55.5,
+      reverseSpeed: 18.3, hullRotation: 25.2, towerRotation: 48.1, gunElivation: "-10/85" },
+    gunSpecs: [
+      {
+        name: "M242 Bushmaster (25mm)",
+        type: "Cannon",
+        rateOfFire: 8.3,
+        reload: 6,
+        ammunition: 600,
+        magazine: 300,
+        range: 1566
+      },
+{
+        name: "MIM-146 (152mm)",
+        type: "Missile Launcher",
+        reload: 12,
+        ammunition: 6,
+        magazine: 1,
+        range: 2000,
+        targetTime: 1.5
+      },
+{
+        name: "M260 (70mm)",
+        type: "Missile Launcher",
+        rateOfFire: 3.3,
+        reload: 9,
+        ammunition: 14,
+        magazine: 7,
+        range: 1333,
+      }
+
+    ],
     weapons: [
       { name: "PGU-32U/T", type: "Main Gun", damage: 410, penetration: 104 },
       { name: "M791", type: "Main Gun", damage: 480, penetration: 120 },
@@ -2122,7 +2925,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    id: 155,
+    id: 159,
     name: "MGM-166 LOSAT",
     type: "Missile Carrier",
     faction: "American",
@@ -2130,14 +2933,27 @@ const VEHICLES_DATA = [
     image: "MGM-166.jpg",
     description: "A U.S. prototype hypervelocity missile system designed to defeat heavy armor.",
     stats: {
-      health: 29000,
-      speed: 69,
-      reverseSpeed: 24,
-      turretRotationSpeed: 45,
-      hullRotationSpeed: 35,
-      armor: 500,
-      agility: 41
-    },
+      health: 32580,
+      speed: 55.6,
+      reverseSpeed: 16.8, hullRotation: 28.8, towerRotation: 20.2, gunElivation: "0/0" },
+    gunSpecs: [
+      {
+        name: "LOSAT MGM (163mm)",
+        type: "Missile Launcher",
+        reload: 20,
+        ammunition: 6,
+        magazine: 6,
+        range: 1860
+      },
+     {
+        name: "LOSAT MGM (163mm)",
+        type: "Missile Launcher",
+        reload: 20,
+        ammunition: 6,
+        magazine: 6,
+        range: 1860
+      }
+    ],
     weapons: [
       { name: "LOSAT MGM", type: "Missile", damage: 12740, penetration: 764, reload: 20 }
     ]
@@ -2345,7 +3161,7 @@ const VEHICLES_DATA = [
   "tier": "III",
   "image": "Mitsubishi-F-2B.jpg",
   "description": "Multirole fighter developed from the F-16, optimized for anti-ship and air-to-air roles.",
-  "stats": { "health": 20400,  "speed": 490, "afterburnerSpeed": 2210, "agility": 49  },
+    "stats": { "health": 20400,  "speed": 490, "afterburnerSpeed": 2210, "agility": 49, battleload: 2500, mass: 9527, stealth: "5-20" },
   "weapons": [
     { "name": "JLAU-3A", "type": "Rocket Pod", "damage": 5200, "penetration": 128, "reload": 20 },
     { "name": "GBU-38 JDAM", "type": "Guided Bomb", "damage": 14300, "penetration": 120, "reload": 25 },
@@ -2366,7 +3182,7 @@ const VEHICLES_DATA = [
     tier: "III",
     description: "Multi-role fighter with advanced night vision and precision strike capabilities.",
     image: "F-16C-Night-Falcon.jpg",
-    stats: { health: 17500, speed: 830, afterburnerSpeed: 1970, agility: 48 },
+    stats: { health: 17500, speed: 830, afterburnerSpeed: 1970, agility: 48, battleload: 2575, mass: 9017, stealth: "0-10" },
     weapons: [
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
       { name: "GBU-12 Paveway II", type: "Guided Bomb", damage: 18590, penetration: 120, reload: 30 },
@@ -2388,7 +3204,7 @@ const VEHICLES_DATA = [
     tier: "III",
     image: "FA-18F-Super-Hornet.jpg",
     description: "Twin-engine carrier-based multirole fighter with excellent versatility for both air-to-air and air-to-ground combat.",
-    stats: { health: 18100, speed: 950, afterburnerSpeed: 1730, agility: 41 },
+    stats: { health: 18100, speed: 950, afterburnerSpeed: 1730, agility: 41, battleload: 2300, mass: 10400, stealth: "0-15" },
     weapons: [
       { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
       { name: "MK-81", type: "Guided Bomb", damage: 13000, penetration: 90, reload: 20 },
@@ -2410,7 +3226,7 @@ const VEHICLES_DATA = [
     tier: "III",
     image: "J-16-Shenyang.jpg",
     description: "Chinese twin-seat multirole fighter derived from Su-30, capable of carrying heavy weapons payload.",
-    stats: { health: 21300, speed: 810, afterburnerSpeed: 2030, agility: 43 },
+    stats: { health: 21300, speed: 810, afterburnerSpeed: 2030, agility: 43, battleload: 4000, mass: 17500, stealth: "0-5" },
     weapons: [
       { "name": "FT-3", "type": "Air-to-Ground Missile", "damage": 15800, "penetration": 210, "reload": 34 },
       { "name": "LS-6-250", "type": "Guided Bomb", "damage": 17300, "penetration": 300, "reload": 40 },
@@ -2430,7 +3246,7 @@ const VEHICLES_DATA = [
     tier: "III",
     image: "Su-37-Terminator.jpg",
     description: "Experimental Russian fighter with thrust-vectoring for extreme maneuverability.",
-    stats: { health: 21700, speed: 900, afterburnerSpeed: 2250, agility: 48 },
+    stats: { health: 21700, speed: 900, afterburnerSpeed: 2250, agility: 48, battleload: 300, mass: 18500, stealth: "0-13" },
     weapons: [
       { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
       { "name": "FAB-250", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
@@ -2452,7 +3268,7 @@ const VEHICLES_DATA = [
     tier: "III",
     image: "Su-25UB.jpg",
     description: "Twin-seat variant of the Su-25, specialized for ground attack with heavy armor.",
-    stats: { health: 21000, speed: 670, afterburnerSpeed: 860, agility: 43 },
+    stats: { health: 21000, speed: 670, afterburnerSpeed: 860, agility: 43, battleload: 3200, mass: 9315, stealth: 0-0 },
     weapons: [
       { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
       { "name": "FAB-250", "type": "Unguided Bomb", "damage": 15100, "penetration": 130, "reload": 30 },
@@ -2474,7 +3290,7 @@ const VEHICLES_DATA = [
     tier: "III",
     image: "Su-39.jpg",
     description: "Upgraded variant of Su-25 with improved avionics and guided weapons.",
-    stats: { health: 24400, speed: 670, afterburnerSpeed: 2250, agility: 49 },
+    stats: { health: 24400, speed: 670, afterburnerSpeed: 2250, agility: 49, battleload: 3200, mass: 10740, stealth: 0-5 },
     weapons: [
       { "name": "B8M1", "type": "Unguided Rocket", "damage": 5100, "penetration": 420, "reload": 20 },
       { "name": "KAB-250", "type": "Guided Bomb", "damage": 14900, "penetration": 130, "reload": 25 },
@@ -2490,13 +3306,13 @@ const VEHICLES_DATA = [
   },
   {
     id: 307,
-    name: "J-15",
+    name: "J-15 Shenyang",
     type: "Fighter Jet",
     faction: "Chinese",
     tier: "III",
     image: "J-15.jpg",
     description: "Chinese carrier-based fighter based on Su-33 design, versatile in both air and ground roles.",
-    stats: { health: 23500, speed: 1170, afterburnerSpeed: 2070, agility: 49 },
+    stats: { health: 23500, speed: 1170, afterburnerSpeed: 2070, agility: 49, battleload: 3000, mass: 17500, stealth: 0-5 },
     weapons: [
       { "name": "Type 1", "type": "Guided Bomb", "damage": 15100, "penetration": 120, "reload": 32 },
       { "name": "x2 Type 90", "type": "Air-to-Ground Missile", "damage": 6400, "penetration": 320, "reload": 40 },
@@ -2518,7 +3334,7 @@ const VEHICLES_DATA = [
     tier: "III",
     image: "MiG-35.jpg",
     description: "Advanced MiG fighter with modern avionics, thrust-vectoring, and strong multirole performance.",
-    stats: { health: 18400, speed: 720, afterburnerSpeed: 2250, agility: 43 },
+    stats: { health: 18400, speed: 720, afterburnerSpeed: 2250, agility: 43, battleload: 3400, mass: 11000, stealth: 8-23 },
     weapons: [
       { name: "KAB-250", type: "Guided Bomb", damage: 14900, penetration: 130, reload: 25 },
       { name: "FAB-500", type: "Bomb", damage: 16000, penetration: 210, reload: 35 },
@@ -2539,7 +3355,7 @@ const VEHICLES_DATA = [
   "tier": "III",
   "image": "F-15SE-Silent-Eagle.jpg",
   "description": "Advanced variant of the F-15 Strike Eagle with modern avionics and stealth characteristics.",
-  "stats": { "health": 19800, "speed": 820, "afterburnerSpeed": 2390, "agility": 43 },
+  "stats": { "health": 19800, "speed": 820, "afterburnerSpeed": 2390, "agility": 43, battleload: 2500, mass: 14300, stealth: 10-25 },
   "weapons": [
     { "name": "GBU-31 JDAM", "type": "Guided Bomb", "damage": 19400, "penetration": 360, "reload": 40 },
     { "name": "GBU-32 JDAM", "type": "Guided Bomb", "damage": 15700, "penetration": 200, "reload": 35 },
@@ -2560,7 +3376,7 @@ const VEHICLES_DATA = [
     "tier": "III",
     "image": "Su-35S.png",
     "description": "Highly maneuverable 4++ generation multirole fighter with thrust vectoring engines and powerful radar.",
-    "stats": { "health": 24400, "speed": 1260, "afterburnerSpeed": 2250, "agility": 49 },
+    "stats": { "health": 24400, "speed": 1260, "afterburnerSpeed": 2250, "agility": 49, battleload: 3900, mass: 18500, stealth: 0-15 },
     "weapons": [
       { "name": "R-73", "type": "Short-Range AAM", "damage": 4900, "penetration": 60, "reload": 15 },
       { "name": "R-27", "type": "Medium-Range AAM", "damage": 8100, "penetration": 65, "reload": 20},
@@ -2583,7 +3399,7 @@ const VEHICLES_DATA = [
     "tier": "III",
     "image": "A-10A-Thunderbolt.jpg",
     "description": "Close air support aircraft designed around the GAU-8 Avenger cannon.",
-    "stats": { "health": 27600, "speed": 500, "afterburnerSpeed": 760, "agility": 48 },
+    "stats": { "health": 27600, "speed": 500, "afterburnerSpeed": 760, "agility": 48, battleload: 6200, mass: 9176, stealth: 0-5 },
     "weapons": [
     { name: "LAU-61", type: "Rocket Pod", damage: 4100, penetration: 290, reload: 20 },
     { name: "MK-84", type: "General-Purpose Bomb", damage: 19400, penetration: 360, reload: 40 },
@@ -2868,9 +3684,37 @@ const VEHICLES_DATA = [
       { "name": "Soltam", "type": "Morter", "damage": 2970, "penetration": 125, "reload": 4 }
     ]
   },
-
   {
     "id": 417,
+    "name": "K1A1",
+    "type": "Main Battle Tank",
+    "faction": "SouthKorean",
+    "tier": "III",
+    "description": "A main battle tank weighing approximately 53 tons, equipped with a 120 mm smoothbore gun, advanced fire-control systems, and composite armor for high survivability and battlefield dominance.",
+    "image": "K1A1.jpg",
+   stats: { health: 41480, speed: 52.4, reverseSpeed: 29.4, hullRotation: 24.5, towerRotation: 30.4, gunElivation: "-10/20" },
+    gunSpecs: [
+      {
+        name: "KM256 (120mm)",
+        type: "Cannon",
+        reload: 5,
+        ammunition: 38,
+        magazine: 1,
+        range: 1473
+      }
+    ],
+    "weapons": [
+      { "name": "K276 APFSDS", "type": "Main Gun", "damage": 11480, "penetration": 670 },
+      { "name": "K277 HEAT", "type": "Main Gun", "damage": 12100, "penetration": 480 },
+      { "name": "KSTAM-II HEAT", "type": "Main Gun", "damage": 10230, "penetration": 850 },
+      
+      
+    ]
+  },
+
+
+  {
+    "id": 418,
     "name": "PLZ-07B",
     "type": "SPH",
     "faction": "Chinese",
@@ -2887,7 +3731,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 418,
+    "id": 419,
     "name": "M110A2",
     "type": "SPH",
     "faction": "Japanese",
@@ -2903,7 +3747,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 419,
+    "id": 420,
     "name": "2S31 Vena",
     "type": "SPH",
     "faction": "Russian",
@@ -2920,7 +3764,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 420,
+    "id": 421,
     "name": "XM2001 Crusader",
     "type": "SPH",
     "faction": "American",
@@ -2937,7 +3781,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 421,
+    "id": 422,
     "name": "Gepard 1A2",
     "type": "Anti-Air",
     "faction": "German",
@@ -2953,19 +3797,25 @@ const VEHICLES_DATA = [
     ]
   },
 {
-    "id": 422,
-    "name": "2S38 Derivation",
+    "id": 423,
+    "name": "2S38 Derivatsiya",
     "type": "Anti-Air",
     "faction": "Russian",
     "tier": "III",
-    "image": "2S38.jpg",
+    "image": "2S38-Derivatsiya.jpg",
     "description": "Advanced Russian combat vehicle equipped with a 57mm autocannon, capable of engaging aerial, infantry, and armored targets.",
-    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
-    "weapons": []
+    "stats": { "health": 34100, "speed": 70, reverseSpeed: 31, hullRotation: 42, towerRotation: 60.2, gunElivation: "-5/75"},
+    gunSpec: {name: "2A90 (57mm)", type: "Cannon", rateOfFire: 2.5, reload: 5, ammunition: 148, magazine: 148, range: 1706, targetTime: 1.4},
+    "weapons": [
+    { "name": "3UBM22 API", "type": "Missile", "damage": 1700, "penetration": 147, "reload": 5  },
+    { "name": "3U08 HE", "type": "Missile", "damage": 800, "penetration": 75, "reload": 5  },
+    { "name": "3UBM42 APFSDS", "type": "Missile", "damage": 1760, "penetration": 340, "reload": 5   },
+    { "name": "OR-281U HEI", "type": "Missile", "damage": 890, "penetration": 78, "reload": 5  },
+    ]
   },
 
   {
-    "id": 423,
+    "id": 424,
     "name": "K-31 Cheonma",
     "type": "Anti-Air",
     "faction": "SouthKorean",
@@ -2979,7 +3829,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 424,
+    "id": 425,
     "name": "PGZ-09",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -2996,7 +3846,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 425,
+    "id": 426,
     "name": "2S6M1 Tunguska-M1",
     "type": "Anti-Air",
     "faction": "Russian",
@@ -3013,7 +3863,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 426,
+    "id": 427,
     "name": "Type 625E SHORAD",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -3029,7 +3879,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 427,
+    "id": 428,
     "name": "XM975",
     "type": "Anti-Air",
     "faction": "American",
@@ -3043,7 +3893,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 428,
+    "id": 429,
     "name": "AFT-10",
     "type": "Missile Carrier",
     "faction": "Chinese",
@@ -3057,7 +3907,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 429,
+    "id": 430,
     "name": "TAN-SAM-1C",
     "type": "Anti-Air",
     "faction": "Japanese",
@@ -3072,7 +3922,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 430,
+    "id": 431,
     "name": "M113 Hellfire",
     "type": "Missile Carrier",
     "faction": "American",
@@ -3087,7 +3937,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 431,
+    "id": 432,
     "name": "9A52-2 Smerch",
     "type": "MLRS",
     "faction": "Russian",
@@ -3103,7 +3953,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 432,
+    "id": 433,
     "name": "Type 89 MLRS",
     "type": "MLRS",
     "faction": "Chinese",
@@ -3119,7 +3969,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 433,
+    "id": 434,
     "name": "Type 75 MLRS",
     "type": "MLRS",
     "faction": "Japanese",
@@ -3134,7 +3984,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 434,
+    "id": 435,
     "name": "AFT-09",
     "type": "Missile Carrier",
     "faction": "Chinese",
@@ -3148,7 +3998,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 435,
+    "id": 436,
     "name": "LAV-600",
     "type": "Tank Destroyer",
     "faction": "American",
@@ -3165,7 +4015,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 436,
+    "id": 437,
     "name": "HSTV-L",
     "type": "Light Tank",
     "faction": "American",
@@ -3180,7 +4030,45 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 437,
+    "id": 438,
+    "name": "LAV-AD",
+    "type": "Light Tank",
+    "faction": "American",
+    "tier": "III",
+    "image": "LAV-AD.jpg",
+    "description": "A light armored air-defense vehicle armed with a 25 mm autocannon and surface-to-air missiles, providing short-range protection against helicopters, aircraft, and drones.",
+    "stats": { "health": 25740, "speed": 80.6, reverseSpeed: 15.1,  towerRotation: 45.8, gunElivation: "-8/60" },
+    gunSpecs: [
+      {
+        name: "GAU-12/U (25mm)",
+        type: "Cannon",
+        rateOfFire: 11,
+        reload: 12,
+        ammunition: 1155,
+        magazine: 1155,
+        range: 1800
+      },
+{
+        name: "FIM-92 Stinger (70mm)",
+        type: "Mssile Launcher",
+        reload: 12,
+        ammunition: 16,
+        magazine: 1,
+        range: 1450,
+        targetTime: 1.1
+      }
+
+    ],
+
+    "weapons": [
+      { "name": "PGU-25/U HEI", "type": "Main Gun", "damage": 480, "penetration": 28 },
+{ "name": "PGU-20/U SAPHEI", "type": "Main Gun", "damage": 320, "penetration": 86 },
+{ "name": "FIM-92 Stinger", "type": "Main Gun", "damage": 2400, "penetration": 21 },
+
+    ]
+  },
+  {
+    "id": 439,
     "name": "Pandur II",
     "type": "Light Tank",
     "faction": "Austrian",
@@ -3198,7 +4086,7 @@ const VEHICLES_DATA = [
   },
 
   {
-    "id": 438,
+    "id": 440,
     "name": "K21 KNIFV",
     "type": "Light Tank",
     "faction": "SouthKorean",
@@ -3215,7 +4103,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 439,
+    "id": 441,
     "name": "Rookiat MTTD",
     "type": "Light Tank",
     "faction": "British",
@@ -3231,7 +4119,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 440,
+    "id": 442,
     "name": "ZBL-08",
     "type": "Light Tank",
     "faction": "Chinese",
@@ -3248,7 +4136,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 441,
+    "id": 443,
     "name": "ХM8 AGS",
     "type": "Light Tank",
     "faction": "American",
@@ -3265,7 +4153,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 442,
+    "id": 444,
     "name": "VBCI-2",
     "type": "Light Tank",
     "faction": "French",
@@ -3281,7 +4169,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 443,
+    "id": 445,
     "name": "WMA301",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -3297,7 +4185,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 444,
+    "id": 446,
     "name": "Centauro I 120",
     "type": "Tank Destroyer",
     "faction": "Italian",
@@ -3312,7 +4200,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 445,
+    "id": 447,
     "name": "BMD3",
     "type": "Light Tank",
     "faction": "Russian",
@@ -3330,7 +4218,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 446,
+    "id": 448,
     "name": "Strf 9040 BILL",
     "type": "Light Tank",
     "faction": "Sweden",
@@ -3346,7 +4234,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 447,
+    "id": 449,
     "name": "M3A3 Bradley",
     "type": "Light Tank",
     "faction": "American",
@@ -3985,7 +4873,7 @@ const VEHICLES_DATA = [
     "id": 705,
     "name": "T-62 545",
     "type": "Main Battle Tank",
-    "faction": "Russian",
+    "faction": "Chinese",
     "tier": "II",
     "image": "T-62-545.jpg",
     "description": "Soviet T-62 variant, equipped with the 545 hp V-55 engine and improved reliability.",
@@ -4040,8 +4928,35 @@ const VEHICLES_DATA = [
       { "name": "XM1 (GM) Secondary MG", "type": "Machine Gun", "damage": 170, "penetration": 22, "rateOfFire": "607 rpm" }
     ]
   },
-  {
+{
     "id": 709,
+    "name": "Al Kafil-1",
+    "type": "Main Battle Tank",
+    "faction": "Iraqi",
+    "tier": "II",
+    "image": "Al-Kafil-1.jpg",
+    "description": "Iraqi-developed main battle tank modernization focused on upgraded firepower, protection systems, and improved battlefield effectiveness.",
+    "stats": { "health": 34360, "speed": 56.6, reverseSpeed: 26.9, hullRotation: 259, towerRotation: 24.1, gunElivation: "-6/14" },
+    gunSpecs: [
+      {
+        name: "D-10T2S (100mm)",
+        type: "Cannon",
+        reload: 5.2,
+        ammunition: 43,
+        magazine: 1,
+        range: 1373
+      }
+    ],
+    "weapons": [
+   { "name": "3BM25 APFSDS", "type": "Main Gun", "damage": 8800, "penetration": 335 },
+{ "name": "3BK17M HEAT", "type": "Main Gun", "damage": 10670, "penetration": 390 },
+{ "name": "OF-412 HEI", "type": "Main Gun", "damage": 10200, "penetration": 57 },
+{ "name": "9M117 HEAT", "type": "Main Gun", "damage": 7980, "penetration": 600 },
+
+]
+  },
+  {
+    "id": 710,
     "name": "BMP-2",
     "type": "Light Tank",
     "faction": "Russian",
@@ -4055,7 +4970,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 710,
+    "id": 711,
     "name": "BTR-82AT",
     "type": "Light Tank",
     "faction": "Russian",
@@ -4069,7 +4984,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 711,
+    "id": 712,
     "name": "BTR-82A1",
     "type": "Light Tank",
     "faction": "Russian",
@@ -4083,7 +4998,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 712,
+    "id": 713,
     "name": "M3 Bradley",
     "type": "Multirole-IFV",
     "faction": "American",
@@ -4098,7 +5013,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 713,
+    "id": 714,
     "name": "M551 Sheridan",
     "type": "Light Tank",
     "faction": "American",
@@ -4112,7 +5027,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 714,
+    "id": 715,
     "name": "Object 685",
     "type": "Light Tank",
     "faction": "Russian",
@@ -4126,7 +5041,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 715,
+    "id": 716,
     "name": "IT-1 Dragon",
     "type": "Tank Destroyer",
     "faction": "Russian",
@@ -4140,7 +5055,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 716,
+    "id": 717,
     "name": "M163 VADS",
     "type": "Anti-Air",
     "faction": "American",
@@ -4154,7 +5069,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 717,
+    "id": 718,
     "name": "PGZ-04A",
     "type": "Anti-Air",
     "faction": "Chinese",
@@ -4168,7 +5083,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 718,
+    "id": 719,
     "name": "ZSU-23-4M4 Shilka",
     "type": "Anti-Air",
     "faction": "Russian",
@@ -4182,7 +5097,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 719,
+    "id": 720,
     "name": "LAV-300",
     "type": "Tank Destroyer",
     "faction": "American",
@@ -4196,7 +5111,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 720,
+    "id": 721,
     "name": "ERC-90 F4 Sagaie",
     "type": "Tank Destroyer",
     "faction": "Mexican",
@@ -4212,7 +5127,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 721,
+    "id": 722,
     "name": "PTL-02",
     "type": "Tank Destroyer",
     "faction": "Chinese",
@@ -4226,7 +5141,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 722,
+    "id": 723,
     "name": "FV101 Scorpion-90",
     "type": "Light Tank",
     "faction": "Indonesian",
@@ -4242,7 +5157,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 723,
+    "id": 724,
     "name": "M109",
     "type": "SPH",
     "faction": "American",
@@ -4256,7 +5171,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 724,
+    "id": 725,
     "name": "PLL-05",
     "type": "SPH",
     "faction": "Chinese",
@@ -4270,7 +5185,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 725,
+    "id": 726,
     "name": "PLZ-83",
     "type": "SPH",
     "faction": "Chinese",
@@ -4284,7 +5199,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 726,
+    "id": 727,
     "name": "2S1 Gvozdika",
     "type": "SPH",
     "faction": "Russian",
@@ -4298,7 +5213,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 727,
+    "id": 728,
     "name": "2S3 Akatsiya",
     "type": "SPH",
     "faction": "Russian",
@@ -4312,7 +5227,7 @@ const VEHICLES_DATA = [
     ]
   },
   {
-    "id": 728,
+    "id": 729,
     "name": "Type 74 SPH",
     "type": "SPH",
     "faction": "Japanese",
@@ -6418,17 +7333,7 @@ const VEHICLES_DATA = [
       
     ]
   },
-    {
-    "id": 1006,
-    "name": "Al Kafil-1",
-    "type": "Main Battle Tank",
-    "faction": "Iraqi",
-    "tier": "",
-    "image": "AlKafil1.jpg",
-    "description": "Iraqi-developed main battle tank modernization focused on upgraded firepower, protection systems, and improved battlefield effectiveness.",
-    "stats": { "health": 0, "speed": 0, "armor": "0mm", "agility": 0 },
-    "weapons": []
-  },
+   
 
   {
     "id": 1008,
@@ -6462,6 +7367,7 @@ const getAircraftRole = (vehicle: any) => {
   if (vehicle.name.includes("X2 Shinshin")) return "stealth"
   if (vehicle.name.includes("B-Type")) return "stealth"
   if (vehicle.name.includes("TF-X Kaan")) return "stealth"
+  if (vehicle.name.includes("Tempest")) return "stealth"
   if (vehicle.name.includes("F-16C Night Falcon")) return "multi-role"
   if (vehicle.name.includes("F-5E Tiger II")) return "multi-role"
   if (vehicle.name.includes("TU-222")) return "bomber"
@@ -6609,6 +7515,7 @@ const getFlagImage = (faction: string): string => {
     Iranian: "/Iranian-flag.png",
     Polish: "/Poland-flag.webp",
      SouthKorean: "/SouthKorea-flag.jpg",
+     "North Korean": "/North-Korean.jpg",
     Indian: "/India.png",
     Pakistani: "/Pakistan.png",
     Mexican: "/Mexico.png",
@@ -7014,29 +7921,18 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
 
   // Auto-show video when vehicleName is provided
   useEffect(() => {
-    console.log('ArmourVideo: Component mounted, vehicleName:', vehicleName);
-    console.log('ArmourVideo: Available videos data:', vehicleVideosData);
-    
-    if (vehicleName) {
-      console.log('ArmourVideo: Looking for video with name:', vehicleName);
-      console.log('ArmourVideo: Available videos:', vehicleVideosData.default);
-      
-      if (!vehicleVideosData.default || !Array.isArray(vehicleVideosData.default)) {
-        console.error('ArmourVideo: vehicleVideosData.default is not an array:', vehicleVideosData.default);
-        return;
-      }
-      
-      const video = vehicleVideosData.default.find((v: any) => v.name === vehicleName);
-      if (video) {
-        console.log('ArmourVideo: Found video:', video);
-        setActiveVideo(video);
-        setIsPlaying(false); // Start with paused state
-        setCurrentTime(0);
-      } else {
-        console.error('ArmourVideo: No video found for vehicle:', vehicleName);
-        console.error('ArmourVideo: Available vehicle names:', vehicleVideosData.default.map((v: any) => v.name));
-      }
-    }
+  if (vehicleName) {
+  if (!vehicleVideosData.default || !Array.isArray(vehicleVideosData.default)) {
+  return;
+  }
+  
+  const video = vehicleVideosData.default.find((v: any) => v.name === vehicleName);
+  if (video) {
+  setActiveVideo(video);
+  setIsPlaying(false); // Start with paused state
+  setCurrentTime(0);
+  }
+  }
   }, [vehicleName]);
 
   const handleClose = () => {
@@ -7103,13 +7999,12 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
 
   // Handle player initialization when activeVideo changes
   useEffect(() => {
-    if (!activeVideo || !videoRef.current) return;
-
-    const initializePlayerIfNeeded = () => {
-      // Only initialize if we don't have a player instance
-      if (!playerRef.current) {
-        console.log('Initializing YouTube player for:', activeVideo.name);
-        initializePlayer();
+  if (!activeVideo || !videoRef.current) return;
+  
+  const initializePlayerIfNeeded = () => {
+  // Only initialize if we don't have a player instance
+  if (!playerRef.current) {
+  initializePlayer();
       } else {
         console.log('Reusing existing YouTube player');
         // Update the existing player with new video
@@ -7182,7 +8077,7 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
     const endTime = timeToSeconds(activeVideo.end);
     const videoDuration = endTime - startTime;
 
-    console.log('ArmourVideo: Initializing player with videoId:', getVideoId(activeVideo.url));
+
 
     setDuration(videoDuration);
     setCurrentTime(0);
@@ -7209,134 +8104,69 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
         playerRef.current = null;
       }
 
-      playerRef.current = new (window as any).YT.Player(videoRef.current, {
-        videoId: getVideoId(activeVideo.url),
-        playerVars: {
-          autoplay: 0, // Disable autoplay initially - we'll start it manually
-          start: startTime,
-          end: endTime,
-          rel: 0,
-          modestbranding: 1,
-          controls: 0,
-          showinfo: 0,
-          iv_load_policy: 3,
-          cc_load_policy: 0,
-          disablekb: 1,
-          fs: 1, // Enable fullscreen
-          playsinline: 1, // Critical for mobile playback
-          vq: 'small', // Use lower quality for better mobile performance
-          enablejsapi: 1,
-          origin: window.location.origin,
-          widget_referrer: window.location.href,
-          mobile: '1', // Optimize for mobile
-          html5: 1, // Force HTML5 player
-          wmode: 'opaque', // Better iOS compatibility
-          allowfullscreen: 'true', // Ensure fullscreen works
-      },
-      events: {
-        onReady: (event: any) => {
-          console.log('YouTube player is ready');
-          setIsPlayerInitialized(true);
-          // Ensure we start with audio muted
-          event.target.mute();
-          
-          // Mobile detection
-          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-          const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-          
-          // Configure iframe
-          const iframe = event.target.getIframe();
-          if (iframe) {
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.style.position = 'absolute';
-            iframe.style.top = '0';
-            iframe.style.left = '0';
-            iframe.style.border = 'none';
-            iframe.style.borderRadius = '0';
-          }
-          
-          // Start playing the video
-          setTimeout(() => {
-            try {
-              const currentState = event.target.getPlayerState();
-              if (currentState !== (window as any).YT.PlayerState.PLAYING) {
-                event.target.playVideo();
-              }
-              setIsPlaying(true);
-              startProgressTracking();
-            } catch (error) {
-              console.log('Could not autoplay video:', error);
-              setIsPlaying(false);
-            }
-          }, 100);
-        },
-        onError: (event: any) => {
-          console.error('ArmourVideo: Player error:', event.data);
-          console.error('ArmourVideo: Error code:', event.data);
-        },
-        onStateChange: (event: any) => {
-          console.log('ArmourVideo: Player state changed:', event.data);
-          const YT = (window as any).YT;
-          
-          switch (event.data) {
-            case YT.PlayerState.PLAYING:
-              // Only update state if we're not already playing to prevent unnecessary re-renders
-              if (!isPlaying) {
-                setIsPlaying(true);
-                startProgressTracking();
-              }
-              break;
-              
-            case YT.PlayerState.PAUSED:
-              // Only update if we're not already paused
-              if (isPlaying) {
-                setIsPlaying(false);
-              }
-              break;
-              
-            case YT.PlayerState.ENDED:
-              setIsPlaying(false);
-              setCurrentTime(duration);
-              // Reset to start time when video ends
-              if (activeVideo) {
-                const startTime = timeToSeconds(activeVideo.start);
-                event.target.seekTo(startTime, true);
-              }
-              break;
-              
-            case YT.PlayerState.BUFFERING:
-              // Handle buffering state if needed
-              break;
-              
-            default:
-              break;
-          }
-        }
+      const videoId = getVideoId(activeVideo.url);
+      
+      if (!videoId) {
+        console.error('Could not extract video ID from URL:', activeVideo.url);
+        return;
       }
-    });
+      
+      if (!videoRef.current) {
+        return;
+      }
+      
+      // Use simple iframe embed instead of YouTube API
+      const embedUrl = `https://www.youtube.com/embed/${videoId}?start=${startTime}&end=${endTime}&autoplay=0&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=1&playsinline=1`;
+      
+      videoRef.current.innerHTML = `
+        <iframe
+          src="${embedUrl}"
+          title="${activeVideo.name}"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; border: none; border-radius: 0;"
+        ></iframe>
+      `;
+      
+      // Store a mock player object to maintain compatibility with existing code
+      playerRef.current = {
+        playVideo: () => {},
+        pauseVideo: () => {},
+        seekTo: () => {},
+        getCurrentTime: () => 0,
+        getPlayerState: () => 1,
+        destroy: () => {}
+      };
     } catch (error) {
-      console.error('ArmourVideo: Error initializing YouTube player:', error);
+      console.error('Error initializing video player:', error);
       // Reset playerRef on error
       playerRef.current = null;
     }
+    
+    // Initialize player as ready since we're using iframe
+    setTimeout(() => {
+      setIsPlayerInitialized(true);
+      setIsPlaying(true);
+    }, 500);
   };
 
   const startProgressTracking = () => {
+    const startTime = timeToSeconds(activeVideo.start);
     const interval = setInterval(() => {
-      if (playerRef.current && isPlaying) {
-        const currentTime = playerRef.current.getCurrentTime();
-        const startTime = timeToSeconds(activeVideo.start);
-        const adjustedTime = Math.min(currentTime - startTime, duration);
-        
-        setCurrentTime(adjustedTime);
-        
-        // Stop at end timestamp
-        if (adjustedTime >= duration) {
-          playerRef.current.pauseVideo();
-          setIsPlaying(false);
-          setCurrentTime(duration);
-          clearInterval(interval);
+      if (isPlaying && videoRef.current) {
+        const iframe = videoRef.current.querySelector('iframe') as HTMLIFrameElement;
+        if (iframe) {
+          // Simulate progress - in a real scenario with postMessage API we could get actual time
+          // For now, we'll just increment the progress
+          setCurrentTime(prev => {
+            if (prev >= duration) {
+              setIsPlaying(false);
+              clearInterval(interval);
+              return duration;
+            }
+            return prev + 0.1;
+          });
         }
       } else {
         clearInterval(interval);
@@ -7345,13 +8175,9 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
   };
 
   const togglePlayPause = () => {
-    if (playerRef.current) {
-      if (isPlaying) {
-        playerRef.current.pauseVideo();
-      } else {
-        playerRef.current.playVideo();
-      }
-    }
+    // For iframe embeds, we can't directly control playback
+    // So we'll just toggle the UI state
+    setIsPlaying(!isPlaying);
   };
 
   const toggleFullscreen = () => {
@@ -7412,8 +8238,14 @@ const ArmourVideo = ({ vehicleName }: { vehicleName?: string }) => {
 
   // Extract video ID from YouTube URL
   const getVideoId = (url: string): string => {
-    const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
-    return match ? match[1] : '';
+    if (!url) return '';
+    // Handle youtu.be/ID format
+    const shortMatch = url.match(/youtu\.be\/([^?&\n#]+)/);
+    if (shortMatch) return shortMatch[1];
+    // Handle youtube.com/watch?v=ID format
+    const longMatch = url.match(/youtube\.com\/watch\?v=([^&\n?#]+)/);
+    if (longMatch) return longMatch[1];
+    return '';
   };
 
   return (
@@ -7800,6 +8632,8 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const [highlightedEvent, setHighlightedEvent] = useState<number | null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState('English');
   const [translations, setTranslations] = useState(englishTranslations);
+  const [stealthMaxMode, setStealthMaxMode] = useState<Record<string, boolean>>({});
+  const [showArticles, setShowArticles] = useState(false);
 
   // Translation function
   const t = (key: string) => {
@@ -7903,11 +8737,20 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   
   const getUpgradedValue = (vehicle: any, statType: string) => {
     const upgradeLevel = upgradeLevels[vehicle.id] || 0;
-    if (upgradeLevel === 0) return vehicle.stats[statType] || 0;
+    
+    // Handle different property name variations
+    let baseValue = vehicle.stats[statType] || 0;
+    if (statType === 'hullRotation' && !baseValue) {
+      baseValue = vehicle.stats.hullRotationSpeed || 0;
+    }
+    if (statType === 'turretRotation' && !baseValue) {
+      baseValue = vehicle.stats.turretRotationSpeed || vehicle.stats.towerRotation || 0;
+    }
+    
+    if (upgradeLevel === 0) return baseValue;
     
     // Convert statType to lowercase for consistent comparison
     const statTypeLower = statType.toLowerCase();
-    const baseValue = vehicle.stats[statType] || 0;
     
     let boostMultiplier = 1;
     
@@ -7930,7 +8773,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       }
     }
     
-    const boostableStats = ['health', 'speed', 'agility', 'afterburnerspeed', 'verticalspeed', 'damage'];
+    const boostableStats = ['health', 'speed', 'agility', 'afterburnerspeed', 'verticalspeed', 'damage', 'reversespeed', 'hullrotation', 'turretrotation'];
     
     if (boostableStats.includes(statTypeLower)) {
       return Math.round(baseValue * boostMultiplier);
@@ -8010,8 +8853,15 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const vehiclesPerPage = 15
 
   const [showAbout, setShowAbout] = useState(false)
-  const [showUpdates, setShowUpdates] = useState(false)
   const [showCredits, setShowCredits] = useState(false)
+  const [showUpdates, setShowUpdates] = useState(false)
+  const [showSlots, setShowSlots] = useState(false)
+  const [showVehicleTierList, setShowVehicleTierList] = useState(false)
+  const [selectedSlots, setSelectedSlots] = useState<{tanks: string[], helis: string[], jets: string[]}>({
+    tanks: Array(5).fill(''),
+    helis: Array(2).fill(''),
+    jets: Array(2).fill('')
+  })
   const [armourVideoVehicle, setArmourVideoVehicle] = useState<string | null>(null)
 
   const [selectedWeaponForModal, setSelectedWeaponForModal] = useState<any | null>(null)
@@ -8366,6 +9216,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   // Battle Pass state
   const [battlePassOpen, setBattlePassOpen] = useState(false)
   const [selectedBattlePass, setSelectedBattlePass] = useState<number | null>(null)
+  const [showTierList, setShowTierList] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [saveNotification, setSaveNotification] = useState('')
@@ -9297,6 +10148,9 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
       "ZTQ-15",
       "Panzer 87-140",
       "TF-X Kaan",
+      "CV90120",
+      "Tempest",
+      
 
     ]
     return marketVehicles.includes(vehicleName)
@@ -9305,16 +10159,12 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   const isConstructionVehicle = (vehicleName: string) => {
     const constructionVehicles = [
    
-      
-      
-      
-"HARP General Krueger",
-"AMX-10RC",,
-"2S38 Derivation",
-"Object 447A",
-"Al Kafil-1",
-"Vijayanta",
 
+"HARP General Krueger",
+"AMX-10RC",
+"Vijayanta",
+"Tempest",
+"Cheonma-2",
 
 
       
@@ -9325,7 +10175,7 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
 
 
   // Missile tagging system
- const antiFlareMissiles = [
+const antiFlareMissiles = [
   "Kh-47M2 Kinzhal",
   "SAM Rokand",
   "AIM-120 AMRAAM",
@@ -9337,14 +10187,11 @@ const MwtVehicleStats: React.FC<MwtVehicleStatsProps> = ({ vehicles: initialVehi
   "KD-88",
   "CM-102A",
   "9K38 IGLA-V",
-  "R-60",
-  "9K38 IGLA-V",
-  "R-93M",
   "KD-21",
-  "Storm Shadow",
   "HD-1A",
-  "ADS STARSTREAK",
+  "ADS STARSTREAK"
 ];
+
 
 // Standard missile systems
 const standardMissiles = [
@@ -9374,7 +10221,7 @@ const standardMissiles = [
   "Stinger Launcher",
 ];
 
-const antiWarningMissiles = [
+const noLockOnWarningMissiles = [
   "SAM Rokand",
   "Kh-47M2 Kinzhal",
   "AIM-120 AMRAAM",
@@ -9385,15 +10232,8 @@ const antiWarningMissiles = [
   "AAM-4",
   "AAM-5",
   "AAM-6",
-  "R-73",
-  "R-60",
   "R-27",
-  "R-93M",
   "R-40TD",
-  "PL-2",
-  "PL-5",
-  "PL-7",
-  "PL-10",
   "PL-12",
   "PL-15",
   "Type 90",
@@ -9421,10 +10261,10 @@ const antiWarningMissiles = [
   "Type 90",
   "9K38 IGLA-V",
   "9M120 Attack",
-  "R-93M",
   "KD-21",
   "HD-1A",
   "ADS STARSTREAK",
+  "TL-6"
 ];
 
 const longRangeMissiles = [
@@ -9474,6 +10314,8 @@ const laserGuidedMissiles = [
   "APKWS",
   "4x BA-21",
   "2x BA-21",
+  "Izdeliye 305",
+  "Attack ATGM",
 ];
 
 const rocketPods = [
@@ -9503,15 +10345,26 @@ const rocketPods = [
   "Telson 12",
   "Telson 22",
 ];
+
+
+const noLaunchWarningMissiles: string[] = [
+  "AGM-114 Hellfire",
+  "BGM-71 TOW",
+  "9M133 Kornet",
+  "HJ-12"
+];
 const missileHasTags = (missileName: string) => {
   const tags = []
 
-  // Maintain specific order: Anti-Flare, Anti-Warning, Long-Range, Laser-guided, Rocket Pod, Standard Missile
+  // Maintain specific order: Anti-Flare, No-Lock-On-Warning, No-Launch-Warning, Long-Range, Laser-guided, Rocket Pod
   if (antiFlareMissiles.includes(missileName)) {
     tags.push('anti-flare')
   }
-  if (antiWarningMissiles.includes(missileName)) {
-    tags.push('anti-warning')
+  if (noLockOnWarningMissiles.includes(missileName)) {
+    tags.push('no-lock-on-warning')
+  }
+  if (noLaunchWarningMissiles.includes(missileName)) {
+    tags.push('no-launch-warning')
   }
   if (longRangeMissiles.includes(missileName)) {
     tags.push('long-range')
@@ -9687,7 +10540,14 @@ const getMissileImageCandidates = (weaponName: string) => {
 "M1A1 AIM TUSK",
 "EC-665 Tiger HAP",
 "EF-2000 Typhoon",
-  "Pandur II",
+"Pandur II",
+"2S38 Derivatsiya",
+"Object 477",
+"K1A1",
+"Al Kafil-1",
+"Centauro 155/39 LW",
+"SH-16",
+"LAV-AD"
 ]
    return exclusiveVehicles.includes(vehicleName)
   }
@@ -10886,6 +11746,45 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                     <Gift className="w-5 h-5 text-pink-400 group-hover:text-pink-300" />
                     <span className="text-white font-medium group-hover:text-pink-300 transition-colors duration-200">Event</span>
                   </motion.button>
+
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setShowVehicleTierList(true);
+                    }}
+                    className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                  >
+                    <Layers className="w-5 h-5 text-red-400 group-hover:text-red-300" />
+                    <span className="text-white font-medium group-hover:text-red-300 transition-colors duration-200">Vehicle Tier List</span>
+                  </motion.button>
+                  
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setShowSlots(true);
+                    }}
+                    className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                  >
+                    <Filter className="w-5 h-5 text-orange-400 group-hover:text-orange-300" />
+                    <span className="text-white font-medium group-hover:text-orange-300 transition-colors duration-200">Slots (Vehicle Lineup)</span>
+                  </motion.button>
+                  
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setShowArticles(true);
+                    }}
+                    className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-slate-600/50 hover:border-slate-500/50 transition-all duration-200 group"
+                  >
+                    <Newspaper className="w-5 h-5 text-indigo-400 group-hover:text-indigo-300" />
+                    <span className="text-white font-medium group-hover:text-indigo-300 transition-colors duration-200">Articles</span>
+                  </motion.button>
                   
                   <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -11479,7 +12378,8 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
       {/* Battle Pass Tab - Fully Responsive */}
       <button
         onClick={() => setBattlePassOpen(!battlePassOpen)}
-        className={`fixed top-1/2 left-0 z-50 bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-950 hover:to-blue-900 transition-all duration-300 transform -translate-y-1/2 rounded-r-lg shadow-lg border-blue-700 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r-2 border-blue-600 mx-0 mr-0 ml-[-4px] ${isMenuOpen || eventOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}`}
+        className={`fixed left-0 z-50 bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-950 hover:to-blue-900 transition-all duration-300 transform rounded-r-lg shadow-lg border-blue-700 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r-2 border-blue-600 mx-0 mr-0 ml-[-4px] ${isMenuOpen || eventOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}
+                   top-[calc(50%-150px)] -translate-y-1/2 sm:top-[calc(50%-165px)] md:top-[calc(50%-240px)] lg:top-[calc(50%-275px)]`}
       >
         {/* Mobile: Compact icon + text */}
         <div className="sm:hidden flex flex-col items-center justify-center px-1 py-2 text-white font-bold text-[9px] tracking-wide">
@@ -11500,6 +12400,60 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
         >
           <span className="sm:block md:hidden">BATTLE<br/>PASS</span>
           <span className="hidden md:block">BATTLE PASS</span>
+        </div>
+      </button>
+
+      {/* Vehicle Slot Tab - Fully Responsive */}
+      <button
+        onClick={() => setShowSlots(true)}
+        className={`fixed left-0 z-50 bg-gradient-to-r from-orange-700 to-orange-600 hover:from-orange-800 hover:to-orange-700 transition-all duration-300 transform rounded-r-lg shadow-lg border-orange-500 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r-2 border-orange-400 mx-0 mr-0 ml-[-4px] ${isMenuOpen || eventOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}
+                   top-1/2 -translate-y-1/2`}
+      >
+        {/* Mobile: Compact icon + text */}
+        <div className="sm:hidden flex flex-col items-center justify-center px-1 py-2 text-white font-bold text-[9px] tracking-wide">
+          <svg className="w-3 h-3 mb-1" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M3 6h18v2H3V6Zm0 5h18v2H3v-2Zm0 5h18v2H3v-2Z"/>
+          </svg>
+          <span className="text-center leading-tight">VS</span>
+        </div>
+
+        {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
+        <div 
+          className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider
+                     sm:px-1 sm:py-3 sm:text-[10px] sm:ml-[-6px] sm:mr-[-6px]
+                     md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px]
+                     lg:px-3 lg:py-6 lg:text-base lg:ml-[-15px] lg:mr-[-12px]"
+          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+        >
+          <span className="sm:block md:hidden">VEHICLE<br/>SLOT</span>
+          <span className="hidden md:block">VEHICLE SLOT</span>
+        </div>
+      </button>
+
+      {/* Tier List Tab - Fully Responsive */}
+      <button
+        onClick={() => setShowTierList(true)}
+        className={`fixed left-0 z-50 bg-gradient-to-r from-red-700 to-red-600 hover:from-red-800 hover:to-red-700 transition-all duration-300 transform rounded-r-lg shadow-lg border-red-500 flex items-center justify-center min-h-[80px] min-w-[28px] sm:min-h-[90px] sm:min-w-[32px] md:min-h-[140px] md:min-w-[48px] lg:min-h-[160px] lg:min-w-[52px] border-r-2 border-red-400 mx-0 mr-0 ml-[-4px] ${isMenuOpen || eventOpen ? '-translate-x-full opacity-0' : 'translate-x-0 opacity-100'}
+                   top-[calc(50%+150px)] -translate-y-1/2 sm:top-[calc(50%+165px)] md:top-[calc(50%+240px)] lg:top-[calc(50%+275px)]`}
+      >
+        {/* Mobile: Compact icon + text */}
+        <div className="sm:hidden flex flex-col items-center justify-center px-1 py-2 text-white font-bold text-[9px] tracking-wide">
+          <svg className="w-3 h-3 mb-1" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h16v2H4v-2Z"/>
+          </svg>
+          <span className="text-center leading-tight">TL</span>
+        </div>
+
+        {/* Tablet & Desktop: Vertical rotated text with responsive sizing */}
+        <div 
+          className="hidden sm:flex items-center justify-center text-white font-bold tracking-wider
+                     sm:px-1 sm:py-3 sm:text-[10px] sm:ml-[-6px] sm:mr-[-6px]
+                     md:px-3 md:py-5 md:text-sm md:ml-[-12px] md:mr-[-12px]
+                     lg:px-3 lg:py-6 lg:text-base lg:ml-[-15px] lg:mr-[-12px]"
+          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+        >
+          <span className="sm:block md:hidden">TIER<br/>LIST</span>
+          <span className="hidden md:block">TIER LIST</span>
         </div>
       </button>
 
@@ -12307,7 +13261,7 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
               )}
 
               {isConstructionVehicle(vehicle.name) && (
-                <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20 rounded-xl">
+                <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20 rounded-xl" style={{ top: '45%' }}>
                   <img
                     src="Construction.png"
                     alt="Under Construction"
@@ -12628,80 +13582,132 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                         )}
                       </div>
                     </div>
-                    <div className="bg-slate-800/50 rounded-lg p-3">
-                      <div className="text-xs text-slate-400 mb-1 flex items-center gap-1">
-                        Armor
-                        <div className="relative group ml-1">
-                          <button 
-                            className="w-4 h-4 flex items-center justify-center text-xs rounded-full border border-blue-400 text-blue-400 hover:bg-blue-900/50 transition-colors"
-                            onMouseEnter={(e) => {
-                              const tooltip = e.currentTarget.nextElementSibling as HTMLElement;
-                              tooltip.classList.remove('hidden');
-                            }}
-                            onMouseLeave={(e) => {
-                              const tooltip = e.currentTarget.nextElementSibling as HTMLElement;
-                              tooltip.classList.add('hidden');
-                            }}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const tooltip = e.currentTarget.nextElementSibling as HTMLElement;
-                              tooltip.classList.toggle('hidden');
-                            }}
-                            aria-label="Armor information"
-                          >
-                            ?
-                          </button>
-                          <div className="absolute z-10 hidden left-1/2 transform -translate-x-1/2 bottom-full mb-1 w-48 bg-slate-800 text-white text-xs p-2 rounded shadow-lg">
-                            Armor stats are based on average calculations and might not be 100% accurate
-                          </div>
+                    {/* Stat 3: Reverse Speed > Hull Rotation > Tower Rotation > Armor */}
+                    {vehicle.stats.reverseSpeed !== undefined ? (
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <div className="text-xs text-slate-400 mb-1">Reverse Speed</div>
+                        <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                          {vehicle.stats.reverseSpeed} km/h
                         </div>
                       </div>
-                      <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                        {vehicle.stats.armor}
-                        {isEditor && isEditMode && (
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              const next = prompt('Edit Armor (e.g., "1100mm")', String(vehicle.stats.armor || ''));
-                              if (next !== null) {
-                                saveEdit(displayVehicle.id, 'stats.armor', next);
-                              }
-                            }}
-                            className="text-[12px] leading-none hover:opacity-80"
-                            title="Edit Armor"
-                            aria-label="Edit Armor"
-                          >
-                            ✏️
-                          </button>
-                        )}
+                    ) : (vehicle.stats.hullRotation !== undefined || vehicle.stats.hullRotationSpeed !== undefined) ? (
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <div className="text-xs text-slate-400 mb-1">Hull Rotation</div>
+                        <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                          {vehicle.stats.hullRotation || vehicle.stats.hullRotationSpeed} deg/s
+                        </div>
                       </div>
-                    </div>
+                    ) : (vehicle.stats.towerRotation !== undefined || vehicle.stats.turretRotation !== undefined || vehicle.stats.turretRotationSpeed !== undefined) ? (
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <div className="text-xs text-slate-400 mb-1">Turret Rotation</div>
+                        <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                          {vehicle.stats.towerRotation || vehicle.stats.turretRotation || vehicle.stats.turretRotationSpeed} deg/s
+                        </div>
+                      </div>
+                    ) : vehicle.stats.armor !== undefined ? (
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <div className="text-xs text-slate-400 mb-1 flex items-center gap-1">
+                          Armor
+                          <div className="relative group ml-1">
+                            <button 
+                              className="w-4 h-4 flex items-center justify-center text-xs rounded-full border border-blue-400 text-blue-400 hover:bg-blue-900/50 transition-colors"
+                              onMouseEnter={(e) => {
+                                const tooltip = e.currentTarget.nextElementSibling as HTMLElement;
+                                tooltip.classList.remove('hidden');
+                              }}
+                              onMouseLeave={(e) => {
+                                const tooltip = e.currentTarget.nextElementSibling as HTMLElement;
+                                tooltip.classList.add('hidden');
+                              }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                const tooltip = e.currentTarget.nextElementSibling as HTMLElement;
+                                tooltip.classList.toggle('hidden');
+                              }}
+                              aria-label="Armor information"
+                            >
+                              ?
+                            </button>
+                            <div className="absolute z-10 hidden left-1/2 transform -translate-x-1/2 bottom-full mb-1 w-48 bg-slate-800 text-white text-xs p-2 rounded shadow-lg">
+                              Armor stats are based on average calculations and might not be 100% accurate
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                          {vehicle.stats.armor}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <div className="text-xs text-slate-400 mb-1">Agility</div>
+                        <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
+                          {vehicle.stats.agility || 'N/A'}
+                        </div>
+                      </div>
+                    )}
                   </>
                 )}
 
-                <div className="bg-slate-800/50 rounded-lg p-3">
-                  <div className="text-xs text-slate-400 mb-1">Agility</div>
-                  <div className="text-lg font-bold text-cyan-300 flex items-center gap-2">
-                    {vehicle.stats.agility}
-                    {isEditor && isEditMode && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          const raw = prompt('Edit Agility (0-100)', String(vehicle.stats.agility));
-                          if (raw !== null) {
-                            const val = parseInt(raw, 10);
-                            if (!isNaN(val)) saveEdit(displayVehicle.id, 'stats.agility', val);
-                          }
-                        }}
-                        className="text-[12px] leading-none hover:opacity-80"
-                        title="Edit Agility"
-                        aria-label="Edit Agility"
-                      >
-                        ✏️
-                      </button>
-                    )}
-                  </div>
-                </div>
+                {/* Stat 4: Next available stat in priority order */}
+                {(() => {
+                  const hasReverseSpeed = vehicle.stats.reverseSpeed !== undefined;
+                  const hasHullRotation = vehicle.stats.hullRotation !== undefined || vehicle.stats.hullRotationSpeed !== undefined;
+                  const hasTurretRotation = vehicle.stats.towerRotation !== undefined || vehicle.stats.turretRotation !== undefined || vehicle.stats.turretRotationSpeed !== undefined;
+                  const hasArmor = vehicle.stats.armor !== undefined;
+                  const hasAgility = vehicle.stats.agility !== undefined;
+                  
+                  // Determine what was shown in stat 3
+                  const stat3ShowedReverseSpeed = hasReverseSpeed;
+                  const stat3ShowedHullRotation = !hasReverseSpeed && hasHullRotation;
+                  const stat3ShowedTurretRotation = !hasReverseSpeed && !hasHullRotation && hasTurretRotation;
+                  const stat3ShowedArmor = !hasReverseSpeed && !hasHullRotation && !hasTurretRotation && hasArmor;
+                  
+                  // For stat 4, show next available that wasn't shown in stat 3
+                  if (stat3ShowedReverseSpeed && hasHullRotation) {
+                    return (
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <div className="text-xs text-slate-400 mb-1">Hull Rotation</div>
+                        <div className="text-lg font-bold text-cyan-300">
+                          {vehicle.stats.hullRotation || vehicle.stats.hullRotationSpeed} deg/s
+                        </div>
+                      </div>
+                    );
+                  } else if ((stat3ShowedReverseSpeed || stat3ShowedHullRotation) && hasTurretRotation) {
+                    return (
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <div className="text-xs text-slate-400 mb-1">Turret Rotation</div>
+                        <div className="text-lg font-bold text-cyan-300">
+                          {vehicle.stats.towerRotation || vehicle.stats.turretRotation || vehicle.stats.turretRotationSpeed} deg/s
+                        </div>
+                      </div>
+                    );
+                  } else if ((stat3ShowedReverseSpeed || stat3ShowedHullRotation || stat3ShowedTurretRotation) && hasArmor) {
+                    return (
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <div className="text-xs text-slate-400 mb-1">Armor</div>
+                        <div className="text-lg font-bold text-cyan-300">
+                          {vehicle.stats.armor}
+                        </div>
+                      </div>
+                    );
+                  } else if (hasAgility) {
+                    return (
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <div className="text-xs text-slate-400 mb-1">Agility</div>
+                        <div className="text-lg font-bold text-cyan-300">
+                          {vehicle.stats.agility}
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <div className="text-xs text-slate-400 mb-1">-</div>
+                        <div className="text-lg font-bold text-cyan-300">N/A</div>
+                      </div>
+                    );
+                  }
+                })()}
               </div>
 
               <div className="space-y-2 mb-3">
@@ -13619,7 +14625,31 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
 
     </div>
   </div>
-)}
+         )}
+
+        {/* Slots Preset Modal */}
+        <SlotsPreset 
+          isOpen={showSlots}
+          onClose={() => setShowSlots(false)}
+          vehicles={VEHICLES}
+          selectedSlots={selectedSlots}
+          onSlotsChange={setSelectedSlots}
+        />
+
+        <AnimatePresence>
+          {(showVehicleTierList || showTierList) && (
+            <VehicleTierList
+              vehicles={VEHICLES}
+              onClose={() => {
+                setShowVehicleTierList(false);
+                setShowTierList(false);
+              }}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Articles Modal */}
+        <Articles isOpen={showArticles} onClose={() => setShowArticles(false)} />
 
         {/* Vehicle Info Modal */}
         {vehicleInfoOpen && (
@@ -13729,32 +14759,24 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                           </span>
                         </div>
                         <div className="relative w-full pb-[56.25%] mb-2">
-                          {vehicle.image ? (
-                            <>
-                              <img 
-                                src={vehicle.image} 
-                                alt={vehicle.name} 
-                                className="absolute inset-0 w-full h-full object-cover"
-                              />
-                              {/* Vehicle Tags */}
-                              <div className="absolute top-2 right-2 z-20 flex flex-col gap-1">
-                                {isNewVehicle(vehicle.name) && (
-                                  <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-white text-black">
-                                    NEW
-                                  </div>
-                                )}
-                                {isUpcomingVehicle(vehicle.name) && (
-                                  <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-red-600 text-white">
-                                    UPCOMING
-                                  </div>
-                                )}
+                          <img 
+                            src={vehicle.image || '/mwt-assistant.jpg'} 
+                            alt={vehicle.name} 
+                            className="absolute inset-0 w-full h-full object-cover"
+                          />
+                          {/* Vehicle Tags */}
+                          <div className="absolute top-2 right-2 z-20 flex flex-col gap-1">
+                            {isNewVehicle(vehicle.name) && (
+                              <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-white text-black">
+                                NEW
                               </div>
-                            </>
-                          ) : (
-                            <div className="absolute inset-0 bg-slate-700 flex items-center justify-center text-slate-400">
-                              No image available
-                            </div>
-                          )}
+                            )}
+                            {isUpcomingVehicle(vehicle.name) && (
+                              <div className="px-1.5 py-0.5 sm:px-2 sm:py-1 rounded text-[10px] sm:text-xs font-semibold shadow-lg bg-red-600 text-white">
+                                UPCOMING
+                              </div>
+                            )}
+                          </div>
                         </div>
                         
                         {/* Download buttons - below image for mobile */}
@@ -13957,17 +14979,19 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                         
 
                         <div className="grid grid-cols-1 gap-4">
-                          {/* Health - Always shown */}
-                          <div className="bg-slate-800/80 rounded-lg p-4">
-                            <StatBar 
-                              label="HEALTH" 
-                              value={getUpgradedValue(displayVehicle, 'health')} 
-                              baseValue={displayVehicle.stats.health}
-                              maxValue={2000}
-                              upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
-                              onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
-                            />
-                          </div>
+                          {/* Health - Only shown if defined */}
+                          {displayVehicle.stats.health !== undefined && (
+                            <div className="bg-slate-800/80 rounded-lg p-4">
+                              <StatBar 
+                                label="HEALTH" 
+                                value={getUpgradedValue(displayVehicle, 'health')} 
+                                baseValue={displayVehicle.stats.health}
+                                maxValue={50000}
+                                upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
+                              />
+                            </div>
+                          )}
 
                           {/* For Jets and Bombers */}
                           {(vehicle.type === 'Fighter Jet' || vehicle.type === 'Attack Aircraft' || vehicle.type === 'Multirole Fighter' || vehicle.type === 'Bomber') && (
@@ -13994,6 +15018,59 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                                 />
                                 <div className="text-xs text-slate-400 mt-1">km/h</div>
                               </div>
+                              {displayVehicle.stats.agility !== undefined && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <StatBar 
+                                    label="AGILITY" 
+                                    value={getUpgradedValue(displayVehicle, 'agility')} 
+                                    baseValue={displayVehicle.stats.agility}
+                                    maxValue={100}
+                                    upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                    onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
+                                  />
+                                </div>
+                              )}
+                              {displayVehicle.stats.battleload !== undefined && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <div className="flex items-center justify-between">
+                                    <label className="text-xs font-bold text-slate-300 uppercase">BATTLE LOAD</label>
+                                    <span className="text-sm font-bold text-slate-200">{displayVehicle.stats.battleload}</span>
+                                  </div>
+                                  <div className="text-xs text-slate-400 mt-2">kg</div>
+                                </div>
+                              )}
+                              {displayVehicle.stats.mass !== undefined && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <div className="flex items-center justify-between">
+                                    <label className="text-xs font-bold text-slate-300 uppercase">MASS</label>
+                                    <span className="text-sm font-bold text-slate-200">{displayVehicle.stats.mass}</span>
+                                  </div>
+                                  <div className="text-xs text-slate-400 mt-2">kg</div>
+                                </div>
+                              )}
+                              {displayVehicle.stats.stealth !== undefined && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <div className="flex items-center justify-between mb-2">
+                                    <label className="text-xs font-bold text-slate-300 uppercase">STEALTH</label>
+                                    <button
+                                      onClick={() => setStealthMaxMode({...stealthMaxMode, [displayVehicle.id]: !stealthMaxMode[displayVehicle.id]})}
+                                      className="px-3 py-1 text-xs font-bold rounded bg-green-600 hover:bg-green-700 text-white transition-colors"
+                                    >
+                                      {stealthMaxMode[displayVehicle.id] ? 'MAX' : 'MAX'}
+                                    </button>
+                                  </div>
+                                  <div className="flex items-center justify-end">
+                                    <span className="text-sm font-bold text-slate-200">
+                                      {(() => {
+                                        const stealthStr = String(displayVehicle.stats.stealth);
+                                        const [min, max] = stealthStr.split('-').map(Number);
+                                        return stealthMaxMode[displayVehicle.id] ? max : min;
+                                      })()}
+                                    </span>
+                                  </div>
+                                  <div className="text-xs text-slate-400 mt-2">%</div>
+                                </div>
+                              )}
                             </>
                           )}
 
@@ -14038,27 +15115,121 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                           {/* For Tanks/Other Vehicles */}
                           {!['Fighter Jet', 'Attack Aircraft', 'Multirole Fighter', 'Bomber', 'Helicopter', 'Attack Helicopter', 'Scout Helicopter'].includes(vehicle.type) && (
                             <>
-                              <div className="bg-slate-800/80 rounded-lg p-4">
-                                <StatBar 
-                                  label="SPEED" 
-                                  value={getUpgradedValue(displayVehicle, 'speed')} 
-                                  baseValue={displayVehicle.stats.speed}
-                                  maxValue={100}
-                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
-                                />
-                                <div className="text-xs text-slate-400 mt-1">km/h</div>
-                              </div>
-                              <div className="bg-slate-800/80 rounded-lg p-4">
-                                <StatBar 
-                                  label="AGILITY" 
-                                  value={getUpgradedValue(displayVehicle, 'agility')} 
-                                  baseValue={displayVehicle.stats.agility || 0}
-                                  maxValue={100}
-                                  upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
-                                  onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
-                                />
-                              </div>
+                              {displayVehicle.stats.speed !== undefined && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <StatBar 
+                                    label="SPEED" 
+                                    value={getUpgradedValue(displayVehicle, 'speed')} 
+                                    baseValue={displayVehicle.stats.speed}
+                                    maxValue={100}
+                                    upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                    onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
+                                  />
+                                  <div className="text-xs text-slate-400 mt-1">km/h</div>
+                                </div>
+                              )}
+                              {displayVehicle.stats.reverseSpeed !== undefined && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <StatBar 
+                                    label="REVERSE SPEED" 
+                                    value={getUpgradedValue(displayVehicle, 'reverseSpeed')} 
+                                    baseValue={displayVehicle.stats.reverseSpeed}
+                                    maxValue={100}
+                                    upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                    onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
+                                  />
+                                  <div className="text-xs text-slate-400 mt-1">km/h</div>
+                                </div>
+                              )}
+                              {displayVehicle.stats.agility !== undefined && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <StatBar 
+                                    label="AGILITY" 
+                                    value={getUpgradedValue(displayVehicle, 'agility')} 
+                                    baseValue={displayVehicle.stats.agility}
+                                    maxValue={100}
+                                    upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                    onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
+                                  />
+                                </div>
+                              )}
+                              {displayVehicle.stats.battleload !== undefined && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <StatBar 
+                                    label="BATTLE LOAD" 
+                                    value={getUpgradedValue(displayVehicle, 'battleload')} 
+                                    baseValue={displayVehicle.stats.battleload}
+                                    maxValue={10000}
+                                    upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                    onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
+                                  />
+                                  <div className="text-xs text-slate-400 mt-1">kg</div>
+                                </div>
+                              )}
+                              {displayVehicle.stats.mass !== undefined && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <StatBar 
+                                    label="MASS" 
+                                    value={getUpgradedValue(displayVehicle, 'mass')} 
+                                    baseValue={displayVehicle.stats.mass}
+                                    maxValue={50000}
+                                    upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                    onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
+                                  />
+                                  <div className="text-xs text-slate-400 mt-1">kg</div>
+                                </div>
+                              )}
+                              {displayVehicle.stats.stealth !== undefined && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <StatBar 
+                                    label="STEALTH" 
+                                    value={getUpgradedValue(displayVehicle, 'stealth')} 
+                                    baseValue={displayVehicle.stats.stealth}
+                                    maxValue={100}
+                                    upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                    onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
+                                  />
+                                  <div className="text-xs text-slate-400 mt-1">%</div>
+                                </div>
+                              )}
+                              {(displayVehicle.stats.hullRotation !== undefined || displayVehicle.stats.hullRotationSpeed !== undefined) && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <StatBar 
+                                    label="HULL ROTATION"
+                                    value={getUpgradedValue(displayVehicle, 'hullRotation')}
+                                    baseValue={displayVehicle.stats.hullRotation || displayVehicle.stats.hullRotationSpeed || 0}
+                                    maxValue={60}
+                                    upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                    onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
+                                  />
+                                  <div className="text-xs text-slate-400 mt-1">deg/s</div>
+                                </div>
+                              )}
+                              {(displayVehicle.stats.turretRotation !== undefined || displayVehicle.stats.turretRotationSpeed !== undefined || displayVehicle.stats.towerRotation !== undefined) && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <StatBar 
+                                    label="TURRET ROTATION"
+                                    value={getUpgradedValue(displayVehicle, 'turretRotation')}
+                                    baseValue={displayVehicle.stats.turretRotation || displayVehicle.stats.turretRotationSpeed || displayVehicle.stats.towerRotation || 0}
+                                    maxValue={60}
+                                    upgradeLevel={upgradeLevels[displayVehicle.id] || 0}
+                                    onUpgradeChange={(level: number) => handleUpgradeChange(displayVehicle.id, level)}
+                                  />
+                                  <div className="text-xs text-slate-400 mt-1">deg/s</div>
+                                </div>
+                              )}
+                              {(displayVehicle.stats.gunElevation !== undefined || displayVehicle.stats.gunDepression !== undefined || displayVehicle.stats.gunElivation !== undefined) && (
+                                <div className="bg-slate-800/80 rounded-lg p-4">
+                                  <div className="flex justify-between items-center">
+                                    <span className="text-xs font-medium text-gray-300">GUN ELEVATION</span>
+                                    <span className="text-sm font-bold text-white">
+                                      {typeof displayVehicle.stats.gunElivation === 'string' 
+                                        ? displayVehicle.stats.gunElivation 
+                                        : `${displayVehicle.stats.gunDepression || 0}° / +${displayVehicle.stats.gunElevation || 0}°`}
+                                    </span>
+                                  </div>
+                                </div>
+                              )}
                               {displayVehicle.stats.armor && (
                                 <div className="bg-slate-800/80 rounded-lg p-4">
                                   <div className="flex justify-between items-center mb-1">
@@ -14140,6 +15311,71 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
 
                       {/* Weapon Systems */}
                       <div className="text-white">
+                        {/* Gun Specifications - Only shown if gunSpecs data exists */}
+                        {displayVehicle.gunSpecs && displayVehicle.gunSpecs.length > 0 && (
+                          <div className="mb-6">
+                            <h3 className="text-lg font-bold mb-4">Gun Specifications</h3>
+                            <div className="space-y-4">
+                              {displayVehicle.gunSpecs.map((gun: any, idx: number) => (
+                                <div key={idx} className="bg-slate-700/50 rounded-lg p-4 border border-slate-600/50">
+                                  {/* Gun Name and Type */}
+                                  <div className="mb-3 pb-3 border-b border-slate-600/30">
+                                    <div className="text-sm text-slate-300">
+                                      {gun.name && <div className="font-bold text-cyan-300">{gun.name}</div>}
+                                      {gun.type && <div className="text-xs text-slate-400">{gun.type}</div>}
+                                    </div>
+                                  </div>
+                                  
+                                  {/* Gun Stats Grid */}
+                                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                    {gun.rateOfFire !== undefined && (
+                                      <div className="bg-slate-800/80 rounded-lg p-3">
+                                        <div className="text-xs text-slate-400 mb-1">Rate of Fire</div>
+                                        <div className="text-lg font-bold text-cyan-300">{gun.rateOfFire}</div>
+                                        <div className="text-xs text-slate-500">rps</div>
+                                      </div>
+                                    )}
+                                    {gun.reload !== undefined && (
+                                      <div className="bg-slate-800/80 rounded-lg p-3">
+                                        <div className="text-xs text-slate-400 mb-1">Reload</div>
+                                        <div className="text-lg font-bold text-cyan-300">{gun.reload}</div>
+                                        <div className="text-xs text-slate-500">seconds</div>
+                                      </div>
+                                    )}
+                                    {gun.ammunition !== undefined && (
+                                      <div className="bg-slate-800/80 rounded-lg p-3">
+                                        <div className="text-xs text-slate-400 mb-1">Ammunition</div>
+                                        <div className="text-sm font-bold text-cyan-300">{gun.ammunition}</div>
+                                      </div>
+                                    )}
+                                    {gun.magazine !== undefined && (
+                                      <div className="bg-slate-800/80 rounded-lg p-3">
+                                        <div className="text-xs text-slate-400 mb-1">Magazine</div>
+                                        <div className="text-lg font-bold text-cyan-300">{gun.magazine}</div>
+                                        <div className="text-xs text-slate-500">rounds</div>
+                                      </div>
+                                    )}
+                                    {gun.range !== undefined && (
+                                      <div className="bg-slate-800/80 rounded-lg p-3">
+                                        <div className="text-xs text-slate-400 mb-1">Range</div>
+                                        <div className="text-lg font-bold text-cyan-300">{gun.range}</div>
+                                        <div className="text-xs text-slate-500">meters</div>
+                                      </div>
+                                    )}
+                                    {gun.targetTime !== undefined && (
+                                      <div className="bg-slate-800/80 rounded-lg p-3">
+                                        <div className="text-xs text-slate-400 mb-1">Target Acquisition</div>
+                                        <div className="text-lg font-bold text-cyan-300">{gun.targetTime}</div>
+                                        <div className="text-xs text-slate-500">seconds</div>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
                         <h3 className="text-lg font-bold mb-3">Weapons</h3>
                         <div className="space-y-3">
                           {isConstructionVehicle(displayVehicle.name) ? (
@@ -14320,14 +15556,24 @@ ${isMarketVehicle(vehicle.name) ? " PREMIUM VEHICLE - Available in Market" : is
                                               <span className="text-orange-400 font-medium">Anti-Flare</span>
                                             </>
                                           )}
-                                          {tag === 'anti-warning' && (
+                                          {tag === 'no-lock-on-warning' && (
                                             <>
-                                              <div className="w-3 h-3 text-red-400">
+                                              <div className="w-3 h-3 text-purple-400">
                                                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                                                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                                  <path d="M12 2L4 12l8 10 8-10L12 2zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
                                                 </svg>
                                               </div>
-                                              <span className="text-red-400 font-medium">Anti-Warning</span>
+                                              <span className="text-purple-400 font-medium">No Lock-On Warning</span>
+                                            </>
+                                          )}
+                                          {tag === 'no-launch-warning' && (
+                                            <>
+                                              <div className="w-3 h-3 text-blue-400">
+                                                <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+                                                  <path d="M12 2L4 12l8 10 8-10L12 2zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
+                                                </svg>
+                                              </div>
+                                              <span className="text-blue-400 font-medium">No Launch Warning</span>
                                             </>
                                           )}
                                           {tag === 'long-range' && (
@@ -15362,6 +16608,11 @@ const MainPage = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4 sm:pt-4">
         <div className="sm:pt-0">
           <Pages activePage={activePage} onPageChange={setActivePage} />
+        </div>
+
+        {/* Adsterra Banner Ad */}
+        <div className="w-full flex justify-center mt-4">
+          <AdsterraBanner />
         </div>
 
         {isMobile && (
